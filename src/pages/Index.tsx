@@ -26,7 +26,7 @@ const Index = () => {
         </div>
 
         {/* Main layout */}
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col md:flex-row gap-8">
           {/* Content area */}
           <div className="flex-1 min-w-0">
             <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
@@ -73,7 +73,7 @@ const Index = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="lg:w-80 flex-shrink-0">
+          <div className="md:w-80 flex-shrink-0">
             <div className="bg-card rounded-2xl border border-border p-5 sticky top-8">
               {/* Sidebar header */}
               <button
