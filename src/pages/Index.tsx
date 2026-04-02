@@ -10,7 +10,7 @@ const lessons = [
 
 const Index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  
 
   return (
     <div className="min-h-screen bg-background">
@@ -74,21 +74,13 @@ const Index = () => {
           </div>
 
           {/* Sidebar */}
-          <div
-            className="md:w-80 flex-shrink-0"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <div className="bg-card rounded-2xl border border-border p-5 sticky top-8">
+          <div className="md:w-80 flex-shrink-0">
+            <div className="rounded-2xl p-5 sticky top-8">
               {/* Sidebar header */}
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 className={`flex items-center justify-between w-full rounded-xl px-4 py-3 transition-colors ${
-                  !sidebarOpen && !isHovered
-                    ? "bg-[hsl(270,60%,93%)]"
-                    : sidebarOpen
-                    ? "mb-4"
-                    : "bg-[hsl(270,60%,93%)]"
+                  !sidebarOpen ? "bg-[hsl(270,60%,93%)]" : "mb-4"
                 }`}
               >
                 <div className="flex items-center gap-2">
@@ -103,8 +95,8 @@ const Index = () => {
               </button>
 
               {/* Lesson list */}
-              {(sidebarOpen || isHovered) && (
-                <div className="space-y-3 mt-4">
+              {sidebarOpen && (
+                <div className="space-y-3">
                   {lessons.map((lesson) => (
                     <button
                       key={lesson.number}
