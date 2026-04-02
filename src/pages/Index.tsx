@@ -91,7 +91,7 @@ const Index = () => {
               {/* Sidebar header */}
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className={`flex items-center justify-between w-full rounded-xl px-4 py-3 ${
+                className={`group flex items-center justify-between w-full rounded-xl px-4 py-3 ${
                   sidebarOpen ? "mb-4" : ""
                 }`}
               >
@@ -100,8 +100,8 @@ const Index = () => {
                   <span className="text-lg font-bold text-foreground">Инструкции из курса</span>
                 </div>
                 <ChevronDown
-                  className={`w-5 h-5 text-muted-foreground transition-transform ${
-                    sidebarOpen ? "" : "-rotate-90"
+                  className={`w-5 h-5 text-muted-foreground transition-transform duration-200 ${
+                    sidebarOpen ? "rotate-180" : "group-hover:translate-y-1"
                   }`}
                 />
               </button>
