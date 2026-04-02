@@ -9,7 +9,8 @@ const lessons = [
 ];
 
 const Index = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div className="min-h-screen bg-background">
