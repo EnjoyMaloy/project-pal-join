@@ -80,7 +80,7 @@ const Index = () => {
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 className={`flex items-center justify-between w-full rounded-xl px-4 py-3 transition-colors ${
-                  !sidebarOpen ? "bg-[hsl(270,60%,93%)]" : "mb-4"
+                  !sidebarOpen ? "bg-muted" : "mb-4"
                 }`}
               >
                 <div className="flex items-center gap-2">
