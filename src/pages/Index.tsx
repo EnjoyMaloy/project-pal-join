@@ -9,7 +9,8 @@ const lessons = [
 ];
 
 const Index = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div className="min-h-screen bg-background">
@@ -73,15 +74,25 @@ const Index = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="md:w-80 flex-shrink-0">
+          <div
+            className="md:w-80 flex-shrink-0"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             <div className="bg-card rounded-2xl border border-border p-5 sticky top-8">
               {/* Sidebar header */}
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="flex items-center justify-between w-full mb-4"
+                className={`flex items-center justify-between w-full rounded-xl px-4 py-3 transition-colors ${
+                  !sidebarOpen && !isHovered
+                    ? "bg-[hsl(270,60%,93%)]"
+                    : sidebarOpen
+                    ? "mb-4"
+                    : "bg-[hsl(270,60%,93%)]"
+                }`}
               >
                 <div className="flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-primary" />
+                  <BookOpen className="w-5 h-5 text-foreground/70" />
                   <span className="text-lg font-bold text-foreground">Инструкции из курса</span>
                 </div>
                 <ChevronDown
@@ -92,8 +103,8 @@ const Index = () => {
               </button>
 
               {/* Lesson list */}
-              {sidebarOpen && (
-                <div className="space-y-3">
+              {(sidebarOpen || isHovered) && (
+                <div className="space-y-3 mt-4">
                   {lessons.map((lesson) => (
                     <button
                       key={lesson.number}
