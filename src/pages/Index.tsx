@@ -87,12 +87,12 @@ const Index = () => {
 
           {/* Sidebar */}
           <div className="md:w-80 flex-shrink-0">
-            <div className={`rounded-2xl p-5 sticky top-8 ${sidebarOpen ? "bg-card" : ""}`}>
+            <div className={`rounded-2xl p-5 sticky top-8 ${sidebarOpen ? "bg-card" : "bg-muted hover:bg-[hsl(270,60%,93%)]"} transition-colors`}>
               {/* Sidebar header */}
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className={`flex items-center justify-between w-full rounded-xl px-4 py-3 transition-colors ${
-                  !sidebarOpen ? "bg-muted hover:bg-[hsl(270,60%,93%)]" : "mb-4"
+                className={`flex items-center justify-between w-full rounded-xl px-4 py-3 ${
+                  sidebarOpen ? "mb-4" : ""
                 }`}
               >
                 <div className="flex items-center gap-2">
