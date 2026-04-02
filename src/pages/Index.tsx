@@ -1,7 +1,19 @@
 import { useState, useRef, useEffect } from "react";
 import { ArrowLeft, BookOpen, ChevronDown } from "lucide-react";
-import iconActive from "@/assets/icon-active.svg";
-import iconInactive from "@/assets/icon-inactive.svg";
+
+const IconActive = ({ className }: { className?: string }) => (
+  <svg className={className} width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.1992 0C20.9665 0 22.4004 1.43282 22.4004 3.2002V15.6973L15.6973 22.4004H3.2002C1.4329 22.4004 0 20.9666 0 19.1992V3.2002C0 1.43282 1.4329 0 3.2002 0H19.1992ZM6.69922 6.2002V8.2002H10.2041V15.7051H12.2041V8.2002H15.6992V6.2002H6.69922Z" fill="currentColor"/>
+  </svg>
+);
+
+const IconInactive = ({ className }: { className?: string }) => (
+  <svg className={className} width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 1C1.89543 1 1 1.89539 1 3V19C1 20.1046 1.89543 21 3 21H15L21 15V3C21 1.89539 20.1046 1 19 1H3Z" stroke="currentColor" strokeWidth="2"/>
+    <path d="M15.5 8H12.0049V15.5049H10.0049V8H6.5V6H15.5V8Z" fill="currentColor"/>
+    <path d="M21.3535 15.3535L15.3535 21.3535L14.5 21V17C14.5 15.6192 15.6193 14.5 17 14.5H21L21.3535 15.3535Z" fill="currentColor"/>
+  </svg>
+);
 
 const lessonsData = [
   {
@@ -214,11 +226,11 @@ const Index = () => {
                       }`}
                     >
                       <div className="flex items-start gap-3">
-                        <img
-                          src={index === activeLesson ? iconActive : iconInactive}
-                          alt=""
-                          className="w-7 h-7 flex-shrink-0 mt-0.5"
-                        />
+                        {index === activeLesson ? (
+                          <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-foreground" />
+                        ) : (
+                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-foreground" />
+                        )}
                         <div>
                           <span className="text-xs font-medium text-secondary-foreground block mb-1">
                             Урок {lesson.number}
