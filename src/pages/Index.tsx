@@ -75,7 +75,7 @@ const Index = () => {
 
           {/* Sidebar */}
           <div className="md:w-80 flex-shrink-0">
-            <div className="rounded-2xl p-5 sticky top-8">
+            <div className={`rounded-2xl p-5 sticky top-8 ${sidebarOpen ? "bg-card" : ""}`}>
               {/* Sidebar header */}
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
