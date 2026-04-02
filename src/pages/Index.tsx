@@ -227,15 +227,23 @@ const Index = () => {
                     >
                       <div className="flex items-start gap-3">
                         {index === activeLesson ? (
-                          <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-foreground" />
+                          <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-[hsl(270,40%,20%)]" />
                         ) : (
-                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-foreground" />
+                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-[hsl(270,50%,60%)]" />
                         )}
                         <div>
-                          <span className="text-xs font-medium text-secondary-foreground block mb-1">
-                            Урок {lesson.number}
-                          </span>
-                          <span className="text-sm font-semibold text-foreground leading-snug block">
+                          {index === activeLesson ? (
+                            <span className="inline-block text-xs font-medium text-[hsl(270,40%,20%)] bg-white/80 rounded px-2 py-0.5 mb-1">
+                              Урок {lesson.number}
+                            </span>
+                          ) : (
+                            <span className="text-xs font-medium text-[hsl(270,50%,55%)] block mb-1">
+                              Урок {lesson.number}
+                            </span>
+                          )}
+                          <span className={`text-sm font-semibold leading-snug block ${
+                            index === activeLesson ? "text-[hsl(270,40%,20%)]" : "text-foreground"
+                          }`}>
                             {lesson.title}
                           </span>
                         </div>
