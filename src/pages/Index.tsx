@@ -87,7 +87,7 @@ const Index = () => {
 
           {/* Sidebar */}
           <div className="md:w-80 flex-shrink-0">
-            <div className={`rounded-2xl p-5 sticky top-8 ${sidebarOpen ? "bg-card" : "bg-muted hover:bg-[hsl(270,60%,93%)]"} transition-colors`}>
+            <div className={`rounded-2xl p-5 sticky top-8 border border-border ${sidebarOpen ? "bg-card" : "bg-muted hover:bg-[hsl(270,60%,93%)]"} transition-colors`}>
               {/* Sidebar header */}
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
