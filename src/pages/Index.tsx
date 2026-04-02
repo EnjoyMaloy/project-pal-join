@@ -226,11 +226,11 @@ const Index = () => {
                       }`}
                     >
                       <div className="flex items-start gap-3">
-                        <img
-                          src={index === activeLesson ? iconActive : iconInactive}
-                          alt=""
-                          className="w-7 h-7 flex-shrink-0 mt-0.5"
-                        />
+                        {index === activeLesson ? (
+                          <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-foreground" />
+                        ) : (
+                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-foreground" />
+                        )}
                         <div>
                           <span className="text-xs font-medium text-secondary-foreground block mb-1">
                             Урок {lesson.number}
