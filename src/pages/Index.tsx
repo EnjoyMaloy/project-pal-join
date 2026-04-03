@@ -182,17 +182,17 @@ const Index = () => {
                 </article>
               </div>
             ) : (
-              <div className="bg-[hsl(270,60%,93%)] rounded-2xl p-12 flex items-center justify-center min-h-[300px] cursor-pointer hover:bg-[hsl(270,60%,88%)] transition-colors"
+              <div className="bg-secondary rounded-2xl p-12 flex items-center justify-center min-h-[300px] cursor-pointer hover:bg-[hsl(261,100%,80%)] transition-colors"
                 onClick={() => setLessonOpen(true)}
               >
-                <span className="text-lg font-semibold text-[hsl(270,50%,40%)]">Выберите урок из списка</span>
+                <span className="text-lg font-semibold text-secondary-foreground">Выберите урок из списка</span>
               </div>
             )}
           </div>
 
           {/* Sidebar */}
           <div className="md:w-80 flex-shrink-0">
-            <div className={`rounded-2xl p-4 sticky top-8 border border-border ${sidebarOpen ? "bg-card" : "bg-muted hover:bg-[hsl(270,60%,93%)]"} transition-colors`}>
+            <div className={`rounded-2xl p-4 sticky top-8 border border-border ${sidebarOpen ? "bg-card" : "bg-muted hover:bg-secondary"} transition-colors`}>
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 className={`group flex items-center justify-between w-full rounded-xl px-4 py-2`}
@@ -221,28 +221,28 @@ const Index = () => {
                       onClick={() => handleLessonClick(index)}
                       className={`w-full text-left rounded-xl border-2 p-4 transition-all ${
                         index === activeLesson
-                          ? "bg-[hsl(270,70%,80%)] border-[hsl(270,70%,65%)]"
-                          : "bg-background border-border hover:bg-[hsl(270,60%,93%)] hover:border-[hsl(270,60%,80%)]"
+                          ? "bg-[hsl(261,100%,80%)] border-[hsl(261,100%,71%)]"
+                          : "bg-background border-border hover:bg-secondary hover:border-[hsl(261,100%,80%)]"
                       }`}
                     >
                       <div className="flex items-start gap-3">
                         {index === activeLesson ? (
-                          <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-[hsl(270,40%,20%)]" />
+                          <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-secondary-foreground" />
                         ) : (
-                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-[hsl(270,50%,60%)]" />
+                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-primary" />
                         )}
                         <div>
                           {index === activeLesson ? (
-                            <span className="inline-block text-xs font-medium text-[hsl(270,40%,20%)] bg-white/80 rounded px-2 py-0.5 mb-1">
+                            <span className="inline-block text-xs font-medium text-secondary-foreground bg-white/80 rounded px-2 py-0.5 mb-1">
                               Урок {lesson.number}
                             </span>
                           ) : (
-                            <span className="text-xs font-medium text-[hsl(270,50%,55%)] block mb-1">
+                            <span className="text-xs font-medium text-primary block mb-1">
                               Урок {lesson.number}
                             </span>
                           )}
                           <span className={`text-sm font-semibold leading-snug block ${
-                            index === activeLesson ? "text-[hsl(270,40%,20%)]" : "text-foreground"
+                            index === activeLesson ? "text-secondary-foreground" : "text-foreground"
                           }`}>
                             {lesson.title}
                           </span>
