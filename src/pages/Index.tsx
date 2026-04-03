@@ -221,8 +221,8 @@ const Index = () => {
                       onClick={() => handleLessonClick(index)}
                       className={`w-full text-left rounded-xl border-2 p-4 transition-all ${
                         index === activeLesson
-                          ? "bg-[hsl(270,70%,80%)] border-[hsl(270,70%,65%)]"
-                          : "bg-background border-border hover:bg-[hsl(270,60%,93%)] hover:border-[hsl(270,60%,80%)]"
+                          ? "bg-[hsl(261,100%,80%)] border-[hsl(261,100%,71%)]"
+                          : "bg-background border-border hover:bg-secondary hover:border-[hsl(261,100%,80%)]"
                       }`}
                     >
                       <div className="flex items-start gap-3">
