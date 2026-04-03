@@ -76,6 +76,9 @@
     --input: 0 0% 27.5%;
     --ring: 261 100% 71%;
 
+    --violet-light: 261 100% 80%;
+    --violet-dark: 261 99% 65%;
+
     --sidebar-background: 0 0% 0%;
     --sidebar-foreground: 240 7% 97%;
     --sidebar-primary: 240 7% 97%;
