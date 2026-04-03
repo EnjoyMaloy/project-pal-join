@@ -227,9 +227,9 @@ const Index = () => {
                     >
                       <div className="flex items-start gap-3">
                         {index === activeLesson ? (
-                          <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-[hsl(270,40%,20%)]" />
+                          <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-secondary-foreground" />
                         ) : (
-                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-[hsl(270,50%,60%)]" />
+                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-primary" />
                         )}
                         <div>
                           {index === activeLesson ? (
