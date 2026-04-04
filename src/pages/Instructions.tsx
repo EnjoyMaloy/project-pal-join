@@ -31,7 +31,7 @@ interface CardData {
 const STATIC_CARDS: CardData[] = [
   {
     id: "static-1",
-    title: "Как настроить Claw Bot на своем компьютере?",
+    title: "Как настроить Open Claw на сервере?",
     author: "Dmitry Volkov",
     avatar: avatarDmitry,
     borderColor: "#BF96FF",
