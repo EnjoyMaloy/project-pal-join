@@ -53,6 +53,7 @@ const lessonsData = [
     description: "Разберём основные стратегии покупки и продажи подарков.",
     reward: 800,
     progress: 45,
+    hasInstruction: true,
     content: {
       heading: "Стратегии торговли на вторичном рынке",
       sections: [
