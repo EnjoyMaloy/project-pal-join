@@ -291,7 +291,7 @@ const Index = () => {
                                 height: 32,
                               }}
                             >
-                              {lesson.progress === 100 ? "Пройти снова" : lesson.progress > 0 ? "Продолжить" : "Начать"}
+                              {lesson.progress === 100 ? t("index.retake") : lesson.progress > 0 ? t("index.continue") : t("index.start")}
                             </button>
                           </div>
                         </div>
