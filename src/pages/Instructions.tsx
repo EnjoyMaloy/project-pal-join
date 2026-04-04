@@ -128,7 +128,7 @@ const Instructions = () => {
           gradient: "linear-gradient(180deg, #FFF8E1 0%, #E65100 100%)",
           isDbArticle: true,
         }));
-        setCards([...dbCards, ...STATIC_CARDS]);
+        setCards([...STATIC_CARDS]);
         setLoading(false);
       });
   }, []);
