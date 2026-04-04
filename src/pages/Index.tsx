@@ -224,15 +224,15 @@ const Index = () => {
                       onClick={() => handleLessonClick(index)}
                       className={`group w-full text-left rounded-xl border-2 p-4 transition-all ${
                         index === activeLesson
-                          ? "bg-[#D9C0FF] border-[#A66CFF]"
-                          : "bg-background border-border hover:bg-violet-super-light hover:border-[#D9C0FF] hover:-translate-y-0.5"
+                           ? "bg-secondary border-primary"
+                          : "bg-background border-border hover:bg-violet-super-light hover:border-secondary hover:-translate-y-0.5"
                       }`}
                     >
                       <div className="flex items-start gap-3">
                         {index === activeLesson ? (
                           <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-secondary-foreground" />
                         ) : (
-                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-[#BF96FF] group-hover:text-[#A66CFF]" />
+                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-violet-light group-hover:text-primary" />
                         )}
                         <div>
                           {index === activeLesson ? (
@@ -240,7 +240,7 @@ const Index = () => {
                               Урок {lesson.number}
                             </span>
                           ) : (
-                            <span className="inline-block text-xs font-medium text-[#BF96FF] group-hover:text-[#A66CFF] bg-transparent rounded px-2 py-0.5 mb-1">
+                            <span className="inline-block text-xs font-medium text-violet-light group-hover:text-primary bg-transparent rounded px-2 py-0.5 mb-1">
                               Урок {lesson.number}
                             </span>
                           )}
