@@ -47,6 +47,7 @@ const translations = {
   "index.start": { ru: "Начать", en: "Start" },
   "index.next": { ru: "Далее", en: "Next" },
   "index.finish": { ru: "Завершить", en: "Finish" },
+  "article.back": { ru: "К инструкциям", en: "To guides" },
 } as const;
 
 type TranslationKey = keyof typeof translations;
