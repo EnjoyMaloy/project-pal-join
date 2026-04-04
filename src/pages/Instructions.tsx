@@ -182,7 +182,7 @@ const Instructions = () => {
                   onClick={() => setShowFavorites(false)}
                   className={`px-4 py-1.5 rounded-md text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
                 >
-                  Все
+                  {t("instructions.all")}
                 </button>
                 <button
                   onClick={() => setShowFavorites(true)}
