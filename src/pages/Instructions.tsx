@@ -80,6 +80,7 @@ const STATIC_CARDS: CardData[] = [
 ];
 
 const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardData; bookmarked: boolean; onToggleBookmark: (id: string) => void }) => {
+  const { t } = useLanguage();
   const Wrapper = card.isDbArticle ? Link : ("div" as any);
   const wrapperProps = card.isDbArticle ? { to: `/instructions/${card.id}` } : {};
 
