@@ -271,7 +271,7 @@ const Index = () => {
                             {/* Title row */}
                             <div className="flex items-center gap-1.5">
                               <BookOpenCheck className="w-[18px] h-[18px] text-primary flex-shrink-0" />
-                              <span className="text-[16px] font-medium leading-[100%]" style={{ color: 'hsl(var(--foreground))' }}>
+                              <span className="text-[16px] font-medium leading-[100%]" style={{ color: '#232323' }}>
                                 {lesson.title}
                               </span>
                             </div>
