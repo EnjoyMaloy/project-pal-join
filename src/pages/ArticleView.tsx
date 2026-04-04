@@ -33,7 +33,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     author: "Dmitry Volkov",
     avatar: avatarDmitry,
     views: 3104,
-    gradient: "linear-gradient(180deg, #E8DCFB 0%, #7B2FBE 100%)",
+    gradient: "linear-gradient(to left, #7B2FBE 0%, #E8DCFB 100%)",
     borderColor: "#BF96FF",
     image: img3dSecurity,
     readTime: "8 мин",
