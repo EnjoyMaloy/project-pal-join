@@ -182,7 +182,7 @@ const ArticleView = () => {
 
   if (staticArticle) {
     return (
-      <div className="min-h-screen bg-background p-6">
+      <div className="min-h-screen bg-background px-3 py-4 md:p-6">
         {/* Back button */}
         <div className="max-w-4xl mx-auto mb-4">
           <button
