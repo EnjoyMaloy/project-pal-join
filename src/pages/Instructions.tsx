@@ -123,7 +123,10 @@ const CardVariant2 = ({ card, wrapperProps, Wrapper }: { card: CardData; wrapper
 
 const CardVariant3 = ({ card, wrapperProps, Wrapper }: { card: CardData; wrapperProps: any; Wrapper: any }) => (
   <Wrapper {...wrapperProps} className="flex flex-col w-full group cursor-pointer rounded-xl overflow-hidden" style={{ background: card.gradient }}>
-    <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity">
+    <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity flex items-center justify-center">
+      {card.image && (
+        <img src={card.image} alt="" className="w-24 h-24 object-contain drop-shadow-lg" loading="lazy" width={96} height={96} />
+      )}
       <div className="absolute top-1 right-1 flex items-center gap-1">
         <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success("Ссылка скопирована"); }} className="w-[38px] h-[38px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
           <LinkIcon className="w-[14px] h-[14px] text-foreground" strokeWidth={1.5} />
