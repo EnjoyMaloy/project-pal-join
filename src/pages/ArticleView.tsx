@@ -180,9 +180,9 @@ const ArticleView = () => {
       <div className="min-h-screen bg-background">
         {/* Hero banner */}
         <div className="relative w-full h-[280px] overflow-hidden" style={{ background: staticArticle.gradient }}>
-          <div className="absolute inset-0 flex items-center justify-center opacity-30">
+        <div className="absolute right-8 bottom-0 flex items-end justify-end">
             {staticArticle.image && (
-              <img src={staticArticle.image} alt="" className="w-[200px] h-[200px] object-contain" />
+              <img src={staticArticle.image} alt="" className="w-[220px] h-[220px] object-contain drop-shadow-lg" />
             )}
           </div>
           <div className="relative z-10 max-w-4xl mx-auto px-6 pt-6">
