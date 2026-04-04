@@ -9,6 +9,7 @@ import Index from "./pages/Index.tsx";
 import Articles from "./pages/Articles.tsx";
 import ArticleEditor from "./pages/ArticleEditor.tsx";
 import Auth from "./pages/Auth.tsx";
+import Instructions from "./pages/Instructions.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
