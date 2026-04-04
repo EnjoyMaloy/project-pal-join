@@ -222,7 +222,7 @@ const Index = () => {
                       className={`w-full text-left rounded-xl border-2 p-4 transition-all ${
                         index === activeLesson
                           ? "bg-violet-light border-primary"
-                          : "bg-background border-border hover:bg-secondary hover:border-violet-light"
+                          : "bg-background border-border hover:bg-[#E8DCFB] hover:border-violet-light"
                       }`}
                     >
                       <div className="flex items-start gap-3">
