@@ -266,7 +266,7 @@ const Index = () => {
                               </span>
                             </div>
                             <div className="flex flex-col" style={{ gap: 6 }}>
-                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: 'hsl(var(--foreground))' }}>Награда</span>
+                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: 'hsl(var(--foreground))' }}>{t("index.reward")}</span>
                               <div className="flex items-center" style={{ gap: 4 }}>
                                 <span
                                   className="inline-flex items-center justify-center rounded-full text-[8px] font-bold"
