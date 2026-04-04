@@ -67,6 +67,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     borderColor: "#FFCC47",
     image: img3dNft,
     readTime: "6 мин",
+    updatedAt: "2025-02-20",
     content: `
       <h2>Как оценивать NFT проекты</h2>
       <p>Рынок NFT полон как перспективных проектов, так и мошеннических схем. Научитесь отличать одно от другого.</p>
