@@ -116,14 +116,41 @@ const CardVariant2 = ({ card, wrapperProps, Wrapper }: { card: CardData; wrapper
   </Wrapper>
 );
 
+const CardVariant3 = ({ card, wrapperProps, Wrapper }: { card: CardData; wrapperProps: any; Wrapper: any }) => (
+  <Wrapper {...wrapperProps} className="flex flex-col w-full group cursor-pointer rounded-xl overflow-hidden" style={{ background: card.gradient }}>
+    <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity">
+      <div className="absolute top-1 right-1 flex items-center gap-1">
+        <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success("Ссылка скопирована"); }} className="w-[38px] h-[38px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
+          <LinkIcon className="w-[14px] h-[14px] text-foreground" strokeWidth={1.5} />
+        </button>
+        <button onClick={(e: React.MouseEvent) => e.preventDefault()} className="w-[38px] h-[38px] rounded-full bg-white/60 flex items-center justify-center">
+          <Bookmark className="w-[14px] h-[14px] text-foreground" strokeWidth={1.5} />
+        </button>
+      </div>
+    </div>
+    <div className="flex flex-col gap-3 px-4 pb-4 items-center">
+      <p className="text-[20px] font-medium leading-[90%] text-center text-white group-hover:opacity-80 transition-opacity">{card.title}</p>
+      <div className="flex items-center gap-3 px-2 py-[5px] rounded-md w-fit" style={{ background: "rgba(255,255,255,0.25)" }}>
+        <div className="flex items-center gap-2">
+          <img src={card.avatar} alt={card.author} className="w-5 h-5 rounded-full object-cover" style={{ border: `1.5px solid rgba(255,255,255,0.5)` }} loading="lazy" width={20} height={20} />
+          <span className="text-[14px] font-normal leading-none text-white/90">{card.author}</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <Eye className="w-[14px] h-[14px] text-white/80" strokeWidth={1.25} />
+          <span className="text-[14px] font-normal leading-none text-white/80">{card.views}</span>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+);
+
 const InstructionCard = ({ card, index }: { card: CardData; index: number }) => {
   const Wrapper = card.isDbArticle ? Link : "div";
   const wrapperProps = card.isDbArticle ? { to: `/instructions/${card.id}` } : {};
 
-  if (index === 0) {
-    return <CardVariant1 card={card} wrapperProps={wrapperProps} Wrapper={Wrapper} />;
-  }
-  return <CardVariant2 card={card} wrapperProps={wrapperProps} Wrapper={Wrapper} />;
+  if (index === 0) return <CardVariant1 card={card} wrapperProps={wrapperProps} Wrapper={Wrapper} />;
+  if (index === 1) return <CardVariant2 card={card} wrapperProps={wrapperProps} Wrapper={Wrapper} />;
+  return <CardVariant3 card={card} wrapperProps={wrapperProps} Wrapper={Wrapper} />;
 };
 
 const Instructions = () => {
