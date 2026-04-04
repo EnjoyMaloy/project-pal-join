@@ -4,7 +4,7 @@ type Lang = "ru" | "en";
 
 const translations = {
   // Navbar
-  "nav.search": { ru: "Найти инструкцию...", en: "Search instructions..." },
+  "nav.search": { ru: "Найти инструкцию...", en: "Search guides..." },
   "nav.logout": { ru: "Выйти", en: "Log out" },
   "nav.login": { ru: "Войти", en: "Log in" },
 
