@@ -89,7 +89,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     author: "Anna Petrova",
     avatar: avatarAnna,
     views: 1842,
-    gradient: "linear-gradient(180deg, #FFD6E0 0%, #D63384 100%)",
+    gradient: "linear-gradient(to left, #D63384 0%, #FFD6E0 100%)",
     borderColor: "#FF8A80",
     image: img3dCoin,
     readTime: "10 мин",
