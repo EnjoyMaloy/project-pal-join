@@ -268,7 +268,7 @@ const Instructions = () => {
                 {activeCategory !== "all" && (
                   <button
                     onClick={() => setActiveCategory("all")}
-                    className="px-5 py-2 rounded-lg text-[15px] bg-muted dark:bg-transparent dark:border-2 dark:border-white text-muted-foreground hover:text-foreground transition-colors"
+                    className="px-5 py-2 rounded-lg text-[15px] bg-muted dark:bg-transparent dark:border dark:border-white/40 text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {t("instructions.reset")}
                   </button>
