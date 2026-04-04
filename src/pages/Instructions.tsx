@@ -289,14 +289,15 @@ const Instructions = () => {
                 {sortOpen ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
               </button>
               {sortOpen && (
-                <div className="absolute right-0 top-full mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[180px] z-50">
+                <div className="absolute right-0 top-full mt-2 bg-background border border-border rounded-2xl shadow-lg py-2 min-w-[200px] z-50">
                   {(Object.entries(SORT_LABELS) as [SortOption, string][]).map(([key, label]) => (
                     <button
                       key={key}
                       onClick={() => { setSort(key); setSortOpen(false); }}
-                      className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-muted transition-colors"
+                      className={`w-full flex items-center justify-between px-4 py-3 text-left transition-colors rounded-xl mx-auto ${sort === key ? '' : 'hover:bg-primary hover:text-primary-foreground'}`}
+                      style={{ width: 'calc(100% - 8px)', marginLeft: 4, marginRight: 4 }}
                     >
-                      <span className={`text-body-14 ${sort === key ? 'text-primary font-medium' : 'text-foreground'}`}>{label}</span>
+                      <span className={`text-body-14 ${sort === key ? 'text-primary font-medium' : ''}`}>{label}</span>
                       {sort === key && <Check className="w-4 h-4 text-primary" />}
                     </button>
                   ))}
