@@ -191,7 +191,7 @@ const Index = () => {
                             <div className="text-right">
                               <span className="text-caption-10 text-muted-foreground">Награда</span>
                               <p className="text-subh-14 text-foreground flex items-center gap-1 justify-end">
-                                <span className="w-4 h-4 rounded-full bg-green-500 inline-flex items-center justify-center text-[8px] text-white font-bold">S</span>
+                                <span className="w-4 h-4 rounded-full bg-primary inline-flex items-center justify-center text-[8px] text-primary-foreground font-bold">S</span>
                                 {lesson.reward.toLocaleString()}
                               </p>
                             </div>
