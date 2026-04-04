@@ -53,7 +53,7 @@ const Sidebar = () => {
         className={`flex items-center gap-3 px-3 h-9 rounded-lg text-[16px] font-normal leading-none transition-colors relative ${
           active
             ? "bg-primary text-primary-foreground font-medium"
-            : "text-foreground/70 hover:text-foreground hover:bg-muted"
+            : "text-foreground/70 hover:text-foreground hover:bg-sidebar-accent"
         }`}
       >
         <Icon className="w-[18px] h-[18px] flex-shrink-0" />
