@@ -30,7 +30,7 @@ const STATIC_CARDS: CardData[] = [
     title: "Безопасность в Web3",
     author: "Dmitry Volkov",
     avatar: avatarDmitry,
-    borderColor: "#7B9EBF",
+    borderColor: "#C62828",
     views: 3104,
     gradient: "linear-gradient(180deg, #FFCDD2 0%, #C62828 100%)",
     image: img3dSecurity,
