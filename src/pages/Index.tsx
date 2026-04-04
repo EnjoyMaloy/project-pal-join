@@ -237,7 +237,7 @@ const Index = () => {
                           {lesson.hasInstruction && (
                             <span
                               className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full flex items-center justify-center"
-                              style={{ background: 'hsl(var(--background))', border: '1px solid rgba(166, 108, 255, 0.25)' }}
+                              style={{ background: '#FFFFFF', border: '1px solid rgba(166, 108, 255, 0.25)' }}
                             >
                               <Paperclip className="w-2.5 h-2.5 text-primary" />
                             </span>
