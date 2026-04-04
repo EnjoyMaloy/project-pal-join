@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Eye, Bookmark, ChevronUp, ChevronDown, Check, SlidersHorizontal, ArrowUpDown } from "lucide-react";
-import ShareLinkIcon from "@/components/icons/ShareLinkIcon";
+import { Eye, Bookmark, LinkIcon, ChevronUp, ChevronDown, Check, SlidersHorizontal, ArrowUpDown } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -91,7 +90,7 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
         )}
         <div className="absolute top-2 right-2 flex items-center gap-1">
           <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success(t("instructions.linkCopied")); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
-            <ShareLinkIcon className="w-[12px] h-[12px] text-foreground" />
+            <LinkIcon className="w-[12px] h-[12px] text-foreground" strokeWidth={1.5} />
           </button>
           <button onClick={(e: React.MouseEvent) => { e.preventDefault(); onToggleBookmark(card.id); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
             <Bookmark className={`w-[12px] h-[12px] transition-colors ${bookmarked ? 'text-primary fill-primary' : 'text-foreground'}`} strokeWidth={1.5} />
