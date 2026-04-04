@@ -183,6 +183,11 @@ const Index = () => {
                           </h3>
                           <p className="text-body-14 text-muted-foreground mt-2 leading-relaxed">{lesson.description}</p>
 
+                          <div className="inline-flex items-center gap-1.5 mt-3 px-2.5 py-1 rounded-full bg-secondary border border-border">
+                            <BookOpen className="w-3.5 h-3.5 text-primary" />
+                            <span className="text-caption-10 text-secondary-foreground">Инструкция</span>
+                          </div>
+
                           <div className="flex items-center justify-between mt-4">
                             <div>
                               <span className="text-caption-10 text-muted-foreground">Пройдено:</span>
