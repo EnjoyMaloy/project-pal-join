@@ -250,7 +250,7 @@ const Index = () => {
                                   }}
                                 >
                                   <Paperclip className="w-3 h-3" />
-                                  Инструкция
+                                  {t("index.instruction")}
                                 </span>
                               </div>
                             )}
