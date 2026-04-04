@@ -81,7 +81,6 @@ const Navbar = () => {
 
           {user ? (
             <>
-              <span className="text-caption-12 text-muted-foreground hidden sm:block">{user.email}</span>
               <Button variant="ghost" size="sm" onClick={handleLogout} className="text-body-14">
                 <LogOut className="w-4 h-4 mr-1" />
                 {t("nav.logout")}
