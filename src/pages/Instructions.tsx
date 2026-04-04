@@ -84,9 +84,9 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
 
   return (
     <Link to={`/instructions/${card.id}`} className="flex flex-col w-[280px] min-w-[280px] group cursor-pointer rounded-xl overflow-hidden transition-transform duration-200 hover:-translate-y-1" style={{ background: card.gradient, boxShadow: `inset 0 0 0 2px ${card.borderColor}25` }}>
-      <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity flex items-end justify-center overflow-hidden">
+      <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity flex items-center justify-center">
         {card.image && (
-          <img src={card.image} alt="" className={`w-full h-full object-contain p-4 ${card.id !== 'static-1' ? 'translate-y-2' : ''}`} loading="lazy" />
+          <img src={card.image} alt="" className={`object-contain ${card.id === 'static-1' ? 'w-full h-full p-4' : 'w-[85%] h-[85%] translate-y-3'}`} loading="lazy" />
         )}
         <div className="absolute top-2 right-2 flex items-center gap-1">
           <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success(t("instructions.linkCopied")); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
