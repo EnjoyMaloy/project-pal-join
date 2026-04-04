@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Eye, Bookmark, LinkIcon, ChevronUp, ChevronDown, Check, Search } from "lucide-react";
+import { Link, useSearchParams } from "react-router-dom";
+import { Eye, Bookmark, LinkIcon, ChevronUp, ChevronDown, Check } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import avatarSychev from "@/assets/avatar-sychev.jpg";
