@@ -12,6 +12,7 @@ const Navbar = () => {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const isInstructions = location.pathname === "/instructions";
+  const isArticleView = location.pathname.startsWith("/instructions/");
   const searchValue = searchParams.get("q") || "";
   const { lang, setLang, t } = useLanguage();
   const { theme, setTheme } = useTheme();
@@ -31,7 +32,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-16 md:h-14 border-b-0 md:border-b md:border-border">
+    <nav className={`sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-16 md:h-14 border-b-0 md:border-b md:border-border ${isArticleView ? 'hidden md:block' : ''}`}>
       <div className="max-w-full mx-auto px-4 flex items-center justify-between h-16 md:h-14 gap-4 pt-1 md:pt-0">
         {isInstructions ? (
           <div className="relative flex-1 max-w-md">
