@@ -29,9 +29,21 @@ const Sidebar = () => {
     return location.pathname.startsWith(path);
   };
 
-  const renderItem = (item: { label: string; icon: React.ElementType; path: string; badge?: number }) => {
-    const active = isActive(item.path);
+  const renderItem = (item: { label: string; icon: React.ElementType; path: string; badge?: number; disabled?: boolean }) => {
+    const active = !item.disabled && isActive(item.path);
     const Icon = item.icon;
+
+    if (item.disabled) {
+      return (
+        <div
+          key={item.path}
+          className="flex items-center gap-3 px-3 h-9 rounded-lg text-[16px] font-normal leading-none text-muted-foreground/50 cursor-default relative"
+        >
+          <Icon className="w-[18px] h-[18px] flex-shrink-0" />
+          {!collapsed && <span className="truncate">{item.label}</span>}
+        </div>
+      );
+    }
 
     return (
       <Link
