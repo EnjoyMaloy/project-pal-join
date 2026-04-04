@@ -217,8 +217,8 @@ const Index = () => {
                             width: 54,
                             height: 54,
                             borderRadius: '50%',
-                            background: 'linear-gradient(180deg, hsl(var(--muted)) 0%, hsl(var(--background)) 100%)',
-                            border: '1px solid hsl(var(--border))',
+                            background: 'linear-gradient(180deg, #F7F7F8 0%, #FFFFFF 100%)',
+                            border: '1px solid #EBE9EA',
                             boxShadow: '0px 1px 4px rgba(70, 4, 102, 0.08)',
                           }}
                         >
