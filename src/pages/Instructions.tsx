@@ -186,6 +186,7 @@ const Instructions = () => {
               </div>
             )}
           </div>
+          </div>
         </div>
 
         {loading ? (
