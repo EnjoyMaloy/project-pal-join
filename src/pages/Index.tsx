@@ -219,7 +219,7 @@ const Index = () => {
                     <button
                       key={lesson.number}
                       onClick={() => handleLessonClick(index)}
-                      className={`w-full text-left rounded-xl border-2 p-4 transition-all ${
+                      className={`group w-full text-left rounded-xl border-2 p-4 transition-all ${
                         index === activeLesson
                           ? "bg-[#D9C0FF] border-[#A66CFF]"
                           : "bg-background border-border hover:bg-[#E8DCFB] hover:border-[#D9C0FF] hover:-translate-y-0.5"
@@ -237,7 +237,7 @@ const Index = () => {
                               Урок {lesson.number}
                             </span>
                           ) : (
-                            <span className="text-xs font-medium text-primary block mb-1">
+                            <span className="text-xs font-medium text-primary group-hover:text-[#460366] block mb-1">
                               Урок {lesson.number}
                             </span>
                           )}
