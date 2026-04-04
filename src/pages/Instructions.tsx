@@ -184,15 +184,15 @@ const Instructions = () => {
                 <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
                   <button
                     onClick={() => setShowFavorites(false)}
-                    className={`px-3 md:px-4 py-1.5 rounded-md text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                    className={`px-4 md:px-4 py-2 rounded-md text-[16px] md:text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
                   >
                     {t("instructions.all")}
                   </button>
                   <button
                     onClick={() => setShowFavorites(true)}
-                    className={`px-3 md:px-4 py-1.5 rounded-md text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                    className={`px-4 md:px-4 py-2 rounded-md text-[16px] md:text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
                   >
-                    <Bookmark className="w-3.5 h-3.5" strokeWidth={1.5} />
+                    <Bookmark className="w-4 h-4" strokeWidth={1.5} />
                     {t("instructions.favorites")}
                     {bookmarkedIds.size > 0 && (
                       <span className="text-caption-12 text-muted-foreground">{bookmarkedIds.size}</span>
@@ -204,9 +204,9 @@ const Instructions = () => {
                 <div className="relative md:hidden">
                   <button
                     onClick={() => { setFilterOpen(!filterOpen); setSortOpen(false); }}
-                    className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${activeCategory !== "all" ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                    className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${activeCategory !== "all" ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
                   >
-                    <SlidersHorizontal className="w-4 h-4" strokeWidth={1.5} />
+                    <SlidersHorizontal className="w-5 h-5" strokeWidth={1.5} />
                   </button>
                   {filterOpen && (
                     <div className="absolute left-0 top-full mt-2 bg-background border border-border rounded-2xl shadow-lg py-2 min-w-[200px] z-50">
@@ -233,9 +233,9 @@ const Instructions = () => {
               <div className="relative md:hidden">
                 <button
                   onClick={() => { setSortOpen(!sortOpen); setFilterOpen(false); }}
-                  className="w-9 h-9 rounded-lg flex items-center justify-center bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                  className="w-10 h-10 rounded-lg flex items-center justify-center bg-muted text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <ArrowUpDown className="w-4 h-4" strokeWidth={1.5} />
+                  <ArrowUpDown className="w-5 h-5" strokeWidth={1.5} />
                 </button>
                 {sortOpen && (
                   <div className="absolute left-0 top-full mt-2 bg-background border border-border rounded-2xl shadow-lg py-2 min-w-[200px] z-50">
