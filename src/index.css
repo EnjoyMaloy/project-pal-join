@@ -1,3 +1,22 @@
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_Thin.otf') format('opentype'); font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_Thin_Italic.otf') format('opentype'); font-weight: 100; font-style: italic; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_ExtraLight.otf') format('opentype'); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_ExtraLight_Italic.otf') format('opentype'); font-weight: 200; font-style: italic; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_Light_Italic.otf') format('opentype'); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_Italic.otf') format('opentype'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_Medium_Italic.otf') format('opentype'); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_DemiBold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_DemiBold_Italic.otf') format('opentype'); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_Bold_Italic.otf') format('opentype'); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_ExtraBold.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_ExtraBold_Italic.otf') format('opentype'); font-weight: 800; font-style: italic; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_Black.otf') format('opentype'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'TT Commons'; src: url('/fonts/TT_Commons_Black_Italic.otf') format('opentype'); font-weight: 900; font-style: italic; font-display: swap; }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -99,6 +118,6 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'TT Commons', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 }
