@@ -48,7 +48,7 @@ const Navbar = () => {
                 }
               }}
               placeholder={t("nav.search")}
-              className="w-full pl-10 pr-4 py-2 rounded-lg bg-muted border-none text-body-14 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 md:py-2 rounded-lg bg-muted border-none text-[16px] md:text-body-14 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
             />
           </div>
         ) : (

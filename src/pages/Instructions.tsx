@@ -233,9 +233,9 @@ const Instructions = () => {
               <div className="relative md:hidden">
                 <button
                   onClick={() => { setSortOpen(!sortOpen); setFilterOpen(false); }}
-                  className="w-9 h-9 rounded-lg flex items-center justify-center bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                  className="w-10 h-10 rounded-lg flex items-center justify-center bg-muted text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <ArrowUpDown className="w-4 h-4" strokeWidth={1.5} />
+                  <ArrowUpDown className="w-5 h-5" strokeWidth={1.5} />
                 </button>
                 {sortOpen && (
                   <div className="absolute left-0 top-full mt-2 bg-background border border-border rounded-2xl shadow-lg py-2 min-w-[200px] z-50">
