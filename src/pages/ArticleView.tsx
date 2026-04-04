@@ -222,7 +222,7 @@ const ArticleView = () => {
           </div>
           <div className="flex items-center gap-1.5 text-muted-foreground">
             <Clock className="w-4 h-4" strokeWidth={1.5} />
-            <span className="text-body-14">{staticArticle.readTime}</span>
+            <span className="text-body-14">{staticArticle.readTime} {t("article.min")}</span>
           </div>
           <div className="flex items-center gap-1.5 text-muted-foreground">
             <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
