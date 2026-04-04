@@ -240,7 +240,7 @@ const Index = () => {
                               Урок {lesson.number}
                             </span>
                           ) : (
-                            <span className="inline-block text-xs font-medium text-[#BF96FF] group-hover:text-[#A66CFF] bg-transparent rounded px-2 py-0.5 mb-1">
+                            <span className="inline-block text-xs font-medium text-violet-light group-hover:text-primary bg-transparent rounded px-2 py-0.5 mb-1">
                               Урок {lesson.number}
                             </span>
                           )}
