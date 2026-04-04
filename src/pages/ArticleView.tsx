@@ -208,9 +208,8 @@ const ArticleView = () => {
               src={staticArticle.avatar}
               alt={staticArticle.author}
               className="w-9 h-9 rounded-full object-cover"
-              style={{ border: `2px solid ${staticArticle.borderColor}` }}
             />
-            <span className="text-subh-14 text-foreground">{staticArticle.author}</span>
+            <span className="text-body-14 text-foreground">{staticArticle.author}</span>
           </div>
           <div className="flex items-center gap-1.5 text-muted-foreground">
             <Eye className="w-4 h-4" strokeWidth={1.5} />
