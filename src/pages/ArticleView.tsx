@@ -179,7 +179,7 @@ const ArticleView = () => {
     return (
       <div className="min-h-screen bg-background p-6">
         {/* Hero banner */}
-        <div className="relative w-full aspect-[5/2] max-h-[360px] overflow-hidden rounded-2xl" style={{ background: staticArticle.gradient }}>
+        <div className="relative w-full aspect-[5/2] max-h-[360px] overflow-hidden rounded-2xl" style={{ background: staticArticle.gradient, border: `1.5px solid ${staticArticle.borderColor}` }}>
         <div className="absolute right-8 bottom-0 flex items-end justify-end">
             {staticArticle.image && (
               <img src={staticArticle.image} alt="" className="w-[220px] h-[220px] object-contain drop-shadow-lg" />
