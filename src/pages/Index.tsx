@@ -115,11 +115,10 @@ const Index = () => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-h1 text-foreground mb-3">
-            Быстрый старт в Telegram Gifts
+            {t("index.title")}
           </h1>
           <p className="text-[16px] font-normal leading-relaxed text-muted-foreground max-w-3xl">
-            Курс покажет, как пользоваться Telegram Gifts и зарабатывать на них. Ты разберёшься в механике,
-            поймёшь, какие подарки востребованы, и узнаешь о секретах торговли на вторичном рынке.
+            {t("index.description")}
           </p>
         </div>
 
