@@ -260,10 +260,10 @@ const Instructions = () => {
                   const isActive = activeCategory === cat;
                   const label = cat === "ai" ? t("instructions.aiSkills") : t("instructions.cryptoBasics");
                   return (
-                    <button
+                     <button
                       key={cat}
                       onClick={() => setActiveCategory(isActive ? "all" : cat)}
-                      className={`px-5 py-2 rounded-lg text-[15px] font-medium transition-colors ${isActive ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                      className={`px-5 py-2 rounded-lg text-[15px] font-medium transition-colors ${isActive ? 'bg-primary text-primary-foreground' : 'bg-muted dark:bg-transparent dark:border dark:border-border text-muted-foreground hover:text-foreground'}`}
                     >
                       {label}
                     </button>
@@ -272,7 +272,7 @@ const Instructions = () => {
                 {activeCategory !== "all" && (
                   <button
                     onClick={() => setActiveCategory("all")}
-                    className="px-5 py-2 rounded-lg text-[15px] bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                    className="px-5 py-2 rounded-lg text-[15px] bg-muted dark:bg-transparent dark:border dark:border-border text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {t("instructions.reset")}
                   </button>
