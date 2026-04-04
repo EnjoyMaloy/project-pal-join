@@ -7,6 +7,8 @@ import avatarSychev from "@/assets/avatar-sychev.jpg";
 import avatarAnna from "@/assets/avatar-anna.jpg";
 import avatarDmitry from "@/assets/avatar-dmitry.jpg";
 import avatarAlex from "@/assets/avatar-alex.jpg";
+import img3dSecurity from "@/assets/3d-security.png";
+import img3dNft from "@/assets/3d-nft.png";
 
 interface Article {
   id: string;
