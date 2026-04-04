@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Eye, Bookmark, LinkIcon } from "lucide-react";
+import { Eye, Bookmark, LinkIcon, ChevronUp, ChevronDown, Check } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import avatarSychev from "@/assets/avatar-sychev.jpg";
@@ -108,9 +108,19 @@ const InstructionCard = ({ card }: { card: CardData }) => {
   );
 };
 
+type SortOption = "newest" | "popular" | "rating";
+
+const SORT_LABELS: Record<SortOption, string> = {
+  newest: "Сначала новые",
+  popular: "Популярные",
+  rating: "Высокий рейтинг",
+};
+
 const Instructions = () => {
   const [cards, setCards] = useState<CardData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [sort, setSort] = useState<SortOption>("newest");
+  const [sortOpen, setSortOpen] = useState(false);
 
   useEffect(() => {
     supabase
@@ -119,31 +129,54 @@ const Instructions = () => {
       .eq("published", true)
       .order("created_at", { ascending: false })
       .then(({ data }) => {
-        const dbCards: CardData[] = (data || []).map((a) => ({
-          id: a.id,
-          title: a.title || "Без названия",
-          author: "Sychev Pavel",
-          avatar: avatarSychev,
-          borderColor: "#B8C4D0",
-          views: 2738,
-          gradient: "linear-gradient(180deg, #FFF8E1 0%, #E65100 100%)",
-          isDbArticle: true,
-        }));
         setCards([...STATIC_CARDS]);
         setLoading(false);
       });
   }, []);
 
+  const sortedCards = [...cards].sort((a, b) => {
+    if (sort === "popular") return b.views - a.views;
+    return 0;
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto px-6 py-8">
-        <h1 className="text-h1 text-foreground mb-6">Инструкции</h1>
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-h1 text-foreground">Инструкции</h1>
+
+          <div className="relative">
+            <button
+              onClick={() => setSortOpen(!sortOpen)}
+              className="flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-background hover:bg-muted transition-colors"
+            >
+              <span className="text-body-14 text-muted-foreground">Сортировка:</span>
+              <span className="text-body-14 font-medium text-foreground">{SORT_LABELS[sort]}</span>
+              {sortOpen ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
+            </button>
+
+            {sortOpen && (
+              <div className="absolute right-0 top-full mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[200px] z-50">
+                {(Object.entries(SORT_LABELS) as [SortOption, string][]).map(([key, label]) => (
+                  <button
+                    key={key}
+                    onClick={() => { setSort(key); setSortOpen(false); }}
+                    className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-muted transition-colors"
+                  >
+                    <span className={`text-body-14 ${sort === key ? 'text-primary font-medium' : 'text-foreground'}`}>{label}</span>
+                    {sort === key && <Check className="w-4 h-4 text-primary" />}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
 
         {loading ? (
           <p className="text-body-14 text-muted-foreground">Загрузка...</p>
         ) : (
           <div className="flex flex-wrap gap-6">
-            {cards.map((card) => (
+            {sortedCards.map((card) => (
               <InstructionCard key={card.id} card={card} />
             ))}
           </div>
