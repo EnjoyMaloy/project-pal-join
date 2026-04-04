@@ -204,9 +204,9 @@ const Instructions = () => {
                 <div className="relative md:hidden">
                   <button
                     onClick={() => { setFilterOpen(!filterOpen); setSortOpen(false); }}
-                    className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${activeCategory !== "all" ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                    className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${activeCategory !== "all" ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
                   >
-                    <SlidersHorizontal className="w-4 h-4" strokeWidth={1.5} />
+                    <SlidersHorizontal className="w-5 h-5" strokeWidth={1.5} />
                   </button>
                   {filterOpen && (
                     <div className="absolute left-0 top-full mt-2 bg-background border border-border rounded-2xl shadow-lg py-2 min-w-[200px] z-50">
