@@ -23,7 +23,7 @@ interface StaticArticle {
   borderColor: string;
   image?: string;
   content: string;
-  readTime: string;
+  readTime: number;
   updatedAt: string;
 }
 
