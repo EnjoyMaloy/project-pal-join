@@ -157,18 +157,55 @@ const Index = () => {
                 <p className="text-subh-16-medium text-secondary-foreground mb-2">Уроки курса</p>
                 <div className="flex flex-wrap justify-center gap-5">
                   {lessonsData.map((lesson, index) => (
-                    <button
-                      key={lesson.number}
-                      onClick={() => setStoryIndex(index)}
-                      className="flex flex-col items-center gap-2 group"
-                    >
-                      <div className="w-16 h-16 rounded-full bg-primary/20 border-[3px] border-primary flex items-center justify-center group-hover:scale-110 group-hover:border-violet-dark transition-all">
-                        <span className="text-h3 text-primary group-hover:text-violet-dark transition-colors">{lesson.number}</span>
-                      </div>
-                      <span className="text-caption-10 text-secondary-foreground max-w-[80px] text-center leading-tight">
-                        {lesson.title}
-                      </span>
-                    </button>
+                    <div key={lesson.number} className="relative flex flex-col items-center gap-2">
+                      <button
+                        data-lesson-circle
+                        onClick={() => setPopoverIndex(popoverIndex === index ? null : index)}
+                        className="flex flex-col items-center gap-2 group"
+                      >
+                        <div className={`w-16 h-16 rounded-full bg-primary/20 border-[3px] flex items-center justify-center transition-all ${
+                          popoverIndex === index ? "border-violet-dark scale-110" : "border-primary group-hover:scale-110 group-hover:border-violet-dark"
+                        }`}>
+                          <span className="text-h3 text-primary group-hover:text-violet-dark transition-colors">{lesson.number}</span>
+                        </div>
+                      </button>
+
+                      {/* Popover card */}
+                      {popoverIndex === index && (
+                        <div
+                          data-lesson-popover
+                          className="absolute top-20 left-1/2 -translate-x-1/2 w-[280px] bg-card rounded-2xl border border-border shadow-xl p-5 z-30 animate-in fade-in slide-in-from-top-2 duration-200"
+                        >
+                          <span className="text-caption-12 text-muted-foreground uppercase tracking-wider">Урок {lesson.number}</span>
+                          <h3 className="text-subh-16-medium text-foreground mt-1.5 flex items-start gap-2">
+                            <BookOpenCheck className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                            {lesson.title}
+                          </h3>
+                          <p className="text-body-14 text-muted-foreground mt-2 leading-relaxed">{lesson.description}</p>
+
+                          <div className="flex items-center justify-between mt-4">
+                            <div>
+                              <span className="text-caption-10 text-muted-foreground">Пройдено:</span>
+                              <p className="text-subh-14 text-foreground">{lesson.progress}%</p>
+                            </div>
+                            <div className="text-right">
+                              <span className="text-caption-10 text-muted-foreground">Награда</span>
+                              <p className="text-subh-14 text-foreground flex items-center gap-1 justify-end">
+                                <span className="w-4 h-4 rounded-full bg-green-500 inline-flex items-center justify-center text-[8px] text-white font-bold">S</span>
+                                {lesson.reward.toLocaleString()}
+                              </p>
+                            </div>
+                          </div>
+
+                          <button
+                            onClick={() => { setPopoverIndex(null); setStoryIndex(index); }}
+                            className="w-full mt-4 text-btn-medium bg-foreground text-background py-3 rounded-xl hover:opacity-90 transition-opacity"
+                          >
+                            {lesson.progress === 100 ? "Пройти снова" : lesson.progress > 0 ? "Продолжить" : "Начать"}
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               </div>
