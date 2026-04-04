@@ -196,20 +196,28 @@ const Instructions = () => {
                 </button>
               </div>
 
-              <div className="flex items-center gap-1">
-                {(["all", "AI", "Crypto"] as const).map((label) => {
-                  const value = label === "all" ? "all" : label.toLowerCase() as Category;
-                  const isActive = activeCategory === value;
+              <div className="flex items-center gap-2">
+                {(["ai", "crypto"] as Category[]).map((cat) => {
+                  const isActive = activeCategory === cat;
+                  const label = cat === "ai" ? t("instructions.aiSkills") : t("instructions.cryptoBasics");
                   return (
                     <button
-                      key={label}
-                      onClick={() => setActiveCategory(value)}
-                      className={`px-3 py-1.5 rounded-full text-body-14 transition-colors ${isActive ? 'bg-foreground text-background font-medium' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                      key={cat}
+                      onClick={() => setActiveCategory(isActive ? "all" : cat)}
+                      className={`px-5 py-2 rounded-full text-body-14 font-medium transition-colors ${isActive ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
                     >
-                      {label === "all" ? t("instructions.allTopics") : label}
+                      {label}
                     </button>
                   );
                 })}
+                {activeCategory !== "all" && (
+                  <button
+                    onClick={() => setActiveCategory("all")}
+                    className="px-5 py-2 rounded-full text-body-14 bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {t("instructions.reset")}
+                  </button>
+                )}
               </div>
             </div>
 
