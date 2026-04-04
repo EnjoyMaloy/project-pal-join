@@ -48,6 +48,7 @@ const STATIC_CARDS: CardData[] = [
     borderColor: "#7B9EBF",
     views: 3104,
     gradient: "linear-gradient(180deg, #FFCDD2 0%, #C62828 100%)",
+    image: img3dSecurity,
     isDbArticle: false,
   },
   {
