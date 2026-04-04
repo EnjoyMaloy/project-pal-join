@@ -19,10 +19,10 @@ const BottomNav = () => {
   ];
 
   const courseItems = [
-    { label: "Назад", icon: ArrowLeft, path: "back", action: () => navigate("/") },
-    { label: "Курс", icon: GraduationCap, path: "/my-courses" },
-    { label: "Инструкции", icon: FileText, path: "/my-courses?tab=instructions" },
-    { label: "Квест", icon: Trophy, path: "/quest", disabled: true },
+    { label: t("bottomNav.back"), icon: ArrowLeft, path: "back", action: () => navigate("/") },
+    { label: t("bottomNav.course"), icon: GraduationCap, path: "/my-courses" },
+    { label: t("sidebar.instructions"), icon: FileText, path: "/my-courses?tab=instructions" },
+    { label: t("bottomNav.quest"), icon: Trophy, path: "/quest", disabled: true },
   ];
 
   const items = isMyCourses ? courseItems : defaultItems;
