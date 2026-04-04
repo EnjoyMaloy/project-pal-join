@@ -252,16 +252,16 @@ const Index = () => {
                           className="absolute top-20 left-1/2 -translate-x-1/2 z-30 animate-in fade-in slide-in-from-top-2 duration-200"
                           style={{
                             width: 230,
-                            background: 'hsl(var(--card))',
-                            border: '1px solid hsl(var(--border))',
+                            background: '#FFFFFF',
+                            border: '1px solid #EBE9EA',
                             boxShadow: '0px 4px 8px rgba(70, 4, 102, 0.1)',
                             borderRadius: 10,
                             overflow: 'hidden',
                           }}
                         >
                           {/* Header bar */}
-                          <div style={{ background: 'hsl(var(--muted))', padding: '12px 9px' }}>
-                            <span className="text-[12px] font-normal tracking-[0.01em] uppercase" style={{ color: 'hsl(var(--muted-foreground))' }}>
+                          <div style={{ background: '#F7F7F8', padding: '12px 9px' }}>
+                            <span className="text-[12px] font-normal tracking-[0.01em] uppercase" style={{ color: '#8D8D8D' }}>
                               {t("index.lesson")} {lesson.number}
                             </span>
                           </div>
@@ -271,13 +271,13 @@ const Index = () => {
                             {/* Title row */}
                             <div className="flex items-center gap-1.5">
                               <BookOpenCheck className="w-[18px] h-[18px] text-primary flex-shrink-0" />
-                              <span className="text-[16px] font-medium leading-[100%]" style={{ color: 'hsl(var(--foreground))' }}>
+                              <span className="text-[16px] font-medium leading-[100%]" style={{ color: '#232323' }}>
                                 {lesson.title}
                               </span>
                             </div>
 
                             {/* Description */}
-                            <p className="text-[12px] font-normal leading-[140%]" style={{ color: 'hsl(var(--muted-foreground))', marginTop: 6, paddingLeft: 24 }}>
+                            <p className="text-[12px] font-normal leading-[140%]" style={{ color: '#8D8D8D', marginTop: 6, paddingLeft: 24 }}>
                               {lesson.description}
                             </p>
                             {lesson.hasInstruction && (
@@ -285,8 +285,8 @@ const Index = () => {
                                 <span
                                   className="inline-flex items-center gap-1 text-[11px] font-medium"
                                   style={{
-                                    color: 'hsl(var(--secondary-foreground))',
-                                    background: 'hsl(var(--secondary))',
+                                    color: '#460466',
+                                    background: '#E8DCFB',
                                     padding: '3px 8px',
                                     borderRadius: 6,
                                   }}
@@ -297,24 +297,24 @@ const Index = () => {
                               </div>
                             )}
                           </div>
-                          <div style={{ borderTop: '1px solid hsl(var(--muted))', margin: '10px 0 0' }} />
+                          <div style={{ borderTop: '1px solid #EBE9EA', margin: '10px 0 0' }} />
 
                           {/* Stats row */}
                           <div className="flex justify-between" style={{ padding: '10px 8px' }}>
                             <div className="flex flex-col" style={{ gap: 6 }}>
-                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: 'hsl(var(--muted-foreground))' }}>{t("index.completed")}</span>
-                              <span className="text-[16px] font-medium leading-[100%] tracking-[0.01em]" style={{ color: lesson.progress > 0 ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))' }}>
+                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: '#8D8D8D' }}>{t("index.completed")}</span>
+                              <span className="text-[16px] font-medium leading-[100%] tracking-[0.01em]" style={{ color: lesson.progress > 0 ? '#232323' : '#8D8D8D' }}>
                                 {lesson.progress}%
                               </span>
                             </div>
                             <div className="flex flex-col" style={{ gap: 6 }}>
-                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: 'hsl(var(--foreground))' }}>{t("index.reward")}</span>
+                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: '#232323' }}>{t("index.reward")}</span>
                               <div className="flex items-center" style={{ gap: 4 }}>
                                 <span
                                   className="inline-flex items-center justify-center rounded-full text-[8px] font-bold"
                                   style={{ width: 16, height: 16, background: '#FF7D60', color: '#FFFFFF' }}
                                 >S</span>
-                                <span className="text-[14px] font-medium leading-[100%] tracking-[-0.01em]" style={{ color: 'hsl(var(--foreground))' }}>
+                                <span className="text-[14px] font-medium leading-[100%] tracking-[-0.01em]" style={{ color: '#232323' }}>
                                   {lesson.reward.toLocaleString()}
                                 </span>
                               </div>
@@ -327,8 +327,8 @@ const Index = () => {
                               onClick={() => { setPopoverIndex(null); setStoryIndex(index); }}
                               className="w-full text-[14px] font-medium tracking-[0.01em] hover:opacity-90 transition-opacity"
                               style={{
-                                background: 'hsl(var(--foreground))',
-                                color: 'hsl(var(--background))',
+                                background: '#232323',
+                                color: '#FFFFFF',
                                 borderRadius: 8,
                                 height: 32,
                               }}
