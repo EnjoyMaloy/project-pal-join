@@ -238,7 +238,7 @@ const Instructions = () => {
                   <ArrowUpDown className="w-4 h-4" strokeWidth={1.5} />
                 </button>
                 {sortOpen && (
-                  <div className="absolute right-0 top-full mt-2 bg-background border border-border rounded-2xl shadow-lg py-2 min-w-[200px] z-50">
+                  <div className="absolute left-0 top-full mt-2 bg-background border border-border rounded-2xl shadow-lg py-2 min-w-[200px] z-50">
                     {(Object.entries(SORT_LABELS) as [SortOption, string][]).map(([key, label]) => (
                       <button
                         key={key}
