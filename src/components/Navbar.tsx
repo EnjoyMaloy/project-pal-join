@@ -55,6 +55,14 @@ const Navbar = () => {
           <div />
         )}
         <div className="flex items-center gap-2">
+          {/* Theme toggle */}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 rounded-md hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+          >
+            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
+
           {/* Language switcher */}
           <div className="flex items-center bg-muted rounded-md p-0.5">
             <button
