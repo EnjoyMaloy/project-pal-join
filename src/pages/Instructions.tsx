@@ -4,6 +4,9 @@ import { Eye, Bookmark, LinkIcon } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import avatarSychev from "@/assets/avatar-sychev.jpg";
+import avatarAnna from "@/assets/avatar-anna.jpg";
+import avatarDmitry from "@/assets/avatar-dmitry.jpg";
+import avatarAlex from "@/assets/avatar-alex.jpg";
 
 interface Article {
   id: string;
@@ -12,69 +15,118 @@ interface Article {
   created_at: string;
 }
 
-const COLORS = ["#FFF8E1", "#E8EAF6", "#FFEBEE", "#FCE4EC", "#E0F7FA", "#F3E5F5", "#E8F5E9", "#FFF3E0"];
+interface CardData {
+  id: string;
+  title: string;
+  author: string;
+  avatar: string;
+  borderColor: string;
+  views: number;
+  gradient: string;
+  isDbArticle: boolean;
+}
 
-const InstructionCard = ({ article, index }: { article: Article; index: number }) => (
-  <Link to={`/instructions/${article.id}`} className="flex flex-col gap-3 w-full group">
-    {/* Image area */}
-    <div
-      className="relative w-full aspect-[328/181] rounded-[10px] overflow-hidden group-hover:opacity-90 transition-opacity"
-      style={{ background: COLORS[index % COLORS.length] }}
-    >
-      <div className="absolute top-1 right-1 flex items-center gap-1">
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            const url = `${window.location.origin}/instructions/${article.id}`;
-            navigator.clipboard.writeText(url);
-            toast.success("Ссылка скопирована");
-          }}
-          className="w-[38px] h-[38px] rounded-full bg-white flex items-center justify-center hover:bg-gray-50 transition-colors"
-        >
-          <LinkIcon className="w-[14px] h-[14px] text-foreground" strokeWidth={1.5} />
-        </button>
-        <button
-          onClick={(e) => e.preventDefault()}
-          className="w-[38px] h-[38px] rounded-full bg-white flex items-center justify-center"
-        >
-          <Bookmark className="w-[14px] h-[14px] text-foreground" strokeWidth={1.5} />
-        </button>
-      </div>
-    </div>
+const STATIC_CARDS: CardData[] = [
+  {
+    id: "static-1",
+    title: "Настройка TON Wallet",
+    author: "Anna Petrova",
+    avatar: avatarAnna,
+    borderColor: "#C9A87C",
+    views: 1842,
+    gradient: "linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%)",
+    isDbArticle: false,
+  },
+  {
+    id: "static-2",
+    title: "Безопасность в Web3",
+    author: "Dmitry Volkov",
+    avatar: avatarDmitry,
+    borderColor: "#7B9EBF",
+    views: 3104,
+    gradient: "linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%)",
+    isDbArticle: false,
+  },
+  {
+    id: "static-3",
+    title: "Анализ NFT проектов",
+    author: "Alex Kim",
+    avatar: avatarAlex,
+    borderColor: "#6B7B8D",
+    views: 956,
+    gradient: "linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 100%)",
+    isDbArticle: false,
+  },
+];
 
-    {/* Author + Rating + Views */}
-    <div className="flex items-center gap-3 px-2 py-[5px] rounded-md w-fit" style={{ background: "#F7F7F8" }}>
-      <div className="flex items-center gap-2">
-        <img
-          src={avatarSychev}
-          alt="Sychev Pavel"
-          className="w-5 h-5 rounded-full object-cover"
-          style={{ border: "1.5px solid #B8C4D0" }}
-          loading="lazy"
-          width={20}
-          height={20}
-        />
-        <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
-          Sychev Pavel
-        </span>
-      </div>
-      <div className="flex items-center gap-1">
-        <Eye className="w-[14px] h-[14px]" style={{ color: "#464646" }} strokeWidth={1.25} />
-        <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
-          2738
-        </span>
-      </div>
-    </div>
+const InstructionCard = ({ card }: { card: CardData }) => {
+  const Wrapper = card.isDbArticle ? Link : "div";
+  const wrapperProps = card.isDbArticle
+    ? { to: `/instructions/${card.id}` }
+    : {};
 
-    {/* Title */}
-    <p className="text-[20px] font-normal leading-[90%] group-hover:text-primary transition-colors" style={{ color: "#000000" }}>
-      {article.title || "Без названия"}
-    </p>
-  </Link>
-);
+  return (
+    <Wrapper {...(wrapperProps as any)} className="flex flex-col gap-3 w-full group cursor-pointer">
+      {/* Image area */}
+      <div
+        className="relative w-full aspect-[328/181] rounded-[10px] overflow-hidden group-hover:opacity-90 transition-opacity"
+        style={{ background: card.gradient }}
+      >
+        <div className="absolute top-1 right-1 flex items-center gap-1">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              const url = `${window.location.origin}/instructions/${card.id}`;
+              navigator.clipboard.writeText(url);
+              toast.success("Ссылка скопирована");
+            }}
+            className="w-[38px] h-[38px] rounded-full bg-white flex items-center justify-center hover:bg-gray-50 transition-colors"
+          >
+            <LinkIcon className="w-[14px] h-[14px] text-foreground" strokeWidth={1.5} />
+          </button>
+          <button
+            onClick={(e) => e.preventDefault()}
+            className="w-[38px] h-[38px] rounded-full bg-white flex items-center justify-center"
+          >
+            <Bookmark className="w-[14px] h-[14px] text-foreground" strokeWidth={1.5} />
+          </button>
+        </div>
+      </div>
+
+      {/* Author + Views */}
+      <div className="flex items-center gap-3 px-2 py-[5px] rounded-md w-fit" style={{ background: "#F7F7F8" }}>
+        <div className="flex items-center gap-2">
+          <img
+            src={card.avatar}
+            alt={card.author}
+            className="w-5 h-5 rounded-full object-cover"
+            style={{ border: `1.5px solid ${card.borderColor}` }}
+            loading="lazy"
+            width={20}
+            height={20}
+          />
+          <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
+            {card.author}
+          </span>
+        </div>
+        <div className="flex items-center gap-1">
+          <Eye className="w-[14px] h-[14px]" style={{ color: "#464646" }} strokeWidth={1.25} />
+          <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
+            {card.views}
+          </span>
+        </div>
+      </div>
+
+      {/* Title */}
+      <p className="text-[20px] font-normal leading-[90%] group-hover:text-primary transition-colors" style={{ color: "#000000" }}>
+        {card.title}
+      </p>
+    </Wrapper>
+  );
+};
 
 const Instructions = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
+  const [cards, setCards] = useState<CardData[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -84,7 +136,17 @@ const Instructions = () => {
       .eq("published", true)
       .order("created_at", { ascending: false })
       .then(({ data }) => {
-        setArticles(data || []);
+        const dbCards: CardData[] = (data || []).map((a) => ({
+          id: a.id,
+          title: a.title || "Без названия",
+          author: "Sychev Pavel",
+          avatar: avatarSychev,
+          borderColor: "#B8C4D0",
+          views: 2738,
+          gradient: "linear-gradient(135deg, #FFF8E1 0%, #FFE082 100%)",
+          isDbArticle: true,
+        }));
+        setCards([...dbCards, ...STATIC_CARDS]);
         setLoading(false);
       });
   }, []);
@@ -96,14 +158,10 @@ const Instructions = () => {
 
         {loading ? (
           <p className="text-body-14 text-muted-foreground">Загрузка...</p>
-        ) : articles.length === 0 ? (
-          <div className="bg-card rounded-2xl border border-border p-12 text-center">
-            <p className="text-body-14 text-muted-foreground">Пока нет опубликованных инструкций</p>
-          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {articles.map((article, index) => (
-              <InstructionCard key={article.id} article={article} index={index} />
+            {cards.map((card) => (
+              <InstructionCard key={card.id} card={card} />
             ))}
           </div>
         )}
