@@ -59,6 +59,7 @@ const STATIC_CARDS: CardData[] = [
     borderColor: "#6B7B8D",
     views: 956,
     gradient: "linear-gradient(180deg, #B2EBF2 0%, #00695C 100%)",
+    image: img3dNft,
     isDbArticle: false,
   },
 ];
