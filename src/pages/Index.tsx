@@ -217,8 +217,8 @@ const Index = () => {
                             width: 54,
                             height: 54,
                             borderRadius: '50%',
-                            background: 'linear-gradient(180deg, #F7F7F8 0%, #FFFFFF 100%)',
-                            border: '1px solid #FFFFFF',
+                            background: 'linear-gradient(180deg, hsl(var(--muted)) 0%, hsl(var(--background)) 100%)',
+                            border: '1px solid hsl(var(--border))',
                             boxShadow: '0px 1px 4px rgba(70, 4, 102, 0.08)',
                           }}
                         >
@@ -252,7 +252,7 @@ const Index = () => {
                           className="absolute top-20 left-1/2 -translate-x-1/2 z-30 animate-in fade-in slide-in-from-top-2 duration-200"
                           style={{
                             width: 230,
-                            background: '#FFFFFF',
+                            background: 'hsl(var(--card))',
                             border: '1px solid hsl(var(--border))',
                             boxShadow: '0px 4px 8px rgba(70, 4, 102, 0.1)',
                             borderRadius: 10,
@@ -285,7 +285,7 @@ const Index = () => {
                                 <span
                                   className="inline-flex items-center gap-1 text-[11px] font-medium"
                                   style={{
-                                    color: '#460466',
+                                    color: 'hsl(var(--secondary-foreground))',
                                     background: 'hsl(var(--secondary))',
                                     padding: '3px 8px',
                                     borderRadius: 6,
@@ -391,7 +391,7 @@ const Index = () => {
                         )}
                         <div>
                           {index === activeLesson ? (
-                            <span className="text-caption-12 font-medium inline-block text-secondary-foreground bg-white/80 rounded px-2 py-0.5 mb-1">
+                            <span className="text-caption-12 font-medium inline-block text-secondary-foreground bg-background/80 rounded px-2 py-0.5 mb-1">
                                {t("index.lesson")} {lesson.number}
                             </span>
                           ) : (
