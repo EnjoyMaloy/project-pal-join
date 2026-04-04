@@ -233,7 +233,7 @@ const ArticleView = () => {
         </div>
 
         {/* Mobile: content scrolls under toolbar */}
-        <div className="md:hidden bg-muted rounded-b-3xl px-4 pt-2 pb-6 -mt-2">
+        <div className="md:hidden bg-muted rounded-b-3xl px-4 pt-6 pb-6 -mt-2">
           <div className="max-w-4xl mx-auto mb-4">
             <h1 className="text-foreground text-[28px] font-medium leading-[110%]">{staticArticle.title}</h1>
           </div>
@@ -242,18 +242,18 @@ const ArticleView = () => {
               <img src={staticArticle.avatar} alt={staticArticle.author} className="w-10 h-10 rounded-full object-cover" />
               <span className="text-[16px] font-medium text-foreground">{staticArticle.author}</span>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between px-2">
               <div className="flex items-center gap-1.5 text-muted-foreground">
-                <Eye className="w-4 h-4" strokeWidth={1.5} />
-                <span className="text-body-14">{staticArticle.views.toLocaleString()}</span>
+                <Eye className="w-5 h-5" strokeWidth={1.5} />
+                <span className="text-[15px]">{staticArticle.views.toLocaleString()}</span>
               </div>
               <div className="flex items-center gap-1.5 text-muted-foreground">
-                <Clock className="w-4 h-4" strokeWidth={1.5} />
-                <span className="text-body-14">{staticArticle.readTime} {t("article.min")}</span>
+                <Clock className="w-5 h-5" strokeWidth={1.5} />
+                <span className="text-[15px]">{staticArticle.readTime} {t("article.min")}</span>
               </div>
               <div className="flex items-center gap-1.5 text-muted-foreground">
-                <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
-                <span className="text-body-14">
+                <CalendarDays className="w-5 h-5" strokeWidth={1.5} />
+                <span className="text-[15px]">
                   {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
                 </span>
               </div>
