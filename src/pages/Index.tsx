@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Paperclip } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
