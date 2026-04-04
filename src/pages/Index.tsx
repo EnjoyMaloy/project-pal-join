@@ -302,8 +302,8 @@ const Index = () => {
                           {/* Stats row */}
                           <div className="flex justify-between" style={{ padding: '10px 8px' }}>
                             <div className="flex flex-col" style={{ gap: 6 }}>
-                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: 'hsl(var(--muted-foreground))' }}>{t("index.completed")}</span>
-                              <span className="text-[16px] font-medium leading-[100%] tracking-[0.01em]" style={{ color: lesson.progress > 0 ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))' }}>
+                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: '#8D8D8D' }}>{t("index.completed")}</span>
+                              <span className="text-[16px] font-medium leading-[100%] tracking-[0.01em]" style={{ color: lesson.progress > 0 ? '#232323' : '#8D8D8D' }}>
                                 {lesson.progress}%
                               </span>
                             </div>
