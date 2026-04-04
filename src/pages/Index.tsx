@@ -81,6 +81,7 @@ const Index = () => {
   const [activeLesson, setActiveLesson] = useState(0);
   const [lessonOpen, setLessonOpen] = useState(false);
   const [storyIndex, setStoryIndex] = useState<number | null>(null);
+  const [popoverIndex, setPopoverIndex] = useState<number | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [listHeight, setListHeight] = useState(0);
 
@@ -90,10 +91,17 @@ const Index = () => {
     }
   }, [sidebarOpen]);
 
-  const handleLessonClick = (index: number) => {
-    setActiveLesson(index);
-    setLessonOpen(true);
-  };
+  // Close popover on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (popoverIndex !== null && !target.closest('[data-lesson-popover]') && !target.closest('[data-lesson-circle]')) {
+        setPopoverIndex(null);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [popoverIndex]);
 
   const currentLesson = lessonsData[activeLesson];
 
