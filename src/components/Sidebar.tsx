@@ -97,22 +97,9 @@ const Sidebar = () => {
         {/* Divider */}
         <div className="my-3 border-t" style={{ borderColor: '#EBE9EA' }} />
 
-        {/* AI Assistant */}
+        {/* Instructions */}
         <div className="flex flex-col gap-1.5">
           {menuGroup3.map(renderItem)}
-        </div>
-
-        {/* Divider */}
-        <div className="my-3 border-t" style={{ borderColor: '#EBE9EA' }} />
-
-        {/* Create section */}
-        {!collapsed && (
-          <p className="text-[16px] font-medium leading-none px-1 mb-2" style={{ color: '#8D8D8D' }}>
-            Создать
-          </p>
-        )}
-        <div className="flex flex-col gap-1.5">
-          {menuGroup4.map(renderItem)}
         </div>
       </div>
     </aside>
