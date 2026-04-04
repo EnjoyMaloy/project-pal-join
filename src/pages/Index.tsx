@@ -229,7 +229,7 @@ const Index = () => {
                         {index === activeLesson ? (
                           <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-secondary-foreground" />
                         ) : (
-                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-primary" />
+                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-primary group-hover:text-[#A66CFF]" />
                         )}
                         <div>
                           {index === activeLesson ? (
@@ -237,7 +237,7 @@ const Index = () => {
                               Урок {lesson.number}
                             </span>
                           ) : (
-                            <span className="text-xs font-medium text-primary group-hover:text-[#460366] block mb-1">
+                            <span className="text-xs font-medium text-primary group-hover:text-[#A66CFF] block mb-1">
                               Урок {lesson.number}
                             </span>
                           )}
