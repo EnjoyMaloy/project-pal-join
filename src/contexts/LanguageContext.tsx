@@ -28,6 +28,22 @@ const translations = {
   "instructions.noFavorites": { ru: "Нет избранных инструкций", en: "No favorite instructions" },
   "instructions.notFound": { ru: "Ничего не найдено", en: "Nothing found" },
   "instructions.linkCopied": { ru: "Ссылка скопирована", en: "Link copied" },
+
+  // Index / My Courses page
+  "index.title": { ru: "Быстрый старт в Telegram Gifts", en: "Quick Start with Telegram Gifts" },
+  "index.description": { ru: "Курс покажет, как пользоваться Telegram Gifts и зарабатывать на них. Ты разберёшься в механике, поймёшь, какие подарки востребованы, и узнаешь о секретах торговли на вторичном рынке.", en: "This course will show you how to use Telegram Gifts and earn from them. You'll understand the mechanics, learn which gifts are in demand, and discover secondary market trading secrets." },
+  "index.backToCourse": { ru: "Вернуться к курсу", en: "Back to course" },
+  "index.courseLessons": { ru: "Уроки курса", en: "Course Lessons" },
+  "index.courseInstructions": { ru: "Инструкции из курса", en: "Course Instructions" },
+  "index.lesson": { ru: "Урок", en: "Lesson" },
+  "index.instruction": { ru: "Инструкция", en: "Instruction" },
+  "index.completed": { ru: "Пройдено:", en: "Completed:" },
+  "index.reward": { ru: "Награда", en: "Reward" },
+  "index.retake": { ru: "Пройти снова", en: "Retake" },
+  "index.continue": { ru: "Продолжить", en: "Continue" },
+  "index.start": { ru: "Начать", en: "Start" },
+  "index.next": { ru: "Далее", en: "Next" },
+  "index.finish": { ru: "Завершить", en: "Finish" },
 } as const;
 
 type TranslationKey = keyof typeof translations;
