@@ -119,7 +119,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     gradient: "linear-gradient(to left, #4A8C1C 0%, #E8F5C8 100%)",
     borderColor: "#A0D468",
     image: img3dRocket,
-    readTime: "5 мин",
+    readTime: 5,
     updatedAt: "2025-04-01",
     content: `
       <h2>Начало работы с TON Wallet</h2>
