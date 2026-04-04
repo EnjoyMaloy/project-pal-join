@@ -40,6 +40,7 @@ export default {
           foreground: "hsl(var(--accent-foreground))",
         },
         violet: {
+          "super-light": "hsl(var(--violet-super-light))",
           light: "hsl(var(--violet-light))",
           dark: "hsl(var(--violet-dark))",
         },
