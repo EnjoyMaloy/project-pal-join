@@ -400,7 +400,7 @@ const Index = () => {
                             </span>
                           )}
                           <span className={`text-[18px] font-normal leading-[100%] block ${
-                            index === activeLesson ? "text-foreground" : "text-foreground"
+                            index === activeLesson ? "text-violet-super-dark" : "text-foreground"
                           }`}>
                             {lesson.title}
                           </span>
