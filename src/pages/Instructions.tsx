@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Star, Eye, Bookmark, LinkIcon } from "lucide-react";
+import { Eye, Bookmark, LinkIcon } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import avatarSychev from "@/assets/avatar-sychev.jpg";
@@ -56,12 +56,6 @@ const InstructionCard = ({ article, index }: { article: Article; index: number }
         />
         <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
           Sychev Pavel
-        </span>
-      </div>
-      <div className="flex items-center gap-1">
-        <Star className="w-[14px] h-[14px]" fill="#FF7D60" stroke="none" />
-        <span className="text-[14px] font-normal leading-none tracking-[0.01em]" style={{ color: "#232323" }}>
-          4.8
         </span>
       </div>
       <div className="flex items-center gap-1">
