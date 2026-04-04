@@ -176,49 +176,76 @@ const Instructions = () => {
         <div className="mb-6">
           {/* Desktop: single row | Mobile: stacked */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div className="flex items-center gap-2 md:gap-3 flex-wrap">
-              <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
-                <button
-                  onClick={() => setShowFavorites(false)}
-                  className={`px-3 md:px-4 py-1.5 rounded-md text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
-                >
-                  {t("instructions.all")}
-                </button>
-                <button
-                  onClick={() => setShowFavorites(true)}
-                  className={`px-3 md:px-4 py-1.5 rounded-md text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
-                >
-                  <Bookmark className="w-3.5 h-3.5" strokeWidth={1.5} />
-                  {t("instructions.favorites")}
-                  {bookmarkedIds.size > 0 && (
-                    <span className="text-caption-12 text-muted-foreground">{bookmarkedIds.size}</span>
+            {/* First row: tabs + mobile icons */}
+            <div className="flex items-center justify-between md:justify-start gap-2 md:gap-3 flex-wrap">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
+                  <button
+                    onClick={() => setShowFavorites(false)}
+                    className={`px-3 md:px-4 py-1.5 rounded-md text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                  >
+                    {t("instructions.all")}
+                  </button>
+                  <button
+                    onClick={() => setShowFavorites(true)}
+                    className={`px-3 md:px-4 py-1.5 rounded-md text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                  >
+                    <Bookmark className="w-3.5 h-3.5" strokeWidth={1.5} />
+                    {t("instructions.favorites")}
+                    {bookmarkedIds.size > 0 && (
+                      <span className="text-caption-12 text-muted-foreground">{bookmarkedIds.size}</span>
+                    )}
+                  </button>
+                </div>
+
+                {/* Mobile: filter icon with dropdown */}
+                <div className="relative md:hidden">
+                  <button
+                    onClick={() => { setFilterOpen(!filterOpen); setSortOpen(false); }}
+                    className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${activeCategory !== "all" ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                  >
+                    <SlidersHorizontal className="w-4 h-4" strokeWidth={1.5} />
+                  </button>
+                  {filterOpen && (
+                    <div className="absolute left-0 top-full mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[180px] z-50">
+                      {(["all", "ai", "crypto"] as Category[]).map((cat) => {
+                        const label = cat === "all" ? t("instructions.all") : cat === "ai" ? t("instructions.aiSkills") : t("instructions.cryptoBasics");
+                        return (
+                          <button
+                            key={cat}
+                            onClick={() => { setActiveCategory(cat); setFilterOpen(false); }}
+                            className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-muted transition-colors"
+                          >
+                            <span className={`text-body-14 ${activeCategory === cat ? 'text-primary font-medium' : 'text-foreground'}`}>{label}</span>
+                            {activeCategory === cat && <Check className="w-4 h-4 text-primary" />}
+                          </button>
+                        );
+                      })}
+                    </div>
                   )}
-                </button>
+                </div>
               </div>
 
-              {/* Mobile: filter icon with dropdown */}
+              {/* Mobile: sort icon (right side) */}
               <div className="relative md:hidden">
                 <button
-                  onClick={() => setFilterOpen(!filterOpen)}
-                  className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${activeCategory !== "all" ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                  onClick={() => { setSortOpen(!sortOpen); setFilterOpen(false); }}
+                  className="w-9 h-9 rounded-lg flex items-center justify-center bg-muted text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <SlidersHorizontal className="w-4 h-4" strokeWidth={1.5} />
+                  <ArrowUpDown className="w-4 h-4" strokeWidth={1.5} />
                 </button>
-                {filterOpen && (
-                  <div className="absolute left-0 top-full mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[180px] z-50">
-                    {(["all", "ai", "crypto"] as Category[]).map((cat) => {
-                      const label = cat === "all" ? t("instructions.all") : cat === "ai" ? t("instructions.aiSkills") : t("instructions.cryptoBasics");
-                      return (
-                        <button
-                          key={cat}
-                          onClick={() => { setActiveCategory(cat); setFilterOpen(false); }}
-                          className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-muted transition-colors"
-                        >
-                          <span className={`text-body-14 ${activeCategory === cat ? 'text-primary font-medium' : 'text-foreground'}`}>{label}</span>
-                          {activeCategory === cat && <Check className="w-4 h-4 text-primary" />}
-                        </button>
-                      );
-                    })}
+                {sortOpen && (
+                  <div className="absolute right-0 top-full mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[180px] z-50">
+                    {(Object.entries(SORT_LABELS) as [SortOption, string][]).map(([key, label]) => (
+                      <button
+                        key={key}
+                        onClick={() => { setSort(key); setSortOpen(false); }}
+                        className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-muted transition-colors"
+                      >
+                        <span className={`text-body-14 ${sort === key ? 'text-primary font-medium' : 'text-foreground'}`}>{label}</span>
+                        {sort === key && <Check className="w-4 h-4 text-primary" />}
+                      </button>
+                    ))}
                   </div>
                 )}
               </div>
@@ -249,24 +276,16 @@ const Instructions = () => {
               </div>
             </div>
 
-            <div className="relative">
-              {/* Mobile: sort icon */}
+            {/* Desktop: sort button */}
+            <div className="relative hidden md:block">
               <button
                 onClick={() => setSortOpen(!sortOpen)}
-                className="md:hidden w-9 h-9 rounded-lg flex items-center justify-center bg-muted text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <ArrowUpDown className="w-4 h-4" strokeWidth={1.5} />
-              </button>
-              {/* Desktop: sort button */}
-              <button
-                onClick={() => setSortOpen(!sortOpen)}
-                className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full bg-background hover:bg-muted transition-colors"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-background hover:bg-muted transition-colors"
               >
                 <span className="text-body-14 text-muted-foreground">{t("instructions.sort")}</span>
                 <span className="text-body-14 font-medium text-foreground">{SORT_LABELS[sort]}</span>
                 {sortOpen ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
               </button>
-
               {sortOpen && (
                 <div className="absolute right-0 top-full mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[180px] z-50">
                   {(Object.entries(SORT_LABELS) as [SortOption, string][]).map(([key, label]) => (
