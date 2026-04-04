@@ -379,7 +379,7 @@ const Index = () => {
                       onClick={() => { setActiveLesson(index); setLessonOpen(true); }}
                       className={`group w-full text-left rounded-xl border-2 p-4 transition-all ${
                         index === activeLesson
-                           ? "bg-violet-dark border-violet-super-dark"
+                           ? "bg-violet-mid border-violet-super-dark"
                           : "bg-background border-border hover:bg-violet-super-light hover:border-secondary hover:-translate-y-0.5"
                       }`}
                     >

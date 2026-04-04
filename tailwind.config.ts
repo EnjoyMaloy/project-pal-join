@@ -42,6 +42,7 @@ export default {
         violet: {
           "super-light": "hsl(var(--violet-super-light))",
           light: "hsl(var(--violet-light))",
+          mid: "hsl(var(--violet-mid))",
           dark: "hsl(var(--violet-dark))",
           "super-dark": "hsl(var(--violet-super-dark))",
         },
