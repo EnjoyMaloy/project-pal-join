@@ -259,7 +259,7 @@ const Instructions = () => {
             </p>
           </div>
         ) : (
-          <div className="flex flex-wrap gap-6">
+          <div className="grid grid-cols-2 md:flex md:flex-wrap gap-3 md:gap-6">
             {sortedCards.map((card) => (
               <InstructionCard key={card.id} card={card} bookmarked={bookmarkedIds.has(card.id)} onToggleBookmark={toggleBookmark} />
             ))}
