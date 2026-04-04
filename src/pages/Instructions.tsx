@@ -173,23 +173,41 @@ const Instructions = () => {
       <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="mb-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
-              <button
-                onClick={() => setShowFavorites(false)}
-                className={`px-4 py-1.5 rounded-md text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
-              >
-                Все
-              </button>
-              <button
-                onClick={() => setShowFavorites(true)}
-                className={`px-4 py-1.5 rounded-md text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
-              >
-                <Bookmark className="w-3.5 h-3.5" strokeWidth={1.5} />
-                Избранное
-                {bookmarkedIds.size > 0 && (
-                  <span className="text-caption-12 text-muted-foreground">{bookmarkedIds.size}</span>
-                )}
-              </button>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
+                <button
+                  onClick={() => setShowFavorites(false)}
+                  className={`px-4 py-1.5 rounded-md text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                >
+                  Все
+                </button>
+                <button
+                  onClick={() => setShowFavorites(true)}
+                  className={`px-4 py-1.5 rounded-md text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                >
+                  <Bookmark className="w-3.5 h-3.5" strokeWidth={1.5} />
+                  Избранное
+                  {bookmarkedIds.size > 0 && (
+                    <span className="text-caption-12 text-muted-foreground">{bookmarkedIds.size}</span>
+                  )}
+                </button>
+              </div>
+
+              <div className="flex items-center gap-1">
+                {(["all", "AI", "Crypto"] as const).map((label) => {
+                  const value = label === "all" ? "all" : label.toLowerCase() as Category;
+                  const isActive = activeCategory === value;
+                  return (
+                    <button
+                      key={label}
+                      onClick={() => setActiveCategory(value)}
+                      className={`px-3 py-1.5 rounded-full text-body-14 transition-colors ${isActive ? 'bg-foreground text-background font-medium' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                    >
+                      {label === "all" ? "Все темы" : label}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="relative">
