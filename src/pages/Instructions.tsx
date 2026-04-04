@@ -118,12 +118,13 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
 
 type SortOption = "newest" | "popular";
 
-const SORT_LABELS: Record<SortOption, string> = {
-  newest: "Сначала новые",
-  popular: "Популярные",
-};
-
 const Instructions = () => {
+  const { t } = useLanguage();
+  const SORT_LABELS: Record<SortOption, string> = {
+    newest: t("instructions.newest"),
+    popular: t("instructions.popular"),
+  };
+
   const [cards, setCards] = useState<CardData[]>([]);
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState<SortOption>("newest");
