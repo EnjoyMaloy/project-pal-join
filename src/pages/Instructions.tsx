@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Star, Eye, Bookmark } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import avatarSychev from "@/assets/avatar-sychev.jpg";
 
 interface Article {
   id: string;
@@ -30,14 +31,19 @@ const InstructionCard = ({ article, index }: { article: Article; index: number }
     </div>
 
     {/* Category chip */}
-    <div className="flex items-center gap-1.5 px-2 py-[5px] rounded-md w-fit" style={{ background: "#F7F7F8" }}>
-      <span className="grid grid-cols-2 gap-[1px] w-[10px] h-[10px]">
-        {[0, 1, 2, 3].map((i) => (
-          <span key={i} className="w-full h-full rounded-[1px]" style={{ background: "#464646" }} />
-        ))}
-      </span>
+    {/* Author */}
+    <div className="flex items-center gap-2">
+      <img
+        src={avatarSychev}
+        alt="Sychev Pavel"
+        className="w-7 h-7 rounded-full object-cover"
+        style={{ border: "2px solid #B8C4D0" }}
+        loading="lazy"
+        width={28}
+        height={28}
+      />
       <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
-        Инструкция
+        Sychev Pavel
       </span>
     </div>
 
