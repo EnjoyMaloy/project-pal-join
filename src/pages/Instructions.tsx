@@ -102,10 +102,10 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
           <p className="text-[18px] md:text-[21px] font-normal leading-[100%] text-center transition-transform duration-200 group-hover:-translate-y-1 text-violet-100">{card.title}</p>
         </div>
         <div className="mt-3 flex items-center gap-2 px-3 py-[5px] rounded-full w-fit" style={{ background: "rgba(255,255,255,0.25)" }}>
-          <img src={card.avatar} alt={card.author} className="w-5 h-5 rounded-full object-cover" loading="lazy" width={20} height={20} />
-          <span className="text-[14px] font-normal leading-none text-white/90">{card.author}</span>
-          <Eye className="w-[14px] h-[14px] text-white/80" strokeWidth={1.75} />
-          <span className="text-[14px] font-normal leading-none text-white/80">{card.views}</span>
+          <img src={card.avatar} alt={card.author} className="w-6 h-6 rounded-full object-cover" loading="lazy" width={24} height={24} />
+          <span className="text-[15px] font-normal leading-none text-white/70">{card.author}</span>
+          <Eye className="w-[16px] h-[16px] text-white/70" strokeWidth={1.75} />
+          <span className="text-[15px] font-normal leading-none text-white/70">{card.views}</span>
         </div>
       </div>
     </Link>
