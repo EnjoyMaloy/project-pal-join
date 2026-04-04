@@ -210,9 +210,9 @@ const ArticleView = () => {
   if (staticArticle) {
     return (
       <div className="min-h-screen bg-background">
-        {/* Mobile: gray header card */}
-        <div className="md:hidden bg-muted rounded-b-3xl px-4 pt-2 pb-6">
-          <div className="max-w-4xl mx-auto mb-3 flex items-center justify-between">
+        {/* Mobile: sticky toolbar */}
+        <div className="md:hidden sticky top-0 z-50 bg-muted px-4 pt-2 pb-2 rounded-b-3xl transition-all duration-300">
+          <div className="max-w-4xl mx-auto flex items-center justify-between">
             <button
               onClick={() => navigate("/instructions")}
               className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
@@ -234,7 +234,15 @@ const ArticleView = () => {
               </button>
             </div>
           </div>
-          <div className="max-w-4xl mx-auto mb-4">
+        </div>
+
+        {/* Mobile: collapsible header content */}
+        <div
+          className={`md:hidden bg-muted px-4 pb-6 -mt-[24px] rounded-b-3xl transition-all duration-300 ease-in-out overflow-hidden ${
+            scrolled ? 'max-h-0 opacity-0 pb-0 -mt-0' : 'max-h-[300px] opacity-100'
+          }`}
+        >
+          <div className="max-w-4xl mx-auto mb-4 pt-2">
             <h1 className="text-foreground text-[28px] font-medium leading-[110%]">{staticArticle.title}</h1>
           </div>
           <div className="max-w-4xl mx-auto">
