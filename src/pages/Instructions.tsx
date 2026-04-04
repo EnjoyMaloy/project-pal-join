@@ -52,7 +52,7 @@ const STATIC_CARDS: CardData[] = [
     title: "Запуск токена",
     author: "Anna Petrova",
     avatar: avatarAnna,
-    borderColor: "#C9A87C",
+    borderColor: "#F57F17",
     views: 1842,
     gradient: "linear-gradient(180deg, #FFF9C4 0%, #F57F17 100%)",
     image: img3dCoin,
