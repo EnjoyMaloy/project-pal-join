@@ -394,7 +394,7 @@ const Index = () => {
 
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3">
-              <span className="text-subh-14 text-foreground">Урок {lessonsData[storyIndex].number}</span>
+              <span className="text-subh-14 text-foreground">{t("index.lesson")} {lessonsData[storyIndex].number}</span>
               <button onClick={() => setStoryIndex(null)} className="text-muted-foreground hover:text-foreground">
                 <X className="w-5 h-5" />
               </button>
