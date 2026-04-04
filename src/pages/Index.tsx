@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Paperclip } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -98,12 +98,6 @@ const Index = () => {
     }
   }, [sidebarOpen]);
 
-  // Auto-open sidebar on mobile when instructions tab is active
-  useEffect(() => {
-    if (mobileTab === "instructions" && !sidebarOpen) {
-      setSidebarOpen(true);
-    }
-  }, [mobileTab]);
 
   // Close popover on outside click
   useEffect(() => {
@@ -119,9 +113,50 @@ const Index = () => {
 
   const currentLesson = lessonsData[activeLesson];
 
+  const navigate = useNavigate();
+
+  // Instruction items linking to static articles
+  const instructionItems = lessonsData
+    .filter((l) => l.hasInstruction)
+    .map((l) => ({
+      lesson: l,
+      articleId: l.number === 1 ? "static-1" : l.number === 6 ? "static-3" : null,
+    }));
+
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-6xl mx-auto px-4 py-8 md:py-12">
+      {/* Mobile: Instructions tab — simple list, no header/sidebar wrapper */}
+      {mobileTab === "instructions" && (
+        <div className="md:hidden px-4 py-6">
+          <h1 className="text-[22px] font-medium text-foreground mb-5">{t("index.courseInstructions")}</h1>
+          <div className="space-y-3">
+            {instructionItems.map(({ lesson, articleId }) => (
+              <button
+                key={lesson.number}
+                onClick={() => articleId && navigate(`/instructions/${articleId}`)}
+                className="w-full text-left rounded-2xl border border-border bg-card p-4 hover:bg-muted transition-colors"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
+                    <FileText className="w-5 h-5 text-primary" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-caption-12 font-medium text-muted-foreground">
+                      {t("index.lesson")} {lesson.number}
+                    </span>
+                    <span className="text-[16px] font-medium leading-[120%] text-foreground block mt-0.5">
+                      {lesson.title}
+                    </span>
+                    <p className="text-body-14 text-muted-foreground mt-1 line-clamp-2">{lesson.description}</p>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className={`max-w-6xl mx-auto px-4 py-8 md:py-12 ${mobileTab === "instructions" ? "hidden md:block" : ""}`}>
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-h1 text-foreground mb-3">
@@ -313,8 +348,8 @@ const Index = () => {
             )}
           </div>
 
-          {/* Sidebar - always visible on desktop, shown on mobile only when instructions tab */}
-          <div className={`md:w-80 flex-shrink-0 ${mobileTab === "instructions" ? "" : "hidden md:block"}`}>
+          {/* Sidebar - desktop only */}
+          <div className="hidden md:block md:w-80 flex-shrink-0">
             <div
               className={`group rounded-2xl sticky top-8 border border-border ${sidebarOpen ? "bg-card p-4" : "bg-muted hover:bg-violet-super-light cursor-pointer"} transition-all`}
               onClick={() => !sidebarOpen && setSidebarOpen(true)}
