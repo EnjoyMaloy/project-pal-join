@@ -10,6 +10,7 @@ import Articles from "./pages/Articles.tsx";
 import ArticleEditor from "./pages/ArticleEditor.tsx";
 import Auth from "./pages/Auth.tsx";
 import Instructions from "./pages/Instructions.tsx";
+import ArticleView from "./pages/ArticleView.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
