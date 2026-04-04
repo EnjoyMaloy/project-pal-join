@@ -15,11 +15,7 @@ const menuGroup2 = [
 ];
 
 const menuGroup3 = [
-  { label: "AI Ассистент", icon: Sparkles, path: "/ai" },
-];
-
-const menuGroup4 = [
-  { label: "Рабочее пространство", icon: PenTool, path: "/articles" },
+  { label: "Инструкции", icon: FileText, path: "/instructions" },
 ];
 
 const Sidebar = () => {
