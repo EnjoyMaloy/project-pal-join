@@ -19,20 +19,22 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Navbar />
-        <div className="flex">
+        <div className="flex h-screen">
           <Sidebar />
-          <main className="flex-1 min-w-0">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/my-courses" element={<Index />} />
-              <Route path="/articles" element={<Articles />} />
-              <Route path="/articles/new" element={<ArticleEditor />} />
-              <Route path="/articles/:id" element={<ArticleEditor />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
+          <div className="flex-1 min-w-0 flex flex-col">
+            <Navbar />
+            <main className="flex-1 min-w-0 overflow-auto">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/my-courses" element={<Index />} />
+                <Route path="/articles" element={<Articles />} />
+                <Route path="/articles/new" element={<ArticleEditor />} />
+                <Route path="/articles/:id" element={<ArticleEditor />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+          </div>
         </div>
       </BrowserRouter>
     </TooltipProvider>
