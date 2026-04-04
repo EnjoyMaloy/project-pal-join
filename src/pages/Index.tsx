@@ -242,13 +242,13 @@ const Index = () => {
                                 <span
                                   className="inline-flex items-center gap-1 text-[11px] font-medium"
                                   style={{
-                                    color: 'hsl(var(--primary))',
+                                    color: '#460466',
                                     background: 'hsl(var(--secondary))',
                                     padding: '3px 8px',
                                     borderRadius: 6,
                                   }}
                                 >
-                                  <FileText className="w-3 h-3" />
+                                  <Paperclip className="w-3 h-3" />
                                   Инструкция
                                 </span>
                               </div>
