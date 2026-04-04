@@ -97,9 +97,11 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
           </button>
         </div>
       </div>
-      <div className="flex flex-col gap-3 px-4 pb-4 items-center">
-        <p className="text-[18px] md:text-[20px] font-normal leading-[90%] text-center transition-transform duration-200 group-hover:-translate-y-1 text-violet-100">{card.title}</p>
-        <div className="flex items-center gap-3 px-2 py-[5px] rounded-md w-fit" style={{ background: "rgba(255,255,255,0.25)" }}>
+      <div className="flex flex-col flex-1 px-4 pb-4 items-center">
+        <div className="flex-1 flex items-center">
+          <p className="text-[18px] md:text-[21px] font-normal leading-[100%] text-center transition-transform duration-200 group-hover:-translate-y-1 text-violet-100">{card.title}</p>
+        </div>
+        <div className="mt-3 flex items-center gap-3 px-2 py-[5px] rounded-md w-fit" style={{ background: "rgba(255,255,255,0.25)" }}>
           <div className="flex items-center gap-2">
             <img src={card.avatar} alt={card.author} className="w-5 h-5 rounded-full object-cover" style={{ border: `1.5px solid rgba(255,255,255,0.5)` }} loading="lazy" width={20} height={20} />
             <span className="text-[14px] font-normal leading-none text-white/90">{card.author}</span>
