@@ -1,10 +1,11 @@
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { LogIn, LogOut, Search } from "lucide-react";
+import { LogIn, LogOut, Search, Sun, Moon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import type { User as SupaUser } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
   const [user, setUser] = useState<SupaUser | null>(null);
