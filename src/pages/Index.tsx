@@ -277,7 +277,7 @@ const Index = () => {
                             </div>
 
                             {/* Description */}
-                            <p className="text-[12px] font-normal leading-[140%]" style={{ color: 'hsl(var(--muted-foreground))', marginTop: 6, paddingLeft: 24 }}>
+                            <p className="text-[12px] font-normal leading-[140%]" style={{ color: '#8D8D8D', marginTop: 6, paddingLeft: 24 }}>
                               {lesson.description}
                             </p>
                             {lesson.hasInstruction && (
