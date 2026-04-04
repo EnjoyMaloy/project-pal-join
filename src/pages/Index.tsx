@@ -82,6 +82,8 @@ const lessonsData = [
 
 const Index = () => {
   const { t } = useLanguage();
+  const [searchParams] = useSearchParams();
+  const mobileTab = searchParams.get("tab");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeLesson, setActiveLesson] = useState(0);
   const [lessonOpen, setLessonOpen] = useState(false);
