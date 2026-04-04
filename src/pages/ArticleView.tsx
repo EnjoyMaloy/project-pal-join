@@ -178,6 +178,17 @@ const ArticleView = () => {
   if (staticArticle) {
     return (
       <div className="min-h-screen bg-background p-6">
+        {/* Back button */}
+        <div className="max-w-4xl mx-auto mb-4">
+          <button
+            onClick={() => navigate("/instructions")}
+            className="flex items-center gap-2 text-primary text-subh-16 py-2 px-3 -ml-3 rounded-lg hover:bg-primary/10 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" strokeWidth={2} />
+            Вернуться назад
+          </button>
+        </div>
+
         {/* Hero banner */}
         <div className="relative w-full h-[220px] overflow-hidden rounded-2xl max-w-4xl mx-auto" style={{ background: staticArticle.gradient }}>
           <div className="absolute right-[15%] bottom-2 flex items-end justify-end">
@@ -185,20 +196,8 @@ const ArticleView = () => {
               <img src={staticArticle.image} alt="" className="w-[200px] h-[200px] object-contain drop-shadow-lg" />
             )}
           </div>
-          <div className="relative z-10 h-full max-w-3xl mx-auto px-8">
-            <div className="pt-5">
-              <Button
-                variant="ghost"
-                onClick={() => navigate("/instructions")}
-                className="text-foreground/60 hover:text-foreground hover:bg-white/20 w-fit"
-              >
-                <ArrowLeft className="w-4 h-4 mr-1" />
-                {t("sidebar.instructions")}
-              </Button>
-            </div>
-            <div className="absolute inset-0 flex items-center px-8 max-w-3xl mx-auto">
-              <h1 className="text-foreground text-[36px] font-medium leading-[110%]">{staticArticle.title}</h1>
-            </div>
+          <div className="absolute inset-0 flex items-center px-8 max-w-3xl mx-auto">
+            <h1 className="text-foreground text-[36px] font-medium leading-[110%]">{staticArticle.title}</h1>
           </div>
         </div>
 
