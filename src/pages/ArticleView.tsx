@@ -217,9 +217,10 @@ const ArticleView = () => {
                 <LinkIcon className="w-4 h-4 text-foreground" strokeWidth={1.5} />
               </button>
               <button
+                onClick={toggleBookmark}
                 className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
               >
-                <Bookmark className="w-4 h-4 text-foreground" strokeWidth={1.5} />
+                <Bookmark className={`w-4 h-4 transition-colors ${bookmarked ? 'text-primary fill-primary' : 'text-foreground'}`} strokeWidth={1.5} />
               </button>
             </div>
           </div>
