@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Eye, Bookmark, LinkIcon, ChevronUp, ChevronDown, Check } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
 import avatarSychev from "@/assets/avatar-sychev.jpg";
 import avatarAnna from "@/assets/avatar-anna.jpg";
 import avatarDmitry from "@/assets/avatar-dmitry.jpg";
@@ -79,6 +80,7 @@ const STATIC_CARDS: CardData[] = [
 ];
 
 const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardData; bookmarked: boolean; onToggleBookmark: (id: string) => void }) => {
+  const { t } = useLanguage();
   const Wrapper = card.isDbArticle ? Link : ("div" as any);
   const wrapperProps = card.isDbArticle ? { to: `/instructions/${card.id}` } : {};
 
@@ -89,7 +91,7 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
           <img src={card.image} alt="" className="w-full h-full object-contain p-4" loading="lazy" />
         )}
         <div className="absolute top-2 right-2 flex items-center gap-1">
-          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success("Ссылка скопирована"); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
+          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success(t("instructions.linkCopied")); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
             <LinkIcon className="w-[12px] h-[12px] text-foreground" strokeWidth={1.5} />
           </button>
           <button onClick={(e: React.MouseEvent) => { e.preventDefault(); onToggleBookmark(card.id); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
@@ -116,12 +118,13 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
 
 type SortOption = "newest" | "popular";
 
-const SORT_LABELS: Record<SortOption, string> = {
-  newest: "Сначала новые",
-  popular: "Популярные",
-};
-
 const Instructions = () => {
+  const { t } = useLanguage();
+  const SORT_LABELS: Record<SortOption, string> = {
+    newest: t("instructions.newest"),
+    popular: t("instructions.popular"),
+  };
+
   const [cards, setCards] = useState<CardData[]>([]);
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState<SortOption>("newest");
@@ -179,14 +182,14 @@ const Instructions = () => {
                   onClick={() => setShowFavorites(false)}
                   className={`px-4 py-1.5 rounded-md text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
                 >
-                  Все
+                  {t("instructions.all")}
                 </button>
                 <button
                   onClick={() => setShowFavorites(true)}
                   className={`px-4 py-1.5 rounded-md text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
                 >
                   <Bookmark className="w-3.5 h-3.5" strokeWidth={1.5} />
-                  Избранное
+                  {t("instructions.favorites")}
                   {bookmarkedIds.size > 0 && (
                     <span className="text-caption-12 text-muted-foreground">{bookmarkedIds.size}</span>
                   )}
@@ -203,7 +206,7 @@ const Instructions = () => {
                       onClick={() => setActiveCategory(value)}
                       className={`px-3 py-1.5 rounded-full text-body-14 transition-colors ${isActive ? 'bg-foreground text-background font-medium' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
                     >
-                      {label === "all" ? "Все темы" : label}
+                      {label === "all" ? t("instructions.allTopics") : label}
                     </button>
                   );
                 })}
@@ -215,7 +218,7 @@ const Instructions = () => {
                 onClick={() => setSortOpen(!sortOpen)}
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-background hover:bg-muted transition-colors"
               >
-                <span className="text-body-14 text-muted-foreground">Сортировка:</span>
+                <span className="text-body-14 text-muted-foreground">{t("instructions.sort")}</span>
                 <span className="text-body-14 font-medium text-foreground">{SORT_LABELS[sort]}</span>
                 {sortOpen ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
               </button>
@@ -239,12 +242,12 @@ const Instructions = () => {
         </div>
 
         {loading ? (
-          <p className="text-body-14 text-muted-foreground">Загрузка...</p>
+          <p className="text-body-14 text-muted-foreground">{t("instructions.loading")}</p>
         ) : sortedCards.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <Bookmark className="w-10 h-10 text-muted-foreground/40 mb-3" />
             <p className="text-body-14 text-muted-foreground">
-              {showFavorites ? "Нет избранных инструкций" : "Ничего не найдено"}
+              {showFavorites ? t("instructions.noFavorites") : t("instructions.notFound")}
             </p>
           </div>
         ) : (

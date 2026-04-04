@@ -1,26 +1,28 @@
 import { Link, useLocation } from "react-router-dom";
 import { Home, Circle, BookOpen, ClipboardList, Coins, Users, FileText, PanelLeftClose, PanelLeft } from "lucide-react";
 import { useState } from "react";
-
-const menuGroup1 = [
-  { label: "Главная", icon: Home, path: "/" },
-  { label: "Каталог", icon: Circle, path: "/catalog" },
-  { label: "Мои курсы", icon: BookOpen, path: "/my-courses" },
-];
-
-const menuGroup2 = [
-  { label: "Задания", icon: ClipboardList, path: "/tasks", badge: 12 },
-  { label: "Мой токен", icon: Coins, path: "/token" },
-  { label: "Реферальная программа", icon: Users, path: "/referral" },
-];
-
-const menuGroup3 = [
-  { label: "Инструкции", icon: FileText, path: "/instructions" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Sidebar = () => {
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+  const { t } = useLanguage();
+
+  const menuGroup1 = [
+    { label: t("sidebar.home"), icon: Home, path: "/" },
+    { label: t("sidebar.catalog"), icon: Circle, path: "/catalog" },
+    { label: t("sidebar.myCourses"), icon: BookOpen, path: "/my-courses" },
+  ];
+
+  const menuGroup2 = [
+    { label: t("sidebar.tasks"), icon: ClipboardList, path: "/tasks", badge: 12 },
+    { label: t("sidebar.myToken"), icon: Coins, path: "/token" },
+    { label: t("sidebar.referral"), icon: Users, path: "/referral" },
+  ];
+
+  const menuGroup3 = [
+    { label: t("sidebar.instructions"), icon: FileText, path: "/instructions" },
+  ];
 
   const isActive = (path: string) => {
     if (path === "/") return location.pathname === "/";
@@ -65,7 +67,6 @@ const Sidebar = () => {
       }}
     >
       <div className="flex flex-col h-full px-3 pt-6">
-        {/* Logo */}
         <div className="flex items-center justify-between mb-6 px-1">
           {!collapsed && (
             <span className="text-[20px] font-bold leading-none">
@@ -81,23 +82,18 @@ const Sidebar = () => {
           </button>
         </div>
 
-        {/* Menu Group 1 */}
         <div className="flex flex-col gap-1.5">
           {menuGroup1.map(renderItem)}
         </div>
 
-        {/* Divider */}
         <div className="my-3 border-t" style={{ borderColor: '#EBE9EA' }} />
 
-        {/* Menu Group 2 */}
         <div className="flex flex-col gap-1.5">
           {menuGroup2.map(renderItem)}
         </div>
 
-        {/* Divider */}
         <div className="my-3 border-t" style={{ borderColor: '#EBE9EA' }} />
 
-        {/* Instructions */}
         <div className="flex flex-col gap-1.5">
           {menuGroup3.map(renderItem)}
         </div>
