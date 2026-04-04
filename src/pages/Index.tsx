@@ -134,20 +134,17 @@ const Index = () => {
               <button
                 key={lesson.number}
                 onClick={() => articleId && navigate(`/instructions/${articleId}`)}
-                className="w-full text-left rounded-2xl border border-border bg-card p-4 hover:bg-muted transition-colors"
+                className="group w-full text-left rounded-xl border-2 p-4 transition-all bg-background border-border hover:bg-violet-super-light hover:border-secondary hover:-translate-y-0.5"
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
-                    <FileText className="w-5 h-5 text-primary" />
-                  </div>
-                  <div className="min-w-0">
-                    <span className="text-caption-12 font-medium text-muted-foreground">
+                  <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-violet-light group-hover:text-primary" />
+                  <div>
+                    <span className="text-caption-12 font-medium inline-block text-violet-light group-hover:text-primary bg-transparent rounded px-2 py-0.5 mb-1">
                       {t("index.lesson")} {lesson.number}
                     </span>
-                    <span className="text-[16px] font-medium leading-[120%] text-foreground block mt-0.5">
+                    <span className="text-[18px] font-normal leading-[100%] block text-foreground">
                       {lesson.title}
                     </span>
-                    <p className="text-body-14 text-muted-foreground mt-1 line-clamp-2">{lesson.description}</p>
                   </div>
                 </div>
               </button>
