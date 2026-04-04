@@ -220,7 +220,7 @@ const Index = () => {
                           {/* Header bar */}
                           <div style={{ background: 'hsl(var(--muted))', padding: '12px 9px' }}>
                             <span className="text-[12px] font-normal tracking-[0.01em] uppercase" style={{ color: 'hsl(var(--muted-foreground))' }}>
-                              Урок {lesson.number}
+                              {t("index.lesson")} {lesson.number}
                             </span>
                           </div>
 
