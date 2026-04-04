@@ -182,63 +182,90 @@ const ArticleView = () => {
 
   if (staticArticle) {
     return (
-      <div className="min-h-screen bg-background px-3 py-4 md:p-6">
-        {/* Back button */}
-        <div className="max-w-4xl mx-auto mb-4">
-          <button
-            onClick={() => navigate("/instructions")}
-            className="flex items-center gap-2 text-primary text-body-14 py-2 px-3 -ml-3 rounded-lg hover:bg-primary/10 transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5" strokeWidth={2} />
-            {t("article.back")}
-          </button>
+      <div className="min-h-screen bg-background">
+        {/* Mobile: gray header card */}
+        <div className="md:hidden bg-muted rounded-b-3xl px-4 pt-4 pb-6">
+          <div className="max-w-4xl mx-auto mb-3">
+            <button
+              onClick={() => navigate("/instructions")}
+              className="flex items-center gap-2 text-primary text-body-14 py-2 px-3 -ml-3 rounded-lg hover:bg-primary/10 transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5" strokeWidth={2} />
+              {t("article.back")}
+            </button>
+          </div>
+          <div className="max-w-4xl mx-auto mb-4">
+            <h1 className="text-foreground text-[28px] font-medium leading-[110%]">{staticArticle.title}</h1>
+          </div>
+          <div className="max-w-4xl mx-auto flex items-center gap-4 flex-wrap">
+            <div className="flex items-center gap-3">
+              <img src={staticArticle.avatar} alt={staticArticle.author} className="w-9 h-9 rounded-full object-cover" />
+              <span className="text-body-14 text-foreground">{staticArticle.author}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <Eye className="w-4 h-4" strokeWidth={1.5} />
+              <span className="text-body-14">{staticArticle.views.toLocaleString()}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <Clock className="w-4 h-4" strokeWidth={1.5} />
+              <span className="text-body-14">{staticArticle.readTime} {t("article.min")}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
+              <span className="text-body-14">
+                {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* Hero banner - hidden on mobile */}
-        <div className="hidden md:block relative w-full h-[220px] overflow-hidden rounded-2xl max-w-4xl mx-auto" style={{ background: staticArticle.gradient }}>
-          <div className="absolute right-[15%] bottom-2 flex items-end justify-end">
-            {staticArticle.image && (
-              <img src={staticArticle.image} alt="" className="w-[200px] h-[200px] object-contain drop-shadow-lg" />
-            )}
+        {/* Desktop layout */}
+        <div className="hidden md:block px-6 py-6">
+          <div className="max-w-4xl mx-auto mb-4">
+            <button
+              onClick={() => navigate("/instructions")}
+              className="flex items-center gap-2 text-primary text-body-14 py-2 px-3 -ml-3 rounded-lg hover:bg-primary/10 transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5" strokeWidth={2} />
+              {t("article.back")}
+            </button>
           </div>
-          <div className="absolute inset-0 flex items-center px-8 max-w-3xl mx-auto">
-            <h1 className="text-foreground text-[36px] font-medium leading-[110%]">{staticArticle.title}</h1>
-          </div>
-        </div>
 
-        {/* Mobile title */}
-        <div className="md:hidden max-w-4xl mx-auto">
-          <h1 className="text-foreground text-[28px] font-medium leading-[110%]">{staticArticle.title}</h1>
-        </div>
+          <div className="relative w-full h-[220px] overflow-hidden rounded-2xl max-w-4xl mx-auto" style={{ background: staticArticle.gradient }}>
+            <div className="absolute right-[15%] bottom-2 flex items-end justify-end">
+              {staticArticle.image && (
+                <img src={staticArticle.image} alt="" className="w-[200px] h-[200px] object-contain drop-shadow-lg" />
+              )}
+            </div>
+            <div className="absolute inset-0 flex items-center px-8 max-w-3xl mx-auto">
+              <h1 className="text-foreground text-[36px] font-medium leading-[110%]">{staticArticle.title}</h1>
+            </div>
+          </div>
 
-        {/* Meta bar */}
-        <div className="max-w-4xl mx-auto px-1 md:px-6 py-5 flex items-center gap-4 md:gap-6 border-b border-border flex-wrap">
-          <div className="flex items-center gap-3">
-            <img
-              src={staticArticle.avatar}
-              alt={staticArticle.author}
-              className="w-9 h-9 rounded-full object-cover"
-            />
-            <span className="text-body-14 text-foreground">{staticArticle.author}</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-muted-foreground">
-            <Eye className="w-4 h-4" strokeWidth={1.5} />
-            <span className="text-body-14">{staticArticle.views.toLocaleString()}</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-muted-foreground">
-            <Clock className="w-4 h-4" strokeWidth={1.5} />
-            <span className="text-body-14">{staticArticle.readTime} {t("article.min")}</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-muted-foreground">
-            <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
-            <span className="text-body-14">
-              {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
-            </span>
+          <div className="max-w-4xl mx-auto px-6 py-5 flex items-center gap-6 border-b border-border">
+            <div className="flex items-center gap-3">
+              <img src={staticArticle.avatar} alt={staticArticle.author} className="w-9 h-9 rounded-full object-cover" />
+              <span className="text-body-14 text-foreground">{staticArticle.author}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <Eye className="w-4 h-4" strokeWidth={1.5} />
+              <span className="text-body-14">{staticArticle.views.toLocaleString()}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <Clock className="w-4 h-4" strokeWidth={1.5} />
+              <span className="text-body-14">{staticArticle.readTime} {t("article.min")}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
+              <span className="text-body-14">
+                {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
+              </span>
+            </div>
           </div>
         </div>
 
         {/* Content */}
-        <div className="max-w-4xl mx-auto px-1 md:px-6 py-6 md:py-8">
+        <div className="max-w-4xl mx-auto px-4 md:px-6 py-6 md:py-8">
           <article
             className="prose prose-neutral max-w-none text-body-14 text-foreground/80 leading-relaxed
               prose-headings:text-foreground prose-headings:font-normal
