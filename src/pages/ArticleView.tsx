@@ -327,9 +327,8 @@ const ArticleView = () => {
   return (
     <div className="max-w-4xl mx-auto px-6 py-8">
       <Button
-        variant="ghost"
         onClick={() => navigate("/instructions")}
-        className="text-body-14 mb-6"
+        className="text-body-14 mb-6 bg-primary text-primary-foreground hover:bg-primary/90"
       >
         <ArrowLeft className="w-4 h-4 mr-1" />
         {t("sidebar.instructions")}
