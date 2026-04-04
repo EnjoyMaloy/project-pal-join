@@ -175,7 +175,7 @@ const Index = () => {
                             height: 54,
                             borderRadius: '50%',
                             background: 'linear-gradient(180deg, #F7F7F8 0%, #FFFFFF 100%)',
-                            border: '1px solid #FFFFFF',
+                            border: lesson.hasInstruction ? '2px solid #A66CFF' : '1px solid #FFFFFF',
                             boxShadow: '0px 1px 4px rgba(70, 4, 102, 0.08)',
                           }}
                         >
