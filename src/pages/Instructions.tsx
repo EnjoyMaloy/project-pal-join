@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Eye, Bookmark, LinkIcon, ChevronUp, ChevronDown, Check } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
 import avatarSychev from "@/assets/avatar-sychev.jpg";
 import avatarAnna from "@/assets/avatar-anna.jpg";
 import avatarDmitry from "@/assets/avatar-dmitry.jpg";
