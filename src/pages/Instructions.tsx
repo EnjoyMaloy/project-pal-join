@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Star, Eye, Bookmark } from "lucide-react";
+import { Star, Eye, Bookmark, LinkIcon } from "lucide-react";
+import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import avatarSychev from "@/assets/avatar-sychev.jpg";
 
@@ -20,7 +21,18 @@ const InstructionCard = ({ article, index }: { article: Article; index: number }
       className="relative w-full aspect-[328/181] rounded-[10px] overflow-hidden group-hover:opacity-90 transition-opacity"
       style={{ background: COLORS[index % COLORS.length] }}
     >
-      <div className="absolute top-1 right-1">
+      <div className="absolute top-1 right-1 flex items-center gap-1">
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            const url = `${window.location.origin}/instructions/${article.id}`;
+            navigator.clipboard.writeText(url);
+            toast.success("Ссылка скопирована");
+          }}
+          className="w-[38px] h-[38px] rounded-full bg-white flex items-center justify-center hover:bg-gray-50 transition-colors"
+        >
+          <LinkIcon className="w-[14px] h-[14px] text-foreground" strokeWidth={1.5} />
+        </button>
         <button
           onClick={(e) => e.preventDefault()}
           className="w-[38px] h-[38px] rounded-full bg-white flex items-center justify-center"
