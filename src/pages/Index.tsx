@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Paperclip } from "lucide-react";
 
 const IconActive = ({ className }: { className?: string }) => (
   <svg className={className} width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -193,10 +193,10 @@ const Index = () => {
                           </div>
                           {lesson.hasInstruction && (
                             <span
-                              className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full flex items-center justify-center border-2"
-                              style={{ background: 'hsl(var(--background))', borderColor: '#A66CFF' }}
+                              className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full flex items-center justify-center"
+                              style={{ background: 'hsl(var(--background))', border: '1px solid rgba(166, 108, 255, 0.25)' }}
                             >
-                              <FileText className="w-2.5 h-2.5 text-primary" />
+                              <Paperclip className="w-2.5 h-2.5 text-primary" />
                             </span>
                           )}
                         </div>
