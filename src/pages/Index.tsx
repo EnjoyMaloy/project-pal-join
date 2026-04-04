@@ -185,7 +185,7 @@ const Index = () => {
               <div className="bg-secondary rounded-2xl p-12 flex items-center justify-center min-h-[300px] cursor-pointer hover:bg-[hsl(261,100%,80%)] transition-colors"
                 onClick={() => setLessonOpen(true)}
               >
-                <span className="text-lg font-semibold text-secondary-foreground">Выберите урок из списка</span>
+                <span className="text-subh-16-medium text-secondary-foreground">Выберите урок из списка</span>
               </div>
             )}
           </div>
