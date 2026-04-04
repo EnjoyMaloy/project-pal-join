@@ -285,7 +285,7 @@ const Index = () => {
                                 <span
                                   className="inline-flex items-center gap-1 text-[11px] font-medium"
                                   style={{
-                                    color: '#460466',
+                                    color: 'hsl(var(--secondary-foreground))',
                                     background: 'hsl(var(--secondary))',
                                     padding: '3px 8px',
                                     borderRadius: 6,
