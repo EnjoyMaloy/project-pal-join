@@ -80,6 +80,7 @@ const lessonsData = [
 ];
 
 const Index = () => {
+  const { t } = useLanguage();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeLesson, setActiveLesson] = useState(0);
   const [lessonOpen, setLessonOpen] = useState(false);
