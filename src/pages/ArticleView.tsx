@@ -238,7 +238,7 @@ const ArticleView = () => {
         </div>
 
         {/* Content */}
-        <div className="max-w-4xl mx-auto px-6 py-8">
+        <div className="max-w-4xl mx-auto px-1 md:px-6 py-6 md:py-8">
           <article
             className="prose prose-neutral max-w-none text-body-14 text-foreground/80 leading-relaxed
               prose-headings:text-foreground prose-headings:font-normal
