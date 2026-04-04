@@ -89,11 +89,11 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
           <img src={card.image} alt="" className="w-full h-full object-contain" loading="lazy" />
         )}
         <div className="absolute top-2 right-2 flex items-center gap-1">
-          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success(t("instructions.linkCopied")); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
-            <LinkIcon className="w-[12px] h-[12px] text-foreground" strokeWidth={1.5} />
+          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success(t("instructions.linkCopied")); }} className="w-[28px] h-[28px] rounded-full bg-white/60 dark:bg-white/20 flex items-center justify-center hover:bg-white/80 dark:hover:bg-white/30 transition-colors">
+            <LinkIcon className="w-[12px] h-[12px] text-foreground dark:text-white" strokeWidth={1.5} />
           </button>
-          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); onToggleBookmark(card.id); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
-            <Bookmark className={`w-[12px] h-[12px] transition-colors ${bookmarked ? 'text-primary fill-primary' : 'text-foreground'}`} strokeWidth={1.5} />
+          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); onToggleBookmark(card.id); }} className="w-[28px] h-[28px] rounded-full bg-white/60 dark:bg-white/20 flex items-center justify-center hover:bg-white/80 dark:hover:bg-white/30 transition-colors">
+            <Bookmark className={`w-[12px] h-[12px] transition-colors ${bookmarked ? 'text-primary fill-primary' : 'text-foreground dark:text-white'}`} strokeWidth={1.5} />
           </button>
         </div>
       </div>
