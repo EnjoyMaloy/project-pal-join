@@ -66,12 +66,9 @@ const InstructionCard = ({ card }: { card: CardData }) => {
     : {};
 
   return (
-    <Wrapper {...(wrapperProps as any)} className="flex flex-col gap-3 w-full group cursor-pointer">
+    <Wrapper {...(wrapperProps as any)} className="flex flex-col w-full group cursor-pointer rounded-xl overflow-hidden" style={{ background: card.gradient }}>
       {/* Image area */}
-      <div
-        className="relative w-full aspect-[328/181] rounded-[10px] overflow-hidden group-hover:opacity-90 transition-opacity"
-        style={{ background: card.gradient }}
-      >
+      <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity">
         <div className="absolute top-1 right-1 flex items-center gap-1">
           <button
             onClick={(e) => {
@@ -93,34 +90,37 @@ const InstructionCard = ({ card }: { card: CardData }) => {
         </div>
       </div>
 
-      {/* Author + Views */}
-      <div className="flex items-center gap-3 px-2 py-[5px] rounded-md w-fit" style={{ background: "#F7F7F8" }}>
-        <div className="flex items-center gap-2">
-          <img
-            src={card.avatar}
-            alt={card.author}
-            className="w-5 h-5 rounded-full object-cover"
-            style={{ border: `1.5px solid ${card.borderColor}` }}
-            loading="lazy"
-            width={20}
-            height={20}
-          />
-          <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
-            {card.author}
-          </span>
+      {/* Bottom section */}
+      <div className="flex flex-col gap-3 px-4 pb-4">
+        {/* Author + Views */}
+        <div className="flex items-center gap-3 px-2 py-[5px] rounded-md w-fit" style={{ background: "rgba(255,255,255,0.6)" }}>
+          <div className="flex items-center gap-2">
+            <img
+              src={card.avatar}
+              alt={card.author}
+              className="w-5 h-5 rounded-full object-cover"
+              style={{ border: `1.5px solid ${card.borderColor}` }}
+              loading="lazy"
+              width={20}
+              height={20}
+            />
+            <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
+              {card.author}
+            </span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Eye className="w-[14px] h-[14px]" style={{ color: "#464646" }} strokeWidth={1.25} />
+            <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
+              {card.views}
+            </span>
+          </div>
         </div>
-        <div className="flex items-center gap-1">
-          <Eye className="w-[14px] h-[14px]" style={{ color: "#464646" }} strokeWidth={1.25} />
-          <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
-            {card.views}
-          </span>
-        </div>
-      </div>
 
-      {/* Title */}
-      <p className="text-[20px] font-normal leading-[90%] group-hover:text-primary transition-colors" style={{ color: "#000000" }}>
-        {card.title}
-      </p>
+        {/* Title */}
+        <p className="text-[20px] font-normal leading-[90%] group-hover:text-primary transition-colors" style={{ color: "#000000" }}>
+          {card.title}
+        </p>
+      </div>
     </Wrapper>
   );
 };
