@@ -184,7 +184,7 @@ const Instructions = () => {
                 <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
                   <button
                     onClick={() => setShowFavorites(false)}
-                    className={`px-4 md:px-5 py-2 md:py-2.5 rounded-md text-[16px] md:text-[16px] transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                    className={`px-4 md:px-4 py-2 md:py-2 rounded-md text-[16px] md:text-[15px] transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
                   >
                     {t("instructions.all")}
                   </button>
