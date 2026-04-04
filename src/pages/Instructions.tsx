@@ -247,7 +247,7 @@ const Instructions = () => {
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <Bookmark className="w-10 h-10 text-muted-foreground/40 mb-3" />
             <p className="text-body-14 text-muted-foreground">
-              {showFavorites ? "Нет избранных инструкций" : "Ничего не найдено"}
+              {showFavorites ? t("instructions.noFavorites") : t("instructions.notFound")}
             </p>
           </div>
         ) : (
