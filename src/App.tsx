@@ -10,6 +10,7 @@ import Articles from "./pages/Articles.tsx";
 import ArticleEditor from "./pages/ArticleEditor.tsx";
 import Auth from "./pages/Auth.tsx";
 import Instructions from "./pages/Instructions.tsx";
+import ArticleView from "./pages/ArticleView.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
                 <Route path="/articles/:id" element={<ArticleEditor />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/instructions" element={<Instructions />} />
+                <Route path="/instructions/:id" element={<ArticleView />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
