@@ -72,7 +72,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className="h-screen flex-shrink-0 border-r transition-all duration-200"
+      className="h-screen flex-shrink-0 border-r transition-all duration-200 hidden md:block"
       style={{
         width: collapsed ? 60 : 249,
         background: '#F7F7F8',

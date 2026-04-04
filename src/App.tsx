@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "next-themes";
 import Navbar from "@/components/Navbar";
+import BottomNav from "@/components/BottomNav";
 import Sidebar from "@/components/Sidebar";
 import Index from "./pages/Index.tsx";
 import Articles from "./pages/Articles.tsx";
@@ -29,7 +30,7 @@ const App = () => (
               <Sidebar />
               <div className="flex-1 min-w-0 flex flex-col">
                 <Navbar />
-                <main className="flex-1 min-w-0 overflow-auto">
+                <main className="flex-1 min-w-0 overflow-auto pb-16 md:pb-0">
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/my-courses" element={<Index />} />
@@ -44,6 +45,7 @@ const App = () => (
                 </main>
               </div>
             </div>
+            <BottomNav />
           </BrowserRouter>
         </TooltipProvider>
       </LanguageProvider>
