@@ -14,6 +14,7 @@ const Navbar = () => {
   const isInstructions = location.pathname === "/instructions";
   const searchValue = searchParams.get("q") || "";
   const { lang, setLang, t } = useLanguage();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
