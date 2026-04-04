@@ -163,7 +163,7 @@ const Index = () => {
                 </button>
 
                 <article className="prose prose-neutral max-w-none">
-                  <h2 className="text-xl font-bold text-foreground mb-4">{currentLesson.content.heading}</h2>
+                  <h2 className="text-h2 text-foreground mb-4">{currentLesson.content.heading}</h2>
                   {currentLesson.content.sections.map((section, i) => (
                     <div key={i}>
                       {section.heading && (
