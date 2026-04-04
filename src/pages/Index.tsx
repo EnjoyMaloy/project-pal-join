@@ -165,10 +165,18 @@ const Index = () => {
                         onClick={() => setPopoverIndex(popoverIndex === index ? null : index)}
                         className="flex flex-col items-center gap-2 group"
                       >
-                        <div className={`w-16 h-16 rounded-full bg-primary/20 border-[3px] flex items-center justify-center transition-all ${
+                        <div className={`relative w-16 h-16 rounded-full bg-primary/20 border-[3px] flex items-center justify-center transition-all ${
                           popoverIndex === index ? "border-violet-dark scale-110" : "border-primary group-hover:scale-110 group-hover:border-violet-dark"
                         }`}>
                           <span className="text-h3 text-primary group-hover:text-violet-dark transition-colors">{lesson.number}</span>
+                          {lesson.hasInstruction && (
+                            <span
+                              className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full flex items-center justify-center border-2"
+                              style={{ background: 'hsl(var(--background))', borderColor: 'hsl(var(--border))' }}
+                            >
+                              <FileText className="w-2.5 h-2.5 text-primary" />
+                            </span>
+                          )}
                         </div>
                       </button>
 
