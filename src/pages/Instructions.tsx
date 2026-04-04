@@ -202,7 +202,7 @@ const Instructions = () => {
                     <button
                       key={cat}
                       onClick={() => setActiveCategory(isActive ? "all" : cat)}
-                      className={`px-5 py-2 rounded-full text-body-14 font-medium transition-colors ${isActive ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                      className={`px-5 py-2 rounded-lg text-body-14 font-medium transition-colors ${isActive ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
                     >
                       {label}
                     </button>
@@ -211,7 +211,7 @@ const Instructions = () => {
                 {activeCategory !== "all" && (
                   <button
                     onClick={() => setActiveCategory("all")}
-                    className="px-5 py-2 rounded-full text-body-14 bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                    className="px-5 py-2 rounded-lg text-body-14 bg-muted text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {t("instructions.reset")}
                   </button>
