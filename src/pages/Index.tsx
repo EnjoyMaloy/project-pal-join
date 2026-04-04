@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Paperclip } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const IconActive = ({ className }: { className?: string }) => (
   <svg className={className} width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,6 +80,7 @@ const lessonsData = [
 ];
 
 const Index = () => {
+  const { t } = useLanguage();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeLesson, setActiveLesson] = useState(0);
   const [lessonOpen, setLessonOpen] = useState(false);
@@ -113,11 +115,10 @@ const Index = () => {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-h1 text-foreground mb-3">
-            Быстрый старт в Telegram Gifts
+            {t("index.title")}
           </h1>
           <p className="text-[16px] font-normal leading-relaxed text-muted-foreground max-w-3xl">
-            Курс покажет, как пользоваться Telegram Gifts и зарабатывать на них. Ты разберёшься в механике,
-            поймёшь, какие подарки востребованы, и узнаешь о секретах торговли на вторичном рынке.
+            {t("index.description")}
           </p>
         </div>
 
@@ -132,7 +133,7 @@ const Index = () => {
                   className="text-btn-medium inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg hover:bg-violet-dark transition-colors mb-8"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  Вернуться к курсу
+                  {t("index.backToCourse")}
                 </button>
 
                 <article className="prose prose-neutral max-w-none">
@@ -156,7 +157,7 @@ const Index = () => {
               </div>
             ) : (
               <div className="bg-secondary rounded-2xl p-8 min-h-[300px] flex flex-col items-center justify-center gap-6">
-                <p className="text-subh-16-medium text-secondary-foreground mb-2">Уроки курса</p>
+                <p className="text-subh-16-medium text-secondary-foreground mb-2">{t("index.courseLessons")}</p>
                 <div className="flex flex-wrap justify-center gap-5">
                   {lessonsData.map((lesson, index) => (
                     <div key={lesson.number} className="relative flex flex-col items-center gap-2">
@@ -219,7 +220,7 @@ const Index = () => {
                           {/* Header bar */}
                           <div style={{ background: 'hsl(var(--muted))', padding: '12px 9px' }}>
                             <span className="text-[12px] font-normal tracking-[0.01em] uppercase" style={{ color: 'hsl(var(--muted-foreground))' }}>
-                              Урок {lesson.number}
+                              {t("index.lesson")} {lesson.number}
                             </span>
                           </div>
 
@@ -249,7 +250,7 @@ const Index = () => {
                                   }}
                                 >
                                   <Paperclip className="w-3 h-3" />
-                                  Инструкция
+                                  {t("index.instruction")}
                                 </span>
                               </div>
                             )}
@@ -259,13 +260,13 @@ const Index = () => {
                           {/* Stats row */}
                           <div className="flex justify-between" style={{ padding: '10px 8px' }}>
                             <div className="flex flex-col" style={{ gap: 6 }}>
-                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: 'hsl(var(--muted-foreground))' }}>Пройдено:</span>
+                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: 'hsl(var(--muted-foreground))' }}>{t("index.completed")}</span>
                               <span className="text-[16px] font-medium leading-[100%] tracking-[0.01em]" style={{ color: lesson.progress > 0 ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))' }}>
                                 {lesson.progress}%
                               </span>
                             </div>
                             <div className="flex flex-col" style={{ gap: 6 }}>
-                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: 'hsl(var(--foreground))' }}>Награда</span>
+                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: 'hsl(var(--foreground))' }}>{t("index.reward")}</span>
                               <div className="flex items-center" style={{ gap: 4 }}>
                                 <span
                                   className="inline-flex items-center justify-center rounded-full text-[8px] font-bold"
@@ -290,7 +291,7 @@ const Index = () => {
                                 height: 32,
                               }}
                             >
-                              {lesson.progress === 100 ? "Пройти снова" : lesson.progress > 0 ? "Продолжить" : "Начать"}
+                              {lesson.progress === 100 ? t("index.retake") : lesson.progress > 0 ? t("index.continue") : t("index.start")}
                             </button>
                           </div>
                         </div>
@@ -314,7 +315,7 @@ const Index = () => {
               >
                 <div className="flex items-center gap-2">
                   <BookOpen className={`w-5 h-5 text-foreground/70 transition-transform duration-200 ${!sidebarOpen ? "group-hover:scale-110" : ""}`} />
-                  <span className={`text-[22px] font-normal leading-[90%] tracking-[0.01em] text-foreground transition-transform duration-200 origin-left ${!sidebarOpen ? "group-hover:scale-[1.03]" : ""}`}>Инструкции из курса</span>
+                  <span className={`text-[22px] font-normal leading-[90%] tracking-[0.01em] text-foreground transition-transform duration-200 origin-left ${!sidebarOpen ? "group-hover:scale-[1.03]" : ""}`}>{t("index.courseInstructions")}</span>
                 </div>
                 <ChevronDown
                   className={`w-5 h-5 text-muted-foreground transition-transform duration-200 ${
@@ -349,11 +350,11 @@ const Index = () => {
                         <div>
                           {index === activeLesson ? (
                             <span className="text-caption-12 font-medium inline-block text-secondary-foreground bg-white/80 rounded px-2 py-0.5 mb-1">
-                              Урок {lesson.number}
+                               {t("index.lesson")} {lesson.number}
                             </span>
                           ) : (
                             <span className="text-caption-12 font-medium inline-block text-violet-light group-hover:text-primary bg-transparent rounded px-2 py-0.5 mb-1">
-                              Урок {lesson.number}
+                              {t("index.lesson")} {lesson.number}
                             </span>
                           )}
                           <span className={`text-[18px] font-normal leading-[100%] block ${
@@ -393,7 +394,7 @@ const Index = () => {
 
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3">
-              <span className="text-subh-14 text-foreground">Урок {lessonsData[storyIndex].number}</span>
+              <span className="text-subh-14 text-foreground">{t("index.lesson")} {lessonsData[storyIndex].number}</span>
               <button onClick={() => setStoryIndex(null)} className="text-muted-foreground hover:text-foreground">
                 <X className="w-5 h-5" />
               </button>
@@ -426,14 +427,14 @@ const Index = () => {
                   onClick={() => setStoryIndex(storyIndex + 1)}
                   className="w-full text-btn-medium bg-primary text-primary-foreground py-3 rounded-xl hover:bg-violet-dark transition-colors"
                 >
-                  Далее
+                  {t("index.next")}
                 </button>
               ) : (
                 <button
                   onClick={() => setStoryIndex(null)}
                   className="w-full text-btn-medium bg-primary text-primary-foreground py-3 rounded-xl hover:bg-violet-dark transition-colors"
                 >
-                  Завершить
+                  {t("index.finish")}
                 </button>
               )}
             </div>
