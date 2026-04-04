@@ -85,7 +85,7 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
   const wrapperProps = card.isDbArticle ? { to: `/instructions/${card.id}` } : {};
 
   return (
-    <Wrapper {...wrapperProps} className="flex flex-col w-[280px] min-w-[280px] group cursor-pointer rounded-xl overflow-hidden transition-transform duration-200 hover:-translate-y-1" style={{ background: card.gradient, boxShadow: `inset 0 0 0 2px ${card.borderColor}25` }}>
+    <Link to={`/instructions/${card.id}`} className="flex flex-col w-[280px] min-w-[280px] group cursor-pointer rounded-xl overflow-hidden transition-transform duration-200 hover:-translate-y-1" style={{ background: card.gradient, boxShadow: `inset 0 0 0 2px ${card.borderColor}25` }}>
       <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity flex items-center justify-center">
         {card.image && (
           <img src={card.image} alt="" className="w-full h-full object-contain p-4" loading="lazy" />
