@@ -179,23 +179,23 @@ const ArticleView = () => {
     return (
       <div className="min-h-screen bg-background p-6">
         {/* Hero banner */}
-        <div className="relative w-full aspect-[5/2] max-h-[360px] overflow-hidden rounded-2xl" style={{ background: staticArticle.gradient, border: `1.5px solid ${staticArticle.borderColor}` }}>
-        <div className="absolute right-8 bottom-0 flex items-end justify-end">
+        <div className="relative w-full h-[220px] overflow-hidden rounded-2xl" style={{ background: staticArticle.gradient }}>
+          <div className="absolute right-6 -bottom-2 flex items-end justify-end">
             {staticArticle.image && (
-              <img src={staticArticle.image} alt="" className="w-[220px] h-[220px] object-contain drop-shadow-lg" />
+              <img src={staticArticle.image} alt="" className="w-[280px] h-[280px] object-contain drop-shadow-lg" />
             )}
           </div>
-          <div className="relative z-10 max-w-4xl mx-auto px-6 pt-6 h-full flex flex-col">
+          <div className="relative z-10 px-8 pt-5 h-full flex flex-col">
             <Button
               variant="ghost"
               onClick={() => navigate("/instructions")}
-              className="text-white/80 hover:text-white hover:bg-white/10 w-fit"
+              className="text-foreground/60 hover:text-foreground hover:bg-white/20 w-fit"
             >
               <ArrowLeft className="w-4 h-4 mr-1" />
               {t("sidebar.instructions")}
             </Button>
-            <div className="flex-1 flex items-center justify-center">
-              <h1 className="text-white text-[40px] font-medium leading-[100%] text-center">{staticArticle.title}</h1>
+            <div className="flex-1 flex items-center">
+              <h1 className="text-foreground text-[36px] font-medium leading-[110%]">{staticArticle.title}</h1>
             </div>
           </div>
         </div>
