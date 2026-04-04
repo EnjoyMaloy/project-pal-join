@@ -127,6 +127,7 @@ const Instructions = () => {
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState<SortOption>("newest");
   const [sortOpen, setSortOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const search = searchParams.get("q") || "";
   const [activeCategory, setActiveCategory] = useState<Category>("all");
