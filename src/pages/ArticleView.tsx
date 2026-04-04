@@ -155,6 +155,22 @@ const ArticleView = () => {
   const { t } = useLanguage();
   const [dbArticle, setDbArticle] = useState<DbArticle | null>(null);
   const [loading, setLoading] = useState(true);
+  const [bookmarked, setBookmarked] = useState(() => {
+    try {
+      const saved = localStorage.getItem("instruction-bookmarks");
+      return saved ? new Set(JSON.parse(saved)).has(id) : false;
+    } catch { return false; }
+  });
+
+  const toggleBookmark = () => {
+    try {
+      const saved = localStorage.getItem("instruction-bookmarks");
+      const set = saved ? new Set(JSON.parse(saved)) : new Set();
+      if (set.has(id)) { set.delete(id); } else { set.add(id); }
+      localStorage.setItem("instruction-bookmarks", JSON.stringify([...set]));
+      setBookmarked(set.has(id));
+    } catch {}
+  };
 
   const staticArticle = id ? STATIC_ARTICLES[id] : null;
 
