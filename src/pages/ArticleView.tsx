@@ -182,7 +182,7 @@ const ArticleView = () => {
 
   if (staticArticle) {
     return (
-      <div className="min-h-screen bg-background p-6">
+      <div className="min-h-screen bg-background px-3 py-4 md:p-6">
         {/* Back button */}
         <div className="max-w-4xl mx-auto mb-4">
           <button
@@ -212,7 +212,7 @@ const ArticleView = () => {
         </div>
 
         {/* Meta bar */}
-        <div className="max-w-4xl mx-auto px-6 py-5 flex items-center gap-6 border-b border-border">
+        <div className="max-w-4xl mx-auto px-1 md:px-6 py-5 flex items-center gap-4 md:gap-6 border-b border-border flex-wrap">
           <div className="flex items-center gap-3">
             <img
               src={staticArticle.avatar}
@@ -238,7 +238,7 @@ const ArticleView = () => {
         </div>
 
         {/* Content */}
-        <div className="max-w-4xl mx-auto px-6 py-8">
+        <div className="max-w-4xl mx-auto px-1 md:px-6 py-6 md:py-8">
           <article
             className="prose prose-neutral max-w-none text-body-14 text-foreground/80 leading-relaxed
               prose-headings:text-foreground prose-headings:font-normal
