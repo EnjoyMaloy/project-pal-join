@@ -105,7 +105,7 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
             <span className="text-[14px] font-normal leading-none text-white/90">{card.author}</span>
           </div>
           <div className="flex items-center gap-1">
-            <Eye className="w-[14px] h-[14px] text-white/80" strokeWidth={1.25} />
+            <Eye className="w-[14px] h-[14px] text-white/80" strokeWidth={1.75} />
             <span className="text-[14px] font-normal leading-none text-white/80">{card.views}</span>
           </div>
         </div>
