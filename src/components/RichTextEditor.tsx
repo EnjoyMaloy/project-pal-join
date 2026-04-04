@@ -205,7 +205,7 @@ const RichTextEditor = ({
     editorProps: {
       attributes: {
         class:
-          "prose prose-neutral max-w-none p-4 min-h-[200px] focus:outline-none text-body-14 text-foreground",
+          "prose prose-neutral max-w-none p-4 min-h-[200px] focus:outline-none text-[14px] text-foreground",
       },
     },
   });
