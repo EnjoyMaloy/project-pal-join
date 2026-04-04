@@ -385,13 +385,13 @@ const Index = () => {
                     >
                       <div className="flex items-start gap-3">
                         {index === activeLesson ? (
-                          <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-foreground" />
+                          <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-violet-super-dark" />
                         ) : (
                           <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-violet-light group-hover:text-primary" />
                         )}
                         <div>
                           {index === activeLesson ? (
-                            <span className="text-caption-12 font-medium inline-block text-foreground bg-background/80 rounded px-2 py-0.5 mb-1">
+                            <span className="text-caption-12 font-medium inline-block text-violet-super-dark bg-background/80 rounded px-2 py-0.5 mb-1">
                                {t("index.lesson")} {lesson.number}
                             </span>
                           ) : (
@@ -400,7 +400,7 @@ const Index = () => {
                             </span>
                           )}
                           <span className={`text-[18px] font-normal leading-[100%] block ${
-                            index === activeLesson ? "text-foreground" : "text-foreground"
+                            index === activeLesson ? "text-violet-super-dark" : "text-foreground"
                           }`}>
                             {lesson.title}
                           </span>
