@@ -427,7 +427,7 @@ const Index = () => {
                   onClick={() => setStoryIndex(storyIndex + 1)}
                   className="w-full text-btn-medium bg-primary text-primary-foreground py-3 rounded-xl hover:bg-violet-dark transition-colors"
                 >
-                  Далее
+                  {t("index.next")}
                 </button>
               ) : (
                 <button
