@@ -155,12 +155,22 @@ const ArticleView = () => {
   const { t } = useLanguage();
   const [dbArticle, setDbArticle] = useState<DbArticle | null>(null);
   const [loading, setLoading] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [bookmarked, setBookmarked] = useState(() => {
     try {
       const saved = localStorage.getItem("instruction-bookmarks");
       return saved ? new Set(JSON.parse(saved)).has(id) : false;
     } catch { return false; }
   });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleBookmark = () => {
     try {
