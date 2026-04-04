@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { ArrowLeft, BookOpen, ChevronDown, X } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck } from "lucide-react";
 
 const IconActive = ({ className }: { className?: string }) => (
   <svg className={className} width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,96 +19,58 @@ const lessonsData = [
   {
     number: 1,
     title: "Введение в Telegram Gifts",
+    description: "Узнаем, что такое Telegram Gifts, как они работают и почему это интересно.",
+    reward: 500,
+    progress: 100,
     content: {
       heading: "Введение в Telegram Gifts",
       sections: [
-        {
-          text: "Telegram Gifts — это новая функция в мессенджере Telegram, которая позволяет пользователям дарить цифровые подарки друг другу. Эти подарки представляют собой уникальные цифровые активы, которые можно коллекционировать, дарить и даже продавать.",
-        },
-        {
-          heading: "Что такое Telegram Gifts?",
-          text: "Telegram Gifts — это коллекционные цифровые предметы, которые существуют на блокчейне TON. Каждый подарок уникален и имеет вою ценность на рынке. Вы можете приобрести подарки через Telegram и отправить их своим контактам.",
-        },
-        {
-          heading: "Как это работает?",
-          text: "Система работает следующим образом:",
-          list: [
-            "Вы покупаете подарок в Telegram",
-            "Отправляете его другу или сохраняете в коллекции",
-            "Получатель может оставить подарок себе или продать его на вторичном рынке",
-            "Цена подарка может меняться в зависимости от спроса",
-          ],
-        },
-        {
-          heading: "Почему это интересно?",
-          text: "Telegram Gifts открывает новые возможности для заработка и инвестиций. Редкие подарки могут значительно вырасти в цене, а активная торговля позволяет получать прибыль от перепродажи.",
-        },
+        { text: "Telegram Gifts — это новая функция в мессенджере Telegram, которая позволяет пользователям дарить цифровые подарки друг другу. Эти подарки представляют собой уникальные цифровые активы, которые можно коллекционировать, дарить и даже продавать." },
+        { heading: "Что такое Telegram Gifts?", text: "Telegram Gifts — это коллекционные цифровые предметы, которые существуют на блокчейне TON. Каждый подарок уникален и имеет вою ценность на рынке." },
+        { heading: "Как это работает?", text: "Система работает следующим образом:", list: ["Вы покупаете подарок в Telegram", "Отправляете его другу или сохраняете в коллекции", "Получатель может оставить подарок себе или продать его на вторичном рынке", "Цена подарка может меняться в зависимости от спроса"] },
+        { heading: "Почему это интересно?", text: "Telegram Gifts открывает новые возможности для заработка и инвестиций. Редкие подарки могут значительно вырасти в цене." },
       ],
     },
   },
   {
     number: 4,
-    title: "Как выбирать подарки для инвестиций",
+    title: "Как зарабатывают на подарках?",
+    description: "Узнаем, как идёт торговля сейчас и какие навыки помогут выйти в плюс.",
+    reward: 1300,
+    progress: 100,
     content: {
-      heading: "Как выбирать подарки для инвестиций",
+      heading: "Как зарабатывают на подарках?",
       sections: [
-        {
-          text: "Выбор подарков для инвестиций — важный навык, который поможет вам получить максимальную прибыль. В этом уроке мы рассмотрим ключевые критерии выбора.",
-        },
-        {
-          heading: "Критерии оценки",
-          text: "При выборе подарка обращайте внимание на:",
-          list: [
-            "Редкость — чем реже подарок, тем выше потенциал роста",
-            "Дизайн — привлекательные подарки пользуются большим спросом",
-            "Тираж — ограниченные выпуски ценятся выше",
-            "Тренды — следите за популярностью среди коллекционеров",
-          ],
-        },
+        { text: "Выбор подарков для инвестиций — важный навык, который поможет вам получить максимальную прибыль." },
+        { heading: "Критерии оценки", text: "При выборе подарка обращайте внимание на:", list: ["Редкость — чем реже подарок, тем выше потенциал роста", "Дизайн — привлекательные подарки пользуются большим спросом", "Тираж — ограниченные выпуски ценятся выше", "Тренды — следите за популярностью среди коллекционеров"] },
       ],
     },
   },
   {
     number: 6,
     title: "Стратегии торговли на вторичном рынке",
+    description: "Разберём основные стратегии покупки и продажи подарков.",
+    reward: 800,
+    progress: 45,
     content: {
       heading: "Стратегии торговли на вторичном рынке",
       sections: [
-        {
-          text: "Вторичный рынок Telegram Gifts — это место, где можно покупать и продавать подарки. Правильная стратегия поможет увеличить ваш доход.",
-        },
-        {
-          heading: "Основные стратегии",
-          text: "Рассмотрим популярные подходы к торговле:",
-          list: [
-            "Покупка на спаде и продажа на росте",
-            "Долгосрочное удержание редких подарков",
-            "Быстрая перепродажа популярных предметов",
-            "Диверсификация коллекции",
-          ],
-        },
+        { text: "Вторичный рынок Telegram Gifts — это место, где можно покупать и продавать подарки." },
+        { heading: "Основные стратегии", text: "Рассмотрим популярные подходы к торговле:", list: ["Покупка на спаде и продажа на росте", "Долгосрочное удержание редких подарков", "Быстрая перепродажа популярных предметов", "Диверсификация коллекции"] },
       ],
     },
   },
   {
     number: 7,
     title: "Анализ трендов и популярных подарков",
+    description: "Научимся отслеживать тренды и предсказывать популярность подарков.",
+    reward: 1000,
+    progress: 0,
     content: {
       heading: "Анализ трендов и популярных подарков",
       sections: [
-        {
-          text: "Умение анализировать тренды — ключ к успешной торговле. В этом уроке вы узнаете, как отслеживать и предсказывать популярность подарков.",
-        },
-        {
-          heading: "Инструменты анализа",
-          text: "Для анализа трендов используйте:",
-          list: [
-            "Мониторинг цен на вторичном рынке",
-            "Отслеживание объёмов продаж",
-            "Анализ активности сообщества",
-            "Изучение новых выпусков и анонсов",
-          ],
-        },
+        { text: "Умение анализировать тренды — ключ к успешной торговле." },
+        { heading: "Инструменты анализа", text: "Для анализа трендов используйте:", list: ["Мониторинг цен на вторичном рынке", "Отслеживание объёмов продаж", "Анализ активности сообщества", "Изучение новых выпусков и анонсов"] },
       ],
     },
   },
@@ -119,6 +81,7 @@ const Index = () => {
   const [activeLesson, setActiveLesson] = useState(0);
   const [lessonOpen, setLessonOpen] = useState(false);
   const [storyIndex, setStoryIndex] = useState<number | null>(null);
+  const [popoverIndex, setPopoverIndex] = useState<number | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [listHeight, setListHeight] = useState(0);
 
@@ -128,10 +91,17 @@ const Index = () => {
     }
   }, [sidebarOpen]);
 
-  const handleLessonClick = (index: number) => {
-    setActiveLesson(index);
-    setLessonOpen(true);
-  };
+  // Close popover on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (popoverIndex !== null && !target.closest('[data-lesson-popover]') && !target.closest('[data-lesson-circle]')) {
+        setPopoverIndex(null);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [popoverIndex]);
 
   const currentLesson = lessonsData[activeLesson];
 
@@ -187,18 +157,55 @@ const Index = () => {
                 <p className="text-subh-16-medium text-secondary-foreground mb-2">Уроки курса</p>
                 <div className="flex flex-wrap justify-center gap-5">
                   {lessonsData.map((lesson, index) => (
-                    <button
-                      key={lesson.number}
-                      onClick={() => setStoryIndex(index)}
-                      className="flex flex-col items-center gap-2 group"
-                    >
-                      <div className="w-16 h-16 rounded-full bg-primary/20 border-[3px] border-primary flex items-center justify-center group-hover:scale-110 group-hover:border-violet-dark transition-all">
-                        <span className="text-h3 text-primary group-hover:text-violet-dark transition-colors">{lesson.number}</span>
-                      </div>
-                      <span className="text-caption-10 text-secondary-foreground max-w-[80px] text-center leading-tight">
-                        {lesson.title}
-                      </span>
-                    </button>
+                    <div key={lesson.number} className="relative flex flex-col items-center gap-2">
+                      <button
+                        data-lesson-circle
+                        onClick={() => setPopoverIndex(popoverIndex === index ? null : index)}
+                        className="flex flex-col items-center gap-2 group"
+                      >
+                        <div className={`w-16 h-16 rounded-full bg-primary/20 border-[3px] flex items-center justify-center transition-all ${
+                          popoverIndex === index ? "border-violet-dark scale-110" : "border-primary group-hover:scale-110 group-hover:border-violet-dark"
+                        }`}>
+                          <span className="text-h3 text-primary group-hover:text-violet-dark transition-colors">{lesson.number}</span>
+                        </div>
+                      </button>
+
+                      {/* Popover card */}
+                      {popoverIndex === index && (
+                        <div
+                          data-lesson-popover
+                          className="absolute top-20 left-1/2 -translate-x-1/2 w-[280px] bg-card rounded-2xl border border-border shadow-xl p-5 z-30 animate-in fade-in slide-in-from-top-2 duration-200"
+                        >
+                          <span className="text-caption-12 text-muted-foreground uppercase tracking-wider">Урок {lesson.number}</span>
+                          <h3 className="text-subh-16-medium text-foreground mt-1.5 flex items-start gap-2">
+                            <BookOpenCheck className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                            {lesson.title}
+                          </h3>
+                          <p className="text-body-14 text-muted-foreground mt-2 leading-relaxed">{lesson.description}</p>
+
+                          <div className="flex items-center justify-between mt-4">
+                            <div>
+                              <span className="text-caption-10 text-muted-foreground">Пройдено:</span>
+                              <p className="text-subh-14 text-foreground">{lesson.progress}%</p>
+                            </div>
+                            <div className="text-right">
+                              <span className="text-caption-10 text-muted-foreground">Награда</span>
+                              <p className="text-subh-14 text-foreground flex items-center gap-1 justify-end">
+                                <span className="w-4 h-4 rounded-full bg-primary inline-flex items-center justify-center text-[8px] text-primary-foreground font-bold">S</span>
+                                {lesson.reward.toLocaleString()}
+                              </p>
+                            </div>
+                          </div>
+
+                          <button
+                            onClick={() => { setPopoverIndex(null); setStoryIndex(index); }}
+                            className="w-full mt-4 text-btn-medium bg-foreground text-background py-3 rounded-xl hover:opacity-90 transition-opacity"
+                          >
+                            {lesson.progress === 100 ? "Пройти снова" : lesson.progress > 0 ? "Продолжить" : "Начать"}
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               </div>
@@ -236,7 +243,7 @@ const Index = () => {
                   {lessonsData.map((lesson, index) => (
                     <button
                       key={lesson.number}
-                      onClick={() => handleLessonClick(index)}
+                      onClick={() => { setActiveLesson(index); setLessonOpen(true); }}
                       className={`group w-full text-left rounded-xl border-2 p-4 transition-all ${
                         index === activeLesson
                            ? "bg-secondary border-primary"
