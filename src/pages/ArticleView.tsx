@@ -24,6 +24,7 @@ interface StaticArticle {
   image?: string;
   content: string;
   readTime: string;
+  updatedAt: string;
 }
 
 const STATIC_ARTICLES: Record<string, StaticArticle> = {
