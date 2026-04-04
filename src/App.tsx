@@ -9,6 +9,7 @@ import Index from "./pages/Index.tsx";
 import Articles from "./pages/Articles.tsx";
 import ArticleEditor from "./pages/ArticleEditor.tsx";
 import Auth from "./pages/Auth.tsx";
+import Instructions from "./pages/Instructions.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
                 <Route path="/articles/new" element={<ArticleEditor />} />
                 <Route path="/articles/:id" element={<ArticleEditor />} />
                 <Route path="/auth" element={<Auth />} />
+                <Route path="/instructions" element={<Instructions />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
