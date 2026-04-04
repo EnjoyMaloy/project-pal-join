@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText } from "lucide-react";
 
 const IconActive = ({ className }: { className?: string }) => (
   <svg className={className} width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,6 +22,7 @@ const lessonsData = [
     description: "Узнаем, что такое Telegram Gifts, как они работают и почему это интересно.",
     reward: 500,
     progress: 100,
+    hasInstruction: true,
     content: {
       heading: "Введение в Telegram Gifts",
       sections: [
@@ -52,6 +53,7 @@ const lessonsData = [
     description: "Разберём основные стратегии покупки и продажи подарков.",
     reward: 800,
     progress: 45,
+    hasInstruction: true,
     content: {
       heading: "Стратегии торговли на вторичном рынке",
       sections: [
@@ -163,10 +165,18 @@ const Index = () => {
                         onClick={() => setPopoverIndex(popoverIndex === index ? null : index)}
                         className="flex flex-col items-center gap-2 group"
                       >
-                        <div className={`w-16 h-16 rounded-full bg-primary/20 border-[3px] flex items-center justify-center transition-all ${
+                        <div className={`relative w-16 h-16 rounded-full bg-primary/20 border-[3px] flex items-center justify-center transition-all ${
                           popoverIndex === index ? "border-violet-dark scale-110" : "border-primary group-hover:scale-110 group-hover:border-violet-dark"
                         }`}>
                           <span className="text-h3 text-primary group-hover:text-violet-dark transition-colors">{lesson.number}</span>
+                          {lesson.hasInstruction && (
+                            <span
+                              className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full flex items-center justify-center border-2"
+                              style={{ background: 'hsl(var(--background))', borderColor: 'hsl(var(--border))' }}
+                            >
+                              <FileText className="w-2.5 h-2.5 text-primary" />
+                            </span>
+                          )}
                         </div>
                       </button>
 
@@ -205,9 +215,23 @@ const Index = () => {
                             <p className="text-[12px] font-normal leading-[140%]" style={{ color: 'hsl(var(--muted-foreground))', marginTop: 6, paddingLeft: 24 }}>
                               {lesson.description}
                             </p>
+                            {lesson.hasInstruction && (
+                              <div className="flex items-center gap-1.5 mt-2" style={{ paddingLeft: 24 }}>
+                                <span
+                                  className="inline-flex items-center gap-1 text-[11px] font-medium"
+                                  style={{
+                                    color: 'hsl(var(--primary))',
+                                    background: 'hsl(var(--secondary))',
+                                    padding: '3px 8px',
+                                    borderRadius: 6,
+                                  }}
+                                >
+                                  <FileText className="w-3 h-3" />
+                                  Инструкция
+                                </span>
+                              </div>
+                            )}
                           </div>
-
-                          {/* Divider */}
                           <div style={{ borderTop: '1px solid hsl(var(--muted))', margin: '10px 0 0' }} />
 
                           {/* Stats row */}
