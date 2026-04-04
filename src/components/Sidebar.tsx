@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Circle, BookOpen, ClipboardList, Coins, Users, Sparkles, PenTool, PanelLeftClose, PanelLeft } from "lucide-react";
+import { Home, Circle, BookOpen, ClipboardList, Coins, Users, FileText, PanelLeftClose, PanelLeft } from "lucide-react";
 import { useState } from "react";
 
 const menuGroup1 = [
