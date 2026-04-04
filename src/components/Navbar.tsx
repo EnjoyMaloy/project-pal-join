@@ -1,10 +1,11 @@
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { LogIn, LogOut, Search } from "lucide-react";
+import { LogIn, LogOut, Search, Sun, Moon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import type { User as SupaUser } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
   const [user, setUser] = useState<SupaUser | null>(null);
@@ -13,6 +14,7 @@ const Navbar = () => {
   const isInstructions = location.pathname === "/instructions";
   const searchValue = searchParams.get("q") || "";
   const { lang, setLang, t } = useLanguage();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -53,6 +55,14 @@ const Navbar = () => {
           <div />
         )}
         <div className="flex items-center gap-2">
+          {/* Theme toggle */}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 rounded-md hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+          >
+            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
+
           {/* Language switcher */}
           <div className="flex items-center bg-muted rounded-md p-0.5">
             <button

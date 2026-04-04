@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { ThemeProvider } from "next-themes";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import Index from "./pages/Index.tsx";
@@ -18,33 +19,35 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <LanguageProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <div className="flex h-screen">
-            <Sidebar />
-            <div className="flex-1 min-w-0 flex flex-col">
-              <Navbar />
-              <main className="flex-1 min-w-0 overflow-auto">
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/my-courses" element={<Index />} />
-                  <Route path="/articles" element={<Articles />} />
-                  <Route path="/articles/new" element={<ArticleEditor />} />
-                  <Route path="/articles/:id" element={<ArticleEditor />} />
-                  <Route path="/auth" element={<Auth />} />
-                  <Route path="/instructions" element={<Instructions />} />
-                  <Route path="/instructions/:id" element={<ArticleView />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </main>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+      <LanguageProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <div className="flex h-screen">
+              <Sidebar />
+              <div className="flex-1 min-w-0 flex flex-col">
+                <Navbar />
+                <main className="flex-1 min-w-0 overflow-auto">
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/my-courses" element={<Index />} />
+                    <Route path="/articles" element={<Articles />} />
+                    <Route path="/articles/new" element={<ArticleEditor />} />
+                    <Route path="/articles/:id" element={<ArticleEditor />} />
+                    <Route path="/auth" element={<Auth />} />
+                    <Route path="/instructions" element={<Instructions />} />
+                    <Route path="/instructions/:id" element={<ArticleView />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </main>
+              </div>
             </div>
-          </div>
-        </BrowserRouter>
-      </TooltipProvider>
-    </LanguageProvider>
+          </BrowserRouter>
+        </TooltipProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
