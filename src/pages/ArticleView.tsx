@@ -227,24 +227,26 @@ const ArticleView = () => {
           <div className="max-w-4xl mx-auto mb-4">
             <h1 className="text-foreground text-[28px] font-medium leading-[110%]">{staticArticle.title}</h1>
           </div>
-          <div className="max-w-4xl mx-auto flex items-center gap-4 flex-wrap">
-            <div className="flex items-center gap-3">
-              <img src={staticArticle.avatar} alt={staticArticle.author} className="w-9 h-9 rounded-full object-cover" />
-              <span className="text-body-14 text-foreground">{staticArticle.author}</span>
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center gap-3 mb-3">
+              <img src={staticArticle.avatar} alt={staticArticle.author} className="w-10 h-10 rounded-full object-cover" />
+              <span className="text-[16px] font-medium text-foreground">{staticArticle.author}</span>
             </div>
-            <div className="flex items-center gap-1.5 text-muted-foreground">
-              <Eye className="w-4 h-4" strokeWidth={1.5} />
-              <span className="text-body-14">{staticArticle.views.toLocaleString()}</span>
-            </div>
-            <div className="flex items-center gap-1.5 text-muted-foreground">
-              <Clock className="w-4 h-4" strokeWidth={1.5} />
-              <span className="text-body-14">{staticArticle.readTime} {t("article.min")}</span>
-            </div>
-            <div className="flex items-center gap-1.5 text-muted-foreground">
-              <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
-              <span className="text-body-14">
-                {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
-              </span>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1.5 text-muted-foreground">
+                <Eye className="w-4 h-4" strokeWidth={1.5} />
+                <span className="text-body-14">{staticArticle.views.toLocaleString()}</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-muted-foreground">
+                <Clock className="w-4 h-4" strokeWidth={1.5} />
+                <span className="text-body-14">{staticArticle.readTime} {t("article.min")}</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-muted-foreground">
+                <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
+                <span className="text-body-14">
+                  {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
+                </span>
+              </div>
             </div>
           </div>
         </div>
