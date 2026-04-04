@@ -133,7 +133,7 @@ const Index = () => {
                   className="text-btn-medium inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg hover:bg-violet-dark transition-colors mb-8"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  Вернуться к курсу
+                  {t("index.backToCourse")}
                 </button>
 
                 <article className="prose prose-neutral max-w-none">
