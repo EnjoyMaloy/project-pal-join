@@ -83,7 +83,7 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
   const { t } = useLanguage();
 
   return (
-    <Link to={`/instructions/${card.id}`} className="flex flex-col w-[280px] min-w-[280px] group cursor-pointer rounded-xl overflow-hidden transition-transform duration-200 hover:-translate-y-1" style={{ background: card.gradient, boxShadow: `inset 0 0 0 2px ${card.borderColor}25` }}>
+    <Link to={`/instructions/${card.id}`} className="flex flex-col w-full md:w-[280px] md:min-w-[280px] group cursor-pointer rounded-xl overflow-hidden transition-transform duration-200 hover:-translate-y-1" style={{ background: card.gradient, boxShadow: `inset 0 0 0 2px ${card.borderColor}25` }}>
       <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity flex items-center justify-center">
         {card.image && (
           <img src={card.image} alt="" className="w-full h-full object-contain" loading="lazy" />
@@ -171,66 +171,68 @@ const Instructions = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-6xl mx-auto px-6 py-8">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-8">
         <div className="mb-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
-                <button
-                  onClick={() => setShowFavorites(false)}
-                  className={`px-4 py-1.5 rounded-md text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
-                >
-                  {t("instructions.all")}
-                </button>
-                <button
-                  onClick={() => setShowFavorites(true)}
-                  className={`px-4 py-1.5 rounded-md text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
-                >
-                  <Bookmark className="w-3.5 h-3.5" strokeWidth={1.5} />
-                  {t("instructions.favorites")}
-                  {bookmarkedIds.size > 0 && (
-                    <span className="text-caption-12 text-muted-foreground">{bookmarkedIds.size}</span>
-                  )}
-                </button>
-              </div>
-
-              <div className="flex items-center gap-2">
-                {(["ai", "crypto"] as Category[]).map((cat) => {
-                  const isActive = activeCategory === cat;
-                  const label = cat === "ai" ? t("instructions.aiSkills") : t("instructions.cryptoBasics");
-                  return (
-                    <button
-                      key={cat}
-                      onClick={() => setActiveCategory(isActive ? "all" : cat)}
-                      className={`px-5 py-2 rounded-lg text-body-14 font-medium transition-colors ${isActive ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
-                    >
-                      {label}
-                    </button>
-                  );
-                })}
-                {activeCategory !== "all" && (
-                  <button
-                    onClick={() => setActiveCategory("all")}
-                    className="px-5 py-2 rounded-lg text-body-14 bg-muted text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {t("instructions.reset")}
-                  </button>
+          {/* Tabs: All / Favorites */}
+          <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-0 md:flex-row flex-wrap">
+            <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
+              <button
+                onClick={() => setShowFavorites(false)}
+                className={`px-3 md:px-4 py-1.5 rounded-md text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+              >
+                {t("instructions.all")}
+              </button>
+              <button
+                onClick={() => setShowFavorites(true)}
+                className={`px-3 md:px-4 py-1.5 rounded-md text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+              >
+                <Bookmark className="w-3.5 h-3.5" strokeWidth={1.5} />
+                {t("instructions.favorites")}
+                {bookmarkedIds.size > 0 && (
+                  <span className="text-caption-12 text-muted-foreground">{bookmarkedIds.size}</span>
                 )}
-              </div>
+              </button>
+            </div>
+          </div>
+
+          {/* Categories + Sort */}
+          <div className="flex items-center justify-between gap-2 flex-wrap">
+            <div className="flex items-center gap-2">
+              {(["ai", "crypto"] as Category[]).map((cat) => {
+                const isActive = activeCategory === cat;
+                const label = cat === "ai" ? t("instructions.aiSkills") : t("instructions.cryptoBasics");
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(isActive ? "all" : cat)}
+                    className={`px-4 md:px-5 py-1.5 md:py-2 rounded-lg text-body-14 font-medium transition-colors ${isActive ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+              {activeCategory !== "all" && (
+                <button
+                  onClick={() => setActiveCategory("all")}
+                  className="px-4 md:px-5 py-1.5 md:py-2 rounded-lg text-body-14 bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {t("instructions.reset")}
+                </button>
+              )}
             </div>
 
             <div className="relative">
               <button
                 onClick={() => setSortOpen(!sortOpen)}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-background hover:bg-muted transition-colors"
+                className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-background hover:bg-muted transition-colors"
               >
-                <span className="text-body-14 text-muted-foreground">{t("instructions.sort")}</span>
+                <span className="text-body-14 text-muted-foreground hidden md:inline">{t("instructions.sort")}</span>
                 <span className="text-body-14 font-medium text-foreground">{SORT_LABELS[sort]}</span>
                 {sortOpen ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
               </button>
 
               {sortOpen && (
-                <div className="absolute right-0 top-full mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[200px] z-50">
+                <div className="absolute right-0 top-full mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[180px] z-50">
                   {(Object.entries(SORT_LABELS) as [SortOption, string][]).map(([key, label]) => (
                     <button
                       key={key}
@@ -257,7 +259,7 @@ const Instructions = () => {
             </p>
           </div>
         ) : (
-          <div className="flex flex-wrap gap-6">
+          <div className="grid grid-cols-2 md:flex md:flex-wrap gap-3 md:gap-6">
             {sortedCards.map((card) => (
               <InstructionCard key={card.id} card={card} bookmarked={bookmarkedIds.has(card.id)} onToggleBookmark={toggleBookmark} />
             ))}

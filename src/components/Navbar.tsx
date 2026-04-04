@@ -54,7 +54,7 @@ const Navbar = () => {
         ) : (
           <div />
         )}
-        <div className="flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-2">
           {/* Theme toggle */}
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
