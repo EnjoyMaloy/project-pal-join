@@ -31,74 +31,9 @@ interface CardData {
 const STATIC_CARDS: CardData[] = [
   {
     id: "static-1",
-    title: "Безопасность в Web3",
-    author: "Dmitry Volkov",
-    avatar: avatarDmitry,
-    borderColor: "#BF96FF",
-    views: 3104,
-    gradient: "linear-gradient(180deg, #E8DCFB 0%, #7B2FBE 100%)",
-    image: img3dSecurity,
-    isDbArticle: false,
-    category: "crypto",
-  },
-  {
-    id: "static-2",
-    title: "Безопасность в Web3",
-    author: "Dmitry Volkov",
-    avatar: avatarDmitry,
-    borderColor: "#BF96FF",
-    views: 3104,
-    gradient: "linear-gradient(180deg, #E8DCFB 0%, #7B2FBE 100%)",
-    image: img3dSecurity,
-    isDbArticle: false,
-    category: "crypto",
-  },
-  {
-    id: "static-3",
-    title: "Безопасность в Web3",
-    author: "Dmitry Volkov",
-    avatar: avatarDmitry,
-    borderColor: "#BF96FF",
-    views: 3104,
-    gradient: "linear-gradient(180deg, #E8DCFB 0%, #7B2FBE 100%)",
-    image: img3dSecurity,
-    isDbArticle: false,
-    category: "crypto",
-  },
-  {
-    id: "static-4",
-    title: "Безопасность в Web3",
-    author: "Dmitry Volkov",
-    avatar: avatarDmitry,
-    borderColor: "#BF96FF",
-    views: 3104,
-    gradient: "linear-gradient(180deg, #E8DCFB 0%, #7B2FBE 100%)",
-    image: img3dSecurity,
-    isDbArticle: false,
-    category: "crypto",
-  },
-];
-
-const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardData; bookmarked: boolean; onToggleBookmark: (id: string) => void }) => {
-  const { t } = useLanguage();
-
-  return (
-    <Link to={`/instructions/${card.id}`} className="flex flex-col w-full md:w-[280px] md:min-w-[280px] group cursor-pointer rounded-xl overflow-hidden transition-transform duration-200 hover:-translate-y-1" style={{ background: card.gradient, boxShadow: `inset 0 0 0 2px ${card.borderColor}25` }}>
-      <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity flex items-center justify-center">
-        {card.image && (
-          <img src={card.image} alt="" className="w-full h-full object-contain" loading="lazy" />
-        )}
-        <div className="absolute top-2 right-2 flex items-center gap-1">
-          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success(t("instructions.linkCopied")); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
-            <LinkIcon className="w-[12px] h-[12px] text-foreground" strokeWidth={1.5} />
-          </button>
-          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); onToggleBookmark(card.id); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
-            <Bookmark className={`w-[12px] h-[12px] transition-colors ${bookmarked ? 'text-foreground fill-foreground' : 'text-foreground'}`} strokeWidth={1.5} />
-          </button>
-        </div>
-      </div>
-      <div className="flex flex-col gap-3 px-4 pb-4 items-center">
-        <p className="text-[18px] md:text-[20px] font-normal leading-[90%] text-center text-white transition-transform duration-200 group-hover:-translate-y-1">{card.title}</p>
+    title: "Как настроить Claw Bot на своем компьютере?",
+...
+    <p className="text-[18px] md:text-[20px] font-normal leading-[90%] text-center transition-transform duration-200 group-hover:-translate-y-1 text-violet-100">{card.title}</p>
         <div className="flex items-center gap-3 px-2 py-[5px] rounded-md w-fit" style={{ background: "rgba(255,255,255,0.25)" }}>
           <div className="flex items-center gap-2">
             <img src={card.avatar} alt={card.author} className="w-5 h-5 rounded-full object-cover" style={{ border: `1.5px solid rgba(255,255,255,0.5)` }} loading="lazy" width={20} height={20} />
