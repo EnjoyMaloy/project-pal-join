@@ -154,7 +154,7 @@ const Instructions = () => {
           <div className="relative">
             <button
               onClick={() => setSortOpen(!sortOpen)}
-              className="flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-background hover:bg-muted transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-background hover:bg-muted transition-colors"
             >
               <span className="text-body-14 text-muted-foreground">Сортировка:</span>
               <span className="text-body-14 font-medium text-foreground">{SORT_LABELS[sort]}</span>
