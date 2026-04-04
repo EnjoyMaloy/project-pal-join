@@ -212,7 +212,7 @@ const ArticleView = () => {
         </div>
 
         {/* Meta bar */}
-        <div className="max-w-4xl mx-auto px-6 py-5 flex items-center gap-6 border-b border-border">
+        <div className="max-w-4xl mx-auto px-1 md:px-6 py-5 flex items-center gap-4 md:gap-6 border-b border-border flex-wrap">
           <div className="flex items-center gap-3">
             <img
               src={staticArticle.avatar}
