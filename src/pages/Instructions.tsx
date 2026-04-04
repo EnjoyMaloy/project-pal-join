@@ -12,6 +12,8 @@ import img3dNft from "@/assets/3d-nft.png";
 import img3dRocket from "@/assets/3d-rocket.png";
 import img3dCoin from "@/assets/3d-coin.png";
 
+type Category = "all" | "ai" | "crypto";
+
 interface CardData {
   id: string;
   title: string;
@@ -22,6 +24,7 @@ interface CardData {
   gradient: string;
   image?: string;
   isDbArticle: boolean;
+  category: Category;
 }
 
 const STATIC_CARDS: CardData[] = [
@@ -35,6 +38,7 @@ const STATIC_CARDS: CardData[] = [
     gradient: "linear-gradient(180deg, #E8DCFB 0%, #7B2FBE 100%)",
     image: img3dSecurity,
     isDbArticle: false,
+    category: "crypto",
   },
   {
     id: "static-2",
@@ -46,6 +50,7 @@ const STATIC_CARDS: CardData[] = [
     gradient: "linear-gradient(180deg, #FFF3C4 0%, #E08A00 100%)",
     image: img3dNft,
     isDbArticle: false,
+    category: "crypto",
   },
   {
     id: "static-3",
@@ -57,6 +62,7 @@ const STATIC_CARDS: CardData[] = [
     gradient: "linear-gradient(180deg, #FFD6E0 0%, #D63384 100%)",
     image: img3dCoin,
     isDbArticle: false,
+    category: "ai",
   },
   {
     id: "static-4",
@@ -68,6 +74,7 @@ const STATIC_CARDS: CardData[] = [
     gradient: "linear-gradient(180deg, #E8F5C8 0%, #4A8C1C 100%)",
     image: img3dRocket,
     isDbArticle: false,
+    category: "crypto",
   },
 ];
 
@@ -121,6 +128,7 @@ const Instructions = () => {
   const [sortOpen, setSortOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const search = searchParams.get("q") || "";
+  const [activeCategory, setActiveCategory] = useState<Category>("all");
   const [showFavorites, setShowFavorites] = useState(false);
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(() => {
     try {
@@ -152,7 +160,8 @@ const Instructions = () => {
 
   const filteredCards = cards
     .filter((card) => card.title.toLowerCase().includes(search.toLowerCase()))
-    .filter((card) => !showFavorites || bookmarkedIds.has(card.id));
+    .filter((card) => !showFavorites || bookmarkedIds.has(card.id))
+    .filter((card) => activeCategory === "all" || card.category === activeCategory);
 
   const sortedCards = [...filteredCards].sort((a, b) => {
     if (sort === "popular") return b.views - a.views;
@@ -164,23 +173,41 @@ const Instructions = () => {
       <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="mb-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
-              <button
-                onClick={() => setShowFavorites(false)}
-                className={`px-4 py-1.5 rounded-md text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
-              >
-                Все
-              </button>
-              <button
-                onClick={() => setShowFavorites(true)}
-                className={`px-4 py-1.5 rounded-md text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
-              >
-                <Bookmark className="w-3.5 h-3.5" strokeWidth={1.5} />
-                Избранное
-                {bookmarkedIds.size > 0 && (
-                  <span className="text-caption-12 text-muted-foreground">{bookmarkedIds.size}</span>
-                )}
-              </button>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
+                <button
+                  onClick={() => setShowFavorites(false)}
+                  className={`px-4 py-1.5 rounded-md text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                >
+                  Все
+                </button>
+                <button
+                  onClick={() => setShowFavorites(true)}
+                  className={`px-4 py-1.5 rounded-md text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                >
+                  <Bookmark className="w-3.5 h-3.5" strokeWidth={1.5} />
+                  Избранное
+                  {bookmarkedIds.size > 0 && (
+                    <span className="text-caption-12 text-muted-foreground">{bookmarkedIds.size}</span>
+                  )}
+                </button>
+              </div>
+
+              <div className="flex items-center gap-1">
+                {(["all", "AI", "Crypto"] as const).map((label) => {
+                  const value = label === "all" ? "all" : label.toLowerCase() as Category;
+                  const isActive = activeCategory === value;
+                  return (
+                    <button
+                      key={label}
+                      onClick={() => setActiveCategory(value)}
+                      className={`px-3 py-1.5 rounded-full text-body-14 transition-colors ${isActive ? 'bg-foreground text-background font-medium' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                    >
+                      {label === "all" ? "Все темы" : label}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="relative">
