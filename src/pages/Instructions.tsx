@@ -71,8 +71,7 @@ const STATIC_CARDS: CardData[] = [
   },
 ];
 
-const InstructionCard = ({ card }: { card: CardData }) => {
-  const [bookmarked, setBookmarked] = useState(false);
+const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardData; bookmarked: boolean; onToggleBookmark: (id: string) => void }) => {
   const Wrapper = card.isDbArticle ? Link : ("div" as any);
   const wrapperProps = card.isDbArticle ? { to: `/instructions/${card.id}` } : {};
 
@@ -83,11 +82,11 @@ const InstructionCard = ({ card }: { card: CardData }) => {
           <img src={card.image} alt="" className="w-full h-full object-contain p-4" loading="lazy" />
         )}
         <div className="absolute top-2 right-2 flex items-center gap-1">
-          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success("Ссылка скопирована"); }} className="w-[32px] h-[32px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
-            <LinkIcon className="w-[13px] h-[13px] text-foreground" strokeWidth={1.5} />
+          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success("Ссылка скопирована"); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
+            <LinkIcon className="w-[12px] h-[12px] text-foreground" strokeWidth={1.5} />
           </button>
-          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); setBookmarked(!bookmarked); }} className="w-[32px] h-[32px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
-            <Bookmark className={`w-[13px] h-[13px] transition-colors ${bookmarked ? 'text-foreground fill-foreground' : 'text-foreground'}`} strokeWidth={1.5} />
+          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); onToggleBookmark(card.id); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
+            <Bookmark className={`w-[12px] h-[12px] transition-colors ${bookmarked ? 'text-foreground fill-foreground' : 'text-foreground'}`} strokeWidth={1.5} />
           </button>
         </div>
       </div>
