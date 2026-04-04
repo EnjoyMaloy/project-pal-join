@@ -8,6 +8,7 @@ const BottomNav = () => {
   const { t } = useLanguage();
 
   const isMyCourses = location.pathname === "/my-courses";
+  const currentTab = new URLSearchParams(location.search).get("tab");
 
   const defaultItems = [
     { label: t("sidebar.home"), icon: Home, path: "/", disabled: true },
@@ -18,17 +19,18 @@ const BottomNav = () => {
   ];
 
   const courseItems = [
-    { label: "Назад", icon: ArrowLeft, path: "back", action: () => navigate(-1) },
-    { label: "Курс", icon: GraduationCap, path: "/my-courses", active: true },
-    { label: "Инструкции", icon: FileText, path: "/instructions" },
+    { label: "Назад", icon: ArrowLeft, path: "back", action: () => navigate("/") },
+    { label: "Курс", icon: GraduationCap, path: "/my-courses" },
+    { label: "Инструкции", icon: FileText, path: "/my-courses?tab=instructions" },
     { label: "Квест", icon: Swords, path: "/quest", disabled: true },
   ];
 
   const items = isMyCourses ? courseItems : defaultItems;
 
   const isActive = (item: any) => {
-    if (item.active) return true;
     if (item.disabled) return false;
+    if (isMyCourses && item.path === "/my-courses?tab=instructions") return currentTab === "instructions";
+    if (isMyCourses && item.path === "/my-courses") return !currentTab;
     if (item.path === "/") return location.pathname === "/";
     return location.pathname.startsWith(item.path);
   };

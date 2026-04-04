@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Paperclip } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -81,6 +82,8 @@ const lessonsData = [
 
 const Index = () => {
   const { t } = useLanguage();
+  const [searchParams] = useSearchParams();
+  const mobileTab = searchParams.get("tab");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeLesson, setActiveLesson] = useState(0);
   const [lessonOpen, setLessonOpen] = useState(false);
@@ -94,6 +97,13 @@ const Index = () => {
       setListHeight(sidebarOpen ? listRef.current.scrollHeight : 0);
     }
   }, [sidebarOpen]);
+
+  // Auto-open sidebar on mobile when instructions tab is active
+  useEffect(() => {
+    if (mobileTab === "instructions" && !sidebarOpen) {
+      setSidebarOpen(true);
+    }
+  }, [mobileTab]);
 
   // Close popover on outside click
   useEffect(() => {
@@ -124,8 +134,8 @@ const Index = () => {
 
         {/* Main layout */}
         <div className="flex flex-col md:flex-row gap-8">
-          {/* Content area */}
-          <div className="flex-1 min-w-0">
+          {/* Content area - hidden on mobile when instructions tab is active */}
+          <div className={`flex-1 min-w-0 ${mobileTab === "instructions" ? "hidden md:block" : ""}`}>
             {lessonOpen ? (
               <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
                 <button
@@ -303,8 +313,8 @@ const Index = () => {
             )}
           </div>
 
-          {/* Sidebar */}
-          <div className="md:w-80 flex-shrink-0">
+          {/* Sidebar - always visible on desktop, shown on mobile only when instructions tab */}
+          <div className={`md:w-80 flex-shrink-0 ${mobileTab === "instructions" ? "" : "hidden md:block"}`}>
             <div
               className={`group rounded-2xl sticky top-8 border border-border ${sidebarOpen ? "bg-card p-4" : "bg-muted hover:bg-violet-super-light cursor-pointer"} transition-all`}
               onClick={() => !sidebarOpen && setSidebarOpen(true)}
