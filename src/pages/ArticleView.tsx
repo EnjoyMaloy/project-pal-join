@@ -66,7 +66,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     gradient: "linear-gradient(to left, #E08A00 0%, #FFF3C4 100%)",
     borderColor: "#FFCC47",
     image: img3dNft,
-    readTime: "6 мин",
+    readTime: 6,
     updatedAt: "2025-02-20",
     content: `
       <h2>Как оценивать NFT проекты</h2>
