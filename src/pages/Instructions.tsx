@@ -160,7 +160,8 @@ const Instructions = () => {
 
   const filteredCards = cards
     .filter((card) => card.title.toLowerCase().includes(search.toLowerCase()))
-    .filter((card) => !showFavorites || bookmarkedIds.has(card.id));
+    .filter((card) => !showFavorites || bookmarkedIds.has(card.id))
+    .filter((card) => activeCategory === "all" || card.category === activeCategory);
 
   const sortedCards = [...filteredCards].sort((a, b) => {
     if (sort === "popular") return b.views - a.views;
