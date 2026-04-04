@@ -232,7 +232,7 @@ const ArticleView = () => {
               <img src={staticArticle.avatar} alt={staticArticle.author} className="w-10 h-10 rounded-full object-cover" />
               <span className="text-[16px] font-medium text-foreground">{staticArticle.author}</span>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5 text-muted-foreground">
                 <Eye className="w-4 h-4" strokeWidth={1.5} />
                 <span className="text-body-14">{staticArticle.views.toLocaleString()}</span>
