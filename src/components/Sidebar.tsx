@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Circle, BookOpen, ClipboardList, Coins, Users, Sparkles, PenTool, PanelLeftClose, PanelLeft } from "lucide-react";
+import { Home, Circle, BookOpen, ClipboardList, Coins, Users, FileText, PanelLeftClose, PanelLeft } from "lucide-react";
 import { useState } from "react";
 
 const menuGroup1 = [
@@ -15,11 +15,7 @@ const menuGroup2 = [
 ];
 
 const menuGroup3 = [
-  { label: "AI Ассистент", icon: Sparkles, path: "/ai" },
-];
-
-const menuGroup4 = [
-  { label: "Рабочее пространство", icon: PenTool, path: "/articles" },
+  { label: "Инструкции", icon: FileText, path: "/instructions" },
 ];
 
 const Sidebar = () => {
@@ -101,22 +97,9 @@ const Sidebar = () => {
         {/* Divider */}
         <div className="my-3 border-t" style={{ borderColor: '#EBE9EA' }} />
 
-        {/* AI Assistant */}
+        {/* Instructions */}
         <div className="flex flex-col gap-1.5">
           {menuGroup3.map(renderItem)}
-        </div>
-
-        {/* Divider */}
-        <div className="my-3 border-t" style={{ borderColor: '#EBE9EA' }} />
-
-        {/* Create section */}
-        {!collapsed && (
-          <p className="text-[16px] font-medium leading-none px-1 mb-2" style={{ color: '#8D8D8D' }}>
-            Создать
-          </p>
-        )}
-        <div className="flex flex-col gap-1.5">
-          {menuGroup4.map(renderItem)}
         </div>
       </div>
     </aside>
