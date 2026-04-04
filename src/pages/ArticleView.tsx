@@ -29,12 +29,12 @@ interface StaticArticle {
 const STATIC_ARTICLES: Record<string, StaticArticle> = {
   "static-1": {
     id: "static-1",
-    title: "Безопасность в Web3",
+    title: "Как установить Open Claw?",
     author: "Dmitry Volkov",
     avatar: avatarDmitry,
     views: 3104,
-    gradient: "linear-gradient(to left, #7B2FBE 0%, #E8DCFB 100%)",
-    borderColor: "#BF96FF",
+    gradient: "linear-gradient(to left, #924CFE 0%, #D9C0FF 100%)",
+    borderColor: "rgba(191, 150, 255, 0.4)",
     image: img3dSecurity,
     readTime: "8 мин",
     content: `
