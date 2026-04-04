@@ -134,7 +134,7 @@ const Index = () => {
               <button
                 key={lesson.number}
                 onClick={() => articleId && navigate(`/instructions/${articleId}`)}
-                className="group w-full text-left rounded-xl border-2 p-4 transition-all bg-muted border-border hover:bg-violet-super-light hover:border-secondary hover:-translate-y-0.5"
+                className="group w-full text-left rounded-xl border-2 p-4 transition-all bg-background border-border hover:bg-violet-super-light hover:border-secondary hover:-translate-y-0.5"
               >
                 <div className="flex items-center gap-3">
                   <IconInactive className="w-7 h-7 flex-shrink-0 text-violet-light group-hover:text-primary" />
