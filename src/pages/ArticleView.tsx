@@ -243,15 +243,15 @@ const ArticleView = () => {
               <span className="text-[16px] font-medium text-foreground">{staticArticle.author}</span>
             </div>
             <div className="flex items-center justify-between px-2">
-              <div className="flex items-center gap-1.5 text-muted-foreground">
+              <div className="flex items-center gap-1.5 text-muted-foreground dark:text-white/50">
                 <Eye className="w-5 h-5" strokeWidth={1.5} />
                 <span className="text-[15px]">{staticArticle.views.toLocaleString()}</span>
               </div>
-              <div className="flex items-center gap-1.5 text-muted-foreground">
+              <div className="flex items-center gap-1.5 text-muted-foreground dark:text-white/50">
                 <Clock className="w-5 h-5" strokeWidth={1.5} />
                 <span className="text-[15px]">{staticArticle.readTime} {t("article.min")}</span>
               </div>
-              <div className="flex items-center gap-1.5 text-muted-foreground">
+              <div className="flex items-center gap-1.5 text-muted-foreground dark:text-white/50">
                 <CalendarDays className="w-5 h-5" strokeWidth={1.5} />
                 <span className="text-[15px]">
                   {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
