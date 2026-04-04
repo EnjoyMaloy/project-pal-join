@@ -20,14 +20,19 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/articles" element={<Articles />} />
-          <Route path="/articles/new" element={<ArticleEditor />} />
-          <Route path="/articles/:id" element={<ArticleEditor />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="flex">
+          <Sidebar />
+          <main className="flex-1 min-w-0">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/articles" element={<Articles />} />
+              <Route path="/articles/new" element={<ArticleEditor />} />
+              <Route path="/articles/:id" element={<ArticleEditor />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
