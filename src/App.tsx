@@ -32,6 +32,7 @@ const App = () => (
                 <Route path="/articles/new" element={<ArticleEditor />} />
                 <Route path="/articles/:id" element={<ArticleEditor />} />
                 <Route path="/auth" element={<Auth />} />
+                <Route path="/instructions" element={<Instructions />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
