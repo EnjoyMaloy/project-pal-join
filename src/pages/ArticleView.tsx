@@ -23,7 +23,7 @@ interface StaticArticle {
   borderColor: string;
   image?: string;
   content: string;
-  readTime: string;
+  readTime: number;
   updatedAt: string;
 }
 
@@ -37,7 +37,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     gradient: "linear-gradient(to left, #924CFE 0%, #D9C0FF 100%)",
     borderColor: "rgba(191, 150, 255, 0.4)",
     image: img3dSecurity,
-    readTime: "8 мин",
+    readTime: 8,
     updatedAt: "2025-03-15",
     content: `
       <h2>Основные угрозы в Web3</h2>
@@ -66,7 +66,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     gradient: "linear-gradient(to left, #E08A00 0%, #FFF3C4 100%)",
     borderColor: "#FFCC47",
     image: img3dNft,
-    readTime: "6 мин",
+    readTime: 6,
     updatedAt: "2025-02-20",
     content: `
       <h2>Как оценивать NFT проекты</h2>
@@ -95,7 +95,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     gradient: "linear-gradient(to left, #D63384 0%, #FFD6E0 100%)",
     borderColor: "#FF8A80",
     image: img3dCoin,
-    readTime: "10 мин",
+    readTime: 10,
     updatedAt: "2025-01-10",
     content: `
       <h2>Пошаговый гайд по запуску токена</h2>
@@ -119,7 +119,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     gradient: "linear-gradient(to left, #4A8C1C 0%, #E8F5C8 100%)",
     borderColor: "#A0D468",
     image: img3dRocket,
-    readTime: "5 мин",
+    readTime: 5,
     updatedAt: "2025-04-01",
     content: `
       <h2>Начало работы с TON Wallet</h2>
@@ -222,7 +222,7 @@ const ArticleView = () => {
           </div>
           <div className="flex items-center gap-1.5 text-muted-foreground">
             <Clock className="w-4 h-4" strokeWidth={1.5} />
-            <span className="text-body-14">{staticArticle.readTime}</span>
+            <span className="text-body-14">{staticArticle.readTime} {t("article.min")}</span>
           </div>
           <div className="flex items-center gap-1.5 text-muted-foreground">
             <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
