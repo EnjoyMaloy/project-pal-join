@@ -70,10 +70,7 @@ const Sidebar = () => {
       <div className="flex flex-col h-full px-3 pt-6">
         <div className="flex items-center justify-between mb-6 px-1">
           {!collapsed && (
-            <span className="text-[20px] font-bold leading-none">
-              <span style={{ color: '#924CFE' }}>A</span>
-              <span className="text-foreground">cademy</span>
-            </span>
+            <img src={logo} alt="Open Academy" className="h-7 object-contain" />
           )}
           <button
             onClick={() => setCollapsed(!collapsed)}
