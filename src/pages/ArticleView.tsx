@@ -184,14 +184,13 @@ const ArticleView = () => {
     return (
       <div className="min-h-screen bg-background">
         {/* Mobile: gray header card */}
-        <div className="md:hidden bg-muted rounded-b-3xl px-4 pt-4 pb-6">
+        <div className="md:hidden bg-muted rounded-b-3xl px-4 pt-2 pb-6">
           <div className="max-w-4xl mx-auto mb-3">
             <button
               onClick={() => navigate("/instructions")}
-              className="flex items-center gap-2 text-primary text-body-14 py-2 px-3 -ml-3 rounded-lg hover:bg-primary/10 transition-colors"
+              className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
             >
-              <ArrowLeft className="w-5 h-5" strokeWidth={2} />
-              {t("article.back")}
+              <ArrowLeft className="w-5 h-5 text-foreground" strokeWidth={2} />
             </button>
           </div>
           <div className="max-w-4xl mx-auto mb-4">
