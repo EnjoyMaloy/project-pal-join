@@ -157,7 +157,7 @@ const Index = () => {
               </div>
             ) : (
               <div className="bg-secondary rounded-2xl p-8 min-h-[300px] flex flex-col items-center justify-center gap-6">
-                <p className="text-subh-16-medium text-secondary-foreground mb-2">Уроки курса</p>
+                <p className="text-subh-16-medium text-secondary-foreground mb-2">{t("index.courseLessons")}</p>
                 <div className="flex flex-wrap justify-center gap-5">
                   {lessonsData.map((lesson, index) => (
                     <div key={lesson.number} className="relative flex flex-col items-center gap-2">
