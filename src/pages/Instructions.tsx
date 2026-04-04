@@ -71,6 +71,11 @@ const InstructionCard = ({ article, index }: { article: Article; index: number }
         </span>
       </div>
     </div>
+
+    {/* Title */}
+    <p className="text-[20px] font-normal leading-[90%] group-hover:text-primary transition-colors" style={{ color: "#000000" }}>
+      {article.title || "Без названия"}
+    </p>
   </Link>
 );
 
