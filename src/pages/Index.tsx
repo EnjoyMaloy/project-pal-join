@@ -128,7 +128,7 @@ const Index = () => {
       {/* Mobile: Instructions tab — simple list, no header/sidebar wrapper */}
       {mobileTab === "instructions" && (
         <div className="md:hidden px-4 py-6">
-          <h1 className="text-[22px] font-medium text-foreground mb-5">{t("index.courseInstructions")}</h1>
+          <h1 className="text-h1 text-foreground mb-5">{t("index.courseInstructions")}</h1>
           <div className="space-y-3">
             {instructionItems.map(({ lesson, articleId }) => (
               <button
