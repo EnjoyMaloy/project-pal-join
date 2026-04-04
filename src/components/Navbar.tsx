@@ -23,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-14">
       <div className="max-w-full mx-auto px-4 flex items-center justify-end h-14">
         <div className="flex items-center gap-2">
           {user ? (

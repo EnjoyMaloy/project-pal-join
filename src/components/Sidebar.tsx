@@ -61,7 +61,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className="sticky top-14 h-[calc(100vh-3.5rem)] flex-shrink-0 border-r transition-all duration-200"
+      className="h-screen flex-shrink-0 border-r transition-all duration-200"
       style={{
         width: collapsed ? 60 : 249,
         background: '#F7F7F8',
