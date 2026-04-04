@@ -232,7 +232,7 @@ const Index = () => {
                         {index === activeLesson ? (
                           <IconActive className="w-7 h-7 flex-shrink-0 mt-0.5 text-secondary-foreground" />
                         ) : (
-                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-[#BF96FF] group-hover:text-[#A66CFF]" />
+                          <IconInactive className="w-7 h-7 flex-shrink-0 mt-0.5 text-violet-light group-hover:text-primary" />
                         )}
                         <div>
                           {index === activeLesson ? (
