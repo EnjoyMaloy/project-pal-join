@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Home, Circle, BookOpen, FileText, User, ArrowLeft, GraduationCap, Swords } from "lucide-react";
+import { Home, Circle, BookOpen, FileText, User, ArrowLeft, GraduationCap, Trophy } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const BottomNav = () => {
@@ -22,7 +22,7 @@ const BottomNav = () => {
     { label: "Назад", icon: ArrowLeft, path: "back", action: () => navigate("/") },
     { label: "Курс", icon: GraduationCap, path: "/my-courses" },
     { label: "Инструкции", icon: FileText, path: "/my-courses?tab=instructions" },
-    { label: "Квест", icon: Swords, path: "/quest", disabled: true },
+    { label: "Квест", icon: Trophy, path: "/quest", disabled: true },
   ];
 
   const items = isMyCourses ? courseItems : defaultItems;
