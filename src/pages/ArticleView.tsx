@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { ArrowLeft, Eye, Clock } from "lucide-react";
+import { ArrowLeft, Eye, Clock, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import avatarSychev from "@/assets/avatar-sychev.jpg";
@@ -24,6 +24,7 @@ interface StaticArticle {
   image?: string;
   content: string;
   readTime: string;
+  updatedAt: string;
 }
 
 const STATIC_ARTICLES: Record<string, StaticArticle> = {
@@ -37,6 +38,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     borderColor: "rgba(191, 150, 255, 0.4)",
     image: img3dSecurity,
     readTime: "8 мин",
+    updatedAt: "2025-03-15",
     content: `
       <h2>Основные угрозы в Web3</h2>
       <p>Мир Web3 открывает невероятные возможности, но также сопряжён с уникальными рисками безопасности. В отличие от традиционного веба, здесь вы несёте полную ответственность за свои активы.</p>
@@ -65,6 +67,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     borderColor: "#FFCC47",
     image: img3dNft,
     readTime: "6 мин",
+    updatedAt: "2025-02-20",
     content: `
       <h2>Как оценивать NFT проекты</h2>
       <p>Рынок NFT полон как перспективных проектов, так и мошеннических схем. Научитесь отличать одно от другого.</p>
@@ -93,6 +96,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     borderColor: "#FF8A80",
     image: img3dCoin,
     readTime: "10 мин",
+    updatedAt: "2025-01-10",
     content: `
       <h2>Пошаговый гайд по запуску токена</h2>
       <p>Запуск собственного токена — это серьёзный шаг, который требует технической подготовки и понимания регуляторных аспектов.</p>
@@ -116,6 +120,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     borderColor: "#A0D468",
     image: img3dRocket,
     readTime: "5 мин",
+    updatedAt: "2025-04-01",
     content: `
       <h2>Начало работы с TON Wallet</h2>
       <p>TON — один из самых быстрорастущих блокчейнов, тесно интегрированный с Telegram. Настройка кошелька займёт всего несколько минут.</p>
@@ -218,6 +223,12 @@ const ArticleView = () => {
           <div className="flex items-center gap-1.5 text-muted-foreground">
             <Clock className="w-4 h-4" strokeWidth={1.5} />
             <span className="text-body-14">{staticArticle.readTime}</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-muted-foreground">
+            <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
+            <span className="text-body-14">
+              {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
+            </span>
           </div>
         </div>
 
