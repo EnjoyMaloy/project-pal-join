@@ -266,7 +266,7 @@ const ArticleView = () => {
           <div className="max-w-4xl mx-auto mb-4">
             <button
               onClick={() => navigate("/instructions")}
-              className="flex items-center gap-2 text-primary text-body-14 py-2 px-3 ml-2 rounded-lg hover:bg-primary/10 transition-colors"
+              className="flex items-center gap-2 text-primary-foreground bg-primary text-body-14 py-2 px-3 ml-2 rounded-lg hover:bg-primary/90 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" strokeWidth={2} />
               {t("article.back")}
