@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { ArrowLeft, Eye, Clock, CalendarDays } from "lucide-react";
+import { ArrowLeft, Eye, Clock, CalendarDays, Bookmark, LinkIcon } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import avatarSychev from "@/assets/avatar-sychev.jpg";
