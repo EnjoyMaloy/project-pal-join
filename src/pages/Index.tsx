@@ -306,8 +306,8 @@ const Index = () => {
             )}
           </div>
 
-          {/* Sidebar */}
-          <div className="md:w-80 flex-shrink-0">
+          {/* Sidebar - always visible on desktop, shown on mobile only when instructions tab */}
+          <div className={`md:w-80 flex-shrink-0 ${mobileTab === "instructions" ? "" : "hidden md:block"}`}>
             <div
               className={`group rounded-2xl sticky top-8 border border-border ${sidebarOpen ? "bg-card p-4" : "bg-muted hover:bg-violet-super-light cursor-pointer"} transition-all`}
               onClick={() => !sidebarOpen && setSidebarOpen(true)}
