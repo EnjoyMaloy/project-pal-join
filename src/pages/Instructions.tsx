@@ -82,12 +82,12 @@ const InstructionCard = ({ card }: { card: CardData }) => {
         {card.image && (
           <img src={card.image} alt="" className="w-full h-full object-contain p-4" loading="lazy" />
         )}
-        <div className="absolute top-1 right-1 flex items-center gap-1">
-          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success("Ссылка скопирована"); }} className="w-[38px] h-[38px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
-            <LinkIcon className="w-[14px] h-[14px] text-foreground" strokeWidth={1.5} />
+        <div className="absolute top-2 right-2 flex items-center gap-1">
+          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success("Ссылка скопирована"); }} className="w-[32px] h-[32px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
+            <LinkIcon className="w-[13px] h-[13px] text-foreground" strokeWidth={1.5} />
           </button>
-          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); setBookmarked(!bookmarked); }} className="w-[38px] h-[38px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
-            <Bookmark className={`w-[14px] h-[14px] transition-colors ${bookmarked ? 'text-foreground fill-foreground' : 'text-foreground'}`} strokeWidth={1.5} />
+          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); setBookmarked(!bookmarked); }} className="w-[32px] h-[32px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
+            <Bookmark className={`w-[13px] h-[13px] transition-colors ${bookmarked ? 'text-foreground fill-foreground' : 'text-foreground'}`} strokeWidth={1.5} />
           </button>
         </div>
       </div>
