@@ -184,13 +184,13 @@ const Instructions = () => {
                 <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
                   <button
                     onClick={() => setShowFavorites(false)}
-                    className={`px-4 md:px-4 py-2 rounded-md text-[16px] md:text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                    className={`px-4 md:px-5 py-2 md:py-2.5 rounded-md text-[16px] md:text-[16px] transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
                   >
                     {t("instructions.all")}
                   </button>
                   <button
                     onClick={() => setShowFavorites(true)}
-                    className={`px-4 md:px-4 py-2 rounded-md text-[16px] md:text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+                    className={`px-4 md:px-5 py-2 md:py-2.5 rounded-md text-[16px] md:text-[16px] transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
                   >
                     <Bookmark className="w-4 h-4" strokeWidth={1.5} />
                     {t("instructions.favorites")}
@@ -263,7 +263,7 @@ const Instructions = () => {
                     <button
                       key={cat}
                       onClick={() => setActiveCategory(isActive ? "all" : cat)}
-                      className={`px-5 py-2 rounded-lg text-body-14 font-medium transition-colors ${isActive ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                      className={`px-6 py-2.5 rounded-lg text-[16px] font-medium transition-colors ${isActive ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
                     >
                       {label}
                     </button>
@@ -272,7 +272,7 @@ const Instructions = () => {
                 {activeCategory !== "all" && (
                   <button
                     onClick={() => setActiveCategory("all")}
-                    className="px-5 py-2 rounded-lg text-body-14 bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                    className="px-6 py-2.5 rounded-lg text-[16px] bg-muted text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {t("instructions.reset")}
                   </button>
@@ -284,10 +284,10 @@ const Instructions = () => {
             <div className="relative hidden md:block">
               <button
                 onClick={() => setSortOpen(!sortOpen)}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-background hover:bg-muted transition-colors"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-background hover:bg-muted transition-colors"
               >
-                <span className="text-body-14 text-muted-foreground">{t("instructions.sort")}</span>
-                <span className="text-body-14 font-medium text-foreground">{SORT_LABELS[sort]}</span>
+                <span className="text-[16px] text-muted-foreground">{t("instructions.sort")}</span>
+                <span className="text-[16px] font-medium text-foreground">{SORT_LABELS[sort]}</span>
                 {sortOpen ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
               </button>
               {sortOpen && (
