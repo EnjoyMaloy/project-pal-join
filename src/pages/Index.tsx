@@ -171,7 +171,7 @@ const Index = () => {
                       )}
                       <p className="text-body-14 text-foreground/80 leading-relaxed mb-4">{section.text}</p>
                       {section.list && (
-                        <ul className="list-none space-y-1 text-foreground/80 mb-4 pl-0">
+                        <ul className="list-none space-y-1 text-body-14 text-foreground/80 mb-4 pl-0">
                           {section.list.map((item, j) => (
                             <li key={j}>{item}</li>
                           ))}
