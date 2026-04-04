@@ -165,10 +165,32 @@ const Index = () => {
                         onClick={() => setPopoverIndex(popoverIndex === index ? null : index)}
                         className="flex flex-col items-center gap-2 group"
                       >
-                        <div className={`relative w-16 h-16 rounded-full bg-primary/20 border-[3px] flex items-center justify-center transition-all ${
-                          popoverIndex === index ? "border-violet-dark scale-110" : "border-primary group-hover:scale-110 group-hover:border-violet-dark"
-                        }`}>
-                          <span className="text-h3 text-primary group-hover:text-violet-dark transition-colors">{lesson.number}</span>
+                        {/* Outer circle */}
+                        <div
+                          className={`relative flex items-center justify-center transition-all ${
+                            popoverIndex === index ? "scale-110" : "group-hover:scale-110"
+                          }`}
+                          style={{
+                            width: 54,
+                            height: 54,
+                            borderRadius: '50%',
+                            background: 'linear-gradient(180deg, #F7F7F8 0%, #FFFFFF 100%)',
+                            border: '1px solid #FFFFFF',
+                            boxShadow: '0px 1px 4px rgba(70, 4, 102, 0.08)',
+                          }}
+                        >
+                          {/* Inner circle */}
+                          <div
+                            className="flex items-center justify-center"
+                            style={{
+                              width: 40,
+                              height: 40,
+                              borderRadius: '50%',
+                              background: 'linear-gradient(180deg, rgba(70, 4, 102, 0.1) 0%, rgba(191, 150, 255, 0.1) 100%)',
+                            }}
+                          >
+                            <span className="text-[18px] font-medium text-primary">{lesson.number}</span>
+                          </div>
                           {lesson.hasInstruction && (
                             <span
                               className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full flex items-center justify-center border-2"
