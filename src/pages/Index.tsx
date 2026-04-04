@@ -348,7 +348,7 @@ const Index = () => {
           {/* Sidebar - desktop only */}
           <div className="hidden md:block md:w-80 flex-shrink-0">
             <div
-              className={`group rounded-2xl sticky top-8 border border-border ${sidebarOpen ? "bg-card p-4" : "bg-muted hover:bg-violet-super-light cursor-pointer"} transition-all`}
+              className={`group rounded-2xl sticky top-8 border border-border ${sidebarOpen ? "bg-card p-4" : "bg-muted hover:bg-sidebar-accent cursor-pointer"} transition-all`}
               onClick={() => !sidebarOpen && setSidebarOpen(true)}
             >
               <button
