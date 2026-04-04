@@ -13,6 +13,7 @@ const Navbar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const isInstructions = location.pathname === "/instructions";
   const isArticleView = location.pathname.startsWith("/instructions/");
+  const isMyCourses = location.pathname === "/my-courses";
   const searchValue = searchParams.get("q") || "";
   const { lang, setLang, t } = useLanguage();
   const { theme, setTheme } = useTheme();
