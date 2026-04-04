@@ -25,6 +25,7 @@ const App = () => (
           <main className="flex-1 min-w-0">
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/my-courses" element={<Index />} />
               <Route path="/articles" element={<Articles />} />
               <Route path="/articles/new" element={<ArticleEditor />} />
               <Route path="/articles/:id" element={<ArticleEditor />} />
