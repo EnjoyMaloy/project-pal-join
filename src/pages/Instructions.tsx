@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Eye, Bookmark, LinkIcon, ChevronUp, ChevronDown, Check } from "lucide-react";
+import { Eye, Bookmark, LinkIcon, ChevronUp, ChevronDown, Check, Search } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import avatarSychev from "@/assets/avatar-sychev.jpg";
@@ -121,6 +121,7 @@ const Instructions = () => {
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState<SortOption>("newest");
   const [sortOpen, setSortOpen] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     supabase
@@ -134,7 +135,11 @@ const Instructions = () => {
       });
   }, []);
 
-  const sortedCards = [...cards].sort((a, b) => {
+  const filteredCards = cards.filter((card) =>
+    card.title.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const sortedCards = [...filteredCards].sort((a, b) => {
     if (sort === "popular") return b.views - a.views;
     return 0;
   });
@@ -142,7 +147,18 @@ const Instructions = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto px-6 py-8">
-        <div className="flex items-center justify-between mb-6">
+        <div className="mb-6">
+          <div className="relative w-full mb-4">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Найти инструкцию..."
+              className="w-full pl-12 pr-4 py-3 rounded-xl bg-muted border-none text-body-14 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+            />
+          </div>
+          <div className="flex items-center justify-between">
           <h1 className="text-h1 text-foreground">Инструкции</h1>
 
           <div className="relative">
@@ -169,6 +185,7 @@ const Instructions = () => {
                 ))}
               </div>
             )}
+          </div>
           </div>
         </div>
 
