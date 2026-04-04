@@ -327,8 +327,8 @@ const Index = () => {
                               onClick={() => { setPopoverIndex(null); setStoryIndex(index); }}
                               className="w-full text-[14px] font-medium tracking-[0.01em] hover:opacity-90 transition-opacity"
                               style={{
-                                background: 'hsl(var(--foreground))',
-                                color: 'hsl(var(--background))',
+                                background: '#232323',
+                                color: '#FFFFFF',
                                 borderRadius: 8,
                                 height: 32,
                               }}
