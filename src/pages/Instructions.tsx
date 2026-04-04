@@ -206,7 +206,7 @@ const Instructions = () => {
                       onClick={() => setActiveCategory(value)}
                       className={`px-3 py-1.5 rounded-full text-body-14 transition-colors ${isActive ? 'bg-foreground text-background font-medium' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
                     >
-                      {label === "all" ? "Все темы" : label}
+                      {label === "all" ? t("instructions.allTopics") : label}
                     </button>
                   );
                 })}
