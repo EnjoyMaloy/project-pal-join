@@ -103,7 +103,7 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
         </div>
         <div className="mt-3 flex items-center gap-3 px-2 py-[5px] rounded-full w-fit" style={{ background: "rgba(255,255,255,0.25)" }}>
           <div className="flex items-center gap-2">
-            <img src={card.avatar} alt={card.author} className="w-5 h-5 rounded-full object-cover" style={{ border: `1.5px solid rgba(255,255,255,0.5)` }} loading="lazy" width={20} height={20} />
+            <img src={card.avatar} alt={card.author} className="w-5 h-5 rounded-full object-cover" loading="lazy" width={20} height={20} />
             <span className="text-[14px] font-normal leading-none text-white/90">{card.author}</span>
           </div>
           <div className="flex items-center gap-1">
