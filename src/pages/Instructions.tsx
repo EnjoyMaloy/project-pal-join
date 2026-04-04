@@ -59,12 +59,6 @@ const InstructionCard = ({ article, index }: { article: Article; index: number }
         </span>
       </div>
       <div className="flex items-center gap-1">
-        <Star className="w-[14px] h-[14px]" fill="#FF7D60" stroke="none" />
-        <span className="text-[14px] font-normal leading-none tracking-[0.01em]" style={{ color: "#232323" }}>
-          4.8
-        </span>
-      </div>
-      <div className="flex items-center gap-1">
         <Eye className="w-[14px] h-[14px]" style={{ color: "#464646" }} strokeWidth={1.25} />
         <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
           2738
