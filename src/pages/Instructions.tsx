@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Star, Eye, Bookmark } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import avatarSychev from "@/assets/avatar-sychev.jpg";
 
 interface Article {
   id: string;
