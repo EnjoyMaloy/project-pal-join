@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Home, Circle, BookOpen, ClipboardList, Coins, Users, FileText, PanelLeftClose, PanelLeft } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import logo from "@/assets/logo.png";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -81,10 +82,7 @@ const Sidebar = () => {
       <div className="flex flex-col h-full px-3 pt-6">
         <div className="flex items-center justify-between mb-6 px-1">
           {!collapsed && (
-            <span className="text-[20px] font-bold leading-none">
-              <span style={{ color: '#924CFE' }}>A</span>
-              <span className="text-foreground">cademy</span>
-            </span>
+            <img src={logo} alt="Open Academy" className="h-7 object-contain" />
           )}
           <button
             onClick={() => setCollapsed(!collapsed)}
