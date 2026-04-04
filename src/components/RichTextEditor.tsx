@@ -20,7 +20,7 @@ import {
   Code,
   Quote,
 } from "lucide-react";
-import { useCallback } from "react";
+import { useCallback, type MouseEvent } from "react";
 
 interface RichTextEditorProps {
   content?: string;
@@ -43,10 +43,17 @@ const MenuBar = ({ editor }: { editor: ReturnType<typeof useEditor> }) => {
     editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
   }, [editor]);
 
+  const handleToolbarMouseDown = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
   if (!editor) return null;
 
   return (
-    <div className="flex flex-wrap items-center gap-0.5 border-b border-border p-1.5">
+    <div
+      className="flex flex-wrap items-center gap-0.5 border-b border-border p-1.5"
+      onMouseDown={handleToolbarMouseDown}
+    >
       <Toggle
         size="sm"
         pressed={editor.isActive("bold")}
