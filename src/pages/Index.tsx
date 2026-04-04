@@ -308,13 +308,13 @@ const Index = () => {
                               </span>
                             </div>
                             <div className="flex flex-col" style={{ gap: 6 }}>
-                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: 'hsl(var(--foreground))' }}>{t("index.reward")}</span>
+                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: '#232323' }}>{t("index.reward")}</span>
                               <div className="flex items-center" style={{ gap: 4 }}>
                                 <span
                                   className="inline-flex items-center justify-center rounded-full text-[8px] font-bold"
                                   style={{ width: 16, height: 16, background: '#FF7D60', color: '#FFFFFF' }}
                                 >S</span>
-                                <span className="text-[14px] font-medium leading-[100%] tracking-[-0.01em]" style={{ color: 'hsl(var(--foreground))' }}>
+                                <span className="text-[14px] font-medium leading-[100%] tracking-[-0.01em]" style={{ color: '#232323' }}>
                                   {lesson.reward.toLocaleString()}
                                 </span>
                               </div>
