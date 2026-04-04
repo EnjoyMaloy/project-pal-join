@@ -54,7 +54,7 @@ const STATIC_CARDS: CardData[] = [
     avatar: avatarAlex,
     borderColor: "#6B7B8D",
     views: 956,
-    gradient: "linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 100%)",
+    gradient: "linear-gradient(135deg, #00695C 0%, #004D40 100%)",
     isDbArticle: false,
   },
 ];
