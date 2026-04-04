@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Paperclip } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const IconActive = ({ className }: { className?: string }) => (
   <svg className={className} width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
