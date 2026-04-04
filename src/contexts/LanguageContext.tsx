@@ -15,7 +15,7 @@ const translations = {
   "sidebar.tasks": { ru: "Задания", en: "Tasks" },
   "sidebar.myToken": { ru: "Мой токен", en: "My Token" },
   "sidebar.referral": { ru: "Реферальная программа", en: "Referral Program" },
-  "sidebar.instructions": { ru: "Инструкции", en: "Instructions" },
+  "sidebar.instructions": { ru: "Инструкции", en: "Guides" },
 
   // Instructions page
   "instructions.all": { ru: "Все", en: "All" },
