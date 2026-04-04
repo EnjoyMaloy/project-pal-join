@@ -45,6 +45,7 @@ const App = () => (
                 </main>
               </div>
             </div>
+            <BottomNav />
           </BrowserRouter>
         </TooltipProvider>
       </LanguageProvider>
