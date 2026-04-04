@@ -139,10 +139,10 @@ const Index = () => {
       <div className="max-w-6xl mx-auto px-4 py-8 md:py-12">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+          <h1 className="text-h1 text-foreground mb-3">
             Быстрый старт в Telegram Gifts
           </h1>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-3xl">
+          <p className="text-body-14 text-muted-foreground leading-relaxed max-w-3xl">
             Курс покажет, как пользоваться Telegram Gifts и зарабатывать на них. Ты разберёшься в механике,
             поймёшь, какие подарки востребованы, и узнаешь о секретах торговли на вторичном рынке.
           </p>
@@ -156,22 +156,22 @@ const Index = () => {
               <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
                 <button
                   onClick={() => setLessonOpen(false)}
-                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity mb-8"
+                  className="text-btn-medium inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity mb-8"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Вернуться к курсу
                 </button>
 
                 <article className="prose prose-neutral max-w-none">
-                  <h2 className="text-xl font-bold text-foreground mb-4">{currentLesson.content.heading}</h2>
+                  <h2 className="text-h2 text-foreground mb-4">{currentLesson.content.heading}</h2>
                   {currentLesson.content.sections.map((section, i) => (
                     <div key={i}>
                       {section.heading && (
-                        <h3 className="text-lg font-bold text-foreground mb-3">{section.heading}</h3>
+                        <h3 className="text-h3 text-foreground mb-3">{section.heading}</h3>
                       )}
-                      <p className="text-foreground/80 leading-relaxed mb-4">{section.text}</p>
+                      <p className="text-body-14 text-foreground/80 leading-relaxed mb-4">{section.text}</p>
                       {section.list && (
-                        <ul className="list-none space-y-1 text-foreground/80 mb-4 pl-0">
+                        <ul className="list-none space-y-1 text-body-14 text-foreground/80 mb-4 pl-0">
                           {section.list.map((item, j) => (
                             <li key={j}>{item}</li>
                           ))}
@@ -185,7 +185,7 @@ const Index = () => {
               <div className="bg-secondary rounded-2xl p-12 flex items-center justify-center min-h-[300px] cursor-pointer hover:bg-[hsl(261,100%,80%)] transition-colors"
                 onClick={() => setLessonOpen(true)}
               >
-                <span className="text-lg font-semibold text-secondary-foreground">Выберите урок из списка</span>
+                <span className="text-subh-16-medium text-secondary-foreground">Выберите урок из списка</span>
               </div>
             )}
           </div>
@@ -202,7 +202,7 @@ const Index = () => {
               >
                 <div className="flex items-center gap-2">
                   <BookOpen className={`w-5 h-5 text-foreground/70 transition-transform duration-200 ${!sidebarOpen ? "group-hover:scale-110" : ""}`} />
-                  <span className={`text-lg font-bold text-foreground transition-transform duration-200 origin-left ${!sidebarOpen ? "group-hover:scale-[1.03]" : ""}`}>Инструкции из курса</span>
+                  <span className={`text-subh-16 text-foreground transition-transform duration-200 origin-left ${!sidebarOpen ? "group-hover:scale-[1.03]" : ""}`}>Инструкции из курса</span>
                 </div>
                 <ChevronDown
                   className={`w-5 h-5 text-muted-foreground transition-transform duration-200 ${
@@ -236,15 +236,15 @@ const Index = () => {
                         )}
                         <div>
                           {index === activeLesson ? (
-                            <span className="inline-block text-xs font-medium text-secondary-foreground bg-white/80 rounded px-2 py-0.5 mb-1">
+                            <span className="text-caption-12 inline-block text-secondary-foreground bg-white/80 rounded px-2 py-0.5 mb-1">
                               Урок {lesson.number}
                             </span>
                           ) : (
-                            <span className="inline-block text-xs font-medium text-violet-light group-hover:text-primary bg-transparent rounded px-2 py-0.5 mb-1">
+                            <span className="text-caption-12 inline-block text-violet-light group-hover:text-primary bg-transparent rounded px-2 py-0.5 mb-1">
                               Урок {lesson.number}
                             </span>
                           )}
-                          <span className={`text-sm font-semibold leading-snug block ${
+                          <span className={`text-subh-14 leading-snug block ${
                             index === activeLesson ? "text-secondary-foreground" : "text-foreground"
                           }`}>
                             {lesson.title}
