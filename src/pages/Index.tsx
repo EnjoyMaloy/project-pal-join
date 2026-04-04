@@ -193,7 +193,7 @@ const Index = () => {
           {/* Sidebar */}
           <div className="md:w-80 flex-shrink-0">
             <div
-              className={`group rounded-2xl sticky top-8 border border-border ${sidebarOpen ? "bg-card p-4" : "bg-muted hover:bg-[#E8DCFB] cursor-pointer"} transition-all`}
+              className={`group rounded-2xl sticky top-8 border border-border ${sidebarOpen ? "bg-card p-4" : "bg-muted hover:bg-violet-super-light cursor-pointer"} transition-all`}
               onClick={() => !sidebarOpen && setSidebarOpen(true)}
             >
               <button
@@ -225,7 +225,7 @@ const Index = () => {
                       className={`group w-full text-left rounded-xl border-2 p-4 transition-all ${
                         index === activeLesson
                           ? "bg-[#D9C0FF] border-[#A66CFF]"
-                          : "bg-background border-border hover:bg-[#E8DCFB] hover:border-[#D9C0FF] hover:-translate-y-0.5"
+                          : "bg-background border-border hover:bg-violet-super-light hover:border-[#D9C0FF] hover:-translate-y-0.5"
                       }`}
                     >
                       <div className="flex items-start gap-3">
