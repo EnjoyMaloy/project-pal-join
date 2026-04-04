@@ -127,8 +127,8 @@ const Index = () => {
 
         {/* Main layout */}
         <div className="flex flex-col md:flex-row gap-8">
-          {/* Content area */}
-          <div className="flex-1 min-w-0">
+          {/* Content area - hidden on mobile when instructions tab is active */}
+          <div className={`flex-1 min-w-0 ${mobileTab === "instructions" ? "hidden md:block" : ""}`}>
             {lessonOpen ? (
               <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
                 <button
