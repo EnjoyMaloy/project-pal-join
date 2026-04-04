@@ -81,8 +81,6 @@ const STATIC_CARDS: CardData[] = [
 
 const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardData; bookmarked: boolean; onToggleBookmark: (id: string) => void }) => {
   const { t } = useLanguage();
-  const Wrapper = card.isDbArticle ? Link : ("div" as any);
-  const wrapperProps = card.isDbArticle ? { to: `/instructions/${card.id}` } : {};
 
   return (
     <Link to={`/instructions/${card.id}`} className="flex flex-col w-[280px] min-w-[280px] group cursor-pointer rounded-xl overflow-hidden transition-transform duration-200 hover:-translate-y-1" style={{ background: card.gradient, boxShadow: `inset 0 0 0 2px ${card.borderColor}25` }}>
