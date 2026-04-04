@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Eye, Bookmark, LinkIcon, ChevronUp, ChevronDown, Check, SlidersHorizontal } from "lucide-react";
+import { Eye, Bookmark, LinkIcon, ChevronUp, ChevronDown, Check, SlidersHorizontal, ArrowUpDown } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -250,11 +250,19 @@ const Instructions = () => {
             </div>
 
             <div className="relative">
+              {/* Mobile: sort icon */}
               <button
                 onClick={() => setSortOpen(!sortOpen)}
-                className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-background hover:bg-muted transition-colors"
+                className="md:hidden w-9 h-9 rounded-lg flex items-center justify-center bg-muted text-muted-foreground hover:text-foreground transition-colors"
               >
-                <span className="text-body-14 text-muted-foreground hidden md:inline">{t("instructions.sort")}</span>
+                <ArrowUpDown className="w-4 h-4" strokeWidth={1.5} />
+              </button>
+              {/* Desktop: sort button */}
+              <button
+                onClick={() => setSortOpen(!sortOpen)}
+                className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full bg-background hover:bg-muted transition-colors"
+              >
+                <span className="text-body-14 text-muted-foreground">{t("instructions.sort")}</span>
                 <span className="text-body-14 font-medium text-foreground">{SORT_LABELS[sort]}</span>
                 {sortOpen ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
               </button>
