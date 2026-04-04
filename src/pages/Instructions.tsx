@@ -242,7 +242,7 @@ const Instructions = () => {
         </div>
 
         {loading ? (
-          <p className="text-body-14 text-muted-foreground">Загрузка...</p>
+          <p className="text-body-14 text-muted-foreground">{t("instructions.loading")}</p>
         ) : sortedCards.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <Bookmark className="w-10 h-10 text-muted-foreground/40 mb-3" />
