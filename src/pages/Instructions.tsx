@@ -25,6 +25,7 @@ interface CardData {
   borderColor: string;
   views: number;
   gradient: string;
+  image?: string;
   isDbArticle: boolean;
 }
 
