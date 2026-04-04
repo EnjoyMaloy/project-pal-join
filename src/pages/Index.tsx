@@ -139,10 +139,10 @@ const Index = () => {
       <div className="max-w-6xl mx-auto px-4 py-8 md:py-12">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+          <h1 className="text-h1 text-foreground mb-3">
             Быстрый старт в Telegram Gifts
           </h1>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed max-w-3xl">
+          <p className="text-body-14 text-muted-foreground leading-relaxed max-w-3xl">
             Курс покажет, как пользоваться Telegram Gifts и зарабатывать на них. Ты разберёшься в механике,
             поймёшь, какие подарки востребованы, и узнаешь о секретах торговли на вторичном рынке.
           </p>
