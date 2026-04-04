@@ -155,6 +155,22 @@ const ArticleView = () => {
   const { t } = useLanguage();
   const [dbArticle, setDbArticle] = useState<DbArticle | null>(null);
   const [loading, setLoading] = useState(true);
+  const [bookmarked, setBookmarked] = useState(() => {
+    try {
+      const saved = localStorage.getItem("instruction-bookmarks");
+      return saved ? new Set(JSON.parse(saved)).has(id) : false;
+    } catch { return false; }
+  });
+
+  const toggleBookmark = () => {
+    try {
+      const saved = localStorage.getItem("instruction-bookmarks");
+      const set = saved ? new Set(JSON.parse(saved)) : new Set();
+      if (set.has(id)) { set.delete(id); } else { set.add(id); }
+      localStorage.setItem("instruction-bookmarks", JSON.stringify([...set]));
+      setBookmarked(set.has(id));
+    } catch {}
+  };
 
   const staticArticle = id ? STATIC_ARTICLES[id] : null;
 
@@ -201,9 +217,10 @@ const ArticleView = () => {
                 <LinkIcon className="w-4 h-4 text-foreground" strokeWidth={1.5} />
               </button>
               <button
+                onClick={toggleBookmark}
                 className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
               >
-                <Bookmark className="w-4 h-4 text-foreground" strokeWidth={1.5} />
+                <Bookmark className={`w-4 h-4 transition-colors ${bookmarked ? 'text-primary fill-primary' : 'text-foreground'}`} strokeWidth={1.5} />
               </button>
             </div>
           </div>
