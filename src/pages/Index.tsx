@@ -193,14 +193,14 @@ const Index = () => {
           {/* Sidebar */}
           <div className="md:w-80 flex-shrink-0">
             <div
-              className={`rounded-2xl sticky top-8 border border-border ${sidebarOpen ? "bg-card p-4" : "bg-muted hover:bg-[#E8DCFB] cursor-pointer"} transition-all`}
+              className={`group rounded-2xl sticky top-8 border border-border ${sidebarOpen ? "bg-card p-4" : "bg-muted hover:bg-[#E8DCFB] cursor-pointer"} transition-all`}
               onClick={() => !sidebarOpen && setSidebarOpen(true)}
             >
               <button
                 onClick={(e) => { if (sidebarOpen) { e.stopPropagation(); setSidebarOpen(false); } }}
-                className={`group flex items-center justify-between w-full rounded-xl px-4 py-4 ${sidebarOpen ? "" : "pointer-events-none"}`}
+                className={`flex items-center justify-between w-full rounded-xl px-4 py-4 ${sidebarOpen ? "" : "pointer-events-none"}`}
               >
-                <div className="flex items-center gap-2 transition-transform duration-200" style={!sidebarOpen ? {} : {}}>
+                <div className="flex items-center gap-2">
                   <BookOpen className={`w-5 h-5 text-foreground/70 transition-transform duration-200 ${!sidebarOpen ? "group-hover:scale-110" : ""}`} />
                   <span className={`text-lg font-bold text-foreground transition-transform duration-200 origin-left ${!sidebarOpen ? "group-hover:scale-[1.03]" : ""}`}>Инструкции из курса</span>
                 </div>
