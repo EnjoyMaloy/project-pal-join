@@ -112,7 +112,7 @@ const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardDat
           </div>
         </div>
       </div>
-    </Wrapper>
+    </Link>
   );
 };
 
