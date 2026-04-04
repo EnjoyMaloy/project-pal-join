@@ -31,9 +31,8 @@ interface RichTextEditorProps {
 }
 
 const MenuBar = ({ editor }: { editor: ReturnType<typeof useEditor> }) => {
-  if (!editor) return null;
-
   const setLink = useCallback(() => {
+    if (!editor) return;
     const previousUrl = editor.getAttributes("link").href;
     const url = window.prompt("URL", previousUrl);
     if (url === null) return;
@@ -43,6 +42,8 @@ const MenuBar = ({ editor }: { editor: ReturnType<typeof useEditor> }) => {
     }
     editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
   }, [editor]);
+
+  if (!editor) return null;
 
   return (
     <div className="flex flex-wrap items-center gap-0.5 border-b border-border p-1.5">
