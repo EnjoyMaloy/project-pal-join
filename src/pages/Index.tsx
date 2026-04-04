@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { ArrowLeft, BookOpen, ChevronDown } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronDown, X } from "lucide-react";
 
 const IconActive = ({ className }: { className?: string }) => (
   <svg className={className} width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -117,7 +117,8 @@ const lessonsData = [
 const Index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeLesson, setActiveLesson] = useState(0);
-  const [lessonOpen, setLessonOpen] = useState(true);
+  const [lessonOpen, setLessonOpen] = useState(false);
+  const [storyIndex, setStoryIndex] = useState<number | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [listHeight, setListHeight] = useState(0);
 
@@ -182,10 +183,24 @@ const Index = () => {
                 </article>
               </div>
             ) : (
-              <div className="bg-secondary rounded-2xl p-12 flex items-center justify-center min-h-[300px] cursor-pointer hover:bg-[hsl(261,100%,80%)] transition-colors"
-                onClick={() => setLessonOpen(true)}
-              >
-                <span className="text-subh-16-medium text-secondary-foreground">Выберите урок из списка</span>
+              <div className="bg-secondary rounded-2xl p-8 min-h-[300px] flex flex-col items-center justify-center gap-6">
+                <p className="text-subh-16-medium text-secondary-foreground mb-2">Уроки курса</p>
+                <div className="flex flex-wrap justify-center gap-5">
+                  {lessonsData.map((lesson, index) => (
+                    <button
+                      key={lesson.number}
+                      onClick={() => setStoryIndex(index)}
+                      className="flex flex-col items-center gap-2 group"
+                    >
+                      <div className="w-16 h-16 rounded-full bg-primary/20 border-[3px] border-primary flex items-center justify-center group-hover:scale-110 group-hover:border-violet-dark transition-all">
+                        <span className="text-h3 text-primary group-hover:text-violet-dark transition-colors">{lesson.number}</span>
+                      </div>
+                      <span className="text-caption-10 text-secondary-foreground max-w-[80px] text-center leading-tight">
+                        {lesson.title}
+                      </span>
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -259,6 +274,75 @@ const Index = () => {
           </div>
         </div>
       </div>
+      {/* Stories overlay */}
+      {storyIndex !== null && (
+        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4" onClick={() => setStoryIndex(null)}>
+          <div
+            className="relative bg-background rounded-2xl overflow-hidden flex flex-col"
+            style={{ width: "min(400px, 100%)", height: "min(700px, 90vh)" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Progress dots */}
+            <div className="flex gap-1.5 p-3 pb-0">
+              {lessonsData.map((_, i) => (
+                <div
+                  key={i}
+                  className={`h-1 flex-1 rounded-full transition-colors ${
+                    i === storyIndex ? "bg-primary" : i < storyIndex ? "bg-primary/40" : "bg-border"
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Header */}
+            <div className="flex items-center justify-between px-4 py-3">
+              <span className="text-subh-14 text-foreground">Урок {lessonsData[storyIndex].number}</span>
+              <button onClick={() => setStoryIndex(null)} className="text-muted-foreground hover:text-foreground">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto px-4 pb-4">
+              <h2 className="text-h3 text-foreground mb-3">{lessonsData[storyIndex].content.heading}</h2>
+              {lessonsData[storyIndex].content.sections.map((section, i) => (
+                <div key={i} className="mb-3">
+                  {section.heading && (
+                    <h3 className="text-subh-14 text-foreground mb-1.5">{section.heading}</h3>
+                  )}
+                  <p className="text-body-14 text-foreground/80 leading-relaxed">{section.text}</p>
+                  {section.list && (
+                    <ul className="text-body-14 text-foreground/80 mt-1.5 space-y-1 pl-4 list-disc">
+                      {section.list.map((item, j) => (
+                        <li key={j}>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom button */}
+            <div className="p-4 border-t border-border">
+              {storyIndex < lessonsData.length - 1 ? (
+                <button
+                  onClick={() => setStoryIndex(storyIndex + 1)}
+                  className="w-full text-btn-medium bg-primary text-primary-foreground py-3 rounded-xl hover:bg-violet-dark transition-colors"
+                >
+                  Далее
+                </button>
+              ) : (
+                <button
+                  onClick={() => setStoryIndex(null)}
+                  className="w-full text-btn-medium bg-primary text-primary-foreground py-3 rounded-xl hover:bg-violet-dark transition-colors"
+                >
+                  Завершить
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
