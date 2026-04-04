@@ -76,7 +76,7 @@ const InstructionCard = ({ card }: { card: CardData }) => {
   const wrapperProps = card.isDbArticle ? { to: `/instructions/${card.id}` } : {};
 
   return (
-    <Wrapper {...wrapperProps} className="flex flex-col w-full group cursor-pointer rounded-xl overflow-hidden" style={{ background: card.gradient }}>
+    <Wrapper {...wrapperProps} className="flex flex-col w-[280px] min-w-[280px] group cursor-pointer rounded-xl overflow-hidden" style={{ background: card.gradient }}>
       <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity flex items-center justify-center">
         {card.image && (
           <img src={card.image} alt="" className="w-full h-full object-contain p-4" loading="lazy" />
@@ -141,7 +141,7 @@ const Instructions = () => {
         {loading ? (
           <p className="text-body-14 text-muted-foreground">Загрузка...</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex flex-wrap gap-6">
             {cards.map((card) => (
               <InstructionCard key={card.id} card={card} />
             ))}
