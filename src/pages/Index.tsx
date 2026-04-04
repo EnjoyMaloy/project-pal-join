@@ -243,7 +243,7 @@ const Index = () => {
                   {lessonsData.map((lesson, index) => (
                     <button
                       key={lesson.number}
-                      onClick={() => handleLessonClick(index)}
+                      onClick={() => { setActiveLesson(index); setLessonOpen(true); }}
                       className={`group w-full text-left rounded-xl border-2 p-4 transition-all ${
                         index === activeLesson
                            ? "bg-secondary border-primary"
