@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Home, Circle, BookOpen, FileText, User, ArrowLeft, GraduationCap, Swords } from "lucide-react";
+import { Home, Circle, BookOpen, FileText, User, ArrowLeft, GraduationCap, Trophy } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const BottomNav = () => {
