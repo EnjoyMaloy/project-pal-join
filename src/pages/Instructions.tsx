@@ -227,31 +227,31 @@ const Instructions = () => {
                     </div>
                   )}
                 </div>
-              </div>
 
-              {/* Mobile: sort icon (right side) */}
-              <div className="relative md:hidden">
-                <button
-                  onClick={() => { setSortOpen(!sortOpen); setFilterOpen(false); }}
-                  className="w-10 h-10 rounded-lg flex items-center justify-center bg-muted text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <ArrowUpDown className="w-5 h-5" strokeWidth={1.5} />
-                </button>
-                {sortOpen && (
-                  <div className="absolute left-0 top-full mt-2 bg-background border border-border rounded-2xl shadow-lg py-2 min-w-[200px] z-50">
-                    {(Object.entries(SORT_LABELS) as [SortOption, string][]).map(([key, label]) => (
-                      <button
-                        key={key}
-                        onClick={() => { setSort(key); setSortOpen(false); }}
-                        className={`w-full flex items-center justify-between px-4 py-3 text-left transition-colors rounded-xl mx-auto ${sort === key ? '' : 'hover:bg-primary hover:text-primary-foreground'}`}
-                        style={{ width: 'calc(100% - 8px)', marginLeft: 4, marginRight: 4 }}
-                      >
-                        <span className={`text-body-14 font-medium ${sort === key ? 'text-primary' : ''}`}>{label}</span>
-                        {sort === key && <Check className="w-4 h-4 text-primary" />}
-                      </button>
-                    ))}
-                  </div>
-                )}
+                {/* Mobile: sort icon */}
+                <div className="relative md:hidden">
+                  <button
+                    onClick={() => { setSortOpen(!sortOpen); setFilterOpen(false); }}
+                    className="w-10 h-10 rounded-lg flex items-center justify-center bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <ArrowUpDown className="w-5 h-5" strokeWidth={1.5} />
+                  </button>
+                  {sortOpen && (
+                    <div className="absolute left-0 top-full mt-2 bg-background border border-border rounded-2xl shadow-lg py-2 min-w-[200px] z-50">
+                      {(Object.entries(SORT_LABELS) as [SortOption, string][]).map(([key, label]) => (
+                        <button
+                          key={key}
+                          onClick={() => { setSort(key); setSortOpen(false); }}
+                          className={`w-full flex items-center justify-between px-4 py-3 text-left transition-colors rounded-xl mx-auto ${sort === key ? '' : 'hover:bg-primary hover:text-primary-foreground'}`}
+                          style={{ width: 'calc(100% - 8px)', marginLeft: 4, marginRight: 4 }}
+                        >
+                          <span className={`text-body-14 font-medium ${sort === key ? 'text-primary' : ''}`}>{label}</span>
+                          {sort === key && <Check className="w-4 h-4 text-primary" />}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Desktop: category buttons */}
