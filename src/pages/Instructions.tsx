@@ -74,6 +74,7 @@ const STATIC_CARDS: CardData[] = [
     gradient: "linear-gradient(180deg, #E8F5C8 0%, #4A8C1C 100%)",
     image: img3dRocket,
     isDbArticle: false,
+    category: "crypto",
   },
 ];
 
