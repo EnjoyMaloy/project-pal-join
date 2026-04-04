@@ -298,7 +298,7 @@ const Instructions = () => {
                       className={`w-full flex items-center justify-between px-4 py-3 text-left transition-colors rounded-xl mx-auto ${sort === key ? '' : 'hover:bg-primary hover:text-primary-foreground'}`}
                       style={{ width: 'calc(100% - 8px)', marginLeft: 4, marginRight: 4 }}
                     >
-                      <span className={`text-body-14 ${sort === key ? 'text-primary font-medium' : ''}`}>{label}</span>
+                      <span className={`text-body-14 font-medium ${sort === key ? 'text-primary' : ''}`}>{label}</span>
                       {sort === key && <Check className="w-4 h-4 text-primary" />}
                     </button>
                   ))}
