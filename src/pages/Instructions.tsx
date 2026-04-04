@@ -108,12 +108,11 @@ const InstructionCard = ({ card }: { card: CardData }) => {
   );
 };
 
-type SortOption = "newest" | "popular" | "rating";
+type SortOption = "newest" | "popular";
 
 const SORT_LABELS: Record<SortOption, string> = {
   newest: "Сначала новые",
   popular: "Популярные",
-  rating: "Высокий рейтинг",
 };
 
 const Instructions = () => {
