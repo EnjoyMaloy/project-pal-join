@@ -71,8 +71,7 @@ const STATIC_CARDS: CardData[] = [
   },
 ];
 
-const InstructionCard = ({ card }: { card: CardData }) => {
-  const [bookmarked, setBookmarked] = useState(false);
+const InstructionCard = ({ card, bookmarked, onToggleBookmark }: { card: CardData; bookmarked: boolean; onToggleBookmark: (id: string) => void }) => {
   const Wrapper = card.isDbArticle ? Link : ("div" as any);
   const wrapperProps = card.isDbArticle ? { to: `/instructions/${card.id}` } : {};
 
@@ -83,11 +82,11 @@ const InstructionCard = ({ card }: { card: CardData }) => {
           <img src={card.image} alt="" className="w-full h-full object-contain p-4" loading="lazy" />
         )}
         <div className="absolute top-2 right-2 flex items-center gap-1">
-          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success("Ссылка скопирована"); }} className="w-[32px] h-[32px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
-            <LinkIcon className="w-[13px] h-[13px] text-foreground" strokeWidth={1.5} />
+          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success("Ссылка скопирована"); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
+            <LinkIcon className="w-[12px] h-[12px] text-foreground" strokeWidth={1.5} />
           </button>
-          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); setBookmarked(!bookmarked); }} className="w-[32px] h-[32px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
-            <Bookmark className={`w-[13px] h-[13px] transition-colors ${bookmarked ? 'text-foreground fill-foreground' : 'text-foreground'}`} strokeWidth={1.5} />
+          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); onToggleBookmark(card.id); }} className="w-[28px] h-[28px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
+            <Bookmark className={`w-[12px] h-[12px] transition-colors ${bookmarked ? 'text-foreground fill-foreground' : 'text-foreground'}`} strokeWidth={1.5} />
           </button>
         </div>
       </div>
@@ -122,6 +121,22 @@ const Instructions = () => {
   const [sortOpen, setSortOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const search = searchParams.get("q") || "";
+  const [showFavorites, setShowFavorites] = useState(false);
+  const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(() => {
+    try {
+      const saved = localStorage.getItem("instruction-bookmarks");
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch { return new Set(); }
+  });
+
+  const toggleBookmark = (id: string) => {
+    setBookmarkedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      localStorage.setItem("instruction-bookmarks", JSON.stringify([...next]));
+      return next;
+    });
+  };
 
   useEffect(() => {
     supabase
@@ -135,9 +150,9 @@ const Instructions = () => {
       });
   }, []);
 
-  const filteredCards = cards.filter((card) =>
-    card.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredCards = cards
+    .filter((card) => card.title.toLowerCase().includes(search.toLowerCase()))
+    .filter((card) => !showFavorites || bookmarkedIds.has(card.id));
 
   const sortedCards = [...filteredCards].sort((a, b) => {
     if (sort === "popular") return b.views - a.views;
@@ -149,42 +164,66 @@ const Instructions = () => {
       <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="mb-6">
           <div className="flex items-center justify-between">
-          <h1 className="text-h1 text-foreground">Инструкции</h1>
+            <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
+              <button
+                onClick={() => setShowFavorites(false)}
+                className={`px-4 py-1.5 rounded-md text-body-14 transition-colors ${!showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+              >
+                Все
+              </button>
+              <button
+                onClick={() => setShowFavorites(true)}
+                className={`px-4 py-1.5 rounded-md text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
+              >
+                <Bookmark className="w-3.5 h-3.5" strokeWidth={1.5} />
+                Избранное
+                {bookmarkedIds.size > 0 && (
+                  <span className="text-caption-12 text-muted-foreground">{bookmarkedIds.size}</span>
+                )}
+              </button>
+            </div>
 
-          <div className="relative">
-            <button
-              onClick={() => setSortOpen(!sortOpen)}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-background hover:bg-muted transition-colors"
-            >
-              <span className="text-body-14 text-muted-foreground">Сортировка:</span>
-              <span className="text-body-14 font-medium text-foreground">{SORT_LABELS[sort]}</span>
-              {sortOpen ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
-            </button>
+            <div className="relative">
+              <button
+                onClick={() => setSortOpen(!sortOpen)}
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-background hover:bg-muted transition-colors"
+              >
+                <span className="text-body-14 text-muted-foreground">Сортировка:</span>
+                <span className="text-body-14 font-medium text-foreground">{SORT_LABELS[sort]}</span>
+                {sortOpen ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
+              </button>
 
-            {sortOpen && (
-              <div className="absolute right-0 top-full mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[200px] z-50">
-                {(Object.entries(SORT_LABELS) as [SortOption, string][]).map(([key, label]) => (
-                  <button
-                    key={key}
-                    onClick={() => { setSort(key); setSortOpen(false); }}
-                    className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-muted transition-colors"
-                  >
-                    <span className={`text-body-14 ${sort === key ? 'text-primary font-medium' : 'text-foreground'}`}>{label}</span>
-                    {sort === key && <Check className="w-4 h-4 text-primary" />}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+              {sortOpen && (
+                <div className="absolute right-0 top-full mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[200px] z-50">
+                  {(Object.entries(SORT_LABELS) as [SortOption, string][]).map(([key, label]) => (
+                    <button
+                      key={key}
+                      onClick={() => { setSort(key); setSortOpen(false); }}
+                      className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-muted transition-colors"
+                    >
+                      <span className={`text-body-14 ${sort === key ? 'text-primary font-medium' : 'text-foreground'}`}>{label}</span>
+                      {sort === key && <Check className="w-4 h-4 text-primary" />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         {loading ? (
           <p className="text-body-14 text-muted-foreground">Загрузка...</p>
+        ) : sortedCards.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-20 text-center">
+            <Bookmark className="w-10 h-10 text-muted-foreground/40 mb-3" />
+            <p className="text-body-14 text-muted-foreground">
+              {showFavorites ? "Нет избранных инструкций" : "Ничего не найдено"}
+            </p>
+          </div>
         ) : (
           <div className="flex flex-wrap gap-6">
             {sortedCards.map((card) => (
-              <InstructionCard key={card.id} card={card} />
+              <InstructionCard key={card.id} card={card} bookmarked={bookmarkedIds.has(card.id)} onToggleBookmark={toggleBookmark} />
             ))}
           </div>
         )}
