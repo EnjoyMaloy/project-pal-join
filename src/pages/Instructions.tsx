@@ -44,7 +44,7 @@ const STATIC_CARDS: CardData[] = [
     avatar: avatarDmitry,
     borderColor: "#7B9EBF",
     views: 3104,
-    gradient: "linear-gradient(135deg, #D32F2F 0%, #C62828 100%)",
+    gradient: "linear-gradient(180deg, #FFCDD2 0%, #C62828 100%)",
     isDbArticle: false,
   },
   {
@@ -54,7 +54,7 @@ const STATIC_CARDS: CardData[] = [
     avatar: avatarAlex,
     borderColor: "#6B7B8D",
     views: 956,
-    gradient: "linear-gradient(135deg, #00695C 0%, #004D40 100%)",
+    gradient: "linear-gradient(180deg, #B2EBF2 0%, #00695C 100%)",
     isDbArticle: false,
   },
 ];
@@ -129,7 +129,7 @@ const CardVariant3 = ({ card, wrapperProps, Wrapper }: { card: CardData; wrapper
       </div>
     </div>
     <div className="flex flex-col gap-3 px-4 pb-4 items-center">
-      <p className="text-[20px] font-medium leading-[90%] text-center text-white group-hover:opacity-80 transition-opacity">{card.title}</p>
+      <p className="text-[20px] font-normal leading-[90%] text-center text-white group-hover:opacity-80 transition-opacity">{card.title}</p>
       <div className="flex items-center gap-3 px-2 py-[5px] rounded-md w-fit" style={{ background: "rgba(255,255,255,0.25)" }}>
         <div className="flex items-center gap-2">
           <img src={card.avatar} alt={card.author} className="w-5 h-5 rounded-full object-cover" style={{ border: `1.5px solid rgba(255,255,255,0.5)` }} loading="lazy" width={20} height={20} />
