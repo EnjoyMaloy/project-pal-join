@@ -72,11 +72,9 @@ const Sidebar = () => {
 
   return (
     <aside
-      className="h-screen flex-shrink-0 border-r transition-all duration-200 hidden md:block"
+      className="h-screen flex-shrink-0 border-r border-border bg-sidebar transition-all duration-200 hidden md:block"
       style={{
         width: collapsed ? 60 : 249,
-        background: '#F7F7F8',
-        borderColor: 'hsl(var(--border))',
       }}
     >
       <div className="flex flex-col h-full px-3 pt-6">
