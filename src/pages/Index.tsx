@@ -22,6 +22,7 @@ const lessonsData = [
     description: "Узнаем, что такое Telegram Gifts, как они работают и почему это интересно.",
     reward: 500,
     progress: 100,
+    hasInstruction: true,
     content: {
       heading: "Введение в Telegram Gifts",
       sections: [
