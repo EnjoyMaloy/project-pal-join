@@ -1,12 +1,15 @@
-import { Link, useLocation } from "react-router-dom";
-import { Home, Circle, BookOpen, FileText, User } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Home, Circle, BookOpen, FileText, User, ArrowLeft, GraduationCap, Swords } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const BottomNav = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { t } = useLanguage();
 
-  const items = [
+  const isMyCourses = location.pathname === "/my-courses";
+
+  const defaultItems = [
     { label: t("sidebar.home"), icon: Home, path: "/", disabled: true },
     { label: t("sidebar.catalog"), icon: Circle, path: "/catalog", disabled: true },
     { label: t("sidebar.myCourses"), icon: BookOpen, path: "/my-courses" },
@@ -14,16 +17,27 @@ const BottomNav = () => {
     { label: t("bottomNav.profile"), icon: User, path: "/profile", disabled: true },
   ];
 
-  const isActive = (path: string) => {
-    if (path === "/") return location.pathname === "/";
-    return location.pathname.startsWith(path);
+  const courseItems = [
+    { label: "Назад", icon: ArrowLeft, path: "back", action: () => navigate(-1) },
+    { label: "Курс", icon: GraduationCap, path: "/my-courses", active: true },
+    { label: "Инструкции", icon: FileText, path: "/instructions" },
+    { label: "Квест", icon: Swords, path: "/quest", disabled: true },
+  ];
+
+  const items = isMyCourses ? courseItems : defaultItems;
+
+  const isActive = (item: any) => {
+    if (item.active) return true;
+    if (item.disabled) return false;
+    if (item.path === "/") return location.pathname === "/";
+    return location.pathname.startsWith(item.path);
   };
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background md:hidden">
       <div className="flex items-center justify-around h-16 px-2">
-        {items.map((item) => {
-          const active = !item.disabled && isActive(item.path);
+        {items.map((item: any) => {
+          const active = isActive(item);
           const Icon = item.icon;
 
           const content = (
@@ -34,6 +48,14 @@ const BottomNav = () => {
               </span>
             </div>
           );
+
+          if (item.action) {
+            return (
+              <button key={item.path} onClick={item.action} className="flex-1 flex justify-center py-2">
+                {content}
+              </button>
+            );
+          }
 
           if (item.disabled) {
             return (
