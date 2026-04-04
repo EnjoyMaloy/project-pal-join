@@ -139,7 +139,7 @@ const Index = () => {
                 <div className="flex items-center gap-3">
                   <IconInactive className="w-7 h-7 flex-shrink-0 text-violet-light group-hover:text-primary" />
                   <div>
-                    <span className="text-[13px] font-medium inline-block text-primary bg-secondary rounded px-2.5 py-1 mb-1.5">
+                    <span className="text-caption-12 font-medium inline-block text-violet-light group-hover:text-primary bg-transparent rounded px-2 py-0.5 mb-1">
                       {t("index.lesson")} {lesson.number}
                     </span>
                     <span className="text-[18px] font-normal leading-[100%] block text-foreground">
