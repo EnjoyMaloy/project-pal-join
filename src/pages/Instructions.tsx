@@ -171,7 +171,7 @@ const Instructions = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-6xl mx-auto px-6 py-8">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-8">
         <div className="mb-6">
           {/* Tabs: All / Favorites */}
           <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-0 md:flex-row flex-wrap">
