@@ -185,16 +185,18 @@ const ArticleView = () => {
               <img src={staticArticle.image} alt="" className="w-[220px] h-[220px] object-contain drop-shadow-lg" />
             )}
           </div>
-          <div className="relative z-10 max-w-4xl mx-auto px-6 pt-6">
+          <div className="relative z-10 max-w-4xl mx-auto px-6 pt-6 h-full flex flex-col">
             <Button
               variant="ghost"
               onClick={() => navigate("/instructions")}
-              className="text-white/80 hover:text-white hover:bg-white/10 mb-8"
+              className="text-white/80 hover:text-white hover:bg-white/10 w-fit"
             >
               <ArrowLeft className="w-4 h-4 mr-1" />
               {t("sidebar.instructions")}
             </Button>
-            <h1 className="text-h1 text-white text-[32px] leading-[100%] max-w-lg">{staticArticle.title}</h1>
+            <div className="flex-1 flex items-center justify-center">
+              <h1 className="text-white text-[40px] font-medium leading-[100%] text-center">{staticArticle.title}</h1>
+            </div>
           </div>
         </div>
 
