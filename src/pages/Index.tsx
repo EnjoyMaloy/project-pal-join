@@ -202,7 +202,7 @@ const Index = () => {
               >
                 <div className="flex items-center gap-2">
                   <BookOpen className={`w-5 h-5 text-foreground/70 transition-transform duration-200 ${!sidebarOpen ? "group-hover:scale-110" : ""}`} />
-                  <span className={`text-h2 text-foreground transition-transform duration-200 origin-left ${!sidebarOpen ? "group-hover:scale-[1.03]" : ""}`}>Инструкции из курса</span>
+                  <span className={`text-[22px] font-normal leading-[90%] tracking-[0.01em] text-foreground transition-transform duration-200 origin-left ${!sidebarOpen ? "group-hover:scale-[1.03]" : ""}`}>Инструкции из курса</span>
                 </div>
                 <ChevronDown
                   className={`w-5 h-5 text-muted-foreground transition-transform duration-200 ${
