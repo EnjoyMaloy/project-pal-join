@@ -236,11 +236,11 @@ const Index = () => {
                         )}
                         <div>
                           {index === activeLesson ? (
-                            <span className="inline-block text-xs font-medium text-secondary-foreground bg-white/80 rounded px-2 py-0.5 mb-1">
+                            <span className="text-caption-12 inline-block text-secondary-foreground bg-white/80 rounded px-2 py-0.5 mb-1">
                               Урок {lesson.number}
                             </span>
                           ) : (
-                            <span className="inline-block text-xs font-medium text-violet-light group-hover:text-primary bg-transparent rounded px-2 py-0.5 mb-1">
+                            <span className="text-caption-12 inline-block text-violet-light group-hover:text-primary bg-transparent rounded px-2 py-0.5 mb-1">
                               Урок {lesson.number}
                             </span>
                           )}
