@@ -98,12 +98,6 @@ const Index = () => {
     }
   }, [sidebarOpen]);
 
-  // Auto-open sidebar on mobile when instructions tab is active
-  useEffect(() => {
-    if (mobileTab === "instructions" && !sidebarOpen) {
-      setSidebarOpen(true);
-    }
-  }, [mobileTab]);
 
   // Close popover on outside click
   useEffect(() => {
