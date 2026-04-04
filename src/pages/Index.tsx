@@ -354,7 +354,7 @@ const Index = () => {
                             </span>
                           ) : (
                             <span className="text-caption-12 font-medium inline-block text-violet-light group-hover:text-primary bg-transparent rounded px-2 py-0.5 mb-1">
-                              Урок {lesson.number}
+                              {t("index.lesson")} {lesson.number}
                             </span>
                           )}
                           <span className={`text-[18px] font-normal leading-[100%] block ${
