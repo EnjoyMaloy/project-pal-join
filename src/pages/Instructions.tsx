@@ -41,7 +41,7 @@ const STATIC_CARDS: CardData[] = [
     title: "Анализ NFT проектов",
     author: "Alex Kim",
     avatar: avatarAlex,
-    borderColor: "#6B7B8D",
+    borderColor: "#00695C",
     views: 956,
     gradient: "linear-gradient(180deg, #B2EBF2 0%, #00695C 100%)",
     image: img3dNft,
