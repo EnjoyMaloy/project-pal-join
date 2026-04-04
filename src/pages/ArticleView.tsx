@@ -194,8 +194,8 @@ const ArticleView = () => {
           </button>
         </div>
 
-        {/* Hero banner */}
-        <div className="relative w-full h-[220px] overflow-hidden rounded-2xl max-w-4xl mx-auto" style={{ background: staticArticle.gradient }}>
+        {/* Hero banner - hidden on mobile */}
+        <div className="hidden md:block relative w-full h-[220px] overflow-hidden rounded-2xl max-w-4xl mx-auto" style={{ background: staticArticle.gradient }}>
           <div className="absolute right-[15%] bottom-2 flex items-end justify-end">
             {staticArticle.image && (
               <img src={staticArticle.image} alt="" className="w-[200px] h-[200px] object-contain drop-shadow-lg" />
@@ -204,6 +204,11 @@ const ArticleView = () => {
           <div className="absolute inset-0 flex items-center px-8 max-w-3xl mx-auto">
             <h1 className="text-foreground text-[36px] font-medium leading-[110%]">{staticArticle.title}</h1>
           </div>
+        </div>
+
+        {/* Mobile title */}
+        <div className="md:hidden max-w-4xl mx-auto">
+          <h1 className="text-foreground text-[28px] font-medium leading-[110%]">{staticArticle.title}</h1>
         </div>
 
         {/* Meta bar */}
