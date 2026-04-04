@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Eye, Bookmark, ChevronUp, ChevronDown, Check, SlidersHorizontal, ArrowUpDown } from "lucide-react";
-import ShareLinkIcon from "@/components/icons/ShareLinkIcon";
+import { Eye, Bookmark, LinkIcon, ChevronUp, ChevronDown, Check, SlidersHorizontal, ArrowUpDown } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
