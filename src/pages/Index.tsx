@@ -244,7 +244,7 @@ const Index = () => {
                               Урок {lesson.number}
                             </span>
                           )}
-                          <span className={`text-sm font-semibold leading-snug block ${
+                          <span className={`text-subh-14 leading-snug block ${
                             index === activeLesson ? "text-secondary-foreground" : "text-foreground"
                           }`}>
                             {lesson.title}
