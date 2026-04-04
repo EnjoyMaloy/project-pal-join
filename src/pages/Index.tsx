@@ -167,9 +167,9 @@ const Index = () => {
                   {currentLesson.content.sections.map((section, i) => (
                     <div key={i}>
                       {section.heading && (
-                        <h3 className="text-lg font-bold text-foreground mb-3">{section.heading}</h3>
+                        <h3 className="text-h3 text-foreground mb-3">{section.heading}</h3>
                       )}
-                      <p className="text-foreground/80 leading-relaxed mb-4">{section.text}</p>
+                      <p className="text-body-14 text-foreground/80 leading-relaxed mb-4">{section.text}</p>
                       {section.list && (
                         <ul className="list-none space-y-1 text-foreground/80 mb-4 pl-0">
                           {section.list.map((item, j) => (
