@@ -217,8 +217,8 @@ const Index = () => {
                             width: 54,
                             height: 54,
                             borderRadius: '50%',
-                            background: 'linear-gradient(180deg, hsl(var(--muted)) 0%, hsl(var(--background)) 100%)',
-                            border: '1px solid hsl(var(--border))',
+                            background: 'linear-gradient(180deg, #F7F7F8 0%, #FFFFFF 100%)',
+                            border: '1px solid #EBE9EA',
                             boxShadow: '0px 1px 4px rgba(70, 4, 102, 0.08)',
                           }}
                         >
@@ -237,7 +237,7 @@ const Index = () => {
                           {lesson.hasInstruction && (
                             <span
                               className="absolute -bottom-0.5 -right-0.5 w-5 h-5 rounded-full flex items-center justify-center"
-                              style={{ background: 'hsl(var(--background))', border: '1px solid rgba(166, 108, 255, 0.25)' }}
+                              style={{ background: '#FFFFFF', border: '1px solid rgba(166, 108, 255, 0.25)' }}
                             >
                               <Paperclip className="w-2.5 h-2.5 text-primary" />
                             </span>
