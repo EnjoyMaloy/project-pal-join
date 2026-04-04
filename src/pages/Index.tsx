@@ -252,7 +252,7 @@ const Index = () => {
                           className="absolute top-20 left-1/2 -translate-x-1/2 z-30 animate-in fade-in slide-in-from-top-2 duration-200"
                           style={{
                             width: 230,
-                            background: '#FFFFFF',
+                            background: 'hsl(var(--card))',
                             border: '1px solid hsl(var(--border))',
                             boxShadow: '0px 4px 8px rgba(70, 4, 102, 0.1)',
                             borderRadius: 10,
