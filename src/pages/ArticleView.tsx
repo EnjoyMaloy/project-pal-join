@@ -37,7 +37,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     gradient: "linear-gradient(to left, #924CFE 0%, #D9C0FF 100%)",
     borderColor: "rgba(191, 150, 255, 0.4)",
     image: img3dSecurity,
-    readTime: "8 мин",
+    readTime: 8,
     updatedAt: "2025-03-15",
     content: `
       <h2>Основные угрозы в Web3</h2>
