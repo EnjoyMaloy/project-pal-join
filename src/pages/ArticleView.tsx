@@ -155,22 +155,12 @@ const ArticleView = () => {
   const { t } = useLanguage();
   const [dbArticle, setDbArticle] = useState<DbArticle | null>(null);
   const [loading, setLoading] = useState(true);
-  const [scrolled, setScrolled] = useState(false);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [bookmarked, setBookmarked] = useState(() => {
     try {
       const saved = localStorage.getItem("instruction-bookmarks");
       return saved ? new Set(JSON.parse(saved)).has(id) : false;
     } catch { return false; }
   });
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const toggleBookmark = () => {
     try {
@@ -210,69 +200,62 @@ const ArticleView = () => {
   if (staticArticle) {
     return (
       <div className="min-h-screen bg-background">
-        {/* Mobile: header with sticky toolbar + collapsible content */}
-        <div className="md:hidden sticky top-0 z-50 bg-muted rounded-b-3xl px-4 pt-2 overflow-hidden transition-all duration-500 ease-in-out"
-          style={{
-            paddingBottom: scrolled ? '8px' : '24px',
-          }}
-        >
-          {/* Toolbar — always visible */}
-          <div className="max-w-4xl mx-auto flex items-center justify-between mb-1">
-            <button
-              onClick={() => navigate("/instructions")}
-              className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5 text-foreground" strokeWidth={2} />
-            </button>
-            <div className="flex items-center gap-2">
+        {/* Mobile: sticky toolbar with fade overlay */}
+        <div className="md:hidden sticky top-0 z-50">
+          <div className="relative bg-muted/95 backdrop-blur-sm rounded-b-3xl px-4 pt-2 pb-3">
+            <div className="max-w-4xl mx-auto flex items-center justify-between">
               <button
-                onClick={() => { navigator.clipboard.writeText(window.location.href); toast.success(t("instructions.linkCopied")); }}
+                onClick={() => navigate("/instructions")}
                 className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
               >
-                <LinkIcon className="w-4 h-4 text-foreground" strokeWidth={1.5} />
+                <ArrowLeft className="w-5 h-5 text-foreground" strokeWidth={2} />
               </button>
-              <button
-                onClick={toggleBookmark}
-                className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
-              >
-                <Bookmark className={`w-4 h-4 transition-colors ${bookmarked ? 'text-primary fill-primary' : 'text-foreground'}`} strokeWidth={1.5} />
-              </button>
-            </div>
-          </div>
-
-          {/* Collapsible content — fades out on scroll */}
-          <div
-            className="transition-all duration-500 ease-in-out"
-            style={{
-              maxHeight: scrolled ? '0px' : '300px',
-              opacity: scrolled ? 0 : 1,
-              transform: scrolled ? 'translateY(-10px)' : 'translateY(0)',
-              overflow: 'hidden',
-            }}
-          >
-            <div className="max-w-4xl mx-auto mb-4 pt-2">
-              <h1 className="text-foreground text-[28px] font-medium leading-[110%]">{staticArticle.title}</h1>
-            </div>
-            <div className="max-w-4xl mx-auto">
-              <div className="flex items-center gap-3 mb-3">
-                <img src={staticArticle.avatar} alt={staticArticle.author} className="w-10 h-10 rounded-full object-cover" />
-                <span className="text-[16px] font-medium text-foreground">{staticArticle.author}</span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => { navigator.clipboard.writeText(window.location.href); toast.success(t("instructions.linkCopied")); }}
+                  className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
+                >
+                  <LinkIcon className="w-4 h-4 text-foreground" strokeWidth={1.5} />
+                </button>
+                <button
+                  onClick={toggleBookmark}
+                  className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
+                >
+                  <Bookmark className={`w-4 h-4 transition-colors ${bookmarked ? 'text-primary fill-primary' : 'text-foreground'}`} strokeWidth={1.5} />
+                </button>
               </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Eye className="w-4 h-4" strokeWidth={1.5} />
-                  <span className="text-body-14">{staticArticle.views.toLocaleString()}</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <Clock className="w-4 h-4" strokeWidth={1.5} />
-                  <span className="text-body-14">{staticArticle.readTime} {t("article.min")}</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
-                  <span className="text-body-14">
-                    {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
-                  </span>
-                </div>
+            </div>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 -bottom-10 h-10 bg-gradient-to-b from-muted via-muted/80 to-transparent"
+            />
+          </div>
+        </div>
+
+        {/* Mobile: content scrolls under toolbar */}
+        <div className="md:hidden bg-muted rounded-b-3xl px-4 pt-2 pb-6 -mt-2">
+          <div className="max-w-4xl mx-auto mb-4">
+            <h1 className="text-foreground text-[28px] font-medium leading-[110%]">{staticArticle.title}</h1>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center gap-3 mb-3">
+              <img src={staticArticle.avatar} alt={staticArticle.author} className="w-10 h-10 rounded-full object-cover" />
+              <span className="text-[16px] font-medium text-foreground">{staticArticle.author}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5 text-muted-foreground">
+                <Eye className="w-4 h-4" strokeWidth={1.5} />
+                <span className="text-body-14">{staticArticle.views.toLocaleString()}</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-muted-foreground">
+                <Clock className="w-4 h-4" strokeWidth={1.5} />
+                <span className="text-body-14">{staticArticle.readTime} {t("article.min")}</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-muted-foreground">
+                <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
+                <span className="text-body-14">
+                  {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
+                </span>
               </div>
             </div>
           </div>
