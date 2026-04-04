@@ -120,6 +120,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     borderColor: "#A0D468",
     image: img3dRocket,
     readTime: "5 мин",
+    updatedAt: "2025-04-01",
     content: `
       <h2>Начало работы с TON Wallet</h2>
       <p>TON — один из самых быстрорастущих блокчейнов, тесно интегрированный с Telegram. Настройка кошелька займёт всего несколько минут.</p>
