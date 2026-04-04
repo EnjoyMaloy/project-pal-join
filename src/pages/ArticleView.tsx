@@ -186,13 +186,26 @@ const ArticleView = () => {
       <div className="min-h-screen bg-background">
         {/* Mobile: gray header card */}
         <div className="md:hidden bg-muted rounded-b-3xl px-4 pt-2 pb-6">
-          <div className="max-w-4xl mx-auto mb-3">
+          <div className="max-w-4xl mx-auto mb-3 flex items-center justify-between">
             <button
               onClick={() => navigate("/instructions")}
               className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
             >
               <ArrowLeft className="w-5 h-5 text-foreground" strokeWidth={2} />
             </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => { navigator.clipboard.writeText(window.location.href); toast.success(t("instructions.linkCopied")); }}
+                className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
+              >
+                <LinkIcon className="w-4 h-4 text-foreground" strokeWidth={1.5} />
+              </button>
+              <button
+                className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
+              >
+                <Bookmark className="w-4 h-4 text-foreground" strokeWidth={1.5} />
+              </button>
+            </div>
           </div>
           <div className="max-w-4xl mx-auto mb-4">
             <h1 className="text-foreground text-[28px] font-medium leading-[110%]">{staticArticle.title}</h1>
