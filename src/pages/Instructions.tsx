@@ -12,6 +12,8 @@ import img3dNft from "@/assets/3d-nft.png";
 import img3dRocket from "@/assets/3d-rocket.png";
 import img3dCoin from "@/assets/3d-coin.png";
 
+type Category = "all" | "ai" | "crypto";
+
 interface CardData {
   id: string;
   title: string;
@@ -22,6 +24,7 @@ interface CardData {
   gradient: string;
   image?: string;
   isDbArticle: boolean;
+  category: Category;
 }
 
 const STATIC_CARDS: CardData[] = [
