@@ -227,7 +227,7 @@ const ArticleView = () => {
             </div>
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 -bottom-10 h-10 bg-gradient-to-b from-muted via-muted/80 to-transparent"
+              className="pointer-events-none absolute inset-x-0 -bottom-6 h-6 bg-gradient-to-b from-muted/60 to-transparent backdrop-blur-sm"
             />
           </div>
         </div>
