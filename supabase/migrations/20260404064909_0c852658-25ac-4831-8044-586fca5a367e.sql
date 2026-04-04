@@ -1,0 +1,1 @@
+UPDATE articles SET title = 'Установка Open Claw' WHERE id = '2cbedcf7-c6f9-4331-a5ce-762f621d8acb';
