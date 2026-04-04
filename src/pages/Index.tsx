@@ -391,7 +391,7 @@ const Index = () => {
                         )}
                         <div>
                           {index === activeLesson ? (
-                            <span className="text-caption-12 font-medium inline-block text-violet-super-dark bg-background/80 rounded px-2 py-0.5 mb-1">
+                            <span className="text-caption-12 font-medium inline-block text-violet-super-dark bg-white rounded px-2 py-0.5 mb-1">
                                {t("index.lesson")} {lesson.number}
                             </span>
                           ) : (
