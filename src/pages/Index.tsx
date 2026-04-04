@@ -174,40 +174,77 @@ const Index = () => {
                       {popoverIndex === index && (
                         <div
                           data-lesson-popover
-                          className="absolute top-20 left-1/2 -translate-x-1/2 w-[280px] bg-card rounded-2xl border border-border shadow-xl p-5 z-30 animate-in fade-in slide-in-from-top-2 duration-200"
+                          className="absolute top-20 left-1/2 -translate-x-1/2 z-30 animate-in fade-in slide-in-from-top-2 duration-200"
+                          style={{
+                            width: 230,
+                            background: '#FFFFFF',
+                            border: '1px solid hsl(var(--border))',
+                            boxShadow: '0px 4px 8px rgba(70, 4, 102, 0.1)',
+                            borderRadius: 10,
+                            overflow: 'hidden',
+                          }}
                         >
-                          <span className="text-caption-12 text-muted-foreground uppercase tracking-wider">Урок {lesson.number}</span>
-                          <h3 className="text-subh-16-medium text-foreground mt-1.5 flex items-start gap-2">
-                            <BookOpenCheck className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                            {lesson.title}
-                          </h3>
-                          <p className="text-body-14 text-muted-foreground mt-2 leading-relaxed">{lesson.description}</p>
-
-                          <div className="inline-flex items-center gap-1.5 mt-3 px-2.5 py-1 rounded-full bg-secondary border border-border">
-                            <BookOpen className="w-3.5 h-3.5 text-primary" />
-                            <span className="text-caption-10 text-secondary-foreground">Инструкция</span>
+                          {/* Header bar */}
+                          <div className="px-2 py-2.5" style={{ background: 'hsl(var(--muted))' }}>
+                            <span className="text-[12px] font-normal tracking-[0.01em] uppercase" style={{ color: 'hsl(var(--muted-foreground))' }}>
+                              Урок {lesson.number}
+                            </span>
                           </div>
 
-                          <div className="flex items-center justify-between mt-4">
-                            <div>
-                              <span className="text-caption-10 text-muted-foreground">Пройдено:</span>
-                              <p className="text-subh-14 text-foreground">{lesson.progress}%</p>
+                          <div className="px-2 pt-2.5 pb-2">
+                            {/* Title row */}
+                            <div className="flex items-center gap-1.5">
+                              <BookOpenCheck className="w-[18px] h-[18px] text-primary flex-shrink-0" />
+                              <span className="text-[16px] font-medium leading-[100%]" style={{ color: 'hsl(var(--foreground))' }}>
+                                {lesson.title}
+                              </span>
                             </div>
-                            <div className="text-right">
-                              <span className="text-caption-10 text-muted-foreground">Награда</span>
-                              <p className="text-subh-14 text-foreground flex items-center gap-1 justify-end">
-                                <span className="w-4 h-4 rounded-full bg-primary inline-flex items-center justify-center text-[8px] text-primary-foreground font-bold">S</span>
-                                {lesson.reward.toLocaleString()}
-                              </p>
+
+                            {/* Description */}
+                            <p className="text-[12px] font-normal leading-[140%] mt-1.5 pl-[24px]" style={{ color: 'hsl(var(--muted-foreground))' }}>
+                              {lesson.description}
+                            </p>
+                          </div>
+
+                          {/* Divider */}
+                          <div style={{ borderTop: '1px solid hsl(var(--muted))' }} />
+
+                          {/* Stats row */}
+                          <div className="flex items-start justify-between px-2 py-2.5">
+                            <div className="flex flex-col gap-1.5">
+                              <span className="text-[14px] font-normal" style={{ color: 'hsl(var(--muted-foreground))' }}>Пройдено:</span>
+                              <span className="text-[16px] font-medium tracking-[0.01em]" style={{ color: lesson.progress > 0 ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))' }}>
+                                {lesson.progress}%
+                              </span>
+                            </div>
+                            <div className="flex flex-col gap-1.5">
+                              <span className="text-[14px] font-normal" style={{ color: 'hsl(var(--foreground))' }}>Награда</span>
+                              <div className="flex items-center gap-1">
+                                <span
+                                  className="w-4 h-4 rounded-full inline-flex items-center justify-center text-[8px] font-bold"
+                                  style={{ background: '#FF7D60', color: '#FFFFFF' }}
+                                >S</span>
+                                <span className="text-[14px] font-medium tracking-[-0.01em]" style={{ color: 'hsl(var(--foreground))' }}>
+                                  {lesson.reward.toLocaleString()}
+                                </span>
+                              </div>
                             </div>
                           </div>
 
-                          <button
-                            onClick={() => { setPopoverIndex(null); setStoryIndex(index); }}
-                            className="w-full mt-4 text-btn-medium bg-foreground text-background py-3 rounded-xl hover:opacity-90 transition-opacity"
-                          >
-                            {lesson.progress === 100 ? "Пройти снова" : lesson.progress > 0 ? "Продолжить" : "Начать"}
-                          </button>
+                          {/* Button */}
+                          <div className="px-2 pb-2">
+                            <button
+                              onClick={() => { setPopoverIndex(null); setStoryIndex(index); }}
+                              className="w-full text-[14px] font-medium tracking-[0.01em] py-2.5 hover:opacity-90 transition-opacity"
+                              style={{
+                                background: 'hsl(var(--foreground))',
+                                color: 'hsl(var(--background))',
+                                borderRadius: 8,
+                              }}
+                            >
+                              {lesson.progress === 100 ? "Пройти снова" : lesson.progress > 0 ? "Продолжить" : "Начать"}
+                            </button>
+                          </div>
                         </div>
                       )}
                     </div>
