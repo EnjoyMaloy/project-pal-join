@@ -5,7 +5,7 @@ import { useState } from "react";
 const menuGroup1 = [
   { label: "Главная", icon: Home, path: "/" },
   { label: "Каталог", icon: Circle, path: "/catalog" },
-  { label: "Мои курсы", icon: BookOpen, path: "/my-courses" },
+  { label: "Мои курсы", icon: BookOpen, path: "/" },
 ];
 
 const menuGroup2 = [
