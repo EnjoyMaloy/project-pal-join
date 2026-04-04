@@ -30,7 +30,7 @@ const STATIC_CARDS: CardData[] = [
     title: "Безопасность в Web3",
     author: "Dmitry Volkov",
     avatar: avatarDmitry,
-    borderColor: "#7B9EBF",
+    borderColor: "#C62828",
     views: 3104,
     gradient: "linear-gradient(180deg, #FFCDD2 0%, #C62828 100%)",
     image: img3dSecurity,
@@ -41,7 +41,7 @@ const STATIC_CARDS: CardData[] = [
     title: "Анализ NFT проектов",
     author: "Alex Kim",
     avatar: avatarAlex,
-    borderColor: "#6B7B8D",
+    borderColor: "#00695C",
     views: 956,
     gradient: "linear-gradient(180deg, #B2EBF2 0%, #00695C 100%)",
     image: img3dNft,
@@ -52,7 +52,7 @@ const STATIC_CARDS: CardData[] = [
     title: "Запуск токена",
     author: "Anna Petrova",
     avatar: avatarAnna,
-    borderColor: "#C9A87C",
+    borderColor: "#F57F17",
     views: 1842,
     gradient: "linear-gradient(180deg, #FFF9C4 0%, #F57F17 100%)",
     image: img3dCoin,
@@ -63,7 +63,7 @@ const STATIC_CARDS: CardData[] = [
     title: "Настройка TON Wallet",
     author: "Sychev Pavel",
     avatar: avatarSychev,
-    borderColor: "#B8C4D0",
+    borderColor: "#6A1B9A",
     views: 2738,
     gradient: "linear-gradient(180deg, #E1BEE7 0%, #6A1B9A 100%)",
     image: img3dRocket,
@@ -76,7 +76,7 @@ const InstructionCard = ({ card }: { card: CardData }) => {
   const wrapperProps = card.isDbArticle ? { to: `/instructions/${card.id}` } : {};
 
   return (
-    <Wrapper {...wrapperProps} className="flex flex-col w-[280px] min-w-[280px] group cursor-pointer rounded-xl overflow-hidden" style={{ background: card.gradient }}>
+    <Wrapper {...wrapperProps} className="flex flex-col w-[280px] min-w-[280px] group cursor-pointer rounded-xl overflow-hidden transition-transform duration-200 hover:-translate-y-1" style={{ background: card.gradient, border: `2px solid ${card.borderColor}` }}>
       <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity flex items-center justify-center">
         {card.image && (
           <img src={card.image} alt="" className="w-full h-full object-contain p-4" loading="lazy" />
@@ -91,7 +91,7 @@ const InstructionCard = ({ card }: { card: CardData }) => {
         </div>
       </div>
       <div className="flex flex-col gap-3 px-4 pb-4 items-center">
-        <p className="text-[20px] font-normal leading-[90%] text-center text-white group-hover:opacity-80 transition-opacity">{card.title}</p>
+        <p className="text-[20px] font-normal leading-[90%] text-center text-white transition-transform duration-200 group-hover:-translate-y-1">{card.title}</p>
         <div className="flex items-center gap-3 px-2 py-[5px] rounded-md w-fit" style={{ background: "rgba(255,255,255,0.25)" }}>
           <div className="flex items-center gap-2">
             <img src={card.avatar} alt={card.author} className="w-5 h-5 rounded-full object-cover" style={{ border: `1.5px solid rgba(255,255,255,0.5)` }} loading="lazy" width={20} height={20} />
