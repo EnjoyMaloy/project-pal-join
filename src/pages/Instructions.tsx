@@ -72,6 +72,7 @@ const STATIC_CARDS: CardData[] = [
 ];
 
 const InstructionCard = ({ card }: { card: CardData }) => {
+  const [bookmarked, setBookmarked] = useState(false);
   const Wrapper = card.isDbArticle ? Link : ("div" as any);
   const wrapperProps = card.isDbArticle ? { to: `/instructions/${card.id}` } : {};
 
@@ -85,8 +86,8 @@ const InstructionCard = ({ card }: { card: CardData }) => {
           <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success("Ссылка скопирована"); }} className="w-[38px] h-[38px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
             <LinkIcon className="w-[14px] h-[14px] text-foreground" strokeWidth={1.5} />
           </button>
-          <button onClick={(e: React.MouseEvent) => e.preventDefault()} className="w-[38px] h-[38px] rounded-full bg-white/60 flex items-center justify-center">
-            <Bookmark className="w-[14px] h-[14px] text-foreground" strokeWidth={1.5} />
+          <button onClick={(e: React.MouseEvent) => { e.preventDefault(); setBookmarked(!bookmarked); }} className="w-[38px] h-[38px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
+            <Bookmark className={`w-[14px] h-[14px] transition-colors ${bookmarked ? 'text-foreground fill-foreground' : 'text-foreground'}`} strokeWidth={1.5} />
           </button>
         </div>
       </div>
