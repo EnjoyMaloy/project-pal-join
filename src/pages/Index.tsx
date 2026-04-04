@@ -126,7 +126,7 @@ const Index = () => {
             {lessonOpen ? (
               <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
                 <button
-                  onClick={() => setLessonOpen(false)}
+                  onClick={() => { setLessonOpen(false); setActiveLesson(-1); }}
                   className="text-btn-medium inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg hover:bg-violet-dark transition-colors mb-8"
                 >
                   <ArrowLeft className="w-4 h-4" />
