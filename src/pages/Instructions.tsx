@@ -46,11 +46,20 @@ const InstructionCard = ({ article, index }: { article: Article; index: number }
       {article.title || "Без названия"}
     </p>
 
-    {/* Date + meta */}
+    {/* Rating + Views */}
     <div className="flex items-center gap-1.5">
-      <span className="text-[14px] font-normal leading-none" style={{ color: "#8D8D8D" }}>
-        {new Date(article.created_at).toLocaleDateString("ru-RU")}
-      </span>
+      <div className="flex items-center gap-1">
+        <Star className="w-[14px] h-[14px]" fill="#FF7D60" stroke="none" />
+        <span className="text-[14px] font-normal leading-none tracking-[0.01em]" style={{ color: "#232323" }}>
+          4.8
+        </span>
+      </div>
+      <div className="flex items-center gap-1.5 px-1.5 py-1 rounded-full" style={{ background: "#F7F7F8" }}>
+        <Eye className="w-[18px] h-[18px]" style={{ color: "#464646" }} strokeWidth={1.25} />
+        <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
+          2738
+        </span>
+      </div>
     </div>
   </Link>
 );
