@@ -224,6 +224,12 @@ const ArticleView = () => {
             <Clock className="w-4 h-4" strokeWidth={1.5} />
             <span className="text-body-14">{staticArticle.readTime}</span>
           </div>
+          <div className="flex items-center gap-1.5 text-muted-foreground">
+            <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
+            <span className="text-body-14">
+              {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
+            </span>
+          </div>
         </div>
 
         {/* Content */}
