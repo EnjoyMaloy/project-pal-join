@@ -297,7 +297,7 @@ const Index = () => {
                               </div>
                             )}
                           </div>
-                          <div style={{ borderTop: '1px solid hsl(var(--muted))', margin: '10px 0 0' }} />
+                          <div style={{ borderTop: '1px solid #EBE9EA', margin: '10px 0 0' }} />
 
                           {/* Stats row */}
                           <div className="flex justify-between" style={{ padding: '10px 8px' }}>
