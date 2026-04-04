@@ -179,13 +179,13 @@ const ArticleView = () => {
     return (
       <div className="min-h-screen bg-background p-6">
         {/* Hero banner */}
-        <div className="relative w-full h-[220px] overflow-hidden rounded-2xl" style={{ background: staticArticle.gradient }}>
-          <div className="absolute right-16 bottom-2 flex items-end justify-end">
+        <div className="relative w-full h-[220px] overflow-hidden rounded-2xl max-w-5xl mx-auto" style={{ background: staticArticle.gradient }}>
+          <div className="absolute right-[15%] bottom-2 flex items-end justify-end">
             {staticArticle.image && (
               <img src={staticArticle.image} alt="" className="w-[200px] h-[200px] object-contain drop-shadow-lg" />
             )}
           </div>
-          <div className="relative z-10 px-8 pt-5 h-full flex flex-col">
+          <div className="relative z-10 px-8 pt-5 h-full flex flex-col max-w-3xl mx-auto">
             <Button
               variant="ghost"
               onClick={() => navigate("/instructions")}
