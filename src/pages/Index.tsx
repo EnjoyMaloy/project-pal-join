@@ -185,13 +185,14 @@ const Index = () => {
                           }}
                         >
                           {/* Header bar */}
-                          <div className="px-2 py-2.5" style={{ background: 'hsl(var(--muted))' }}>
+                          <div style={{ background: 'hsl(var(--muted))', padding: '12px 9px' }}>
                             <span className="text-[12px] font-normal tracking-[0.01em] uppercase" style={{ color: 'hsl(var(--muted-foreground))' }}>
                               Урок {lesson.number}
                             </span>
                           </div>
 
-                          <div className="px-2 pt-2.5 pb-2">
+                          {/* Content */}
+                          <div style={{ padding: '10px 8px 0' }}>
                             {/* Title row */}
                             <div className="flex items-center gap-1.5">
                               <BookOpenCheck className="w-[18px] h-[18px] text-primary flex-shrink-0" />
@@ -201,30 +202,30 @@ const Index = () => {
                             </div>
 
                             {/* Description */}
-                            <p className="text-[12px] font-normal leading-[140%] mt-1.5 pl-[24px]" style={{ color: 'hsl(var(--muted-foreground))' }}>
+                            <p className="text-[12px] font-normal leading-[140%]" style={{ color: 'hsl(var(--muted-foreground))', marginTop: 6, paddingLeft: 24 }}>
                               {lesson.description}
                             </p>
                           </div>
 
                           {/* Divider */}
-                          <div style={{ borderTop: '1px solid hsl(var(--muted))' }} />
+                          <div style={{ borderTop: '1px solid hsl(var(--muted))', margin: '10px 0 0' }} />
 
                           {/* Stats row */}
-                          <div className="flex items-start justify-between px-2 py-2.5">
-                            <div className="flex flex-col gap-1.5">
-                              <span className="text-[14px] font-normal" style={{ color: 'hsl(var(--muted-foreground))' }}>Пройдено:</span>
-                              <span className="text-[16px] font-medium tracking-[0.01em]" style={{ color: lesson.progress > 0 ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))' }}>
+                          <div className="flex justify-between" style={{ padding: '10px 8px' }}>
+                            <div className="flex flex-col" style={{ gap: 6 }}>
+                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: 'hsl(var(--muted-foreground))' }}>Пройдено:</span>
+                              <span className="text-[16px] font-medium leading-[100%] tracking-[0.01em]" style={{ color: lesson.progress > 0 ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground))' }}>
                                 {lesson.progress}%
                               </span>
                             </div>
-                            <div className="flex flex-col gap-1.5">
-                              <span className="text-[14px] font-normal" style={{ color: 'hsl(var(--foreground))' }}>Награда</span>
-                              <div className="flex items-center gap-1">
+                            <div className="flex flex-col" style={{ gap: 6 }}>
+                              <span className="text-[14px] font-normal leading-[100%]" style={{ color: 'hsl(var(--foreground))' }}>Награда</span>
+                              <div className="flex items-center" style={{ gap: 4 }}>
                                 <span
-                                  className="w-4 h-4 rounded-full inline-flex items-center justify-center text-[8px] font-bold"
-                                  style={{ background: '#FF7D60', color: '#FFFFFF' }}
+                                  className="inline-flex items-center justify-center rounded-full text-[8px] font-bold"
+                                  style={{ width: 16, height: 16, background: '#FF7D60', color: '#FFFFFF' }}
                                 >S</span>
-                                <span className="text-[14px] font-medium tracking-[-0.01em]" style={{ color: 'hsl(var(--foreground))' }}>
+                                <span className="text-[14px] font-medium leading-[100%] tracking-[-0.01em]" style={{ color: 'hsl(var(--foreground))' }}>
                                   {lesson.reward.toLocaleString()}
                                 </span>
                               </div>
@@ -232,14 +233,15 @@ const Index = () => {
                           </div>
 
                           {/* Button */}
-                          <div className="px-2 pb-2">
+                          <div style={{ padding: '0 8px 8px' }}>
                             <button
                               onClick={() => { setPopoverIndex(null); setStoryIndex(index); }}
-                              className="w-full text-[14px] font-medium tracking-[0.01em] py-2.5 hover:opacity-90 transition-opacity"
+                              className="w-full text-[14px] font-medium tracking-[0.01em] hover:opacity-90 transition-opacity"
                               style={{
                                 background: 'hsl(var(--foreground))',
                                 color: 'hsl(var(--background))',
                                 borderRadius: 8,
+                                height: 32,
                               }}
                             >
                               {lesson.progress === 100 ? "Пройти снова" : lesson.progress > 0 ? "Продолжить" : "Начать"}
