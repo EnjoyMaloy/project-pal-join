@@ -96,6 +96,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     borderColor: "#FF8A80",
     image: img3dCoin,
     readTime: "10 мин",
+    updatedAt: "2025-01-10",
     content: `
       <h2>Пошаговый гайд по запуску токена</h2>
       <p>Запуск собственного токена — это серьёзный шаг, который требует технической подготовки и понимания регуляторных аспектов.</p>
