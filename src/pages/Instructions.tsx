@@ -30,17 +30,16 @@ const InstructionCard = ({ article, index }: { article: Article; index: number }
       </div>
     </div>
 
-    {/* Category chip */}
-    {/* Author */}
-    <div className="flex items-center gap-2">
+    {/* Author chip */}
+    <div className="flex items-center gap-2 px-2 py-[5px] rounded-md w-fit" style={{ background: "#F7F7F8" }}>
       <img
         src={avatarSychev}
         alt="Sychev Pavel"
-        className="w-7 h-7 rounded-full object-cover"
-        style={{ border: "2px solid #B8C4D0" }}
+        className="w-5 h-5 rounded-full object-cover"
+        style={{ border: "1.5px solid #B8C4D0" }}
         loading="lazy"
-        width={28}
-        height={28}
+        width={20}
+        height={20}
       />
       <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
         Sychev Pavel
