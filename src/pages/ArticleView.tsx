@@ -185,7 +185,7 @@ const ArticleView = () => {
             className="flex items-center gap-2 text-primary text-body-14 py-2 px-3 -ml-3 rounded-lg hover:bg-primary/10 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" strokeWidth={2} />
-            Вернуться назад
+            {t("article.back")}
           </button>
         </div>
 
