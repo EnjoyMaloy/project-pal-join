@@ -100,7 +100,7 @@ const Sidebar = () => {
           {menuGroup2.map(renderItem)}
         </div>
 
-        <div className="my-3 border-t" style={{ borderColor: '#EBE9EA' }} />
+        <div className="my-3 border-t border-border" />
 
         <div className="flex flex-col gap-1.5">
           {menuGroup3.map(renderItem)}
