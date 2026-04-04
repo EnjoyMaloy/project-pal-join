@@ -15,7 +15,7 @@ const translations = {
   "sidebar.tasks": { ru: "Задания", en: "Tasks" },
   "sidebar.myToken": { ru: "Мой токен", en: "My Token" },
   "sidebar.referral": { ru: "Реферальная программа", en: "Referral Program" },
-  "sidebar.instructions": { ru: "Инструкции", en: "Instructions" },
+  "sidebar.instructions": { ru: "Инструкции", en: "Guides" },
 
   // Instructions page
   "instructions.all": { ru: "Все", en: "All" },
@@ -34,7 +34,7 @@ const translations = {
   "index.description": { ru: "Курс покажет, как пользоваться Telegram Gifts и зарабатывать на них. Ты разберёшься в механике, поймёшь, какие подарки востребованы, и узнаешь о секретах торговли на вторичном рынке.", en: "This course will show you how to use Telegram Gifts and earn from them. You'll understand the mechanics, learn which gifts are in demand, and discover secondary market trading secrets." },
   "index.backToCourse": { ru: "Вернуться к курсу", en: "Back to course" },
   "index.courseLessons": { ru: "Уроки курса", en: "Course Lessons" },
-  "index.courseInstructions": { ru: "Инструкции из курса", en: "Course Instructions" },
+  "index.courseInstructions": { ru: "Инструкции из курса", en: "Study Guides" },
   "index.lesson": { ru: "Урок", en: "Lesson" },
   "index.instruction": { ru: "Инструкция", en: "Instruction" },
   "index.completed": { ru: "Пройдено:", en: "Completed:" },
