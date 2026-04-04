@@ -284,10 +284,10 @@ const Instructions = () => {
             <div className="relative hidden md:block">
               <button
                 onClick={() => setSortOpen(!sortOpen)}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-background hover:bg-muted transition-colors"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-background hover:bg-muted transition-colors"
               >
-                <span className="text-body-14 text-muted-foreground">{t("instructions.sort")}</span>
-                <span className="text-body-14 font-medium text-foreground">{SORT_LABELS[sort]}</span>
+                <span className="text-[16px] text-muted-foreground">{t("instructions.sort")}</span>
+                <span className="text-[16px] font-medium text-foreground">{SORT_LABELS[sort]}</span>
                 {sortOpen ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
               </button>
               {sortOpen && (
