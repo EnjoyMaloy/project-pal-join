@@ -215,9 +215,23 @@ const Index = () => {
                             <p className="text-[12px] font-normal leading-[140%]" style={{ color: 'hsl(var(--muted-foreground))', marginTop: 6, paddingLeft: 24 }}>
                               {lesson.description}
                             </p>
+                            {lesson.hasInstruction && (
+                              <div className="flex items-center gap-1.5 mt-2" style={{ paddingLeft: 24 }}>
+                                <span
+                                  className="inline-flex items-center gap-1 text-[11px] font-medium"
+                                  style={{
+                                    color: 'hsl(var(--primary))',
+                                    background: 'hsl(var(--secondary))',
+                                    padding: '3px 8px',
+                                    borderRadius: 6,
+                                  }}
+                                >
+                                  <FileText className="w-3 h-3" />
+                                  Инструкция
+                                </span>
+                              </div>
+                            )}
                           </div>
-
-                          {/* Divider */}
                           <div style={{ borderTop: '1px solid hsl(var(--muted))', margin: '10px 0 0' }} />
 
                           {/* Stats row */}
