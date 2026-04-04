@@ -63,7 +63,7 @@ const STATIC_CARDS: CardData[] = [
     title: "Настройка TON Wallet",
     author: "Sychev Pavel",
     avatar: avatarSychev,
-    borderColor: "#B8C4D0",
+    borderColor: "#6A1B9A",
     views: 2738,
     gradient: "linear-gradient(180deg, #E1BEE7 0%, #6A1B9A 100%)",
     image: img3dRocket,
