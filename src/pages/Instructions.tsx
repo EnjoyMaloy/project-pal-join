@@ -209,16 +209,17 @@ const Instructions = () => {
                     <SlidersHorizontal className="w-4 h-4" strokeWidth={1.5} />
                   </button>
                   {filterOpen && (
-                    <div className="absolute left-0 top-full mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[180px] z-50">
+                    <div className="absolute left-0 top-full mt-2 bg-background border border-border rounded-2xl shadow-lg py-2 min-w-[200px] z-50">
                       {(["all", "ai", "crypto"] as Category[]).map((cat) => {
                         const label = cat === "all" ? t("instructions.all") : cat === "ai" ? t("instructions.aiSkills") : t("instructions.cryptoBasics");
                         return (
                           <button
                             key={cat}
                             onClick={() => { setActiveCategory(cat); setFilterOpen(false); }}
-                            className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-muted transition-colors"
+                            className={`w-full flex items-center justify-between px-4 py-3 text-left transition-colors rounded-xl mx-auto ${activeCategory === cat ? '' : 'hover:bg-primary hover:text-primary-foreground'}`}
+                            style={{ width: 'calc(100% - 8px)', marginLeft: 4, marginRight: 4 }}
                           >
-                            <span className={`text-body-14 ${activeCategory === cat ? 'text-primary font-medium' : 'text-foreground'}`}>{label}</span>
+                            <span className={`text-body-14 font-medium ${activeCategory === cat ? 'text-primary' : ''}`}>{label}</span>
                             {activeCategory === cat && <Check className="w-4 h-4 text-primary" />}
                           </button>
                         );
