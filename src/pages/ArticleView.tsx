@@ -29,12 +29,12 @@ interface StaticArticle {
 const STATIC_ARTICLES: Record<string, StaticArticle> = {
   "static-1": {
     id: "static-1",
-    title: "Безопасность в Web3",
+    title: "Как установить Open Claw?",
     author: "Dmitry Volkov",
     avatar: avatarDmitry,
     views: 3104,
-    gradient: "linear-gradient(to left, #7B2FBE 0%, #E8DCFB 100%)",
-    borderColor: "#BF96FF",
+    gradient: "linear-gradient(to left, #924CFE 0%, #D9C0FF 100%)",
+    borderColor: "rgba(191, 150, 255, 0.4)",
     image: img3dSecurity,
     readTime: "8 мин",
     content: `
@@ -179,7 +179,7 @@ const ArticleView = () => {
     return (
       <div className="min-h-screen bg-background p-6">
         {/* Hero banner */}
-        <div className="relative w-full aspect-[5/2] max-h-[360px] overflow-hidden rounded-2xl" style={{ background: staticArticle.gradient }}>
+        <div className="relative w-full aspect-[5/2] max-h-[360px] overflow-hidden rounded-2xl" style={{ background: staticArticle.gradient, border: `1.5px solid ${staticArticle.borderColor}` }}>
         <div className="absolute right-8 bottom-0 flex items-end justify-end">
             {staticArticle.image && (
               <img src={staticArticle.image} alt="" className="w-[220px] h-[220px] object-contain drop-shadow-lg" />
