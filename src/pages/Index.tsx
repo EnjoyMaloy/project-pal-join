@@ -221,7 +221,7 @@ const Index = () => {
                       onClick={() => handleLessonClick(index)}
                       className={`w-full text-left rounded-xl border-2 p-4 transition-all ${
                         index === activeLesson
-                          ? "bg-[#E8DCFB] border-[#A66CFF]"
+                          ? "bg-[#D9C0FF] border-[#A66CFF]"
                           : "bg-background border-border hover:bg-[#E8DCFB] hover:border-violet-light"
                       }`}
                     >
