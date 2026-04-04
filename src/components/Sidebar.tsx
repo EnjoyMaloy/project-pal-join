@@ -9,15 +9,15 @@ const Sidebar = () => {
   const { t } = useLanguage();
 
   const menuGroup1 = [
-    { label: t("sidebar.home"), icon: Home, path: "/" },
-    { label: t("sidebar.catalog"), icon: Circle, path: "/catalog" },
+    { label: t("sidebar.home"), icon: Home, path: "/", disabled: true },
+    { label: t("sidebar.catalog"), icon: Circle, path: "/catalog", disabled: true },
     { label: t("sidebar.myCourses"), icon: BookOpen, path: "/my-courses" },
   ];
 
   const menuGroup2 = [
-    { label: t("sidebar.tasks"), icon: ClipboardList, path: "/tasks", badge: 12 },
-    { label: t("sidebar.myToken"), icon: Coins, path: "/token" },
-    { label: t("sidebar.referral"), icon: Users, path: "/referral" },
+    { label: t("sidebar.tasks"), icon: ClipboardList, path: "/tasks", badge: 12, disabled: true },
+    { label: t("sidebar.myToken"), icon: Coins, path: "/token", disabled: true },
+    { label: t("sidebar.referral"), icon: Users, path: "/referral", disabled: true },
   ];
 
   const menuGroup3 = [
@@ -29,9 +29,21 @@ const Sidebar = () => {
     return location.pathname.startsWith(path);
   };
 
-  const renderItem = (item: { label: string; icon: React.ElementType; path: string; badge?: number }) => {
-    const active = isActive(item.path);
+  const renderItem = (item: { label: string; icon: React.ElementType; path: string; badge?: number; disabled?: boolean }) => {
+    const active = !item.disabled && isActive(item.path);
     const Icon = item.icon;
+
+    if (item.disabled) {
+      return (
+        <div
+          key={item.path}
+          className="flex items-center gap-3 px-3 h-9 rounded-lg text-[16px] font-normal leading-none text-muted-foreground/50 cursor-default relative"
+        >
+          <Icon className="w-[18px] h-[18px] flex-shrink-0" />
+          {!collapsed && <span className="truncate">{item.label}</span>}
+        </div>
+      );
+    }
 
     return (
       <Link
