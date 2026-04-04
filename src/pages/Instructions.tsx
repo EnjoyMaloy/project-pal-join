@@ -192,7 +192,7 @@ const Instructions = () => {
                     onClick={() => setShowFavorites(true)}
                     className={`px-4 md:px-4 py-2 rounded-md text-[16px] md:text-body-14 transition-colors flex items-center gap-1.5 ${showFavorites ? 'bg-background text-foreground shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground'}`}
                   >
-                    <Bookmark className="w-3.5 h-3.5" strokeWidth={1.5} />
+                    <Bookmark className="w-4 h-4" strokeWidth={1.5} />
                     {t("instructions.favorites")}
                     {bookmarkedIds.size > 0 && (
                       <span className="text-caption-12 text-muted-foreground">{bookmarkedIds.size}</span>
