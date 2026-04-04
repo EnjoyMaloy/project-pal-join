@@ -31,7 +31,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-14">
+    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-16 md:h-14 border-b border-border md:border-b">
       <div className="max-w-full mx-auto px-4 flex items-center justify-between h-14 gap-4">
         {isInstructions ? (
           <div className="relative flex-1 max-w-md">
