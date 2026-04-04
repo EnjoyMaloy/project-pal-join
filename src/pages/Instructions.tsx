@@ -42,37 +42,30 @@ const InstructionCard = ({ article, index }: { article: Article; index: number }
       </div>
     </div>
 
-    {/* Author chip */}
-    <div className="flex items-center gap-2 px-2 py-[5px] rounded-md w-fit" style={{ background: "#F7F7F8" }}>
-      <img
-        src={avatarSychev}
-        alt="Sychev Pavel"
-        className="w-5 h-5 rounded-full object-cover"
-        style={{ border: "1.5px solid #B8C4D0" }}
-        loading="lazy"
-        width={20}
-        height={20}
-      />
-      <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
-        Sychev Pavel
-      </span>
-    </div>
-
-    {/* Title */}
-    <p className="text-[20px] font-normal leading-[90%] group-hover:text-primary transition-colors" style={{ color: "#000000" }}>
-      {article.title || "Без названия"}
-    </p>
-
-    {/* Rating + Views */}
-    <div className="flex items-center gap-1.5">
+    {/* Author + Rating + Views */}
+    <div className="flex items-center gap-3 px-2 py-[5px] rounded-md w-fit" style={{ background: "#F7F7F8" }}>
+      <div className="flex items-center gap-2">
+        <img
+          src={avatarSychev}
+          alt="Sychev Pavel"
+          className="w-5 h-5 rounded-full object-cover"
+          style={{ border: "1.5px solid #B8C4D0" }}
+          loading="lazy"
+          width={20}
+          height={20}
+        />
+        <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
+          Sychev Pavel
+        </span>
+      </div>
       <div className="flex items-center gap-1">
         <Star className="w-[14px] h-[14px]" fill="#FF7D60" stroke="none" />
         <span className="text-[14px] font-normal leading-none tracking-[0.01em]" style={{ color: "#232323" }}>
           4.8
         </span>
       </div>
-      <div className="flex items-center gap-1.5 px-1.5 py-1 rounded-full" style={{ background: "#F7F7F8" }}>
-        <Eye className="w-[18px] h-[18px]" style={{ color: "#464646" }} strokeWidth={1.25} />
+      <div className="flex items-center gap-1">
+        <Eye className="w-[14px] h-[14px]" style={{ color: "#464646" }} strokeWidth={1.25} />
         <span className="text-[14px] font-normal leading-none" style={{ color: "#464646" }}>
           2738
         </span>
