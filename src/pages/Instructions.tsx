@@ -128,6 +128,7 @@ const Instructions = () => {
   const [sortOpen, setSortOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const search = searchParams.get("q") || "";
+  const [activeCategory, setActiveCategory] = useState<Category>("all");
   const [showFavorites, setShowFavorites] = useState(false);
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(() => {
     try {
