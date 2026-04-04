@@ -215,7 +215,7 @@ const ArticleView = () => {
                   onClick={() => { navigator.clipboard.writeText(window.location.href); toast.success(t("instructions.linkCopied")); }}
                   className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
                 >
-                  <ShareLinkIcon className="w-4 h-4 text-foreground" />
+                  <LinkIcon className="w-4 h-4 text-foreground" strokeWidth={1.5} />
                 </button>
                 <button
                   onClick={toggleBookmark}
