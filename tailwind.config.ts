@@ -43,6 +43,7 @@ export default {
           "super-light": "hsl(var(--violet-super-light))",
           light: "hsl(var(--violet-light))",
           dark: "hsl(var(--violet-dark))",
+          "super-dark": "hsl(var(--violet-super-dark))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
