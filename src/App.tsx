@@ -30,7 +30,7 @@ const App = () => (
               <Sidebar />
               <div className="flex-1 min-w-0 flex flex-col">
                 <Navbar />
-                <main className="flex-1 min-w-0 overflow-auto">
+                <main className="flex-1 min-w-0 overflow-auto pb-16 md:pb-0">
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/my-courses" element={<Index />} />
