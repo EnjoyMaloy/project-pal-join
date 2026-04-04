@@ -50,6 +50,9 @@ const translations = {
   "index.finish": { ru: "Завершить", en: "Finish" },
   "article.back": { ru: "К инструкциям", en: "To guides" },
   "article.min": { ru: "мин", en: "min" },
+  "bottomNav.back": { ru: "Назад", en: "Back" },
+  "bottomNav.course": { ru: "Курс", en: "Course" },
+  "bottomNav.quest": { ru: "Квест", en: "Quest" },
 } as const;
 
 type TranslationKey = keyof typeof translations;
