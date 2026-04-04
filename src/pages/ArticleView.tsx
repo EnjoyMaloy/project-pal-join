@@ -95,7 +95,7 @@ const STATIC_ARTICLES: Record<string, StaticArticle> = {
     gradient: "linear-gradient(to left, #D63384 0%, #FFD6E0 100%)",
     borderColor: "#FF8A80",
     image: img3dCoin,
-    readTime: "10 мин",
+    readTime: 10,
     updatedAt: "2025-01-10",
     content: `
       <h2>Пошаговый гайд по запуску токена</h2>
