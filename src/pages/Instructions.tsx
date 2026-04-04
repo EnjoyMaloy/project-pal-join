@@ -196,27 +196,57 @@ const Instructions = () => {
                 </button>
               </div>
 
-              {(["ai", "crypto"] as Category[]).map((cat) => {
-                const isActive = activeCategory === cat;
-                const label = cat === "ai" ? t("instructions.aiSkills") : t("instructions.cryptoBasics");
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(isActive ? "all" : cat)}
-                    className={`px-4 md:px-5 py-1.5 md:py-2 rounded-lg text-body-14 font-medium transition-colors ${isActive ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
-                  >
-                    {label}
-                  </button>
-                );
-              })}
-              {activeCategory !== "all" && (
+              {/* Mobile: filter icon with dropdown */}
+              <div className="relative md:hidden">
                 <button
-                  onClick={() => setActiveCategory("all")}
-                  className="px-4 md:px-5 py-1.5 md:py-2 rounded-lg text-body-14 bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                  onClick={() => setFilterOpen(!filterOpen)}
+                  className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${activeCategory !== "all" ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
                 >
-                  {t("instructions.reset")}
+                  <SlidersHorizontal className="w-4 h-4" strokeWidth={1.5} />
                 </button>
-              )}
+                {filterOpen && (
+                  <div className="absolute left-0 top-full mt-2 bg-background border border-border rounded-xl shadow-lg py-2 min-w-[180px] z-50">
+                    {(["all", "ai", "crypto"] as Category[]).map((cat) => {
+                      const label = cat === "all" ? t("instructions.all") : cat === "ai" ? t("instructions.aiSkills") : t("instructions.cryptoBasics");
+                      return (
+                        <button
+                          key={cat}
+                          onClick={() => { setActiveCategory(cat); setFilterOpen(false); }}
+                          className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-muted transition-colors"
+                        >
+                          <span className={`text-body-14 ${activeCategory === cat ? 'text-primary font-medium' : 'text-foreground'}`}>{label}</span>
+                          {activeCategory === cat && <Check className="w-4 h-4 text-primary" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Desktop: category buttons */}
+              <div className="hidden md:flex items-center gap-2">
+                {(["ai", "crypto"] as Category[]).map((cat) => {
+                  const isActive = activeCategory === cat;
+                  const label = cat === "ai" ? t("instructions.aiSkills") : t("instructions.cryptoBasics");
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => setActiveCategory(isActive ? "all" : cat)}
+                      className={`px-5 py-2 rounded-lg text-body-14 font-medium transition-colors ${isActive ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
+                {activeCategory !== "all" && (
+                  <button
+                    onClick={() => setActiveCategory("all")}
+                    className="px-5 py-2 rounded-lg text-body-14 bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {t("instructions.reset")}
+                  </button>
+                )}
+              </div>
             </div>
 
             <div className="relative">
