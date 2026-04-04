@@ -210,9 +210,14 @@ const ArticleView = () => {
   if (staticArticle) {
     return (
       <div className="min-h-screen bg-background">
-        {/* Mobile: sticky toolbar */}
-        <div className="md:hidden sticky top-0 z-50 bg-muted px-4 pt-2 pb-2 rounded-b-3xl transition-all duration-300">
-          <div className="max-w-4xl mx-auto flex items-center justify-between">
+        {/* Mobile: header with sticky toolbar + collapsible content */}
+        <div className="md:hidden sticky top-0 z-50 bg-muted rounded-b-3xl px-4 pt-2 overflow-hidden transition-all duration-500 ease-in-out"
+          style={{
+            paddingBottom: scrolled ? '8px' : '24px',
+          }}
+        >
+          {/* Toolbar — always visible */}
+          <div className="max-w-4xl mx-auto flex items-center justify-between mb-1">
             <button
               onClick={() => navigate("/instructions")}
               className="w-9 h-9 rounded-full bg-background flex items-center justify-center hover:bg-background/80 transition-colors"
@@ -234,36 +239,40 @@ const ArticleView = () => {
               </button>
             </div>
           </div>
-        </div>
 
-        {/* Mobile: collapsible header content */}
-        <div
-          className={`md:hidden bg-muted px-4 pb-6 -mt-[24px] rounded-b-3xl transition-all duration-300 ease-in-out overflow-hidden ${
-            scrolled ? 'max-h-0 opacity-0 pb-0 -mt-0' : 'max-h-[300px] opacity-100'
-          }`}
-        >
-          <div className="max-w-4xl mx-auto mb-4 pt-2">
-            <h1 className="text-foreground text-[28px] font-medium leading-[110%]">{staticArticle.title}</h1>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center gap-3 mb-3">
-              <img src={staticArticle.avatar} alt={staticArticle.author} className="w-10 h-10 rounded-full object-cover" />
-              <span className="text-[16px] font-medium text-foreground">{staticArticle.author}</span>
+          {/* Collapsible content — fades out on scroll */}
+          <div
+            className="transition-all duration-500 ease-in-out"
+            style={{
+              maxHeight: scrolled ? '0px' : '300px',
+              opacity: scrolled ? 0 : 1,
+              transform: scrolled ? 'translateY(-10px)' : 'translateY(0)',
+              overflow: 'hidden',
+            }}
+          >
+            <div className="max-w-4xl mx-auto mb-4 pt-2">
+              <h1 className="text-foreground text-[28px] font-medium leading-[110%]">{staticArticle.title}</h1>
             </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5 text-muted-foreground">
-                <Eye className="w-4 h-4" strokeWidth={1.5} />
-                <span className="text-body-14">{staticArticle.views.toLocaleString()}</span>
+            <div className="max-w-4xl mx-auto">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={staticArticle.avatar} alt={staticArticle.author} className="w-10 h-10 rounded-full object-cover" />
+                <span className="text-[16px] font-medium text-foreground">{staticArticle.author}</span>
               </div>
-              <div className="flex items-center gap-1.5 text-muted-foreground">
-                <Clock className="w-4 h-4" strokeWidth={1.5} />
-                <span className="text-body-14">{staticArticle.readTime} {t("article.min")}</span>
-              </div>
-              <div className="flex items-center gap-1.5 text-muted-foreground">
-                <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
-                <span className="text-body-14">
-                  {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
-                </span>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <Eye className="w-4 h-4" strokeWidth={1.5} />
+                  <span className="text-body-14">{staticArticle.views.toLocaleString()}</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <Clock className="w-4 h-4" strokeWidth={1.5} />
+                  <span className="text-body-14">{staticArticle.readTime} {t("article.min")}</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <CalendarDays className="w-4 h-4" strokeWidth={1.5} />
+                  <span className="text-body-14">
+                    {new Date(staticArticle.updatedAt).toLocaleDateString(t("instructions.all") === "Все" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
