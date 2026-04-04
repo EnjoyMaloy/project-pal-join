@@ -7,6 +7,8 @@ import avatarSychev from "@/assets/avatar-sychev.jpg";
 import avatarAnna from "@/assets/avatar-anna.jpg";
 import avatarDmitry from "@/assets/avatar-dmitry.jpg";
 import avatarAlex from "@/assets/avatar-alex.jpg";
+import img3dSecurity from "@/assets/3d-security.png";
+import img3dNft from "@/assets/3d-nft.png";
 
 interface Article {
   id: string;
@@ -23,6 +25,7 @@ interface CardData {
   borderColor: string;
   views: number;
   gradient: string;
+  image?: string;
   isDbArticle: boolean;
 }
 
@@ -45,6 +48,7 @@ const STATIC_CARDS: CardData[] = [
     borderColor: "#7B9EBF",
     views: 3104,
     gradient: "linear-gradient(180deg, #FFCDD2 0%, #C62828 100%)",
+    image: img3dSecurity,
     isDbArticle: false,
   },
   {
@@ -55,6 +59,7 @@ const STATIC_CARDS: CardData[] = [
     borderColor: "#6B7B8D",
     views: 956,
     gradient: "linear-gradient(180deg, #B2EBF2 0%, #00695C 100%)",
+    image: img3dNft,
     isDbArticle: false,
   },
 ];
@@ -118,7 +123,10 @@ const CardVariant2 = ({ card, wrapperProps, Wrapper }: { card: CardData; wrapper
 
 const CardVariant3 = ({ card, wrapperProps, Wrapper }: { card: CardData; wrapperProps: any; Wrapper: any }) => (
   <Wrapper {...wrapperProps} className="flex flex-col w-full group cursor-pointer rounded-xl overflow-hidden" style={{ background: card.gradient }}>
-    <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity">
+    <div className="relative w-full aspect-[328/181] group-hover:opacity-90 transition-opacity flex items-center justify-center">
+      {card.image && (
+        <img src={card.image} alt="" className="w-24 h-24 object-contain drop-shadow-lg" loading="lazy" width={96} height={96} />
+      )}
       <div className="absolute top-1 right-1 flex items-center gap-1">
         <button onClick={(e: React.MouseEvent) => { e.preventDefault(); navigator.clipboard.writeText(`${window.location.origin}/instructions/${card.id}`); toast.success("Ссылка скопирована"); }} className="w-[38px] h-[38px] rounded-full bg-white/60 flex items-center justify-center hover:bg-white/80 transition-colors">
           <LinkIcon className="w-[14px] h-[14px] text-foreground" strokeWidth={1.5} />
