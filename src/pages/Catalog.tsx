@@ -77,32 +77,36 @@ const Catalog = () => {
           {t("catalog.subtitle")}
         </p>
 
-        {/* Category circles row */}
-        <div className="flex gap-4 overflow-x-auto pb-4 mb-8 scrollbar-hide">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(selectedCategory === cat.id ? null : cat.id)}
-              className={`flex flex-col items-center gap-2 min-w-[120px] group transition-all ${
-                selectedCategory === cat.id ? "scale-105" : "hover:scale-105"
-              }`}
-            >
-              <div
-                className={`w-[72px] h-[72px] rounded-2xl flex items-center justify-center text-2xl transition-all ${
-                  selectedCategory === cat.id ? "ring-2 ring-primary ring-offset-2" : ""
+        {/* Category cards row */}
+        <div className="flex gap-3 overflow-x-auto pb-4 mb-8 scrollbar-hide">
+          {categories.map((cat) => {
+            const Icon = cat.icon;
+            const label = lang === "ru" ? cat.labelRu : cat.labelEn;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(selectedCategory === cat.id ? null : cat.id)}
+                className={`flex-shrink-0 flex flex-col justify-between rounded-2xl p-4 transition-all ${
+                  selectedCategory === cat.id ? "ring-2 ring-primary ring-offset-2 scale-[1.03]" : "hover:scale-[1.03]"
                 }`}
-                style={{ background: cat.bg }}
+                style={{
+                  background: cat.bg,
+                  width: 160,
+                  height: 160,
+                }}
               >
-                {cat.emoji}
-              </div>
-              <span className="text-[14px] font-medium text-foreground leading-tight text-center">
-                {lang === "ru" ? cat.labelRu : cat.labelEn}
-              </span>
-              <span className={`text-[13px] font-normal leading-none ${cat.countRu === "Скоро" ? "text-primary" : "text-primary"}`}>
-                {lang === "ru" ? cat.countRu : cat.countEn}
-              </span>
-            </button>
-          ))}
+                <Icon style={{ color: cat.iconColor }} className="w-7 h-7" />
+                <div className="text-left">
+                  <span className="text-[16px] font-medium leading-[1.2] text-foreground block whitespace-pre-line">
+                    {label}
+                  </span>
+                  <span className="text-[14px] font-medium mt-1 block" style={{ color: cat.countColor }}>
+                    {lang === "ru" ? cat.countRu : cat.countEn}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
         </div>
 
         {/* Filters row */}
