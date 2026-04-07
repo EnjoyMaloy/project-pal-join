@@ -65,7 +65,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn }: Paym
           >
             <X className="w-4 h-4" />
           </button>
-          <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4">
+          <div className="w-11 h-11 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-3">
             <Sparkles className="w-7 h-7 text-primary-foreground" />
           </div>
           <h2 className="text-[22px] font-bold text-primary-foreground mb-1">
