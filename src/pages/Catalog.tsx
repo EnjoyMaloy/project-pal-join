@@ -178,6 +178,7 @@ const Catalog = () => {
           {sortedCourses.map((course) => (
             <div
               key={course.id}
+              onClick={() => course.premium ? navigate(`/course/${course.id}`) : undefined}
               className="group rounded-2xl overflow-hidden border border-border bg-background hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer"
             >
               {/* Image */}
