@@ -315,18 +315,18 @@ const CourseView = () => {
 
             {/* Course type & students */}
             <div className="grid grid-cols-2 gap-3">
-              <div className="flex items-center gap-3 border border-border rounded-xl p-4">
+              <div className="flex items-center gap-3 border border-border rounded-xl p-4 overflow-hidden">
                 <Gamepad2 className="w-5 h-5 text-primary flex-shrink-0" />
-                <div>
-                  <p className="text-[12px] text-muted-foreground">{lang === "ru" ? "Тип курса" : "Course type"}</p>
-                  <p className="text-[14px] font-medium text-foreground">{courseType}</p>
+                <div className="min-w-0">
+                  <p className="text-[12px] text-muted-foreground truncate">{lang === "ru" ? "Тип курса" : "Course type"}</p>
+                  <p className="text-[13px] font-medium text-foreground truncate">{courseType}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 border border-border rounded-xl p-4">
+              <div className="flex items-center gap-3 border border-border rounded-xl p-4 overflow-hidden">
                 <Users className="w-5 h-5 text-primary flex-shrink-0" />
-                <div>
-                  <p className="text-[12px] text-muted-foreground">{lang === "ru" ? "Прошли курс" : "Completed"}</p>
-                  <p className="text-[14px] font-medium text-foreground">{course.students.toLocaleString()}</p>
+                <div className="min-w-0">
+                  <p className="text-[12px] text-muted-foreground truncate">{lang === "ru" ? "Прошли курс" : "Completed"}</p>
+                  <p className="text-[13px] font-medium text-foreground truncate">{course.students.toLocaleString()}</p>
                 </div>
               </div>
             </div>
