@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Star, ChevronDown, ChevronRight, Users, Gamepad2 } from "lucide-react";
+import { Star, ChevronDown, ChevronRight, Users, Gamepad2, Lock } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import PaymentModal from "@/components/PaymentModal";
 
 interface CourseData {
   id: string;
@@ -148,6 +150,7 @@ const CourseView = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { lang } = useLanguage();
+  const [paymentOpen, setPaymentOpen] = useState(false);
 
   const course = id ? coursesData[id] : null;
 
@@ -215,8 +218,12 @@ const CourseView = () => {
                   {isFree ? (lang === "ru" ? "Бесплатно" : "Free") : `$${course.price}`}
                 </p>
               </div>
-              <Button className="h-12 px-8 rounded-xl text-[15px] font-semibold">
-                {lang === "ru" ? "Войдите, чтобы начать" : "Sign in to start"}
+              <Button
+                onClick={() => course.price ? setPaymentOpen(true) : undefined}
+                className="h-12 px-8 rounded-xl text-[15px] font-semibold gap-2"
+              >
+                {course.price && <Lock className="w-4 h-4" />}
+                {lang === "ru" ? "Начать обучение" : "Start learning"}
               </Button>
             </div>
 
@@ -350,6 +357,12 @@ const CourseView = () => {
           </div>
         </div>
       </div>
+      <PaymentModal
+        open={paymentOpen}
+        onOpenChange={setPaymentOpen}
+        courseTitleRu={course.titleRu}
+        courseTitleEn={course.titleEn}
+      />
     </div>
   );
 };
