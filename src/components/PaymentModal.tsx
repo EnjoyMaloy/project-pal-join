@@ -56,9 +56,9 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn }: Paym
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[480px] p-0 gap-0 overflow-hidden border-0 rounded-2xl">
+      <DialogContent className="sm:max-w-[480px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl">
         {/* Header */}
-        <div className="bg-gradient-to-b from-[hsl(var(--primary))] to-[hsl(var(--primary)/0.8)] px-6 pt-8 pb-6 text-center relative">
+        <div className="bg-gradient-to-b from-[hsl(var(--primary))] to-[hsl(var(--primary)/0.8)] px-5 pt-6 pb-4 text-center relative">
           <button
             onClick={() => onOpenChange(false)}
             className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-primary-foreground hover:bg-white/30 transition-colors"
