@@ -210,7 +210,7 @@ const Catalog = () => {
                   {lang === "ru" ? course.titleRu : course.titleEn}
                 </h3>
 
-                {/* Rating and students */}
+                {/* Rating, students, and price */}
                 <div className="flex items-center gap-3 text-[14px]">
                   <span className="inline-flex items-center gap-1">
                     <Star className="w-3.5 h-3.5 text-orange-400 fill-orange-400" />
@@ -220,6 +220,9 @@ const Catalog = () => {
                     <Users className="w-3.5 h-3.5" />
                     {course.students.toLocaleString()}
                   </span>
+                  {course.premium && course.price && (
+                    <span className="ml-auto font-semibold text-foreground">${course.price}</span>
+                  )}
                 </div>
               </div>
             </div>
