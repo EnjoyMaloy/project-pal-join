@@ -150,6 +150,7 @@ const CourseView = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { lang } = useLanguage();
+  const [paymentOpen, setPaymentOpen] = useState(false);
 
   const course = id ? coursesData[id] : null;
 
