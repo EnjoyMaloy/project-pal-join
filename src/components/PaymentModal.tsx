@@ -71,7 +71,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn }: Paym
           <h2 className="text-[18px] font-bold text-primary-foreground mb-0.5">
             {lang === "ru" ? "Получить доступ" : "Get Access"}
           </h2>
-          <p className="text-[14px] text-primary-foreground/80">
+          <p className="text-[13px] text-primary-foreground/80">
             {lang === "ru" ? "Выберите, как вы хотите получить доступ к курсу" : "Choose how you want to access the course"}
           </p>
         </div>
