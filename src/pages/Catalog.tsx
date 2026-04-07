@@ -34,14 +34,16 @@ interface CourseCard {
   rating: number;
   students: number;
   image: string;
+  premium?: boolean;
+  price?: number;
 }
 
 const courses: CourseCard[] = [
   { id: "1", titleRu: "Быстрый старт в Telegram Gifts", titleEn: "Quick Start with Telegram Gifts", categoryId: "web3", rating: 4.9, students: 371, image: "https://images.unsplash.com/photo-1621504450181-5d356f61d307?w=400&h=300&fit=crop" },
-  { id: "2", titleRu: "Анализ проектов", titleEn: "Project Analysis", categoryId: "invest", rating: 4.9, students: 35419, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" },
-  { id: "3", titleRu: "Как создать систему достижения финансовых целей?", titleEn: "How to Build a Financial Goals System?", categoryId: "invest", rating: 4.8, students: 4168, image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&h=300&fit=crop" },
+  { id: "2", titleRu: "Анализ проектов", titleEn: "Project Analysis", categoryId: "invest", rating: 4.9, students: 35419, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop", premium: true, price: 49 },
+  { id: "3", titleRu: "Как создать систему достижения финансовых целей?", titleEn: "How to Build a Financial Goals System?", categoryId: "invest", rating: 4.8, students: 4168, image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&h=300&fit=crop", premium: true, price: 29 },
   { id: "4", titleRu: "Погружение в DeFi", titleEn: "Diving into DeFi", categoryId: "web3", rating: 4.8, students: 33898, image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=300&fit=crop" },
-  { id: "5", titleRu: "Основы блокчейна: архитектура доверия", titleEn: "Blockchain Basics: Trust Architecture", categoryId: "crypto", rating: 4.8, students: 11301, image: "https://images.unsplash.com/photo-1644143379190-08a5f055de1d?w=400&h=300&fit=crop" },
+  { id: "5", titleRu: "Основы блокчейна: архитектура доверия", titleEn: "Blockchain Basics: Trust Architecture", categoryId: "crypto", rating: 4.8, students: 11301, image: "https://images.unsplash.com/photo-1644143379190-08a5f055de1d?w=400&h=300&fit=crop", premium: true, price: 39 },
 ];
 
 const Catalog = () => {
