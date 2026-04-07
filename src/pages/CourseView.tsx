@@ -43,7 +43,7 @@ const coursesData: Record<string, CourseData> = {
     rating: 4.9,
     reviewCount: 1010,
     students: 35419,
-    price: null,
+    price: 49,
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop",
     updatedAt: "07.04.26",
     languages: "English, Русский",
