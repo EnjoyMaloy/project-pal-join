@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ChevronDown, Star, Users, LayoutGrid } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Sparkles, Bitcoin, ShieldCheck, BarChart3, PieChart, Snowflake, Wrench } from "lucide-react";
 
 interface CategoryItem {
   id: string;
@@ -9,18 +10,20 @@ interface CategoryItem {
   labelEn: string;
   countRu: string;
   countEn: string;
-  emoji: string;
+  countColor: string;
+  icon: React.ElementType;
+  iconColor: string;
   bg: string;
 }
 
 const categories: CategoryItem[] = [
-  { id: "ai", labelRu: "AI-навыки", labelEn: "AI Skills", countRu: "Скоро", countEn: "Soon", emoji: "✦", bg: "#E8DCFB" },
-  { id: "crypto", labelRu: "Основы крипты", labelEn: "Crypto Basics", countRu: "2 курса", countEn: "2 courses", emoji: "₿", bg: "#FFE0C2" },
-  { id: "security", labelRu: "Безопасность", labelEn: "Security", countRu: "1 курс", countEn: "1 course", emoji: "🛡", bg: "#D4F5E9" },
-  { id: "trading", labelRu: "Трейдинг", labelEn: "Trading", countRu: "3 курса", countEn: "3 courses", emoji: "📊", bg: "#FFF3C4" },
-  { id: "invest", labelRu: "Инвестиции", labelEn: "Investments", countRu: "4 курса", countEn: "4 courses", emoji: "📈", bg: "#C4F0E6" },
-  { id: "web3", labelRu: "Web3 и DeFi", labelEn: "Web3 & DeFi", countRu: "4 курса", countEn: "4 courses", emoji: "❖", bg: "#E0E0FF" },
-  { id: "tools", labelRu: "Инструменты", labelEn: "Tools", countRu: "1 курс", countEn: "1 course", emoji: "⚙", bg: "#FFE0F0" },
+  { id: "ai", labelRu: "AI-навыки", labelEn: "AI Skills", countRu: "Скоро", countEn: "Soon", countColor: "#00C48C", icon: Sparkles, iconColor: "#3DD6D0", bg: "#E0F7F6" },
+  { id: "crypto", labelRu: "Основы\nкрипты", labelEn: "Crypto\nBasics", countRu: "2 курса", countEn: "2 courses", countColor: "#FF6B2C", icon: Bitcoin, iconColor: "#FF6B2C", bg: "#FFE4D6" },
+  { id: "security", labelRu: "Безопасность", labelEn: "Security", countRu: "1 курс", countEn: "1 course", countColor: "#4285F4", icon: ShieldCheck, iconColor: "#4285F4", bg: "#DDE5F9" },
+  { id: "trading", labelRu: "Трейдинг", labelEn: "Trading", countRu: "3 курса", countEn: "3 courses", countColor: "#00C48C", icon: BarChart3, iconColor: "#2EAD6D", bg: "#D9F2E6" },
+  { id: "invest", labelRu: "Инвестиции", labelEn: "Investments", countRu: "4 курса", countEn: "4 courses", countColor: "#F5A623", icon: PieChart, iconColor: "#F5A623", bg: "#FFF6D9" },
+  { id: "web3", labelRu: "Web3 и DeFi", labelEn: "Web3 & DeFi", countRu: "4 курса", countEn: "4 courses", countColor: "#924CFE", icon: Snowflake, iconColor: "#924CFE", bg: "#E8DCFB" },
+  { id: "tools", labelRu: "Инструменты", labelEn: "Tools", countRu: "1 курс", countEn: "1 course", countColor: "#E91E8C", icon: Wrench, iconColor: "#E91E8C", bg: "#FCDCEE" },
 ];
 
 interface CourseCard {
