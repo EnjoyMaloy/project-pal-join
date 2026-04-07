@@ -357,6 +357,12 @@ const CourseView = () => {
           </div>
         </div>
       </div>
+      <PaymentModal
+        open={paymentOpen}
+        onOpenChange={setPaymentOpen}
+        courseTitleRu={course.titleRu}
+        courseTitleEn={course.titleEn}
+      />
     </div>
   );
 };
