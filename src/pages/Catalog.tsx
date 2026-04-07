@@ -180,13 +180,19 @@ const Catalog = () => {
               className="group rounded-2xl overflow-hidden border border-border bg-background hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer"
             >
               {/* Image */}
-              <div className="aspect-[4/3] overflow-hidden">
+              <div className="aspect-[4/3] overflow-hidden relative">
                 <img
                   src={course.image}
                   alt={lang === "ru" ? course.titleRu : course.titleEn}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
+                {course.premium && (
+                  <span className="absolute top-2.5 left-2.5 inline-flex items-center gap-1 rounded-full bg-[hsl(var(--primary))] px-2.5 py-1 text-[12px] font-semibold text-primary-foreground">
+                    <Crown className="w-3 h-3" />
+                    Premium
+                  </span>
+                )}
               </div>
 
               {/* Content */}
