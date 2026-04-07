@@ -14,6 +14,7 @@ const Navbar = () => {
   const isInstructions = location.pathname === "/instructions";
   const isArticleView = location.pathname.startsWith("/instructions/");
   const isMyCourses = location.pathname === "/my-courses";
+  const isCatalog = location.pathname === "/catalog" || location.pathname === "/";
   const searchValue = searchParams.get("q") || "";
   const { lang, setLang, t } = useLanguage();
   const { theme, setTheme } = useTheme();
