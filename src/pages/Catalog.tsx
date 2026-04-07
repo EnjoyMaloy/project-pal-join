@@ -48,6 +48,7 @@ const courses: CourseCard[] = [
 
 const Catalog = () => {
   const { lang, t } = useLanguage();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
