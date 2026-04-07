@@ -219,7 +219,7 @@ const CourseView = () => {
                 </p>
               </div>
               <Button
-                onClick={() => course.price ? setPaymentOpen(true) : undefined}
+                onClick={() => setPaymentOpen(true)}
                 className="h-12 px-8 rounded-xl text-[15px] font-semibold gap-2"
               >
                 {course.price && <Lock className="w-4 h-4" />}
