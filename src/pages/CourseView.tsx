@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Star, ChevronDown, ChevronRight, Users, Gamepad2 } from "lucide-react";
+import { Star, ChevronDown, ChevronRight, Users, Gamepad2, Lock } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import PaymentModal from "@/components/PaymentModal";
 
 interface CourseData {
   id: string;
