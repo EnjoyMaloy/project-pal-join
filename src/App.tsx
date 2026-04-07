@@ -33,7 +33,8 @@ const App = () => (
                 <Navbar />
                 <main className="flex-1 min-w-0 overflow-auto pb-16 md:pb-0">
                   <Routes>
-                    <Route path="/" element={<Index />} />
+                    <Route path="/" element={<Catalog />} />
+                    <Route path="/catalog" element={<Catalog />} />
                     <Route path="/my-courses" element={<Index />} />
                     <Route path="/articles" element={<Articles />} />
                     <Route path="/articles/new" element={<ArticleEditor />} />

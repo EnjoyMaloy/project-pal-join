@@ -36,7 +36,7 @@ const Navbar = () => {
   return (
     <nav className={`sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-16 md:h-14 border-b-0 md:border-b md:border-border ${isArticleView || isMyCourses ? 'hidden md:block' : ''}`}>
       <div className="max-w-full mx-auto px-4 flex items-center justify-between h-16 md:h-14 gap-4 pt-1 md:pt-0">
-        {isInstructions ? (
+        {isInstructions || isCatalog ? (
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 md:w-4 md:h-4 text-muted-foreground" />
             <input
@@ -50,7 +50,7 @@ const Navbar = () => {
                   setSearchParams({});
                 }
               }}
-              placeholder={t("nav.search")}
+              placeholder={isCatalog ? t("nav.searchCourse") : t("nav.search")}
               className="w-full pl-10 pr-4 py-2.5 md:py-2 rounded-lg bg-muted border-none text-[16px] md:text-body-14 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
             />
           </div>
