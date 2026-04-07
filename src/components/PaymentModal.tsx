@@ -122,7 +122,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn }: Paym
           </div>
 
           {/* CTA */}
-          <Button className="w-full h-12 rounded-xl text-[15px] font-semibold gap-2">
+          <Button className="w-full h-11 rounded-xl text-[15px] font-semibold gap-2">
             <Zap className="w-4 h-4" />
             {lang === "ru" ? "Продолжить" : "Continue"}
           </Button>
