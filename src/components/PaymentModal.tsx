@@ -77,7 +77,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn }: Paym
         </div>
 
         {/* Body */}
-        <div className="px-5 py-5 space-y-3">
+        <div className="px-5 py-4 space-y-2.5">
           {/* Course name pill */}
           <div className="border border-border rounded-xl px-4 py-3 text-center">
             <span className="text-[14px] font-medium text-foreground">{courseTitle}</span>
