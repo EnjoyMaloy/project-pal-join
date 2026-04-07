@@ -14,6 +14,7 @@ import ArticleEditor from "./pages/ArticleEditor.tsx";
 import Auth from "./pages/Auth.tsx";
 import Instructions from "./pages/Instructions.tsx";
 import ArticleView from "./pages/ArticleView.tsx";
+import Catalog from "./pages/Catalog.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -32,7 +33,8 @@ const App = () => (
                 <Navbar />
                 <main className="flex-1 min-w-0 overflow-auto pb-16 md:pb-0">
                   <Routes>
-                    <Route path="/" element={<Index />} />
+                    <Route path="/" element={<Catalog />} />
+                    <Route path="/catalog" element={<Catalog />} />
                     <Route path="/my-courses" element={<Index />} />
                     <Route path="/articles" element={<Articles />} />
                     <Route path="/articles/new" element={<ArticleEditor />} />

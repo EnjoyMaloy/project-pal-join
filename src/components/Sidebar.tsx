@@ -11,7 +11,7 @@ const Sidebar = () => {
 
   const menuGroup1 = [
     { label: t("sidebar.home"), icon: Home, path: "/", disabled: true },
-    { label: t("sidebar.catalog"), icon: Circle, path: "/catalog", disabled: true },
+    { label: t("sidebar.catalog"), icon: Circle, path: "/catalog" },
     { label: t("sidebar.myCourses"), icon: BookOpen, path: "/my-courses" },
   ];
 
