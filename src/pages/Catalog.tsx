@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ChevronDown, Star, Users, LayoutGrid } from "lucide-react";
+import { ChevronDown, Star, Users, LayoutGrid, Crown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Sparkles, Bitcoin, ShieldCheck, BarChart3, PieChart, Snowflake, Wrench } from "lucide-react";
 
