@@ -189,7 +189,15 @@ const CourseView = () => {
           {/* Main content */}
           <div className="flex-1 min-w-0">
             {/* Title */}
-            <h1 className="text-[28px] font-bold text-foreground mb-4">{title}</h1>
+            <div className="flex items-center gap-3 mb-4 flex-wrap">
+              <h1 className="text-[28px] font-bold text-foreground">{title}</h1>
+              {course.price !== null && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-[hsl(var(--primary))] px-3 py-1 text-[13px] font-semibold text-primary-foreground">
+                  <Crown className="w-3.5 h-3.5" />
+                  Premium
+                </span>
+              )}
+            </div>
 
             {/* Description */}
             <p className="text-[15px] text-muted-foreground leading-relaxed mb-5">
