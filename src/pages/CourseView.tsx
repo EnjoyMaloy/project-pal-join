@@ -218,8 +218,12 @@ const CourseView = () => {
                   {isFree ? (lang === "ru" ? "Бесплатно" : "Free") : `$${course.price}`}
                 </p>
               </div>
-              <Button className="h-12 px-8 rounded-xl text-[15px] font-semibold">
-                {lang === "ru" ? "Войдите, чтобы начать" : "Sign in to start"}
+              <Button
+                onClick={() => course.price ? setPaymentOpen(true) : undefined}
+                className="h-12 px-8 rounded-xl text-[15px] font-semibold gap-2"
+              >
+                {course.price && <Lock className="w-4 h-4" />}
+                {lang === "ru" ? "Начать обучение" : "Start learning"}
               </Button>
             </div>
 
