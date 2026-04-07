@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { ChevronDown, Star, Users, LayoutGrid, Crown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Sparkles, Bitcoin, ShieldCheck, BarChart3, PieChart, Snowflake, Wrench } from "lucide-react";
@@ -48,6 +48,7 @@ const courses: CourseCard[] = [
 
 const Catalog = () => {
   const { lang, t } = useLanguage();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -177,6 +178,7 @@ const Catalog = () => {
           {sortedCourses.map((course) => (
             <div
               key={course.id}
+              onClick={() => course.premium ? navigate(`/course/${course.id}`) : undefined}
               className="group rounded-2xl overflow-hidden border border-border bg-background hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer"
             >
               {/* Image */}

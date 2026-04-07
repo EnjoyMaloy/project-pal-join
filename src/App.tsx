@@ -15,6 +15,7 @@ import Auth from "./pages/Auth.tsx";
 import Instructions from "./pages/Instructions.tsx";
 import ArticleView from "./pages/ArticleView.tsx";
 import Catalog from "./pages/Catalog.tsx";
+import CourseView from "./pages/CourseView.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
                     <Route path="/articles/new" element={<ArticleEditor />} />
                     <Route path="/articles/:id" element={<ArticleEditor />} />
                     <Route path="/auth" element={<Auth />} />
+                    <Route path="/course/:id" element={<CourseView />} />
                     <Route path="/instructions" element={<Instructions />} />
                     <Route path="/instructions/:id" element={<ArticleView />} />
                     <Route path="*" element={<NotFound />} />
