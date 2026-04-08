@@ -159,10 +159,9 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               {lang === "ru" ? "Продолжить" : "Continue"}
             </Button>
           </div>
-        ) : (
+        ) : step === "payment" ? (
           /* Payment method selection */
           <div className="px-5 py-5 space-y-4">
-            {/* Bank card option */}
             <button
               className="w-full border-2 border-primary rounded-xl px-5 py-5 flex flex-col items-center gap-2 bg-primary/5 transition-all"
             >
@@ -173,7 +172,6 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               <span className="text-[13px] text-muted-foreground">Visa, Mastercard, Maestro</span>
             </button>
 
-            {/* Total */}
             <div className="bg-muted/50 rounded-xl px-4 py-3.5 flex items-center justify-between">
               <span className="text-[15px] text-foreground">
                 {lang === "ru" ? "Итого" : "Total"}
@@ -183,7 +181,6 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               </span>
             </div>
 
-            {/* Confirm */}
             <Button
               className="w-full h-11 rounded-xl text-[15px] font-semibold gap-2"
               onClick={() => {
