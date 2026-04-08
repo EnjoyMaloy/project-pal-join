@@ -193,12 +193,24 @@ const CourseView = () => {
             {/* Title */}
             <div className="flex items-center gap-3 mb-4 flex-wrap">
               <h1 className="text-[28px] font-bold text-foreground">{title}</h1>
-              {course.price !== null && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-[hsl(var(--primary))] px-3 py-1 text-[13px] font-semibold text-primary-foreground">
-                  <Crown className="w-3.5 h-3.5" />
-                  Premium
-                </span>
-              )}
+              {course.price !== null && (() => {
+                const isPurchased = store.purchasedCourses.includes(course.id);
+                const hasSubscription = store.subscription?.active;
+                const isOwned = isPurchased || hasSubscription;
+                return isOwned ? (
+                  <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(46,173,109,0.15)] px-3 py-1 text-[13px] font-medium"
+                    style={{ background: "linear-gradient(0deg, rgba(192,255,220,0.5), rgba(192,255,220,0.5)), #FFFFFF", color: "#1A6B3C" }}
+                  >
+                    <Crown className="w-3.5 h-3.5" style={{ color: "#1A6B3C" }} />
+                    Premium
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-[hsl(var(--primary))] px-3 py-1 text-[13px] font-semibold text-primary-foreground">
+                    <Crown className="w-3.5 h-3.5" />
+                    Premium
+                  </span>
+                );
+              })()}
             </div>
 
             {/* Description */}
