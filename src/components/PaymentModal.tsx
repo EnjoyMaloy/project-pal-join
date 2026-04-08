@@ -86,38 +86,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
             </p>
 
             {/* Mascot illustration */}
-            <div className="relative w-[300px] h-[270px] mb-10">
-              <div
-                className="absolute rounded-full"
-                style={{
-                  width: 175,
-                  height: 175,
-                  left: "50%",
-                  top: "50%",
-                  transform: "translate(-50%, -50%) rotate(16deg)",
-                  background: "#C5F700",
-                }}
-              />
-              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 300 270" fill="none">
-                <path d="M90 60 L95 45 L100 60 L95 75 Z" stroke="#000" strokeWidth="2" fill="none" />
-                <line x1="200" y1="50" x2="230" y2="30" stroke="#000" strokeWidth="2" />
-                <line x1="210" y1="40" x2="240" y2="55" stroke="#000" strokeWidth="2" />
-                <line x1="220" y1="60" x2="245" y2="75" stroke="#000" strokeWidth="2" />
-                <path d="M40 120 Q30 100 50 90 Q60 85 70 95 L85 115" stroke="#000" strokeWidth="2" fill="none" />
-                <path d="M50 95 Q45 88 55 82" stroke="#000" strokeWidth="2" fill="none" />
-                <path d="M60 90 Q58 82 65 78" stroke="#000" strokeWidth="2" fill="none" />
-                <path d="M260 120 Q270 100 250 90 Q240 85 230 95 L215 115" stroke="#000" strokeWidth="2" fill="none" />
-                <path d="M250 95 Q255 88 245 82" stroke="#000" strokeWidth="2" fill="none" />
-                <path d="M240 90 Q242 82 235 78" stroke="#000" strokeWidth="2" fill="none" />
-                <path d="M130 130 Q125 122 135 120" stroke="#000" strokeWidth="2" fill="none" />
-                <path d="M170 130 Q175 122 165 120" stroke="#000" strokeWidth="2" fill="none" />
-                <path d="M135 148 Q150 158 165 148" stroke="#000" strokeWidth="2" fill="none" />
-                <ellipse cx="240" cy="220" rx="12" ry="8" stroke="#000" strokeWidth="2" fill="none" />
-                <ellipse cx="250" cy="235" rx="10" ry="6" stroke="#000" strokeWidth="2" fill="none" />
-                <path d="M110 220 Q100 240 115 250 Q130 255 135 240" stroke="#000" strokeWidth="2" fill="none" />
-                <path d="M190 220 Q200 240 185 250 Q170 255 165 240" stroke="#000" strokeWidth="2" fill="none" />
-              </svg>
-            </div>
+            <img src={mascotSuccess} alt="" className="w-[300px] mb-10" />
 
             <div className="flex items-center gap-3 w-full max-w-[492px]">
               <Button
