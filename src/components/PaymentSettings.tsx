@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePurchaseStore, type Transaction, type SubscriptionData } from "@/hooks/usePurchaseStore";
 import { Crown, BookOpen, Receipt, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import SubscriptionModal from "@/components/SubscriptionModal";
 
 const PaymentSettings = () => {
   const { lang } = useLanguage();
