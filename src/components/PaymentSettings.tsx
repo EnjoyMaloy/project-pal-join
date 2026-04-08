@@ -1,13 +1,16 @@
+import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePurchaseStore, type Transaction, type SubscriptionData } from "@/hooks/usePurchaseStore";
 import { Crown, BookOpen, Receipt, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import SubscriptionModal from "@/components/SubscriptionModal";
 
 const PaymentSettings = () => {
   const { lang } = useLanguage();
   const navigate = useNavigate();
   const store = usePurchaseStore();
+  const [upgradeOpen, setUpgradeOpen] = useState(false);
 
   const hasSubscription = store.subscription?.active;
   const purchasedCourses = store.purchasedCourses;
@@ -54,6 +57,15 @@ const PaymentSettings = () => {
                 {lang === "ru" ? "до" : "until"} {formatDate(store.subscription.endDate)}
               </div>
               <p className="text-[14px] font-semibold text-foreground">{store.subscription.price}</p>
+              {store.subscription.plan === "monthly" && (
+                <Button
+                  size="sm"
+                  className="mt-2 rounded-lg text-[13px] h-8 px-4"
+                  onClick={() => setUpgradeOpen(true)}
+                >
+                  {lang === "ru" ? "Улучшить подписку" : "Upgrade subscription"}
+                </Button>
+              )}
             </div>
           ) : (
             <p className="ml-8 text-[14px] text-muted-foreground">
@@ -127,8 +139,9 @@ const PaymentSettings = () => {
               {lang === "ru" ? "Нет транзакций" : "No transactions yet"}
             </p>
           )}
-        </div>
       </div>
+      <SubscriptionModal open={upgradeOpen} onOpenChange={setUpgradeOpen} />
+    </div>
     </div>
   );
 };
