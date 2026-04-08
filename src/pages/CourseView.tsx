@@ -153,6 +153,7 @@ const CourseView = () => {
   const navigate = useNavigate();
   const { lang } = useLanguage();
   const [paymentOpen, setPaymentOpen] = useState(false);
+  const store = usePurchaseStore();
 
   const course = id ? coursesData[id] : null;
 
