@@ -2,7 +2,7 @@ import { useState } from "react";
 import mascotSuccess from "@/assets/mascot-success.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Crown, Zap, Check, ChevronLeft, CreditCard, Sparkles } from "lucide-react";
+import { X, Crown, Zap, Check, ChevronLeft, CreditCard, Bitcoin } from "lucide-react";
 import { purchaseSubscription } from "@/hooks/usePurchaseStore";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
