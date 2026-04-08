@@ -134,9 +134,9 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
           </button>
           <div className="w-11 h-11 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-3">
             {step === "plan" ? (
-              <Sparkles className="w-5 h-5 text-primary-foreground" />
-            ) : (
               <Crown className="w-5 h-5 text-primary-foreground" />
+            ) : (
+              <CreditCard className="w-5 h-5 text-primary-foreground" />
             )}
           </div>
           <h2 className="text-[18px] font-bold text-primary-foreground mb-0.5">
