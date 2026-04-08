@@ -139,8 +139,9 @@ const PaymentSettings = () => {
               {lang === "ru" ? "Нет транзакций" : "No transactions yet"}
             </p>
           )}
-        </div>
       </div>
+      <SubscriptionModal open={upgradeOpen} onOpenChange={setUpgradeOpen} />
+    </div>
     </div>
   );
 };
