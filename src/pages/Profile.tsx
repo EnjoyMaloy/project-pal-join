@@ -20,6 +20,7 @@ const Profile = () => {
   const { lang } = useLanguage();
   const navigate = useNavigate();
   const [user, setUser] = useState<SupaUser | null>(null);
+  const [isReset, setIsReset] = useState(() => localStorage.getItem("demo_reset") === "true");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -32,7 +33,13 @@ const Profile = () => {
       setUser(session?.user ?? null);
       if (!session?.user) navigate("/auth");
     });
-    return () => subscription.unsubscribe();
+
+    const handleReset = () => setIsReset(true);
+    window.addEventListener("demo_reset", handleReset);
+    return () => {
+      subscription.unsubscribe();
+      window.removeEventListener("demo_reset", handleReset);
+    };
   }, [navigate]);
 
   const handleLogout = async () => {
@@ -43,46 +50,48 @@ const Profile = () => {
     ? user.email.substring(0, 2).toUpperCase()
     : "U";
 
-  // Demo subscription data
-  const subscription = {
-    active: true,
-    plan: lang === "ru" ? "Годовой план" : "Yearly Plan",
-    price: lang === "ru" ? "4 990 ₽/год" : "$49.90/year",
-    startDate: "2025-01-15",
-    endDate: "2026-01-15",
-    autoRenew: true,
-  };
+  const subscription_data = isReset
+    ? { active: false, plan: "", price: "", startDate: "", endDate: "", autoRenew: false }
+    : {
+        active: true,
+        plan: lang === "ru" ? "Годовой план" : "Yearly Plan",
+        price: lang === "ru" ? "4 990 ₽/год" : "$49.90/year",
+        startDate: "2025-01-15",
+        endDate: "2026-01-15",
+        autoRenew: true,
+      };
 
-  // Demo transaction history
-  const transactions = [
-    {
-      id: "1",
-      dateRu: "15 янв 2025",
-      dateEn: "Jan 15, 2025",
-      descRu: "Годовая подписка Premium",
-      descEn: "Yearly Premium Subscription",
-      amount: lang === "ru" ? "4 990 ₽" : "$49.90",
-      type: "subscription" as const,
-    },
-    {
-      id: "2",
-      dateRu: "20 фев 2025",
-      dateEn: "Feb 20, 2025",
-      descRu: "Курс «Основы криптовалют»",
-      descEn: "Course \"Crypto Basics\"",
-      amount: lang === "ru" ? "1 490 ₽" : "$14.90",
-      type: "purchase" as const,
-    },
-    {
-      id: "3",
-      dateRu: "5 мар 2025",
-      dateEn: "Mar 5, 2025",
-      descRu: "Курс «AI для начинающих»",
-      descEn: "Course \"AI for Beginners\"",
-      amount: lang === "ru" ? "990 ₽" : "$9.90",
-      type: "purchase" as const,
-    },
-  ];
+  const transactions = isReset
+    ? []
+    : [
+        {
+          id: "1",
+          dateRu: "15 янв 2025",
+          dateEn: "Jan 15, 2025",
+          descRu: "Годовая подписка Premium",
+          descEn: "Yearly Premium Subscription",
+          amount: lang === "ru" ? "4 990 ₽" : "$49.90",
+          type: "subscription" as const,
+        },
+        {
+          id: "2",
+          dateRu: "20 фев 2025",
+          dateEn: "Feb 20, 2025",
+          descRu: "Курс «Основы криптовалют»",
+          descEn: "Course \"Crypto Basics\"",
+          amount: lang === "ru" ? "1 490 ₽" : "$14.90",
+          type: "purchase" as const,
+        },
+        {
+          id: "3",
+          dateRu: "5 мар 2025",
+          dateEn: "Mar 5, 2025",
+          descRu: "Курс «AI для начинающих»",
+          descEn: "Course \"AI for Beginners\"",
+          amount: lang === "ru" ? "990 ₽" : "$9.90",
+          type: "purchase" as const,
+        },
+      ];
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-6 md:py-10">
@@ -179,14 +188,14 @@ const Profile = () => {
           </h2>
 
           <div className="border border-border rounded-2xl p-6">
-            {subscription.active ? (
+            {subscription_data.active ? (
               <div>
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-11 h-11 rounded-full bg-gradient-to-br from-violet-dark to-violet-light flex items-center justify-center">
                     <Crown className="w-5 h-5 text-primary-foreground" />
                   </div>
                   <div>
-                    <p className="text-[16px] font-semibold text-foreground">{subscription.plan}</p>
+                    <p className="text-[16px] font-semibold text-foreground">{subscription_data.plan}</p>
                     <span className="inline-block mt-0.5 text-[12px] font-medium text-primary bg-primary/10 rounded-full px-2 py-0.5">
                       {lang === "ru" ? "Активна" : "Active"}
                     </span>
@@ -196,19 +205,19 @@ const Profile = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between text-[14px]">
                     <span className="text-muted-foreground">{lang === "ru" ? "Стоимость" : "Price"}</span>
-                    <span className="font-medium text-foreground">{subscription.price}</span>
+                    <span className="font-medium text-foreground">{subscription_data.price}</span>
                   </div>
                   <div className="flex justify-between text-[14px]">
                     <span className="text-muted-foreground">{lang === "ru" ? "Начало" : "Started"}</span>
-                    <span className="font-medium text-foreground">{subscription.startDate}</span>
+                    <span className="font-medium text-foreground">{subscription_data.startDate}</span>
                   </div>
                   <div className="flex justify-between text-[14px]">
                     <span className="text-muted-foreground">{lang === "ru" ? "Окончание" : "Expires"}</span>
-                    <span className="font-medium text-foreground">{subscription.endDate}</span>
+                    <span className="font-medium text-foreground">{subscription_data.endDate}</span>
                   </div>
                   <div className="flex justify-between text-[14px]">
                     <span className="text-muted-foreground">{lang === "ru" ? "Автопродление" : "Auto-renew"}</span>
-                    <span className="font-medium text-foreground">{subscription.autoRenew ? "✓" : "✗"}</span>
+                    <span className="font-medium text-foreground">{subscription_data.autoRenew ? "✓" : "✗"}</span>
                   </div>
                 </div>
               </div>

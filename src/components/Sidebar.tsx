@@ -2,7 +2,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Home, Circle, BookOpen, ClipboardList, Coins, Users, FileText, PanelLeftClose, PanelLeft, RotateCcw } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/logo.png";
 
 const Sidebar = () => {
@@ -109,12 +108,10 @@ const Sidebar = () => {
 
         <div className="mt-auto pb-6">
           <button
-            onClick={async () => {
-              if (window.confirm(lang === "ru" ? "Сбросить все данные? Вы будете разлогинены." : "Reset all data? You will be logged out.")) {
-                await supabase.auth.signOut();
-                localStorage.clear();
-                sessionStorage.clear();
-                window.location.href = "/";
+            onClick={() => {
+              if (window.confirm(lang === "ru" ? "Сбросить данные подписок и курсов?" : "Reset subscriptions and courses data?")) {
+                localStorage.setItem("demo_reset", "true");
+                window.dispatchEvent(new Event("demo_reset"));
               }
             }}
             className={`flex items-center gap-3 px-3 h-9 rounded-lg text-[16px] font-normal leading-none transition-colors text-destructive hover:bg-destructive/10 w-full ${collapsed ? "justify-center" : ""}`}
