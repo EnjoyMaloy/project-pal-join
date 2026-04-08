@@ -67,7 +67,6 @@ const CourseCard = ({
                 style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF" }}
               >
                 <Crown className="w-3.5 h-3.5" style={{ color: "hsl(280 92% 21%)" }} />
-                </svg>
                 Premium
               </span>
             )}
