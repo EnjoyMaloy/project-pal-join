@@ -369,6 +369,7 @@ const CourseView = () => {
       <PaymentModal
         open={paymentOpen}
         onOpenChange={setPaymentOpen}
+        courseId={course.id}
         courseTitleRu={course.titleRu}
         courseTitleEn={course.titleEn}
       />
