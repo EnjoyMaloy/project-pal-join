@@ -89,11 +89,13 @@ const Navbar = () => {
 
           {/* Buy subscription button */}
           <button
+            onClick={() => setSubModalOpen(true)}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-violet-dark via-violet-mid to-violet-light text-primary-foreground text-[14px] font-semibold shadow-md hover:shadow-lg hover:brightness-110 transition-all"
           >
             <Crown className="w-4 h-4" />
             {lang === "ru" ? "Купить подписку" : "Buy subscription"}
           </button>
+          <SubscriptionModal open={subModalOpen} onOpenChange={setSubModalOpen} />
 
           {/* Profile avatar / Auth */}
           {user ? (
