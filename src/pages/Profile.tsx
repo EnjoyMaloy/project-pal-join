@@ -174,10 +174,8 @@ const Profile = () => {
                     <span className="text-muted-foreground">{lang === "ru" ? "Окончание" : "Expires"}</span>
                     <span className="font-medium text-foreground">{subscription_data.endDate}</span>
                   </div>
-                  <div className="flex justify-between text-[14px]">
-                    <span className="text-muted-foreground">{lang === "ru" ? "Автопродление" : "Auto-renew"}</span>
-                    <span className="font-medium text-foreground">{subscription_data.autoRenew ? "✓" : "✗"}</span>
-                  </div>
+                </div>
+              </div>
                 </div>
               </div>
             ) : (
