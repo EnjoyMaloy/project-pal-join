@@ -193,13 +193,93 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                 } else {
                   purchaseSubscription(selectedPlan, priceLabel);
                 }
-                toast.success(lang === "ru" ? "Оплата прошла успешно!" : "Payment successful!");
-                handleClose(false);
+                setStep("success");
               }}
             >
               <Zap className="w-4 h-4" />
               {lang === "ru" ? "Подтвердить оплату" : "Confirm payment"}
             </Button>
+          </div>
+        ) : (
+          /* Success screen */
+          <div className="px-5 py-10 flex flex-col items-center text-center">
+            {/* Title */}
+            <h2 className="text-[28px] font-medium text-foreground leading-[90%] mb-4">
+              {lang === "ru" ? "Спасибо!" : "Thank you!"}
+            </h2>
+            <h2 className="text-[28px] font-medium text-foreground leading-[90%] mb-9">
+              {lang === "ru" ? "Оплата получена" : "Your payment has been received"}
+            </h2>
+            <p className="text-[18px] text-[hsl(var(--muted-foreground))] leading-[100%] max-w-[502px] mb-12">
+              {lang === "ru"
+                ? "Купленный курс добавлен в Мои курсы. Вы получите подтверждение на email."
+                : "The purchased course has been added to My Courses. You will receive a confirmation receipt by email."}
+            </p>
+
+            {/* Mascot illustration */}
+            <div className="relative w-[300px] h-[270px] mb-10">
+              {/* Green circle */}
+              <div
+                className="absolute rounded-full"
+                style={{
+                  width: 175,
+                  height: 175,
+                  left: "50%",
+                  top: "50%",
+                  transform: "translate(-50%, -50%) rotate(16deg)",
+                  background: "#C5F700",
+                }}
+              />
+              {/* Decorative lines */}
+              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 300 270" fill="none">
+                {/* Sparkle top-left */}
+                <path d="M90 60 L95 45 L100 60 L95 75 Z" stroke="#000" strokeWidth="2" fill="none" />
+                {/* Lines top-right */}
+                <line x1="200" y1="50" x2="230" y2="30" stroke="#000" strokeWidth="2" />
+                <line x1="210" y1="40" x2="240" y2="55" stroke="#000" strokeWidth="2" />
+                <line x1="220" y1="60" x2="245" y2="75" stroke="#000" strokeWidth="2" />
+                {/* Hands left */}
+                <path d="M40 120 Q30 100 50 90 Q60 85 70 95 L85 115" stroke="#000" strokeWidth="2" fill="none" />
+                <path d="M50 95 Q45 88 55 82" stroke="#000" strokeWidth="2" fill="none" />
+                <path d="M60 90 Q58 82 65 78" stroke="#000" strokeWidth="2" fill="none" />
+                {/* Hands right */}
+                <path d="M260 120 Q270 100 250 90 Q240 85 230 95 L215 115" stroke="#000" strokeWidth="2" fill="none" />
+                <path d="M250 95 Q255 88 245 82" stroke="#000" strokeWidth="2" fill="none" />
+                <path d="M240 90 Q242 82 235 78" stroke="#000" strokeWidth="2" fill="none" />
+                {/* Face */}
+                <path d="M130 130 Q125 122 135 120" stroke="#000" strokeWidth="2" fill="none" />
+                <path d="M170 130 Q175 122 165 120" stroke="#000" strokeWidth="2" fill="none" />
+                <path d="M135 148 Q150 158 165 148" stroke="#000" strokeWidth="2" fill="none" />
+                {/* Coins bottom-right */}
+                <ellipse cx="240" cy="220" rx="12" ry="8" stroke="#000" strokeWidth="2" fill="none" />
+                <ellipse cx="250" cy="235" rx="10" ry="6" stroke="#000" strokeWidth="2" fill="none" />
+                {/* Feet */}
+                <path d="M110 220 Q100 240 115 250 Q130 255 135 240" stroke="#000" strokeWidth="2" fill="none" />
+                <path d="M190 220 Q200 240 185 250 Q170 255 165 240" stroke="#000" strokeWidth="2" fill="none" />
+              </svg>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex items-center gap-3 w-full">
+              <Button
+                variant="outline"
+                className="flex-1 h-12 rounded-lg text-[16px] font-medium bg-[hsl(var(--muted))] border-0 text-foreground hover:bg-[hsl(var(--muted)/0.8)]"
+                onClick={() => {
+                  handleClose(false);
+                  navigate("/catalog");
+                }}
+              >
+                {lang === "ru" ? "В каталог" : "Back to Catalog"}
+              </Button>
+              <Button
+                className="flex-1 h-12 rounded-lg text-[16px] font-medium bg-[#232323] hover:bg-[#464646] text-white"
+                onClick={() => {
+                  handleClose(false);
+                }}
+              >
+                {lang === "ru" ? "К курсу" : "Go the course"}
+              </Button>
+            </div>
           </div>
         )}
       </DialogContent>
