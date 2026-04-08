@@ -173,11 +173,6 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
             <Zap className="w-4 h-4" />
             {lang === "ru" ? "Купить подписку" : "Buy Subscription"}
           </button>
-          <p className="text-center text-[12px] text-muted-foreground mt-3">
-            {lang === "ru"
-              ? "30-дневная гарантия возврата денег"
-              : "30-day money-back guarantee"}
-          </p>
         </div>
         </div>
       </DialogContent>
