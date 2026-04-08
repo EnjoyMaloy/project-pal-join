@@ -41,26 +41,28 @@ const PaymentSettings = () => {
             </span>
           </div>
           {hasSubscription && store.subscription ? (
-            <div className="ml-8 space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="text-[14px] font-medium text-green-600 bg-green-500/10 px-2.5 py-0.5 rounded-full">
-                  {lang === "ru" ? "Активна" : "Active"}
-                </span>
-                <span className="text-[14px] text-muted-foreground">
-                  {store.subscription.plan === "monthly"
-                    ? (lang === "ru" ? "Месячная" : "Monthly")
-                    : (lang === "ru" ? "Годовая" : "Yearly")}
-                </span>
+            <div className="ml-8 flex items-start justify-between">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-[14px] font-medium text-green-600 bg-green-500/10 px-2.5 py-0.5 rounded-full">
+                    {lang === "ru" ? "Активна" : "Active"}
+                  </span>
+                  <span className="text-[14px] text-muted-foreground">
+                    {store.subscription.plan === "monthly"
+                      ? (lang === "ru" ? "Месячная" : "Monthly")
+                      : (lang === "ru" ? "Годовая" : "Yearly")}
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
+                  <Calendar className="w-3.5 h-3.5" />
+                  {lang === "ru" ? "до" : "until"} {formatDate(store.subscription.endDate)}
+                </div>
+                <p className="text-[14px] font-semibold text-foreground">{store.subscription.price}</p>
               </div>
-              <div className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
-                <Calendar className="w-3.5 h-3.5" />
-                {lang === "ru" ? "до" : "until"} {formatDate(store.subscription.endDate)}
-              </div>
-              <p className="text-[14px] font-semibold text-foreground">{store.subscription.price}</p>
               {store.subscription.plan === "monthly" && (
                 <Button
                   size="sm"
-                  className="mt-2 rounded-lg text-[13px] h-8 px-4"
+                  className="rounded-lg text-[13px] h-8 px-4"
                   onClick={() => setUpgradeOpen(true)}
                 >
                   {lang === "ru" ? "Улучшить подписку" : "Upgrade subscription"}
