@@ -15,12 +15,13 @@ import {
   Pencil,
   Receipt,
 } from "lucide-react";
+import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 
 const Profile = () => {
   const { lang } = useLanguage();
   const navigate = useNavigate();
   const [user, setUser] = useState<SupaUser | null>(null);
-  const [isReset, setIsReset] = useState(() => localStorage.getItem("demo_reset") === "true");
+  const store = usePurchaseStore();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -33,13 +34,7 @@ const Profile = () => {
       setUser(session?.user ?? null);
       if (!session?.user) navigate("/auth");
     });
-
-    const handleReset = () => setIsReset(true);
-    window.addEventListener("demo_reset", handleReset);
-    return () => {
-      subscription.unsubscribe();
-      window.removeEventListener("demo_reset", handleReset);
-    };
+    return () => subscription.unsubscribe();
   }, [navigate]);
 
   const handleLogout = async () => {
@@ -50,48 +45,8 @@ const Profile = () => {
     ? user.email.substring(0, 2).toUpperCase()
     : "U";
 
-  const subscription_data = isReset
-    ? { active: false, plan: "", price: "", startDate: "", endDate: "", autoRenew: false }
-    : {
-        active: true,
-        plan: lang === "ru" ? "Годовой план" : "Yearly Plan",
-        price: lang === "ru" ? "4 990 ₽/год" : "$49.90/year",
-        startDate: "2025-01-15",
-        endDate: "2026-01-15",
-        autoRenew: true,
-      };
-
-  const transactions = isReset
-    ? []
-    : [
-        {
-          id: "1",
-          dateRu: "15 янв 2025",
-          dateEn: "Jan 15, 2025",
-          descRu: "Годовая подписка Premium",
-          descEn: "Yearly Premium Subscription",
-          amount: lang === "ru" ? "4 990 ₽" : "$49.90",
-          type: "subscription" as const,
-        },
-        {
-          id: "2",
-          dateRu: "20 фев 2025",
-          dateEn: "Feb 20, 2025",
-          descRu: "Курс «Основы криптовалют»",
-          descEn: "Course \"Crypto Basics\"",
-          amount: lang === "ru" ? "1 490 ₽" : "$14.90",
-          type: "purchase" as const,
-        },
-        {
-          id: "3",
-          dateRu: "5 мар 2025",
-          dateEn: "Mar 5, 2025",
-          descRu: "Курс «AI для начинающих»",
-          descEn: "Course \"AI for Beginners\"",
-          amount: lang === "ru" ? "990 ₽" : "$9.90",
-          type: "purchase" as const,
-        },
-      ];
+  const subscription_data = store.subscription;
+  const transactions = store.transactions;
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-6 md:py-10">
