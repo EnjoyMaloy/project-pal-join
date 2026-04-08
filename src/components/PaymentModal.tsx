@@ -3,7 +3,7 @@ import mascotSuccess from "@/assets/mascot-success.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Sparkles, Zap, Check, Crown, CreditCard, ChevronLeft } from "lucide-react";
+import { X, Sparkles, Zap, Check, Crown, CreditCard, ChevronLeft, Bitcoin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { purchaseCourse, purchaseSubscription } from "@/hooks/usePurchaseStore";
 
@@ -23,6 +23,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState<PlanId>("single");
   const [step, setStep] = useState<Step>("plan");
+  const [paymentMethod, setPaymentMethod] = useState<"card" | "crypto">("card");
 
   const courseTitle = lang === "ru" ? courseTitleRu : courseTitleEn;
 
@@ -205,7 +206,12 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
         ) : (
           <div className="px-5 py-5 space-y-4">
             <button
-              className="w-full border-2 border-primary rounded-xl px-5 py-5 flex flex-col items-center gap-2 bg-primary/5 transition-all"
+              className={`w-full rounded-xl px-5 py-5 flex flex-col items-center gap-2 transition-all ${
+                paymentMethod === "card"
+                  ? "border-2 border-primary bg-primary/5"
+                  : "border-2 border-border hover:border-muted-foreground/30"
+              }`}
+              onClick={() => setPaymentMethod("card")}
             >
               <CreditCard className="w-6 h-6 text-primary" />
               <span className="text-[15px] font-semibold text-foreground">
@@ -213,6 +219,21 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               </span>
               <span className="text-[13px] text-muted-foreground">Visa, Mastercard, Maestro</span>
             </button>
+
+            {lang === "en" && (
+              <button
+                className={`w-full rounded-xl px-5 py-5 flex flex-col items-center gap-2 transition-all ${
+                  paymentMethod === "crypto"
+                    ? "border-2 border-primary bg-primary/5"
+                    : "border-2 border-border hover:border-muted-foreground/30"
+                }`}
+                onClick={() => setPaymentMethod("crypto")}
+              >
+                <Bitcoin className="w-6 h-6 text-primary" />
+                <span className="text-[15px] font-semibold text-foreground">Cryptocurrency</span>
+                <span className="text-[13px] text-muted-foreground">BTC, ETH, USDT, TON</span>
+              </button>
+            )}
 
             <div className="bg-muted/50 rounded-xl px-4 py-3.5 flex items-center justify-between">
               <span className="text-[15px] text-foreground">
