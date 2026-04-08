@@ -7,18 +7,20 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
-  Mail,
-  Send,
-  Wallet,
   Crown,
   LogOut,
   Pencil,
   Receipt,
+  Globe,
+  Volume2,
+  Bell,
+  ChevronDown,
 } from "lucide-react";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
+import { Switch } from "@/components/ui/switch";
 
 const Profile = () => {
-  const { lang } = useLanguage();
+  const { lang, setLang } = useLanguage();
   const navigate = useNavigate();
   const [user, setUser] = useState<SupaUser | null>(null);
   const store = usePurchaseStore();
@@ -67,23 +69,26 @@ const Profile = () => {
           </h2>
 
           <div className="border border-border rounded-2xl p-6">
-            {/* Avatar */}
-            <div className="flex flex-col items-center mb-6">
-              <Avatar className="w-24 h-24 mb-4">
+            {/* Avatar + Name + Buttons row */}
+            <div className="flex items-center gap-5">
+              <Avatar className="w-20 h-20 flex-shrink-0">
                 <AvatarImage src={user?.user_metadata?.avatar_url} />
-                <AvatarFallback className="bg-muted text-foreground text-[28px] font-semibold">
+                <AvatarFallback className="bg-muted text-foreground text-[24px] font-semibold">
                   {userInitials}
                 </AvatarFallback>
               </Avatar>
 
-              <div className="flex gap-3">
+              <div className="flex items-center gap-3 flex-wrap">
+                <p className="text-[20px] font-bold text-foreground">
+                  {user?.user_metadata?.full_name || user?.email?.split("@")[0] || "User"}
+                </p>
                 <Button
                   variant="outline"
                   size="sm"
                   className="rounded-full text-[13px] gap-1.5"
                 >
                   <Pencil className="w-3.5 h-3.5" />
-                  {lang === "ru" ? "Изменить аватар" : "Change avatar"}
+                  {lang === "ru" ? "Изменить аватар" : "Change the avatar"}
                 </Button>
                 <Button
                   variant="outline"
@@ -96,42 +101,52 @@ const Profile = () => {
                 </Button>
               </div>
             </div>
+          </div>
 
-            {/* Info fields */}
-            <div className="space-y-5">
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-4 h-4 text-muted-foreground" />
-                </div>
-                <div>
-                  <p className="text-[13px] text-muted-foreground">Email</p>
-                  <p className="text-[15px] font-medium text-foreground">
-                    {user?.email || "—"}
-                  </p>
-                </div>
-              </div>
+          {/* Settings */}
+          <h2 className="text-[22px] font-bold text-foreground mt-8 mb-5">
+            {lang === "ru" ? "Настройки" : "Settings"}
+          </h2>
 
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                  <Send className="w-4 h-4 text-muted-foreground" />
-                </div>
-                <div>
-                  <p className="text-[13px] text-muted-foreground">Telegram</p>
-                  <p className="text-[15px] font-medium text-foreground">—</p>
-                </div>
+          <div className="border border-border rounded-2xl divide-y divide-border">
+            {/* Language */}
+            <div className="flex items-center justify-between px-6 py-5">
+              <div className="flex items-center gap-3">
+                <Globe className="w-5 h-5 text-foreground" />
+                <span className="text-[16px] font-medium text-foreground">
+                  {lang === "ru" ? "Язык" : "Language"}
+                </span>
               </div>
+              <button
+                onClick={() => setLang(lang === "ru" ? "en" : "ru")}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border text-[14px] font-medium text-foreground hover:bg-muted transition-colors"
+              >
+                <span>{lang === "ru" ? "🇷🇺" : "🇬🇧"}</span>
+                {lang.toUpperCase()}
+                <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
+              </button>
+            </div>
 
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
-                  <Wallet className="w-4 h-4 text-muted-foreground" />
-                </div>
-                <div>
-                  <p className="text-[13px] text-muted-foreground">
-                    {lang === "ru" ? "Кошелёк" : "Wallet"}
-                  </p>
-                  <p className="text-[15px] font-medium text-foreground">—</p>
-                </div>
+            {/* Sounds */}
+            <div className="flex items-center justify-between px-6 py-5">
+              <div className="flex items-center gap-3">
+                <Volume2 className="w-5 h-5 text-foreground" />
+                <span className="text-[16px] font-medium text-foreground">
+                  {lang === "ru" ? "Звуки" : "Sounds"}
+                </span>
               </div>
+              <Switch />
+            </div>
+
+            {/* Notifications */}
+            <div className="flex items-center justify-between px-6 py-5">
+              <div className="flex items-center gap-3">
+                <Bell className="w-5 h-5 text-foreground" />
+                <span className="text-[16px] font-medium text-foreground">
+                  {lang === "ru" ? "Оповещения" : "Notifications"}
+                </span>
+              </div>
+              <Switch />
             </div>
           </div>
         </div>
