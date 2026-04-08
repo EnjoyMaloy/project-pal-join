@@ -59,11 +59,6 @@ const CourseCard = ({
                 Premium
               </span>
             )}
-            {!isOwned && isNew && (
-              <span className="inline-flex items-center justify-center rounded-full bg-[#F65C39] border border-[rgba(76,1,1,0.06)] px-2 py-[5px] text-body-12 font-semibold text-primary-foreground">
-                NEW
-              </span>
-            )}
             {!isOwned && premium && (
               <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(146,76,254,0.1)] px-2 py-[5px] text-body-12 font-medium text-violet-super-dark"
                 style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF" }}
