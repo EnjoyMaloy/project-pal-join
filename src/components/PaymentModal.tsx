@@ -3,18 +3,21 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { X, Sparkles, Zap, Check, Crown, CreditCard, ChevronLeft } from "lucide-react";
+import { purchaseCourse, purchaseSubscription } from "@/hooks/usePurchaseStore";
+import { toast } from "sonner";
 
 interface PaymentModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   courseTitleRu: string;
   courseTitleEn: string;
+  courseId: string;
 }
 
 type PlanId = "single" | "monthly" | "yearly";
 type Step = "plan" | "payment";
 
-const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn }: PaymentModalProps) => {
+const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, courseId }: PaymentModalProps) => {
   const { lang } = useLanguage();
   const [selectedPlan, setSelectedPlan] = useState<PlanId>("single");
   const [step, setStep] = useState<Step>("plan");
@@ -179,7 +182,19 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn }: Paym
             </div>
 
             {/* Confirm */}
-            <Button className="w-full h-11 rounded-xl text-[15px] font-semibold gap-2">
+            <Button
+              className="w-full h-11 rounded-xl text-[15px] font-semibold gap-2"
+              onClick={() => {
+                const priceLabel = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                if (selectedPlan === "single") {
+                  purchaseCourse(courseId, courseTitleRu, courseTitleEn, priceLabel);
+                } else {
+                  purchaseSubscription(selectedPlan, priceLabel);
+                }
+                toast.success(lang === "ru" ? "Оплата прошла успешно!" : "Payment successful!");
+                handleClose(false);
+              }}
+            >
               <Zap className="w-4 h-4" />
               {lang === "ru" ? "Подтвердить оплату" : "Confirm payment"}
             </Button>

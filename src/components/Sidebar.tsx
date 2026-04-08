@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Home, Circle, BookOpen, ClipboardList, Coins, Users, FileText, PanelLeftClose, PanelLeft, RotateCcw } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { resetPurchaseStore } from "@/hooks/usePurchaseStore";
 import logo from "@/assets/logo.png";
 
 const Sidebar = () => {
@@ -110,8 +111,7 @@ const Sidebar = () => {
           <button
             onClick={() => {
               if (window.confirm(lang === "ru" ? "Сбросить данные подписок и курсов?" : "Reset subscriptions and courses data?")) {
-                localStorage.setItem("demo_reset", "true");
-                window.dispatchEvent(new Event("demo_reset"));
+                resetPurchaseStore();
               }
             }}
             className={`flex items-center gap-3 px-3 h-9 rounded-lg text-[16px] font-normal leading-none transition-colors text-destructive hover:bg-destructive/10 w-full ${collapsed ? "justify-center" : ""}`}

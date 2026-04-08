@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { ChevronDown, Star, Users, LayoutGrid, Crown } from "lucide-react";
+import { ChevronDown, Star, Users, LayoutGrid, Crown, CheckCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Sparkles, Bitcoin, ShieldCheck, BarChart3, PieChart, Snowflake, Wrench } from "lucide-react";
+import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 
 interface CategoryItem {
   id: string;
@@ -55,6 +56,7 @@ const Catalog = () => {
   const [sortOpen, setSortOpen] = useState(false);
   const [sortBy, setSortBy] = useState<"newest" | "popular">("newest");
   const [catDropdownOpen, setCatDropdownOpen] = useState(false);
+  const store = usePurchaseStore();
 
   const filteredCourses = courses.filter((c) => {
     const matchesCategory = !selectedCategory || c.categoryId === selectedCategory;
@@ -175,7 +177,12 @@ const Catalog = () => {
 
         {/* Course cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {sortedCourses.map((course) => (
+          {sortedCourses.map((course) => {
+            const isPurchased = store.purchasedCourses.includes(course.id);
+            const hasSubscription = store.subscription?.active;
+            const isOwned = isPurchased || (course.premium && hasSubscription);
+
+            return (
             <div
               key={course.id}
               onClick={() => course.premium ? navigate(`/course/${course.id}`) : undefined}
@@ -189,12 +196,17 @@ const Catalog = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
-                {course.premium && (
+                {isOwned ? (
+                  <span className="absolute top-2.5 left-2.5 inline-flex items-center gap-1 rounded-full bg-green-500 px-2.5 py-1 text-[12px] font-semibold text-white">
+                    <CheckCircle className="w-3 h-3" />
+                    {lang === "ru" ? "Куплено" : "Purchased"}
+                  </span>
+                ) : course.premium ? (
                   <span className="absolute top-2.5 left-2.5 inline-flex items-center gap-1 rounded-full bg-[hsl(var(--primary))] px-2.5 py-1 text-[12px] font-semibold text-primary-foreground">
                     <Crown className="w-3 h-3" />
                     Premium
                   </span>
-                )}
+                ) : null}
               </div>
 
               {/* Content */}
@@ -228,7 +240,8 @@ const Catalog = () => {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {sortedCourses.length === 0 && (
