@@ -3,7 +3,7 @@ import mascotSuccess from "@/assets/mascot-success.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Sparkles, Zap, Check, Crown, CreditCard, ChevronLeft } from "lucide-react";
+import { X, Sparkles, Zap, Check, Crown, CreditCard, ChevronLeft, Bitcoin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { purchaseCourse, purchaseSubscription } from "@/hooks/usePurchaseStore";
 
