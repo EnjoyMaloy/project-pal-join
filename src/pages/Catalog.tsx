@@ -56,6 +56,7 @@ const Catalog = () => {
   const [sortOpen, setSortOpen] = useState(false);
   const [sortBy, setSortBy] = useState<"newest" | "popular">("newest");
   const [catDropdownOpen, setCatDropdownOpen] = useState(false);
+  const store = usePurchaseStore();
 
   const filteredCourses = courses.filter((c) => {
     const matchesCategory = !selectedCategory || c.categoryId === selectedCategory;
