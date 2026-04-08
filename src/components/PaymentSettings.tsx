@@ -1,6 +1,8 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePurchaseStore, type Transaction, type SubscriptionData } from "@/hooks/usePurchaseStore";
 import { Crown, BookOpen, Receipt, Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const PaymentSettings = () => {
   const { lang } = useLanguage();
