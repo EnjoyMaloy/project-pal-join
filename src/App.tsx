@@ -16,6 +16,7 @@ import Instructions from "./pages/Instructions.tsx";
 import ArticleView from "./pages/ArticleView.tsx";
 import Catalog from "./pages/Catalog.tsx";
 import CourseView from "./pages/CourseView.tsx";
+import Profile from "./pages/Profile.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
