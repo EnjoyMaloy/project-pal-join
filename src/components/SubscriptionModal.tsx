@@ -67,7 +67,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[440px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl shadow-2xl [&>button.absolute]:hidden">
+      <DialogContent className="sm:max-w-[440px] max-h-[90vh] p-0 gap-0 overflow-hidden border-0 rounded-2xl shadow-2xl [&>button.absolute]:hidden">
         {/* ── Header ── */}
         <div className="relative bg-gradient-to-br from-violet-dark via-primary to-violet-light px-6 pt-10 pb-8 text-center rounded-t-2xl overflow-hidden">
           {/* decorative blur circles */}
