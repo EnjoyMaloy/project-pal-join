@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { ChevronDown, Star, Users, LayoutGrid, Crown, CheckCircle } from "lucide-react";
+import { ChevronDown, LayoutGrid } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Sparkles, Bitcoin, ShieldCheck, BarChart3, PieChart, Snowflake, Wrench } from "lucide-react";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
+import CourseCard from "@/components/CourseCard";
 
 interface CategoryItem {
   id: string;
