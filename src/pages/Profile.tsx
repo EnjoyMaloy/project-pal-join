@@ -150,7 +150,6 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        </div>
 
         {/* Right — Subscriptions */}
         <div>
