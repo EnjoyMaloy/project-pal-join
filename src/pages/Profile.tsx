@@ -20,7 +20,7 @@ import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import { Switch } from "@/components/ui/switch";
 
 const Profile = () => {
-  const { lang } = useLanguage();
+  const { lang, setLang } = useLanguage();
   const navigate = useNavigate();
   const [user, setUser] = useState<SupaUser | null>(null);
   const store = usePurchaseStore();
