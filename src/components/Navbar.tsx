@@ -1,11 +1,12 @@
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { LogIn, LogOut, Search, Sun, Moon } from "lucide-react";
+import { LogIn, LogOut, Search, Sun, Moon, Crown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import type { User as SupaUser } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Navbar = () => {
   const [user, setUser] = useState<SupaUser | null>(null);
@@ -33,6 +34,8 @@ const Navbar = () => {
     await supabase.auth.signOut();
   };
 
+  const userInitials = user?.email ? user.email.substring(0, 2).toUpperCase() : "U";
+
   return (
     <nav className={`sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-16 md:h-14 border-b-0 md:border-b md:border-border ${isArticleView || isMyCourses ? 'hidden md:block' : ''}`}>
       <div className="max-w-full mx-auto px-4 flex items-center justify-between h-16 md:h-14 gap-4 pt-1 md:pt-0">
@@ -57,7 +60,7 @@ const Navbar = () => {
         ) : (
           <div />
         )}
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-3">
           {/* Theme toggle */}
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -82,19 +85,29 @@ const Navbar = () => {
             </button>
           </div>
 
+          {/* Buy subscription button */}
+          <button
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-violet-dark via-violet-mid to-violet-light text-primary-foreground text-[14px] font-semibold shadow-md hover:shadow-lg hover:brightness-110 transition-all"
+          >
+            <Crown className="w-4 h-4" />
+            {lang === "ru" ? "Купить подписку" : "Buy subscription"}
+          </button>
+
+          {/* Profile avatar / Auth */}
           {user ? (
-            <>
-              <Button variant="ghost" size="sm" onClick={handleLogout} className="text-body-14">
-                <LogOut className="w-4 h-4 mr-1" />
-                {t("nav.logout")}
-              </Button>
-            </>
+            <Avatar className="w-9 h-9 cursor-pointer ring-2 ring-border hover:ring-primary/40 transition-all" onClick={handleLogout}>
+              <AvatarImage src={user.user_metadata?.avatar_url} />
+              <AvatarFallback className="bg-muted text-foreground text-[13px] font-medium">
+                {userInitials}
+              </AvatarFallback>
+            </Avatar>
           ) : (
             <Link to="/auth">
-              <Button variant="ghost" size="sm" className="text-body-14">
-                <LogIn className="w-4 h-4 mr-1" />
-                {t("nav.login")}
-              </Button>
+              <Avatar className="w-9 h-9 cursor-pointer ring-2 ring-border hover:ring-primary/40 transition-all">
+                <AvatarFallback className="bg-muted text-muted-foreground text-[13px] font-medium">
+                  <LogIn className="w-4 h-4" />
+                </AvatarFallback>
+              </Avatar>
             </Link>
           )}
         </div>
