@@ -62,7 +62,17 @@ const CourseCard = ({
                 NEW
               </span>
             )}
-            {!isOwned && trending && (
+            {!isOwned && premium && (
+              <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(146,76,254,0.1)] px-2 py-[5px] text-body-12 font-medium text-violet-super-dark"
+                style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF" }}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 1.75C6.65 1.75 6.3175 1.89 6.07 2.1375L5.25 2.9575L4.43 2.1375C3.9025 1.61 3.0975 1.61 2.57 2.1375C2.0425 2.665 2.0425 3.47 2.57 3.9975L5.25 6.6775L3.5 8.4275V10.5H5.5725L7 9.0725L8.4275 10.5H10.5V8.4275L8.75 6.6775L11.43 3.9975C11.9575 3.47 11.9575 2.665 11.43 2.1375C10.9025 1.61 10.0975 1.61 9.57 2.1375L8.75 2.9575L7.93 2.1375C7.6825 1.89 7.35 1.75 7 1.75Z" fill="hsl(280 92% 21%)" />
+                </svg>
+                Premium
+              </span>
+            )}
+            {!isOwned && !premium && trending && (
               <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(146,76,254,0.1)] px-2 py-[5px] text-body-12 font-medium text-violet-super-dark"
                 style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF" }}
               >
