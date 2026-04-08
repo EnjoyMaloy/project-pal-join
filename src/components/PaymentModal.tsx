@@ -182,7 +182,19 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
             </div>
 
             {/* Confirm */}
-            <Button className="w-full h-11 rounded-xl text-[15px] font-semibold gap-2">
+            <Button
+              className="w-full h-11 rounded-xl text-[15px] font-semibold gap-2"
+              onClick={() => {
+                const priceLabel = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                if (selectedPlan === "single") {
+                  purchaseCourse(courseId, courseTitleRu, courseTitleEn, priceLabel);
+                } else {
+                  purchaseSubscription(selectedPlan, priceLabel);
+                }
+                toast.success(lang === "ru" ? "Оплата прошла успешно!" : "Payment successful!");
+                handleClose(false);
+              }}
+            >
               <Zap className="w-4 h-4" />
               {lang === "ru" ? "Подтвердить оплату" : "Confirm payment"}
             </Button>

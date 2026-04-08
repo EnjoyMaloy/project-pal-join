@@ -158,7 +158,18 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
         {/* ── CTA ── */}
         <div className="px-5 pb-6 pt-4">
-          <button className="w-full h-12 rounded-xl text-[15px] font-bold text-primary-foreground bg-gradient-to-r from-violet-dark to-primary hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/25">
+          <button
+            onClick={() => {
+              const plan = plans.find(p => p.id === selectedPlan)!;
+              const priceLabel = lang === "ru"
+                ? `${plan.priceRu}${plan.subRu}`
+                : `${plan.priceEn}${plan.subEn}`;
+              purchaseSubscription(selectedPlan, priceLabel);
+              toast.success(lang === "ru" ? "Подписка оформлена!" : "Subscription activated!");
+              onOpenChange(false);
+            }}
+            className="w-full h-12 rounded-xl text-[15px] font-bold text-primary-foreground bg-gradient-to-r from-violet-dark to-primary hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/25"
+          >
             <Zap className="w-4 h-4" />
             {lang === "ru" ? "Купить подписку" : "Buy Subscription"}
           </button>

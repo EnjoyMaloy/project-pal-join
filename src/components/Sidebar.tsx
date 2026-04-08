@@ -110,8 +110,7 @@ const Sidebar = () => {
           <button
             onClick={() => {
               if (window.confirm(lang === "ru" ? "Сбросить данные подписок и курсов?" : "Reset subscriptions and courses data?")) {
-                localStorage.setItem("demo_reset", "true");
-                window.dispatchEvent(new Event("demo_reset"));
+                resetPurchaseStore();
               }
             }}
             className={`flex items-center gap-3 px-3 h-9 rounded-lg text-[16px] font-normal leading-none transition-colors text-destructive hover:bg-destructive/10 w-full ${collapsed ? "justify-center" : ""}`}
