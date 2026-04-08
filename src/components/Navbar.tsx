@@ -8,10 +8,13 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SubscriptionModal from "@/components/SubscriptionModal";
+import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 
 const Navbar = () => {
   const [user, setUser] = useState<SupaUser | null>(null);
   const [subModalOpen, setSubModalOpen] = useState(false);
+  const store = usePurchaseStore();
+  const hasSubscription = store.subscription?.active;
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const isInstructions = location.pathname === "/instructions";
@@ -88,13 +91,15 @@ const Navbar = () => {
           </div>
 
           {/* Buy subscription button */}
-          <button
-            onClick={() => setSubModalOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-violet-dark via-violet-mid to-violet-light text-primary-foreground text-[14px] font-semibold shadow-md hover:shadow-lg hover:brightness-110 transition-all"
-          >
-            <Crown className="w-4 h-4" />
-            {lang === "ru" ? "Купить подписку" : "Buy subscription"}
-          </button>
+          {!hasSubscription && (
+            <button
+              onClick={() => setSubModalOpen(true)}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-violet-dark via-violet-mid to-violet-light text-primary-foreground text-[14px] font-semibold shadow-md hover:shadow-lg hover:brightness-110 transition-all"
+            >
+              <Crown className="w-4 h-4" />
+              {lang === "ru" ? "Купить подписку" : "Buy subscription"}
+            </button>
+          )}
           <SubscriptionModal open={subModalOpen} onOpenChange={setSubModalOpen} />
 
           {/* Profile avatar / Auth */}
