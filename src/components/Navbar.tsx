@@ -8,6 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SubscriptionModal from "@/components/SubscriptionModal";
+import PremiumAvatarWrapper from "@/components/PremiumAvatarWrapper";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 
 const Navbar = () => {
