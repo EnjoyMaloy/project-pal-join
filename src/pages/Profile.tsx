@@ -134,7 +134,7 @@ const Profile = () => {
             {lang === "ru" ? "Настройки" : "Settings"}
           </h2>
 
-          <div className="border border-border rounded-2xl divide-y divide-border">
+          <div className="bg-[hsl(var(--muted))] rounded-2xl divide-y divide-border/50">
             {/* Language */}
             <div className="flex items-center justify-between px-6 py-5">
               <div className="flex items-center gap-3">
