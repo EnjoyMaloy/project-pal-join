@@ -6,8 +6,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
-  ArrowLeft,
-  Crown,
   LogOut,
   Pencil,
   Globe,
@@ -17,9 +15,6 @@ import {
   Mail,
   Send,
   Wallet,
-  BookOpen,
-  Clock,
-  Trophy,
 } from "lucide-react";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import { Switch } from "@/components/ui/switch";
@@ -170,74 +165,77 @@ const Profile = () => {
         </div>
 
         {/* Right column */}
-        <div>
+        <div className="flex flex-col gap-[60px]">
           {/* Portfolio */}
-          <h2 className="text-[22px] font-bold text-foreground mb-5">
-            {lang === "ru" ? "Портфолио" : "Portfolio"}
-          </h2>
-
-          <div className="mb-8">
-            <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-              <span className="text-[18px]">🎨</span>
-            </div>
+          <div className="flex flex-col gap-6">
+            <h2 className="text-[24px] font-medium leading-[90%] text-[#000000]">
+              {lang === "ru" ? "Портфолио" : "Portfolio"}
+            </h2>
+            <p className="text-[18px] font-normal leading-[120%] text-[#8D8D8D]">
+              {lang === "ru" ? "Ваше портфолио пусто" : "Your portfolio is empty"}
+            </p>
           </div>
 
-          {/* Learning statistics */}
-          <h2 className="text-[22px] font-bold text-foreground mb-5">
-            {lang === "ru" ? "Статистика обучения" : "Learning Statistics"}
-          </h2>
-
-          <div className="mb-4">
-            <button className="flex items-center gap-2 px-4 py-2 rounded-full border border-border text-[14px] font-medium text-foreground hover:bg-muted transition-colors">
-              {lang === "ru" ? "За все время" : "All time"}
-              <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 mb-8">
-            <div className="border border-border rounded-2xl p-5 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-[hsl(var(--destructive)/0.1)] flex items-center justify-center flex-shrink-0">
-                <BookOpen className="w-5 h-5 text-[hsl(var(--destructive))]" />
-              </div>
-              <div>
-                <p className="text-[13px] text-muted-foreground leading-tight">
-                  {lang === "ru" ? "Пройдено уроков" : "Lessons completed"}
-                </p>
-                <p className="text-[24px] font-bold text-foreground">24</p>
-              </div>
+          {/* Training statistics */}
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
+              <h2 className="text-[24px] font-medium leading-[90%] text-[#000000]">
+                {lang === "ru" ? "Статистика обучения" : "Training statistics"}
+              </h2>
+              <button className="flex items-center justify-center gap-1 px-4 h-9 w-fit border border-[#EBE9EA] rounded-[10px] text-[18px] font-normal leading-[120%] text-[#464646] hover:bg-muted transition-colors">
+                {lang === "ru" ? "За 30 дней" : "Last 30 days"}
+                <ChevronDown className="w-3.5 h-3.5 text-[#464646]" />
+              </button>
             </div>
-            <div className="border border-border rounded-2xl p-5 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-[hsl(var(--primary)/0.1)] flex items-center justify-center flex-shrink-0">
-                <Clock className="w-5 h-5 text-[hsl(var(--primary))]" />
+
+            <div className="flex flex-col gap-5">
+              <p className="text-[18px] font-normal leading-[120%] text-[#8D8D8D]">
+                {lang === "ru"
+                  ? "Вы ещё не прошли ни одного урока. Начните обучение прямо сейчас:"
+                  : <>You haven't completed any lessons yet. <span className="text-[#000000] font-medium">Start your learning</span> right now:</>}
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { label: lang === "ru" ? "Торговля криптой" : "Trading in Crypto", bg: "rgba(255, 176, 158, 0.5)", color: "#E93F18" },
+                  { label: lang === "ru" ? "Финансовая безопасность" : "Financial Security", bg: "rgba(217, 192, 255, 0.5)", color: "#924CFE" },
+                  { label: lang === "ru" ? "Web3 технологии" : "Web3 Technologies", bg: "rgba(194, 244, 232, 0.5)", color: "#00A28E" },
+                  { label: lang === "ru" ? "Инвестиции" : "Investments", bg: "rgba(255, 247, 172, 0.5)", color: "#AD9C00" },
+                ].map((cat, i) => (
+                  <span
+                    key={i}
+                    className="inline-flex items-center justify-center px-5 py-4 rounded-full text-[22px] font-normal leading-[100%]"
+                    style={{ background: cat.bg, color: cat.color }}
+                  >
+                    {cat.label}
+                  </span>
+                ))}
               </div>
-              <div>
-                <p className="text-[13px] text-muted-foreground leading-tight">
-                  {lang === "ru" ? "Минут образования" : "Minutes of learning"}
-                </p>
-                <p className="text-[24px] font-bold text-foreground">120</p>
+              <div className="flex gap-2">
+                {[
+                  { label: lang === "ru" ? "Мемкоины и NFT" : "Memecoins & NFTs", bg: "rgba(253, 192, 221, 0.5)", color: "#E90874" },
+                  { label: lang === "ru" ? "Telegram и TON" : "Telegram & TON", bg: "rgba(205, 243, 255, 0.5)", color: "#69AFEB" },
+                ].map((cat, i) => (
+                  <span
+                    key={i}
+                    className="inline-flex items-center justify-center px-5 py-4 rounded-full text-[22px] font-normal leading-[100%]"
+                    style={{ background: cat.bg, color: cat.color }}
+                  >
+                    {cat.label}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
 
           {/* Achievements */}
-          <h2 className="text-[22px] font-bold text-foreground mb-5">
-            {lang === "ru" ? "Достижения" : "Achievements"}
-          </h2>
-
-          <div className="flex gap-3 overflow-x-auto pb-2">
-            {[
-              { emoji: "🛒", bg: "bg-red-50 dark:bg-red-950/30" },
-              { emoji: "🏔️", bg: "bg-blue-50 dark:bg-blue-950/30" },
-              { emoji: "💯", bg: "bg-yellow-50 dark:bg-yellow-950/30" },
-              { emoji: "🧭", bg: "bg-pink-50 dark:bg-pink-950/30" },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className={`w-24 h-24 rounded-2xl ${item.bg} flex items-center justify-center flex-shrink-0`}
-              >
-                <span className="text-[40px]">{item.emoji}</span>
-              </div>
-            ))}
+          <div className="flex flex-col gap-6">
+            <h2 className="text-[24px] font-medium leading-[90%] text-[#000000]">
+              {lang === "ru" ? "Достижения" : "Achievements"}
+            </h2>
+            <p className="text-[18px] font-normal leading-[120%] text-[#8D8D8D]">
+              {lang === "ru" ? "Вы ещё не заработали ни одного достижения" : "You haven't earned any achievements yet"}
+            </p>
           </div>
         </div>
       </div>
