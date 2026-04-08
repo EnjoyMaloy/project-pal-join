@@ -1,13 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Circle, BookOpen, ClipboardList, Coins, Users, FileText, PanelLeftClose, PanelLeft } from "lucide-react";
+import { Home, Circle, BookOpen, ClipboardList, Coins, Users, FileText, PanelLeftClose, PanelLeft, RotateCcw } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/logo.png";
 
 const Sidebar = () => {
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const menuGroup1 = [
     { label: t("sidebar.home"), icon: Home, path: "/", disabled: true },
@@ -104,6 +105,23 @@ const Sidebar = () => {
 
         <div className="flex flex-col gap-1.5">
           {menuGroup3.map(renderItem)}
+        </div>
+
+        <div className="mt-auto pb-6">
+          <button
+            onClick={async () => {
+              if (window.confirm(lang === "ru" ? "Сбросить все данные? Вы будете разлогинены." : "Reset all data? You will be logged out.")) {
+                await supabase.auth.signOut();
+                localStorage.clear();
+                sessionStorage.clear();
+                window.location.href = "/";
+              }
+            }}
+            className={`flex items-center gap-3 px-3 h-9 rounded-lg text-[16px] font-normal leading-none transition-colors text-destructive hover:bg-destructive/10 w-full ${collapsed ? "justify-center" : ""}`}
+          >
+            <RotateCcw className="w-[18px] h-[18px] flex-shrink-0" />
+            {!collapsed && <span className="truncate">{lang === "ru" ? "Сбросить всё" : "Reset all"}</span>}
+          </button>
         </div>
       </div>
     </aside>
