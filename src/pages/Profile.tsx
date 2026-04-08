@@ -7,15 +7,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
-  Mail,
-  Send,
-  Wallet,
   Crown,
   LogOut,
   Pencil,
   Receipt,
+  Globe,
+  Volume2,
+  Bell,
+  ChevronDown,
 } from "lucide-react";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
+import { Switch } from "@/components/ui/switch";
 
 const Profile = () => {
   const { lang } = useLanguage();
