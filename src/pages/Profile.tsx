@@ -26,6 +26,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<SupaUser | null>(null);
   const store = usePurchaseStore();
+  const hasSubscription = store.subscription?.active;
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
