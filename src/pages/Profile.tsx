@@ -188,14 +188,14 @@ const Profile = () => {
           </h2>
 
           <div className="border border-border rounded-2xl p-6">
-            {subscription.active ? (
+            {subscription_data.active ? (
               <div>
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-11 h-11 rounded-full bg-gradient-to-br from-violet-dark to-violet-light flex items-center justify-center">
                     <Crown className="w-5 h-5 text-primary-foreground" />
                   </div>
                   <div>
-                    <p className="text-[16px] font-semibold text-foreground">{subscription.plan}</p>
+                    <p className="text-[16px] font-semibold text-foreground">{subscription_data.plan}</p>
                     <span className="inline-block mt-0.5 text-[12px] font-medium text-primary bg-primary/10 rounded-full px-2 py-0.5">
                       {lang === "ru" ? "Активна" : "Active"}
                     </span>
@@ -205,19 +205,19 @@ const Profile = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between text-[14px]">
                     <span className="text-muted-foreground">{lang === "ru" ? "Стоимость" : "Price"}</span>
-                    <span className="font-medium text-foreground">{subscription.price}</span>
+                    <span className="font-medium text-foreground">{subscription_data.price}</span>
                   </div>
                   <div className="flex justify-between text-[14px]">
                     <span className="text-muted-foreground">{lang === "ru" ? "Начало" : "Started"}</span>
-                    <span className="font-medium text-foreground">{subscription.startDate}</span>
+                    <span className="font-medium text-foreground">{subscription_data.startDate}</span>
                   </div>
                   <div className="flex justify-between text-[14px]">
                     <span className="text-muted-foreground">{lang === "ru" ? "Окончание" : "Expires"}</span>
-                    <span className="font-medium text-foreground">{subscription.endDate}</span>
+                    <span className="font-medium text-foreground">{subscription_data.endDate}</span>
                   </div>
                   <div className="flex justify-between text-[14px]">
                     <span className="text-muted-foreground">{lang === "ru" ? "Автопродление" : "Auto-renew"}</span>
-                    <span className="font-medium text-foreground">{subscription.autoRenew ? "✓" : "✗"}</span>
+                    <span className="font-medium text-foreground">{subscription_data.autoRenew ? "✓" : "✗"}</span>
                   </div>
                 </div>
               </div>
