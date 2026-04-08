@@ -20,6 +20,7 @@ type Step = "plan" | "payment" | "success";
 
 const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, courseId }: PaymentModalProps) => {
   const { lang } = useLanguage();
+  const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState<PlanId>("single");
   const [step, setStep] = useState<Step>("plan");
 
