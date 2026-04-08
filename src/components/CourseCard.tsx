@@ -1,4 +1,4 @@
-import { Star, Users, LayoutGrid, Bookmark, CheckCircle } from "lucide-react";
+import { Star, Users, LayoutGrid, Bookmark, CheckCircle, Crown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
 
@@ -66,9 +66,7 @@ const CourseCard = ({
               <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(146,76,254,0.1)] px-2 py-[5px] text-body-12 font-medium text-violet-super-dark"
                 style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF" }}
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2 20h20v-2H2v2Zm1-4h18l-2-8-5 4-4-6-4 6-5-4 2 8Z" fill="hsl(280 92% 21%)" />
-                </svg>
+                <Crown className="w-3.5 h-3.5" style={{ color: "hsl(280 92% 21%)" }} />
                 Premium
               </span>
             )}
