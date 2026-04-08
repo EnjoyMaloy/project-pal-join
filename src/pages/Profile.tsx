@@ -134,18 +134,18 @@ const Profile = () => {
             {lang === "ru" ? "Настройки" : "Settings"}
           </h2>
 
-          <div className="border border-border rounded-2xl divide-y divide-border">
+          <div className="bg-[hsl(var(--muted))] rounded-2xl divide-y divide-border/50">
             {/* Language */}
             <div className="flex items-center justify-between px-6 py-5">
               <div className="flex items-center gap-3">
                 <Globe className="w-5 h-5 text-foreground" />
-                <span className="text-[16px] font-medium text-foreground">
+                <span className="text-[16px] font-semibold text-foreground">
                   {lang === "ru" ? "Язык" : "Language"}
                 </span>
               </div>
               <button
                 onClick={() => setLang(lang === "ru" ? "en" : "ru")}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border text-[14px] font-medium text-foreground hover:bg-muted transition-colors"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-background border border-border/50 text-[15px] font-semibold text-foreground hover:bg-background/80 transition-colors"
               >
                 <span>{lang === "ru" ? "🇷🇺" : "🇬🇧"}</span>
                 {lang.toUpperCase()}
@@ -157,7 +157,7 @@ const Profile = () => {
             <div className="flex items-center justify-between px-6 py-5">
               <div className="flex items-center gap-3">
                 <Volume2 className="w-5 h-5 text-foreground" />
-                <span className="text-[16px] font-medium text-foreground">
+                <span className="text-[16px] font-semibold text-foreground">
                   {lang === "ru" ? "Звуки" : "Sounds"}
                 </span>
               </div>
@@ -168,7 +168,7 @@ const Profile = () => {
             <div className="flex items-center justify-between px-6 py-5">
               <div className="flex items-center gap-3">
                 <Bell className="w-5 h-5 text-foreground" />
-                <span className="text-[16px] font-medium text-foreground">
+                <span className="text-[16px] font-semibold text-foreground">
                   {lang === "ru" ? "Оповещения" : "Notifications"}
                 </span>
               </div>
