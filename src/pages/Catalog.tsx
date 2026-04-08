@@ -183,66 +183,24 @@ const Catalog = () => {
           {sortedCourses.map((course) => {
             const isPurchased = store.purchasedCourses.includes(course.id);
             const hasSubscription = store.subscription?.active;
-            const isOwned = isPurchased || (course.premium && hasSubscription);
+            const isOwned = isPurchased || (course.premium && hasSubscription) || false;
 
             return (
-            <div
-              key={course.id}
-              onClick={() => course.premium ? navigate(`/course/${course.id}`) : undefined}
-              className="group rounded-2xl overflow-hidden border border-border bg-background hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer"
-            >
-              {/* Image */}
-              <div className="aspect-[4/3] overflow-hidden relative">
-                <img
-                  src={course.image}
-                  alt={lang === "ru" ? course.titleRu : course.titleEn}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-                {isOwned ? (
-                  <span className="absolute top-2.5 left-2.5 inline-flex items-center gap-1 rounded-full bg-green-500 px-2.5 py-1 text-[12px] font-semibold text-white">
-                    <CheckCircle className="w-3 h-3" />
-                    {lang === "ru" ? "Куплено" : "Purchased"}
-                  </span>
-                ) : course.premium ? (
-                  <span className="absolute top-2.5 left-2.5 inline-flex items-center gap-1 rounded-full bg-[hsl(var(--primary))] px-2.5 py-1 text-[12px] font-semibold text-primary-foreground">
-                    <Crown className="w-3 h-3" />
-                    Premium
-                  </span>
-                ) : null}
-              </div>
-
-              {/* Content */}
-              <div className="p-4">
-                {/* Category tag */}
-                <div className="flex items-center gap-1.5 mb-2">
-                  <LayoutGrid className="w-3.5 h-3.5 text-muted-foreground" />
-                  <span className="text-[13px] text-muted-foreground">
-                    {getCategoryLabel(course.categoryId)}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h3 className="text-[16px] font-medium leading-[1.3] text-foreground mb-3 line-clamp-2">
-                  {lang === "ru" ? course.titleRu : course.titleEn}
-                </h3>
-
-                {/* Rating, students, and price */}
-                <div className="flex items-center gap-3 text-[14px]">
-                  <span className="inline-flex items-center gap-1">
-                    <Star className="w-3.5 h-3.5 text-orange-400 fill-orange-400" />
-                    <span className="font-medium text-foreground">{course.rating}</span>
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-muted-foreground">
-                    <Users className="w-3.5 h-3.5" />
-                    {course.students.toLocaleString()}
-                  </span>
-                  {course.premium && course.price && (
-                    <span className="ml-auto font-semibold text-foreground">${course.price}</span>
-                  )}
-                </div>
-              </div>
-            </div>
+              <CourseCard
+                key={course.id}
+                id={course.id}
+                titleRu={course.titleRu}
+                titleEn={course.titleEn}
+                categoryLabel={getCategoryLabel(course.categoryId)}
+                rating={course.rating}
+                students={course.students}
+                image={course.image}
+                premium={course.premium}
+                price={course.price}
+                isNew={course.isNew}
+                trending={course.trending}
+                isOwned={isOwned}
+              />
             );
           })}
         </div>
