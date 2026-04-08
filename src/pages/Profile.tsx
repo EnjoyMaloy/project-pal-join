@@ -143,14 +143,18 @@ const Profile = () => {
           </h2>
 
           <div className="border border-border rounded-2xl p-6">
-            {subscription_data.active ? (
+            {subscription_data?.active ? (
               <div>
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-11 h-11 rounded-full bg-gradient-to-br from-violet-dark to-violet-light flex items-center justify-center">
                     <Crown className="w-5 h-5 text-primary-foreground" />
                   </div>
                   <div>
-                    <p className="text-[16px] font-semibold text-foreground">{subscription_data.plan}</p>
+                    <p className="text-[16px] font-semibold text-foreground">
+                      {subscription_data.plan === "yearly"
+                        ? (lang === "ru" ? "Годовой план" : "Yearly Plan")
+                        : (lang === "ru" ? "Месячный план" : "Monthly Plan")}
+                    </p>
                     <span className="inline-block mt-0.5 text-[12px] font-medium text-primary bg-primary/10 rounded-full px-2 py-0.5">
                       {lang === "ru" ? "Активна" : "Active"}
                     </span>
