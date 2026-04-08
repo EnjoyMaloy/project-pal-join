@@ -45,6 +45,7 @@ const App = () => (
                     <Route path="/course/:id" element={<CourseView />} />
                     <Route path="/instructions" element={<Instructions />} />
                     <Route path="/instructions/:id" element={<ArticleView />} />
+                    <Route path="/profile" element={<Profile />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>
