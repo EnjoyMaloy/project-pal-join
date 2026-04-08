@@ -23,6 +23,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState<PlanId>("single");
   const [step, setStep] = useState<Step>("plan");
+  const [paymentMethod, setPaymentMethod] = useState<"card" | "crypto">("card");
 
   const courseTitle = lang === "ru" ? courseTitleRu : courseTitleEn;
 
