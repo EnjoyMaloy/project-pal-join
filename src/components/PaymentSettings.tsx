@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const PaymentSettings = () => {
   const { lang } = useLanguage();
+  const navigate = useNavigate();
   const store = usePurchaseStore();
 
   const hasSubscription = store.subscription?.active;
