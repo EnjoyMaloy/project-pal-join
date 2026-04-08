@@ -106,12 +106,14 @@ const Navbar = () => {
           {/* Profile avatar / Auth */}
           {user ? (
             <Link to="/profile">
-              <Avatar className="w-9 h-9 cursor-pointer ring-2 ring-border hover:ring-primary/40 transition-all">
-                <AvatarImage src={user.user_metadata?.avatar_url} />
-                <AvatarFallback className="bg-muted text-foreground text-[13px] font-medium">
-                  {userInitials}
-                </AvatarFallback>
-              </Avatar>
+              <PremiumAvatarWrapper isPremium={!!hasSubscription} size="sm">
+                <Avatar className="w-9 h-9 cursor-pointer ring-2 ring-border hover:ring-primary/40 transition-all">
+                  <AvatarImage src={user.user_metadata?.avatar_url} />
+                  <AvatarFallback className="bg-muted text-foreground text-[13px] font-medium">
+                    {userInitials}
+                  </AvatarFallback>
+                </Avatar>
+              </PremiumAvatarWrapper>
             </Link>
           ) : (
             <Link to="/auth">
