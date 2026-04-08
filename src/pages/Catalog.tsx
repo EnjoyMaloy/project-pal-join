@@ -177,7 +177,12 @@ const Catalog = () => {
 
         {/* Course cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {sortedCourses.map((course) => (
+          {sortedCourses.map((course) => {
+            const isPurchased = store.purchasedCourses.includes(course.id);
+            const hasSubscription = store.subscription?.active;
+            const isOwned = isPurchased || (course.premium && hasSubscription);
+
+            return (
             <div
               key={course.id}
               onClick={() => course.premium ? navigate(`/course/${course.id}`) : undefined}
@@ -191,12 +196,17 @@ const Catalog = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
-                {course.premium && (
+                {isOwned ? (
+                  <span className="absolute top-2.5 left-2.5 inline-flex items-center gap-1 rounded-full bg-green-500 px-2.5 py-1 text-[12px] font-semibold text-white">
+                    <CheckCircle className="w-3 h-3" />
+                    {lang === "ru" ? "Куплено" : "Purchased"}
+                  </span>
+                ) : course.premium ? (
                   <span className="absolute top-2.5 left-2.5 inline-flex items-center gap-1 rounded-full bg-[hsl(var(--primary))] px-2.5 py-1 text-[12px] font-semibold text-primary-foreground">
                     <Crown className="w-3 h-3" />
                     Premium
                   </span>
-                )}
+                ) : null}
               </div>
 
               {/* Content */}
