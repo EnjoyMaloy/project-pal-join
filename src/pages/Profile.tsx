@@ -6,6 +6,7 @@ import type { User as SupaUser } from "@supabase/supabase-js";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import PremiumAvatarWrapper from "@/components/PremiumAvatarWrapper";
 import {
   LogOut,
   Pencil,
