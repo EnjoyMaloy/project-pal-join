@@ -20,6 +20,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState<PlanId>("yearly");
   const [step, setStep] = useState<Step>("plan");
+  const [paymentMethod, setPaymentMethod] = useState<"card" | "crypto">("card");
 
   const plans: {
     id: PlanId;
