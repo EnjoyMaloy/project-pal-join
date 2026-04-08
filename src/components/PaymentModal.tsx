@@ -70,8 +70,8 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[480px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl [&>button.absolute]:hidden">
-        {/* Header */}
+      <DialogContent className={`sm:max-w-[480px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl [&>button.absolute]:hidden ${step === "success" ? "sm:max-w-[576px]" : ""}`}>
+        {step !== "success" && (
         <div className="bg-gradient-to-b from-[hsl(var(--primary))] to-[hsl(var(--primary)/0.8)] px-5 pt-6 pb-4 text-center relative">
           {step === "payment" && (
             <button
