@@ -176,8 +176,6 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-                </div>
-              </div>
             ) : (
               <div className="flex flex-col items-center text-center py-8">
                 <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center mb-4">
