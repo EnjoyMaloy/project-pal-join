@@ -13,6 +13,8 @@ import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 const Navbar = () => {
   const [user, setUser] = useState<SupaUser | null>(null);
   const [subModalOpen, setSubModalOpen] = useState(false);
+  const store = usePurchaseStore();
+  const hasSubscription = store.subscription?.active;
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const isInstructions = location.pathname === "/instructions";
