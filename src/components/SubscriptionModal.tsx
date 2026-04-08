@@ -2,7 +2,7 @@ import { useState } from "react";
 import mascotSuccess from "@/assets/mascot-success.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Crown, Zap, Check, ChevronLeft, CreditCard, Sparkles } from "lucide-react";
+import { X, Crown, Zap, Check, ChevronLeft, CreditCard, Bitcoin } from "lucide-react";
 import { purchaseSubscription } from "@/hooks/usePurchaseStore";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -267,7 +267,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 }`}
                 onClick={() => setPaymentMethod("crypto")}
               >
-                <Sparkles className="w-6 h-6 text-primary" />
+                <Bitcoin className="w-6 h-6 text-primary" />
                 <span className="text-[15px] font-semibold text-foreground">Cryptocurrency</span>
                 <span className="text-[13px] text-muted-foreground">BTC, ETH, USDT, TON</span>
               </button>
