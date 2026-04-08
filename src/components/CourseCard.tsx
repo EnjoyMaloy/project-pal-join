@@ -1,4 +1,4 @@
-import { Star, Users, LayoutGrid, Bookmark, CheckCircle } from "lucide-react";
+import { Star, Users, LayoutGrid, Bookmark, CheckCircle, Crown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
 
