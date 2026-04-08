@@ -66,8 +66,8 @@ const CourseCard = ({
               <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(146,76,254,0.1)] px-2 py-[5px] text-body-12 font-medium text-violet-super-dark"
                 style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF" }}
               >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.333 11.083h9.334V9.917L9.333 7.583 7 9.917 4.667 7.583l-2.334 2.334v1.166Zm4.667-4.55L9.333 4.2l2.334 2.333V3.5a.583.583 0 0 0-.584-.583H2.917a.583.583 0 0 0-.584.583v3.033L4.667 4.2 7 6.533Z" fill="hsl(280 92% 21%)" />
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 20h20v-2H2v2Zm1-4h18l-2-8-5 4-4-6-4 6-5-4 2 8Z" fill="hsl(280 92% 21%)" />
                 </svg>
                 Premium
               </span>
