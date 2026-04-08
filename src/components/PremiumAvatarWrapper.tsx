@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Crown } from "lucide-react";
 
 interface PremiumAvatarWrapperProps {
   isPremium: boolean;
@@ -9,15 +10,33 @@ interface PremiumAvatarWrapperProps {
 const PremiumAvatarWrapper = ({ isPremium, size = "sm", children }: PremiumAvatarWrapperProps) => {
   if (!isPremium) return <>{children}</>;
 
-  const ringSize = size === "lg" ? "p-[3px]" : "p-[2px]";
+  const badgeSize = size === "lg" ? 30 : 20;
+  const iconSize = size === "lg" ? 16 : 10;
+  const borderWidth = size === "lg" ? 3 : 2;
 
   return (
-    <div className={`relative rounded-full bg-gradient-to-tr from-[#A66CFF] via-[#BF96FF] to-[#D9C0FF] ${ringSize}`}>
-      {children}
-      <div className="absolute -bottom-0.5 -right-0.5 bg-gradient-to-tr from-[#A66CFF] to-[#D9C0FF] rounded-full flex items-center justify-center shadow-sm"
-        style={{ width: size === "lg" ? 28 : 18, height: size === "lg" ? 28 : 18 }}
+    <div className="relative inline-flex">
+      {/* Gradient ring around avatar */}
+      <div
+        className="rounded-full bg-gradient-to-tr from-[#A66CFF] via-[#BF96FF] to-[#D9C0FF]"
+        style={{ padding: borderWidth }}
       >
-        <span className="text-white" style={{ fontSize: size === "lg" ? 14 : 10 }}>👑</span>
+        <div className="rounded-full bg-background" style={{ padding: borderWidth }}>
+          {children}
+        </div>
+      </div>
+
+      {/* Crown badge at bottom-right */}
+      <div
+        className="absolute flex items-center justify-center rounded-full bg-gradient-to-tr from-[#924CFE] to-[#BF96FF] shadow-md ring-2 ring-background"
+        style={{
+          width: badgeSize,
+          height: badgeSize,
+          bottom: size === "lg" ? 2 : 0,
+          right: size === "lg" ? 2 : -1,
+        }}
+      >
+        <Crown className="text-white" style={{ width: iconSize, height: iconSize }} fill="white" strokeWidth={0} />
       </div>
     </div>
   );
