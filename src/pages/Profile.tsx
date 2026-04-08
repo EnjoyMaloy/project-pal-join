@@ -10,11 +10,16 @@ import {
   Crown,
   LogOut,
   Pencil,
-  Receipt,
   Globe,
   Volume2,
   Bell,
   ChevronDown,
+  Mail,
+  Send,
+  Wallet,
+  BookOpen,
+  Clock,
+  Trophy,
 } from "lucide-react";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import { Switch } from "@/components/ui/switch";
@@ -47,9 +52,6 @@ const Profile = () => {
     ? user.email.substring(0, 2).toUpperCase()
     : "U";
 
-  const subscription_data = store.subscription;
-  const transactions = store.transactions;
-
   return (
     <div className="max-w-5xl mx-auto px-4 py-6 md:py-10">
       {/* Back */}
@@ -62,50 +64,73 @@ const Profile = () => {
       </button>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Left — Profile details */}
+        {/* Left column */}
         <div>
           <h2 className="text-[22px] font-bold text-foreground mb-5">
             {lang === "ru" ? "Детали профиля" : "Profile Details"}
           </h2>
 
-          <div className="border border-border rounded-2xl p-8">
-            {/* Avatar + Name + Buttons row */}
-            <div className="flex items-center gap-6">
-              <Avatar className="w-24 h-24 flex-shrink-0">
-                <AvatarImage src={user?.user_metadata?.avatar_url} />
-                <AvatarFallback className="bg-muted text-foreground text-[28px] font-semibold">
-                  {userInitials}
-                </AvatarFallback>
-              </Avatar>
+          {/* Avatar + Name + Buttons */}
+          <div className="flex items-center gap-6 mb-6">
+            <Avatar className="w-24 h-24 flex-shrink-0">
+              <AvatarImage src={user?.user_metadata?.avatar_url} />
+              <AvatarFallback className="bg-muted text-foreground text-[28px] font-semibold">
+                {userInitials}
+              </AvatarFallback>
+            </Avatar>
 
-              <p className="text-[22px] font-bold text-foreground whitespace-nowrap">
-                {user?.email?.split("@")[0] || "User"}
-              </p>
+            <p className="text-[22px] font-bold text-foreground whitespace-nowrap">
+              {user?.email?.split("@")[0] || "User"}
+            </p>
 
-              <div className="flex items-center gap-3 ml-auto">
-                <Button
-                  variant="outline"
-                  size="default"
-                  className="rounded-full text-[14px] gap-2 px-5 py-2.5 h-auto"
-                >
-                  <Pencil className="w-4 h-4" />
-                  {lang === "ru" ? "Изменить аватар" : "Change the avatar"}
-                </Button>
-                <Button
-                  variant="outline"
-                  size="default"
-                  className="rounded-full text-[14px] gap-2 px-5 py-2.5 h-auto"
-                  onClick={handleLogout}
-                >
-                  <LogOut className="w-4 h-4" />
-                  {lang === "ru" ? "Выйти" : "Log out"}
-                </Button>
+            <div className="flex items-center gap-3">
+              <Button
+                variant="outline"
+                size="default"
+                className="rounded-full text-[14px] gap-2 px-5 py-2.5 h-auto"
+              >
+                <Pencil className="w-4 h-4" />
+                {lang === "ru" ? "Изменить аватар" : "Change the avatar"}
+              </Button>
+              <Button
+                variant="outline"
+                size="default"
+                className="rounded-full text-[14px] gap-2 px-5 py-2.5 h-auto"
+                onClick={handleLogout}
+              >
+                <LogOut className="w-4 h-4" />
+                {lang === "ru" ? "Выйти" : "Log out"}
+              </Button>
+            </div>
+          </div>
+
+          {/* Contact info card */}
+          <div className="border border-border rounded-2xl divide-y divide-border mb-8">
+            <div className="flex items-center justify-between px-6 py-5">
+              <div className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-foreground" />
+                <span className="text-[16px] font-medium text-foreground">Email</span>
               </div>
+              <span className="text-[15px] text-foreground">{user?.email || "—"}</span>
+            </div>
+            <div className="flex items-center justify-between px-6 py-5">
+              <div className="flex items-center gap-3">
+                <Send className="w-5 h-5 text-foreground" />
+                <span className="text-[16px] font-medium text-foreground">Telegram</span>
+              </div>
+              <span className="text-[15px] text-foreground">{user?.email?.split("@")[0] || "—"}</span>
+            </div>
+            <div className="flex items-center justify-between px-6 py-5">
+              <div className="flex items-center gap-3">
+                <Wallet className="w-5 h-5 text-foreground" />
+                <span className="text-[16px] font-medium text-foreground">Wallet</span>
+              </div>
+              <span className="text-[15px] text-foreground">—</span>
             </div>
           </div>
 
           {/* Settings */}
-          <h2 className="text-[22px] font-bold text-foreground mt-8 mb-5">
+          <h2 className="text-[22px] font-bold text-foreground mb-5">
             {lang === "ru" ? "Настройки" : "Settings"}
           </h2>
 
@@ -152,100 +177,75 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Right — Subscriptions */}
+        {/* Right column */}
         <div>
+          {/* Portfolio */}
           <h2 className="text-[22px] font-bold text-foreground mb-5">
-            {lang === "ru" ? "Подписки" : "Subscriptions"}
+            {lang === "ru" ? "Портфолио" : "Portfolio"}
           </h2>
 
-          <div className="border border-border rounded-2xl p-6">
-            {subscription_data?.active ? (
-              <div>
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-11 h-11 rounded-full bg-gradient-to-br from-violet-dark to-violet-light flex items-center justify-center">
-                    <Crown className="w-5 h-5 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <p className="text-[16px] font-semibold text-foreground">
-                      {subscription_data.plan === "yearly"
-                        ? (lang === "ru" ? "Годовой план" : "Yearly Plan")
-                        : (lang === "ru" ? "Месячный план" : "Monthly Plan")}
-                    </p>
-                    <span className="inline-block mt-0.5 text-[12px] font-medium text-primary bg-primary/10 rounded-full px-2 py-0.5">
-                      {lang === "ru" ? "Активна" : "Active"}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex justify-between text-[14px]">
-                    <span className="text-muted-foreground">{lang === "ru" ? "Стоимость" : "Price"}</span>
-                    <span className="font-medium text-foreground">{subscription_data.price}</span>
-                  </div>
-                  <div className="flex justify-between text-[14px]">
-                    <span className="text-muted-foreground">{lang === "ru" ? "Начало" : "Started"}</span>
-                    <span className="font-medium text-foreground">{subscription_data.startDate}</span>
-                  </div>
-                  <div className="flex justify-between text-[14px]">
-                    <span className="text-muted-foreground">{lang === "ru" ? "Окончание" : "Expires"}</span>
-                    <span className="font-medium text-foreground">{subscription_data.endDate}</span>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="flex flex-col items-center text-center py-8">
-                <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center mb-4">
-                  <Crown className="w-6 h-6 text-muted-foreground" />
-                </div>
-                <p className="text-[16px] font-semibold text-foreground mb-1">
-                  {lang === "ru" ? "Нет активной подписки" : "No active subscription"}
-                </p>
-              </div>
-            )}
+          <div className="mb-8">
+            <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+              <span className="text-[18px]">🎨</span>
+            </div>
           </div>
 
-          {/* Transaction history */}
-          <h2 className="text-[22px] font-bold text-foreground mt-8 mb-5">
-            {lang === "ru" ? "История транзакций" : "Transaction History"}
+          {/* Learning statistics */}
+          <h2 className="text-[22px] font-bold text-foreground mb-5">
+            {lang === "ru" ? "Статистика обучения" : "Learning Statistics"}
           </h2>
 
-          <div className="border border-border rounded-2xl p-6">
-            {transactions.length === 0 ? (
-              <div className="flex flex-col items-center text-center py-8">
-                <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center mb-4">
-                  <Receipt className="w-6 h-6 text-muted-foreground" />
-                </div>
-                <p className="text-[16px] font-semibold text-foreground mb-1">
-                  {lang === "ru" ? "Нет транзакций" : "No transactions"}
-                </p>
-                <p className="text-[14px] text-muted-foreground">
-                  {lang === "ru"
-                    ? "Здесь будет история ваших покупок и подписок"
-                    : "Your purchase and subscription history will appear here"}
-                </p>
+          <div className="mb-4">
+            <button className="flex items-center gap-2 px-4 py-2 rounded-full border border-border text-[14px] font-medium text-foreground hover:bg-muted transition-colors">
+              {lang === "ru" ? "За все время" : "All time"}
+              <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="border border-border rounded-2xl p-5 flex items-center gap-4">
+              <div className="w-10 h-10 rounded-full bg-[hsl(var(--destructive)/0.1)] flex items-center justify-center flex-shrink-0">
+                <BookOpen className="w-5 h-5 text-[hsl(var(--destructive))]" />
               </div>
-            ) : (
-              <div className="space-y-3">
-                {transactions.map((tx) => (
-                  <div
-                    key={tx.id}
-                    className="flex items-center justify-between py-3 border-b border-border last:border-0"
-                  >
-                    <div>
-                      <p className="text-[14px] font-medium text-foreground">
-                        {lang === "ru" ? tx.descRu : tx.descEn}
-                      </p>
-                      <p className="text-[12px] text-muted-foreground">
-                        {new Date(tx.date).toLocaleDateString(lang === "ru" ? "ru-RU" : "en-US", { year: "numeric", month: "short", day: "numeric" })}
-                      </p>
-                    </div>
-                    <span className="text-[15px] font-semibold text-foreground">
-                      {tx.amount}
-                    </span>
-                  </div>
-                ))}
+              <div>
+                <p className="text-[13px] text-muted-foreground leading-tight">
+                  {lang === "ru" ? "Пройдено уроков" : "Lessons completed"}
+                </p>
+                <p className="text-[24px] font-bold text-foreground">24</p>
               </div>
-            )}
+            </div>
+            <div className="border border-border rounded-2xl p-5 flex items-center gap-4">
+              <div className="w-10 h-10 rounded-full bg-[hsl(var(--primary)/0.1)] flex items-center justify-center flex-shrink-0">
+                <Clock className="w-5 h-5 text-[hsl(var(--primary))]" />
+              </div>
+              <div>
+                <p className="text-[13px] text-muted-foreground leading-tight">
+                  {lang === "ru" ? "Минут образования" : "Minutes of learning"}
+                </p>
+                <p className="text-[24px] font-bold text-foreground">120</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Achievements */}
+          <h2 className="text-[22px] font-bold text-foreground mb-5">
+            {lang === "ru" ? "Достижения" : "Achievements"}
+          </h2>
+
+          <div className="flex gap-3 overflow-x-auto pb-2">
+            {[
+              { emoji: "🛒", bg: "bg-red-50 dark:bg-red-950/30" },
+              { emoji: "🏔️", bg: "bg-blue-50 dark:bg-blue-950/30" },
+              { emoji: "💯", bg: "bg-yellow-50 dark:bg-yellow-950/30" },
+              { emoji: "🧭", bg: "bg-pink-50 dark:bg-pink-950/30" },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className={`w-24 h-24 rounded-2xl ${item.bg} flex items-center justify-center flex-shrink-0`}
+              >
+                <span className="text-[40px]">{item.emoji}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
