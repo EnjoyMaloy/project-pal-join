@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PaymentSettings from "@/components/PaymentSettings";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import type { User as SupaUser } from "@supabase/supabase-js";
@@ -115,6 +116,9 @@ const Profile = () => {
               <span className="text-[16px] font-semibold text-foreground">-</span>
             </div>
           </div>
+
+          {/* Payment Settings */}
+          <PaymentSettings />
 
           {/* Settings */}
           <h2 className="text-[22px] font-bold text-foreground mb-5">
