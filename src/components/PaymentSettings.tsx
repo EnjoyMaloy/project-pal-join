@@ -55,6 +55,8 @@ const PaymentSettings = () => {
               <div className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
                 <Calendar className="w-3.5 h-3.5" />
                 {lang === "ru" ? "до" : "until"} {formatDate(store.subscription.endDate)}
+              </div>
+              <p className="text-[14px] font-semibold text-foreground">{store.subscription.price}</p>
               {store.subscription.plan === "monthly" && (
                 <Button
                   size="sm"
@@ -64,7 +66,6 @@ const PaymentSettings = () => {
                   {lang === "ru" ? "Улучшить подписку" : "Upgrade subscription"}
                 </Button>
               )}
-              <p className="text-[14px] font-semibold text-foreground">{store.subscription.price}</p>
             </div>
           ) : (
             <p className="ml-8 text-[14px] text-muted-foreground">
