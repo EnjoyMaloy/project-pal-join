@@ -245,7 +245,7 @@ const CourseView = () => {
                 onClick={() => setPaymentOpen(true)}
                 className="h-12 px-8 rounded-xl text-[15px] font-semibold gap-2"
               >
-                {course.price && <Lock className="w-4 h-4" />}
+                {course.price && !store.purchasedCourses.includes(course.id) && !store.subscription?.active && <Lock className="w-4 h-4" />}
                 {lang === "ru" ? "Начать обучение" : "Start learning"}
               </Button>
             </div>
