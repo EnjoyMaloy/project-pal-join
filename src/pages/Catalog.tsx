@@ -240,7 +240,8 @@ const Catalog = () => {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {sortedCourses.length === 0 && (
