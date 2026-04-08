@@ -8,6 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SubscriptionModal from "@/components/SubscriptionModal";
+import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 
 const Navbar = () => {
   const [user, setUser] = useState<SupaUser | null>(null);
