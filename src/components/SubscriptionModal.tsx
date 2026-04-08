@@ -267,7 +267,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 }`}
                 onClick={() => setPaymentMethod("crypto")}
               >
-                <Sparkles className="w-6 h-6 text-primary" />
+                <Bitcoin className="w-6 h-6 text-primary" />
                 <span className="text-[15px] font-semibold text-foreground">Cryptocurrency</span>
                 <span className="text-[13px] text-muted-foreground">BTC, ETH, USDT, TON</span>
               </button>
