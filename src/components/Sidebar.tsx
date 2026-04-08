@@ -8,7 +8,7 @@ import logo from "@/assets/logo.png";
 const Sidebar = () => {
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const menuGroup1 = [
     { label: t("sidebar.home"), icon: Home, path: "/", disabled: true },
