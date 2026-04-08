@@ -52,9 +52,11 @@ const CourseCard = ({
         <div className="absolute top-1 left-2 right-1 flex items-center justify-between">
           <div className="flex items-center gap-[5px]">
             {isOwned && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-[#2EAD6D] px-2 py-[5px] text-body-12 font-semibold text-primary-foreground">
-                <CheckCircle className="w-3.5 h-3.5" />
-                {lang === "ru" ? "Куплено" : "Purchased"}
+              <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(46,173,109,0.15)] px-2 py-[5px] text-body-12 font-medium"
+                style={{ background: "linear-gradient(0deg, rgba(192,255,220,0.5), rgba(192,255,220,0.5)), #FFFFFF", color: "#1A6B3C" }}
+              >
+                <Crown className="w-3.5 h-3.5" style={{ color: "#1A6B3C" }} />
+                Premium
               </span>
             )}
             {!isOwned && isNew && (
