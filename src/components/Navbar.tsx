@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import SubscriptionModal from "@/components/SubscriptionModal";
 
 const Navbar = () => {
   const [user, setUser] = useState<SupaUser | null>(null);
+  const [subModalOpen, setSubModalOpen] = useState(false);
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const isInstructions = location.pathname === "/instructions";
