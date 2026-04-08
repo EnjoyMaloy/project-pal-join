@@ -64,7 +64,7 @@ const Profile = () => {
 
           {/* Avatar + Name + Buttons */}
           <div className="flex items-center gap-6 mb-6">
-            <Avatar className="w-24 h-24 flex-shrink-0">
+            <Avatar className="w-[100px] h-[100px] flex-shrink-0">
               <AvatarImage src={user?.user_metadata?.avatar_url} />
               <AvatarFallback className="bg-muted text-foreground text-[28px] font-semibold">
                 {userInitials}
