@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { X, Crown, Zap, Check } from "lucide-react";
+import { purchaseSubscription } from "@/hooks/usePurchaseStore";
+import { toast } from "sonner";
 
 interface SubscriptionModalProps {
   open: boolean;
