@@ -8,6 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SubscriptionModal from "@/components/SubscriptionModal";
+import PremiumAvatarWrapper from "@/components/PremiumAvatarWrapper";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 
 const Navbar = () => {
@@ -105,12 +106,14 @@ const Navbar = () => {
           {/* Profile avatar / Auth */}
           {user ? (
             <Link to="/profile">
-              <Avatar className="w-9 h-9 cursor-pointer ring-2 ring-border hover:ring-primary/40 transition-all">
-                <AvatarImage src={user.user_metadata?.avatar_url} />
-                <AvatarFallback className="bg-muted text-foreground text-[13px] font-medium">
-                  {userInitials}
-                </AvatarFallback>
-              </Avatar>
+              <PremiumAvatarWrapper isPremium={!!hasSubscription} size="sm">
+                <Avatar className="w-9 h-9 cursor-pointer ring-2 ring-border hover:ring-primary/40 transition-all">
+                  <AvatarImage src={user.user_metadata?.avatar_url} />
+                  <AvatarFallback className="bg-muted text-foreground text-[13px] font-medium">
+                    {userInitials}
+                  </AvatarFallback>
+                </Avatar>
+              </PremiumAvatarWrapper>
             </Link>
           ) : (
             <Link to="/auth">
