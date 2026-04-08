@@ -6,8 +6,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
-  ArrowLeft,
-  Crown,
   LogOut,
   Pencil,
   Globe,
@@ -17,9 +15,6 @@ import {
   Mail,
   Send,
   Wallet,
-  BookOpen,
-  Clock,
-  Trophy,
 } from "lucide-react";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import { Switch } from "@/components/ui/switch";
