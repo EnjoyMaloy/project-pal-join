@@ -10,6 +10,7 @@ const PaymentSettings = () => {
   const { lang } = useLanguage();
   const navigate = useNavigate();
   const store = usePurchaseStore();
+  const [upgradeOpen, setUpgradeOpen] = useState(false);
 
   const hasSubscription = store.subscription?.active;
   const purchasedCourses = store.purchasedCourses;
