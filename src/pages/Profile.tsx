@@ -222,7 +222,7 @@ const Profile = () => {
                         {lang === "ru" ? tx.descRu : tx.descEn}
                       </p>
                       <p className="text-[12px] text-muted-foreground">
-                        {lang === "ru" ? tx.dateRu : tx.dateEn}
+                        {new Date(tx.date).toLocaleDateString(lang === "ru" ? "ru-RU" : "en-US", { year: "numeric", month: "short", day: "numeric" })}
                       </p>
                     </div>
                     <span className="text-[15px] font-semibold text-foreground">
