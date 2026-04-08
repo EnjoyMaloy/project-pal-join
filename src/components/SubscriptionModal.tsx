@@ -166,6 +166,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               : "30-day money-back guarantee"}
           </p>
         </div>
+        </div>
       </DialogContent>
     </Dialog>
   );
