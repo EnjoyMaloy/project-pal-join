@@ -75,11 +75,21 @@ const PaymentSettings = () => {
               {transactions
                 .filter((t) => t.type === "purchase")
                 .map((t) => (
-                  <div key={t.id} className="flex items-center justify-between">
+                  <div key={t.id} className="flex items-center justify-between gap-3">
                     <span className="text-[14px] text-foreground">
                       {lang === "ru" ? t.descRu : t.descEn}
                     </span>
-                    <span className="text-[13px] text-muted-foreground">{t.amount}</span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-[13px] text-muted-foreground">{t.amount}</span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="rounded-lg text-[13px] h-7 px-3"
+                        onClick={() => navigate("/catalog")}
+                      >
+                        {lang === "ru" ? "Открыть курс" : "Open course"}
+                      </Button>
+                    </div>
                   </div>
                 ))}
             </div>
