@@ -119,7 +119,7 @@ const Navbar = () => {
 
           {/* Buy subscription button */}
           {!hasSubscription && (
-            <div className="rounded-[10px] p-[2px] bg-gradient-to-r from-[#924CFE] via-[#BF96FF] to-[#A66CFF]" style={{ height: 48 }}>
+            <div className="rounded-[10px] p-[2px] animate-gradient-border" style={{ height: 48, background: "linear-gradient(270deg, #924CFE, #BF96FF, #D9C0FF, #A66CFF, #924CFE)", backgroundSize: "300% 300%" }}>
               <button
                 onClick={() => setSubModalOpen(true)}
                 className="flex items-center gap-2 rounded-[8px] bg-[#A66CFF] text-white text-[16px] font-normal hover:brightness-110 transition-all w-full h-full"
