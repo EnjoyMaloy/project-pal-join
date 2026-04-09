@@ -116,8 +116,8 @@ const Navbar = () => {
             <span
               className="flex items-center justify-center rounded-full text-[13px] font-bold"
               style={{
-                width: 28,
-                height: 28,
+                width: 24,
+                height: 24,
                 background: "rgba(255,255,255,0.25)",
                 color: "#fff",
               }}
