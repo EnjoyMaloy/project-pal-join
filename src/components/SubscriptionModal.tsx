@@ -2,7 +2,7 @@ import { useState } from "react";
 import mascotSuccess from "@/assets/mascot-success.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Zap, Check, ChevronLeft, CreditCard, Bitcoin } from "lucide-react";
+import { X, Check, ChevronLeft, CreditCard, Bitcoin } from "lucide-react";
 import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { purchaseSubscription } from "@/hooks/usePurchaseStore";
 import { useNavigate } from "react-router-dom";
@@ -23,40 +23,34 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   const [step, setStep] = useState<Step>("plan");
   const [paymentMethod, setPaymentMethod] = useState<"card" | "crypto">("card");
 
-  const plans: {
-    id: PlanId;
-    titleRu: string;
-    titleEn: string;
-    priceRu: string;
-    priceEn: string;
-    subRu: string;
-    subEn: string;
-    perMonthRu?: string;
-    perMonthEn?: string;
-    badgeRu?: string;
-    badgeEn?: string;
-  }[] = [
+  const plans = [
     {
-      id: "monthly",
+      id: "monthly" as PlanId,
       titleRu: "Месячная",
       titleEn: "Monthly",
       priceRu: "₽1,200",
-      priceEn: "$14",
-      subRu: " /месяц",
+      priceEn: "$ 14",
+      subRu: " /мес",
       subEn: " /mo",
     },
     {
-      id: "yearly",
+      id: "yearly" as PlanId,
       titleRu: "Годовая",
       titleEn: "Yearly",
       priceRu: "₽9,600",
-      priceEn: "$99",
+      priceEn: "$ 99",
       subRu: " /год",
       subEn: " /yr",
       perMonthRu: "₽800/месяц",
       perMonthEn: "$8.25/mo",
-      badgeRu: "Скидка 33%",
-      badgeEn: "Save 33%",
+      badgeRu: "Лучшая цена!",
+      badgeEn: "Best value!",
+      discountRu: "Скидка 33%",
+      discountEn: "30% off!",
+      oldPriceRu: "₽14,400",
+      oldPriceEn: "$168",
+      oldSubRu: " /год",
+      oldSubEn: " /year",
     },
   ];
 
@@ -115,183 +109,233 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[440px] max-h-[90vh] p-0 gap-0 border-0 rounded-2xl shadow-2xl overflow-hidden [&>button.absolute]:hidden">
+      <DialogContent className="sm:max-w-[440px] max-h-[90vh] p-0 gap-0 border-0 rounded-3xl shadow-2xl overflow-hidden [&>button.absolute]:hidden bg-[#1a1625]">
         <div className="overflow-y-auto max-h-[90vh]">
-        {/* Header */}
-        <div className="relative bg-gradient-to-br from-violet-dark via-primary to-violet-light px-6 pt-10 pb-8 text-center rounded-t-2xl overflow-hidden">
-          <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-violet-super-light/20 blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-violet-mid/25 blur-2xl pointer-events-none" />
+          {/* Header area */}
+          <div className="relative px-6 pt-6 pb-6 text-center overflow-hidden">
+            {/* Background glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[200px] rounded-full bg-[hsl(var(--violet-mid)/0.3)] blur-[80px] pointer-events-none" />
 
-          {step === "payment" && (
+            {/* Close button */}
             <button
-              onClick={() => setStep("plan")}
-              className="absolute top-4 left-4 w-8 h-8 rounded-full bg-primary-foreground/15 backdrop-blur-sm flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/25 transition-colors"
+              onClick={() => handleClose(false)}
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-colors z-10"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <X className="w-4 h-4" />
             </button>
-          )}
 
-          <button
-            onClick={() => handleClose(false)}
-            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-primary-foreground/15 backdrop-blur-sm flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/25 transition-colors"
-          >
-            <X className="w-4 h-4" />
-          </button>
-
-          <div className="w-16 h-16 rounded-2xl bg-primary-foreground/15 backdrop-blur-sm flex items-center justify-center mx-auto mb-5 rotate-3">
-            {step === "plan" ? (
-              <PremiumStarIcon className="w-8 h-8" fill="currentColor" />
-            ) : (
-              <CreditCard className="w-8 h-8 text-primary-foreground drop-shadow-sm" />
+            {step === "payment" && (
+              <button
+                onClick={() => setStep("plan")}
+                className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-colors z-10"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
             )}
-          </div>
 
-          <h2 className="text-[22px] font-bold text-primary-foreground leading-tight mb-1.5">
-            {step === "plan"
-              ? (lang === "ru" ? "Разблокировать премиум" : "Unlock Premium")
-              : (lang === "ru" ? "Выберите способ оплаты" : "Choose payment method")
-            }
-          </h2>
-          <p className="text-[14px] text-primary-foreground/75 leading-snug max-w-[280px] mx-auto">
-            {step === "plan"
-              ? (lang === "ru" ? "Неограниченный доступ ко всем курсам" : "Unlimited access to all courses")
-              : (lang === "ru" ? "Выберите, как вы хотите оплатить" : "Choose how you want to pay")
-            }
-          </p>
-        </div>
-
-        {step === "plan" ? (
-          <>
-            {/* Plan cards */}
-            <div className="px-5 -mt-4 relative z-10">
-              <div className="flex gap-3">
-                {plans.map((plan) => {
-                  const isSelected = selectedPlan === plan.id;
-                  const badge = lang === "ru" ? plan.badgeRu : plan.badgeEn;
-
-                  return (
-                    <button
-                      key={plan.id}
-                      onClick={() => setSelectedPlan(plan.id)}
-                      className={`
-                        flex-1 rounded-xl px-3 py-4 text-center transition-all relative
-                        bg-background shadow-sm
-                        ${isSelected
-                          ? "ring-2 ring-primary shadow-md"
-                          : "ring-1 ring-border hover:ring-muted-foreground/30"
-                        }
-                      `}
-                    >
-                      {badge && (
-                        <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[11px] font-semibold bg-[hsl(var(--success))] text-primary-foreground rounded-full px-2.5 py-0.5 whitespace-nowrap">
-                          {badge}
-                        </span>
-                      )}
-                      <p className="text-[13px] font-medium text-muted-foreground mb-1.5">
-                        {lang === "ru" ? plan.titleRu : plan.titleEn}
-                      </p>
-                      <p className="text-foreground leading-none">
-                        <span className="text-[24px] font-bold">
-                          {lang === "ru" ? plan.priceRu : plan.priceEn}
-                        </span>
-                        <span className="text-[12px] font-normal text-muted-foreground">
-                          {lang === "ru" ? plan.subRu : plan.subEn}
-                        </span>
-                      </p>
-                      {plan.perMonthRu && (
-                        <p className="text-[12px] text-[hsl(var(--success))] font-medium mt-1.5">
-                          {lang === "ru" ? plan.perMonthRu : plan.perMonthEn}
-                        </p>
-                      )}
-                    </button>
-                  );
-                })}
+            {/* Icon with glow */}
+            <div className="relative w-20 h-20 mx-auto mb-5 mt-4">
+              <div className="absolute inset-0 rounded-full bg-[hsl(var(--violet-mid)/0.5)] blur-xl" />
+              <div className="relative w-20 h-20 rounded-full bg-gradient-to-b from-[hsl(var(--violet-dark))] to-[hsl(var(--violet-super-dark))] flex items-center justify-center">
+                {step === "plan" ? (
+                  <PremiumStarIcon className="w-9 h-9" fill="white" />
+                ) : (
+                  <CreditCard className="w-9 h-9 text-white" />
+                )}
               </div>
             </div>
 
-            {/* Benefits */}
-            <div className="px-6 pt-5 pb-2 space-y-3">
-              {benefits.map((b, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full bg-[hsl(var(--success-accent)/0.15)] flex items-center justify-center flex-shrink-0">
-                    <Check className="w-3.5 h-3.5 text-[hsl(var(--success))]" />
+            <h2 className="text-[22px] font-bold text-white leading-tight mb-1">
+              {step === "plan"
+                ? (lang === "ru" ? "Разблокировать премиум" : "Unlock Premium")
+                : (lang === "ru" ? "Способ оплаты" : "Payment method")
+              }
+            </h2>
+            <p className="text-[14px] text-white/50 leading-snug">
+              {step === "plan"
+                ? (lang === "ru" ? "Неограниченный доступ ко всем курсам" : "Unlimited access to all courses")
+                : (lang === "ru" ? "Выберите, как вы хотите оплатить" : "Choose how you want to pay")
+              }
+            </p>
+          </div>
+
+          {step === "plan" ? (
+            <>
+              {/* Benefits as review-style card */}
+              <div className="px-5 mb-5">
+                <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-4">
+                  <div className="space-y-2.5">
+                    {benefits.map((b, i) => (
+                      <div key={i} className="flex items-center gap-3">
+                        <div className="w-5 h-5 rounded-full bg-[hsl(var(--violet-mid)/0.25)] flex items-center justify-center flex-shrink-0">
+                          <Check className="w-3 h-3 text-[hsl(var(--violet-light))]" />
+                        </div>
+                        <span className="text-[13px] text-white/80">{b}</span>
+                      </div>
+                    ))}
                   </div>
-                  <span className="text-[14px] text-foreground font-medium">{b}</span>
                 </div>
-              ))}
-            </div>
+              </div>
 
-            {/* CTA */}
-            <div className="px-5 pb-6 pt-4">
-              <button
-                onClick={() => setStep("payment")}
-                className="w-full h-12 rounded-xl text-[15px] font-bold text-primary-foreground bg-gradient-to-r from-violet-dark to-primary hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/25"
-              >
-                <Zap className="w-4 h-4" />
-                {lang === "ru" ? "Продолжить" : "Continue"}
-              </button>
-            </div>
-          </>
-        ) : (
-          /* Payment step */
-          <div className="px-5 py-5 space-y-4">
-            <button
-              className={`w-full rounded-xl px-5 py-5 flex flex-col items-center gap-2 transition-all ${
-                paymentMethod === "card"
-                  ? "border-2 border-primary bg-primary/5"
-                  : "border-2 border-border hover:border-muted-foreground/30"
-              }`}
-              onClick={() => setPaymentMethod("card")}
-            >
-              <CreditCard className="w-6 h-6 text-primary" />
-              <span className="text-[15px] font-semibold text-foreground">
-                {lang === "ru" ? "Банковская карта" : "Bank card"}
-              </span>
-              <span className="text-[13px] text-muted-foreground">Visa, Mastercard, Maestro</span>
-            </button>
+              {/* Plan selection pills */}
+              <div className="px-5 mb-4">
+                <div className="flex gap-2.5">
+                  {plans.map((plan) => {
+                    const isSelected = selectedPlan === plan.id;
+                    const badge = lang === "ru" ? plan.badgeRu : plan.badgeEn;
 
-            {lang === "en" && (
+                    return (
+                      <button
+                        key={plan.id}
+                        onClick={() => setSelectedPlan(plan.id)}
+                        className={`
+                          flex-1 rounded-xl px-3 py-4 text-center transition-all relative
+                          ${isSelected
+                            ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
+                            : "border border-white/15 bg-white/5 hover:border-white/25"
+                          }
+                        `}
+                      >
+                        {badge && (
+                          <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[10px] font-semibold bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-2.5 py-0.5 whitespace-nowrap">
+                            {badge}
+                          </span>
+                        )}
+                        {isSelected && (
+                          <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-[hsl(var(--violet-light))] flex items-center justify-center">
+                            <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
+                          </div>
+                        )}
+                        <p className="text-[13px] font-medium text-white/60 mb-1">
+                          {lang === "ru" ? plan.titleRu : plan.titleEn}
+                        </p>
+                        <p className="text-white leading-none">
+                          <span className="text-[22px] font-bold">
+                            {lang === "ru" ? plan.priceRu : plan.priceEn}
+                          </span>
+                        </p>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Selected plan details */}
+              <div className="px-5 mb-5">
+                <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[16px] font-bold text-white">
+                        {lang === "ru" ? selectedPlanData.titleRu : selectedPlanData.titleEn}
+                      </span>
+                      {selectedPlanData.discountRu && (
+                        <span className="text-[11px] font-medium border border-white/20 text-white/70 rounded-full px-2 py-0.5">
+                          {lang === "ru" ? selectedPlanData.discountRu : selectedPlanData.discountEn}
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-[18px] font-bold text-white">
+                      {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[12px] text-white/40">
+                      {selectedPlanData.perMonthRu
+                        ? (lang === "ru" ? `Всего ${selectedPlanData.perMonthRu}` : `Just ${selectedPlanData.perMonthEn}`)
+                        : ""}
+                    </span>
+                    {selectedPlanData.oldPriceRu && (
+                      <span className="text-[13px] text-white/30 line-through">
+                        {lang === "ru" ? `${selectedPlanData.oldPriceRu}${selectedPlanData.oldSubRu}` : `${selectedPlanData.oldPriceEn}${selectedPlanData.oldSubEn}`}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div className="px-5 pb-5">
+                <button
+                  onClick={() => setStep("payment")}
+                  className="w-full h-[52px] rounded-2xl text-[15px] font-bold text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] transition-all flex items-center justify-center gap-2"
+                >
+                  {lang === "ru"
+                    ? `Подписаться — ${selectedPlanData.priceRu}${selectedPlanData.subRu}`
+                    : `Subscribe ${selectedPlanData.titleEn}`
+                  }
+                </button>
+              </div>
+
+              {/* Footer links */}
+              <div className="flex items-center justify-center gap-3 pb-5 text-[12px] text-white/30">
+                <span className="hover:text-white/50 cursor-pointer transition-colors">
+                  {lang === "ru" ? "Условия" : "Terms"}
+                </span>
+                <span>·</span>
+                <span className="hover:text-white/50 cursor-pointer transition-colors">
+                  {lang === "ru" ? "Конфиденциальность" : "Privacy"}
+                </span>
+              </div>
+            </>
+          ) : (
+            /* Payment step */
+            <div className="px-5 py-4 space-y-3">
               <button
                 className={`w-full rounded-xl px-5 py-5 flex flex-col items-center gap-2 transition-all ${
-                  paymentMethod === "crypto"
-                    ? "border-2 border-primary bg-primary/5"
-                    : "border-2 border-border hover:border-muted-foreground/30"
+                  paymentMethod === "card"
+                    ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
+                    : "border border-white/15 bg-white/5 hover:border-white/25"
                 }`}
-                onClick={() => setPaymentMethod("crypto")}
+                onClick={() => setPaymentMethod("card")}
               >
-                <Bitcoin className="w-6 h-6 text-primary" />
-                <span className="text-[15px] font-semibold text-foreground">Cryptocurrency</span>
-                <span className="text-[13px] text-muted-foreground">BTC, ETH, USDT, TON</span>
+                <CreditCard className="w-6 h-6 text-[hsl(var(--violet-light))]" />
+                <span className="text-[15px] font-semibold text-white">
+                  {lang === "ru" ? "Банковская карта" : "Bank card"}
+                </span>
+                <span className="text-[13px] text-white/40">Visa, Mastercard, Maestro</span>
               </button>
-            )}
 
-            <div className="bg-muted/50 rounded-xl px-4 py-3.5 flex items-center justify-between">
-              <span className="text-[15px] text-foreground">
-                {lang === "ru" ? "Итого" : "Total"}
-              </span>
-              <span className="text-[18px] font-bold text-foreground">
-                {lang === "ru"
-                  ? `${selectedPlanData.priceRu}${selectedPlanData.subRu}`
-                  : `${selectedPlanData.priceEn}${selectedPlanData.subEn}`
-                }
-              </span>
+              {lang === "en" && (
+                <button
+                  className={`w-full rounded-xl px-5 py-5 flex flex-col items-center gap-2 transition-all ${
+                    paymentMethod === "crypto"
+                      ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
+                      : "border border-white/15 bg-white/5 hover:border-white/25"
+                  }`}
+                  onClick={() => setPaymentMethod("crypto")}
+                >
+                  <Bitcoin className="w-6 h-6 text-[hsl(var(--violet-light))]" />
+                  <span className="text-[15px] font-semibold text-white">Cryptocurrency</span>
+                  <span className="text-[13px] text-white/40">BTC, ETH, USDT, TON</span>
+                </button>
+              )}
+
+              <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 flex items-center justify-between">
+                <span className="text-[15px] text-white/60">
+                  {lang === "ru" ? "Итого" : "Total"}
+                </span>
+                <span className="text-[18px] font-bold text-white">
+                  {lang === "ru"
+                    ? `${selectedPlanData.priceRu}${selectedPlanData.subRu}`
+                    : `${selectedPlanData.priceEn}${selectedPlanData.subEn}`
+                  }
+                </span>
+              </div>
+
+              <button
+                onClick={() => {
+                  const priceLabel = lang === "ru"
+                    ? `${selectedPlanData.priceRu}${selectedPlanData.subRu}`
+                    : `${selectedPlanData.priceEn}${selectedPlanData.subEn}`;
+                  purchaseSubscription(selectedPlan, priceLabel);
+                  setStep("success");
+                }}
+                className="w-full h-[52px] rounded-2xl text-[15px] font-bold text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] transition-all flex items-center justify-center gap-2"
+              >
+                {lang === "ru" ? "Подтвердить оплату" : "Confirm payment"}
+              </button>
             </div>
-
-            <button
-              onClick={() => {
-                const priceLabel = lang === "ru"
-                  ? `${selectedPlanData.priceRu}${selectedPlanData.subRu}`
-                  : `${selectedPlanData.priceEn}${selectedPlanData.subEn}`;
-                purchaseSubscription(selectedPlan, priceLabel);
-                setStep("success");
-              }}
-              className="w-full h-12 rounded-xl text-[15px] font-bold text-primary-foreground bg-gradient-to-r from-violet-dark to-primary hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/25"
-            >
-              <Zap className="w-4 h-4" />
-              {lang === "ru" ? "Подтвердить оплату" : "Confirm payment"}
-            </button>
-          </div>
-        )}
+          )}
         </div>
       </DialogContent>
     </Dialog>
