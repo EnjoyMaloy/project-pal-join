@@ -175,7 +175,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                 </div>
                 <div className="flex flex-col items-end flex-shrink-0 ml-3">
                   {plan.badge && (
-                    <span className="text-[11px] font-semibold bg-green-500 text-white rounded px-2 py-0.5 mb-1">
+                    <span className="text-[11px] font-semibold bg-[hsl(var(--success))] text-white rounded px-2 py-0.5 mb-1">
                       {plan.badge}
                     </span>
                   )}
