@@ -145,7 +145,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               </div>
             </div>
 
-            <h2 className="text-[24px] font-medium text-white leading-[22px]">
+            <h2 className="text-white leading-[22px] text-3xl font-normal">
               {step === "plan"
                 ? (lang === "ru" ? "Разблокировать премиум" : "Unlock Premium")
                 : (lang === "ru" ? "Способ оплаты" : "Payment method")
@@ -239,7 +239,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         : ""}
                     </span>
                     {selectedPlanData.oldPriceRu && (
-                      <span className="text-white/30 line-through text-sm font-normal">
+                      <span className="text-white/30 line-through font-normal text-lg">
                         {lang === "ru" ? `${selectedPlanData.oldPriceRu}${selectedPlanData.oldSubRu}` : `${selectedPlanData.oldPriceEn}${selectedPlanData.oldSubEn}`}
                       </span>
                     )}
