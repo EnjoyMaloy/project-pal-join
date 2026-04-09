@@ -10,6 +10,8 @@ import PremiumAvatarWrapper from "@/components/PremiumAvatarWrapper";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import defaultAvatar from "@/assets/default-avatar.jpg";
 import { useTheme } from "next-themes";
+import flagEn from "@/assets/flag-en.png";
+import flagRu from "@/assets/flag-ru.png";
 
 const Navbar = () => {
   const [user, setUser] = useState<SupaUser | null>(null);
