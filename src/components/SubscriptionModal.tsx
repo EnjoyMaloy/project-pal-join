@@ -228,18 +228,18 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         </span>
                       )}
                     </div>
-                    <span className="text-[18px] font-semibold text-white">
+                    <span className="text-white font-normal text-3xl">
                       {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[12px] text-white/40">
+                    <span className="text-white/40 text-sm font-normal">
                       {selectedPlanData.perMonthRu
                         ? (lang === "ru" ? `Всего ${selectedPlanData.perMonthRu}` : `Just ${selectedPlanData.perMonthEn}`)
                         : ""}
                     </span>
                     {selectedPlanData.oldPriceRu && (
-                      <span className="text-[13px] text-white/30 line-through">
+                      <span className="text-white/30 line-through text-sm font-normal">
                         {lang === "ru" ? `${selectedPlanData.oldPriceRu}${selectedPlanData.oldSubRu}` : `${selectedPlanData.oldPriceEn}${selectedPlanData.oldSubEn}`}
                       </span>
                     )}
