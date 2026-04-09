@@ -105,7 +105,7 @@ const Navbar = () => {
           </div>
 
           {/* Unified currency block */}
-          <div className="flex items-center bg-background border border-border rounded-[10px] gap-3 cursor-pointer hover:brightness-95 transition-all" style={{ height: 48, padding: "6px 16px" }}>
+          <div className="flex items-center bg-muted border border-border rounded-[10px] gap-3 cursor-pointer hover:brightness-95 transition-all" style={{ height: 48, padding: "6px 16px" }}>
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 rounded-full flex items-center justify-center text-[16px] font-medium text-white border border-[#924CFE]/30" style={{ background: "linear-gradient(135deg, #B88AFF, #9A5CFF)" }}>A</div>
               <span className="text-[14px] font-normal text-foreground">212,384</span>
