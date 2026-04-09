@@ -65,7 +65,7 @@ const Profile = () => {
           <div className="flex items-center gap-6 mb-6">
             <PremiumAvatarWrapper isPremium={!!hasSubscription} size="lg">
               <Avatar className="w-[100px] h-[100px] flex-shrink-0">
-                <AvatarImage src={user?.user_metadata?.avatar_url} />
+                <AvatarImage src={user?.user_metadata?.avatar_url || defaultAvatar} />
                 <AvatarFallback className="bg-muted text-foreground text-[28px] font-semibold">
                   {userInitials}
                 </AvatarFallback>
