@@ -213,7 +213,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                               backgroundSize: "300% auto",
                               WebkitBackgroundClip: "text",
                               WebkitTextFillColor: "transparent",
-                              animation: "text-shimmer 0.6s ease-in-out 1s 1 forwards",
+                              animation: "text-shimmer 1.2s ease-in-out 1s 1 forwards",
                               backgroundPosition: "-300% center",
                             } : {}}
                           >
