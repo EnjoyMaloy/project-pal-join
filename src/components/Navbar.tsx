@@ -1,11 +1,10 @@
 import { Link, useLocation, useSearchParams, useNavigate } from "react-router-dom";
-import { LogIn, LogOut, Search, Sun, Moon, Crown } from "lucide-react";
+import { LogIn, Search, Crown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import type { User as SupaUser } from "@supabase/supabase-js";
-import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useTheme } from "next-themes";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SubscriptionModal from "@/components/SubscriptionModal";
 import PremiumAvatarWrapper from "@/components/PremiumAvatarWrapper";
