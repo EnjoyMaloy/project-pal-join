@@ -184,7 +184,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
           <h2 className="text-white leading-[22px] text-3xl font-normal">
             {step === "plan"
-              ? (lang === "ru" ? "Получить доступ" : "Get Access")
+              ? (lang === "ru" ? "Открыть доступ" : "Get Access")
               : (lang === "ru" ? "Способ оплаты" : "Payment method")
             }
           </h2>
