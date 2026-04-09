@@ -207,7 +207,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         </span>
                       </p>
                       {plan.perMonthRu && (
-                        <p className="text-[12px] text-green-600 font-medium mt-1.5">
+                        <p className="text-[12px] text-[hsl(var(--success))] font-medium mt-1.5">
                           {lang === "ru" ? plan.perMonthRu : plan.perMonthEn}
                         </p>
                       )}
