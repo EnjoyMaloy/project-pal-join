@@ -57,6 +57,38 @@
     --violet-dark: 261 99% 65%;
     --violet-super-dark: 280 92% 21%;
 
+    /* Category colors */
+    --cat-ai: 175 100% 42%;
+    --cat-ai-icon: 174 55% 52%;
+    --cat-ai-bg: 174 62% 92%;
+    --cat-crypto: 18 100% 59%;
+    --cat-crypto-bg: 18 100% 92%;
+    --cat-security: 217 90% 61%;
+    --cat-security-bg: 222 62% 92%;
+    --cat-trading: 153 100% 39%;
+    --cat-trading-icon: 149 65% 43%;
+    --cat-trading-bg: 149 50% 90%;
+    --cat-invest: 39 91% 55%;
+    --cat-invest-bg: 45 100% 92%;
+    --cat-web3: 261 99% 65%;
+    --cat-web3-bg: 261 100% 93%;
+    --cat-tools: 326 84% 51%;
+    --cat-tools-bg: 326 90% 92%;
+
+    /* Profile tag colors */
+    --tag-trading: 12 82% 50%;
+    --tag-trading-bg: 12 100% 81%;
+    --tag-security: 261 99% 65%;
+    --tag-security-bg: 261 100% 88%;
+    --tag-web3: 170 100% 32%;
+    --tag-web3-bg: 163 70% 86%;
+    --tag-invest: 53 100% 34%;
+    --tag-invest-bg: 52 100% 84%;
+    --tag-meme: 335 93% 47%;
+    --tag-meme-bg: 338 94% 87%;
+    --tag-telegram: 210 74% 67%;
+    --tag-telegram-bg: 198 100% 90%;
+
     --radius: 0.75rem;
 
     --sidebar-background: 240 7% 97%;

@@ -46,6 +46,23 @@ export default {
           dark: "hsl(var(--violet-dark))",
           "super-dark": "hsl(var(--violet-super-dark))",
         },
+        cat: {
+          ai: { DEFAULT: "hsl(var(--cat-ai))", icon: "hsl(var(--cat-ai-icon))", bg: "hsl(var(--cat-ai-bg))" },
+          crypto: { DEFAULT: "hsl(var(--cat-crypto))", bg: "hsl(var(--cat-crypto-bg))" },
+          security: { DEFAULT: "hsl(var(--cat-security))", bg: "hsl(var(--cat-security-bg))" },
+          trading: { DEFAULT: "hsl(var(--cat-trading))", icon: "hsl(var(--cat-trading-icon))", bg: "hsl(var(--cat-trading-bg))" },
+          invest: { DEFAULT: "hsl(var(--cat-invest))", bg: "hsl(var(--cat-invest-bg))" },
+          web3: { DEFAULT: "hsl(var(--cat-web3))", bg: "hsl(var(--cat-web3-bg))" },
+          tools: { DEFAULT: "hsl(var(--cat-tools))", bg: "hsl(var(--cat-tools-bg))" },
+        },
+        tag: {
+          trading: { DEFAULT: "hsl(var(--tag-trading))", bg: "hsl(var(--tag-trading-bg) / 0.5)" },
+          security: { DEFAULT: "hsl(var(--tag-security))", bg: "hsl(var(--tag-security-bg) / 0.5)" },
+          web3: { DEFAULT: "hsl(var(--tag-web3))", bg: "hsl(var(--tag-web3-bg) / 0.5)" },
+          invest: { DEFAULT: "hsl(var(--tag-invest))", bg: "hsl(var(--tag-invest-bg) / 0.5)" },
+          meme: { DEFAULT: "hsl(var(--tag-meme))", bg: "hsl(var(--tag-meme-bg) / 0.5)" },
+          telegram: { DEFAULT: "hsl(var(--tag-telegram))", bg: "hsl(var(--tag-telegram-bg) / 0.5)" },
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
