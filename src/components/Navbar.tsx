@@ -105,7 +105,7 @@ const Navbar = () => {
           </div>
 
           {/* Unified currency block */}
-          <div className="flex items-center bg-muted border border-border rounded-full gap-3 cursor-pointer hover:bg-accent transition-colors" style={{ height: 36, padding: "6px 16px" }}>
+          <div className="flex items-center bg-muted border border-border rounded-[10px] gap-3 cursor-pointer hover:bg-accent transition-colors" style={{ height: 36, padding: "6px 16px" }}>
             <div className="flex items-center gap-2">
               <div className="w-5 h-5 rounded-full bg-[#A66CFF]/80 flex items-center justify-center text-[11px] font-bold text-white">A</div>
               <span className="text-[14px] font-normal text-foreground">212,384</span>
@@ -121,7 +121,7 @@ const Navbar = () => {
           {!hasSubscription && (
             <button
               onClick={() => setSubModalOpen(true)}
-              className="flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-dark via-violet-mid to-violet-light text-primary-foreground text-[16px] font-normal shadow-md hover:shadow-lg hover:brightness-110 transition-all"
+              className="flex items-center gap-2 rounded-[10px] bg-gradient-to-r from-violet-dark via-violet-mid to-violet-light text-primary-foreground text-[16px] font-normal shadow-md hover:shadow-lg hover:brightness-110 transition-all"
               style={{ height: 36, padding: "6px 16px 6px 10px" }}
             >
               <Crown className="w-4 h-4" />
