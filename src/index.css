@@ -280,3 +280,9 @@
     box-shadow: 0 0 8px hsl(var(--violet-light) / 0.4);
   }
 }
+
+/* Dark violet overlay for subscription modal */
+.subscription-modal ~ [data-radix-dialog-overlay],
+[data-radix-dialog-overlay]:has(~ .subscription-modal) {
+  background: hsl(280 92% 3% / 0.88) !important;
+}
