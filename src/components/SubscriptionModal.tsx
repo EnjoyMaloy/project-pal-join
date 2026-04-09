@@ -98,24 +98,15 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 : "Subscription activated. You will receive a confirmation receipt by email."}
             </p>
             <img src={mascotSuccess} alt="" className="w-[300px] mb-10" />
-            <div className="flex items-center gap-3 w-full max-w-[492px]">
-              <Button
-                variant="outline"
-                className="flex-1 h-12 rounded-lg text-[20px] font-medium bg-[hsl(var(--muted))] border-0 text-foreground hover:bg-[hsl(var(--muted)/0.8)]"
-                onClick={() => {
-                  handleClose(false);
-                  navigate("/catalog");
-                }}
-              >
-                {lang === "ru" ? "В каталог" : "Back to Catalog"}
-              </Button>
-              <Button
-                className="flex-1 h-12 rounded-lg text-[20px] font-medium bg-[#232323] hover:bg-[#464646] text-white"
-                onClick={() => handleClose(false)}
-              >
-                {lang === "ru" ? "К курсам" : "Go to courses"}
-              </Button>
-            </div>
+            <Button
+              className="w-full max-w-[492px] h-12 rounded-lg text-[20px] font-medium bg-[#232323] hover:bg-[#464646] text-white"
+              onClick={() => {
+                handleClose(false);
+                navigate("/catalog");
+              }}
+            >
+              {lang === "ru" ? "В каталог" : "Go to Catalog"}
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
