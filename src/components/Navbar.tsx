@@ -67,7 +67,7 @@ const Navbar = () => {
             </div>
             {/* Streak button */}
             <button className="flex items-center gap-2 text-foreground hover:opacity-80 transition-opacity">
-              <span className="text-[22px]">🔥</span>
+              <Flame className="w-5 h-5" style={{ color: "#F65C39" }} />
               <span className="text-[20px] font-semibold">56</span>
             </button>
           </div>
