@@ -329,7 +329,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               )}
 
               <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 flex items-center justify-between">
-                <span className="text-[15px] text-white/60">
+                <span className="text-white/60 text-lg font-normal">
                   {lang === "ru" ? "Итого" : "Total"}
                 </span>
                 <span className="text-[18px] font-bold text-white">
