@@ -105,15 +105,15 @@ const Navbar = () => {
           </div>
 
           {/* Unified currency block */}
-          <div className="flex items-center bg-muted border border-border rounded-[10px] gap-3 cursor-pointer hover:bg-accent transition-colors" style={{ height: 48, padding: "6px 16px" }}>
+          <div className="flex items-stretch bg-muted border border-border rounded-[10px] cursor-pointer hover:bg-accent transition-colors overflow-hidden" style={{ height: 48 }}>
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-md bg-[#A66CFF] flex items-center justify-center text-[12px] font-bold text-white">A</div>
-              <span className="text-[14px] font-normal text-foreground">212,384</span>
+              <div className="w-[48px] h-full rounded-l-[9px] bg-[#A66CFF] flex items-center justify-center text-[13px] font-bold text-white shrink-0">A</div>
+              <span className="text-[14px] font-normal text-foreground pr-3">212,384</span>
             </div>
-            <div className="w-px h-4 bg-border" />
+            <div className="w-px self-center h-4 bg-border" />
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-md bg-[#E07450] flex items-center justify-center text-[12px] font-bold text-white">S</div>
-              <span className="text-[14px] font-normal text-foreground">2,126,771</span>
+              <div className="w-[48px] h-full rounded-none bg-[#E07450] flex items-center justify-center text-[13px] font-bold text-white shrink-0">S</div>
+              <span className="text-[14px] font-normal text-foreground pr-3">2,126,771</span>
             </div>
           </div>
 
