@@ -9,7 +9,7 @@ interface PremiumAvatarWrapperProps {
 const PremiumAvatarWrapper = ({ isPremium, size = "sm", children }: PremiumAvatarWrapperProps) => {
   if (!isPremium) return <>{children}</>;
 
-  const borderWidth = size === "lg" ? 3 : 2;
+  const borderWidth = size === "lg" ? 4 : 3;
 
   return (
     <div
