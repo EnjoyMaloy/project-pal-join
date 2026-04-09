@@ -149,7 +149,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
           <div className="w-16 h-16 rounded-2xl bg-primary-foreground/15 backdrop-blur-sm flex items-center justify-center mx-auto mb-5 rotate-3">
             {step === "plan" ? (
-              <Crown className="w-8 h-8 text-primary-foreground drop-shadow-sm" />
+              <PremiumStarIcon className="w-8 h-8" fill="currentColor" />
             ) : (
               <CreditCard className="w-8 h-8 text-primary-foreground drop-shadow-sm" />
             )}

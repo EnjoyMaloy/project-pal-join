@@ -36,7 +36,7 @@ const PaymentSettings = () => {
         {/* Subscription */}
         <div className="px-6 py-5">
           <div className="flex items-center gap-3 mb-3">
-            <Crown className="w-5 h-5 text-foreground" />
+            <PremiumStarIcon className="w-5 h-5" fill="currentColor" />
             <span className="text-[16px] font-semibold text-foreground">
               {lang === "ru" ? "Подписка" : "Subscription"}
             </span>

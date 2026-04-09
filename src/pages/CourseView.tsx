@@ -207,7 +207,7 @@ const CourseView = () => {
                   </span>
                 ) : (
                   <span className="inline-flex items-center gap-1 rounded-full bg-[hsl(var(--primary))] px-3 py-1 text-[13px] font-semibold text-primary-foreground">
-                    <Crown className="w-3.5 h-3.5" />
+                    <PremiumStarIcon className="w-3.5 h-3.5" fill="currentColor" />
                     Premium
                   </span>
                 );
