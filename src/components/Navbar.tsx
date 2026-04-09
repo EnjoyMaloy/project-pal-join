@@ -107,12 +107,12 @@ const Navbar = () => {
           {/* Unified currency block */}
           <div className="flex items-center bg-muted border border-border rounded-[10px] gap-3 cursor-pointer hover:brightness-95 transition-all" style={{ height: 48, padding: "6px 16px" }}>
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full flex items-center justify-center text-[16px] font-medium text-white border border-[#924CFE]/30" style={{ background: "linear-gradient(135deg, #BF96FF, #AC76FF)" }}>A</div>
+              <div className="w-6 h-6 rounded-full flex items-center justify-center text-[16px] font-medium text-white border border-[#924CFE]/30" style={{ background: "linear-gradient(135deg, #B88AFF, #9A5CFF)" }}>A</div>
               <span className="text-[14px] font-normal text-foreground">212,384</span>
             </div>
             <div className="w-px h-4 bg-border" />
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full flex items-center justify-center text-[16px] font-medium text-white border border-[#E05A3A]/30" style={{ background: "linear-gradient(135deg, #FFa088, #FF7D60)" }}>S</div>
+              <div className="w-6 h-6 rounded-full flex items-center justify-center text-[16px] font-medium text-white border border-[#E05A3A]/30" style={{ background: "linear-gradient(135deg, #FF8E70, #FF6545)" }}>S</div>
               <span className="text-[14px] font-normal text-foreground">2,126,771</span>
             </div>
           </div>
