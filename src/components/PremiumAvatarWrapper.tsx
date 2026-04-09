@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 
 interface PremiumAvatarWrapperProps {
   isPremium: boolean;
@@ -10,38 +9,18 @@ interface PremiumAvatarWrapperProps {
 const PremiumAvatarWrapper = ({ isPremium, size = "sm", children }: PremiumAvatarWrapperProps) => {
   if (!isPremium) return <>{children}</>;
 
-  const badgeSize = size === "lg" ? 30 : 20;
-  const iconSize = size === "lg" ? 16 : 10;
   const borderWidth = size === "lg" ? 3 : 2;
 
   return (
-    <div className="relative inline-flex">
-      {/* Animated gradient ring around avatar */}
-      <div
-        className="rounded-full animate-gradient-border"
-        style={{
-          padding: borderWidth,
-          background: "linear-gradient(270deg, #924CFE, #BF96FF, #D9C0FF, #A66CFF, #924CFE)",
-          backgroundSize: "300% 300%",
-        }}
-      >
-        <div className="rounded-full bg-background" style={{ padding: borderWidth }}>
-          {children}
-        </div>
-      </div>
-
-      {/* Star badge at bottom-right */}
-      <div
-        className="absolute flex items-center justify-center rounded-full bg-gradient-to-tr from-[#924CFE] to-[#BF96FF] shadow-md ring-2 ring-background"
-        style={{
-          width: badgeSize,
-          height: badgeSize,
-          bottom: size === "lg" ? 2 : 0,
-          right: size === "lg" ? 2 : -1,
-        }}
-      >
-        <PremiumStarIcon style={{ width: iconSize, height: iconSize }} fill="white" />
-      </div>
+    <div
+      className="rounded-full animate-gradient-border"
+      style={{
+        padding: borderWidth,
+        background: "linear-gradient(270deg, #924CFE, #BF96FF, #D9C0FF, #A66CFF, #924CFE)",
+        backgroundSize: "300% 300%",
+      }}
+    >
+      {children}
     </div>
   );
 };
