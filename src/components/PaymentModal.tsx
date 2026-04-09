@@ -40,10 +40,10 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     },
     {
       id: "monthly" as PlanId,
-      titleRu: "Полный доступ",
-      titleEn: "Full Access",
-      descRu: "Все премиум курсы на 1 месяц",
-      descEn: "All premium courses for 1 month",
+      titleRu: "Премиум подписка",
+      titleEn: "Premium",
+      descRu: "Все курсы на платформе",
+      descEn: "All courses on the platform",
       priceRu: "₽1,200",
       priceEn: "$14",
       subRu: "/мес",
@@ -51,10 +51,10 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     },
     {
       id: "yearly" as PlanId,
-      titleRu: "Полный доступ",
-      titleEn: "Full Access",
-      descRu: "Все премиум курсы на 1 год",
-      descEn: "All premium courses for 1 year",
+      titleRu: "Премиум подписка",
+      titleEn: "Premium",
+      descRu: "Все курсы на платформе",
+      descEn: "All courses on the platform",
       priceRu: "₽9,600",
       priceEn: "$99",
       subRu: "/год",
@@ -66,9 +66,25 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
   const selectedPlanData = plans.find((p) => p.id === selectedPlan)!;
 
-  const benefits = lang === "ru"
-    ? ["Навсегда доступ", "Все материалы курса", "Сертификат о завершении"]
-    : ["Lifetime access", "All course materials", "Certificate of completion"];
+  const singleBenefits = lang === "ru"
+    ? ["Доступ к курсу навсегда", "Обновления курса", "Закрытое сообщество курса"]
+    : ["Lifetime course access", "Course updates", "Private course community"];
+
+  const premiumBenefits = lang === "ru"
+    ? [
+        "Все платные курсы без ограничений",
+        "Доступ в приватные каналы внутри курсов",
+        "Premium статус в профиле",
+        "AI-генерация — 3 курса в месяц",
+      ]
+    : [
+        "All paid courses with no limits",
+        "Access to private channels inside courses",
+        "Premium profile status",
+        "AI generation — 3 courses per month",
+      ];
+
+  const benefits = selectedPlan === "single" ? singleBenefits : premiumBenefits;
 
   const handleClose = (value: boolean) => {
     onOpenChange(value);
