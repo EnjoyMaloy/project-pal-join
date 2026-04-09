@@ -26,7 +26,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   const plans = [
     {
       id: "monthly" as PlanId,
-      titleRu: "Месячная",
+      titleRu: "На месяц",
       titleEn: "Monthly",
       priceRu: "₽1,200",
       priceEn: "$ 14",
@@ -35,7 +35,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
     },
     {
       id: "yearly" as PlanId,
-      titleRu: "Годовая",
+      titleRu: "На год",
       titleEn: "Yearly",
       priceRu: "₽9,600",
       priceEn: "$ 99",
@@ -200,11 +200,11 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                             <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
                           </div>
                         )}
-                        <p className="text-[13px] font-medium text-white/60 mb-1">
+                        <p className="text-[14px] font-normal text-white/60 mb-1">
                           {lang === "ru" ? plan.titleRu : plan.titleEn}
                         </p>
                         <p className="text-white leading-none">
-                          <span className="text-[22px] font-bold">
+                          <span className="text-[22px] font-semibold">
                             {lang === "ru" ? plan.priceRu : plan.priceEn}
                           </span>
                         </p>
