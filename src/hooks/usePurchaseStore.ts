@@ -95,7 +95,6 @@ export function cancelSubscription() {
   }
   saveStore(store);
 }
-}
 
 export function usePurchaseStore(): PurchaseStore {
   const [store, setStore] = useState<PurchaseStore>(getStore);
