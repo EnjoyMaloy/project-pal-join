@@ -112,7 +112,7 @@ const Navbar = () => {
             </div>
             <div className="w-px h-4 bg-border" />
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full flex items-center justify-center text-[16px] font-medium text-white border border-[#E05A3A]/30" style={{ background: "linear-gradient(135deg, #FFa088, #FF7D60)" }}>S</div>
+              <div className="w-6 h-6 rounded-full flex items-center justify-center text-[16px] font-medium text-white border border-[#E05A3A]/30" style={{ background: "linear-gradient(135deg, #FF8E70, #FF6545)" }}>S</div>
               <span className="text-[14px] font-normal text-foreground">2,126,771</span>
             </div>
           </div>
