@@ -14,6 +14,9 @@ interface PaymentModalProps {
   courseTitleRu: string;
   courseTitleEn: string;
   courseId: string;
+  courseImage?: string;
+  courseDescRu?: string;
+  courseDescEn?: string;
 }
 
 type PlanId = "single" | "monthly" | "yearly";
