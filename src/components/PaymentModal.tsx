@@ -184,7 +184,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
             <>
               {/* Course info */}
               <div className="px-5 mb-4">
-                <div className="relative rounded-xl bg-gradient-to-r from-white/10 to-white/[0.02] px-4 py-3 flex items-center gap-3 before:absolute before:inset-0 before:rounded-xl before:p-[2px] before:bg-gradient-to-r before:from-[hsl(var(--violet-light))] before:via-[hsl(var(--violet-mid)/0.3)] before:to-[hsl(var(--violet-super-light))] before:-z-[1] before:content-[''] after:absolute after:inset-[2px] after:rounded-[10px] after:bg-gradient-to-r after:from-[hsl(280_92%_3%)] after:to-[hsl(280_92%_5%)] after:-z-[1] after:content-['']">
+                <div className="relative rounded-xl bg-gradient-to-r from-white/10 to-white/[0.02] px-4 py-3 flex items-center gap-3 before:absolute before:inset-0 before:rounded-xl before:p-[2px] before:bg-gradient-to-r before:from-[hsl(var(--violet-mid)/0.6)] before:via-[hsl(var(--violet-dark)/0.3)] before:to-[hsl(var(--violet-light)/0.5)] before:-z-[1] before:content-[''] after:absolute after:inset-[2px] after:rounded-[10px] after:bg-gradient-to-r after:from-[hsl(280_92%_2%)] after:to-[hsl(280_92%_4%)] after:-z-[1] after:content-['']">
                   {courseImage && (
                     <img src={courseImage} alt="" className="w-14 h-10 rounded-lg object-cover flex-shrink-0" />
                   )}
