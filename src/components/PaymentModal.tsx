@@ -213,16 +213,11 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                           : "border border-[hsl(280_25%_14%)] bg-white/5 hover:border-white/25"
                       }`}
                     >
-                      <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0">
-                        {isSelected && (
-                          <div className="w-5 h-5 rounded-full bg-[hsl(var(--violet-light))] flex items-center justify-center">
-                            <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
-                          </div>
-                        )}
-                      </div>
                       <div className="min-w-0 flex-1">
                         <p className="text-white text-lg font-normal">{lang === "ru" ? plan.titleRu : plan.titleEn}</p>
-                        <p className="text-white/40 text-sm">{lang === "ru" ? plan.descRu : plan.descEn}</p>
+                        {(lang === "ru" ? plan.descRu : plan.descEn) && (
+                          <p className="text-white/40 text-sm">{lang === "ru" ? plan.descRu : plan.descEn}</p>
+                        )}
                       </div>
                       <div className="flex flex-col items-end flex-shrink-0">
                         {"badgeRu" in plan && (
@@ -236,6 +231,13 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                             <span className="text-white/40 text-sm">{lang === "ru" ? plan.subRu : plan.subEn}</span>
                           )}
                         </span>
+                      </div>
+                      <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0">
+                        {isSelected && (
+                          <div className="w-5 h-5 rounded-full bg-[hsl(var(--violet-light))] flex items-center justify-center">
+                            <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
+                          </div>
+                        )}
                       </div>
                     </button>
                   );
