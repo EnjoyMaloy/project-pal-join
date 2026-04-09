@@ -229,7 +229,10 @@ const CourseView = () => {
               <div>
                 <p className="text-[14px] text-muted-foreground mb-0.5">{lang === "ru" ? "Цена:" : "Price:"}</p>
                 <p className="text-[26px] font-bold text-foreground">
-                  {isFree ? (lang === "ru" ? "Бесплатно" : "Free") : `$${course.price}`}
+                  {isFree
+                    ? (lang === "ru" ? "Бесплатно" : "Free")
+                    : (<><span className="text-[16px] font-normal text-muted-foreground">от </span>{lang === "ru" ? "$6" : "$6"}<span className="text-[16px] font-normal text-muted-foreground">/мес</span></>)
+                  }
                 </p>
               </div>
               {(() => {
