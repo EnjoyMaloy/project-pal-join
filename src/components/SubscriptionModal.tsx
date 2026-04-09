@@ -182,7 +182,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                     return (
                       <button
                         key={plan.id}
-                        onClick={() => setSelectedPlan(plan.id)}
+                        onClick={() => { setSelectedPlan(plan.id); if (plan.id === "yearly") setShimmerKey(k => k + 1); }}
                         className={`
                           flex-1 rounded-xl px-3 py-4 text-center transition-all relative
                           ${isSelected
@@ -229,12 +229,34 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         </span>
                       )}
                     </div>
-                    <span className="text-white font-normal text-3xl">
+                    <span
+                      key={`price-${shimmerKey}`}
+                      className="text-white font-normal text-3xl"
+                      style={selectedPlan === "yearly" && shimmerKey > 0 ? {
+                        background: "linear-gradient(90deg, white 30%, hsl(var(--violet-super-light)) 50%, white 70%)",
+                        backgroundSize: "200% auto",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        animation: "text-shimmer 0.6s ease-in-out 1s 1",
+                        backgroundPosition: "-200% center",
+                      } : {}}
+                    >
                       {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-white/40 font-normal text-lg">
+                    <span
+                      key={`permonth-${shimmerKey}`}
+                      className="text-white/40 font-normal text-lg"
+                      style={selectedPlan === "yearly" && shimmerKey > 0 && selectedPlanData.perMonthRu ? {
+                        background: "linear-gradient(90deg, rgba(255,255,255,0.4) 30%, hsl(var(--violet-super-light)) 50%, rgba(255,255,255,0.4) 70%)",
+                        backgroundSize: "200% auto",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        animation: "text-shimmer 0.6s ease-in-out 2s 1",
+                        backgroundPosition: "-200% center",
+                      } : {}}
+                    >
                       {selectedPlanData.perMonthRu
                         ? (lang === "ru" ? `Всего ${selectedPlanData.perMonthRu}` : `Just ${selectedPlanData.perMonthEn}`)
                         : ""}
