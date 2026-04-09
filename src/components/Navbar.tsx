@@ -75,7 +75,7 @@ const Navbar = () => {
             <button
               onClick={() => setLang(lang === "ru" ? "en" : "ru")}
               className="flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors"
-              style={{ height: 42, minWidth: 102 }}
+              style={{ height: 48, minWidth: 102 }}
             >
               <span className="text-[15px]">
                 {lang === "ru" ? "🇷🇺" : "🇬🇧"}
@@ -90,7 +90,7 @@ const Navbar = () => {
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="flex items-center justify-center rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors"
-              style={{ width: 42, height: 42 }}
+              style={{ width: 48, height: 48 }}
             >
               {theme === "dark" ? <Sun className="w-[18px] h-[18px]" /> : <Moon className="w-[18px] h-[18px]" />}
             </button>
