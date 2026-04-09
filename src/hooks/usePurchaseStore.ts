@@ -88,6 +88,14 @@ export function purchaseSubscription(plan: "monthly" | "yearly", priceLabel: str
   saveStore(store);
 }
 
+export function cancelSubscription() {
+  const store = getStore();
+  if (store.subscription) {
+    store.subscription.active = false;
+  }
+  saveStore(store);
+}
+
 export function usePurchaseStore(): PurchaseStore {
   const [store, setStore] = useState<PurchaseStore>(getStore);
 
