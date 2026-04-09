@@ -184,7 +184,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
             <>
               {/* Course info */}
               <div className="px-5 mb-4">
-                <div className="rounded-xl border border-[hsl(280_25%_14%)] bg-[hsl(280_40%_8%)] px-4 py-3 flex items-center gap-3">
+                <div className="rounded-xl border border-[hsl(280_25%_14%)] bg-white/5 px-4 py-3 flex items-center gap-3">
                   {courseImage && (
                     <img src={courseImage} alt="" className="w-10 h-10 rounded-lg object-cover flex-shrink-0" />
                   )}
@@ -246,7 +246,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
               {/* Benefits */}
               <div className="px-5 mb-5">
-                <div className="rounded-xl border border-[hsl(280_25%_14%)] bg-[hsl(280_40%_8%)] px-5 py-4">
+                <div className="rounded-xl border border-[hsl(280_25%_14%)] bg-white/5 px-5 py-4">
                   <div className="space-y-3">
                     {benefits.map((b, i) => (
                       <div key={i} className="flex items-center gap-3">
