@@ -307,7 +307,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 onClick={() => setPaymentMethod("card")}
               >
                 <CreditCard className="w-6 h-6 text-[hsl(var(--violet-light))]" />
-                <span className="text-[15px] font-semibold text-white">
+                <span className="text-white font-normal text-lg">
                   {lang === "ru" ? "Банковская карта" : "Bank card"}
                 </span>
                 <span className="text-[13px] text-white/40">Visa, Mastercard, Maestro</span>
@@ -332,7 +332,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 <span className="text-white/60 text-lg font-normal">
                   {lang === "ru" ? "Итого" : "Total"}
                 </span>
-                <span className="text-white font-medium text-xl">
+                <span className="text-white text-xl font-normal">
                   {lang === "ru"
                     ? `${selectedPlanData.priceRu}${selectedPlanData.subRu}`
                     : `${selectedPlanData.priceEn}${selectedPlanData.subEn}`
