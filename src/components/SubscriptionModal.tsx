@@ -348,7 +348,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                   purchaseSubscription(selectedPlan, priceLabel);
                   setStep("success");
                 }}
-                className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] transition-all flex items-center justify-center gap-2 text-xl font-medium"
+                className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
               >
                 {lang === "ru" ? "Подтвердить оплату" : "Confirm payment"}
               </button>
