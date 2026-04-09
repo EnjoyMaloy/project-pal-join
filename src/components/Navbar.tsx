@@ -119,14 +119,16 @@ const Navbar = () => {
 
           {/* Buy subscription button */}
           {!hasSubscription && (
-            <button
-              onClick={() => setSubModalOpen(true)}
-              className="flex items-center gap-2 rounded-[10px] bg-gradient-to-r from-violet-dark to-violet-light text-primary-foreground text-[16px] font-normal hover:brightness-110 transition-all"
-              style={{ height: 48, padding: "6px 16px 6px 10px" }}
-            >
+            <div className="rounded-[10px] p-[2px] bg-gradient-to-r from-[#924CFE] via-[#BF96FF] to-[#A66CFF]" style={{ height: 48 }}>
+              <button
+                onClick={() => setSubModalOpen(true)}
+                className="flex items-center gap-2 rounded-[8px] bg-[#A66CFF] text-white text-[16px] font-normal hover:brightness-110 transition-all w-full h-full"
+                style={{ padding: "6px 16px 6px 10px" }}
+              >
               <Crown className="w-4 h-4" />
               {lang === "ru" ? "Купить подписку" : "Buy subscription"}
-            </button>
+              </button>
+            </div>
           )}
           <SubscriptionModal open={subModalOpen} onOpenChange={setSubModalOpen} />
 
