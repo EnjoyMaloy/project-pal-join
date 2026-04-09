@@ -200,7 +200,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                             <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
                           </div>
                         )}
-                        <p className="text-white/60 mb-1 text-center font-sans text-base font-light">
+                        <p className="text-white/60 mb-1 text-center font-sans text-sm font-normal">
                           {lang === "ru" ? plan.titleRu : plan.titleEn}
                         </p>
                         <p className="text-white leading-none">
