@@ -275,7 +275,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               <div className="px-5 pb-5">
                 <button
                   onClick={() => setStep("payment")}
-                  className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] transition-all flex items-center justify-center gap-2 text-xl font-medium"
+                  className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
                 >
                   {lang === "ru"
                     ? `Подписаться — ${selectedPlanData.priceRu}${selectedPlanData.subRu}`
@@ -328,7 +328,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 </button>
               )}
 
-              <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 flex items-center justify-between">
+              <div className="rounded-xl bg-white/5 px-4 py-3.5 flex items-center justify-between">
                 <span className="text-white/60 text-lg font-normal">
                   {lang === "ru" ? "Итого" : "Total"}
                 </span>
@@ -348,7 +348,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                   purchaseSubscription(selectedPlan, priceLabel);
                   setStep("success");
                 }}
-                className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] transition-all flex items-center justify-center gap-2 text-xl font-medium"
+                className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
               >
                 {lang === "ru" ? "Подтвердить оплату" : "Confirm payment"}
               </button>
