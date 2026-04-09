@@ -1,5 +1,5 @@
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { LogIn, Search, Crown } from "lucide-react";
+import { LogIn, Search, Crown, Flame, Sun, Moon, ChevronDown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import type { User as SupaUser } from "@supabase/supabase-js";
@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SubscriptionModal from "@/components/SubscriptionModal";
 import PremiumAvatarWrapper from "@/components/PremiumAvatarWrapper";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
   const [user, setUser] = useState<SupaUser | null>(null);
@@ -21,7 +22,8 @@ const Navbar = () => {
   const isMyCourses = location.pathname === "/my-courses";
   const isCatalog = location.pathname === "/catalog" || location.pathname === "/";
   const searchValue = searchParams.get("q") || "";
-  const { lang, t } = useLanguage();
+  const { lang, setLang, t } = useLanguage();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -38,6 +40,7 @@ const Navbar = () => {
   return (
     <nav className={`sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-16 md:h-14 border-b-0 md:border-b md:border-border ${isArticleView || isMyCourses ? 'hidden md:block' : ''}`}>
       <div className="max-w-full mx-auto px-4 flex items-center justify-between h-16 md:h-14 gap-4 pt-1 md:pt-0">
+        {/* Left: Search */}
         {isInstructions || isCatalog ? (
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 md:w-4 md:h-4 text-muted-foreground" />
@@ -59,7 +62,47 @@ const Navbar = () => {
         ) : (
           <div />
         )}
+
+        {/* Right side items */}
         <div className="hidden md:flex items-center gap-3">
+          {/* Streak */}
+          <div className="flex items-center gap-1.5 text-destructive">
+            <Flame className="w-5 h-5" />
+            <span className="text-[14px] font-semibold">56</span>
+          </div>
+
+          {/* Language switcher */}
+          <button
+            onClick={() => setLang(lang === "ru" ? "en" : "ru")}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-background text-[13px] font-medium text-foreground hover:bg-muted transition-colors"
+          >
+            <span className={`w-5 h-3.5 rounded-sm overflow-hidden inline-flex ${lang === "ru" ? "" : ""}`}>
+              {lang === "ru" ? "🇷🇺" : "🇬🇧"}
+            </span>
+            {lang === "ru" ? "RU" : "EN"}
+            <ChevronDown className="w-3 h-3 text-muted-foreground" />
+          </button>
+
+          {/* Theme toggle */}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="flex items-center justify-center w-9 h-9 rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors"
+          >
+            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
+
+          {/* Coins counter */}
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-violet-light/20 text-violet-dark">
+            <Flame className="w-4 h-4" />
+            <span className="text-[13px] font-semibold">212,384</span>
+          </div>
+
+          {/* Dollar counter */}
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-success/20 text-success">
+            <span className="text-[13px] font-bold">$</span>
+            <span className="text-[13px] font-semibold">2,126,771</span>
+          </div>
+
           {/* Buy subscription button */}
           {!hasSubscription && (
             <button
