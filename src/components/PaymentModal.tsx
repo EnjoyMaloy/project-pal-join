@@ -70,8 +70,8 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   const selectedPlanData = plans.find((p) => p.id === selectedPlan)!;
 
   const singleBenefits = lang === "ru"
-    ? ["Доступ к курсу навсегда", "Обновления курса", "Закрытое сообщество курса"]
-    : ["Lifetime course access", "Course updates", "Private course community"];
+    ? ["Доступ к этому курсу навсегда", "Пожизненные обновления", "Закрытое сообщество курса (если есть)"]
+    : ["Lifetime access to this course", "Lifetime updates", "Private course community (if available)"];
 
   const premiumBenefits = lang === "ru"
     ? [
