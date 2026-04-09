@@ -127,7 +127,8 @@ const Navbar = () => {
               >
               <Crown className="w-4 h-4" />
               {lang === "ru" ? "Купить подписку" : "Buy subscription"}
-            </button>
+              </button>
+            </div>
           )}
           <SubscriptionModal open={subModalOpen} onOpenChange={setSubModalOpen} />
 
