@@ -76,7 +76,7 @@ const Navbar = () => {
         )}
 
         {/* Right side */}
-        <div className="hidden md:flex items-center gap-7">
+        <div className="hidden md:flex items-center gap-3">
           {/* Group: Lang + Theme */}
           <div className="flex items-center gap-3">
             {/* Language switcher */}
