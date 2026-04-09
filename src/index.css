@@ -269,3 +269,14 @@
     text-decoration: underline;
   }
 }
+
+@keyframes shimmer-border {
+  0%, 100% {
+    border-color: hsl(var(--violet-light) / 0.2);
+    box-shadow: 0 0 4px hsl(var(--violet-light) / 0.1);
+  }
+  50% {
+    border-color: hsl(var(--violet-light) / 0.7);
+    box-shadow: 0 0 8px hsl(var(--violet-light) / 0.4);
+  }
+}
