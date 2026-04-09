@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import { Switch } from "@/components/ui/switch";
+import defaultAvatar from "@/assets/default-avatar.jpg";
 
 const Profile = () => {
   const { lang, setLang } = useLanguage();
