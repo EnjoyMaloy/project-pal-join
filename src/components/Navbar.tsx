@@ -1,11 +1,9 @@
-import { Link, useLocation, useSearchParams, useNavigate } from "react-router-dom";
-import { LogIn, LogOut, Search, Sun, Moon, Crown } from "lucide-react";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { LogIn, Search, Crown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import type { User as SupaUser } from "@supabase/supabase-js";
-import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SubscriptionModal from "@/components/SubscriptionModal";
 import PremiumAvatarWrapper from "@/components/PremiumAvatarWrapper";
@@ -23,8 +21,7 @@ const Navbar = () => {
   const isMyCourses = location.pathname === "/my-courses";
   const isCatalog = location.pathname === "/catalog" || location.pathname === "/";
   const searchValue = searchParams.get("q") || "";
-  const { lang, setLang, t } = useLanguage();
-  const { theme, setTheme } = useTheme();
+  const { lang, t } = useLanguage();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -35,10 +32,6 @@ const Navbar = () => {
     });
     return () => subscription.unsubscribe();
   }, []);
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-  };
 
   const userInitials = user?.email ? user.email.substring(0, 2).toUpperCase() : "U";
 
@@ -67,30 +60,6 @@ const Navbar = () => {
           <div />
         )}
         <div className="hidden md:flex items-center gap-3">
-          {/* Theme toggle */}
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-md hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
-          >
-            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
-
-          {/* Language switcher */}
-          <div className="flex items-center bg-muted rounded-md p-0.5">
-            <button
-              onClick={() => setLang("ru")}
-              className={`px-2 py-1 rounded text-caption-12 font-medium transition-colors ${lang === "ru" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
-            >
-              RU
-            </button>
-            <button
-              onClick={() => setLang("en")}
-              className={`px-2 py-1 rounded text-caption-12 font-medium transition-colors ${lang === "en" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
-            >
-              EN
-            </button>
-          </div>
-
           {/* Buy subscription button */}
           {!hasSubscription && (
             <button
