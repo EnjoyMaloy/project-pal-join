@@ -28,7 +28,7 @@ const PaymentSettings = () => {
 
   return (
     <div className="mb-8">
-      <h2 className="text-[22px] font-bold text-foreground mb-5">
+      <h2 className="text-[24px] font-medium leading-[90%] text-foreground mb-5">
         {lang === "ru" ? "Настройки оплаты" : "Payment Settings"}
       </h2>
 

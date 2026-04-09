@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import { Switch } from "@/components/ui/switch";
+import defaultAvatar from "@/assets/default-avatar.jpg";
 
 const Profile = () => {
   const { lang, setLang } = useLanguage();
@@ -56,7 +57,7 @@ const Profile = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left column */}
         <div>
-          <h2 className="text-[22px] font-bold text-foreground mb-5">
+          <h2 className="text-[24px] font-medium leading-[90%] text-foreground mb-5">
             {lang === "ru" ? "Детали профиля" : "Profile Details"}
           </h2>
 
@@ -64,7 +65,7 @@ const Profile = () => {
           <div className="flex items-center gap-6 mb-6">
             <PremiumAvatarWrapper isPremium={!!hasSubscription} size="lg">
               <Avatar className="w-[100px] h-[100px] flex-shrink-0">
-                <AvatarImage src={user?.user_metadata?.avatar_url} />
+                <AvatarImage src={user?.user_metadata?.avatar_url || defaultAvatar} />
                 <AvatarFallback className="bg-muted text-foreground text-[28px] font-semibold">
                   {userInitials}
                 </AvatarFallback>
@@ -125,7 +126,7 @@ const Profile = () => {
           <PaymentSettings />
 
           {/* Settings */}
-          <h2 className="text-[22px] font-bold text-foreground mb-5">
+          <h2 className="text-[24px] font-medium leading-[90%] text-foreground mb-5">
             {lang === "ru" ? "Настройки" : "Settings"}
           </h2>
 
