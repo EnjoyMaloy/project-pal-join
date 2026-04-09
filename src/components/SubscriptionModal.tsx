@@ -237,7 +237,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         backgroundSize: "200% auto",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
-                        animation: "text-shimmer 0.6s ease-in-out 1s 1",
+                        animation: "text-shimmer 0.6s ease-in-out 1s 1 forwards",
                         backgroundPosition: "-200% center",
                       } : {}}
                     >
@@ -253,7 +253,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         backgroundSize: "200% auto",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
-                        animation: "text-shimmer 0.6s ease-in-out 2s 1",
+                        animation: "text-shimmer 0.6s ease-in-out 2s 1 forwards",
                         backgroundPosition: "-200% center",
                       } : {}}
                     >
