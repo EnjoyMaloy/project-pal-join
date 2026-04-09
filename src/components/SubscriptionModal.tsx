@@ -310,7 +310,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 <span className="text-white font-normal text-2xl">
                   {lang === "ru" ? "Банковская карта" : "Bank card"}
                 </span>
-                <span className="text-white/40 text-sm font-normal">Visa, Mastercard, Maestro</span>
+                <span className="text-white/40 font-normal text-base">Visa, Mastercard, Maestro</span>
               </button>
 
               {lang === "en" && (
