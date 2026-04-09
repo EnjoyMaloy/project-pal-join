@@ -57,7 +57,7 @@ const CourseCard = ({
                 style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF" }}
               >
                 <PremiumStarIcon className="w-3.5 h-3.5" fill="hsl(280 92% 21%)" />
-                Premium
+                {lang === "ru" ? "Премиум" : "Premium"}
               </span>
             )}
             {!premium && trending && (
