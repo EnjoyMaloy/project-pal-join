@@ -109,6 +109,13 @@ export default {
           "50%": { backgroundPosition: "100% 50%" },
           "100%": { backgroundPosition: "0% 50%" },
         },
+        "badge-bounce": {
+          "0%": { transform: "translate(-50%, 0)" },
+          "30%": { transform: "translate(-50%, -6px)" },
+          "50%": { transform: "translate(-50%, 0)" },
+          "70%": { transform: "translate(-50%, -3px)" },
+          "100%": { transform: "translate(-50%, 0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
