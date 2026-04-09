@@ -243,7 +243,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         <span className="line-through">{lang === "ru" ? selectedPlanData.oldPriceRu : selectedPlanData.oldPriceEn}</span>
                         {lang === "ru" ? selectedPlanData.oldSubRu : selectedPlanData.oldSubEn}
                       </span>
-                      </span>
+                    )
                     )}
                   </div>
                 </div>
