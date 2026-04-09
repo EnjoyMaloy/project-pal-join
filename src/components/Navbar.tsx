@@ -1,5 +1,5 @@
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { LogIn, Search, Crown, Sun, Moon, ChevronDown } from "lucide-react";
+import { LogIn, Search, Crown, Sun, Moon, ChevronDown, Flame } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import type { User as SupaUser } from "@supabase/supabase-js";
