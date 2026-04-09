@@ -1,5 +1,5 @@
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { LogIn, Search, Crown, Sun, Moon, ChevronDown } from "lucide-react";
+import { LogIn, Search, Crown, Sun, Moon, ChevronDown, Flame } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import type { User as SupaUser } from "@supabase/supabase-js";
@@ -47,7 +47,7 @@ const Navbar = () => {
         {/* Left: Search */}
         {isInstructions || isCatalog ? (
           <div className="flex items-center gap-4">
-            <div className="relative" style={{ width: 420 }}>
+            <div className="relative" style={{ width: 320 }}>
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
@@ -67,7 +67,7 @@ const Navbar = () => {
             </div>
             {/* Streak button */}
             <button className="flex items-center gap-2 text-foreground hover:opacity-80 transition-opacity">
-              <span className="text-[22px]">🔥</span>
+              <Flame className="w-5 h-5" style={{ color: "#F65C39" }} />
               <span className="text-[20px] font-semibold">56</span>
             </button>
           </div>
