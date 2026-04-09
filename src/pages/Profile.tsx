@@ -126,7 +126,7 @@ const Profile = () => {
           <PaymentSettings />
 
           {/* Settings */}
-          <h2 className="text-[22px] font-bold text-foreground mb-5">
+          <h2 className="text-[24px] font-medium leading-[90%] text-foreground mb-5">
             {lang === "ru" ? "Настройки" : "Settings"}
           </h2>
 
