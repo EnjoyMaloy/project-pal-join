@@ -223,7 +223,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         {lang === "ru" ? selectedPlanData.titleRu : selectedPlanData.titleEn}
                       </span>
                       {selectedPlanData.discountRu && (
-                        <span className="border-2 border-[hsl(var(--violet-mid))] text-white/70 rounded-full px-2 py-0.5 text-sm font-medium">
+                        <span className="border-2 border-[hsl(var(--violet-mid))] text-[hsl(var(--violet-mid))] rounded-full px-2 py-0.5 text-sm font-medium">
                           {lang === "ru" ? selectedPlanData.discountRu : selectedPlanData.discountEn}
                         </span>
                       )}
