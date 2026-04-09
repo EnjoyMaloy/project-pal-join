@@ -158,7 +158,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
             <>
               {/* Benefits as review-style card */}
               <div className="px-5 mb-5">
-                <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-4">
+                <div className="rounded-xl border border-[hsl(280_25%_14%)] bg-[hsl(280_40%_8%)] px-5 py-4">
                 <div className="space-y-3">
                     {benefits.map((b, i) => (
                       <div key={i} className="flex items-center gap-3">
@@ -301,8 +301,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               <button
                 className={`w-full rounded-xl px-5 py-5 flex flex-col items-center gap-2 transition-all ${
                   paymentMethod === "card"
-                    ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
-                    : "border border-white/15 bg-white/5 hover:border-white/25"
+                    ? "border-2 border-[hsl(var(--violet-light))] bg-[hsl(280_25%_12%)]"
+                    : "border border-[hsl(280_25%_14%)] bg-[hsl(280_40%_8%)] hover:border-[hsl(280_20%_20%)]"
                 }`}
                 onClick={() => setPaymentMethod("card")}
               >
@@ -317,8 +317,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 <button
                   className={`w-full rounded-xl px-5 py-5 flex flex-col items-center gap-2 transition-all ${
                     paymentMethod === "crypto"
-                      ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
-                      : "border border-white/15 bg-white/5 hover:border-white/25"
+                      ? "border-2 border-[hsl(var(--violet-light))] bg-[hsl(280_25%_12%)]"
+                      : "border border-[hsl(280_25%_14%)] bg-[hsl(280_40%_8%)] hover:border-[hsl(280_20%_20%)]"
                   }`}
                   onClick={() => setPaymentMethod("crypto")}
                 >
@@ -328,7 +328,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 </button>
               )}
 
-              <div className="rounded-xl bg-white/5 px-4 py-3.5 flex items-center justify-between">
+              <div className="rounded-xl bg-[hsl(280_40%_8%)] px-4 py-3.5 flex items-center justify-between">
                 <span className="text-white/60 text-lg font-normal">
                   {lang === "ru" ? "Итого" : "Total"}
                 </span>
