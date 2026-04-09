@@ -270,25 +270,24 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               </div>
             </div>
 
-            {/* CTA */}
-            <div className="px-5 pb-5">
+            {/* CTA - sticky on mobile */}
+            <div className="sticky bottom-0 z-10 px-5 pb-4 pt-3 bg-gradient-to-t from-[hsl(280_92%_3%)] via-[hsl(280_92%_3%)] to-transparent">
               <button
                 onClick={() => setStep("payment")}
                 className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
               >
                 {lang === "ru" ? "Продолжить" : "Continue"}
               </button>
-            </div>
-
-            {/* Footer */}
-            <div className="flex items-center justify-center gap-3 pb-5 text-[12px] text-white/30">
-              <span className="hover:text-white/50 cursor-pointer transition-colors">
-                {lang === "ru" ? "Условия" : "Terms"}
-              </span>
-              <span>·</span>
-              <span className="hover:text-white/50 cursor-pointer transition-colors">
-                {lang === "ru" ? "Конфиденциальность" : "Privacy"}
-              </span>
+              {/* Footer */}
+              <div className="flex items-center justify-center gap-3 pt-3 pb-1 text-[12px] text-white/30">
+                <span className="hover:text-white/50 cursor-pointer transition-colors">
+                  {lang === "ru" ? "Условия" : "Terms"}
+                </span>
+                <span>·</span>
+                <span className="hover:text-white/50 cursor-pointer transition-colors">
+                  {lang === "ru" ? "Конфиденциальность" : "Privacy"}
+                </span>
+              </div>
             </div>
           </>
         ) : (
@@ -361,7 +360,8 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     if (isMobile) {
       return (
         <Drawer open={open} onOpenChange={handleClose}>
-          <DrawerContent className="border-0 rounded-t-2xl max-h-[95vh]">
+          <DrawerContent hideHandle className="border-0 rounded-t-2xl max-h-[95vh]">
+            <div className="mx-auto mt-3 mb-0 h-1 w-12 rounded-full bg-border flex-shrink-0" />
             <div className="overflow-y-auto max-h-[90vh]">
               {successContent}
             </div>
@@ -382,8 +382,10 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={handleClose}>
-        <DrawerContent className="border-0 rounded-t-3xl max-h-[95vh] bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)] shadow-[0_0_120px_40px_hsl(var(--violet-dark)/0.4)] overflow-hidden">
-          <div className="overflow-y-auto max-h-[90vh] relative">
+        <DrawerContent hideHandle className="border-0 rounded-t-3xl max-h-[95vh] bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)] shadow-[0_0_120px_40px_hsl(var(--violet-dark)/0.4)] overflow-hidden flex flex-col">
+          {/* Custom handle */}
+          <div className="mx-auto mt-3 mb-0 h-1 w-12 rounded-full bg-white/20 flex-shrink-0" />
+          <div className="overflow-y-auto flex-1 relative">
             {mainContent}
           </div>
         </DrawerContent>
