@@ -112,7 +112,7 @@ const Navbar = () => {
             </div>
             <div className="w-px self-center h-4 bg-border" />
             <div className="flex items-center gap-2">
-              <div className="w-[48px] h-full rounded-none bg-[#E07450] flex items-center justify-center text-[13px] font-bold text-white shrink-0">S</div>
+              <div className="w-[48px] h-full rounded-none flex items-center justify-center text-[13px] font-bold text-white shrink-0" style={{ background: "#E8A490", boxShadow: "inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.15)" }}>S</div>
               <span className="text-[14px] font-normal text-foreground pr-3">2,126,771</span>
             </div>
           </div>
