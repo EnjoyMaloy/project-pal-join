@@ -122,7 +122,7 @@ const Navbar = () => {
             <button
               onClick={() => setSubModalOpen(true)}
               className="flex items-center gap-2 rounded-[10px] bg-gradient-to-r from-violet-dark via-violet-mid to-violet-light text-primary-foreground text-[16px] font-normal shadow-md hover:shadow-lg hover:brightness-110 transition-all"
-              style={{ height: 36, padding: "6px 16px 6px 10px" }}
+              style={{ height: 48, padding: "6px 16px 6px 10px" }}
             >
               <Crown className="w-4 h-4" />
               {lang === "ru" ? "Купить подписку" : "Buy subscription"}
