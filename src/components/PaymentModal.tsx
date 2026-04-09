@@ -382,8 +382,10 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={handleClose}>
-        <DrawerContent className="border-0 rounded-t-3xl max-h-[95vh] bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)] shadow-[0_0_120px_40px_hsl(var(--violet-dark)/0.4)] overflow-hidden">
-          <div className="overflow-y-auto max-h-[90vh] relative">
+        <DrawerContent hideHandle className="border-0 rounded-t-3xl max-h-[95vh] bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)] shadow-[0_0_120px_40px_hsl(var(--violet-dark)/0.4)] overflow-hidden flex flex-col">
+          {/* Custom handle */}
+          <div className="mx-auto mt-3 mb-0 h-1 w-12 rounded-full bg-white/20 flex-shrink-0" />
+          <div className="overflow-y-auto flex-1 relative">
             {mainContent}
           </div>
         </DrawerContent>
