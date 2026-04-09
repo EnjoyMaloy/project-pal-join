@@ -219,7 +219,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-4">
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-[16px] font-bold text-white">
+                      <span className="text-[20px] font-bold text-white">
                         {lang === "ru" ? selectedPlanData.titleRu : selectedPlanData.titleEn}
                       </span>
                       {selectedPlanData.discountRu && (
@@ -228,7 +228,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         </span>
                       )}
                     </div>
-                    <span className="text-[24px] font-semibold text-white">
+                    <span className="text-[18px] font-semibold text-white">
                       {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
                     </span>
                   </div>
