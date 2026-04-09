@@ -112,7 +112,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[440px] max-h-[90vh] p-0 gap-0 border-0 rounded-3xl shadow-[0_0_120px_40px_hsl(var(--violet-dark)/0.4)] overflow-hidden [&>button.absolute]:hidden bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)]">
         {/* Background glow - sits behind all content */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[350px] rounded-full bg-[hsl(var(--violet-mid)/0.3)] blur-[100px] pointer-events-none z-0" />
+        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[70%] h-[200px] rounded-full bg-[hsl(var(--violet-mid)/0.3)] blur-[80px] pointer-events-none z-0" />
         <div className="overflow-y-auto max-h-[90vh] relative z-[1]">
           {/* Header area */}
           <div className="relative px-6 pt-6 pb-6 text-center">
@@ -301,8 +301,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               <button
                 className={`w-full rounded-xl px-5 py-5 flex flex-col items-center gap-2 transition-all ${
                   paymentMethod === "card"
-                    ? "border-2 border-[hsl(var(--violet-light))] bg-[hsl(280_25%_12%)]"
-                    : "border border-[hsl(280_25%_14%)] bg-[hsl(280_40%_8%)] hover:border-[hsl(280_20%_20%)]"
+                    ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
+                    : "border border-white/15 bg-white/5 hover:border-white/25"
                 }`}
                 onClick={() => setPaymentMethod("card")}
               >
@@ -317,8 +317,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 <button
                   className={`w-full rounded-xl px-5 py-5 flex flex-col items-center gap-2 transition-all ${
                     paymentMethod === "crypto"
-                      ? "border-2 border-[hsl(var(--violet-light))] bg-[hsl(280_25%_12%)]"
-                      : "border border-[hsl(280_25%_14%)] bg-[hsl(280_40%_8%)] hover:border-[hsl(280_20%_20%)]"
+                      ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
+                      : "border border-white/15 bg-white/5 hover:border-white/25"
                   }`}
                   onClick={() => setPaymentMethod("crypto")}
                 >
@@ -328,7 +328,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 </button>
               )}
 
-              <div className="rounded-xl bg-[hsl(280_40%_8%)] px-4 py-3.5 flex items-center justify-between">
+              <div className="rounded-xl bg-white/5 px-4 py-3.5 flex items-center justify-between">
                 <span className="text-white/60 text-lg font-normal">
                   {lang === "ru" ? "Итого" : "Total"}
                 </span>
