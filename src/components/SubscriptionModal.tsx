@@ -145,7 +145,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               </div>
             </div>
 
-            <h2 className="text-[22px] font-bold text-white leading-tight mb-1">
+            <h2 className="text-[24px] font-medium text-white leading-[22px] mb-1">
               {step === "plan"
                 ? (lang === "ru" ? "Разблокировать премиум" : "Unlock Premium")
                 : (lang === "ru" ? "Способ оплаты" : "Payment method")
