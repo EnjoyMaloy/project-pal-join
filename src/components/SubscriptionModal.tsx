@@ -57,13 +57,13 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
   const benefits = lang === "ru"
     ? [
-        "Все платные курсы на платформе без ограничений",
+        "Все платные курсы без ограничений",
         "Доступ в закрытые сообщества внутри курсов",
         "Premium статус в профиле",
         "AI-генерация — 3 курса в месяц",
       ]
     : [
-        "All paid courses on the platform with no limits",
+        "All paid courses with no limits",
         "Access to private communities inside courses",
         "Premium profile status",
         "AI generation — 3 courses per month",
