@@ -147,7 +147,7 @@ const Navbar = () => {
             >
               S
             </span>
-            <span className="text-[18px] font-semibold text-white">2,126,771</span>
+            <span className="text-[18px] font-normal text-white">2,126,771</span>
           </div>
 
           {/* Buy subscription button */}
