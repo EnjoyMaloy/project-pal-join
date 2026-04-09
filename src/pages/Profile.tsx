@@ -57,7 +57,7 @@ const Profile = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left column */}
         <div>
-          <h2 className="text-[22px] font-bold text-foreground mb-5">
+          <h2 className="text-[24px] font-medium leading-[90%] text-foreground mb-5">
             {lang === "ru" ? "Детали профиля" : "Profile Details"}
           </h2>
 
