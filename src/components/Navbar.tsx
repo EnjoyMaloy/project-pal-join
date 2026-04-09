@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SubscriptionModal from "@/components/SubscriptionModal";
 import PremiumAvatarWrapper from "@/components/PremiumAvatarWrapper";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
+import defaultAvatar from "@/assets/default-avatar.jpg";
 import { useTheme } from "next-themes";
 
 const Navbar = () => {
@@ -158,8 +159,8 @@ const Navbar = () => {
           {user ? (
             <Link to="/profile">
               <PremiumAvatarWrapper isPremium={!!hasSubscription} size="sm">
-                <Avatar className="w-11 h-11 cursor-pointer ring-1 ring-border hover:ring-primary/40 transition-all">
-                  <AvatarImage src={user.user_metadata?.avatar_url} />
+                <Avatar className="w-11 h-11 cursor-pointer">
+                  <AvatarImage src={user.user_metadata?.avatar_url || defaultAvatar} />
                   <AvatarFallback className="bg-muted text-foreground text-[13px] font-medium">
                     {userInitials}
                   </AvatarFallback>
@@ -167,8 +168,9 @@ const Navbar = () => {
               </PremiumAvatarWrapper>
             </Link>
           ) : (
-            <Link to="/auth">
-              <Avatar className="w-11 h-11 cursor-pointer ring-1 ring-border hover:ring-primary/40 transition-all">
+            <Link to="/profile">
+              <Avatar className="w-11 h-11 cursor-pointer">
+                <AvatarImage src={defaultAvatar} />
                 <AvatarFallback className="bg-muted text-muted-foreground text-[13px] font-medium">
                   <LogIn className="w-4 h-4" />
                 </AvatarFallback>
