@@ -297,7 +297,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
             </>
           ) : (
             /* Payment step */
-            <div className="px-5 pt-6 pb-4 space-y-3 relative bg-[hsl(280_92%_5%)]">
+            <div className="px-5 pt-6 pb-4 space-y-3">
               <button
                 className={`w-full rounded-xl px-5 py-5 flex flex-col items-center gap-2 transition-all ${
                   paymentMethod === "card"
