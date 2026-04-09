@@ -154,7 +154,8 @@ const Navbar = () => {
           {!hasSubscription && (
             <button
               onClick={() => setSubModalOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-violet-dark via-violet-mid to-violet-light text-primary-foreground text-[14px] font-semibold shadow-md hover:shadow-lg hover:brightness-110 transition-all"
+              className="flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-dark via-violet-mid to-violet-light text-primary-foreground text-[16px] font-normal shadow-md hover:shadow-lg hover:brightness-110 transition-all"
+              style={{ height: 36, padding: "6px 16px 6px 10px" }}
             >
               <Crown className="w-4 h-4" />
               {lang === "ru" ? "Купить подписку" : "Buy subscription"}
