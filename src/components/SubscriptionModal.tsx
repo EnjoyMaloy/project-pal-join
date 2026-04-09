@@ -307,10 +307,10 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 onClick={() => setPaymentMethod("card")}
               >
                 <CreditCard className="w-6 h-6 text-[hsl(var(--violet-light))]" />
-                <span className="text-white font-normal text-lg">
+                <span className="text-white font-normal text-2xl">
                   {lang === "ru" ? "Банковская карта" : "Bank card"}
                 </span>
-                <span className="text-[13px] text-white/40">Visa, Mastercard, Maestro</span>
+                <span className="text-white/40 text-sm font-normal">Visa, Mastercard, Maestro</span>
               </button>
 
               {lang === "en" && (
