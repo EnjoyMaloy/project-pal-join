@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SubscriptionModal from "@/components/SubscriptionModal";
 import PremiumAvatarWrapper from "@/components/PremiumAvatarWrapper";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
+import defaultAvatar from "@/assets/default-avatar.jpg";
 import { useTheme } from "next-themes";
 
 const Navbar = () => {
