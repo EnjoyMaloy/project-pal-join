@@ -1,5 +1,5 @@
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { LogIn, Search, Crown, Flame, Sun, Moon, ChevronDown } from "lucide-react";
+import { LogIn, Search, Crown, Sun, Moon, ChevronDown, Flame } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import type { User as SupaUser } from "@supabase/supabase-js";
@@ -38,12 +38,15 @@ const Navbar = () => {
   const userInitials = user?.email ? user.email.substring(0, 2).toUpperCase() : "U";
 
   return (
-    <nav className={`sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 h-16 md:h-14 border-b-0 md:border-b md:border-border ${isArticleView || isMyCourses ? 'hidden md:block' : ''}`}>
-      <div className="max-w-full mx-auto px-4 flex items-center justify-between h-16 md:h-14 gap-4 pt-1 md:pt-0">
+    <nav
+      className={`sticky top-0 z-50 bg-background border-b border-border ${isArticleView || isMyCourses ? 'hidden md:block' : ''}`}
+      style={{ height: 80 }}
+    >
+      <div className="max-w-full mx-auto px-9 flex items-center justify-between h-full gap-4">
         {/* Left: Search */}
         {isInstructions || isCatalog ? (
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 md:w-4 md:h-4 text-muted-foreground" />
+          <div className="relative w-full max-w-[640px]">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               value={searchValue}
@@ -56,40 +59,42 @@ const Navbar = () => {
                 }
               }}
               placeholder={isCatalog ? t("nav.searchCourse") : t("nav.search")}
-              className="w-full pl-10 pr-4 py-2.5 md:py-2 rounded-lg bg-muted border-none text-[16px] md:text-body-14 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 rounded-[10px] bg-muted border-none text-[18px] font-normal text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+              style={{ height: 48 }}
             />
           </div>
         ) : (
           <div />
         )}
 
-        {/* Right side items */}
-        <div className="hidden md:flex items-center gap-3">
-          {/* Streak */}
-          <div className="flex items-center gap-1.5 text-destructive">
-            <Flame className="w-5 h-5" />
-            <span className="text-[14px] font-semibold">56</span>
+        {/* Right side */}
+        <div className="hidden md:flex items-center gap-7">
+          {/* Group: Lang + Theme */}
+          <div className="flex items-center gap-3">
+            {/* Language switcher */}
+            <button
+              onClick={() => setLang(lang === "ru" ? "en" : "ru")}
+              className="flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors"
+              style={{ height: 42, minWidth: 102 }}
+            >
+              <span className="text-[15px]">
+                {lang === "ru" ? "🇷🇺" : "🇬🇧"}
+              </span>
+              <span className="text-[16px] font-normal" style={{ color: "hsl(var(--foreground))" }}>
+                {lang === "ru" ? "RU" : "EN"}
+              </span>
+              <ChevronDown className="w-3 h-3 text-foreground" />
+            </button>
+
+            {/* Theme toggle */}
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="flex items-center justify-center rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors"
+              style={{ width: 42, height: 42 }}
+            >
+              {theme === "dark" ? <Sun className="w-[18px] h-[18px]" /> : <Moon className="w-[18px] h-[18px]" />}
+            </button>
           </div>
-
-          {/* Language switcher */}
-          <button
-            onClick={() => setLang(lang === "ru" ? "en" : "ru")}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-background text-[13px] font-medium text-foreground hover:bg-muted transition-colors"
-          >
-            <span className={`w-5 h-3.5 rounded-sm overflow-hidden inline-flex ${lang === "ru" ? "" : ""}`}>
-              {lang === "ru" ? "🇷🇺" : "🇬🇧"}
-            </span>
-            {lang === "ru" ? "RU" : "EN"}
-            <ChevronDown className="w-3 h-3 text-muted-foreground" />
-          </button>
-
-          {/* Theme toggle */}
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="flex items-center justify-center w-9 h-9 rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors"
-          >
-            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
 
           {/* Coins counter */}
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-violet-light/20 text-violet-dark">
@@ -119,7 +124,7 @@ const Navbar = () => {
           {user ? (
             <Link to="/profile">
               <PremiumAvatarWrapper isPremium={!!hasSubscription} size="sm">
-                <Avatar className="w-9 h-9 cursor-pointer ring-2 ring-border hover:ring-primary/40 transition-all">
+                <Avatar className="w-11 h-11 cursor-pointer ring-1 ring-border hover:ring-primary/40 transition-all">
                   <AvatarImage src={user.user_metadata?.avatar_url} />
                   <AvatarFallback className="bg-muted text-foreground text-[13px] font-medium">
                     {userInitials}
@@ -129,7 +134,7 @@ const Navbar = () => {
             </Link>
           ) : (
             <Link to="/auth">
-              <Avatar className="w-9 h-9 cursor-pointer ring-2 ring-border hover:ring-primary/40 transition-all">
+              <Avatar className="w-11 h-11 cursor-pointer ring-1 ring-border hover:ring-primary/40 transition-all">
                 <AvatarFallback className="bg-muted text-muted-foreground text-[13px] font-medium">
                   <LogIn className="w-4 h-4" />
                 </AvatarFallback>
