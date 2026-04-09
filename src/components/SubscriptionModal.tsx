@@ -191,7 +191,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         `}
                       >
                         {badge && (
-                          <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-[11px] font-medium bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-2.5 py-0.5 whitespace-nowrap">
+                          <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 font-medium bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-2.5 py-0.5 whitespace-nowrap text-sm">
                             {badge}
                           </span>
                         )}
@@ -200,11 +200,11 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                             <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
                           </div>
                         )}
-                        <p className="text-[14px] font-normal text-white/60 mb-1">
+                        <p className="text-white/60 mb-1 text-center font-sans text-base font-light">
                           {lang === "ru" ? plan.titleRu : plan.titleEn}
                         </p>
                         <p className="text-white leading-none">
-                          <span className="text-[24px] font-semibold">
+                          <span className="text-2xl font-normal">
                             {lang === "ru" ? plan.priceRu : plan.priceEn}
                           </span>
                         </p>
