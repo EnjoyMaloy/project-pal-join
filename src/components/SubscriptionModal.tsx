@@ -221,8 +221,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
             <div className="px-6 pt-5 pb-2 space-y-3">
               {benefits.map((b, i) => (
                 <div key={i} className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0">
-                    <Check className="w-3.5 h-3.5 text-green-600" />
+                  <div className="w-6 h-6 rounded-full bg-[hsl(var(--success-accent)/0.15)] flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3.5 h-3.5 text-[hsl(var(--success))]" />
                   </div>
                   <span className="text-[14px] text-foreground font-medium">{b}</span>
                 </div>

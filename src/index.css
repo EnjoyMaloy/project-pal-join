@@ -57,6 +57,10 @@
     --violet-dark: 261 99% 65%;
     --violet-super-dark: 280 92% 21%;
 
+    /* Success / badge colors */
+    --success: 121 76% 42%;
+    --success-accent: 73 99% 49%;
+
     /* Category colors */
     --cat-ai: 175 100% 42%;
     --cat-ai-icon: 174 55% 52%;

@@ -189,7 +189,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
             <div className="bg-muted/50 rounded-xl px-4 py-3 space-y-2">
               {benefits.map((b, i) => (
                 <div key={i} className="flex items-center gap-2.5">
-                  <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
+                  <Check className="w-4 h-4 text-[hsl(var(--success))] flex-shrink-0" />
                   <span className="text-[14px] text-foreground">{b}</span>
                 </div>
               ))}

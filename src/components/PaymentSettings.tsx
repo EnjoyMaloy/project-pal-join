@@ -44,7 +44,7 @@ const PaymentSettings = () => {
             <div className="ml-8 flex items-start justify-between">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-[14px] font-medium text-green-600 bg-green-500/10 px-2.5 py-0.5 rounded-full">
+                  <span className="text-[14px] font-medium text-[hsl(var(--success))] bg-[hsl(var(--success-accent)/0.15)] px-2.5 py-0.5 rounded-full">
                     {lang === "ru" ? "Активна" : "Active"}
                   </span>
                   <span className="text-[14px] text-muted-foreground">
