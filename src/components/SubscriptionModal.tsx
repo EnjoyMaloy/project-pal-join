@@ -57,16 +57,16 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
   const benefits = lang === "ru"
     ? [
-        "Все платные курсы — полная библиотека без ограничений",
-        "Закрытые сообщества — приватные каналы внутри курсов",
-        "Premium статус — бейдж в профиле",
-        "AI-генерация курсов — 3 персональных курса в месяц",
+        "Все платные курсы без ограничений",
+        "Доступ в приватные каналы внутри курсов",
+        "Premium статус в профиле",
+        "AI-генерация — 3 курса в месяц",
       ]
     : [
-        "All paid courses — full library with no limits",
-        "Private communities — exclusive channels inside courses",
-        "Premium status — profile badge",
-        "AI course generation — 3 personal courses per month",
+        "All paid courses with no limits",
+        "Access to private channels inside courses",
+        "Premium profile status",
+        "AI generation — 3 courses per month",
       ];
 
   const selectedPlanData = plans.find((p) => p.id === selectedPlan)!;
