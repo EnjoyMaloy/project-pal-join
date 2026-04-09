@@ -76,7 +76,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   const premiumBenefits = lang === "ru"
     ? [
         "Все платные курсы без ограничений",
-        "Доступ в приватные каналы внутри курсов",
+        "Доступ в закрытые сообщества внутри курсов",
         "Premium статус в профиле",
         "AI-генерация — 3 курса в месяц",
       ]
