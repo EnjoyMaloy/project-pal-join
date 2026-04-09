@@ -232,6 +232,13 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                           )}
                         </span>
                       </div>
+                      <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0">
+                        {isSelected && (
+                          <div className="w-5 h-5 rounded-full bg-[hsl(var(--violet-light))] flex items-center justify-center">
+                            <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
+                          </div>
+                        )}
+                      </div>
                     </button>
                   );
                 })}
