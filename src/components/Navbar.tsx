@@ -126,7 +126,7 @@ const Navbar = () => {
                 style={{ padding: "6px 16px 6px 10px" }}
               >
               <Crown className="w-4 h-4" />
-              {lang === "ru" ? "Оформить подписку" : "Buy subscription"}
+              {lang === "ru" ? "Подписаться" : "Subscribe"}
               </button>
             </div>
           )}
