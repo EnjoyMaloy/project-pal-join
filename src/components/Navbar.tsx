@@ -90,7 +90,7 @@ const Navbar = () => {
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="flex items-center justify-center rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors"
-              style={{ width: 42, height: 42 }}
+              style={{ width: 48, height: 48 }}
             >
               {theme === "dark" ? <Sun className="w-[18px] h-[18px]" /> : <Moon className="w-[18px] h-[18px]" />}
             </button>
