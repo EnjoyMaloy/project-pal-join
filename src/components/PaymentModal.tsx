@@ -184,9 +184,9 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
             <>
               {/* Course info */}
               <div className="px-5 mb-4">
-                <div className="rounded-xl border border-[hsl(280_25%_14%)] bg-white/5 px-4 py-3 flex items-center gap-3">
+                <div className="rounded-xl border-2 border-[hsl(var(--violet-light)/0.4)] bg-gradient-to-r from-white/10 to-white/[0.02] px-4 py-3 flex items-center gap-3">
                   {courseImage && (
-                    <img src={courseImage} alt="" className="w-10 h-10 rounded-lg object-cover flex-shrink-0" />
+                    <img src={courseImage} alt="" className="w-14 h-10 rounded-lg object-cover flex-shrink-0" />
                   )}
                   <div className="min-w-0">
                     <p className="text-white/90 text-base font-normal truncate">{courseTitle}</p>
