@@ -239,8 +239,9 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         : ""}
                     </span>
                     {selectedPlanData.oldPriceRu && (
-                      <span className="text-white/30 line-through font-normal text-lg">
-                        {lang === "ru" ? `${selectedPlanData.oldPriceRu}${selectedPlanData.oldSubRu}` : `${selectedPlanData.oldPriceEn}${selectedPlanData.oldSubEn}`}
+                      <span className="text-white/30 font-normal text-lg">
+                        <span className="line-through">{lang === "ru" ? selectedPlanData.oldPriceRu : selectedPlanData.oldPriceEn}</span>
+                        {lang === "ru" ? selectedPlanData.oldSubRu : selectedPlanData.oldSubEn}
                       </span>
                     )}
                   </div>
