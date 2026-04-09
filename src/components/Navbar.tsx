@@ -87,9 +87,7 @@ const Navbar = () => {
               className="flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors"
               style={{ height: 48, minWidth: 102 }}
             >
-              <span className="text-[15px]">
-                {lang === "ru" ? "🇷🇺" : "🇬🇧"}
-              </span>
+              <img src={lang === "ru" ? flagRu : flagEn} alt="" className="w-[27px] h-[18px] rounded-[3px] object-cover" />
               <span className="text-[16px] font-normal" style={{ color: "hsl(var(--foreground))" }}>
                 {lang === "ru" ? "RU" : "EN"}
               </span>
