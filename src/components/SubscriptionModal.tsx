@@ -161,7 +161,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 <div className="space-y-3">
                     {benefits.map((b, i) => (
                       <div key={i} className="flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full bg-[hsl(var(--violet-dark)/0.3)] border border-[hsl(var(--violet-light)/0.4)] flex items-center justify-center flex-shrink-0" style={{borderImage: 'linear-gradient(135deg, hsl(var(--violet-light)), hsl(var(--violet-mid)/0.2)) 1', borderImageSlice: 1, borderRadius: '9999px'}}>
+                        <div className="w-6 h-6 rounded-full bg-[hsl(var(--violet-dark)/0.3)] border border-[hsl(var(--violet-light)/0.35)] flex items-center justify-center flex-shrink-0">
                           <Check className="w-3.5 h-3.5 text-[hsl(var(--violet-super-light))]" strokeWidth={3} />
                         </div>
                         <span className="text-[16px] text-white/80">{b}</span>
