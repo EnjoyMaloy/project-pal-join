@@ -228,7 +228,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
               {/* Selected plan details */}
               <div className="px-5 mb-5">
-                <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-4">
+                <div className="rounded-xl bg-white/5 px-5 py-4">
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-2">
                       <span className="text-white font-normal text-xl">
