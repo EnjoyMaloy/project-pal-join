@@ -22,7 +22,7 @@ interface PaymentModalProps {
 type PlanId = "single" | "monthly" | "yearly";
 type Step = "plan" | "payment" | "success";
 
-const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, courseId }: PaymentModalProps) => {
+const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, courseId, courseImage, courseDescRu, courseDescEn }: PaymentModalProps) => {
   const { lang } = useLanguage();
   const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState<PlanId>("single");
