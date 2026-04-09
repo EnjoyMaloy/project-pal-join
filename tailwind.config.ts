@@ -116,6 +116,10 @@ export default {
           "70%": { transform: "translate(-50%, -3px)" },
           "100%": { transform: "translate(-50%, 0)" },
         },
+        "text-shimmer": {
+          "0%": { backgroundPosition: "-200% center" },
+          "100%": { backgroundPosition: "200% center" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
