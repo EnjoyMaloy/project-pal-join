@@ -240,18 +240,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         </span>
                       )}
                     </div>
-                    <span
-                      key={`price-${shimmerKey}`}
-                      className="text-white font-normal text-3xl"
-                      style={selectedPlan === "yearly" && shimmerKey > 0 ? {
-                        background: "linear-gradient(90deg, white 30%, hsl(var(--violet-super-light)) 50%, white 70%)",
-                        backgroundSize: "200% auto",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        animation: "text-shimmer 0.6s ease-in-out 1s 1 forwards",
-                        backgroundPosition: "-200% center",
-                      } : {}}
-                    >
+                    <span className="text-white font-normal text-3xl">
                       {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
                     </span>
                   </div>
@@ -260,12 +249,12 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                       key={`permonth-${shimmerKey}`}
                       className="text-white/40 font-normal text-lg"
                       style={selectedPlan === "yearly" && shimmerKey > 0 && selectedPlanData.perMonthRu ? {
-                        background: "linear-gradient(90deg, rgba(255,255,255,0.4) 30%, hsl(var(--violet-super-light)) 50%, rgba(255,255,255,0.4) 70%)",
-                        backgroundSize: "200% auto",
+                        background: "linear-gradient(90deg, rgba(255,255,255,0.4) 40%, hsl(var(--violet-super-light)) 50%, rgba(255,255,255,0.4) 60%)",
+                        backgroundSize: "300% auto",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                         animation: "text-shimmer 0.6s ease-in-out 2s 1 forwards",
-                        backgroundPosition: "-200% center",
+                        backgroundPosition: "-300% center",
                       } : {}}
                     >
                       {selectedPlanData.perMonthRu
