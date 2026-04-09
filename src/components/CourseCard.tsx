@@ -52,15 +52,7 @@ const CourseCard = ({
         {/* Top bar with badges & bookmark */}
         <div className="absolute top-1 left-2 right-1 flex items-center justify-between">
           <div className="flex items-center gap-[5px]">
-            {isOwned && (
-              <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(46,173,109,0.15)] px-2 py-[5px] text-body-12 font-medium"
-                style={{ background: "linear-gradient(0deg, rgba(192,255,220,0.5), rgba(192,255,220,0.5)), #FFFFFF", color: "#1A6B3C" }}
-              >
-                <PremiumStarIcon className="w-3.5 h-3.5" fill="#1A6B3C" />
-                Premium
-              </span>
-            )}
-            {!isOwned && premium && (
+            {premium && (
               <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(146,76,254,0.1)] px-2 py-[5px] text-body-12 font-medium text-violet-super-dark"
                 style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF" }}
               >
@@ -68,7 +60,7 @@ const CourseCard = ({
                 Premium
               </span>
             )}
-            {!isOwned && !premium && trending && (
+            {!premium && trending && (
               <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(146,76,254,0.1)] px-2 py-[5px] text-body-12 font-medium text-violet-super-dark"
                 style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF" }}
               >
