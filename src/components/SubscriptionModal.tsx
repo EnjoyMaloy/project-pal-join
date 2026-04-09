@@ -205,7 +205,18 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                           {lang === "ru" ? plan.titleRu : plan.titleEn}
                         </p>
                         <p className="text-white leading-none">
-                          <span className="text-2xl font-normal">
+                          <span
+                            key={`top-price-${plan.id}-${shimmerKey}`}
+                            className="text-2xl font-normal"
+                            style={plan.id === "yearly" && isSelected && shimmerKey > 0 ? {
+                              background: "linear-gradient(90deg, white 40%, hsl(var(--violet-super-light)) 50%, white 60%)",
+                              backgroundSize: "300% auto",
+                              WebkitBackgroundClip: "text",
+                              WebkitTextFillColor: "transparent",
+                              animation: "text-shimmer 0.6s ease-in-out 1s 1 forwards",
+                              backgroundPosition: "-300% center",
+                            } : {}}
+                          >
                             {lang === "ru" ? plan.priceRu : plan.priceEn}
                           </span>
                         </p>
