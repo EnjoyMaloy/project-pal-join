@@ -104,50 +104,17 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Coins counter */}
-          <div
-            className="flex items-center gap-2.5 rounded-full text-primary-foreground font-semibold"
-            style={{
-              background: "linear-gradient(135deg, #BF96FF 0%, #A66CFF 100%)",
-              padding: "6px 16px 6px 10px",
-              height: 36,
-            }}
-          >
-            <span
-              className="flex items-center justify-center rounded-full text-[13px] font-bold"
-              style={{
-                width: 24,
-                height: 24,
-                background: "rgba(255,255,255,0.25)",
-                color: "#fff",
-              }}
-            >
-              A
-            </span>
-            <span className="text-[16px] font-normal text-white">212,384</span>
-          </div>
-
-          {/* Dollar counter */}
-          <div
-            className="flex items-center gap-2.5 rounded-full text-primary-foreground font-semibold"
-            style={{
-              background: "linear-gradient(135deg, #E07450 0%, #C94B2A 100%)",
-              padding: "6px 16px 6px 10px",
-              height: 36,
-            }}
-          >
-            <span
-              className="flex items-center justify-center rounded-full text-[13px] font-bold"
-              style={{
-                width: 24,
-                height: 24,
-                background: "rgba(255,255,255,0.25)",
-                color: "#fff",
-              }}
-            >
-              S
-            </span>
-            <span className="text-[16px] font-normal text-white">2,126,771</span>
+          {/* Unified currency block */}
+          <div className="flex items-center h-[36px] bg-muted border border-border rounded-full px-3 gap-3 cursor-pointer hover:bg-accent transition-colors">
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 rounded-full bg-[#A66CFF]/80 flex items-center justify-center text-[11px] font-bold text-white">A</div>
+              <span className="text-[14px] font-normal text-foreground">212,384</span>
+            </div>
+            <div className="w-px h-4 bg-border" />
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 rounded-full bg-[#E07450]/80 flex items-center justify-center text-[11px] font-bold text-white">S</div>
+              <span className="text-[14px] font-normal text-foreground">2,126,771</span>
+            </div>
           </div>
 
           {/* Buy subscription button */}
