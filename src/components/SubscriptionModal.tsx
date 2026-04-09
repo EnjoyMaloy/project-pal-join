@@ -187,7 +187,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                           flex-1 rounded-xl px-3 py-4 text-center transition-all relative
                           ${isSelected
                             ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
-                            : "border border-white/15 bg-white/5 hover:border-white/25"
+                            : "border border-[hsl(280_25%_14%)] bg-white/5 hover:border-white/25"
                           }
                         `}
                       >
