@@ -75,7 +75,7 @@ const Navbar = () => {
             <button
               onClick={() => setLang(lang === "ru" ? "en" : "ru")}
               className="flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors"
-              style={{ height: 42, minWidth: 102 }}
+              style={{ height: 48, minWidth: 102 }}
             >
               <span className="text-[15px]">
                 {lang === "ru" ? "🇷🇺" : "🇬🇧"}
