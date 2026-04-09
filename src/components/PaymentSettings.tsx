@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePurchaseStore, type Transaction, type SubscriptionData } from "@/hooks/usePurchaseStore";
-import { Crown, BookOpen, Receipt, Calendar } from "lucide-react";
+import { BookOpen, Receipt, Calendar } from "lucide-react";
+import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import SubscriptionModal from "@/components/SubscriptionModal";
