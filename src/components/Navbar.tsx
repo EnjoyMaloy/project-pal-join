@@ -124,7 +124,7 @@ const Navbar = () => {
             >
               A
             </span>
-            <span className="text-[18px] font-normal text-white">212,384</span>
+            <span className="text-[16px] font-normal text-white">212,384</span>
           </div>
 
           {/* Dollar counter */}
