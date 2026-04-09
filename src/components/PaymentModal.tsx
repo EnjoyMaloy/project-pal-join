@@ -360,7 +360,8 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     if (isMobile) {
       return (
         <Drawer open={open} onOpenChange={handleClose}>
-          <DrawerContent className="border-0 rounded-t-2xl max-h-[95vh]">
+          <DrawerContent hideHandle className="border-0 rounded-t-2xl max-h-[95vh]">
+            <div className="mx-auto mt-3 mb-0 h-1 w-12 rounded-full bg-border flex-shrink-0" />
             <div className="overflow-y-auto max-h-[90vh]">
               {successContent}
             </div>
