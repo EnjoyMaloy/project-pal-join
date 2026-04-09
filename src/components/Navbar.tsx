@@ -107,7 +107,7 @@ const Navbar = () => {
           {/* Unified currency block */}
           <div className="flex items-stretch bg-muted border border-border rounded-[10px] cursor-pointer hover:bg-accent transition-colors overflow-hidden" style={{ height: 48 }}>
             <div className="flex items-center gap-2">
-              <div className="w-[48px] h-full rounded-l-[9px] bg-[#A66CFF] flex items-center justify-center text-[13px] font-bold text-white shrink-0">A</div>
+              <div className="w-[48px] h-full rounded-l-[9px] flex items-center justify-center text-[13px] font-bold text-white shrink-0" style={{ background: "#C4A0FF", boxShadow: "inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.15)" }}>A</div>
               <span className="text-[14px] font-normal text-foreground pr-3">212,384</span>
             </div>
             <div className="w-px self-center h-4 bg-border" />
