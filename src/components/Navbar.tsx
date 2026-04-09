@@ -1,5 +1,5 @@
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { LogIn, Search, Crown, Sun, Moon, ChevronDown, Flame } from "lucide-react";
+import { LogIn, Search, StarHalf, Sun, Moon, ChevronDown, Flame } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import type { User as SupaUser } from "@supabase/supabase-js";
@@ -125,7 +125,7 @@ const Navbar = () => {
                 className="flex items-center gap-2 rounded-[8px] bg-[#A66CFF] text-white text-[16px] font-normal hover:brightness-110 transition-all w-full h-full"
                 style={{ padding: "6px 16px 6px 10px" }}
               >
-              <Crown className="w-4 h-4" />
+              <StarHalf className="w-4 h-4" />
               {lang === "ru" ? "Подписаться" : "Subscribe"}
               </button>
             </div>
