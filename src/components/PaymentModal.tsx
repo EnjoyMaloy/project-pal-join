@@ -221,7 +221,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                         )}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-white text-xl font-light">{lang === "ru" ? plan.titleRu : plan.titleEn}</p>
+                        <p className="text-white text-lg font-normal">{lang === "ru" ? plan.titleRu : plan.titleEn}</p>
                         <p className="text-white/40 text-sm">{lang === "ru" ? plan.descRu : plan.descEn}</p>
                       </div>
                       <div className="flex flex-col items-end flex-shrink-0">
