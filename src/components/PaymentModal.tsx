@@ -270,25 +270,24 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               </div>
             </div>
 
-            {/* CTA */}
-            <div className="px-5 pb-5">
+            {/* CTA - sticky on mobile */}
+            <div className="sticky bottom-0 z-10 px-5 pb-4 pt-3 bg-gradient-to-t from-[hsl(280_92%_3%)] via-[hsl(280_92%_3%)] to-transparent">
               <button
                 onClick={() => setStep("payment")}
                 className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
               >
                 {lang === "ru" ? "Продолжить" : "Continue"}
               </button>
-            </div>
-
-            {/* Footer */}
-            <div className="flex items-center justify-center gap-3 pb-5 text-[12px] text-white/30">
-              <span className="hover:text-white/50 cursor-pointer transition-colors">
-                {lang === "ru" ? "Условия" : "Terms"}
-              </span>
-              <span>·</span>
-              <span className="hover:text-white/50 cursor-pointer transition-colors">
-                {lang === "ru" ? "Конфиденциальность" : "Privacy"}
-              </span>
+              {/* Footer */}
+              <div className="flex items-center justify-center gap-3 pt-3 pb-1 text-[12px] text-white/30">
+                <span className="hover:text-white/50 cursor-pointer transition-colors">
+                  {lang === "ru" ? "Условия" : "Terms"}
+                </span>
+                <span>·</span>
+                <span className="hover:text-white/50 cursor-pointer transition-colors">
+                  {lang === "ru" ? "Конфиденциальность" : "Privacy"}
+                </span>
+              </div>
             </div>
           </>
         ) : (
