@@ -246,14 +246,14 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
               {/* Benefits */}
               <div className="px-5 mb-5">
-                <div className="rounded-xl border border-[hsl(280_25%_14%)] bg-white/5 px-5 py-4">
-                  <div className="space-y-3">
+                <div className="rounded-xl border border-[hsl(280_25%_14%)] bg-white/5 px-5 py-5">
+                  <div className="space-y-5">
                     {benefits.map((b, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[hsl(var(--violet-dark)/0.4)] to-[hsl(var(--violet-dark)/0.2)] border border-[hsl(var(--violet-light)/0.6)] flex items-center justify-center flex-shrink-0">
-                          <Check className="w-3.5 h-3.5 text-[hsl(var(--violet-super-light))]" strokeWidth={3} />
+                      <div key={i} className="flex items-center gap-4">
+                        <div className="w-7 h-7 rounded-full bg-[hsl(var(--violet-mid))] flex items-center justify-center flex-shrink-0">
+                          <Check className="w-4 h-4 text-white" strokeWidth={3} />
                         </div>
-                        <span className="text-base text-white/80">{b}</span>
+                        <span className="text-base text-white/90">{b}</span>
                       </div>
                     ))}
                   </div>
