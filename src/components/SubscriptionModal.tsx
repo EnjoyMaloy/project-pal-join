@@ -113,9 +113,9 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
       <DialogContent className="sm:max-w-[440px] max-h-[90vh] p-0 gap-0 border-0 rounded-3xl shadow-[0_0_120px_40px_hsl(var(--violet-dark)/0.4)] overflow-hidden [&>button.absolute]:hidden bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)]">
         <div className="overflow-y-auto max-h-[90vh]">
           {/* Header area */}
-          <div className="relative px-6 pt-6 pb-6 text-center overflow-hidden">
+          <div className="relative px-6 pt-6 pb-6 text-center">
             {/* Background glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[200px] rounded-full bg-[hsl(var(--violet-mid)/0.3)] blur-[80px] pointer-events-none" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[300px] rounded-full bg-[hsl(var(--violet-mid)/0.3)] blur-[100px] pointer-events-none" />
 
             {/* Close button */}
             <button
