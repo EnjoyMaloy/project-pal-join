@@ -1,5 +1,5 @@
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { LogIn, Search, Crown, Sun, Moon, ChevronDown, Flame } from "lucide-react";
+import { LogIn, Search, Crown, Sun, Moon, ChevronDown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import type { User as SupaUser } from "@supabase/supabase-js";
@@ -46,23 +46,30 @@ const Navbar = () => {
       <div className="max-w-full mx-auto px-9 flex items-center justify-between h-full gap-4">
         {/* Left: Search */}
         {isInstructions || isCatalog ? (
-          <div className="relative w-full max-w-[640px]">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <input
-              type="text"
-              value={searchValue}
-              onChange={(e) => {
-                const val = e.target.value;
-                if (val) {
-                  setSearchParams({ q: val });
-                } else {
-                  setSearchParams({});
-                }
-              }}
-              placeholder={isCatalog ? t("nav.searchCourse") : t("nav.search")}
-              className="w-full pl-10 pr-4 py-2.5 rounded-[10px] bg-muted border-none text-[18px] font-normal text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
-              style={{ height: 48 }}
-            />
+          <div className="flex items-center gap-4">
+            <div className="relative" style={{ width: 420 }}>
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input
+                type="text"
+                value={searchValue}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (val) {
+                    setSearchParams({ q: val });
+                  } else {
+                    setSearchParams({});
+                  }
+                }}
+                placeholder={isCatalog ? t("nav.searchCourse") : t("nav.search")}
+                className="w-full pl-10 pr-4 py-2.5 rounded-[10px] bg-muted border-none text-[18px] font-normal text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+                style={{ height: 48 }}
+              />
+            </div>
+            {/* Streak button */}
+            <button className="flex items-center gap-2 text-foreground hover:opacity-80 transition-opacity">
+              <span className="text-[22px]">🔥</span>
+              <span className="text-[20px] font-semibold">56</span>
+            </button>
           </div>
         ) : (
           <div />
