@@ -204,7 +204,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                           {lang === "ru" ? plan.titleRu : plan.titleEn}
                         </p>
                         <p className="text-white leading-none">
-                          <span className="text-[22px] font-semibold">
+                          <span className="text-[24px] font-semibold">
                             {lang === "ru" ? plan.priceRu : plan.priceEn}
                           </span>
                         </p>
