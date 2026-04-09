@@ -205,10 +205,10 @@ const Profile = () => {
 
               <div className="flex flex-wrap gap-2">
                 {[
-                  { label: lang === "ru" ? "Торговля криптой" : "Trading in Crypto", bg: "rgba(255, 176, 158, 0.5)", color: "#E93F18" },
-                  { label: lang === "ru" ? "Финансовая безопасность" : "Financial Security", bg: "rgba(217, 192, 255, 0.5)", color: "#924CFE" },
-                  { label: lang === "ru" ? "Web3 технологии" : "Web3 Technologies", bg: "rgba(194, 244, 232, 0.5)", color: "#00A28E" },
-                  { label: lang === "ru" ? "Инвестиции" : "Investments", bg: "rgba(255, 247, 172, 0.5)", color: "#AD9C00" },
+                  { label: lang === "ru" ? "Торговля криптой" : "Trading in Crypto", bg: "hsl(var(--tag-trading-bg) / 0.5)", color: "hsl(var(--tag-trading))" },
+                  { label: lang === "ru" ? "Финансовая безопасность" : "Financial Security", bg: "hsl(var(--tag-security-bg) / 0.5)", color: "hsl(var(--tag-security))" },
+                  { label: lang === "ru" ? "Web3 технологии" : "Web3 Technologies", bg: "hsl(var(--tag-web3-bg) / 0.5)", color: "hsl(var(--tag-web3))" },
+                  { label: lang === "ru" ? "Инвестиции" : "Investments", bg: "hsl(var(--tag-invest-bg) / 0.5)", color: "hsl(var(--tag-invest))" },
                 ].map((cat, i) => (
                   <span
                     key={i}
@@ -221,8 +221,8 @@ const Profile = () => {
               </div>
               <div className="flex gap-2">
                 {[
-                  { label: lang === "ru" ? "Мемкоины и NFT" : "Memecoins & NFTs", bg: "rgba(253, 192, 221, 0.5)", color: "#E90874" },
-                  { label: lang === "ru" ? "Telegram и TON" : "Telegram & TON", bg: "rgba(205, 243, 255, 0.5)", color: "#69AFEB" },
+                  { label: lang === "ru" ? "Мемкоины и NFT" : "Memecoins & NFTs", bg: "hsl(var(--tag-meme-bg) / 0.5)", color: "hsl(var(--tag-meme))" },
+                  { label: lang === "ru" ? "Telegram и TON" : "Telegram & TON", bg: "hsl(var(--tag-telegram-bg) / 0.5)", color: "hsl(var(--tag-telegram))" },
                 ].map((cat, i) => (
                   <span
                     key={i}
