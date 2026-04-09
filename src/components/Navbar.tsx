@@ -97,15 +97,49 @@ const Navbar = () => {
           </div>
 
           {/* Coins counter */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-violet-light/20 text-violet-dark">
-            <Flame className="w-4 h-4" />
-            <span className="text-[13px] font-semibold">212,384</span>
+          <div
+            className="flex items-center gap-2.5 rounded-full text-primary-foreground font-semibold"
+            style={{
+              background: "linear-gradient(135deg, #BF96FF 0%, #A66CFF 100%)",
+              padding: "10px 20px 10px 14px",
+              height: 44,
+            }}
+          >
+            <span
+              className="flex items-center justify-center rounded-full text-[13px] font-bold"
+              style={{
+                width: 28,
+                height: 28,
+                background: "rgba(255,255,255,0.25)",
+                color: "#fff",
+              }}
+            >
+              A
+            </span>
+            <span className="text-[18px] font-semibold text-white">212,384</span>
           </div>
 
           {/* Dollar counter */}
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-success/20 text-success">
-            <span className="text-[13px] font-bold">$</span>
-            <span className="text-[13px] font-semibold">2,126,771</span>
+          <div
+            className="flex items-center gap-2.5 rounded-full text-primary-foreground font-semibold"
+            style={{
+              background: "linear-gradient(135deg, #E07450 0%, #C94B2A 100%)",
+              padding: "10px 20px 10px 14px",
+              height: 44,
+            }}
+          >
+            <span
+              className="flex items-center justify-center rounded-full text-[13px] font-bold"
+              style={{
+                width: 28,
+                height: 28,
+                background: "rgba(255,255,255,0.25)",
+                color: "#fff",
+              }}
+            >
+              S
+            </span>
+            <span className="text-[18px] font-semibold text-white">2,126,771</span>
           </div>
 
           {/* Buy subscription button */}
