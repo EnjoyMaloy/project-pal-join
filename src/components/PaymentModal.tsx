@@ -207,29 +207,29 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                     <button
                       key={plan.id}
                       onClick={() => setSelectedPlan(plan.id)}
-                      className={`w-full text-left rounded-xl px-4 py-3.5 flex items-center justify-between transition-all relative ${
+                      className={`w-full text-left rounded-xl px-4 py-3.5 flex items-center gap-3 transition-all relative ${
                         isSelected
                           ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
                           : "border border-[hsl(280_25%_14%)] bg-white/5 hover:border-white/25"
                       }`}
                     >
-                      <div className="min-w-0">
+                      <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0">
+                        {isSelected && (
+                          <div className="w-5 h-5 rounded-full bg-[hsl(var(--violet-light))] flex items-center justify-center">
+                            <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="min-w-0 flex-1">
                         <p className="text-white text-xl font-light">{lang === "ru" ? plan.titleRu : plan.titleEn}</p>
                         <p className="text-white/40 text-sm">{lang === "ru" ? plan.descRu : plan.descEn}</p>
                       </div>
-                      <div className="flex flex-col items-end flex-shrink-0 ml-3">
-                        <div className="flex items-center gap-2 mb-1">
-                          {"badgeRu" in plan && (
-                            <span className="text-xs bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-2.5 py-0.5 whitespace-nowrap font-semibold">
-                              {lang === "ru" ? plan.badgeRu : plan.badgeEn}
-                            </span>
-                          )}
-                          {isSelected && (
-                            <div className="w-5 h-5 rounded-full bg-[hsl(var(--violet-light))] flex items-center justify-center flex-shrink-0">
-                              <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
-                            </div>
-                          )}
-                        </div>
+                      <div className="flex flex-col items-end flex-shrink-0">
+                        {"badgeRu" in plan && (
+                          <span className="text-xs bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-2.5 py-0.5 whitespace-nowrap font-semibold mb-1">
+                            {lang === "ru" ? plan.badgeRu : plan.badgeEn}
+                          </span>
+                        )}
                         <span className="text-xl font-normal text-white whitespace-nowrap">
                           {lang === "ru" ? plan.priceRu : plan.priceEn}
                           {"subRu" in plan && (
