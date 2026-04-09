@@ -182,10 +182,20 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
           {step === "plan" ? (
             <>
-              {/* Course title */}
+              {/* Course info */}
               <div className="px-5 mb-4">
-                <div className="rounded-xl border border-[hsl(280_25%_14%)] bg-[hsl(280_40%_8%)] px-4 py-2.5 text-center">
-                  <span className="text-white/80 text-base font-normal">{courseTitle}</span>
+                <div className="rounded-xl border border-[hsl(280_25%_14%)] bg-[hsl(280_40%_8%)] px-4 py-3 flex items-center gap-3">
+                  {courseImage && (
+                    <img src={courseImage} alt="" className="w-10 h-10 rounded-lg object-cover flex-shrink-0" />
+                  )}
+                  <div className="min-w-0">
+                    <p className="text-white/90 text-base font-normal truncate">{courseTitle}</p>
+                    {(courseDescRu || courseDescEn) && (
+                      <p className="text-white/40 text-sm truncate">
+                        {lang === "ru" ? courseDescRu : courseDescEn}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
 
