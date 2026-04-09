@@ -24,6 +24,7 @@ const Navbar = () => {
   const isArticleView = location.pathname.startsWith("/instructions/");
   const isMyCourses = location.pathname === "/my-courses";
   const isCatalog = location.pathname === "/catalog" || location.pathname === "/";
+  const isProfile = location.pathname === "/profile";
   const searchValue = searchParams.get("q") || "";
   const { lang, setLang, t } = useLanguage();
   const { theme, setTheme } = useTheme();
@@ -42,7 +43,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-0 z-50 bg-background border-b border-border ${isArticleView || isMyCourses ? 'hidden md:block' : ''}`}
+      className={`sticky top-0 z-50 bg-background border-b border-border ${isArticleView || isMyCourses || isProfile ? 'hidden md:block' : ''}`}
       style={{ height: 80 }}
     >
       <div className="max-w-full mx-auto px-9 flex items-center justify-between h-full gap-4">
