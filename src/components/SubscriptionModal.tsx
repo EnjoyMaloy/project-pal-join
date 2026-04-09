@@ -2,7 +2,8 @@ import { useState } from "react";
 import mascotSuccess from "@/assets/mascot-success.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Crown, Zap, Check, ChevronLeft, CreditCard, Bitcoin } from "lucide-react";
+import { X, Zap, Check, ChevronLeft, CreditCard, Bitcoin } from "lucide-react";
+import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { purchaseSubscription } from "@/hooks/usePurchaseStore";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -148,7 +149,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
           <div className="w-16 h-16 rounded-2xl bg-primary-foreground/15 backdrop-blur-sm flex items-center justify-center mx-auto mb-5 rotate-3">
             {step === "plan" ? (
-              <Crown className="w-8 h-8 text-primary-foreground drop-shadow-sm" />
+              <PremiumStarIcon className="w-8 h-8" fill="currentColor" />
             ) : (
               <CreditCard className="w-8 h-8 text-primary-foreground drop-shadow-sm" />
             )}

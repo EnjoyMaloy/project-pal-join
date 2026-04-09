@@ -3,7 +3,8 @@ import mascotSuccess from "@/assets/mascot-success.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Sparkles, Zap, Check, Crown, CreditCard, ChevronLeft, Bitcoin } from "lucide-react";
+import { X, Sparkles, Zap, Check, CreditCard, ChevronLeft, Bitcoin } from "lucide-react";
+import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { useNavigate } from "react-router-dom";
 import { purchaseCourse, purchaseSubscription } from "@/hooks/usePurchaseStore";
 
@@ -134,7 +135,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
           </button>
           <div className="w-11 h-11 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-3">
             {step === "plan" ? (
-              <Crown className="w-5 h-5 text-primary-foreground" />
+              <PremiumStarIcon className="w-5 h-5" fill="currentColor" />
             ) : (
               <CreditCard className="w-5 h-5 text-primary-foreground" />
             )}

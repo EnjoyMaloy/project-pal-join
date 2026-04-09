@@ -2,7 +2,8 @@ import { useState } from "react";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Star, ChevronDown, ChevronRight, Users, Gamepad2, Lock, Crown } from "lucide-react";
+import { Star, ChevronDown, ChevronRight, Users, Gamepad2, Lock } from "lucide-react";
+import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -201,12 +202,12 @@ const CourseView = () => {
                   <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(46,173,109,0.15)] px-3 py-1 text-[13px] font-medium"
                     style={{ background: "linear-gradient(0deg, rgba(192,255,220,0.5), rgba(192,255,220,0.5)), #FFFFFF", color: "#1A6B3C" }}
                   >
-                    <Crown className="w-3.5 h-3.5" style={{ color: "#1A6B3C" }} />
+                    <PremiumStarIcon className="w-3.5 h-3.5" fill="#1A6B3C" />
                     Premium
                   </span>
                 ) : (
                   <span className="inline-flex items-center gap-1 rounded-full bg-[hsl(var(--primary))] px-3 py-1 text-[13px] font-semibold text-primary-foreground">
-                    <Crown className="w-3.5 h-3.5" />
+                    <PremiumStarIcon className="w-3.5 h-3.5" fill="currentColor" />
                     Premium
                   </span>
                 );
