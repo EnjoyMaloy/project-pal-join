@@ -59,8 +59,8 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
       priceEn: "$99",
       subRu: "/год",
       subEn: "/yr",
-      badgeRu: "Выгоднее",
-      badgeEn: "Best value",
+      badgeRu: "Скидка 45%",
+      badgeEn: "45% off",
     },
   ];
 
@@ -189,11 +189,18 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                         <p className="text-white/40 text-sm">{lang === "ru" ? plan.descRu : plan.descEn}</p>
                       </div>
                       <div className="flex flex-col items-end flex-shrink-0 ml-3">
-                        {"badgeRu" in plan && (
-                          <span className="text-xs font-medium bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-2.5 py-0.5 mb-1">
-                            {lang === "ru" ? plan.badgeRu : plan.badgeEn}
-                          </span>
-                        )}
+                        <div className="flex items-center gap-2 mb-1">
+                          {"badgeRu" in plan && (
+                            <span className="text-xs font-medium bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-2.5 py-0.5 whitespace-nowrap">
+                              {lang === "ru" ? plan.badgeRu : plan.badgeEn}
+                            </span>
+                          )}
+                          {isSelected && (
+                            <div className="w-5 h-5 rounded-full bg-[hsl(var(--violet-light))] flex items-center justify-center flex-shrink-0">
+                              <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
+                            </div>
+                          )}
+                        </div>
                         <span className="text-xl font-normal text-white whitespace-nowrap">
                           {lang === "ru" ? plan.priceRu : plan.priceEn}
                           {"subRu" in plan && (
@@ -201,11 +208,6 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                           )}
                         </span>
                       </div>
-                      {isSelected && (
-                        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-[hsl(var(--violet-light))] flex items-center justify-center">
-                          <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
-                        </div>
-                      )}
                     </button>
                   );
                 })}
