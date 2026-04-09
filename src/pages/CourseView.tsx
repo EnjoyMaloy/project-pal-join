@@ -239,9 +239,9 @@ const CourseView = () => {
                 return (
                   <Button
                     onClick={() => isOwned ? null : setPaymentOpen(true)}
-                    className="h-12 px-8 rounded-xl text-[18px] leading-[18px] font-medium gap-2"
+                    className="h-12 px-8 rounded-xl text-[18px] leading-[18px] font-medium gap-2 [&_svg]:size-5"
                   >
-                    {!isOwned && course.price && <PremiumStarIcon className="w-7 h-7" fill="currentColor" />}
+                    {!isOwned && course.price && <PremiumStarIcon fill="currentColor" />}
                     {isOwned
                       ? (lang === "ru" ? "Начать обучение" : "Start learning")
                       : (lang === "ru" ? "Открыть доступ" : "Get access")
