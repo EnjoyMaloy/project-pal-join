@@ -323,8 +323,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                   onClick={() => setPaymentMethod("crypto")}
                 >
                   <Bitcoin className="w-6 h-6 text-[hsl(var(--violet-light))]" />
-                  <span className="text-[15px] font-semibold text-white">Cryptocurrency</span>
-                  <span className="text-[13px] text-white/40">BTC, ETH, USDT, TON</span>
+                  <span className="text-white font-normal text-2xl">Cryptocurrency</span>
+                  <span className="text-white/40 font-normal text-base">BTC, ETH, USDT, TON</span>
                 </button>
               )}
 
