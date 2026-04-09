@@ -191,7 +191,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         `}
                       >
                         {badge && (
-                          <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 font-medium bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-2.5 py-0.5 whitespace-nowrap text-sm">
+                          <span className={`absolute -top-2.5 left-1/2 -translate-x-1/2 font-medium bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-2.5 py-0.5 whitespace-nowrap text-sm transition-transform ${isSelected ? "animate-[badge-bounce_0.4s_ease-out]" : ""}`}>
                             {badge}
                           </span>
                         )}
