@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Crown } from "lucide-react";
+import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 
 interface PremiumAvatarWrapperProps {
   isPremium: boolean;
@@ -16,17 +16,21 @@ const PremiumAvatarWrapper = ({ isPremium, size = "sm", children }: PremiumAvata
 
   return (
     <div className="relative inline-flex">
-      {/* Gradient ring around avatar */}
+      {/* Animated gradient ring around avatar */}
       <div
-        className="rounded-full bg-gradient-to-tr from-[#A66CFF] via-[#BF96FF] to-[#D9C0FF]"
-        style={{ padding: borderWidth }}
+        className="rounded-full animate-gradient-border"
+        style={{
+          padding: borderWidth,
+          background: "linear-gradient(270deg, #924CFE, #BF96FF, #D9C0FF, #A66CFF, #924CFE)",
+          backgroundSize: "300% 300%",
+        }}
       >
         <div className="rounded-full bg-background" style={{ padding: borderWidth }}>
           {children}
         </div>
       </div>
 
-      {/* Crown badge at bottom-right */}
+      {/* Star badge at bottom-right */}
       <div
         className="absolute flex items-center justify-center rounded-full bg-gradient-to-tr from-[#924CFE] to-[#BF96FF] shadow-md ring-2 ring-background"
         style={{
@@ -36,7 +40,7 @@ const PremiumAvatarWrapper = ({ isPremium, size = "sm", children }: PremiumAvata
           right: size === "lg" ? 2 : -1,
         }}
       >
-        <Crown className="text-white" style={{ width: iconSize, height: iconSize }} fill="white" strokeWidth={0} />
+        <PremiumStarIcon style={{ width: iconSize, height: iconSize }} fill="white" />
       </div>
     </div>
   );
