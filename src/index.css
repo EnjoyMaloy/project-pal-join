@@ -284,5 +284,5 @@
 /* Dark violet overlay for subscription modal */
 .subscription-modal ~ [data-radix-dialog-overlay],
 [data-radix-dialog-overlay]:has(~ .subscription-modal) {
-  background: hsl(280 92% 3% / 0.88) !important;
+  background: hsl(280 92% 1% / 0.92) !important;
 }
