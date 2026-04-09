@@ -133,30 +133,24 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               </button>
             )}
 
-            {/* Icon with glow */}
-            <div className="relative w-20 h-20 mx-auto mb-5 mt-4">
-              <div className="absolute inset-0 rounded-full bg-[hsl(var(--violet-mid)/0.5)] blur-xl" />
-              <div className="relative w-20 h-20 rounded-full bg-gradient-to-b from-[hsl(var(--violet-dark))] to-[hsl(var(--violet-super-dark))] flex items-center justify-center">
+            {/* Icon with soft glow underneath */}
+            <div className="relative w-20 h-20 mx-auto mb-5 mt-4 flex items-center justify-center">
+              <div className="absolute bottom-0 w-16 h-8 rounded-full bg-[hsl(var(--violet-light)/0.4)] blur-xl pointer-events-none" />
+              <div className="relative">
                 {step === "plan" ? (
-                  <PremiumStarIcon className="w-9 h-9" fill="white" />
+                  <PremiumStarIcon className="w-10 h-10 text-[hsl(var(--violet-light))]" fill="hsl(var(--violet-light))" />
                 ) : (
-                  <CreditCard className="w-9 h-9 text-white" />
+                  <CreditCard className="w-10 h-10 text-[hsl(var(--violet-light))]" />
                 )}
               </div>
             </div>
 
-            <h2 className="text-[24px] font-medium text-white leading-[22px] mb-1">
+            <h2 className="text-[24px] font-medium text-white leading-[22px]">
               {step === "plan"
                 ? (lang === "ru" ? "Разблокировать премиум" : "Unlock Premium")
                 : (lang === "ru" ? "Способ оплаты" : "Payment method")
               }
             </h2>
-            <p className="text-[14px] text-white/50 leading-snug">
-              {step === "plan"
-                ? (lang === "ru" ? "Неограниченный доступ ко всем курсам" : "Unlimited access to all courses")
-                : (lang === "ru" ? "Выберите, как вы хотите оплатить" : "Choose how you want to pay")
-              }
-            </p>
           </div>
 
           {step === "plan" ? (
