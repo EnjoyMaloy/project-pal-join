@@ -194,24 +194,14 @@ const CourseView = () => {
             {/* Title */}
             <div className="flex items-center gap-3 mb-4 flex-wrap">
               <h1 className="text-[28px] font-bold text-foreground">{title}</h1>
-              {course.price !== null && (() => {
-                const isPurchased = store.purchasedCourses.includes(course.id);
-                const hasSubscription = store.subscription?.active;
-                const isOwned = isPurchased || hasSubscription;
-                return isOwned ? (
-                  <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(46,173,109,0.15)] px-3 py-1 text-[13px] font-medium"
-                    style={{ background: "linear-gradient(0deg, rgba(192,255,220,0.5), rgba(192,255,220,0.5)), #FFFFFF", color: "#1A6B3C" }}
-                  >
-                    <PremiumStarIcon className="w-3.5 h-3.5" fill="#1A6B3C" />
-                    Premium
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-[hsl(var(--primary))] px-3 py-1 text-[13px] font-semibold text-primary-foreground">
-                    <PremiumStarIcon className="w-3.5 h-3.5" fill="currentColor" />
-                    Premium
-                  </span>
-                );
-              })()}
+              {course.price !== null && (
+                <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(146,76,254,0.1)] px-3 py-1 text-[13px] font-medium text-violet-super-dark"
+                  style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF" }}
+                >
+                  <PremiumStarIcon className="w-3.5 h-3.5" fill="hsl(280 92% 21%)" />
+                  Premium
+                </span>
+              )}
             </div>
 
             {/* Description */}
@@ -242,13 +232,23 @@ const CourseView = () => {
                   {isFree ? (lang === "ru" ? "Бесплатно" : "Free") : `$${course.price}`}
                 </p>
               </div>
-              <Button
-                onClick={() => setPaymentOpen(true)}
-                className="h-12 px-8 rounded-xl text-[15px] font-semibold gap-2"
-              >
-                {course.price && !store.purchasedCourses.includes(course.id) && !store.subscription?.active && <Lock className="w-4 h-4" />}
-                {lang === "ru" ? "Начать обучение" : "Start learning"}
-              </Button>
+              {(() => {
+                const isPurchased = store.purchasedCourses.includes(course.id);
+                const hasSubscription = store.subscription?.active;
+                const isOwned = isPurchased || hasSubscription || isFree;
+                return (
+                  <Button
+                    onClick={() => isOwned ? null : setPaymentOpen(true)}
+                    className="h-12 px-8 rounded-xl text-[15px] font-semibold gap-2"
+                  >
+                    {!isOwned && course.price && <Lock className="w-4 h-4" />}
+                    {isOwned
+                      ? (lang === "ru" ? "Начать обучение" : "Start learning")
+                      : (lang === "ru" ? "Открыть доступ" : "Get access")
+                    }
+                  </Button>
+                );
+              })()}
             </div>
 
             {/* Modules */}
