@@ -135,12 +135,12 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
             {/* Icon with soft glow underneath */}
             <div className="relative w-20 h-20 mx-auto mb-5 mt-4 flex items-center justify-center">
-              <div className="absolute bottom-0 w-16 h-8 rounded-full bg-[hsl(var(--violet-light)/0.4)] blur-xl pointer-events-none" />
+              <div className="absolute bottom-0 w-20 h-10 rounded-full bg-[hsl(var(--violet-super-light)/0.35)] blur-xl pointer-events-none" />
               <div className="relative">
                 {step === "plan" ? (
-                  <PremiumStarIcon className="w-10 h-10 text-[hsl(var(--violet-light))]" fill="hsl(var(--violet-light))" />
+                  <PremiumStarIcon className="w-14 h-14 text-[hsl(var(--violet-super-light))]" fill="hsl(var(--violet-super-light))" />
                 ) : (
-                  <CreditCard className="w-10 h-10 text-[hsl(var(--violet-light))]" />
+                  <CreditCard className="w-14 h-14 text-[hsl(var(--violet-super-light))]" />
                 )}
               </div>
             </div>
