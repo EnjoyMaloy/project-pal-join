@@ -158,13 +158,13 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               {/* Benefits as review-style card */}
               <div className="px-5 mb-5">
                 <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-4">
-                  <div className="space-y-2.5">
+                <div className="space-y-3">
                     {benefits.map((b, i) => (
                       <div key={i} className="flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-[hsl(var(--violet-mid)/0.25)] flex items-center justify-center flex-shrink-0">
-                          <Check className="w-3 h-3 text-[hsl(var(--violet-light))]" />
+                        <div className="w-6 h-6 rounded-full bg-[hsl(var(--violet-mid)/0.25)] flex items-center justify-center flex-shrink-0">
+                          <Check className="w-3.5 h-3.5 text-[hsl(var(--violet-light))]" />
                         </div>
-                        <span className="text-[13px] text-white/80">{b}</span>
+                        <span className="text-[16px] text-white/80">{b}</span>
                       </div>
                     ))}
                   </div>
