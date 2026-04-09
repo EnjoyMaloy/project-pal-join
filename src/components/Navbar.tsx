@@ -132,8 +132,8 @@ const Navbar = () => {
             className="flex items-center gap-2.5 rounded-full text-primary-foreground font-semibold"
             style={{
               background: "linear-gradient(135deg, #E07450 0%, #C94B2A 100%)",
-              padding: "10px 20px 10px 14px",
-              height: 44,
+              padding: "6px 16px 6px 10px",
+              height: 36,
             }}
           >
             <span
