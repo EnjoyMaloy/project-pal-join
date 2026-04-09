@@ -85,7 +85,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
       ]
     : [
         "All paid courses with no limits",
-        "Access to private channels inside courses",
+        "Access to private communities inside courses",
         "Premium profile status",
         "AI generation — 3 courses per month",
       ];
