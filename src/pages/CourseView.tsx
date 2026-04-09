@@ -387,6 +387,9 @@ const CourseView = () => {
         courseId={course.id}
         courseTitleRu={course.titleRu}
         courseTitleEn={course.titleEn}
+        courseImage={course.image}
+        courseDescRu={course.descriptionRu}
+        courseDescEn={course.descriptionEn}
       />
     </div>
   );
