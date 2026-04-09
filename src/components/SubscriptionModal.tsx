@@ -332,7 +332,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 <span className="text-white/60 text-lg font-normal">
                   {lang === "ru" ? "Итого" : "Total"}
                 </span>
-                <span className="text-[18px] font-bold text-white">
+                <span className="text-white font-medium text-xl">
                   {lang === "ru"
                     ? `${selectedPlanData.priceRu}${selectedPlanData.subRu}`
                     : `${selectedPlanData.priceEn}${selectedPlanData.subEn}`
