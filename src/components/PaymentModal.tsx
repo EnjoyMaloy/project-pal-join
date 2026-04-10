@@ -32,6 +32,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   const [step, setStep] = useState<Step>("plan");
   const [paymentMethod, setPaymentMethod] = useState<"card" | "crypto">("card");
   const [termsAccepted, setTermsAccepted] = useState(true);
+  const [autoBilling, setAutoBilling] = useState(false);
 
   const courseTitle = lang === "ru" ? courseTitleRu : courseTitleEn;
 
@@ -74,6 +75,13 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   ];
 
   const selectedPlanData = plans.find((p) => p.id === selectedPlan)!;
+
+  const applyDiscount = (price: string) => {
+    const num = parseFloat(price.replace(/[^0-9.]/g, "").replace(",", ""));
+    const discounted = Math.round(num * 0.9 * 100) / 100;
+    const prefix = price.match(/^[₽$]/)?.[0] || "";
+    return `${prefix}${discounted % 1 === 0 ? discounted.toLocaleString("en-US") : discounted.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+  };
 
   const singleBenefits = lang === "ru"
     ? ["Доступ к этому курсу навсегда", "Пожизненные обновления", "Закрытое сообщество курса (если есть)"]
@@ -285,50 +293,19 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
             <div className="sticky bottom-0 z-10 px-5 pb-4 pt-3 bg-gradient-to-t from-[hsl(280_92%_3%)] via-[hsl(280_92%_3%)] to-transparent">
               <button
                 onClick={() => setStep("payment")}
-                disabled={selectedPlan !== "single" && !termsAccepted}
-                className={`w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium ${selectedPlan !== "single" && !termsAccepted ? "opacity-40 pointer-events-none" : ""}`}
+                className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
               >
                 {lang === "ru" ? "Продолжить" : "Continue"}
               </button>
-
-              {/* Terms checkbox - only for subscription plans, below button */}
-              {(selectedPlan === "monthly" || selectedPlan === "yearly") ? (
-                <div className="flex items-start justify-center gap-2.5 pt-3 pb-1 text-sm text-white/40">
-                  <button
-                    onClick={() => setTermsAccepted(!termsAccepted)}
-                    className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all mt-0.5 ${
-                      termsAccepted
-                        ? "bg-[hsl(var(--violet-light))]"
-                        : "border border-white/30"
-                    }`}
-                  >
-                    {termsAccepted && <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />}
-                  </button>
-                  <span className="cursor-pointer" onClick={() => setTermsAccepted(!termsAccepted)}>
-                    {lang === "ru"
-                      ? <>Я соглашаюсь на автоматическое списание {selectedPlanData.priceRu}/{selectedPlan === "yearly" ? "год" : "мес"} до отмены подписки. </>
-                      : <>I agree to automatic billing of {selectedPlanData.priceEn}/{selectedPlan === "yearly" ? "year" : "mo"} until subscription is cancelled. </>
-                    }
-                    <span className="underline hover:text-white/60 transition-colors">
-                      {lang === "ru" ? "Условия" : "Terms"}
-                    </span>
-                    {" · "}
-                    <span className="underline hover:text-white/60 transition-colors">
-                      {lang === "ru" ? "Конфиденциальность" : "Privacy"}
-                    </span>
-                  </span>
-                </div>
-              ) : (
-                <div className="flex items-center justify-center gap-3 pt-3 pb-1 text-sm text-white/40">
-                  <span className="underline hover:text-white/60 cursor-pointer transition-colors">
-                    {lang === "ru" ? "Условия" : "Terms"}
-                  </span>
-                  <span>·</span>
-                  <span className="underline hover:text-white/60 cursor-pointer transition-colors">
-                    {lang === "ru" ? "Конфиденциальность" : "Privacy"}
-                  </span>
-                </div>
-              )}
+              <div className="flex items-center justify-center gap-3 pt-3 pb-1 text-sm text-white/40">
+                <span className="underline hover:text-white/60 cursor-pointer transition-colors">
+                  {lang === "ru" ? "Условия" : "Terms"}
+                </span>
+                <span>·</span>
+                <span className="underline hover:text-white/60 cursor-pointer transition-colors">
+                  {lang === "ru" ? "Конфиденциальность" : "Privacy"}
+                </span>
+              </div>
             </div>
           </>
         ) : (
@@ -364,21 +341,59 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               </button>
             )}
 
+            {/* Auto-billing discount checkbox */}
+            {(selectedPlan === "monthly" || selectedPlan === "yearly") && (
+              <button
+                onClick={() => setAutoBilling(!autoBilling)}
+                className={`w-full rounded-xl px-4 py-3.5 flex items-center gap-3 transition-all text-left ${
+                  autoBilling
+                    ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
+                    : "border border-white/15 bg-white/5 hover:border-white/25"
+                }`}
+              >
+                <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
+                  autoBilling ? "bg-[hsl(var(--violet-light))]" : "border border-white/30"
+                }`}>
+                  {autoBilling && <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-white text-base font-normal">
+                    {lang === "ru" ? "Автосписание" : "Auto-billing"}
+                  </p>
+                  <p className="text-white/40 text-sm">
+                    {lang === "ru" ? "Скидка 10% при привязке карты" : "10% off when you link your card"}
+                  </p>
+                </div>
+                <span className="text-[hsl(var(--violet-mid))] text-base font-medium flex-shrink-0">-10%</span>
+              </button>
+            )}
+
             <div className="rounded-xl bg-white/5 px-4 py-3.5 flex items-center justify-between">
               <span className="text-white/60 text-lg font-normal">
                 {lang === "ru" ? "Итого" : "Total"}
               </span>
-              <span className="text-white text-xl font-normal">
-                {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
-                {"subRu" in selectedPlanData && selectedPlanData.subRu && (
-                  <span className="text-white/40 text-sm">{lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn}</span>
+              <div className="flex items-baseline gap-2">
+                {autoBilling && (selectedPlan === "monthly" || selectedPlan === "yearly") && (
+                  <span className="text-white/30 text-sm line-through">
+                    {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
+                  </span>
                 )}
-              </span>
+                <span className="text-white text-xl font-normal">
+                  {autoBilling && (selectedPlan === "monthly" || selectedPlan === "yearly")
+                    ? applyDiscount(lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)
+                    : (lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)
+                  }
+                  {"subRu" in selectedPlanData && selectedPlanData.subRu && (
+                    <span className="text-white/40 text-sm">{lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn}</span>
+                  )}
+                </span>
+              </div>
             </div>
 
             <button
               onClick={() => {
-                const priceLabel = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                const priceLabel = autoBilling && selectedPlan !== "single" ? applyDiscount(basePrice) : basePrice;
                 if (selectedPlan === "single") {
                   purchaseCourse(courseId, courseTitleRu, courseTitleEn, priceLabel);
                 } else {
@@ -390,6 +405,16 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
             >
               {lang === "ru" ? "Подтвердить оплату" : "Confirm payment"}
             </button>
+
+            {/* Auto-billing terms */}
+            {autoBilling && (selectedPlan === "monthly" || selectedPlan === "yearly") && (
+              <p className="text-sm text-white/40 text-center pt-1 pb-2">
+                {lang === "ru"
+                  ? <>Продолжая, вы соглашаетесь на автоматическое списание {applyDiscount(selectedPlanData.priceRu)}/{selectedPlan === "yearly" ? "год" : "мес"} до отмены подписки. <span className="underline hover:text-white/60 cursor-pointer transition-colors">Условия</span> · <span className="underline hover:text-white/60 cursor-pointer transition-colors">Конфиденциальность</span></>
+                  : <>By continuing, you agree to automatic billing of {applyDiscount(selectedPlanData.priceEn)}/{selectedPlan === "yearly" ? "year" : "mo"} until subscription is cancelled. <span className="underline hover:text-white/60 cursor-pointer transition-colors">Terms</span> · <span className="underline hover:text-white/60 cursor-pointer transition-colors">Privacy</span></>
+                }
+              </p>
+            )}
           </div>
         )}
       </div>
