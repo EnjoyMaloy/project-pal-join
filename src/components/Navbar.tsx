@@ -46,10 +46,16 @@ const Navbar = () => {
       className={`sticky top-0 z-50 bg-background border-b border-border h-14 md:h-20 ${isArticleView || isMyCourses || isProfile ? 'hidden md:block' : ''}`}
     >
       <div className="max-w-full mx-auto px-3 md:px-9 flex items-center justify-between h-full gap-2 md:gap-4">
-        {/* Left: Search */}
+        {/* Left: Streak (mobile) + Search (desktop) */}
         {isInstructions || isCatalog ? (
-          <div className="hidden md:flex items-center gap-4">
-            <div className="relative" style={{ width: 260 }}>
+          <div className="flex items-center gap-4">
+            {/* Streak - always visible */}
+            <button className="flex items-center gap-2 text-foreground hover:opacity-80 transition-opacity">
+              <Flame className="w-5 h-5" style={{ color: "#F65C39" }} />
+              <span className="text-[18px] md:text-[20px] font-semibold">56</span>
+            </button>
+            {/* Search - desktop only */}
+            <div className="relative hidden md:block" style={{ width: 260 }}>
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
@@ -67,11 +73,6 @@ const Navbar = () => {
                 style={{ height: 48 }}
               />
             </div>
-            {/* Streak button */}
-            <button className="flex items-center gap-2 text-foreground hover:opacity-80 transition-opacity">
-              <Flame className="w-5 h-5" style={{ color: "#F65C39" }} />
-              <span className="text-[20px] font-semibold">56</span>
-            </button>
           </div>
         ) : (
           <div />
@@ -79,9 +80,8 @@ const Navbar = () => {
 
         {/* Right side */}
         <div className="flex items-center gap-2 md:gap-3">
-          {/* Lang + Theme - desktop only for lang, theme visible on mobile */}
+          {/* Language switcher - desktop only */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Language switcher */}
             <button
               onClick={() => setLang(lang === "ru" ? "en" : "ru")}
               className="flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors"
@@ -95,7 +95,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Theme toggle - visible on all sizes */}
+          {/* Theme toggle */}
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="flex items-center justify-center rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors w-9 h-9 md:w-12 md:h-12"
@@ -103,7 +103,7 @@ const Navbar = () => {
             {theme === "dark" ? <Sun className="w-4 h-4 md:w-[18px] md:h-[18px]" /> : <Moon className="w-4 h-4 md:w-[18px] md:h-[18px]" />}
           </button>
 
-          {/* Currency block - visible on all sizes */}
+          {/* Currency block */}
           <div className="flex items-center bg-muted border border-border rounded-[10px] gap-1.5 md:gap-3 cursor-pointer hover:brightness-95 transition-all h-9 px-2 md:h-12 md:px-4">
             <div className="flex items-center gap-1 md:gap-2">
               <div className="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center text-[12px] md:text-[16px] font-medium text-white border border-[#924CFE]/30" style={{ background: "linear-gradient(135deg, #B88AFF, #9A5CFF)" }}>A</div>
@@ -116,44 +116,42 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Buy subscription button - visible on all sizes */}
+          {/* Buy subscription - desktop only */}
           {!hasSubscription && (
-            <div className="rounded-[10px] p-[2px] animate-gradient-border h-9 md:h-12" style={{ background: "linear-gradient(270deg, #924CFE, #BF96FF, #D9C0FF, #A66CFF, #924CFE)", backgroundSize: "300% 300%" }}>
+            <div className="hidden md:block rounded-[10px] p-[2px] animate-gradient-border h-12" style={{ background: "linear-gradient(270deg, #924CFE, #BF96FF, #D9C0FF, #A66CFF, #924CFE)", backgroundSize: "300% 300%" }}>
               <button
                 onClick={() => setSubModalOpen(true)}
-                className="flex items-center gap-1 md:gap-2 rounded-[8px] bg-[#A66CFF] text-white text-[13px] md:text-[16px] font-normal hover:brightness-110 transition-all w-full h-full px-2 md:px-4"
+                className="flex items-center gap-2 rounded-[8px] bg-[#A66CFF] text-white text-[16px] font-normal hover:brightness-110 transition-all w-full h-full px-4"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" className="md:w-5 md:h-5"><path d="M230.08,78.26l-31.84,26.88L208,145.33a5.46,5.46,0,0,1-8.19,5.86L164,129.66l-35.78,21.53a5.46,5.46,0,0,1-8.19-5.86l9.73-40.19L97.92,78.26a5.38,5.38,0,0,1,3.13-9.48l41.79-3.31,16.1-38.14a5.51,5.51,0,0,1,10.12,0l16.1,38.14L227,68.78A5.38,5.38,0,0,1,230.08,78.26Z" opacity="0.2"/><path d="M239.35,70.08a13.41,13.41,0,0,0-11.77-9.28l-36.94-2.92L176.43,24.22a13.51,13.51,0,0,0-24.86,0L137.36,57.88,100.42,60.8a13.39,13.39,0,0,0-7.66,23.58l28.06,23.68-8.56,35.39a13.32,13.32,0,0,0,5.1,13.91,13.51,13.51,0,0,0,15,.69L164,139l31.65,19.06a13.54,13.54,0,0,0,15-.69,13.34,13.34,0,0,0,5.09-13.91l-8.56-35.39,28.06-23.68A13.32,13.32,0,0,0,239.35,70.08ZM193.08,99a8,8,0,0,0-2.61,8l8.28,34.21L168.13,122.8a8,8,0,0,0-8.25,0l-30.62,18.43L137.54,107a8,8,0,0,0-2.62-8L108,76.26l35.52-2.81a8,8,0,0,0,6.74-4.87L164,35.91l13.79,32.67a8,8,0,0,0,6.74,4.87l35.53,2.81Zm-105,24.18L29.66,181.66a8,8,0,0,1-11.32-11.32l58.45-58.45a8,8,0,0,1,11.32,11.32Zm10.81,49.87a8,8,0,0,1,0,11.31L45.66,237.66a8,8,0,0,1-11.32-11.32l53.27-53.26A8,8,0,0,1,98.92,173.08Zm73-1a8,8,0,0,1,0,11.32l-54.28,54.28a8,8,0,0,1-11.32-11.32l54.29-54.28A8,8,0,0,1,171.94,172.06Z"/></svg>
-                <span className="hidden md:inline">{lang === "ru" ? "Премиум" : "Premium"}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M230.08,78.26l-31.84,26.88L208,145.33a5.46,5.46,0,0,1-8.19,5.86L164,129.66l-35.78,21.53a5.46,5.46,0,0,1-8.19-5.86l9.73-40.19L97.92,78.26a5.38,5.38,0,0,1,3.13-9.48l41.79-3.31,16.1-38.14a5.51,5.51,0,0,1,10.12,0l16.1,38.14L227,68.78A5.38,5.38,0,0,1,230.08,78.26Z" opacity="0.2"/><path d="M239.35,70.08a13.41,13.41,0,0,0-11.77-9.28l-36.94-2.92L176.43,24.22a13.51,13.51,0,0,0-24.86,0L137.36,57.88,100.42,60.8a13.39,13.39,0,0,0-7.66,23.58l28.06,23.68-8.56,35.39a13.32,13.32,0,0,0,5.1,13.91,13.51,13.51,0,0,0,15,.69L164,139l31.65,19.06a13.54,13.54,0,0,0,15-.69,13.34,13.34,0,0,0,5.09-13.91l-8.56-35.39,28.06-23.68A13.32,13.32,0,0,0,239.35,70.08ZM193.08,99a8,8,0,0,0-2.61,8l8.28,34.21L168.13,122.8a8,8,0,0,0-8.25,0l-30.62,18.43L137.54,107a8,8,0,0,0-2.62-8L108,76.26l35.52-2.81a8,8,0,0,0,6.74-4.87L164,35.91l13.79,32.67a8,8,0,0,0,6.74,4.87l35.53,2.81Zm-105,24.18L29.66,181.66a8,8,0,0,1-11.32-11.32l58.45-58.45a8,8,0,0,1,11.32,11.32Zm10.81,49.87a8,8,0,0,1,0,11.31L45.66,237.66a8,8,0,0,1-11.32-11.32l53.27-53.26A8,8,0,0,1,98.92,173.08Zm73-1a8,8,0,0,1,0,11.32l-54.28,54.28a8,8,0,0,1-11.32-11.32l54.29-54.28A8,8,0,0,1,171.94,172.06Z"/></svg>
+                {lang === "ru" ? "Премиум" : "Premium"}
               </button>
             </div>
           )}
           <SubscriptionModal open={subModalOpen} onOpenChange={setSubModalOpen} />
 
-          {/* Profile avatar - desktop only */}
-          <div className="hidden md:block">
-            {user ? (
-              <Link to="/profile">
-                <PremiumAvatarWrapper isPremium={!!hasSubscription} size="sm">
-                  <Avatar className="w-11 h-11 cursor-pointer">
-                    <AvatarImage src={user.user_metadata?.avatar_url || defaultAvatar} />
-                    <AvatarFallback className="bg-muted text-foreground text-[13px] font-medium">
-                      {userInitials}
-                    </AvatarFallback>
-                  </Avatar>
-                </PremiumAvatarWrapper>
-              </Link>
-            ) : (
-              <Link to="/profile">
-                <Avatar className="w-11 h-11 cursor-pointer">
-                  <AvatarImage src={defaultAvatar} />
-                  <AvatarFallback className="bg-muted text-muted-foreground text-[13px] font-medium">
-                    <LogIn className="w-4 h-4" />
+          {/* Profile avatar */}
+          {user ? (
+            <Link to="/profile">
+              <PremiumAvatarWrapper isPremium={!!hasSubscription} size="sm">
+                <Avatar className="w-9 h-9 md:w-11 md:h-11 cursor-pointer">
+                  <AvatarImage src={user.user_metadata?.avatar_url || defaultAvatar} />
+                  <AvatarFallback className="bg-muted text-foreground text-[11px] md:text-[13px] font-medium">
+                    {userInitials}
                   </AvatarFallback>
                 </Avatar>
-              </Link>
-            )}
-          </div>
+              </PremiumAvatarWrapper>
+            </Link>
+          ) : (
+            <Link to="/profile">
+              <Avatar className="w-9 h-9 md:w-11 md:h-11 cursor-pointer">
+                <AvatarImage src={defaultAvatar} />
+                <AvatarFallback className="bg-muted text-muted-foreground text-[11px] md:text-[13px] font-medium">
+                  <LogIn className="w-4 h-4" />
+                </AvatarFallback>
+              </Avatar>
+            </Link>
+          )}
         </div>
       </div>
     </nav>
