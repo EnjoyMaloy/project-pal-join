@@ -195,10 +195,10 @@ const CourseView = () => {
             <div className="flex items-center gap-3 mb-4 flex-wrap">
               <h1 className="text-[28px] font-bold text-foreground">{title}</h1>
               {course.price !== null && (
-                <span className="inline-flex items-center justify-center rounded-full px-[6px] pl-[4px] py-0 gap-[2px] h-[18px] text-[10px] font-medium leading-none"
-                  style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF", color: "#460466" }}
+                <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(146,76,254,0.1)] px-3 py-1 text-[13px] font-medium text-violet-super-dark"
+                  style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF" }}
                 >
-                  <PremiumStarIcon className="w-3 h-3" fill="#460466" />
+                  <PremiumStarIcon className="w-3.5 h-3.5" fill="hsl(280 92% 21%)" />
                   {lang === "ru" ? "Премиум" : "Premium"}
                 </span>
               )}
