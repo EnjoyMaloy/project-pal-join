@@ -439,9 +439,9 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
             </div>
           )}
         </div>
-      </DialogContent>
-    </Dialog>
-  );
+      </ResponsiveModal>
+    );
+  };
 };
 
 export default SubscriptionModal;
