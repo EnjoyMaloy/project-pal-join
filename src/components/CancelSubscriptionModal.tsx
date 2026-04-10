@@ -3,7 +3,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Check, AlertTriangle } from "lucide-react";
+import { X, Check, AlertTriangle, Gift } from "lucide-react";
 import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -14,7 +14,7 @@ interface CancelSubscriptionModalProps {
   onConfirmCancel: () => void;
 }
 
-type Step = "survey" | "confirm" | "done";
+type Step = "survey" | "confirm" | "offer" | "done";
 
 const CancelSubscriptionModal = ({ open, onOpenChange, endDate, onConfirmCancel }: CancelSubscriptionModalProps) => {
   const { lang } = useLanguage();
@@ -65,6 +65,8 @@ const CancelSubscriptionModal = ({ open, onOpenChange, endDate, onConfirmCancel 
             <div className="relative">
               {step === "done" ? (
                 <Check className="w-14 h-14 text-[hsl(var(--violet-super-light))]" />
+              ) : step === "offer" ? (
+                <Gift className="w-14 h-14 text-[hsl(var(--violet-super-light))]" />
               ) : (
                 <AlertTriangle className="w-14 h-14 text-[hsl(var(--violet-super-light))]" />
               )}
@@ -74,8 +76,16 @@ const CancelSubscriptionModal = ({ open, onOpenChange, endDate, onConfirmCancel 
           <h2 className="text-white leading-[22px] text-2xl sm:text-3xl font-normal">
             {step === "survey" && (lang === "ru" ? "Почему вы уходите?" : "Why are you leaving?")}
             {step === "confirm" && (lang === "ru" ? "Вы уверены?" : "Are you sure?")}
+            {step === "offer" && (lang === "ru" ? "Подождите!" : "Wait!")}
             {step === "done" && (lang === "ru" ? "Подписка отменена" : "Subscription cancelled")}
           </h2>
+          {step === "offer" && (
+            <p className="text-white/50 text-base mt-3">
+              {lang === "ru"
+                ? "У нас есть для вас специальное предложение"
+                : "We have a special offer for you"}
+            </p>
+          )}
         </div>
 
         {step === "survey" && (
@@ -142,10 +152,7 @@ const CancelSubscriptionModal = ({ open, onOpenChange, endDate, onConfirmCancel 
             </p>
 
             <button
-              onClick={() => {
-                onConfirmCancel();
-                setStep("done");
-              }}
+              onClick={() => setStep("offer")}
               className="w-full h-[52px] rounded-2xl bg-red-500/20 border border-red-500/40 text-red-400 hover:bg-red-500/30 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
             >
               {lang === "ru" ? "Отменить подписку" : "Cancel subscription"}
@@ -156,6 +163,45 @@ const CancelSubscriptionModal = ({ open, onOpenChange, endDate, onConfirmCancel 
               className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
             >
               {lang === "ru" ? "Оставить подписку" : "Keep subscription"}
+            </button>
+          </div>
+        )}
+
+        {step === "offer" && (
+          <div className="px-5 pb-5 space-y-4">
+            {/* Free month offer card */}
+            <div className="rounded-2xl border border-[hsl(var(--violet-light)/0.4)] bg-gradient-to-br from-[hsl(var(--violet-dark)/0.25)] to-[hsl(var(--violet-mid)/0.1)] px-5 py-6 text-center">
+              <div className="inline-flex items-center gap-2 bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-4 py-1.5 text-sm font-semibold mb-4">
+                <Gift className="w-4 h-4" />
+                {lang === "ru" ? "Специальное предложение" : "Special offer"}
+              </div>
+              <h3 className="text-white text-2xl font-medium mb-2">
+                {lang === "ru" ? "1 месяц бесплатно" : "1 month free"}
+              </h3>
+              <p className="text-white/50 text-base leading-relaxed">
+                {lang === "ru"
+                  ? "Останьтесь с нами — мы дарим вам бесплатный месяц Premium подписки. Без обязательств."
+                  : "Stay with us — we're giving you a free month of Premium subscription. No strings attached."}
+              </p>
+            </div>
+
+            {/* Accept offer */}
+            <button
+              onClick={() => handleClose(false)}
+              className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
+            >
+              {lang === "ru" ? "Получить бесплатный месяц" : "Get free month"}
+            </button>
+
+            {/* Still cancel */}
+            <button
+              onClick={() => {
+                onConfirmCancel();
+                setStep("done");
+              }}
+              className="w-full h-[44px] rounded-2xl text-white/40 hover:text-white/60 transition-colors flex items-center justify-center text-base font-normal"
+            >
+              {lang === "ru" ? "Нет, всё равно отменить" : "No, cancel anyway"}
             </button>
           </div>
         )}
