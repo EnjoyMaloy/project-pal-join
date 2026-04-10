@@ -111,7 +111,10 @@ const PaymentSettings = () => {
                   </div>
                 </div>
                 <p className="text-[22px] font-semibold text-foreground">
-                  {store.subscription.price}
+                  {store.subscription.plan === "monthly" ? "₽480" : "₽3,168"}{" "}
+                  <span className="text-[18px] font-normal text-muted-foreground">
+                    /{store.subscription.plan === "monthly" ? "мес" : "год"}
+                  </span>
                 </p>
               </div>
 
