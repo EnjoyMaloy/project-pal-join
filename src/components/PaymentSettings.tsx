@@ -183,7 +183,7 @@ const PaymentSettings = () => {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="rounded-full text-[18px] font-normal h-9 px-5 flex-shrink-0 hover:bg-foreground hover:text-background transition-colors"
+                    className="rounded-full text-[18px] font-normal h-9 px-5 flex-shrink-0 bg-white text-black border-0 hover:bg-black hover:text-white transition-colors"
                     onClick={() => navigate(`/course/${item.id || ""}`)}
                   >
                     {lang === "ru" ? "Открыть" : "Open"}
