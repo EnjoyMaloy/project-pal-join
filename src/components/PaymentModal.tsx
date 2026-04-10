@@ -76,6 +76,13 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
   const selectedPlanData = plans.find((p) => p.id === selectedPlan)!;
 
+  const applyDiscount = (price: string) => {
+    const num = parseFloat(price.replace(/[^0-9.]/g, "").replace(",", ""));
+    const discounted = Math.round(num * 0.9 * 100) / 100;
+    const prefix = price.match(/^[₽$]/)?.[0] || "";
+    return `${prefix}${discounted % 1 === 0 ? discounted.toLocaleString("en-US") : discounted.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+  };
+
   const singleBenefits = lang === "ru"
     ? ["Доступ к этому курсу навсегда", "Пожизненные обновления", "Закрытое сообщество курса (если есть)"]
     : ["Lifetime access to this course", "Lifetime updates", "Private course community (if available)"];
