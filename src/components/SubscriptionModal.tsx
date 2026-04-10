@@ -19,6 +19,28 @@ interface SubscriptionModalProps {
 type PlanId = "monthly" | "yearly";
 type Step = "plan" | "payment" | "success";
 
+const ResponsiveModal = ({ open, onOpenChange, children, className }: { open: boolean; onOpenChange: (v: boolean) => void; children: React.ReactNode; className?: string }) => {
+  const isMobile = useIsMobile();
+  if (isMobile) {
+    return (
+      <Drawer open={open} onOpenChange={onOpenChange}>
+        <DrawerContent className={`max-h-[90vh] p-0 border-0 ${className || ""}`}>
+          <div className="overflow-y-auto max-h-[85vh]">
+            {children}
+          </div>
+        </DrawerContent>
+      </Drawer>
+    );
+  }
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className={className}>
+        {children}
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   const { lang } = useLanguage();
   const navigate = useNavigate();
