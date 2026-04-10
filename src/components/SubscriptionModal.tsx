@@ -83,7 +83,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
   const handleClose = (value: boolean) => {
     onOpenChange(value);
-    if (!value) setStep("plan");
+    if (!value) { setStep("plan"); setAutoBilling(false); }
   };
 
   if (step === "success") {
