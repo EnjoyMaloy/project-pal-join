@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
 import mascotSuccess from "@/assets/mascot-success.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -23,6 +24,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   const [step, setStep] = useState<Step>("plan");
   const [paymentMethod, setPaymentMethod] = useState<"card" | "crypto">("card");
   const [shimmerKey, setShimmerKey] = useState(0);
+  const [termsAccepted, setTermsAccepted] = useState(true);
 
   const plans = [
     {
@@ -275,7 +277,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               <div className="px-5 pb-5">
                 <button
                   onClick={() => setStep("payment")}
-                  className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
+                  disabled={!termsAccepted}
+                  className={`w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium ${!termsAccepted ? "opacity-40 pointer-events-none" : ""}`}
                 >
                   {lang === "ru"
                     ? `Подписаться — ${selectedPlanData.priceRu}${selectedPlanData.subRu}`
@@ -285,14 +288,22 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               </div>
 
               {/* Footer links */}
-              <div className="flex items-center justify-center gap-3 pb-5 text-[12px] text-white/30">
-                <span className="hover:text-white/50 cursor-pointer transition-colors">
-                  {lang === "ru" ? "Условия" : "Terms"}
-                </span>
-                <span>·</span>
-                <span className="hover:text-white/50 cursor-pointer transition-colors">
-                  {lang === "ru" ? "Конфиденциальность" : "Privacy"}
-                </span>
+              <div className="flex items-center justify-center gap-2 pb-5 text-[12px] text-white/30">
+                <Checkbox
+                  id="terms"
+                  checked={termsAccepted}
+                  onCheckedChange={(v) => setTermsAccepted(!!v)}
+                  className="h-3.5 w-3.5 border-white/30 data-[state=checked]:bg-[hsl(var(--violet-mid))] data-[state=checked]:border-[hsl(var(--violet-mid))]"
+                />
+                <label htmlFor="terms" className="cursor-pointer flex items-center gap-1.5">
+                  <span className="hover:text-white/50 transition-colors">
+                    {lang === "ru" ? "Условия" : "Terms"}
+                  </span>
+                  <span>·</span>
+                  <span className="hover:text-white/50 transition-colors">
+                    {lang === "ru" ? "Конфиденциальность" : "Privacy"}
+                  </span>
+                </label>
               </div>
             </>
           ) : (
