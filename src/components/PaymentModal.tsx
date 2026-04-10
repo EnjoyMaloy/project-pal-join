@@ -433,8 +433,8 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     if (isMobile) {
       return (
         <Drawer open={open} onOpenChange={handleClose}>
-          <DrawerContent hideHandle className="border-0 rounded-t-2xl max-h-[95vh]">
-            <div className="mx-auto mt-3 mb-0 h-1 w-12 rounded-full bg-border flex-shrink-0" />
+          <DrawerContent hideHandle className="border-0 rounded-t-2xl max-h-[95vh] bg-white">
+            <div className="mx-auto mt-3 mb-0 h-1 w-12 rounded-full bg-[#EBE9EA] flex-shrink-0" />
             <div className="overflow-y-auto max-h-[90vh]">
               {successContent}
             </div>
@@ -444,7 +444,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     }
     return (
       <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className="sm:max-w-[576px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl [&>button.absolute]:hidden">
+        <DialogContent className="sm:max-w-[576px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl [&>button.absolute]:hidden bg-white">
           {successContent}
         </DialogContent>
       </Dialog>
