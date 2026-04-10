@@ -169,7 +169,7 @@ const PaymentSettings = () => {
           </button>
 
           <div
-            className={`overflow-hidden transition-all duration-300 ease-in-out ${coursesOpen ? "max-h-[500px] opacity-100 mt-5" : "max-h-0 opacity-0"}`}
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${coursesOpen ? "max-h-[500px] opacity-100 mt-6" : "max-h-0 opacity-0"}`}
           >
             <div className="divide-y divide-border/40">
               {purchasedCoursesList.map((item: any, i: number) => (
@@ -210,7 +210,7 @@ const PaymentSettings = () => {
           </button>
 
           <div
-            className={`overflow-hidden transition-all duration-300 ease-in-out ${transactionsOpen ? "max-h-[600px] opacity-100 mt-5" : "max-h-0 opacity-0"}`}
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${transactionsOpen ? "max-h-[600px] opacity-100 mt-6" : "max-h-0 opacity-0"}`}
           >
             <div className="divide-y divide-border/40">
               {transactions.map((t, i) => (
