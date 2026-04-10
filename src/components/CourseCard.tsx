@@ -53,7 +53,7 @@ const CourseCard = ({
         <div className="absolute top-1 left-2 right-1 flex items-center justify-between">
           <div className="flex items-center gap-[5px]">
             {premium && (
-              <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(146,76,254,0.1)] px-2 py-[5px] font-medium text-violet-super-dark"
+              <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(146,76,254,0.1)] px-2 py-[5px] font-medium text-violet-super-dark text-sm"
                 style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF", fontSize: "10px", lineHeight: "14px" }}
               >
                 <PremiumStarIcon className="w-3.5 h-3.5" fill="hsl(280 92% 21%)" />
