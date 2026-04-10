@@ -184,12 +184,16 @@ const Profile = () => {
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <Sun className="w-4 h-4 text-muted-foreground" />
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center ${theme !== "dark" ? "bg-foreground/10" : "bg-transparent"}`}>
+                  <Sun className="w-4 h-4 text-muted-foreground" />
+                </div>
                 <Switch
                   checked={theme === "dark"}
                   onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
                 />
-                <Moon className="w-4 h-4 text-muted-foreground" />
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center ${theme === "dark" ? "bg-foreground/10" : "bg-transparent"}`}>
+                  <Moon className="w-4 h-4 text-muted-foreground" />
+                </div>
               </div>
             </div>
           </div>
