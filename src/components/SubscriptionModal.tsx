@@ -119,9 +119,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
   if (step === "success") {
     return (
-      <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className="sm:max-w-[576px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl [&>button.absolute]:hidden bg-white">
-          <div className="px-8 py-12 flex flex-col items-center text-center bg-white">
+      <ResponsiveModal open={open} onOpenChange={handleClose} className="sm:max-w-[576px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl [&>button.absolute]:hidden bg-white">
+          <div className="px-8 py-12 flex flex-col items-center text-center bg-white rounded-t-2xl">
             <h2 className="text-[28px] font-medium text-[#232323] leading-[90%] mb-4">
               {lang === "ru" ? "Спасибо!" : "Thank you!"}
             </h2>
@@ -144,8 +143,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               {lang === "ru" ? "В каталог" : "Go to Catalog"}
             </Button>
           </div>
-        </DialogContent>
-      </Dialog>
+      </ResponsiveModal>
     );
   }
 
