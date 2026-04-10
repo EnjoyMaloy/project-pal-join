@@ -153,25 +153,29 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     <>
       {/* Background glow */}
       <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[70%] h-[200px] rounded-full bg-[hsl(var(--violet-mid)/0.3)] blur-[80px] pointer-events-none z-0" />
+
+      {/* Close button - sticky */}
+      <button
+        onClick={() => handleClose(false)}
+        className="sticky top-4 float-right mr-4 mt-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-colors z-20"
+      >
+        <X className="w-4 h-4" />
+      </button>
+
+      {/* Back button - sticky */}
+      {step === "payment" && (
+        <button
+          onClick={() => setStep("plan")}
+          className="sticky top-4 float-left ml-4 -mt-8 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-colors z-20"
+        >
+          <ChevronLeft className="w-4 h-4" />
+        </button>
+      )}
+
       <div className="overflow-y-auto max-h-[85vh] sm:max-h-[90vh] relative z-[1]">
         {/* Header area */}
-        <div className="relative px-6 pt-6 pb-6 text-center">
-          {/* Close button */}
-          <button
-            onClick={() => handleClose(false)}
-            className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-colors z-10"
-          >
-            <X className="w-4 h-4" />
-          </button>
+        <div className="relative px-6 pt-2 pb-6 text-center">
 
-          {step === "payment" && (
-            <button
-              onClick={() => setStep("plan")}
-              className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-colors z-10"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-          )}
 
           {/* Icon with soft glow */}
           <div className="relative w-20 h-20 mx-auto mb-5 mt-4 flex items-center justify-center">
