@@ -25,6 +25,14 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   const [paymentMethod, setPaymentMethod] = useState<"card" | "crypto">("card");
   const [shimmerKey, setShimmerKey] = useState(0);
   const [termsAccepted, setTermsAccepted] = useState(true);
+  const [autoBilling, setAutoBilling] = useState(false);
+
+  const applyDiscount = (price: string) => {
+    const num = parseFloat(price.replace(/[^0-9.]/g, "").replace(",", ""));
+    const discounted = Math.round(num * 0.9 * 100) / 100;
+    const prefix = price.match(/^[₽$]/)?.[0] || "";
+    return `${prefix}${discounted % 1 === 0 ? discounted.toLocaleString("en-US") : discounted.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+  };
 
   const plans = [
     {
@@ -349,30 +357,72 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 </button>
               )}
 
+              {/* Auto-billing discount checkbox */}
+              <button
+                onClick={() => setAutoBilling(!autoBilling)}
+                className={`w-full rounded-xl px-4 py-3.5 flex items-center gap-3 transition-all text-left ${
+                  autoBilling
+                    ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
+                    : "border border-white/15 bg-white/5 hover:border-white/25"
+                }`}
+              >
+                <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
+                  autoBilling ? "bg-[hsl(var(--violet-light))]" : "border border-white/30"
+                }`}>
+                  {autoBilling && <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-white text-base font-normal">
+                    {lang === "ru" ? "Автосписание" : "Auto-billing"}
+                  </p>
+                  <p className="text-white/40 text-sm">
+                    {lang === "ru" ? "Скидка 10% при привязке карты" : "10% off when you link your card"}
+                  </p>
+                </div>
+                <span className="text-[hsl(var(--violet-mid))] text-base font-medium flex-shrink-0">-10%</span>
+              </button>
+
               <div className="rounded-xl bg-white/5 px-4 py-3.5 flex items-center justify-between">
                 <span className="text-white/60 text-lg font-normal">
                   {lang === "ru" ? "Итого" : "Total"}
                 </span>
-                <span className="text-white text-xl font-normal">
-                  {lang === "ru"
-                    ? `${selectedPlanData.priceRu}${selectedPlanData.subRu}`
-                    : `${selectedPlanData.priceEn}${selectedPlanData.subEn}`
-                  }
-                </span>
+                <div className="flex items-baseline gap-2">
+                  {autoBilling && (
+                    <span className="text-white/30 text-sm line-through">
+                      {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
+                    </span>
+                  )}
+                  <span className="text-white text-xl font-normal">
+                    {autoBilling
+                      ? applyDiscount(lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)
+                      : (lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)
+                    }
+                    <span className="text-white/40 text-sm">{lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn}</span>
+                  </span>
+                </div>
               </div>
 
               <button
                 onClick={() => {
-                  const priceLabel = lang === "ru"
-                    ? `${selectedPlanData.priceRu}${selectedPlanData.subRu}`
-                    : `${selectedPlanData.priceEn}${selectedPlanData.subEn}`;
-                  purchaseSubscription(selectedPlan, priceLabel);
+                  const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                  const priceLabel = autoBilling ? applyDiscount(basePrice) : basePrice;
+                  purchaseSubscription(selectedPlan, `${priceLabel}${lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn}`);
                   setStep("success");
                 }}
                 className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
               >
                 {lang === "ru" ? "Подтвердить оплату" : "Confirm payment"}
               </button>
+
+              {/* Auto-billing terms */}
+              {autoBilling && (
+                <p className="text-sm text-white/40 text-center pt-1 pb-2">
+                  {lang === "ru"
+                    ? <>Продолжая, вы соглашаетесь на автоматическое списание {applyDiscount(selectedPlanData.priceRu)}/{selectedPlan === "yearly" ? "год" : "мес"} до отмены подписки. <span className="underline hover:text-white/60 cursor-pointer transition-colors">Условия</span> · <span className="underline hover:text-white/60 cursor-pointer transition-colors">Конфиденциальность</span></>
+                    : <>By continuing, you agree to automatic billing of {applyDiscount(selectedPlanData.priceEn)}/{selectedPlan === "yearly" ? "year" : "mo"} until subscription is cancelled. <span className="underline hover:text-white/60 cursor-pointer transition-colors">Terms</span> · <span className="underline hover:text-white/60 cursor-pointer transition-colors">Privacy</span></>
+                  }
+                </p>
+              )}
             </div>
           )}
         </div>
