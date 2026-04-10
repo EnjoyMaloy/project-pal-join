@@ -122,7 +122,7 @@ const PaymentSettings = () => {
               <div className="flex items-center justify-between pt-2 border-t border-border/40">
                 <button
                   onClick={() => setCancelOpen(true)}
-                  className="text-[14px] text-[#FF3B30] hover:text-[#FF453A] transition-colors underline underline-offset-2"
+                  className="text-[14px] text-muted-foreground hover:text-[#FF3B30] transition-colors underline underline-offset-2"
                 >
                   {lang === "ru" ? "Отменить подписку" : "Cancel subscription"}
                 </button>
