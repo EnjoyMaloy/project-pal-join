@@ -45,7 +45,7 @@ const Navbar = () => {
     <nav
       className={`sticky top-0 z-50 bg-background border-b border-border h-14 md:h-20 ${isArticleView || isMyCourses || isProfile ? 'hidden md:block' : ''}`}
     >
-      <div className="max-w-full mx-auto px-3 md:px-9 flex items-center justify-between h-full gap-2 md:gap-4">
+      <div className="max-w-full mx-auto px-3 md:px-9 flex items-center justify-between h-full gap-2 md:gap-4 pt-2 md:pt-0">
         {/* Left: Streak (mobile) + Search (desktop) */}
         {isInstructions || isCatalog ? (
           <div className="flex items-center gap-4">
