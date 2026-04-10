@@ -138,7 +138,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
             {/* Icon with soft glow underneath */}
             <div className="relative w-20 h-20 mx-auto mb-5 mt-4 flex items-center justify-center">
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-16 rounded-full bg-[hsl(var(--violet-super-light)/0.25)] blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-16 rounded-full <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[140%] h-20 rounded-full bg-[hsl(var(--violet-super-light)/0.15)] blur-[60px] pointer-events-none" /> pointer-events-none" />
               <div className="relative">
                 {step === "plan" ? (
                   <PremiumStarIcon className="w-14 h-14 text-[hsl(var(--violet-super-light))]" fill="hsl(var(--violet-super-light))" />
