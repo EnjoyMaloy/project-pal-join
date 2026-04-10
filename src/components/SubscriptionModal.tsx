@@ -287,8 +287,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               <div className="px-5 pb-5">
                 <button
                   onClick={() => setStep("payment")}
-                  disabled={!termsAccepted}
-                  className={`w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium ${!termsAccepted ? "opacity-40 pointer-events-none" : ""}`}
+                  className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
                 >
                   {lang === "ru"
                     ? `Подписаться — ${selectedPlanData.priceRu}${selectedPlanData.subRu}`
@@ -298,29 +297,13 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               </div>
 
               {/* Footer links */}
-              <div className="flex items-start justify-center gap-2.5 pb-5 text-sm text-white/40 px-5">
-                <button
-                  onClick={() => setTermsAccepted(!termsAccepted)}
-                  className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all mt-0.5 ${
-                    termsAccepted
-                      ? "bg-[hsl(var(--violet-light))]"
-                      : "border border-white/30"
-                  }`}
-                >
-                  {termsAccepted && <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />}
-                </button>
-                <span className="cursor-pointer" onClick={() => setTermsAccepted(!termsAccepted)}>
-                  {lang === "ru"
-                    ? <>Я соглашаюсь на автоматическое списание {selectedPlanData.priceRu}/{selectedPlan === "yearly" ? "год" : "мес"} до отмены подписки. </>
-                    : <>I agree to automatic billing of {selectedPlanData.priceEn}/{selectedPlan === "yearly" ? "year" : "mo"} until subscription is cancelled. </>
-                  }
-                  <span className="underline hover:text-white/60 transition-colors">
-                    {lang === "ru" ? "Условия" : "Terms"}
-                  </span>
-                  {" · "}
-                  <span className="underline hover:text-white/60 transition-colors">
-                    {lang === "ru" ? "Конфиденциальность" : "Privacy"}
-                  </span>
+              <div className="flex items-center justify-center gap-1 pb-5 text-sm text-white/40 px-5">
+                <span className="underline hover:text-white/60 transition-colors cursor-pointer">
+                  {lang === "ru" ? "Условия" : "Terms"}
+                </span>
+                {" · "}
+                <span className="underline hover:text-white/60 transition-colors cursor-pointer">
+                  {lang === "ru" ? "Конфиденциальность" : "Privacy"}
                 </span>
               </div>
             </>
