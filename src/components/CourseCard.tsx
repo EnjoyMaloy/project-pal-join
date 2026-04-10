@@ -54,7 +54,7 @@ const CourseCard = ({
           <div className="flex items-center gap-[5px]">
             {premium && (
               <span className="inline-flex items-center justify-center gap-[3px] rounded-full border border-[rgba(146,76,254,0.1)] px-2.5 py-[6px] font-medium text-violet-super-dark"
-                style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF", fontSize: "11px", lineHeight: "15px" }}
+                style={{ background: "linear-gradient(0deg, rgba(217, 192, 255, 0.5), rgba(217, 192, 255, 0.5)), #FFFFFF", fontSize: "12px", lineHeight: "16px" }}
               >
                 <PremiumStarIcon className="w-4 h-4" fill="hsl(280 92% 21%)" />
                 {lang === "ru" ? "Премиум" : "Premium"}
