@@ -224,45 +224,36 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                   <button
                     key={plan.id}
                     onClick={() => setSelectedPlan(plan.id)}
-                    className={`w-full text-left rounded-xl px-4 py-3.5 flex items-center gap-3 transition-all relative ${
+                    className={`w-full rounded-xl px-4 py-3.5 flex flex-col items-center gap-2 transition-all relative ${
                       isSelected
                         ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
                         : "border border-[hsl(280_25%_14%)] bg-white/5 hover:border-white/25"
                     }`}
                   >
-                    <div className="min-w-0 flex-1">
-                      <p className="text-white text-lg font-normal">{lang === "ru" ? plan.titleRu : plan.titleEn}</p>
-                      {(lang === "ru" ? plan.descRu : plan.descEn) && (
-                        <p className="text-white/40 text-sm">{lang === "ru" ? plan.descRu : plan.descEn}</p>
-                      )}
-                    </div>
-                    <div className="flex flex-col items-end flex-shrink-0 min-w-[80px]">
-                      {"badgeRu" in plan && (
-                        <span className="text-xs bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-2.5 py-0.5 whitespace-nowrap font-semibold mb-1">
-                          {lang === "ru" ? plan.badgeRu : plan.badgeEn}
+                    <p className="text-white/40 text-sm font-normal">{lang === "ru" ? plan.titleRu : plan.titleEn}</p>
+                    {"badgeRu" in plan && (
+                      <span className="text-xs bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-2.5 py-0.5 whitespace-nowrap font-semibold">
+                        {lang === "ru" ? plan.badgeRu : plan.badgeEn}
+                      </span>
+                    )}
+                    <div className="flex items-baseline gap-2">
+                      {"oldPriceRu" in plan && plan.oldPriceRu && (
+                        <span className="text-white/30 text-sm line-through">
+                          {lang === "ru" ? plan.oldPriceRu : plan.oldPriceEn}
                         </span>
                       )}
-                      <div className="flex items-baseline gap-2">
-                        {"oldPriceRu" in plan && plan.oldPriceRu && (
-                          <span className="text-white/30 text-sm line-through">
-                            {lang === "ru" ? plan.oldPriceRu : plan.oldPriceEn}
-                          </span>
+                      <span className="text-2xl font-normal text-white whitespace-nowrap">
+                        {lang === "ru" ? plan.priceRu : plan.priceEn}
+                        {"subRu" in plan && (
+                          <span className="text-white/40 text-base">{lang === "ru" ? plan.subRu : plan.subEn}</span>
                         )}
-                        <span className="text-xl font-normal text-white whitespace-nowrap">
-                          {lang === "ru" ? plan.priceRu : plan.priceEn}
-                          {"subRu" in plan && (
-                            <span className="text-white/40 text-sm">{lang === "ru" ? plan.subRu : plan.subEn}</span>
-                          )}
-                        </span>
+                      </span>
+                    </div>
+                    {isSelected && (
+                      <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-[hsl(var(--violet-light))] flex items-center justify-center">
+                        <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
                       </div>
-                    </div>
-                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0">
-                      {isSelected && (
-                        <div className="w-5 h-5 rounded-full bg-[hsl(var(--violet-light))] flex items-center justify-center">
-                          <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />
-                        </div>
-                      )}
-                    </div>
+                    )}
                   </button>
                 );
               })}
