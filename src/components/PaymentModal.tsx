@@ -194,12 +194,12 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
           {/* Icon with soft glow */}
           <div className="relative w-20 h-20 mx-auto mb-5 mt-4 flex items-center justify-center">
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180%] h-24 rounded-full bg-[hsl(261 100% 93% / 0.1)] blur-[90px] pointer-events-none" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180%] h-24 rounded-full bg-[#E8DCFB/0.1] blur-[90px] pointer-events-none" />
             <div className="relative">
               {step === "plan" ? (
-                <PremiumStarIcon className="w-14 h-14 text-[hsl(261, 100%, 93%)]" fill="hsl(261, 100%, 93%)" />
+                <PremiumStarIcon className="w-14 h-14 text-[#E8DCFB]" fill="#E8DCFB" />
               ) : (
-                <CreditCard className="w-14 h-14 text-[hsl(261, 100%, 93%)]" />
+                <CreditCard className="w-14 h-14 text-[#E8DCFB]" />
               )}
             </div>
           </div>
@@ -287,7 +287,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                   {benefits.map((b, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[hsl(var(--violet-dark)/0.4)] to-[hsl(var(--violet-dark)/0.2)] border border-[hsl(var(--violet-light)/0.6)] flex items-center justify-center flex-shrink-0">
-                        <Check className="w-3.5 h-3.5 text-[hsl(261, 100%, 93%)]" strokeWidth={3} />
+                        <Check className="w-3.5 h-3.5 text-[#E8DCFB]" strokeWidth={3} />
                       </div>
                       <span className="text-base text-white/80">{b}</span>
                     </div>
