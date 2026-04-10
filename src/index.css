@@ -106,7 +106,7 @@
   }
 
   .dark {
-    --background: 0 0% 13.7%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 93%;
 
     --card: 0 0% 12%;
@@ -140,7 +140,7 @@
     --violet-dark: 261 99% 65%;
     --violet-super-dark: 280 92% 21%;
 
-    --sidebar-background: 0 0% 27.5%;
+    --sidebar-background: 240 2% 12%;
     --sidebar-foreground: 0 0% 93%;
     --sidebar-primary: 261 100% 71%;
     --sidebar-primary-foreground: 0 0% 100%;
