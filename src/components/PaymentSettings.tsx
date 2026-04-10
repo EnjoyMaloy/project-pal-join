@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { usePurchaseStore, type Transaction, type SubscriptionData, cancelSubscription } from "@/hooks/usePurchaseStore";
+import { usePurchaseStore, type Transaction, cancelSubscription } from "@/hooks/usePurchaseStore";
 import { BookOpen, Receipt, Calendar, ChevronDown } from "lucide-react";
 import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { Button } from "@/components/ui/button";
@@ -79,61 +79,74 @@ const PaymentSettings = () => {
         {lang === "ru" ? "Управление подпиской" : "Subscription Management"}
       </h2>
 
-      <div className="bg-[hsl(var(--muted))] rounded-2xl divide-y divide-border/50">
-        {/* Subscription */}
-        <div className="px-6 py-5">
-          <div className="flex items-center gap-3 mb-3">
+      <div className="space-y-3">
+        {/* Subscription — standalone card */}
+        <div className="bg-[hsl(var(--muted))] rounded-2xl px-6 py-5">
+          <div className="flex items-center gap-3 mb-4">
             <PremiumStarIcon className="w-5 h-5" fill="currentColor" />
             <span className={sectionTitleClass}>
               {lang === "ru" ? "Подписка" : "Subscription"}
             </span>
           </div>
+
           {hasSubscription && store.subscription ? (
-            <div className="ml-8">
-              <div className="flex items-start justify-between mb-3">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[14px] font-medium text-[hsl(var(--success))] bg-[hsl(var(--success-accent)/0.15)] px-2.5 py-0.5 rounded-full">
-                      {lang === "ru" ? "Активна" : "Active"}
-                    </span>
-                    <span className="text-[14px] text-muted-foreground">
-                      {store.subscription.plan === "monthly"
-                        ? (lang === "ru" ? "Месячная" : "Monthly")
-                        : (lang === "ru" ? "Годовая" : "Yearly")}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
-                    <Calendar className="w-3.5 h-3.5" />
-                    {lang === "ru" ? "до" : "until"} {formatDate(store.subscription.endDate)}
-                  </div>
-                  <p className="text-[14px] font-semibold text-foreground">{store.subscription.price}</p>
-                </div>
+            <div className="space-y-4">
+              {/* Status row */}
+              <div className="flex items-center gap-3 flex-wrap">
+                <span className="text-[14px] font-medium text-[hsl(142_71%_35%)] bg-[hsl(142_71%_35%/0.12)] px-3 py-1 rounded-full">
+                  {lang === "ru" ? "Активна" : "Active"}
+                </span>
+                <span className="text-[16px] text-muted-foreground">
+                  {store.subscription.plan === "monthly"
+                    ? (lang === "ru" ? "Месячная" : "Monthly")
+                    : (lang === "ru" ? "Годовая" : "Yearly")}
+                </span>
+              </div>
+
+              {/* Date */}
+              <div className="flex items-center gap-2 text-[15px] text-muted-foreground">
+                <Calendar className="w-4 h-4" />
+                <span>{lang === "ru" ? "до" : "until"} {formatDate(store.subscription.endDate)}</span>
+              </div>
+
+              {/* Price */}
+              <p className="text-[18px] font-semibold text-foreground">
+                {store.subscription.price}
+                <span className="text-[14px] font-normal text-muted-foreground ml-1">
+                  /{store.subscription.plan === "monthly"
+                    ? (lang === "ru" ? "мес" : "mo")
+                    : (lang === "ru" ? "год" : "yr")}
+                </span>
+              </p>
+
+              {/* Actions */}
+              <div className="flex items-center gap-3 pt-1">
                 {store.subscription.plan === "monthly" && (
                   <Button
                     size="sm"
-                    className="rounded-lg text-[13px] h-8 px-4"
+                    className="rounded-[10px] text-[14px] h-9 px-5"
                     onClick={() => setUpgradeOpen(true)}
                   >
-                    {lang === "ru" ? "Улучшить" : "Upgrade"}
+                    {lang === "ru" ? "Улучшить план" : "Upgrade plan"}
                   </Button>
                 )}
+                <button
+                  onClick={() => setCancelOpen(true)}
+                  className="text-[14px] text-muted-foreground hover:text-destructive transition-colors underline underline-offset-2"
+                >
+                  {lang === "ru" ? "Отменить подписку" : "Cancel subscription"}
+                </button>
               </div>
-              <button
-                onClick={() => setCancelOpen(true)}
-                className="text-[13px] text-muted-foreground hover:text-red-400 transition-colors underline underline-offset-2"
-              >
-                {lang === "ru" ? "Отменить подписку" : "Cancel subscription"}
-              </button>
             </div>
           ) : (
-            <p className="ml-8 text-[14px] text-muted-foreground">
+            <p className="text-[16px] text-muted-foreground">
               {lang === "ru" ? "Нет активной подписки" : "No active subscription"}
             </p>
           )}
         </div>
 
-        {/* Purchased courses — collapsible */}
-        <div className="px-6 py-5">
+        {/* Purchased courses — collapsible card */}
+        <div className="bg-[hsl(var(--muted))] rounded-2xl px-6 py-5">
           <button
             onClick={() => setCoursesOpen(!coursesOpen)}
             className="flex items-center gap-3 w-full text-left"
@@ -142,19 +155,27 @@ const PaymentSettings = () => {
             <span className={sectionTitleClass}>
               {lang === "ru" ? "Купленные курсы" : "Purchased Courses"}
             </span>
-            <ChevronDown className={`w-4 h-4 text-muted-foreground ml-auto transition-transform duration-200 ${coursesOpen ? "rotate-180" : ""}`} />
+            <span className="ml-1 text-[14px] text-muted-foreground">
+              {purchasedCoursesList.length}
+            </span>
+            <ChevronDown
+              className={`w-4 h-4 text-muted-foreground ml-auto transition-transform duration-200 ${coursesOpen ? "rotate-180" : ""}`}
+            />
           </button>
-          {coursesOpen && (
-            <div className="ml-8 mt-3 space-y-2">
+
+          <div
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${coursesOpen ? "max-h-[500px] opacity-100 mt-4" : "max-h-0 opacity-0"}`}
+          >
+            <div className="space-y-0 divide-y divide-border/50">
               {purchasedCoursesList.map((item: any, i: number) => (
-                <div key={item.id || i} className="flex items-center justify-between gap-3">
-                  <span className="text-[14px] text-foreground">
+                <div key={item.id || i} className="flex items-center justify-between gap-3 py-3 first:pt-0 last:pb-0">
+                  <span className="text-[15px] text-foreground">
                     {lang === "ru" ? (item.descRu || item.titleRu) : (item.descEn || item.titleEn)}
                   </span>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="rounded-lg text-[13px] h-7 px-3"
+                    className="rounded-[10px] text-[13px] h-8 px-4 flex-shrink-0"
                     onClick={() => navigate(`/course/${item.id || ""}`)}
                   >
                     {lang === "ru" ? "Открыть" : "Open"}
@@ -162,11 +183,11 @@ const PaymentSettings = () => {
                 </div>
               ))}
             </div>
-          )}
+          </div>
         </div>
 
-        {/* Transaction history — collapsible */}
-        <div className="px-6 py-5">
+        {/* Transactions — collapsible card */}
+        <div className="bg-[hsl(var(--muted))] rounded-2xl px-6 py-5">
           <button
             onClick={() => setTransactionsOpen(!transactionsOpen)}
             className="flex items-center gap-3 w-full text-left"
@@ -175,23 +196,31 @@ const PaymentSettings = () => {
             <span className={sectionTitleClass}>
               {lang === "ru" ? "Транзакции" : "Transactions"}
             </span>
-            <ChevronDown className={`w-4 h-4 text-muted-foreground ml-auto transition-transform duration-200 ${transactionsOpen ? "rotate-180" : ""}`} />
+            <span className="ml-1 text-[14px] text-muted-foreground">
+              {transactions.length}
+            </span>
+            <ChevronDown
+              className={`w-4 h-4 text-muted-foreground ml-auto transition-transform duration-200 ${transactionsOpen ? "rotate-180" : ""}`}
+            />
           </button>
-          {transactionsOpen && (
-            <div className="ml-8 mt-3 space-y-3">
+
+          <div
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${transactionsOpen ? "max-h-[600px] opacity-100 mt-4" : "max-h-0 opacity-0"}`}
+          >
+            <div className="space-y-0 divide-y divide-border/50">
               {transactions.map((t, i) => (
-                <div key={t.id || i} className="flex items-center justify-between">
-                  <div>
-                    <p className="text-[14px] text-foreground">
+                <div key={t.id || i} className="flex items-center justify-between py-3 first:pt-0 last:pb-0">
+                  <div className="min-w-0">
+                    <p className="text-[15px] text-foreground truncate">
                       {lang === "ru" ? t.descRu : t.descEn}
                     </p>
-                    <p className="text-[12px] text-muted-foreground">{formatDate(t.date)}</p>
+                    <p className="text-[13px] text-muted-foreground mt-0.5">{formatDate(t.date)}</p>
                   </div>
-                  <span className="text-[14px] font-semibold text-foreground">{t.amount}</span>
+                  <span className="text-[15px] font-semibold text-foreground flex-shrink-0 ml-4">{t.amount}</span>
                 </div>
               ))}
             </div>
-          )}
+          </div>
         </div>
       </div>
 
