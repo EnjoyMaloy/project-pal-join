@@ -135,7 +135,7 @@ const Profile = () => {
             <div className="flex items-center justify-between px-6 py-5">
               <div className="flex items-center gap-3">
                 <Globe className="w-5 h-5 text-foreground" />
-                <span className="text-[16px] font-semibold text-foreground">
+                <span className="text-[20px] font-normal leading-[20px] text-foreground">
                   {lang === "ru" ? "Язык" : "Language"}
                 </span>
               </div>
@@ -153,7 +153,7 @@ const Profile = () => {
             <div className="flex items-center justify-between px-6 py-5">
               <div className="flex items-center gap-3">
                 <Volume2 className="w-5 h-5 text-foreground" />
-                <span className="text-[16px] font-semibold text-foreground">
+                <span className="text-[20px] font-normal leading-[20px] text-foreground">
                   {lang === "ru" ? "Звуки" : "Sounds"}
                 </span>
               </div>
@@ -164,7 +164,7 @@ const Profile = () => {
             <div className="flex items-center justify-between px-6 py-5">
               <div className="flex items-center gap-3">
                 <Bell className="w-5 h-5 text-foreground" />
-                <span className="text-[16px] font-semibold text-foreground">
+                <span className="text-[20px] font-normal leading-[20px] text-foreground">
                   {lang === "ru" ? "Оповещения" : "Notifications"}
                 </span>
               </div>
