@@ -48,7 +48,7 @@ const Navbar = () => {
       <div className="max-w-full mx-auto px-3 md:px-9 flex items-center justify-between h-full gap-2 md:gap-4">
         {/* Left: Search */}
         {isInstructions || isCatalog ? (
-          <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4">
             <div className="relative" style={{ width: 260 }}>
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
