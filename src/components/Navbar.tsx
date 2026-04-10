@@ -43,10 +43,10 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-0 z-50 bg-background border-b border-border ${isArticleView || isMyCourses || isProfile ? 'hidden md:block' : ''}`}
-      style={{ height: 80 }}
+      className={`sticky top-0 z-50 bg-background border-b border-border ${isArticleView || isMyCourses || isProfile ? 'md:block' : ''}`}
+      style={{ height: 56 }}
     >
-      <div className="max-w-full mx-auto px-9 flex items-center justify-between h-full gap-4">
+      <div className="max-w-full mx-auto px-4 md:px-9 flex items-center justify-between h-full gap-2 md:gap-4">
         {/* Left: Search */}
         {isInstructions || isCatalog ? (
           <div className="flex items-center gap-4">
