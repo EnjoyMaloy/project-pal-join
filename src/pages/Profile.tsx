@@ -184,18 +184,17 @@ const Profile = () => {
                   {lang === "ru" ? "Тема" : "Theme"}
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center ${theme !== "dark" ? "bg-foreground/10" : "bg-transparent"}`}>
-                  <Sun className="w-4 h-4 text-muted-foreground" />
-                </div>
-                <Switch
-                  checked={theme === "dark"}
-                  onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
-                />
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center ${theme === "dark" ? "bg-foreground/10" : "bg-transparent"}`}>
-                  <Moon className="w-4 h-4 text-muted-foreground" />
-                </div>
-              </div>
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="relative inline-flex h-8 w-14 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors bg-input"
+              >
+                <span className={`pointer-events-none flex items-center justify-center h-6 w-6 rounded-full bg-background shadow-lg transition-transform ${theme === "dark" ? "translate-x-7" : "translate-x-0.5"}`}>
+                  {theme === "dark"
+                    ? <Moon className="w-3.5 h-3.5 text-foreground" />
+                    : <Sun className="w-3.5 h-3.5 text-foreground" />
+                  }
+                </span>
+              </button>
             </div>
           </div>
         </div>
