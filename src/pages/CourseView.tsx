@@ -231,7 +231,7 @@ const CourseView = () => {
             <div className="flex items-center gap-6 mb-10 flex-wrap">
               <div>
                 <p className="text-[14px] text-muted-foreground mb-0.5">{lang === "ru" ? "Цена:" : "Price:"}</p>
-                <p className="text-[26px] font-bold text-foreground">
+                <p className="text-[24px] font-normal leading-[24px] text-foreground">
                   {isFree
                     ? (lang === "ru" ? "Бесплатно" : "Free")
                     : (<><span className="text-[16px] font-normal text-muted-foreground">{lang === "ru" ? "от " : "from "}</span>$6<span className="text-[16px] font-normal text-muted-foreground">{lang === "ru" ? "/мес" : "/mo"}</span></>)
