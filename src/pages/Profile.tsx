@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import PaymentSettings from "@/components/PaymentSettings";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -17,6 +18,8 @@ import {
   Mail,
   Send,
   Wallet,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import { Switch } from "@/components/ui/switch";
@@ -24,6 +27,7 @@ import defaultAvatar from "@/assets/default-avatar.jpg";
 
 const Profile = () => {
   const { lang, setLang } = useLanguage();
+  const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
   const [user, setUser] = useState<SupaUser | null>(null);
   const store = usePurchaseStore();
@@ -169,6 +173,23 @@ const Profile = () => {
                 </span>
               </div>
               <Switch />
+            </div>
+
+            {/* Theme - mobile only */}
+            <div className="flex md:hidden items-center justify-between px-6 py-5">
+              <div className="flex items-center gap-3">
+                {theme === "dark" ? <Moon className="w-5 h-5 text-foreground" /> : <Sun className="w-5 h-5 text-foreground" />}
+                <span className="text-[20px] font-normal leading-[20px] text-foreground">
+                  {lang === "ru" ? "Тема" : "Theme"}
+                </span>
+              </div>
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-background border border-border/50 text-[15px] font-semibold text-foreground hover:bg-background/80 transition-colors"
+              >
+                {theme === "dark" ? (lang === "ru" ? "Тёмная" : "Dark") : (lang === "ru" ? "Светлая" : "Light")}
+                <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
+              </button>
             </div>
           </div>
         </div>

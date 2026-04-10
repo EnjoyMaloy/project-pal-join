@@ -95,12 +95,12 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Theme toggle */}
+          {/* Theme toggle - desktop only in navbar */}
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="flex items-center justify-center rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors w-9 h-9 md:w-12 md:h-12"
+            className="hidden md:flex items-center justify-center rounded-lg border border-border bg-background text-foreground hover:bg-muted transition-colors w-12 h-12"
           >
-            {theme === "dark" ? <Sun className="w-4 h-4 md:w-[18px] md:h-[18px]" /> : <Moon className="w-4 h-4 md:w-[18px] md:h-[18px]" />}
+            {theme === "dark" ? <Sun className="w-[18px] h-[18px]" /> : <Moon className="w-[18px] h-[18px]" />}
           </button>
 
           {/* Currency block */}
