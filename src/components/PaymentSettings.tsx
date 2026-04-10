@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePurchaseStore, type Transaction, type SubscriptionData, cancelSubscription } from "@/hooks/usePurchaseStore";
-import { BookOpen, Receipt, Calendar } from "lucide-react";
+import { BookOpen, Receipt, Calendar, ChevronDown } from "lucide-react";
 import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -46,12 +46,13 @@ const PaymentSettings = () => {
   const store = usePurchaseStore();
   const [upgradeOpen, setUpgradeOpen] = useState(false);
   const [cancelOpen, setCancelOpen] = useState(false);
+  const [coursesOpen, setCoursesOpen] = useState(false);
+  const [transactionsOpen, setTransactionsOpen] = useState(false);
 
   const hasSubscription = store.subscription?.active;
   const realPurchasedCourses = store.purchasedCourses;
   const realTransactions = store.transactions;
 
-  // Merge real + sample data (sample shown when no real data)
   const transactions = realTransactions.length > 0 ? realTransactions : sampleTransactions;
   const purchasedCoursesList = realPurchasedCourses.length > 0
     ? realTransactions.filter((t) => t.type === "purchase")
@@ -70,6 +71,8 @@ const PaymentSettings = () => {
     });
   };
 
+  const sectionTitleClass = "text-[20px] font-normal leading-[20px] text-foreground";
+
   return (
     <div className="mb-8">
       <h2 className="text-[24px] font-medium leading-[90%] text-foreground mb-5">
@@ -81,7 +84,7 @@ const PaymentSettings = () => {
         <div className="px-6 py-5">
           <div className="flex items-center gap-3 mb-3">
             <PremiumStarIcon className="w-5 h-5" fill="currentColor" />
-            <span className="text-[16px] font-semibold text-foreground">
+            <span className={sectionTitleClass}>
               {lang === "ru" ? "Подписка" : "Subscription"}
             </span>
           </div>
@@ -129,54 +132,66 @@ const PaymentSettings = () => {
           )}
         </div>
 
-        {/* Purchased courses */}
+        {/* Purchased courses — collapsible */}
         <div className="px-6 py-5">
-          <div className="flex items-center gap-3 mb-3">
+          <button
+            onClick={() => setCoursesOpen(!coursesOpen)}
+            className="flex items-center gap-3 w-full text-left"
+          >
             <BookOpen className="w-5 h-5 text-foreground" />
-            <span className="text-[16px] font-semibold text-foreground">
+            <span className={sectionTitleClass}>
               {lang === "ru" ? "Купленные курсы" : "Purchased Courses"}
             </span>
-          </div>
-          <div className="ml-8 space-y-2">
-            {purchasedCoursesList.map((item: any, i: number) => (
-              <div key={item.id || i} className="flex items-center justify-between gap-3">
-                <span className="text-[14px] text-foreground">
-                  {lang === "ru" ? (item.descRu || item.titleRu) : (item.descEn || item.titleEn)}
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="rounded-lg text-[13px] h-7 px-3"
-                  onClick={() => navigate(`/course/${item.id || ""}`)}
-                >
-                  {lang === "ru" ? "Открыть" : "Open"}
-                </Button>
-              </div>
-            ))}
-          </div>
+            <ChevronDown className={`w-4 h-4 text-muted-foreground ml-auto transition-transform duration-200 ${coursesOpen ? "rotate-180" : ""}`} />
+          </button>
+          {coursesOpen && (
+            <div className="ml-8 mt-3 space-y-2">
+              {purchasedCoursesList.map((item: any, i: number) => (
+                <div key={item.id || i} className="flex items-center justify-between gap-3">
+                  <span className="text-[14px] text-foreground">
+                    {lang === "ru" ? (item.descRu || item.titleRu) : (item.descEn || item.titleEn)}
+                  </span>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-lg text-[13px] h-7 px-3"
+                    onClick={() => navigate(`/course/${item.id || ""}`)}
+                  >
+                    {lang === "ru" ? "Открыть" : "Open"}
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* Transaction history */}
+        {/* Transaction history — collapsible */}
         <div className="px-6 py-5">
-          <div className="flex items-center gap-3 mb-3">
+          <button
+            onClick={() => setTransactionsOpen(!transactionsOpen)}
+            className="flex items-center gap-3 w-full text-left"
+          >
             <Receipt className="w-5 h-5 text-foreground" />
-            <span className="text-[16px] font-semibold text-foreground">
-              {lang === "ru" ? "История транзакций" : "Transaction History"}
+            <span className={sectionTitleClass}>
+              {lang === "ru" ? "Транзакции" : "Transactions"}
             </span>
-          </div>
-          <div className="ml-8 space-y-3">
-            {transactions.map((t, i) => (
-              <div key={t.id || i} className="flex items-center justify-between">
-                <div>
-                  <p className="text-[14px] text-foreground">
-                    {lang === "ru" ? t.descRu : t.descEn}
-                  </p>
-                  <p className="text-[12px] text-muted-foreground">{formatDate(t.date)}</p>
+            <ChevronDown className={`w-4 h-4 text-muted-foreground ml-auto transition-transform duration-200 ${transactionsOpen ? "rotate-180" : ""}`} />
+          </button>
+          {transactionsOpen && (
+            <div className="ml-8 mt-3 space-y-3">
+              {transactions.map((t, i) => (
+                <div key={t.id || i} className="flex items-center justify-between">
+                  <div>
+                    <p className="text-[14px] text-foreground">
+                      {lang === "ru" ? t.descRu : t.descEn}
+                    </p>
+                    <p className="text-[12px] text-muted-foreground">{formatDate(t.date)}</p>
+                  </div>
+                  <span className="text-[14px] font-semibold text-foreground">{t.amount}</span>
                 </div>
-                <span className="text-[14px] font-semibold text-foreground">{t.amount}</span>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
