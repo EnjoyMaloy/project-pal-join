@@ -2,12 +2,14 @@ import { useState, useRef, useEffect } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import mascotSuccess from "@/assets/mascot-success.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { X, Check, ChevronLeft, CreditCard, Bitcoin } from "lucide-react";
 import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { purchaseSubscription } from "@/hooks/usePurchaseStore";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SubscriptionModalProps {
   open: boolean;
@@ -16,6 +18,28 @@ interface SubscriptionModalProps {
 
 type PlanId = "monthly" | "yearly";
 type Step = "plan" | "payment" | "success";
+
+const ResponsiveModal = ({ open, onOpenChange, children, className }: { open: boolean; onOpenChange: (v: boolean) => void; children: React.ReactNode; className?: string }) => {
+  const isMobile = useIsMobile();
+  if (isMobile) {
+    return (
+      <Drawer open={open} onOpenChange={onOpenChange}>
+        <DrawerContent className={`max-h-[90vh] p-0 border-0 ${className || ""}`}>
+          <div className="overflow-y-auto max-h-[85vh]">
+            {children}
+          </div>
+        </DrawerContent>
+      </Drawer>
+    );
+  }
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className={className}>
+        {children}
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   const { lang } = useLanguage();
@@ -95,9 +119,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
   if (step === "success") {
     return (
-      <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className="sm:max-w-[576px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl [&>button.absolute]:hidden bg-white">
-          <div className="px-8 py-12 flex flex-col items-center text-center bg-white">
+      <ResponsiveModal open={open} onOpenChange={handleClose} className="sm:max-w-[576px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl [&>button.absolute]:hidden bg-white">
+          <div className="px-8 py-12 flex flex-col items-center text-center bg-white rounded-t-2xl">
             <h2 className="text-[28px] font-medium text-[#232323] leading-[90%] mb-4">
               {lang === "ru" ? "Спасибо!" : "Thank you!"}
             </h2>
@@ -120,14 +143,12 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               {lang === "ru" ? "В каталог" : "Go to Catalog"}
             </Button>
           </div>
-        </DialogContent>
-      </Dialog>
+      </ResponsiveModal>
     );
   }
 
   return (
-    <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[440px] max-h-[90vh] p-0 gap-0 border-0 rounded-3xl overflow-hidden [&>button.rounded-sm]:hidden bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)]">
+    <ResponsiveModal open={open} onOpenChange={handleClose} className="sm:max-w-[440px] max-h-[90vh] p-0 gap-0 border-0 rounded-3xl overflow-hidden [&>button.rounded-sm]:hidden bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)]">
         {/* Background glow - sits behind all content */}
         <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[70%] h-[200px] rounded-full bg-[hsl(var(--violet-mid)/0.3)] blur-[80px] pointer-events-none z-0" />
 
@@ -418,9 +439,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
             </div>
           )}
         </div>
-      </DialogContent>
-    </Dialog>
-  );
+      </ResponsiveModal>
+    );
 };
 
 export default SubscriptionModal;
