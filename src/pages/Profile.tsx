@@ -66,7 +66,7 @@ const Profile = () => {
           </h2>
 
           {/* Avatar + Name + Buttons */}
-          <div className="flex items-center gap-6 mb-6">
+          <div className="flex flex-col items-center md:flex-row md:items-center gap-4 md:gap-6 mb-6">
             <PremiumAvatarWrapper isPremium={!!hasSubscription} size="lg">
               <Avatar className="w-[100px] h-[100px] flex-shrink-0">
                 <AvatarImage src={user?.user_metadata?.avatar_url || defaultAvatar} />
@@ -76,28 +76,29 @@ const Profile = () => {
               </Avatar>
             </PremiumAvatarWrapper>
 
-            <p className="text-[22px] font-bold text-foreground whitespace-nowrap">
-              {user?.email?.split("@")[0] || "User"}
-            </p>
-
-            <div className="flex items-center gap-3">
-              <Button
-                variant="outline"
-                size="default"
-                className="rounded-full text-[14px] gap-2 px-5 py-2.5 h-auto"
-              >
-                <Pencil className="w-4 h-4" />
-                {lang === "ru" ? "Изменить аватар" : "Change the avatar"}
-              </Button>
-              <Button
-                variant="outline"
-                size="default"
-                className="rounded-full text-[14px] gap-2 px-5 py-2.5 h-auto"
-                onClick={handleLogout}
-              >
-                <LogOut className="w-4 h-4" />
-                {lang === "ru" ? "Выйти" : "Log out"}
-              </Button>
+            <div className="flex flex-col items-center md:items-start gap-3">
+              <p className="text-[22px] font-bold text-foreground">
+                {user?.email?.split("@")[0] || "User"}
+              </p>
+              <div className="flex items-center gap-3">
+                <Button
+                  variant="outline"
+                  size="default"
+                  className="rounded-full text-[14px] gap-2 px-5 py-2.5 h-auto"
+                >
+                  <Pencil className="w-4 h-4" />
+                  {lang === "ru" ? "Изменить аватар" : "Change the avatar"}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="default"
+                  className="rounded-full text-[14px] gap-2 px-5 py-2.5 h-auto"
+                  onClick={handleLogout}
+                >
+                  <LogOut className="w-4 h-4" />
+                  {lang === "ru" ? "Выйти" : "Log out"}
+                </Button>
+              </div>
             </div>
           </div>
 
