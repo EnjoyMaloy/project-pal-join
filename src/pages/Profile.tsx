@@ -27,6 +27,7 @@ import defaultAvatar from "@/assets/default-avatar.jpg";
 
 const Profile = () => {
   const { lang, setLang } = useLanguage();
+  const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
   const [user, setUser] = useState<SupaUser | null>(null);
   const store = usePurchaseStore();
