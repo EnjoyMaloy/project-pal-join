@@ -61,14 +61,14 @@ const CancelSubscriptionModal = ({ open, onOpenChange, endDate, onConfirmCancel 
           </button>
 
           <div className="relative w-20 h-20 mx-auto mb-5 mt-4 flex items-center justify-center">
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180%] h-24 rounded-full bg-[hsl(var(--violet-super-light)/0.1)] blur-[90px] pointer-events-none" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180%] h-24 rounded-full bg-[hsl(261 100% 93% / 0.1)] blur-[90px] pointer-events-none" />
             <div className="relative">
               {step === "done" ? (
-                <Check className="w-14 h-14 text-[hsl(var(--violet-super-light))]" />
+                <Check className="w-14 h-14 text-[hsl(261, 100%, 93%)]" />
               ) : step === "offer" ? (
-                <Gift className="w-14 h-14 text-[hsl(var(--violet-super-light))]" />
+                <Gift className="w-14 h-14 text-[hsl(261, 100%, 93%)]" />
               ) : (
-                <AlertTriangle className="w-14 h-14 text-[hsl(var(--violet-super-light))]" />
+                <AlertTriangle className="w-14 h-14 text-[hsl(261, 100%, 93%)]" />
               )}
             </div>
           </div>
