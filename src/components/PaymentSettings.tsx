@@ -136,12 +136,12 @@ const PaymentSettings = () => {
             </>
           ) : (
             <div className="flex items-center justify-between">
-              <p className="text-[16px] text-muted-foreground">
+              <p className="text-[18px] font-normal leading-[120%] text-muted-foreground">
                 {lang === "ru" ? "Нет активной подписки" : "No active subscription"}
               </p>
               <Button
                 size="sm"
-                className="rounded-[10px] text-[14px] h-9 px-5"
+                className="rounded-[10px] text-[18px] font-normal h-9 px-5"
                 onClick={() => setUpgradeOpen(true)}
               >
                 {lang === "ru" ? "Оформить подписку" : "Subscribe"}
@@ -174,7 +174,7 @@ const PaymentSettings = () => {
             <div className="divide-y divide-border/40">
               {purchasedCoursesList.map((item: any, i: number) => (
                 <div key={item.id || i} className="flex items-center justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                  <span className="text-[15px] text-foreground min-w-0 truncate">
+                  <span className="text-[18px] font-normal leading-[120%] text-foreground min-w-0 truncate">
                     {lang === "ru" ? (item.descRu || item.titleRu) : (item.descEn || item.titleEn)}
                   </span>
                   <Button
@@ -216,12 +216,12 @@ const PaymentSettings = () => {
               {transactions.map((t, i) => (
                 <div key={t.id || i} className="flex items-center justify-between py-3.5 first:pt-0 last:pb-0">
                   <div className="min-w-0">
-                    <p className="text-[15px] text-foreground truncate">
+                    <p className="text-[18px] font-normal leading-[120%] text-foreground truncate">
                       {lang === "ru" ? t.descRu : t.descEn}
                     </p>
                     <p className="text-[13px] text-muted-foreground mt-0.5">{formatDate(t.date)}</p>
                   </div>
-                  <span className="text-[16px] text-foreground flex-shrink-0 ml-4 font-medium">{t.amount}</span>
+                  <span className="text-[18px] font-normal leading-[120%] text-foreground flex-shrink-0 ml-4">{t.amount}</span>
                 </div>
               ))}
             </div>
