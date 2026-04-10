@@ -278,24 +278,56 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               </div>
             </div>
 
+            {/* Terms checkbox - only for subscription plans */}
+            {(selectedPlan === "monthly" || selectedPlan === "yearly") && (
+              <div className="flex items-start justify-center gap-2.5 px-5 mb-3 text-sm text-white/40">
+                <button
+                  onClick={() => setTermsAccepted(!termsAccepted)}
+                  className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all mt-0.5 ${
+                    termsAccepted
+                      ? "bg-[hsl(var(--violet-light))]"
+                      : "border border-white/30"
+                  }`}
+                >
+                  {termsAccepted && <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />}
+                </button>
+                <span className="cursor-pointer" onClick={() => setTermsAccepted(!termsAccepted)}>
+                  {lang === "ru"
+                    ? <>Я соглашаюсь на автоматическое списание {selectedPlanData.priceRu}/{selectedPlan === "yearly" ? "год" : "мес"} до отмены подписки. </>
+                    : <>I agree to automatic billing of {selectedPlanData.priceEn}/{selectedPlan === "yearly" ? "year" : "mo"} until subscription is cancelled. </>
+                  }
+                  <span className="underline hover:text-white/60 transition-colors">
+                    {lang === "ru" ? "Условия" : "Terms"}
+                  </span>
+                  {" · "}
+                  <span className="underline hover:text-white/60 transition-colors">
+                    {lang === "ru" ? "Конфиденциальность" : "Privacy"}
+                  </span>
+                </span>
+              </div>
+            )}
+
             {/* CTA - sticky on mobile */}
             <div className="sticky bottom-0 z-10 px-5 pb-4 pt-3 bg-gradient-to-t from-[hsl(280_92%_3%)] via-[hsl(280_92%_3%)] to-transparent">
               <button
                 onClick={() => setStep("payment")}
-                className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
+                disabled={selectedPlan !== "single" && !termsAccepted}
+                className={`w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium ${selectedPlan !== "single" && !termsAccepted ? "opacity-40 pointer-events-none" : ""}`}
               >
                 {lang === "ru" ? "Продолжить" : "Continue"}
               </button>
-              {/* Footer */}
-              <div className="flex items-center justify-center gap-3 pt-3 pb-1 text-[12px] text-white/30">
-                <span className="hover:text-white/50 cursor-pointer transition-colors">
-                  {lang === "ru" ? "Условия" : "Terms"}
-                </span>
-                <span>·</span>
-                <span className="hover:text-white/50 cursor-pointer transition-colors">
-                  {lang === "ru" ? "Конфиденциальность" : "Privacy"}
-                </span>
-              </div>
+              {/* Footer - only show for single plan */}
+              {selectedPlan === "single" && (
+                <div className="flex items-center justify-center gap-3 pt-3 pb-1 text-[12px] text-white/30">
+                  <span className="hover:text-white/50 cursor-pointer transition-colors">
+                    {lang === "ru" ? "Условия" : "Terms"}
+                  </span>
+                  <span>·</span>
+                  <span className="hover:text-white/50 cursor-pointer transition-colors">
+                    {lang === "ru" ? "Конфиденциальность" : "Privacy"}
+                  </span>
+                </div>
+              )}
             </div>
           </>
         ) : (
