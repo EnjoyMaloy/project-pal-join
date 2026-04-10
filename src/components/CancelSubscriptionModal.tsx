@@ -236,7 +236,7 @@ const CancelSubscriptionModal = ({ open, onOpenChange, endDate, onConfirmCancel 
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={handleClose}>
-        <DrawerContent className="border-0 rounded-t-3xl max-h-[95vh] bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)] shadow-[0_0_120px_40px_hsl(var(--violet-dark)/0.4)] overflow-hidden">
+        <DrawerContent className="border-0 rounded-t-3xl max-h-[95vh] bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)] overflow-hidden">
           {content}
         </DrawerContent>
       </Drawer>
@@ -245,7 +245,7 @@ const CancelSubscriptionModal = ({ open, onOpenChange, endDate, onConfirmCancel 
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[440px] max-h-[90vh] p-0 gap-0 border-0 rounded-3xl shadow-[0_0_120px_40px_hsl(var(--violet-dark)/0.4)] overflow-hidden [&>button.absolute]:hidden bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)]">
+      <DialogContent className="sm:max-w-[440px] max-h-[90vh] p-0 gap-0 border-0 rounded-3xl overflow-hidden [&>button.absolute]:hidden bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)]">
         {content}
       </DialogContent>
     </Dialog>
