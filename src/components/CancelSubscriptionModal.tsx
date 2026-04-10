@@ -79,13 +79,6 @@ const CancelSubscriptionModal = ({ open, onOpenChange, endDate, onConfirmCancel 
             {step === "offer" && (lang === "ru" ? "Подождите!" : "Wait!")}
             {step === "done" && (lang === "ru" ? "Подписка отменена" : "Subscription cancelled")}
           </h2>
-          {step === "offer" && (
-            <p className="text-white/50 text-base mt-3">
-              {lang === "ru"
-                ? "У нас есть для вас специальное предложение"
-                : "We have a special offer for you"}
-            </p>
-          )}
         </div>
 
         {step === "survey" && (
