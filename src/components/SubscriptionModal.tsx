@@ -25,6 +25,14 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   const [paymentMethod, setPaymentMethod] = useState<"card" | "crypto">("card");
   const [shimmerKey, setShimmerKey] = useState(0);
   const [termsAccepted, setTermsAccepted] = useState(true);
+  const [autoBilling, setAutoBilling] = useState(false);
+
+  const applyDiscount = (price: string) => {
+    const num = parseFloat(price.replace(/[^0-9.]/g, "").replace(",", ""));
+    const discounted = Math.round(num * 0.9 * 100) / 100;
+    const prefix = price.match(/^[₽$]/)?.[0] || "";
+    return `${prefix}${discounted % 1 === 0 ? discounted.toLocaleString("en-US") : discounted.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+  };
 
   const plans = [
     {
