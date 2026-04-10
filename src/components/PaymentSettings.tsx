@@ -89,7 +89,7 @@ const PaymentSettings = () => {
               </span>
             </div>
             {hasSubscription && store.subscription && (
-              <span className="text-[14px] font-medium text-[hsl(142_71%_35%)] bg-[hsl(142_71%_35%/0.12)] px-3 py-1 rounded-full">
+              <span className="text-[14px] font-medium text-[#232323] bg-[#CFF504] dark:text-[#CFF504] dark:bg-[#CFF504]/15 px-3 py-1 rounded-full">
                 {lang === "ru" ? "Активна" : "Active"}
               </span>
             )}
