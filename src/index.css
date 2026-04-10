@@ -107,9 +107,9 @@
 
   .dark {
     --background: 0 0% 0%;
-    --foreground: 0 0% 93%;
+    --foreground: 0 0% 100%;
 
-    --card: 0 0% 12%;
+    --card: 240 2% 12%;
     --card-foreground: 0 0% 93%;
 
     --popover: 0 0% 12%;
@@ -121,7 +121,7 @@
     --secondary: 263 96% 89%;
     --secondary-foreground: 261 100% 85%;
 
-    --muted: 0 0% 27.5%;
+    --muted: 240 2% 12%;
     --muted-foreground: 0 0% 50%;
 
     --accent: 261 99% 65%;
