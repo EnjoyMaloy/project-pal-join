@@ -117,14 +117,14 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
   // Success content
   const successContent = (
-    <div className="px-6 sm:px-8 py-8 sm:py-12 flex flex-col items-center text-center">
-      <h2 className="text-[24px] sm:text-[28px] font-medium text-foreground leading-[90%] mb-4">
+    <div className="px-6 sm:px-8 py-8 sm:py-12 flex flex-col items-center text-center bg-white">
+      <h2 className="text-[24px] sm:text-[28px] font-medium text-[#232323] leading-[90%] mb-4">
         {lang === "ru" ? "Спасибо!" : "Thank you!"}
       </h2>
-      <h2 className="text-[24px] sm:text-[28px] font-medium text-foreground leading-[90%] mb-6 sm:mb-9">
+      <h2 className="text-[24px] sm:text-[28px] font-medium text-[#232323] leading-[90%] mb-6 sm:mb-9">
         {lang === "ru" ? "Оплата получена" : "Your payment has been received"}
       </h2>
-      <p className="text-[16px] sm:text-[18px] text-muted-foreground leading-[120%] max-w-[502px] mb-8 sm:mb-12">
+      <p className="text-[16px] sm:text-[18px] text-[#8D8D8D] leading-[120%] max-w-[502px] mb-8 sm:mb-12">
         {lang === "ru"
           ? "Купленный курс добавлен в Мои курсы. Вы получите подтверждение на email."
           : "The purchased course has been added to My Courses. You will receive a confirmation receipt by email."}
@@ -134,7 +134,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
         <div className="flex items-center gap-3 w-full max-w-[492px]">
           <Button
             variant="outline"
-            className="flex-1 h-12 rounded-lg text-[18px] sm:text-[20px] font-medium bg-[hsl(var(--muted))] border-0 text-foreground hover:bg-[hsl(var(--muted)/0.8)]"
+            className="flex-1 h-12 rounded-lg text-[18px] sm:text-[20px] font-medium bg-[#F7F7F8] border-0 text-[#232323] hover:bg-[#EBE9EA]"
             onClick={() => {
               handleClose(false);
               navigate("/catalog");
@@ -433,8 +433,8 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     if (isMobile) {
       return (
         <Drawer open={open} onOpenChange={handleClose}>
-          <DrawerContent hideHandle className="border-0 rounded-t-2xl max-h-[95vh]">
-            <div className="mx-auto mt-3 mb-0 h-1 w-12 rounded-full bg-border flex-shrink-0" />
+          <DrawerContent hideHandle className="border-0 rounded-t-2xl max-h-[95vh] bg-white">
+            <div className="mx-auto mt-3 mb-0 h-1 w-12 rounded-full bg-[#EBE9EA] flex-shrink-0" />
             <div className="overflow-y-auto max-h-[90vh]">
               {successContent}
             </div>
@@ -444,7 +444,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     }
     return (
       <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className="sm:max-w-[576px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl [&>button.absolute]:hidden">
+        <DialogContent className="sm:max-w-[576px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl [&>button.absolute]:hidden bg-white">
           {successContent}
         </DialogContent>
       </Dialog>

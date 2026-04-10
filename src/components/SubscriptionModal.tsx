@@ -96,15 +96,15 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   if (step === "success") {
     return (
       <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className="sm:max-w-[576px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl [&>button.absolute]:hidden">
-          <div className="px-8 py-12 flex flex-col items-center text-center">
-            <h2 className="text-[28px] font-medium text-foreground leading-[90%] mb-4">
+        <DialogContent className="sm:max-w-[576px] max-h-[90vh] p-0 gap-0 overflow-y-auto border-0 rounded-2xl [&>button.absolute]:hidden bg-white">
+          <div className="px-8 py-12 flex flex-col items-center text-center bg-white">
+            <h2 className="text-[28px] font-medium text-[#232323] leading-[90%] mb-4">
               {lang === "ru" ? "Спасибо!" : "Thank you!"}
             </h2>
-            <h2 className="text-[28px] font-medium text-foreground leading-[90%] mb-9">
+            <h2 className="text-[28px] font-medium text-[#232323] leading-[90%] mb-9">
               {lang === "ru" ? "Оплата получена" : "Your payment has been received"}
             </h2>
-            <p className="text-[18px] text-muted-foreground leading-[100%] max-w-[502px] mb-12">
+            <p className="text-[18px] text-[#8D8D8D] leading-[100%] max-w-[502px] mb-12">
               {lang === "ru"
                 ? "Подписка активирована. Вы получите подтверждение на email."
                 : "Subscription activated. You will receive a confirmation receipt by email."}
