@@ -188,6 +188,11 @@ const CourseView = () => {
           </span>
         </nav>
 
+        {/* Mobile course image */}
+        <div className="lg:hidden rounded-2xl overflow-hidden bg-pink-100 mb-5">
+          <img src={course.image} alt={title} className="w-full aspect-[4/3] object-cover" />
+        </div>
+
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main content */}
           <div className="flex-1 min-w-0">
@@ -326,8 +331,8 @@ const CourseView = () => {
 
           {/* Sidebar */}
           <div className="w-full lg:w-[340px] flex-shrink-0 space-y-5">
-            {/* Course image */}
-            <div className="rounded-2xl overflow-hidden bg-pink-100">
+            {/* Course image - desktop only */}
+            <div className="hidden lg:block rounded-2xl overflow-hidden bg-pink-100">
               <img
                 src={course.image}
                 alt={title}
