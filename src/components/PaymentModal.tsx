@@ -238,17 +238,19 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                           {lang === "ru" ? plan.badgeRu : plan.badgeEn}
                         </span>
                       )}
-                      <span className="text-xl font-normal text-white whitespace-nowrap">
-                        {lang === "ru" ? plan.priceRu : plan.priceEn}
-                        {"subRu" in plan && (
-                          <span className="text-white/40 text-sm">{lang === "ru" ? plan.subRu : plan.subEn}</span>
+                      <div className="flex items-baseline gap-2">
+                        {"oldPriceRu" in plan && plan.oldPriceRu && (
+                          <span className="text-white/30 text-sm line-through">
+                            {lang === "ru" ? plan.oldPriceRu : plan.oldPriceEn}
+                          </span>
                         )}
-                      </span>
-                      {"oldPriceRu" in plan && plan.oldPriceRu && (
-                        <span className="text-white/30 text-sm line-through">
-                          {lang === "ru" ? plan.oldPriceRu : plan.oldPriceEn}
+                        <span className="text-xl font-normal text-white whitespace-nowrap">
+                          {lang === "ru" ? plan.priceRu : plan.priceEn}
+                          {"subRu" in plan && (
+                            <span className="text-white/40 text-sm">{lang === "ru" ? plan.subRu : plan.subEn}</span>
+                          )}
                         </span>
-                      )}
+                      </div>
                     </div>
                     <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0">
                       {isSelected && (
