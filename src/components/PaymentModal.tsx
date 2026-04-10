@@ -105,7 +105,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
   const handleClose = (value: boolean) => {
     onOpenChange(value);
-    if (!value) setStep("plan");
+    if (!value) { setStep("plan"); setAutoBilling(false); }
   };
 
   // Success content
