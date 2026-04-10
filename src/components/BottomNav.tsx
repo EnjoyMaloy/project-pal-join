@@ -11,7 +11,7 @@ const BottomNav = () => {
   const currentTab = new URLSearchParams(location.search).get("tab");
 
   const defaultItems = [
-    { label: t("sidebar.home"), icon: Home, path: "/", disabled: true },
+    { label: t("sidebar.home"), icon: Home, path: "/" },
     { label: t("sidebar.catalog"), icon: Circle, path: "/catalog", disabled: true },
     { label: t("sidebar.myCourses"), icon: BookOpen, path: "/my-courses" },
     { label: t("sidebar.instructions"), icon: FileText, path: "/instructions" },
