@@ -155,12 +155,12 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
             {/* Icon with soft glow underneath */}
             <div className="relative w-20 h-20 mx-auto mb-5 mt-4 flex items-center justify-center">
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180%] h-24 rounded-full bg-[hsl(var(--violet-super-light)/0.1)] blur-[90px] pointer-events-none" />
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180%] h-24 rounded-full bg-[hsl(261 100% 93% / 0.1)] blur-[90px] pointer-events-none" />
               <div className="relative">
                 {step === "plan" ? (
-                  <PremiumStarIcon className="w-14 h-14 text-[hsl(var(--violet-super-light))]" fill="hsl(var(--violet-super-light))" />
+                  <PremiumStarIcon className="w-14 h-14 text-[hsl(261, 100%, 93%)]" fill="hsl(261, 100%, 93%)" />
                 ) : (
-                  <CreditCard className="w-14 h-14 text-[hsl(var(--violet-super-light))]" />
+                  <CreditCard className="w-14 h-14 text-[hsl(261, 100%, 93%)]" />
                 )}
               </div>
             </div>
@@ -182,7 +182,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                     {benefits.map((b, i) => (
                       <div key={i} className="flex items-center gap-3">
                         <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[hsl(var(--violet-dark)/0.4)] to-[hsl(var(--violet-dark)/0.2)] border border-[hsl(var(--violet-light)/0.6)] flex items-center justify-center flex-shrink-0 animate-[shimmer-border_2s_ease-in-out_infinite] shadow-[0_0_6px_hsl(var(--violet-light)/0.3)]">
-                          <Check className="w-3.5 h-3.5 text-[hsl(var(--violet-super-light))]" strokeWidth={3} />
+                          <Check className="w-3.5 h-3.5 text-[hsl(261, 100%, 93%)]" strokeWidth={3} />
                         </div>
                         <span className="text-[16px] text-white/80">{b}</span>
                       </div>
@@ -228,7 +228,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                             key={`top-price-${plan.id}-${shimmerKey}`}
                             className="text-2xl font-normal"
                             style={plan.id === "yearly" && isSelected && shimmerKey > 0 ? {
-                              background: "linear-gradient(90deg, white 40%, hsl(var(--violet-super-light)) 50%, white 60%)",
+                              background: "linear-gradient(90deg, white 40%, hsl(261, 100%, 93%) 50%, white 60%)",
                               backgroundSize: "300% auto",
                               WebkitBackgroundClip: "text",
                               WebkitTextFillColor: "transparent",
@@ -268,7 +268,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                       key={`permonth-${shimmerKey}`}
                       className="text-white/40 font-normal text-lg"
                       style={selectedPlan === "yearly" && shimmerKey > 0 && selectedPlanData.perMonthRu ? {
-                        background: "linear-gradient(90deg, rgba(255,255,255,0.4) 40%, hsl(var(--violet-super-light)) 50%, rgba(255,255,255,0.4) 60%)",
+                        background: "linear-gradient(90deg, rgba(255,255,255,0.4) 40%, hsl(261, 100%, 93%) 50%, rgba(255,255,255,0.4) 60%)",
                         backgroundSize: "300% auto",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
