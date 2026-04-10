@@ -150,7 +150,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
   // Main modal content (plan + payment steps)
   const mainContent = (
-    <>
+    <div className="relative">
       {/* Background glow */}
       <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[70%] h-[200px] rounded-full bg-[hsl(var(--violet-mid)/0.3)] blur-[80px] pointer-events-none z-0" />
 
@@ -396,7 +396,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 
   // Success screen
