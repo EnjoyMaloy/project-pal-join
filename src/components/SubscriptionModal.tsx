@@ -24,6 +24,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   const [step, setStep] = useState<Step>("plan");
   const [paymentMethod, setPaymentMethod] = useState<"card" | "crypto">("card");
   const [shimmerKey, setShimmerKey] = useState(0);
+  const [termsAccepted, setTermsAccepted] = useState(true);
 
   const plans = [
     {
