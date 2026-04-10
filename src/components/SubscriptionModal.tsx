@@ -26,6 +26,13 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   const [shimmerKey, setShimmerKey] = useState(0);
   const [termsAccepted, setTermsAccepted] = useState(true);
   const [autoBilling, setAutoBilling] = useState(false);
+  const billingTermsRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (autoBilling) {
+      setTimeout(() => billingTermsRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }), 100);
+    }
+  }, [autoBilling]);
 
   const applyDiscount = (price: string) => {
     const num = parseFloat(price.replace(/[^0-9.]/g, "").replace(",", ""));

@@ -33,6 +33,13 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   const [paymentMethod, setPaymentMethod] = useState<"card" | "crypto">("card");
   const [termsAccepted, setTermsAccepted] = useState(true);
   const [autoBilling, setAutoBilling] = useState(false);
+  const billingTermsRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (autoBilling) {
+      setTimeout(() => billingTermsRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }), 100);
+    }
+  }, [autoBilling]);
 
   const courseTitle = lang === "ru" ? courseTitleRu : courseTitleEn;
 
