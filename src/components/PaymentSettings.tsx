@@ -135,9 +135,18 @@ const PaymentSettings = () => {
               </div>
             </>
           ) : (
-            <p className="text-[16px] text-muted-foreground">
-              {lang === "ru" ? "Нет активной подписки" : "No active subscription"}
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="text-[16px] text-muted-foreground">
+                {lang === "ru" ? "Нет активной подписки" : "No active subscription"}
+              </p>
+              <Button
+                size="sm"
+                className="rounded-[10px] text-[14px] h-9 px-5"
+                onClick={() => setUpgradeOpen(true)}
+              >
+                {lang === "ru" ? "Оформить подписку" : "Subscribe"}
+              </Button>
+            </div>
           )}
         </div>
 
