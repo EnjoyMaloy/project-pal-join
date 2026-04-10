@@ -288,19 +288,23 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               </div>
 
               {/* Footer links */}
-              <div className="flex items-center justify-center gap-2 pb-5 text-[12px] text-white/30">
-                <Checkbox
-                  id="terms"
-                  checked={termsAccepted}
-                  onCheckedChange={(v) => setTermsAccepted(!!v)}
-                  className="h-3.5 w-3.5 border-white/30 data-[state=checked]:bg-[hsl(var(--violet-mid))] data-[state=checked]:border-[hsl(var(--violet-mid))]"
-                />
-                <label htmlFor="terms" className="cursor-pointer flex items-center gap-1.5">
-                  <span className="hover:text-white/50 transition-colors">
+              <div className="flex items-center justify-center gap-2.5 pb-5 text-sm text-white/40">
+                <button
+                  onClick={() => setTermsAccepted(!termsAccepted)}
+                  className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
+                    termsAccepted
+                      ? "bg-[hsl(var(--violet-light))]"
+                      : "border border-white/30"
+                  }`}
+                >
+                  {termsAccepted && <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />}
+                </button>
+                <label onClick={() => setTermsAccepted(!termsAccepted)} className="cursor-pointer flex items-center gap-1.5">
+                  <span className="hover:text-white/60 transition-colors">
                     {lang === "ru" ? "Условия" : "Terms"}
                   </span>
                   <span>·</span>
-                  <span className="hover:text-white/50 transition-colors">
+                  <span className="hover:text-white/60 transition-colors">
                     {lang === "ru" ? "Конфиденциальность" : "Privacy"}
                   </span>
                 </label>
