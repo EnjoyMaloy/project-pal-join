@@ -158,7 +158,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
   // Main modal content (plan + payment steps)
   const mainContent = (
-    <div className="relative">
+    <div className="relative w-full max-w-full overflow-x-hidden">
       {/* Background glow */}
       <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-[70%] h-[200px] rounded-full bg-[hsl(var(--violet-mid)/0.3)] blur-[80px] pointer-events-none z-0" />
 
@@ -180,7 +180,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
         </button>
       )}
 
-      <div className="overflow-y-auto max-h-[85vh] sm:max-h-[90vh] relative z-[1]">
+      <div className="relative z-[1] max-h-[85vh] overflow-x-hidden overflow-y-auto sm:max-h-[90vh]">
         {/* Header area */}
         <div className="relative px-6 pt-6 pb-6 text-center">
 
@@ -461,7 +461,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[440px] max-h-[90vh] p-0 gap-0 border-0 rounded-3xl overflow-hidden [&>button.absolute]:hidden bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)]">
+      <DialogContent className="w-[calc(100vw-32px)] max-w-[440px] max-h-[90vh] p-0 gap-0 border-0 rounded-3xl overflow-hidden [&>button.absolute]:hidden bg-gradient-to-b from-[hsl(280_92%_1%)] to-[hsl(280_92%_5%)]">
         {mainContent}
       </DialogContent>
     </Dialog>
