@@ -18,6 +18,8 @@ import {
   Mail,
   Send,
   Wallet,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import { Switch } from "@/components/ui/switch";
