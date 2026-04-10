@@ -331,8 +331,8 @@ const CourseView = () => {
 
           {/* Sidebar */}
           <div className="w-full lg:w-[340px] flex-shrink-0 space-y-5">
-            {/* Course image */}
-            <div className="rounded-2xl overflow-hidden bg-pink-100">
+            {/* Course image - desktop only */}
+            <div className="hidden lg:block rounded-2xl overflow-hidden bg-pink-100">
               <img
                 src={course.image}
                 alt={title}
