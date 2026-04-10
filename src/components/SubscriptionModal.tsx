@@ -287,14 +287,22 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               </div>
 
               {/* Footer links */}
-              <div className="flex items-center justify-center gap-3 pb-5 text-[12px] text-white/30">
-                <span className="hover:text-white/50 cursor-pointer transition-colors">
-                  {lang === "ru" ? "Условия" : "Terms"}
-                </span>
-                <span>·</span>
-                <span className="hover:text-white/50 cursor-pointer transition-colors">
-                  {lang === "ru" ? "Конфиденциальность" : "Privacy"}
-                </span>
+              <div className="flex items-center justify-center gap-2 pb-5 text-[12px] text-white/30">
+                <Checkbox
+                  id="terms"
+                  checked={termsAccepted}
+                  onCheckedChange={(v) => setTermsAccepted(!!v)}
+                  className="h-3.5 w-3.5 border-white/30 data-[state=checked]:bg-[hsl(var(--violet-mid))] data-[state=checked]:border-[hsl(var(--violet-mid))]"
+                />
+                <label htmlFor="terms" className="cursor-pointer flex items-center gap-1.5">
+                  <span className="hover:text-white/50 transition-colors">
+                    {lang === "ru" ? "Условия" : "Terms"}
+                  </span>
+                  <span>·</span>
+                  <span className="hover:text-white/50 transition-colors">
+                    {lang === "ru" ? "Конфиденциальность" : "Privacy"}
+                  </span>
+                </label>
               </div>
             </>
           ) : (
