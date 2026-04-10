@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import PaymentSettings from "@/components/PaymentSettings";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
