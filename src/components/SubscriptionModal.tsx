@@ -332,7 +332,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                       ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
                       : "border border-white/15 bg-white/5 hover:border-white/25"
                   }`}
-                  onClick={() => setPaymentMethod("crypto")}
+                  onClick={() => { setPaymentMethod("crypto"); setAutoBilling(false); }}
                 >
                   <Bitcoin className="w-6 h-6 text-[hsl(var(--violet-light))]" />
                   <span className="text-white font-normal text-2xl">Cryptocurrency</span>
@@ -340,7 +340,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 </button>
               )}
 
-              {/* Auto-billing discount checkbox */}
+              {/* Auto-billing discount checkbox — only for card */}
+              {paymentMethod === "card" && (
               <button
                 onClick={() => setAutoBilling(!autoBilling)}
                 className={`w-full rounded-xl px-4 py-3.5 flex items-center gap-3 transition-all text-left ${
@@ -364,6 +365,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 </div>
                 <span className="text-[hsl(var(--violet-mid))] text-base font-medium flex-shrink-0">-10%</span>
               </button>
+              )}
 
               <div className="rounded-xl bg-white/5 px-4 py-3.5 flex items-center justify-between">
                 <span className="text-white/60 text-lg font-normal">

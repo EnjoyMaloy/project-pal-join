@@ -333,7 +333,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                     ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
                     : "border border-white/15 bg-white/5 hover:border-white/25"
                 }`}
-                onClick={() => setPaymentMethod("crypto")}
+                onClick={() => { setPaymentMethod("crypto"); setAutoBilling(false); }}
               >
                 <Bitcoin className="w-6 h-6 text-[hsl(var(--violet-light))]" />
                 <span className="text-white font-normal text-2xl">Cryptocurrency</span>
@@ -341,8 +341,8 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               </button>
             )}
 
-            {/* Auto-billing discount checkbox */}
-            {(selectedPlan === "monthly" || selectedPlan === "yearly") && (
+            {/* Auto-billing discount checkbox — only for card */}
+            {paymentMethod === "card" && (selectedPlan === "monthly" || selectedPlan === "yearly") && (
               <button
                 onClick={() => setAutoBilling(!autoBilling)}
                 className={`w-full rounded-xl px-4 py-3.5 flex items-center gap-3 transition-all text-left ${
