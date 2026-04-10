@@ -318,12 +318,12 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                   </span>
                 </div>
               ) : (
-                <div className="flex items-center justify-center gap-3 pt-3 pb-1 text-[12px] text-white/30">
-                  <span className="hover:text-white/50 cursor-pointer transition-colors">
+                <div className="flex items-center justify-center gap-3 pt-3 pb-1 text-sm text-white/40">
+                  <span className="underline hover:text-white/60 cursor-pointer transition-colors">
                     {lang === "ru" ? "Условия" : "Terms"}
                   </span>
                   <span>·</span>
-                  <span className="hover:text-white/50 cursor-pointer transition-colors">
+                  <span className="underline hover:text-white/60 cursor-pointer transition-colors">
                     {lang === "ru" ? "Конфиденциальность" : "Privacy"}
                   </span>
                 </div>
