@@ -169,11 +169,11 @@ const PaymentSettings = () => {
           </button>
 
           <div
-            className={`overflow-hidden transition-all duration-300 ease-in-out ${coursesOpen ? "max-h-[500px] opacity-100 mt-4" : "max-h-0 opacity-0"}`}
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${coursesOpen ? "max-h-[500px] opacity-100 mt-5" : "max-h-0 opacity-0"}`}
           >
             <div className="divide-y divide-border/40">
               {purchasedCoursesList.map((item: any, i: number) => (
-                <div key={item.id || i} className="flex items-center justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+                <div key={item.id || i} className="flex items-center justify-between gap-4 py-5 first:pt-0 last:pb-0">
                   <span className="text-[18px] font-normal leading-[120%] text-foreground min-w-0 truncate">
                     {lang === "ru" ? (item.descRu || item.titleRu) : (item.descEn || item.titleEn)}
                   </span>
@@ -210,11 +210,11 @@ const PaymentSettings = () => {
           </button>
 
           <div
-            className={`overflow-hidden transition-all duration-300 ease-in-out ${transactionsOpen ? "max-h-[600px] opacity-100 mt-4" : "max-h-0 opacity-0"}`}
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${transactionsOpen ? "max-h-[600px] opacity-100 mt-5" : "max-h-0 opacity-0"}`}
           >
             <div className="divide-y divide-border/40">
               {transactions.map((t, i) => (
-                <div key={t.id || i} className="flex items-center justify-between py-3.5 first:pt-0 last:pb-0">
+                <div key={t.id || i} className="flex items-center justify-between py-5 first:pt-0 last:pb-0">
                   <div className="min-w-0">
                     <p className="text-[18px] font-normal leading-[120%] text-foreground truncate">
                       {lang === "ru" ? t.descRu : t.descEn}
