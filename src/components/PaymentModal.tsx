@@ -236,7 +236,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                         <p className="text-white/40 text-sm">{lang === "ru" ? plan.descRu : plan.descEn}</p>
                       )}
                     </div>
-                    <div className="flex flex-col items-end flex-shrink-0">
+                    <div className="flex flex-col items-end flex-shrink-0 min-w-[80px]">
                       {"badgeRu" in plan && (
                         <span className="text-xs bg-[hsl(var(--violet-mid))] text-[hsl(var(--violet-super-dark))] rounded-full px-2.5 py-0.5 whitespace-nowrap font-semibold mb-1">
                           {lang === "ru" ? plan.badgeRu : plan.badgeEn}
