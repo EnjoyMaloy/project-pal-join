@@ -176,14 +176,6 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
         {/* Header area */}
         <div className="relative px-6 pt-2 pb-6 text-center">
 
-          {step === "payment" && (
-            <button
-              onClick={() => setStep("plan")}
-              className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-colors z-10"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-          )}
 
           {/* Icon with soft glow */}
           <div className="relative w-20 h-20 mx-auto mb-5 mt-4 flex items-center justify-center">
