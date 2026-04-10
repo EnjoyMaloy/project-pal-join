@@ -174,6 +174,23 @@ const Profile = () => {
               </div>
               <Switch />
             </div>
+
+            {/* Theme - mobile only */}
+            <div className="flex md:hidden items-center justify-between px-6 py-5">
+              <div className="flex items-center gap-3">
+                {theme === "dark" ? <Moon className="w-5 h-5 text-foreground" /> : <Sun className="w-5 h-5 text-foreground" />}
+                <span className="text-[20px] font-normal leading-[20px] text-foreground">
+                  {lang === "ru" ? "Тема" : "Theme"}
+                </span>
+              </div>
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-background border border-border/50 text-[15px] font-semibold text-foreground hover:bg-background/80 transition-colors"
+              >
+                {theme === "dark" ? (lang === "ru" ? "Тёмная" : "Dark") : (lang === "ru" ? "Светлая" : "Light")}
+                <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
+              </button>
+            </div>
           </div>
         </div>
 
