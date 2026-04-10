@@ -155,7 +155,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
             {/* Icon with soft glow underneath */}
             <div className="relative w-20 h-20 mx-auto mb-5 mt-4 flex items-center justify-center">
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180%] h-24 rounded-full bg-[#E8DCFB/0.1] blur-[90px] pointer-events-none" />
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180%] h-24 rounded-full bg-[rgba(232,220,251,0.1)] blur-[90px] pointer-events-none" />
               <div className="relative">
                 {step === "plan" ? (
                   <PremiumStarIcon className="w-14 h-14 text-[#E8DCFB]" fill="#E8DCFB" />
