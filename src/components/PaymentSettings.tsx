@@ -221,7 +221,7 @@ const PaymentSettings = () => {
                     </p>
                     <p className="text-[13px] text-muted-foreground mt-0.5">{formatDate(t.date)}</p>
                   </div>
-                  <span className="text-[16px] font-semibold text-foreground flex-shrink-0 ml-4">{t.amount}</span>
+                  <span className="text-[16px] text-foreground flex-shrink-0 ml-4 font-medium">{t.amount}</span>
                 </div>
               ))}
             </div>
