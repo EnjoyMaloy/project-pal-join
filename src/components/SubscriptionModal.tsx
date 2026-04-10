@@ -340,7 +340,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 </button>
               )}
 
-              {/* Auto-billing discount checkbox */}
+              {/* Auto-billing discount checkbox — only for card */}
+              {paymentMethod === "card" && (
               <button
                 onClick={() => setAutoBilling(!autoBilling)}
                 className={`w-full rounded-xl px-4 py-3.5 flex items-center gap-3 transition-all text-left ${
@@ -364,6 +365,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 </div>
                 <span className="text-[hsl(var(--violet-mid))] text-base font-medium flex-shrink-0">-10%</span>
               </button>
+              )}
 
               <div className="rounded-xl bg-white/5 px-4 py-3.5 flex items-center justify-between">
                 <span className="text-white/60 text-lg font-normal">

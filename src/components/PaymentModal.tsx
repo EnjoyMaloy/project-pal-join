@@ -341,8 +341,8 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               </button>
             )}
 
-            {/* Auto-billing discount checkbox */}
-            {(selectedPlan === "monthly" || selectedPlan === "yearly") && (
+            {/* Auto-billing discount checkbox — only for card */}
+            {paymentMethod === "card" && (selectedPlan === "monthly" || selectedPlan === "yearly") && (
               <button
                 onClick={() => setAutoBilling(!autoBilling)}
                 className={`w-full rounded-xl px-4 py-3.5 flex items-center gap-3 transition-all text-left ${
