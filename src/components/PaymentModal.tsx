@@ -67,6 +67,8 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
       subEn: "/yr",
       badgeRu: "-₽4,800",
       badgeEn: "-$69",
+      oldPriceRu: "₽14,400",
+      oldPriceEn: "$168",
     },
   ];
 
