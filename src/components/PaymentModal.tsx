@@ -232,7 +232,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                   <button
                     key={plan.id}
                     onClick={() => setSelectedPlan(plan.id)}
-                    className={`w-full text-left rounded-xl px-4 py-3.5 flex items-center gap-3 transition-all relative ${
+                    className={`w-full text-left rounded-xl px-4 py-3.5 flex items-center gap-3 transition-all relative overflow-hidden ${
                       isSelected
                         ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
                         : "border border-[hsl(280_25%_14%)] bg-white/5 hover:border-white/25"
