@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import mascotSuccess from "@/assets/mascot-success.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
@@ -33,6 +33,13 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   const [paymentMethod, setPaymentMethod] = useState<"card" | "crypto">("card");
   const [termsAccepted, setTermsAccepted] = useState(true);
   const [autoBilling, setAutoBilling] = useState(false);
+  const billingTermsRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (autoBilling) {
+      setTimeout(() => billingTermsRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }), 100);
+    }
+  }, [autoBilling]);
 
   const courseTitle = lang === "ru" ? courseTitleRu : courseTitleEn;
 
@@ -408,7 +415,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
             {/* Auto-billing terms */}
             {autoBilling && (selectedPlan === "monthly" || selectedPlan === "yearly") && (
-              <p className="text-sm text-white/40 text-center pt-1 pb-2">
+              <p ref={billingTermsRef} className="text-sm text-white/40 text-center pt-1 pb-2">
                 {lang === "ru"
                   ? <>Продолжая, вы соглашаетесь на автоматическое списание {applyDiscount(selectedPlanData.priceRu)}/{selectedPlan === "yearly" ? "год" : "мес"} до отмены подписки. <span className="underline hover:text-white/60 cursor-pointer transition-colors">Условия</span> · <span className="underline hover:text-white/60 cursor-pointer transition-colors">Конфиденциальность</span></>
                   : <>By continuing, you agree to automatic billing of {applyDiscount(selectedPlanData.priceEn)}/{selectedPlan === "yearly" ? "year" : "mo"} until subscription is cancelled. <span className="underline hover:text-white/60 cursor-pointer transition-colors">Terms</span> · <span className="underline hover:text-white/60 cursor-pointer transition-colors">Privacy</span></>
