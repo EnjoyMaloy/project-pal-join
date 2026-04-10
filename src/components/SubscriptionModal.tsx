@@ -288,10 +288,10 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               </div>
 
               {/* Footer links */}
-              <div className="flex items-center justify-center gap-2.5 pb-5 text-sm text-white/40">
+              <div className="flex items-start justify-center gap-2.5 pb-5 text-sm text-white/40 px-5">
                 <button
                   onClick={() => setTermsAccepted(!termsAccepted)}
-                  className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
+                  className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all mt-0.5 ${
                     termsAccepted
                       ? "bg-[hsl(var(--violet-light))]"
                       : "border border-white/30"
@@ -299,15 +299,19 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 >
                   {termsAccepted && <Check className="w-3 h-3 text-[hsl(var(--violet-super-dark))]" />}
                 </button>
-                <label onClick={() => setTermsAccepted(!termsAccepted)} className="cursor-pointer flex items-center gap-1.5">
-                  <span className="hover:text-white/60 transition-colors">
+                <span className="cursor-pointer" onClick={() => setTermsAccepted(!termsAccepted)}>
+                  {lang === "ru"
+                    ? <>Я соглашаюсь на автоматическое списание {selectedPlanData.priceRu}/{selectedPlan === "yearly" ? "год" : "мес"} до отмены подписки. </>
+                    : <>I agree to automatic billing of {selectedPlanData.priceEn}/{selectedPlan === "yearly" ? "year" : "mo"} until subscription is cancelled. </>
+                  }
+                  <span className="underline hover:text-white/60 transition-colors">
                     {lang === "ru" ? "Условия" : "Terms"}
                   </span>
-                  <span>·</span>
-                  <span className="hover:text-white/60 transition-colors">
+                  {" · "}
+                  <span className="underline hover:text-white/60 transition-colors">
                     {lang === "ru" ? "Конфиденциальность" : "Privacy"}
                   </span>
-                </label>
+                </span>
               </div>
             </>
           ) : (
