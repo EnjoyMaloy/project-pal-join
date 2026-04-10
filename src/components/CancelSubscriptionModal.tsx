@@ -61,7 +61,7 @@ const CancelSubscriptionModal = ({ open, onOpenChange, endDate, onConfirmCancel 
           </button>
 
           <div className="relative w-20 h-20 mx-auto mb-5 mt-4 flex items-center justify-center">
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180%] h-24 rounded-full bg-[hsl(var(--violet-super-light)/0.10)] blur-[90px] pointer-events-none" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[180%] h-24 rounded-full bg-[hsl(var(--violet-super-light)/0.1)] blur-[90px] pointer-events-none" />
             <div className="relative">
               {step === "done" ? (
                 <Check className="w-14 h-14 text-[hsl(var(--violet-super-light))]" />
