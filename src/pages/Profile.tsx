@@ -183,13 +183,14 @@ const Profile = () => {
                   {lang === "ru" ? "Тема" : "Theme"}
                 </span>
               </div>
-              <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-background border border-border/50 text-[15px] font-semibold text-foreground hover:bg-background/80 transition-colors"
-              >
-                {theme === "dark" ? (lang === "ru" ? "Тёмная" : "Dark") : (lang === "ru" ? "Светлая" : "Light")}
-                <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
-              </button>
+              <div className="flex items-center gap-2">
+                <Sun className="w-4 h-4 text-muted-foreground" />
+                <Switch
+                  checked={theme === "dark"}
+                  onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+                />
+                <Moon className="w-4 h-4 text-muted-foreground" />
+              </div>
             </div>
           </div>
         </div>
