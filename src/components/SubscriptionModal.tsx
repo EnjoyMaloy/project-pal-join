@@ -277,7 +277,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               <div className="px-5 pb-5">
                 <button
                   onClick={() => setStep("payment")}
-                  className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
+                  disabled={!termsAccepted}
+                  className={`w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium ${!termsAccepted ? "opacity-40 pointer-events-none" : ""}`}
                 >
                   {lang === "ru"
                     ? `Подписаться — ${selectedPlanData.priceRu}${selectedPlanData.subRu}`
