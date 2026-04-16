@@ -34,6 +34,48 @@ interface CourseData {
 }
 
 const coursesData: Record<string, CourseData> = {
+  "1": {
+    id: "1",
+    titleRu: "Быстрый старт в Telegram Gifts",
+    titleEn: "Quick Start with Telegram Gifts",
+    descriptionRu: "Узнайте, как использовать Telegram Gifts для создания уникальных цифровых подарков, коллекций и заработка на NFT-подарках в экосистеме Telegram.",
+    descriptionEn: "Learn how to use Telegram Gifts to create unique digital gifts, collections, and earn from NFT gifts in the Telegram ecosystem.",
+    categoryRu: "Web3 и DeFi",
+    categoryEn: "Web3 & DeFi",
+    rating: 4.9,
+    reviewCount: 85,
+    students: 371,
+    price: null,
+    image: "https://images.unsplash.com/photo-1621504450181-5d356f61d307?w=800&h=500&fit=crop",
+    updatedAt: "10.04.26",
+    languages: "English, Русский",
+    authorName: "OpenCore Club",
+    authorRating: 4.8,
+    courseTypeRu: "Геймифицированный",
+    courseTypeEn: "Gamified",
+    modules: [
+      {
+        titleRu: "Введение в Telegram Gifts",
+        titleEn: "Introduction to Telegram Gifts",
+        lessons: [
+          { titleRu: "Что такое Telegram Gifts", titleEn: "What are Telegram Gifts" },
+          { titleRu: "Создание первого подарка", titleEn: "Creating Your First Gift" },
+          { titleRu: "Монетизация подарков", titleEn: "Monetizing Gifts" },
+        ],
+      },
+    ],
+    reviews: [
+      {
+        username: "crypto_fan",
+        color: "#4CAF50",
+        rating: 5,
+        timeRu: "2 месяца назад",
+        timeEn: "2 months ago",
+        textRu: "Отличный бесплатный курс для начинающих! Всё понятно объясняется, быстро разобрался с Telegram Gifts.",
+        textEn: "Great free course for beginners! Everything is explained clearly, I quickly figured out Telegram Gifts.",
+      },
+    ],
+  },
   "2": {
     id: "2",
     titleRu: "Анализ проектов",
