@@ -114,7 +114,7 @@ const CourseLessons = () => {
   const store = usePurchaseStore();
   const { purchasedCourses } = store;
   const [paymentOpen, setPaymentOpen] = useState(false);
-
+  const [selectedLesson, setSelectedLesson] = useState<LessonNode | null>(null);
   const courseMapRaw = id ? courseMaps[id] : null;
   const isOwned = id ? purchasedCourses.includes(id) : false;
 
