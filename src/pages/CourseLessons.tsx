@@ -326,7 +326,7 @@ const CourseLessons = () => {
           <div className="relative z-10 mx-6 mt-6">
             <div className="bg-background rounded-xl px-5 py-3 inline-flex items-center gap-6 min-w-[220px]">
               <span className="text-[14px] text-foreground font-medium">
-                {lang === "ru" ? "Прогресс" : "Progress"}
+                {lang === "ru" ? "Пройдено" : "Completed"}
               </span>
               <span className="text-[14px] font-semibold text-foreground">{courseMap.progress}%</span>
             </div>
