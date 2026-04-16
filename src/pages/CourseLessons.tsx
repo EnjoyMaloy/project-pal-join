@@ -213,103 +213,186 @@ const CourseLessons = () => {
 
         {/* Lesson map */}
         <div className="relative flex flex-col items-center pb-20">
-          {/* Oval road */}
-          <div className="relative" style={{ width: 320, minHeight: courseMap.lessons.length * 130 + 80 }}>
-            {/* Dashed oval road */}
-            <div
-              className="absolute left-1/2 -translate-x-1/2 top-[40px]"
-              style={{
-                width: 280,
-                height: courseMap.lessons.length * 130 - 50,
-                border: "4px dashed #FFFFFF",
-                borderRadius: 254,
-              }}
-            />
+          {/* Background with violet gradient and dot pattern */}
+          <div className="relative w-full rounded-3xl overflow-hidden p-8" style={{
+            background: "linear-gradient(180deg, rgba(217,192,255,0.4) 0%, rgba(217,192,255,0.08) 100%)",
+          }}>
+            {/* Dot pattern overlay */}
+            <div className="absolute inset-0 opacity-20" style={{
+              backgroundImage: "radial-gradient(circle, #A66CFF 1px, transparent 1px)",
+              backgroundSize: "16px 16px",
+            }} />
 
-            {/* Nodes */}
-            {courseMap.lessons.map((lesson, index) => {
-              const { isRight } = getNodePosition(index, courseMap.lessons.length);
-              const lessonTitle = lang === "ru" ? lesson.titleRu : lesson.titleEn;
-
-              return (
-                <div
-                  key={lesson.id}
-                  className="relative flex items-center gap-3 mb-[66px]"
-                  style={{
-                    justifyContent: isRight ? "flex-end" : "flex-start",
-                    paddingLeft: isRight ? 0 : 16,
-                    paddingRight: isRight ? 16 : 0,
-                  }}
-                >
-                  {/* Label (left side for right-aligned nodes) */}
-                  {isRight && (
-                    <span className={`text-[13px] text-right max-w-[120px] ${
-                      lesson.locked ? "text-[#8D8D8D]" : "text-foreground font-medium"
-                    }`}>
-                      {lesson.current ? (lang === "ru" ? "Начать" : "Start") : lessonTitle}
-                    </span>
-                  )}
-
-                  {/* Node circle */}
-                  <button
-                    disabled={lesson.locked}
-                    onClick={() => {
-                      if (!lesson.locked) setSelectedLesson(lesson);
-                    }}
-                    className="w-16 h-16 rounded-full flex items-center justify-center relative shrink-0 transition-all"
-                    style={
-                      lesson.completed
-                        ? {
-                            background: "linear-gradient(180deg, #FFCBB1 0%, #FED912 100%)",
-                            border: "1px solid #460466",
-                            boxShadow: "inset 0px 2px 0px rgba(255, 255, 255, 0.5)",
-                          }
-                        : lesson.locked
-                        ? {
-                            background: "linear-gradient(180deg, #F7F7F8 0%, #FFFFFF 100%)",
-                            border: "1px solid #FFFFFF",
-                          }
-                        : {
-                            background: "linear-gradient(180deg, #AB75FF 0%, #D3B6FF 100%)",
-                            border: "1px solid #460466",
-                          }
+            <div className="relative">
+              {/* Snake path SVG */}
+              {(() => {
+                const nodeSize = 64;
+                const gapX = 120; // horizontal gap between columns
+                const gapY = 130; // vertical gap between rows
+                const centerX = 160;
+                const leftX = centerX - gapX / 2;
+                const rightX = centerX + gapX / 2;
+                const lessons = courseMap.lessons;
+                
+                // Build node positions for snake layout
+                const positions: { x: number; y: number; lesson: LessonNode }[] = [];
+                let row = 0;
+                let idx = 0;
+                
+                // Row 0: two nodes side by side
+                if (lessons.length >= 2) {
+                  positions.push({ x: leftX, y: 32, lesson: lessons[0] });
+                  positions.push({ x: rightX, y: 32, lesson: lessons[1] });
+                  idx = 2;
+                  row = 1;
+                } else if (lessons.length === 1) {
+                  positions.push({ x: centerX, y: 32, lesson: lessons[0] });
+                  idx = 1;
+                  row = 1;
+                }
+                
+                // Remaining nodes snake down alternating left-right
+                while (idx < lessons.length) {
+                  const col = row % 2 === 1 ? 0 : 1; // odd rows go left, even go right
+                  const x = col === 0 ? leftX : rightX;
+                  const y = 32 + row * gapY;
+                  positions.push({ x, y, lesson: lessons[idx] });
+                  idx++;
+                  row++;
+                }
+                
+                const svgHeight = 32 + row * gapY + 40;
+                
+                // Build path segments
+                const pathSegments: { d: string; completed: boolean }[] = [];
+                for (let i = 0; i < positions.length - 1; i++) {
+                  const from = positions[i];
+                  const to = positions[i + 1];
+                  const isCompleted = from.lesson.completed;
+                  
+                  if (i === 0 && positions.length >= 2) {
+                    // First segment: straight line + U-curve from left to right on row 0, then curve down to row 1
+                    if (positions.length > 2) {
+                      // Line between first two nodes
+                      pathSegments.push({
+                        d: `M ${from.x} ${from.y + nodeSize / 2} L ${to.x} ${to.y + nodeSize / 2}`,
+                        completed: isCompleted,
+                      });
+                    } else {
+                      pathSegments.push({
+                        d: `M ${from.x + nodeSize / 2} ${from.y + nodeSize / 2} L ${to.x - nodeSize / 2} ${to.y + nodeSize / 2}`,
+                        completed: isCompleted,
+                      });
                     }
-                  >
-                    {/* Inner ring */}
-                    <div
-                      className="absolute rounded-full"
-                      style={{
-                        inset: "13%",
-                        background: lesson.completed
-                          ? "rgba(255,255,255,0.3)"
-                          : lesson.locked
-                          ? "linear-gradient(180deg, rgba(70,4,102,0.1) 0%, rgba(191,150,255,0.1) 100%)"
-                          : "rgba(146,76,254,0.3)",
-                      }}
-                    />
-                    {/* Icon */}
-                    <div className="relative z-10">
-                      {lesson.locked ? (
-                        <Lock className="w-5 h-5" style={{ color: "#460466" }} />
-                      ) : lesson.completed ? (
-                        <img src={lessonCompleteIcon} alt="completed" className="w-9 h-9" />
-                      ) : (
-                        <img src={lessonAvailableIcon} alt="available" className="w-9 h-9" />
-                      )}
-                    </div>
-                  </button>
-
-                  {/* Label (right side for left-aligned nodes) */}
-                  {!isRight && (
-                    <span className={`text-[13px] max-w-[120px] ${
-                      lesson.locked ? "text-[#8D8D8D]" : "text-foreground font-medium"
-                    }`}>
-                      {lesson.current ? (lang === "ru" ? "Начать" : "Start") : lessonTitle}
-                    </span>
-                  )}
-                </div>
-              );
-            })}
+                  } else {
+                    // Curved connection (S-curve between rows)
+                    const midY = (from.y + to.y) / 2 + nodeSize / 2;
+                    if (from.x !== to.x) {
+                      // Different columns - S curve
+                      pathSegments.push({
+                        d: `M ${from.x} ${from.y + nodeSize} C ${from.x} ${midY}, ${to.x} ${midY - 30}, ${to.x} ${to.y}`,
+                        completed: isCompleted,
+                      });
+                    } else {
+                      // Same column - straight down
+                      pathSegments.push({
+                        d: `M ${from.x} ${from.y + nodeSize} L ${to.x} ${to.y}`,
+                        completed: isCompleted,
+                      });
+                    }
+                  }
+                }
+                
+                // U-turn from node 1 (right, row 0) to node 2 (row 1)
+                if (positions.length > 2) {
+                  const node1 = positions[1];
+                  const node2 = positions[2];
+                  const isComp = node1.lesson.completed;
+                  const curveRight = rightX + 60;
+                  pathSegments.splice(1, 0, {
+                    d: `M ${node1.x + nodeSize / 2} ${node1.y + nodeSize / 2} C ${curveRight} ${node1.y + nodeSize / 2}, ${curveRight} ${node2.y + nodeSize / 2}, ${node2.x > node1.x ? node2.x - nodeSize / 2 : node2.x + nodeSize / 2} ${node2.y + nodeSize / 2}`,
+                    completed: isComp,
+                  });
+                  // Remove the auto-generated segment for 1->2
+                  pathSegments.splice(2, 1);
+                }
+                
+                return (
+                  <div className="relative" style={{ width: 320, height: svgHeight }}>
+                    {/* SVG paths */}
+                    <svg className="absolute inset-0" width={320} height={svgHeight} fill="none">
+                      {pathSegments.map((seg, i) => (
+                        <path
+                          key={i}
+                          d={seg.d}
+                          stroke={seg.completed ? "#924CFE" : "#FFFFFF"}
+                          strokeWidth={seg.completed ? 4 : 3}
+                          strokeDasharray={seg.completed ? "none" : "8 8"}
+                          fill="none"
+                          strokeLinecap="round"
+                        />
+                      ))}
+                    </svg>
+                    
+                    {/* Nodes */}
+                    {positions.map(({ x, y, lesson }, i) => {
+                      const lessonTitle = lang === "ru" ? lesson.titleRu : lesson.titleEn;
+                      return (
+                        <button
+                          key={lesson.id}
+                          disabled={lesson.locked}
+                          onClick={() => { if (!lesson.locked) setSelectedLesson(lesson); }}
+                          className="absolute w-16 h-16 rounded-full flex items-center justify-center transition-all"
+                          style={{
+                            left: x - nodeSize / 2,
+                            top: y,
+                            ...(lesson.completed
+                              ? {
+                                  background: "linear-gradient(180deg, #AB75FF 0%, #D3B6FF 100%)",
+                                  border: "1px solid #460466",
+                                }
+                              : lesson.current
+                              ? {
+                                  background: "linear-gradient(180deg, #FFCBB1 0%, #FED912 100%)",
+                                  border: "1px solid #460466",
+                                  boxShadow: "inset 0px 2px 0px rgba(255,255,255,0.5)",
+                                }
+                              : lesson.locked
+                              ? {
+                                  background: "linear-gradient(180deg, #F7F7F8 0%, #FFFFFF 100%)",
+                                  border: "1px solid #FFFFFF",
+                                }
+                              : {
+                                  background: "linear-gradient(180deg, #F7F7F8 0%, #FFFFFF 100%)",
+                                  border: "1px solid #FFFFFF",
+                                }),
+                          }}
+                        >
+                          {/* Inner ring */}
+                          <div className="absolute rounded-full" style={{
+                            inset: "13%",
+                            background: lesson.completed
+                              ? "rgba(146,76,254,0.3)"
+                              : lesson.current
+                              ? "rgba(255,255,255,0.3)"
+                              : "linear-gradient(180deg, rgba(70,4,102,0.1) 0%, rgba(191,150,255,0.1) 100%)",
+                          }} />
+                          <div className="relative z-10">
+                            {lesson.locked ? (
+                              <Lock className="w-5 h-5" style={{ color: "#460466" }} />
+                            ) : lesson.completed ? (
+                              <img src={lessonCompleteIcon} alt="completed" className="w-9 h-9" />
+                            ) : (
+                              <img src={lessonAvailableIcon} alt="available" className="w-9 h-9" />
+                            )}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
+            </div>
           </div>
         </div>
       </div>
