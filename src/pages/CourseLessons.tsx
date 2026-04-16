@@ -102,11 +102,11 @@ const courseMaps: Record<string, CourseMapData> = {
   },
 };
 
-// Zigzag path positions for the map
+// Position nodes along the oval road in zigzag
 const getNodePosition = (index: number, total: number) => {
-  const isEven = index % 2 === 0;
-  const xOffset = isEven ? 0 : 80;
-  return { x: xOffset, y: index * 120 };
+  // Alternate left/right sides
+  const isRight = index % 2 === 0;
+  return { isRight };
 };
 
 const CourseLessons = () => {
@@ -195,67 +195,100 @@ const CourseLessons = () => {
 
         {/* Lesson map */}
         <div className="relative flex flex-col items-center pb-20">
-          {/* Background gradient */}
-          <div className="absolute inset-0 rounded-3xl overflow-hidden">
-            <div className="w-full h-full bg-gradient-to-b from-[hsl(var(--violet-light)/0.3)] to-[hsl(var(--violet-light)/0.1)]" 
-                 style={{ background: "linear-gradient(180deg, rgba(217, 192, 255, 0.3) 0%, rgba(217, 192, 255, 0.05) 100%)" }} />
-          </div>
+          {/* Oval road */}
+          <div className="relative" style={{ width: 320, minHeight: courseMap.lessons.length * 130 + 80 }}>
+            {/* Dashed oval road */}
+            <div
+              className="absolute left-1/2 -translate-x-1/2 top-[40px]"
+              style={{
+                width: 280,
+                height: courseMap.lessons.length * 130 - 50,
+                border: "4px dashed #FFFFFF",
+                borderRadius: 254,
+              }}
+            />
 
-          <div className="relative w-full max-w-[300px] py-10">
+            {/* Nodes */}
             {courseMap.lessons.map((lesson, index) => {
-              const pos = getNodePosition(index, courseMap.lessons.length);
+              const { isRight } = getNodePosition(index, courseMap.lessons.length);
               const lessonTitle = lang === "ru" ? lesson.titleRu : lesson.titleEn;
-              const isLast = index === courseMap.lessons.length - 1;
 
               return (
-                <div key={lesson.id} className="relative">
-                  {/* Connecting line to next node */}
-                  {!isLast && (
-                    <div className="absolute left-1/2 -translate-x-1/2 top-[56px] w-0.5 h-[64px]"
-                      style={{
-                        background: lesson.completed
-                          ? "hsl(var(--primary))"
-                          : "repeating-linear-gradient(to bottom, hsl(var(--border)) 0px, hsl(var(--border)) 6px, transparent 6px, transparent 12px)",
-                      }}
-                    />
-                  )}
-
-                  {/* Node */}
-                  <div
-                    className="flex flex-col items-center mb-[64px] relative"
-                    style={{ marginLeft: `${pos.x}px` }}
-                  >
-                    <button
-                      disabled={lesson.locked}
-                      onClick={() => {
-                        if (!lesson.locked) {
-                          setSelectedLesson(lesson);
-                        }
-                      }}
-                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all ${
-                        lesson.completed
-                          ? "shadow-none"
-                          : lesson.current
-                          ? "bg-accent text-accent-foreground ring-4 ring-primary/20 animate-pulse shadow-md"
-                          : lesson.locked
-                          ? "bg-muted text-muted-foreground cursor-not-allowed shadow-md"
-                          : "bg-background border-2 border-border text-foreground hover:border-primary shadow-md"
-                      }`}
-                    >
-                      {lesson.locked ? (
-                        <Lock className="w-5 h-5" />
-                      ) : lesson.completed ? (
-                        <img src={lessonCompleteIcon} alt="completed" className="w-14 h-14 rounded-full" />
-                      ) : (
-                        <img src={lessonAvailableIcon} alt="available" className="w-14 h-14 rounded-full" />
-                      )}
-                    </button>
-                    <span className={`mt-2 text-[13px] text-center max-w-[120px] ${
-                      lesson.locked ? "text-muted-foreground" : "text-foreground font-medium"
+                <div
+                  key={lesson.id}
+                  className="relative flex items-center gap-3 mb-[66px]"
+                  style={{
+                    justifyContent: isRight ? "flex-end" : "flex-start",
+                    paddingLeft: isRight ? 0 : 16,
+                    paddingRight: isRight ? 16 : 0,
+                  }}
+                >
+                  {/* Label (left side for right-aligned nodes) */}
+                  {isRight && (
+                    <span className={`text-[13px] text-right max-w-[120px] ${
+                      lesson.locked ? "text-[#8D8D8D]" : "text-foreground font-medium"
                     }`}>
                       {lesson.current ? (lang === "ru" ? "Начать" : "Start") : lessonTitle}
                     </span>
-                  </div>
+                  )}
+
+                  {/* Node circle */}
+                  <button
+                    disabled={lesson.locked}
+                    onClick={() => {
+                      if (!lesson.locked) setSelectedLesson(lesson);
+                    }}
+                    className="w-16 h-16 rounded-full flex items-center justify-center relative shrink-0 transition-all"
+                    style={
+                      lesson.completed
+                        ? {
+                            background: "linear-gradient(180deg, #FFCBB1 0%, #FED912 100%)",
+                            border: "1px solid #460466",
+                            boxShadow: "inset 0px 2px 0px rgba(255, 255, 255, 0.5)",
+                          }
+                        : lesson.locked
+                        ? {
+                            background: "linear-gradient(180deg, #F7F7F8 0%, #FFFFFF 100%)",
+                            border: "1px solid #FFFFFF",
+                          }
+                        : {
+                            background: "linear-gradient(180deg, #AB75FF 0%, #D3B6FF 100%)",
+                            border: "1px solid #460466",
+                          }
+                    }
+                  >
+                    {/* Inner ring */}
+                    <div
+                      className="absolute rounded-full"
+                      style={{
+                        inset: "13%",
+                        background: lesson.completed
+                          ? "rgba(255,255,255,0.3)"
+                          : lesson.locked
+                          ? "linear-gradient(180deg, rgba(70,4,102,0.1) 0%, rgba(191,150,255,0.1) 100%)"
+                          : "rgba(146,76,254,0.3)",
+                      }}
+                    />
+                    {/* Icon */}
+                    <div className="relative z-10">
+                      {lesson.locked ? (
+                        <Lock className="w-5 h-5" style={{ color: "#460466" }} />
+                      ) : lesson.completed ? (
+                        <img src={lessonCompleteIcon} alt="completed" className="w-9 h-9" />
+                      ) : (
+                        <img src={lessonAvailableIcon} alt="available" className="w-9 h-9" />
+                      )}
+                    </div>
+                  </button>
+
+                  {/* Label (right side for left-aligned nodes) */}
+                  {!isRight && (
+                    <span className={`text-[13px] max-w-[120px] ${
+                      lesson.locked ? "text-[#8D8D8D]" : "text-foreground font-medium"
+                    }`}>
+                      {lesson.current ? (lang === "ru" ? "Начать" : "Start") : lessonTitle}
+                    </span>
+                  )}
                 </div>
               );
             })}
