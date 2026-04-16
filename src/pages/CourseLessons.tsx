@@ -30,7 +30,7 @@ const courseMaps: Record<string, CourseMapData> = {
     titleEn: "Quick Start with Telegram Gifts",
     descriptionRu: "Узнайте, как использовать Telegram Gifts для создания уникальных цифровых подарков.",
     descriptionEn: "Learn how to use Telegram Gifts to create unique digital gifts.",
-    progress: 0,
+    progress: 20,
     lessons: [
       { id: 1, titleRu: "Что такое Telegram Gifts", titleEn: "What are Telegram Gifts", completed: true, locked: false },
       { id: 2, titleRu: "Создание подарка", titleEn: "Creating a Gift", completed: false, locked: false, current: true },
@@ -108,8 +108,11 @@ const CourseLessons = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { lang } = useLanguage();
+  const { purchasedCourses } = usePurchaseStore();
+  const [paymentOpen, setPaymentOpen] = useState(false);
 
   const courseMap = id ? courseMaps[id] : null;
+  const isOwned = id ? purchasedCourses.includes(id) : false;
 
   if (!courseMap) {
     return (
