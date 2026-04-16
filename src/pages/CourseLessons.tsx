@@ -33,7 +33,7 @@ const courseMaps: Record<string, CourseMapData> = {
     titleEn: "Quick Start with Telegram Gifts",
     descriptionRu: "Узнайте, как использовать Telegram Gifts для создания уникальных цифровых подарков.",
     descriptionEn: "Learn how to use Telegram Gifts to create unique digital gifts.",
-    progress: 20,
+    progress: 9,
     lessons: [
       { id: 1, titleRu: "Что такое Telegram Gifts", titleEn: "What are Telegram Gifts", completed: true, locked: false },
       { id: 2, titleRu: "Создание подарка", titleEn: "Creating a Gift", completed: false, locked: false, current: true },
@@ -326,7 +326,7 @@ const CourseLessons = () => {
           <div className="relative z-10 mx-6 mt-6">
             <div className="bg-background rounded-xl px-5 py-3 inline-flex items-center gap-6 min-w-[220px]">
               <span className="text-[14px] text-foreground font-medium">
-                {lang === "ru" ? "Прогресс" : "Progress"}
+                {lang === "ru" ? "Пройдено" : "Completed"}
               </span>
               <span className="text-[14px] font-semibold text-foreground">{courseMap.progress}%</span>
             </div>
@@ -357,33 +357,42 @@ const CourseLessons = () => {
               {positions.map((pos, i) => {
                 const lesson = courseMap.lessons[i];
                 return (
-                  <foreignObject
-                    key={lesson.id}
-                    x={pos.x}
-                    y={pos.y}
-                    width={NODE_SIZE}
-                    height={NODE_SIZE}
-                  >
-                    <button
-                      disabled={lesson.locked}
-                      onClick={() => {
-                        if (!lesson.locked && !lesson.completed && !isOwned) {
-                          setPaymentOpen(true);
-                        }
-                      }}
-                      className={`w-full h-full rounded-full flex items-center justify-center transition-all ${
-                        lesson.completed
-                          ? "bg-[hsl(var(--violet-primary))] shadow-lg"
-                          : lesson.current
-                          ? "bg-[hsl(40,90%,65%)] shadow-lg ring-4 ring-[hsl(40,90%,75%)/0.5]"
-                          : lesson.locked
-                          ? "bg-background/80 border-2 border-[hsl(var(--violet-light))] cursor-not-allowed"
-                          : "bg-background/90 border-2 border-[hsl(var(--violet-light))] hover:border-[hsl(var(--violet-primary))]"
-                      }`}
+                    <foreignObject
+                      key={lesson.id}
+                      x={pos.x}
+                      y={pos.y}
+                      width={NODE_SIZE}
+                      height={NODE_SIZE + (lesson.current ? 28 : 0)}
+                      style={{ overflow: 'visible' }}
                     >
-                      <LessonNodeIcon lesson={lesson} />
-                    </button>
-                  </foreignObject>
+                      <div className="flex flex-col items-center">
+                        <button
+                          disabled={lesson.locked}
+                          onClick={() => {
+                            if (!lesson.locked && !lesson.completed && !isOwned) {
+                              setPaymentOpen(true);
+                            }
+                          }}
+                          className={`w-[${NODE_SIZE}px] h-[${NODE_SIZE}px] rounded-full flex items-center justify-center transition-all ${
+                            lesson.completed
+                              ? "bg-[hsl(var(--violet-primary))] shadow-lg"
+                              : lesson.current
+                              ? "bg-[hsl(40,90%,65%)] shadow-lg ring-4 ring-[hsl(40,90%,75%)/0.5]"
+                              : lesson.locked
+                              ? "bg-background/80 border-2 border-[hsl(var(--violet-light))] cursor-not-allowed"
+                              : "bg-background/90 border-2 border-[hsl(var(--violet-light))] hover:border-[hsl(var(--violet-primary))]"
+                          }`}
+                          style={{ width: NODE_SIZE, height: NODE_SIZE }}
+                        >
+                          <LessonNodeIcon lesson={lesson} />
+                        </button>
+                        {lesson.current && (
+                          <span className="mt-1.5 text-[13px] font-medium text-foreground bg-background rounded-full px-3 py-0.5 shadow-sm whitespace-nowrap">
+                            {lang === "ru" ? "Начать" : "Start"}
+                          </span>
+                        )}
+                      </div>
+                    </foreignObject>
                 );
               })}
             </svg>
