@@ -336,7 +336,7 @@ const CourseView = () => {
                 const isOwned = isPurchased || hasSubscription || isFree;
                 return (
                   <Button
-                    onClick={() => isOwned ? null : setPaymentOpen(true)}
+                    onClick={() => isOwned ? navigate(`/course/${course.id}/lessons`) : setPaymentOpen(true)}
                     className="h-12 px-8 rounded-xl text-[18px] leading-[18px] font-medium gap-2 [&_svg]:size-5"
                   >
                     {!isOwned && course.price && <PremiumStarIcon fill="currentColor" />}

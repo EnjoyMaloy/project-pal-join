@@ -16,6 +16,7 @@ import Instructions from "./pages/Instructions.tsx";
 import ArticleView from "./pages/ArticleView.tsx";
 import Catalog from "./pages/Catalog.tsx";
 import CourseView from "./pages/CourseView.tsx";
+import CourseLessons from "./pages/CourseLessons.tsx";
 import Profile from "./pages/Profile.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -43,6 +44,7 @@ const App = () => (
                     <Route path="/articles/:id" element={<ArticleEditor />} />
                     <Route path="/auth" element={<Auth />} />
                     <Route path="/course/:id" element={<CourseView />} />
+                    <Route path="/course/:id/lessons" element={<CourseLessons />} />
                     <Route path="/instructions" element={<Instructions />} />
                     <Route path="/instructions/:id" element={<ArticleView />} />
                     <Route path="/profile" element={<Profile />} />
