@@ -210,6 +210,13 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               : (lang === "ru" ? "Способ оплаты" : "Payment method")
             }
           </h2>
+          {step === "plan" && (
+            <p className="text-white/50 text-sm mt-3 max-w-[320px] mx-auto leading-[140%]">
+              {lang === "ru"
+                ? "Ты прошёл бесплатную часть курса. Приобрети курс целиком или оформи подписку"
+                : "You've completed the free part. Purchase the full course or subscribe"}
+            </p>
+          )}
         </div>
 
         {step === "plan" ? (
