@@ -281,6 +281,12 @@ const CourseLessons = () => {
           onStart={() => {
             if (!isOwned) {
               setPaymentOpen(true);
+            } else {
+              setCompletedLessons(prev => {
+                const next = new Set(prev);
+                next.add(selectedLesson.id);
+                return next;
+              });
             }
           }}
         />
