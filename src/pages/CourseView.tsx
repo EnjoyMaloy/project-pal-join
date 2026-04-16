@@ -189,6 +189,56 @@ const coursesData: Record<string, CourseData> = {
     ],
     reviews: [],
   },
+  "4": {
+    id: "4",
+    titleRu: "Погружение в DeFi",
+    titleEn: "Diving into DeFi",
+    descriptionRu: "Полное погружение в мир децентрализованных финансов: от базовых концепций до продвинутых стратегий yield farming, ликвидности и управления рисками в DeFi-протоколах.",
+    descriptionEn: "A deep dive into decentralized finance: from basic concepts to advanced yield farming strategies, liquidity provision, and risk management in DeFi protocols.",
+    categoryRu: "Web3 и DeFi",
+    categoryEn: "Web3 & DeFi",
+    rating: 4.8,
+    reviewCount: 2450,
+    students: 33898,
+    price: null,
+    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=500&fit=crop",
+    updatedAt: "20.03.26",
+    languages: "English, Русский",
+    authorName: "OpenCore Club",
+    authorRating: 4.8,
+    courseTypeRu: "Геймифицированный",
+    courseTypeEn: "Gamified",
+    modules: [
+      {
+        titleRu: "Основы DeFi",
+        titleEn: "DeFi Basics",
+        lessons: [
+          { titleRu: "Что такое DeFi", titleEn: "What is DeFi" },
+          { titleRu: "DEX и AMM", titleEn: "DEX and AMM" },
+          { titleRu: "Yield Farming", titleEn: "Yield Farming" },
+        ],
+      },
+      {
+        titleRu: "Продвинутые стратегии",
+        titleEn: "Advanced Strategies",
+        lessons: [
+          { titleRu: "Управление рисками", titleEn: "Risk Management" },
+          { titleRu: "Ликвидность", titleEn: "Liquidity Provision" },
+        ],
+      },
+    ],
+    reviews: [
+      {
+        username: "defi_master",
+        color: "#2196F3",
+        rating: 5,
+        timeRu: "3 месяца назад",
+        timeEn: "3 months ago",
+        textRu: "Один из лучших бесплатных курсов по DeFi. Очень подробно разбираются все ключевые концепции.",
+        textEn: "One of the best free DeFi courses. All key concepts are covered in great detail.",
+      },
+    ],
+  },
 };
 
 const CourseView = () => {
