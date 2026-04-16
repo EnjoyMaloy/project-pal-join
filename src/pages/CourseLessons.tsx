@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Lock, ChevronLeft } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import PaymentModal from "@/components/PaymentModal";
+import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 
 interface LessonNode {
   id: number;
@@ -27,10 +30,10 @@ const courseMaps: Record<string, CourseMapData> = {
     titleEn: "Quick Start with Telegram Gifts",
     descriptionRu: "Узнайте, как использовать Telegram Gifts для создания уникальных цифровых подарков.",
     descriptionEn: "Learn how to use Telegram Gifts to create unique digital gifts.",
-    progress: 0,
+    progress: 20,
     lessons: [
-      { id: 1, titleRu: "Что такое Telegram Gifts", titleEn: "What are Telegram Gifts", completed: false, locked: false, current: true },
-      { id: 2, titleRu: "Создание подарка", titleEn: "Creating a Gift", completed: false, locked: true },
+      { id: 1, titleRu: "Что такое Telegram Gifts", titleEn: "What are Telegram Gifts", completed: true, locked: false },
+      { id: 2, titleRu: "Создание подарка", titleEn: "Creating a Gift", completed: false, locked: false, current: true },
       { id: 3, titleRu: "Коллекции NFT", titleEn: "NFT Collections", completed: false, locked: true },
       { id: 4, titleRu: "Монетизация", titleEn: "Monetization", completed: false, locked: true },
       { id: 5, titleRu: "Стратегии продвижения", titleEn: "Promotion Strategies", completed: false, locked: true },
@@ -105,8 +108,11 @@ const CourseLessons = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { lang } = useLanguage();
+  const { purchasedCourses } = usePurchaseStore();
+  const [paymentOpen, setPaymentOpen] = useState(false);
 
   const courseMap = id ? courseMaps[id] : null;
+  const isOwned = id ? purchasedCourses.includes(id) : false;
 
   if (!courseMap) {
     return (
@@ -180,6 +186,11 @@ const CourseLessons = () => {
                   >
                     <button
                       disabled={lesson.locked}
+                      onClick={() => {
+                        if (!lesson.locked && !lesson.completed && !isOwned) {
+                          setPaymentOpen(true);
+                        }
+                      }}
                       className={`w-14 h-14 rounded-full flex items-center justify-center transition-all shadow-md ${
                         lesson.completed
                           ? "bg-primary text-primary-foreground"
@@ -212,6 +223,16 @@ const CourseLessons = () => {
           </div>
         </div>
       </div>
+
+      {courseMap && (
+        <PaymentModal
+          open={paymentOpen}
+          onOpenChange={setPaymentOpen}
+          courseTitleRu={courseMap.titleRu}
+          courseTitleEn={courseMap.titleEn}
+          courseId={id || "1"}
+        />
+      )}
     </div>
   );
 };
