@@ -4,12 +4,15 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Lock, ChevronLeft } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import PaymentModal from "@/components/PaymentModal";
+import LessonModal from "@/components/LessonModal";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 
 interface LessonNode {
   id: number;
   titleRu: string;
   titleEn: string;
+  descRu: string;
+  descEn: string;
   completed: boolean;
   locked: boolean;
   current?: boolean;
@@ -32,11 +35,11 @@ const courseMaps: Record<string, CourseMapData> = {
     descriptionEn: "Learn how to use Telegram Gifts to create unique digital gifts.",
     progress: 20,
     lessons: [
-      { id: 1, titleRu: "Что такое Telegram Gifts", titleEn: "What are Telegram Gifts", completed: true, locked: false },
-      { id: 2, titleRu: "Создание подарка", titleEn: "Creating a Gift", completed: false, locked: false, current: true },
-      { id: 3, titleRu: "Коллекции NFT", titleEn: "NFT Collections", completed: false, locked: true },
-      { id: 4, titleRu: "Монетизация", titleEn: "Monetization", completed: false, locked: true },
-      { id: 5, titleRu: "Стратегии продвижения", titleEn: "Promotion Strategies", completed: false, locked: true },
+      { id: 1, titleRu: "Что такое Telegram Gifts", titleEn: "What are Telegram Gifts", descRu: "Узнаем, что такое Telegram Gifts и как они работают.", descEn: "Learn what Telegram Gifts are and how they work.", completed: true, locked: false },
+      { id: 2, titleRu: "Создание подарка", titleEn: "Creating a Gift", descRu: "Создадим свой первый цифровой подарок в Telegram.", descEn: "Create your first digital gift in Telegram.", completed: false, locked: false, current: true },
+      { id: 3, titleRu: "Коллекции NFT", titleEn: "NFT Collections", descRu: "Разберём, как организовать коллекции NFT.", descEn: "Learn how to organize NFT collections.", completed: false, locked: true },
+      { id: 4, titleRu: "Монетизация", titleEn: "Monetization", descRu: "Способы монетизации через Telegram Gifts.", descEn: "Ways to monetize through Telegram Gifts.", completed: false, locked: true },
+      { id: 5, titleRu: "Стратегии продвижения", titleEn: "Promotion Strategies", descRu: "Продвижение ваших подарков и коллекций.", descEn: "Promoting your gifts and collections.", completed: false, locked: true },
     ],
   },
   "2": {
@@ -46,13 +49,13 @@ const courseMaps: Record<string, CourseMapData> = {
     descriptionEn: "Learn to analyze potential investment projects: read whitepapers, verify tokenomics, and evaluate teams.",
     progress: 26,
     lessons: [
-      { id: 1, titleRu: "Введение в анализ", titleEn: "Introduction to Analysis", completed: true, locked: false },
-      { id: 2, titleRu: "Чтение Whitepaper", titleEn: "Reading Whitepapers", completed: true, locked: false },
-      { id: 3, titleRu: "Токеномика", titleEn: "Tokenomics", completed: false, locked: false, current: true },
-      { id: 4, titleRu: "Оценка команды", titleEn: "Team Evaluation", completed: false, locked: true },
-      { id: 5, titleRu: "Аудит смарт-контрактов", titleEn: "Smart Contract Auditing", completed: false, locked: true },
-      { id: 6, titleRu: "Анализ конкурентов", titleEn: "Competitor Analysis", completed: false, locked: true },
-      { id: 7, titleRu: "Итоговый проект", titleEn: "Final Project", completed: false, locked: true },
+      { id: 1, titleRu: "Введение в анализ", titleEn: "Introduction to Analysis", descRu: "Основы анализа криптопроектов.", descEn: "Basics of crypto project analysis.", completed: true, locked: false },
+      { id: 2, titleRu: "Чтение Whitepaper", titleEn: "Reading Whitepapers", descRu: "Как правильно читать и анализировать whitepaper.", descEn: "How to read and analyze whitepapers.", completed: true, locked: false },
+      { id: 3, titleRu: "Токеномика", titleEn: "Tokenomics", descRu: "Разбираем токеномику проектов.", descEn: "Analyzing project tokenomics.", completed: false, locked: false, current: true },
+      { id: 4, titleRu: "Оценка команды", titleEn: "Team Evaluation", descRu: "Как оценить команду проекта.", descEn: "How to evaluate a project team.", completed: false, locked: true },
+      { id: 5, titleRu: "Аудит смарт-контрактов", titleEn: "Smart Contract Auditing", descRu: "Основы аудита смарт-контрактов.", descEn: "Smart contract audit basics.", completed: false, locked: true },
+      { id: 6, titleRu: "Анализ конкурентов", titleEn: "Competitor Analysis", descRu: "Методы анализа конкурентов.", descEn: "Competitor analysis methods.", completed: false, locked: true },
+      { id: 7, titleRu: "Итоговый проект", titleEn: "Final Project", descRu: "Применяем все знания на практике.", descEn: "Apply all knowledge in practice.", completed: false, locked: true },
     ],
   },
   "3": {
@@ -62,10 +65,10 @@ const courseMaps: Record<string, CourseMapData> = {
     descriptionEn: "Build a personal system for achieving financial goals.",
     progress: 0,
     lessons: [
-      { id: 1, titleRu: "Постановка целей", titleEn: "Setting Goals", completed: false, locked: false, current: true },
-      { id: 2, titleRu: "Бюджетирование", titleEn: "Budgeting", completed: false, locked: true },
-      { id: 3, titleRu: "Инвестиционный план", titleEn: "Investment Plan", completed: false, locked: true },
-      { id: 4, titleRu: "Автоматизация", titleEn: "Automation", completed: false, locked: true },
+      { id: 1, titleRu: "Постановка целей", titleEn: "Setting Goals", descRu: "Учимся правильно ставить финансовые цели.", descEn: "Learn to set financial goals properly.", completed: false, locked: false, current: true },
+      { id: 2, titleRu: "Бюджетирование", titleEn: "Budgeting", descRu: "Основы бюджетирования и контроля расходов.", descEn: "Budgeting and expense control basics.", completed: false, locked: true },
+      { id: 3, titleRu: "Инвестиционный план", titleEn: "Investment Plan", descRu: "Составляем инвестиционный план.", descEn: "Creating an investment plan.", completed: false, locked: true },
+      { id: 4, titleRu: "Автоматизация", titleEn: "Automation", descRu: "Автоматизация финансовых процессов.", descEn: "Automating financial processes.", completed: false, locked: true },
     ],
   },
   "4": {
@@ -75,11 +78,11 @@ const courseMaps: Record<string, CourseMapData> = {
     descriptionEn: "A deep dive into decentralized finance.",
     progress: 0,
     lessons: [
-      { id: 1, titleRu: "Что такое DeFi", titleEn: "What is DeFi", completed: false, locked: false, current: true },
-      { id: 2, titleRu: "DEX и AMM", titleEn: "DEX and AMM", completed: false, locked: true },
-      { id: 3, titleRu: "Yield Farming", titleEn: "Yield Farming", completed: false, locked: true },
-      { id: 4, titleRu: "Управление рисками", titleEn: "Risk Management", completed: false, locked: true },
-      { id: 5, titleRu: "Ликвидность", titleEn: "Liquidity Provision", completed: false, locked: true },
+      { id: 1, titleRu: "Что такое DeFi", titleEn: "What is DeFi", descRu: "Введение в децентрализованные финансы.", descEn: "Introduction to decentralized finance.", completed: false, locked: false, current: true },
+      { id: 2, titleRu: "DEX и AMM", titleEn: "DEX and AMM", descRu: "Как работают децентрализованные биржи.", descEn: "How decentralized exchanges work.", completed: false, locked: true },
+      { id: 3, titleRu: "Yield Farming", titleEn: "Yield Farming", descRu: "Стратегии фарминга доходности.", descEn: "Yield farming strategies.", completed: false, locked: true },
+      { id: 4, titleRu: "Управление рисками", titleEn: "Risk Management", descRu: "Риски DeFi и способы их минимизации.", descEn: "DeFi risks and how to minimize them.", completed: false, locked: true },
+      { id: 5, titleRu: "Ликвидность", titleEn: "Liquidity Provision", descRu: "Предоставление ликвидности в пулы.", descEn: "Providing liquidity to pools.", completed: false, locked: true },
     ],
   },
   "5": {
@@ -89,10 +92,10 @@ const courseMaps: Record<string, CourseMapData> = {
     descriptionEn: "Understand blockchain architecture and trust mechanisms.",
     progress: 0,
     lessons: [
-      { id: 1, titleRu: "Что такое блокчейн", titleEn: "What is Blockchain", completed: false, locked: false, current: true },
-      { id: 2, titleRu: "Консенсусные механизмы", titleEn: "Consensus Mechanisms", completed: false, locked: true },
-      { id: 3, titleRu: "Криптография", titleEn: "Cryptography", completed: false, locked: true },
-      { id: 4, titleRu: "Смарт-контракты", titleEn: "Smart Contracts", completed: false, locked: true },
+      { id: 1, titleRu: "Что такое блокчейн", titleEn: "What is Blockchain", descRu: "Узнаем, как работает современный блокчейн и почему Web3 уступает Web2-решениям.", descEn: "Learn how modern blockchain works and why Web3 falls short of Web2 solutions.", completed: false, locked: false, current: true },
+      { id: 2, titleRu: "Консенсусные механизмы", titleEn: "Consensus Mechanisms", descRu: "PoW, PoS и другие механизмы консенсуса.", descEn: "PoW, PoS and other consensus mechanisms.", completed: false, locked: true },
+      { id: 3, titleRu: "Криптография", titleEn: "Cryptography", descRu: "Криптографические основы блокчейна.", descEn: "Cryptographic foundations of blockchain.", completed: false, locked: true },
+      { id: 4, titleRu: "Смарт-контракты", titleEn: "Smart Contracts", descRu: "Что такое смарт-контракты и как они работают.", descEn: "What smart contracts are and how they work.", completed: false, locked: true },
     ],
   },
 };
