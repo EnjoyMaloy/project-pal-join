@@ -257,6 +257,25 @@ const CourseLessons = () => {
           courseId={id || "1"}
         />
       )}
+
+      {selectedLesson && courseMap && (
+        <LessonModal
+          open={!!selectedLesson}
+          onOpenChange={(open) => { if (!open) setSelectedLesson(null); }}
+          lessonNumber={selectedLesson.id}
+          titleRu={selectedLesson.titleRu}
+          titleEn={selectedLesson.titleEn}
+          descriptionRu={selectedLesson.descRu}
+          descriptionEn={selectedLesson.descEn}
+          totalLessons={courseMap.lessons.length}
+          progress={courseMap.progress}
+          onStart={() => {
+            if (!isOwned) {
+              setPaymentOpen(true);
+            }
+          }}
+        />
+      )}
     </div>
   );
 };
