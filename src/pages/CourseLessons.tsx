@@ -4,6 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Lock, ChevronLeft } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import PaymentModal from "@/components/PaymentModal";
+import lessonTrophy from "@/assets/lesson-trophy.png";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 
 interface LessonNode {
