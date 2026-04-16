@@ -357,33 +357,42 @@ const CourseLessons = () => {
               {positions.map((pos, i) => {
                 const lesson = courseMap.lessons[i];
                 return (
-                  <foreignObject
-                    key={lesson.id}
-                    x={pos.x}
-                    y={pos.y}
-                    width={NODE_SIZE}
-                    height={NODE_SIZE}
-                  >
-                    <button
-                      disabled={lesson.locked}
-                      onClick={() => {
-                        if (!lesson.locked && !lesson.completed && !isOwned) {
-                          setPaymentOpen(true);
-                        }
-                      }}
-                      className={`w-full h-full rounded-full flex items-center justify-center transition-all ${
-                        lesson.completed
-                          ? "bg-[hsl(var(--violet-primary))] shadow-lg"
-                          : lesson.current
-                          ? "bg-[hsl(40,90%,65%)] shadow-lg ring-4 ring-[hsl(40,90%,75%)/0.5]"
-                          : lesson.locked
-                          ? "bg-background/80 border-2 border-[hsl(var(--violet-light))] cursor-not-allowed"
-                          : "bg-background/90 border-2 border-[hsl(var(--violet-light))] hover:border-[hsl(var(--violet-primary))]"
-                      }`}
+                    <foreignObject
+                      key={lesson.id}
+                      x={pos.x}
+                      y={pos.y}
+                      width={NODE_SIZE}
+                      height={NODE_SIZE + (lesson.current ? 28 : 0)}
+                      style={{ overflow: 'visible' }}
                     >
-                      <LessonNodeIcon lesson={lesson} />
-                    </button>
-                  </foreignObject>
+                      <div className="flex flex-col items-center">
+                        <button
+                          disabled={lesson.locked}
+                          onClick={() => {
+                            if (!lesson.locked && !lesson.completed && !isOwned) {
+                              setPaymentOpen(true);
+                            }
+                          }}
+                          className={`w-[${NODE_SIZE}px] h-[${NODE_SIZE}px] rounded-full flex items-center justify-center transition-all ${
+                            lesson.completed
+                              ? "bg-[hsl(var(--violet-primary))] shadow-lg"
+                              : lesson.current
+                              ? "bg-[hsl(40,90%,65%)] shadow-lg ring-4 ring-[hsl(40,90%,75%)/0.5]"
+                              : lesson.locked
+                              ? "bg-background/80 border-2 border-[hsl(var(--violet-light))] cursor-not-allowed"
+                              : "bg-background/90 border-2 border-[hsl(var(--violet-light))] hover:border-[hsl(var(--violet-primary))]"
+                          }`}
+                          style={{ width: NODE_SIZE, height: NODE_SIZE }}
+                        >
+                          <LessonNodeIcon lesson={lesson} />
+                        </button>
+                        {lesson.current && (
+                          <span className="mt-1.5 text-[13px] font-medium text-foreground bg-background rounded-full px-3 py-0.5 shadow-sm whitespace-nowrap">
+                            {lang === "ru" ? "Начать" : "Start"}
+                          </span>
+                        )}
+                      </div>
+                    </foreignObject>
                 );
               })}
             </svg>
