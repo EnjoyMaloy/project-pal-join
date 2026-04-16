@@ -102,11 +102,29 @@ const courseMaps: Record<string, CourseMapData> = {
   },
 };
 
-// Position nodes along the oval road in zigzag
-const getNodePosition = (index: number, total: number) => {
-  // Alternate left/right sides
-  const isRight = index % 2 === 0;
-  return { isRight };
+// S-curve snake path: nodes arranged in rows of 2, alternating direction
+// Row 0: left-to-right, Row 1: right-to-left, etc.
+const getLessonLayout = (lessons: LessonNode[]) => {
+  const rows: { lesson: LessonNode; col: number; row: number }[] = [];
+  // First row has 2 nodes (left, right), then alternating single nodes snake down
+  // Pattern from reference: pairs at top connected by line+curve, then singles snaking down
+  let row = 0;
+  let i = 0;
+  while (i < lessons.length) {
+    if (row === 0 && i + 1 < lessons.length) {
+      // First row: 2 nodes side by side
+      rows.push({ lesson: lessons[i], col: 0, row });
+      rows.push({ lesson: lessons[i + 1], col: 1, row });
+      i += 2;
+    } else {
+      // Snake: alternate between right(col=1) and left(col=0)
+      const col = (row % 2 === 1) ? 0 : 1;
+      rows.push({ lesson: lessons[i], col, row });
+      i++;
+    }
+    row++;
+  }
+  return rows;
 };
 
 const CourseLessons = () => {
