@@ -102,11 +102,11 @@ const courseMaps: Record<string, CourseMapData> = {
   },
 };
 
-// Zigzag path positions for the map
+// Position nodes along the oval road in zigzag
 const getNodePosition = (index: number, total: number) => {
-  const isEven = index % 2 === 0;
-  const xOffset = isEven ? 0 : 80;
-  return { x: xOffset, y: index * 120 };
+  // Alternate left/right sides
+  const isRight = index % 2 === 0;
+  return { isRight };
 };
 
 const CourseLessons = () => {
