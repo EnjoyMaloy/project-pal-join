@@ -186,6 +186,11 @@ const CourseLessons = () => {
                   >
                     <button
                       disabled={lesson.locked}
+                      onClick={() => {
+                        if (!lesson.locked && !lesson.completed && !isOwned) {
+                          setPaymentOpen(true);
+                        }
+                      }}
                       className={`w-14 h-14 rounded-full flex items-center justify-center transition-all shadow-md ${
                         lesson.completed
                           ? "bg-primary text-primary-foreground"
@@ -218,6 +223,16 @@ const CourseLessons = () => {
           </div>
         </div>
       </div>
+
+      {courseMap && (
+        <PaymentModal
+          open={paymentOpen}
+          onOpenChange={setPaymentOpen}
+          courseTitleRu={courseMap.titleRu}
+          courseTitleEn={courseMap.titleEn}
+          courseId={id || "1"}
+        />
+      )}
     </div>
   );
 };
