@@ -383,9 +383,9 @@ const CourseLessons = () => {
 
               {/* "Начать" label under current node */}
               {courseMap.lessons[3]?.current && (
-                <foreignObject x="85" y="196" width="72" height="28">
+                <foreignObject x="85" y="196" width="72" height="28" className="cursor-pointer" onClick={() => { if (!isOwned) setPaymentOpen(true); }}>
                   <div className="flex justify-center">
-                    <span className="text-[13px] font-medium text-foreground bg-background rounded-full px-3 py-0.5 shadow-sm whitespace-nowrap">
+                    <span className="text-[13px] font-medium text-foreground bg-background rounded-full px-3 py-0.5 shadow-sm whitespace-nowrap cursor-pointer">
                       {lang === "ru" ? "Начать" : "Start"}
                     </span>
                   </div>
