@@ -6,6 +6,7 @@ import { Progress } from "@/components/ui/progress";
 import PaymentModal from "@/components/PaymentModal";
 import LessonModal from "@/components/LessonModal";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
+import lessonCompleteIcon from "@/assets/lesson-complete.png";
 
 interface LessonNode {
   id: number;
@@ -115,6 +116,7 @@ const CourseLessons = () => {
   const { purchasedCourses } = store;
   const [paymentOpen, setPaymentOpen] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState<LessonNode | null>(null);
+  const [completedLessons, setCompletedLessons] = useState<Set<number>>(new Set());
   const courseMapRaw = id ? courseMaps[id] : null;
   const isOwned = id ? purchasedCourses.includes(id) : false;
 
@@ -126,7 +128,8 @@ const CourseLessons = () => {
     ...courseMapRaw,
     progress: isReset ? 0 : courseMapRaw.progress,
     lessons: courseMapRaw.lessons.map((lesson, idx) => {
-      if (isReset) {
+      const isCompleted = completedLessons.has(lesson.id) || (!isReset && lesson.completed);
+      if (isReset && completedLessons.size === 0) {
         return {
           ...lesson,
           completed: false,
@@ -134,7 +137,15 @@ const CourseLessons = () => {
           locked: idx > 0,
         };
       }
-      return lesson;
+      // Find first non-completed lesson to mark as current
+      const allLessons = courseMapRaw.lessons;
+      const firstIncomplete = allLessons.findIndex(l => !completedLessons.has(l.id) && !((!isReset) && l.completed));
+      return {
+        ...lesson,
+        completed: isCompleted,
+        current: !isCompleted && idx === firstIncomplete,
+        locked: !isCompleted && idx > Math.max(firstIncomplete, 0),
+      };
     }),
   } : null;
 
@@ -215,22 +226,20 @@ const CourseLessons = () => {
                           setSelectedLesson(lesson);
                         }
                       }}
-                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all shadow-md ${
+                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all ${
                         lesson.completed
-                          ? "bg-primary text-primary-foreground"
+                          ? "shadow-none"
                           : lesson.current
-                          ? "bg-accent text-accent-foreground ring-4 ring-primary/20 animate-pulse"
+                          ? "bg-accent text-accent-foreground ring-4 ring-primary/20 animate-pulse shadow-md"
                           : lesson.locked
-                          ? "bg-muted text-muted-foreground cursor-not-allowed"
-                          : "bg-background border-2 border-border text-foreground hover:border-primary"
+                          ? "bg-muted text-muted-foreground cursor-not-allowed shadow-md"
+                          : "bg-background border-2 border-border text-foreground hover:border-primary shadow-md"
                       }`}
                     >
                       {lesson.locked ? (
                         <Lock className="w-5 h-5" />
                       ) : lesson.completed ? (
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                          <path d="M4 10L8.5 14.5L16 5.5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
+                        <img src={lessonCompleteIcon} alt="completed" className="w-14 h-14 rounded-full" />
                       ) : (
                         <span className="text-[16px] font-bold">{lesson.id}</span>
                       )}
@@ -272,6 +281,12 @@ const CourseLessons = () => {
           onStart={() => {
             if (!isOwned) {
               setPaymentOpen(true);
+            } else {
+              setCompletedLessons(prev => {
+                const next = new Set(prev);
+                next.add(selectedLesson.id);
+                return next;
+              });
             }
           }}
         />
