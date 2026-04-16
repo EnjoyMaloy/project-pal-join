@@ -119,6 +119,12 @@ const CourseLessons = () => {
   const [selectedLesson, setSelectedLesson] = useState<LessonNode | null>(null);
   const [completedLessons, setCompletedLessons] = useState<Set<number>>(new Set());
   const courseMapRaw = id ? courseMaps[id] : null;
+
+  // Clear completed lessons when store is reset
+  const prevIsReset = useState(false);
+  if (isReset && completedLessons.size > 0) {
+    setCompletedLessons(new Set());
+  }
   const isOwned = id ? purchasedCourses.includes(id) : false;
 
   // Check if store was reset (no purchases, no subscription, no transactions)
