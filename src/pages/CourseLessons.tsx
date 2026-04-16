@@ -33,7 +33,7 @@ const courseMaps: Record<string, CourseMapData> = {
     titleEn: "Quick Start with Telegram Gifts",
     descriptionRu: "Узнайте, как использовать Telegram Gifts для создания уникальных цифровых подарков.",
     descriptionEn: "Learn how to use Telegram Gifts to create unique digital gifts.",
-    progress: 20,
+    progress: 9,
     lessons: [
       { id: 1, titleRu: "Что такое Telegram Gifts", titleEn: "What are Telegram Gifts", completed: true, locked: false },
       { id: 2, titleRu: "Создание подарка", titleEn: "Creating a Gift", completed: false, locked: false, current: true },
