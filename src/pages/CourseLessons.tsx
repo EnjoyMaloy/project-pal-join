@@ -108,11 +108,32 @@ const CourseLessons = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { lang } = useLanguage();
-  const { purchasedCourses } = usePurchaseStore();
+  const store = usePurchaseStore();
+  const { purchasedCourses } = store;
   const [paymentOpen, setPaymentOpen] = useState(false);
 
-  const courseMap = id ? courseMaps[id] : null;
+  const courseMapRaw = id ? courseMaps[id] : null;
   const isOwned = id ? purchasedCourses.includes(id) : false;
+
+  // Check if store was reset (no purchases, no subscription, no transactions)
+  const isReset = purchasedCourses.length === 0 && !store.subscription && store.transactions.length === 0;
+
+  // Dynamic lesson state: if reset, all lessons start fresh
+  const courseMap = courseMapRaw ? {
+    ...courseMapRaw,
+    progress: isReset ? 0 : courseMapRaw.progress,
+    lessons: courseMapRaw.lessons.map((lesson, idx) => {
+      if (isReset) {
+        return {
+          ...lesson,
+          completed: false,
+          current: idx === 0,
+          locked: idx > 0,
+        };
+      }
+      return lesson;
+    }),
+  } : null;
 
   if (!courseMap) {
     return (
