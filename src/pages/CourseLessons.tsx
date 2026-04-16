@@ -211,8 +211,8 @@ const CourseLessons = () => {
                     <button
                       disabled={lesson.locked}
                       onClick={() => {
-                        if (!lesson.locked && !lesson.completed && !isOwned) {
-                          setPaymentOpen(true);
+                        if (!lesson.locked) {
+                          setSelectedLesson(lesson);
                         }
                       }}
                       className={`w-14 h-14 rounded-full flex items-center justify-center transition-all shadow-md ${
