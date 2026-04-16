@@ -367,7 +367,7 @@ const CourseLessons = () => {
               {courseMap.lessons[3] && (() => {
                 const l = courseMap.lessons[3];
                 return (
-                  <g className="cursor-pointer" onClick={() => { if (!l.locked && !isOwned) setPaymentOpen(true); }}>
+                  <g className="cursor-pointer" onClick={() => { if (!l.locked) setPaymentOpen(true); }}>
                     <g filter="url(#filter0_i)">
                       <circle cx="120.922" cy="161" r="32" fill="url(#gGoldNode)"/>
                     </g>
@@ -383,11 +383,15 @@ const CourseLessons = () => {
 
               {/* "Начать" label under current node */}
               {courseMap.lessons[3]?.current && (
-                <foreignObject x="85" y="196" width="72" height="28" className="cursor-pointer" onClick={() => { if (!isOwned) setPaymentOpen(true); }}>
+                <foreignObject x="85" y="196" width="72" height="28">
                   <div className="flex justify-center">
-                    <span className="text-[13px] font-medium text-foreground bg-background rounded-full px-3 py-0.5 shadow-sm whitespace-nowrap cursor-pointer">
+                    <button
+                      type="button"
+                      onClick={() => setPaymentOpen(true)}
+                      className="text-[13px] font-medium text-foreground bg-background rounded-full px-3 py-0.5 shadow-sm whitespace-nowrap cursor-pointer pointer-events-auto"
+                    >
                       {lang === "ru" ? "Начать" : "Start"}
-                    </span>
+                    </button>
                   </div>
                 </foreignObject>
               )}
