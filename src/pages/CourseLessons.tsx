@@ -176,10 +176,6 @@ const CourseLessons = () => {
         {/* Lesson map */}
         <div className="relative flex flex-col items-center pb-20">
           {/* Background gradient */}
-          <div className="absolute inset-0 rounded-3xl overflow-hidden">
-            <div className="w-full h-full bg-gradient-to-b from-[hsl(var(--violet-light)/0.3)] to-[hsl(var(--violet-light)/0.1)]" 
-                 style={{ background: "linear-gradient(180deg, rgba(217, 192, 255, 0.3) 0%, rgba(217, 192, 255, 0.05) 100%)" }} />
-          </div>
 
           <div className="relative w-full max-w-[300px] py-10">
             {courseMap.lessons.map((lesson, index) => {
