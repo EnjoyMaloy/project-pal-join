@@ -226,14 +226,14 @@ const CourseLessons = () => {
                           setSelectedLesson(lesson);
                         }
                       }}
-                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all shadow-md ${
+                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all ${
                         lesson.completed
-                          ? "bg-primary text-primary-foreground"
+                          ? "shadow-none"
                           : lesson.current
-                          ? "bg-accent text-accent-foreground ring-4 ring-primary/20 animate-pulse"
+                          ? "bg-accent text-accent-foreground ring-4 ring-primary/20 animate-pulse shadow-md"
                           : lesson.locked
-                          ? "bg-muted text-muted-foreground cursor-not-allowed"
-                          : "bg-background border-2 border-border text-foreground hover:border-primary"
+                          ? "bg-muted text-muted-foreground cursor-not-allowed shadow-md"
+                          : "bg-background border-2 border-border text-foreground hover:border-primary shadow-md"
                       }`}
                     >
                       {lesson.locked ? (
