@@ -242,7 +242,7 @@ const CourseLessons = () => {
                       ) : lesson.completed ? (
                         <img src={lessonCompleteIcon} alt="completed" className="w-14 h-14 rounded-full" />
                       ) : (
-                        <span className="text-[16px] font-bold">{lesson.id}</span>
+                        <img src={lessonAvailableIcon} alt="available" className="w-14 h-14 rounded-full" />
                       )}
                     </button>
                     <span className={`mt-2 text-[13px] text-center max-w-[120px] ${
@@ -280,15 +280,11 @@ const CourseLessons = () => {
           totalLessons={courseMap.lessons.length}
           progress={courseMap.progress}
           onStart={() => {
-            if (!isOwned) {
-              setPaymentOpen(true);
-            } else {
-              setCompletedLessons(prev => {
-                const next = new Set(prev);
-                next.add(selectedLesson.id);
-                return next;
-              });
-            }
+            setCompletedLessons(prev => {
+              const next = new Set(prev);
+              next.add(selectedLesson.id);
+              return next;
+            });
           }}
         />
       )}
