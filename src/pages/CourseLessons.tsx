@@ -7,6 +7,7 @@ import PaymentModal from "@/components/PaymentModal";
 import LessonModal from "@/components/LessonModal";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import lessonCompleteIcon from "@/assets/lesson-complete.png";
+import lessonAvailableIcon from "@/assets/lesson-available.png";
 
 interface LessonNode {
   id: number;
