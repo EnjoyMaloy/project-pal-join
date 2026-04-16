@@ -124,6 +124,11 @@ const CourseLessons = () => {
   // Check if store was reset (no purchases, no subscription, no transactions)
   const isReset = purchasedCourses.length === 0 && !store.subscription && store.transactions.length === 0;
 
+  // Clear completed lessons when store is reset
+  if (isReset && completedLessons.size > 0) {
+    setCompletedLessons(new Set());
+  }
+
   // Dynamic lesson state: if reset, all lessons start fresh
   const courseMap = courseMapRaw ? {
     ...courseMapRaw,
