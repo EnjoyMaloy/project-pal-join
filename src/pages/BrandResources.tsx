@@ -45,7 +45,6 @@ const BrandResources = () => {
         <section className="mb-20">
           <div className="grid lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-14 items-start">
             <div>
-              <div className="text-caption-12-caps text-muted-foreground mb-3">01 — Логотип</div>
               <h2 className="text-h2 text-foreground mb-4">Логотип</h2>
               <p className="text-body-14 text-muted-foreground leading-relaxed mb-6">
                 Вы можете использовать логотип для партнёрских материалов. Скачивайте в хорошем качестве
@@ -72,7 +71,6 @@ const BrandResources = () => {
         {/* Palette */}
         <section className="mb-20">
           <div className="max-w-2xl mb-8">
-            <div className="text-caption-12-caps text-muted-foreground mb-3">02 — Палитра</div>
             <h2 className="text-h2 text-foreground mb-4">Цветовая палитра</h2>
             <p className="text-body-14 text-muted-foreground leading-relaxed">
               Наша палитра построена на контрасте насыщенного фиолетового, тёплого оранжевого
@@ -114,16 +112,13 @@ const BrandResources = () => {
             ))}
           </div>
 
-          <Button onClick={soon} className="gap-2">
-            <Download size={16} /> Скачать палитру
-          </Button>
         </section>
+
 
         {/* Emoji */}
         <section className="mb-10">
           <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-center">
             <div>
-              <div className="text-caption-12-caps text-muted-foreground mb-3">03 — Эмодзи</div>
               <h2 className="text-h2 text-foreground mb-4">Эмодзи-иллюстрации</h2>
               <p className="text-body-14 text-muted-foreground leading-relaxed mb-6">
                 Набор объёмных 3D-эмодзи для соцсетей, презентаций и сообщений в Telegram.
