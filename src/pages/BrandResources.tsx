@@ -40,7 +40,7 @@ const swatches: Swatch[] = [
   },
   {
     name: "Sky Blue", hex: "#88C5FD", rgb: "136, 197, 253", cmyk: "46, 22, 0, 1",
-    rest: "translate(-6%, 4%) rotate(12.81deg)",
+    rest: "translate(-6%, -10%) rotate(12.81deg)",
     gridClass: "col-start-2 row-start-2",
   },
   {
