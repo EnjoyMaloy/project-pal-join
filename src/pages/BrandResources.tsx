@@ -34,7 +34,6 @@ const BrandResources = () => {
 
         {/* Hero */}
         <header className="mb-20 max-w-2xl">
-          <div className="text-caption-12-caps text-muted-foreground mb-4">Ресурсы бренда</div>
           <h1 className="text-h1 text-foreground mb-5">Айдентика нашего бренда</h1>
           <p className="text-body-14 text-muted-foreground leading-relaxed">
             Привет! Здесь собраны материалы, которые помогут вам красиво и единообразно рассказывать о нас.
