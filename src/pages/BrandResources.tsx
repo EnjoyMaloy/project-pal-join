@@ -20,32 +20,32 @@ type Swatch = {
 const swatches: Swatch[] = [
   {
     name: "OA Purple", hex: "#A66CFF", rgb: "166, 108, 255", cmyk: "35, 58, 0, 0",
-    rest: "translate(0%, 4%) rotate(-8deg)",
+    rest: "translate(-4%, 8%) rotate(-12deg)",
     gridClass: "col-start-1 row-start-1",
   },
   {
     name: "Active Orange", hex: "#FF8645", rgb: "255, 134, 69", cmyk: "0, 47, 73, 0",
-    rest: "translate(-12%, -6%) rotate(6deg)",
+    rest: "translate(-14%, -4%) rotate(7deg)",
     gridClass: "col-start-2 row-start-1",
   },
   {
     name: "Bright Yellow", hex: "#FFDD31", rgb: "255, 221, 49", cmyk: "0, 13, 81, 0",
-    rest: "translate(-22%, 8%) rotate(-5deg)",
+    rest: "translate(-24%, 12%) rotate(-9deg)",
     gridClass: "col-start-3 row-start-1",
   },
   {
     name: "Fresh Lime", hex: "#CCEF40", rgb: "204, 239, 64", cmyk: "15, 0, 73, 6",
-    rest: "translate(8%, -8%) rotate(7deg)",
+    rest: "translate(8%, -12%) rotate(-7deg)",
     gridClass: "col-start-1 row-start-2",
   },
   {
     name: "Sky Blue", hex: "#88C5FD", rgb: "136, 197, 253", cmyk: "46, 22, 0, 1",
-    rest: "translate(-6%, 6%) rotate(-6deg)",
+    rest: "translate(-6%, 4%) rotate(9deg)",
     gridClass: "col-start-2 row-start-2",
   },
   {
     name: "Soft Pink", hex: "#FF96C8", rgb: "255, 150, 200", cmyk: "0, 41, 22, 0",
-    rest: "translate(-18%, -4%) rotate(5deg)",
+    rest: "translate(-18%, -8%) rotate(-5deg)",
     gridClass: "col-start-3 row-start-2",
   },
 ];
@@ -54,13 +54,13 @@ const pills: Swatch[] = [
   {
     name: "Warm Neutral", hex: "#FFFCF5", rgb: "255, 252, 245", cmyk: "0, 1, 4, 0",
     textDark: true, pill: true,
-    rest: "translate(10%, 18%) rotate(-3deg)",
+    rest: "translate(6%, 28%) rotate(-2deg)",
     gridClass: "col-start-1 row-start-3 col-span-1",
   },
   {
     name: "Graphite Black", hex: "#202020", rgb: "32, 32, 32", cmyk: "0, 0, 0, 87",
     pill: true,
-    rest: "translate(-10%, 14%) rotate(4deg)",
+    rest: "translate(-18%, 14%) rotate(4deg)",
     gridClass: "col-start-2 row-start-3 col-span-2",
   },
 ];
