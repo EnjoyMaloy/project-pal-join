@@ -80,7 +80,7 @@ const Footer = () => {
                     <li key={l.en}>
                       <Link
                         to={l.to}
-                        className="text-body-14 text-foreground/80 hover:text-foreground transition-colors"
+                        className="text-body-14 text-foreground/80 hover:text-foreground transition-colors relative inline-block after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-[#B889FF] after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out"
                       >
                         {lang === "ru" ? l.ru : l.en}
                       </Link>
