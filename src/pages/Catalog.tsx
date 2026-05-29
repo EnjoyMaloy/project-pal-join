@@ -212,6 +212,7 @@ const Catalog = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };
