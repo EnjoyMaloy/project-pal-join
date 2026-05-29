@@ -150,7 +150,10 @@ const BrandResources = () => {
                       {isPill ? (
                         <span className="font-mono text-[13px] select-all">{s.hex}</span>
                       ) : (
-                        <div className="leading-tight text-center">
+                        <div
+                          className="leading-tight text-center transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transform:scale(var(--text-scale,1))] group-hover/palette:[transform:scale(1)]"
+                          style={{ ["--text-scale" as string]: s.textScale ?? 1 }}
+                        >
                           <div className="text-[13px] font-medium">{s.name}</div>
                           <div className="font-mono text-[13px] select-all" title={`RGB ${s.rgb} · CMYK ${s.cmyk}`}>{s.hex}</div>
                         </div>
