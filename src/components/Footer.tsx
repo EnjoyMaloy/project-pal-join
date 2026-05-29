@@ -35,7 +35,7 @@ const columns: Col[] = [
     links: [
       { ru: "О нас", en: "About", to: "#" },
       { ru: "Блог", en: "Blog", to: "#" },
-      { ru: "Карьера", en: "Careers", to: "#" },
+      { ru: "Ресурсы бренда", en: "Brand resources", to: "/brand" },
       { ru: "Партнёрство", en: "Partners", to: "#" },
     ],
   },
