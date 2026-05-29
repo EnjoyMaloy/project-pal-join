@@ -20,34 +20,32 @@ type Swatch = {
 const swatches: Swatch[] = [
   {
     name: "OA Purple", hex: "#A66CFF", rgb: "166, 108, 255", cmyk: "35, 58, 0, 0",
-    rest: "translate(-4%, 8%) rotate(5.86deg)",
+    rest: "translate(2%, 6%) rotate(5.86deg) scale(1.32)",
     gridClass: "col-start-1 row-start-1",
   },
   {
     name: "Active Orange", hex: "#FF8645", rgb: "255, 134, 69", cmyk: "0, 47, 73, 0",
-    rest: "translate(-14%, -4%) rotate(-4.12deg)",
+    rest: "translate(-2%, -2%) rotate(-4.12deg) scale(1.38)",
     gridClass: "col-start-2 row-start-1",
   },
   {
     name: "Bright Yellow", hex: "#FFDD31", rgb: "255, 221, 49", cmyk: "0, 13, 81, 0",
-    rest: "translate(-24%, 12%) rotate(17.17deg)",
+    rest: "translate(-8%, 8%) rotate(17.17deg) scale(0.95)",
     gridClass: "col-start-3 row-start-1",
   },
   {
     name: "Fresh Lime", hex: "#CCEF40", rgb: "204, 239, 64", cmyk: "15, 0, 73, 6",
-    rest: "translate(8%, -12%) rotate(-17.65deg)",
+    rest: "translate(10%, -8%) rotate(-17.65deg) scale(0.95)",
     gridClass: "col-start-1 row-start-2",
   },
   {
     name: "Sky Blue", hex: "#88C5FD", rgb: "136, 197, 253", cmyk: "46, 22, 0, 1",
-    rest: "translate(-6%, -10%) rotate(12.81deg)",
+    rest: "translate(-4%, -14%) rotate(12.81deg) scale(0.92)",
     gridClass: "col-start-2 row-start-2",
   },
   {
     name: "Soft Pink", hex: "#FF96C8", rgb: "255, 150, 200", cmyk: "0, 41, 22, 0",
-    rest: "translate(-18%, -8%) rotate(-11.68deg)",
-
-
+    rest: "translate(-10%, -6%) rotate(-11.68deg) scale(0.95)",
     gridClass: "col-start-3 row-start-2",
   },
 ];
