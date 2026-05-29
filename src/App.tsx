@@ -18,6 +18,7 @@ import Catalog from "./pages/Catalog.tsx";
 import CourseView from "./pages/CourseView.tsx";
 import CourseLessons from "./pages/CourseLessons.tsx";
 import Profile from "./pages/Profile.tsx";
+import BrandResources from "./pages/BrandResources.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
