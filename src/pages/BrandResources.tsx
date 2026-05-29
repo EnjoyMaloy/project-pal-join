@@ -23,11 +23,13 @@ const swatches: Swatch[] = [
   {
     name: "OA Purple", hex: "#A66CFF", rgb: "166, 108, 255", cmyk: "35, 58, 0, 0",
     rest: "translate(2%, 6%) rotate(5.86deg) scale(1.32)",
+    textScale: 1 / 1.32,
     gridClass: "col-start-1 row-start-1",
   },
   {
     name: "Active Orange", hex: "#FF8645", rgb: "255, 134, 69", cmyk: "0, 47, 73, 0",
     rest: "translate(-2%, -2%) rotate(-4.12deg) scale(1.38)",
+    textScale: 1 / 1.38,
     gridClass: "col-start-2 row-start-1",
   },
   {
