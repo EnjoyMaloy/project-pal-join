@@ -5,6 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Sparkles, Bitcoin, ShieldCheck, BarChart3, PieChart, Snowflake, Wrench } from "lucide-react";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import CourseCard from "@/components/CourseCard";
+import Footer from "@/components/Footer";
 
 interface CategoryItem {
   id: string;
@@ -211,6 +212,7 @@ const Catalog = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };
