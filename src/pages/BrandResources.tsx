@@ -13,6 +13,8 @@ type Swatch = {
   pill?: boolean;
   // scattered (resting) transform
   rest: string;
+  // inverse scale for inner text so visual font size stays uniform
+  textScale?: number;
   // grid position (column / row spans for the neat layout)
   gridClass: string;
 };
@@ -21,11 +23,13 @@ const swatches: Swatch[] = [
   {
     name: "OA Purple", hex: "#A66CFF", rgb: "166, 108, 255", cmyk: "35, 58, 0, 0",
     rest: "translate(2%, 6%) rotate(5.86deg) scale(1.32)",
+    textScale: 1 / 1.32,
     gridClass: "col-start-1 row-start-1",
   },
   {
     name: "Active Orange", hex: "#FF8645", rgb: "255, 134, 69", cmyk: "0, 47, 73, 0",
     rest: "translate(-2%, -2%) rotate(-4.12deg) scale(1.38)",
+    textScale: 1 / 1.38,
     gridClass: "col-start-2 row-start-1",
   },
   {
@@ -146,7 +150,10 @@ const BrandResources = () => {
                       {isPill ? (
                         <span className="font-mono text-[13px] select-all">{s.hex}</span>
                       ) : (
-                        <div className="leading-tight text-center">
+                        <div
+                          className="leading-tight text-center transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] [transform:scale(var(--text-scale,1))] group-hover/palette:[transform:scale(1)]"
+                          style={{ ["--text-scale" as string]: s.textScale ?? 1 }}
+                        >
                           <div className="text-[13px] font-medium">{s.name}</div>
                           <div className="font-mono text-[13px] select-all" title={`RGB ${s.rgb} · CMYK ${s.cmyk}`}>{s.hex}</div>
                         </div>
