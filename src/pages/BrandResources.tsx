@@ -116,44 +116,49 @@ const BrandResources = () => {
 
         {/* Palette */}
         <section className="mb-20">
-          <div className="max-w-2xl mb-8">
-            <h2 className="text-h2 text-foreground mb-4">Цветовая палитра</h2>
-            <p className="text-body-14 text-muted-foreground leading-relaxed">
-              Наша палитра построена на контрасте насыщенного фиолетового, тёплого оранжевого
-              и спокойных нейтралей. Наведите курсор, чтобы разложить плашки по полочкам — HEX можно выделить и скопировать.
-            </p>
-          </div>
+          <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-14 items-center">
+            <div>
+              <h2 className="text-h2 text-foreground mb-6">Цветовая палитра</h2>
+              <div className="space-y-4 text-body-14 text-muted-foreground leading-relaxed">
+                <p>Цветовая система поможет вам сохранить оригинальные цвета нашего бренда.</p>
+                <p>Основные цвета – сиреневый и оранжевый.</p>
+                <p>Четыре дополнительных оттенка мы используем для разнообразия в графике.</p>
+                <p>Нейтральную пару — кремовый и графитовый чёрный — можно использовать для текста, монохромных акцентов или фона.</p>
+              </div>
+            </div>
 
-          <div className="group/palette max-w-[490px] py-6">
-            <div className="grid grid-cols-3 gap-0 [grid-template-rows:auto_auto_auto]">
-              {[...swatches, ...pills].map((s, i) => {
-                const isPill = s.pill;
-                const textColor = s.textDark ? "#202020" : (isPill ? "#FFFCF5" : "#202020");
-                return (
-                  <div
-                    key={s.hex}
-                    className={`${s.gridClass} ${isPill ? "h-14 rounded-full px-5 flex items-center" : "aspect-square rounded-[20px] p-4 flex flex-col justify-center"} transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform [transform:var(--rest)] group-hover/palette:[transform:translate(0,0)_rotate(0deg)]`}
-                    style={{
-                      backgroundColor: s.hex,
-                      ["--rest" as string]: s.rest,
-                      zIndex: 10 + i,
-                      color: textColor,
-                    }}
-                  >
-                    {isPill ? (
-                      <span className="font-mono text-[13px] select-all">{s.hex}</span>
-                    ) : (
-                      <div className="leading-tight">
-                        <div className="text-[13px] font-medium">{s.name}</div>
-                        <div className="font-mono text-[13px] select-all" title={`RGB ${s.rgb} · CMYK ${s.cmyk}`}>{s.hex}</div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+            <div className="group/palette w-full max-w-[490px] justify-self-end py-6">
+              <div className="grid grid-cols-3 gap-0 [grid-template-rows:auto_auto_auto]">
+                {[...swatches, ...pills].map((s, i) => {
+                  const isPill = s.pill;
+                  const textColor = s.textDark ? "#202020" : (isPill ? "#FFFCF5" : "#202020");
+                  return (
+                    <div
+                      key={s.hex}
+                      className={`${s.gridClass} ${isPill ? "h-14 rounded-full px-5 flex items-center" : "aspect-square rounded-[20px] p-4 flex flex-col justify-center"} transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform [transform:var(--rest)] group-hover/palette:[transform:translate(0,0)_rotate(0deg)]`}
+                      style={{
+                        backgroundColor: s.hex,
+                        ["--rest" as string]: s.rest,
+                        zIndex: 10 + i,
+                        color: textColor,
+                      }}
+                    >
+                      {isPill ? (
+                        <span className="font-mono text-[13px] select-all">{s.hex}</span>
+                      ) : (
+                        <div className="leading-tight">
+                          <div className="text-[13px] font-medium">{s.name}</div>
+                          <div className="font-mono text-[13px] select-all" title={`RGB ${s.rgb} · CMYK ${s.cmyk}`}>{s.hex}</div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
+
 
 
         {/* Emoji */}
