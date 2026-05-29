@@ -13,6 +13,8 @@ type Swatch = {
   pill?: boolean;
   // scattered (resting) transform
   rest: string;
+  // inverse scale for inner text so visual font size stays uniform
+  textScale?: number;
   // grid position (column / row spans for the neat layout)
   gridClass: string;
 };
