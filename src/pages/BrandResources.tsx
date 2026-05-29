@@ -62,7 +62,7 @@ const pills: Swatch[] = [
   {
     name: "Graphite Black", hex: "#202020", rgb: "32, 32, 32", cmyk: "0, 0, 0, 87",
     pill: true,
-    rest: "translate(-18%, 14%) rotate(4deg)",
+    rest: "translate(-18%, -6%) rotate(4deg)",
     gridClass: "col-start-2 row-start-3 col-span-2",
   },
 ];
@@ -137,7 +137,7 @@ const BrandResources = () => {
                   return (
                     <div
                       key={s.hex}
-                      className={`${s.gridClass} ${isPill ? "h-14 rounded-full px-5 flex items-center justify-center" : "aspect-square rounded-[20px] p-4 flex flex-col items-center justify-center text-center"} transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform [transform:var(--rest)] group-hover/palette:[transform:translate(0,0)_rotate(0deg)]`}
+                      className={`${s.gridClass} ${isPill ? "h-10 rounded-full px-5 flex items-center justify-center" : "aspect-square rounded-[20px] p-4 flex flex-col items-center justify-center text-center"} transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform [transform:var(--rest)] group-hover/palette:[transform:translate(0,0)_rotate(0deg)]`}
                       style={{
                         backgroundColor: s.hex,
                         ["--rest" as string]: s.rest,
