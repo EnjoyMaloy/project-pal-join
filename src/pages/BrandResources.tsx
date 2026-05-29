@@ -124,15 +124,15 @@ const BrandResources = () => {
             </p>
           </div>
 
-          <div className="group/palette rounded-3xl bg-muted/40 p-6 sm:p-10 lg:p-14">
-            <div className="grid grid-cols-3 gap-4 sm:gap-5 [grid-template-rows:auto_auto_auto]">
+          <div className="group/palette max-w-[490px] py-6">
+            <div className="grid grid-cols-3 gap-0 [grid-template-rows:auto_auto_auto]">
               {[...swatches, ...pills].map((s, i) => {
                 const isPill = s.pill;
                 const textColor = s.textDark ? "#202020" : (isPill ? "#FFFCF5" : "#202020");
                 return (
                   <div
                     key={s.hex}
-                    className={`${s.gridClass} ${isPill ? "h-20 sm:h-24 rounded-full px-6 sm:px-8 flex items-center justify-between gap-4" : "aspect-square rounded-[28px] p-5 sm:p-6 flex flex-col justify-between"} transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform shadow-sm [transform:var(--rest)] group-hover/palette:[transform:translate(0,0)_rotate(0deg)]`}
+                    className={`${s.gridClass} ${isPill ? "h-14 rounded-full px-5 flex items-center" : "aspect-square rounded-[20px] p-4 flex flex-col justify-center"} transition-transform duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform [transform:var(--rest)] group-hover/palette:[transform:translate(0,0)_rotate(0deg)]`}
                     style={{
                       backgroundColor: s.hex,
                       ["--rest" as string]: s.rest,
@@ -141,19 +141,12 @@ const BrandResources = () => {
                     }}
                   >
                     {isPill ? (
-                      <>
-                        <span className="text-subh-14 font-medium">{s.name}</span>
-                        <span className="font-mono text-[12px] select-all">{s.hex}</span>
-                      </>
+                      <span className="font-mono text-[13px] select-all">{s.hex}</span>
                     ) : (
-                      <>
-                        <div className="text-subh-14 font-medium leading-tight">{s.name}</div>
-                        <dl className="font-mono text-[11px] leading-[1.5] space-y-0.5">
-                          <div className="select-all">HEX {s.hex}</div>
-                          <div className="select-all">RGB {s.rgb}</div>
-                          <div className="select-all">CMYK {s.cmyk}</div>
-                        </dl>
-                      </>
+                      <div className="leading-tight">
+                        <div className="text-[13px] font-medium">{s.name}</div>
+                        <div className="font-mono text-[13px] select-all" title={`RGB ${s.rgb} · CMYK ${s.cmyk}`}>{s.hex}</div>
+                      </div>
                     )}
                   </div>
                 );
