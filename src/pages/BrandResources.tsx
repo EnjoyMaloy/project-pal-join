@@ -9,14 +9,60 @@ type Swatch = {
   hex: string;
   rgb: string;
   cmyk: string;
-  light?: boolean;
+  textDark?: boolean; // dark text on light bg
+  pill?: boolean;
+  // scattered (resting) transform
+  rest: string;
+  // grid position (column / row spans for the neat layout)
+  gridClass: string;
 };
 
 const swatches: Swatch[] = [
-  { name: "OA Purple",      hex: "#A66CFF", rgb: "166, 108, 255", cmyk: "35, 58, 0, 0" },
-  { name: "Active Orange",  hex: "#FF8645", rgb: "255, 134, 69",  cmyk: "0, 47, 73, 0" },
-  { name: "Warm Neutral",   hex: "#FFFCF5", rgb: "255, 252, 245", cmyk: "0, 1, 4, 0", light: true },
-  { name: "Graphite Black", hex: "#202020", rgb: "32, 32, 32",    cmyk: "0, 0, 0, 87" },
+  {
+    name: "OA Purple", hex: "#A66CFF", rgb: "166, 108, 255", cmyk: "35, 58, 0, 0",
+    rest: "translate(0%, 4%) rotate(-8deg)",
+    gridClass: "col-start-1 row-start-1",
+  },
+  {
+    name: "Active Orange", hex: "#FF8645", rgb: "255, 134, 69", cmyk: "0, 47, 73, 0",
+    rest: "translate(-12%, -6%) rotate(6deg)",
+    gridClass: "col-start-2 row-start-1",
+  },
+  {
+    name: "Bright Yellow", hex: "#FFDD31", rgb: "255, 221, 49", cmyk: "0, 13, 81, 0",
+    rest: "translate(-22%, 8%) rotate(-5deg)",
+    gridClass: "col-start-3 row-start-1",
+  },
+  {
+    name: "Fresh Lime", hex: "#CCEF40", rgb: "204, 239, 64", cmyk: "15, 0, 73, 6",
+    rest: "translate(8%, -8%) rotate(7deg)",
+    gridClass: "col-start-1 row-start-2",
+  },
+  {
+    name: "Sky Blue", hex: "#88C5FD", rgb: "136, 197, 253", cmyk: "46, 22, 0, 1",
+    rest: "translate(-6%, 6%) rotate(-6deg)",
+    gridClass: "col-start-2 row-start-2",
+  },
+  {
+    name: "Soft Pink", hex: "#FF96C8", rgb: "255, 150, 200", cmyk: "0, 41, 22, 0",
+    rest: "translate(-18%, -4%) rotate(5deg)",
+    gridClass: "col-start-3 row-start-2",
+  },
+];
+
+const pills: Swatch[] = [
+  {
+    name: "Warm Neutral", hex: "#FFFCF5", rgb: "255, 252, 245", cmyk: "0, 1, 4, 0",
+    textDark: true, pill: true,
+    rest: "translate(10%, 18%) rotate(-3deg)",
+    gridClass: "col-start-1 row-start-3 col-span-1",
+  },
+  {
+    name: "Graphite Black", hex: "#202020", rgb: "32, 32, 32", cmyk: "0, 0, 0, 87",
+    pill: true,
+    rest: "translate(-10%, 14%) rotate(4deg)",
+    gridClass: "col-start-2 row-start-3 col-span-2",
+  },
 ];
 
 const soon = () => toast("Файл скоро будет доступен", { description: "Мы готовим архив — загляните чуть позже." });
@@ -74,44 +120,46 @@ const BrandResources = () => {
             <h2 className="text-h2 text-foreground mb-4">Цветовая палитра</h2>
             <p className="text-body-14 text-muted-foreground leading-relaxed">
               Наша палитра построена на контрасте насыщенного фиолетового, тёплого оранжевого
-              и спокойных нейтралей. Используйте эти цвета как основу любых визуальных материалов о бренде.
+              и спокойных нейтралей. Наведите курсор, чтобы разложить плашки по полочкам — HEX можно выделить и скопировать.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {swatches.map((s) => (
-              <div
-                key={s.hex}
-                className="rounded-2xl overflow-hidden border border-border bg-background"
-              >
-                <div
-                  className="h-40 w-full"
-                  style={{
-                    backgroundColor: s.hex,
-                    boxShadow: s.light ? "inset 0 0 0 1px hsl(var(--border))" : undefined,
-                  }}
-                />
-                <div className="p-5 space-y-3">
-                  <div className="text-subh-14 text-foreground">{s.name}</div>
-                  <dl className="space-y-1.5 font-mono text-[11px] leading-[1.4] text-muted-foreground">
-                    <div className="flex justify-between gap-3">
-                      <dt>HEX</dt>
-                      <dd className="text-foreground">{s.hex}</dd>
-                    </div>
-                    <div className="flex justify-between gap-3">
-                      <dt>RGB</dt>
-                      <dd className="text-foreground">{s.rgb}</dd>
-                    </div>
-                    <div className="flex justify-between gap-3">
-                      <dt>CMYK</dt>
-                      <dd className="text-foreground">{s.cmyk}</dd>
-                    </div>
-                  </dl>
-                </div>
-              </div>
-            ))}
+          <div className="group/palette rounded-3xl bg-muted/40 p-6 sm:p-10 lg:p-14">
+            <div className="grid grid-cols-3 gap-4 sm:gap-5 [grid-template-rows:auto_auto_auto]">
+              {[...swatches, ...pills].map((s, i) => {
+                const isPill = s.pill;
+                const textColor = s.textDark ? "#202020" : (isPill ? "#FFFCF5" : "#202020");
+                return (
+                  <div
+                    key={s.hex}
+                    className={`${s.gridClass} ${isPill ? "h-20 sm:h-24 rounded-full px-6 sm:px-8 flex items-center justify-between gap-4" : "aspect-square rounded-[28px] p-5 sm:p-6 flex flex-col justify-between"} transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform shadow-sm [transform:var(--rest)] group-hover/palette:[transform:translate(0,0)_rotate(0deg)]`}
+                    style={{
+                      backgroundColor: s.hex,
+                      ["--rest" as string]: s.rest,
+                      zIndex: 10 + i,
+                      color: textColor,
+                    }}
+                  >
+                    {isPill ? (
+                      <>
+                        <span className="text-subh-14 font-medium">{s.name}</span>
+                        <span className="font-mono text-[12px] select-all">{s.hex}</span>
+                      </>
+                    ) : (
+                      <>
+                        <div className="text-subh-14 font-medium leading-tight">{s.name}</div>
+                        <dl className="font-mono text-[11px] leading-[1.5] space-y-0.5">
+                          <div className="select-all">HEX {s.hex}</div>
+                          <div className="select-all">RGB {s.rgb}</div>
+                          <div className="select-all">CMYK {s.cmyk}</div>
+                        </dl>
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-
         </section>
 
 
