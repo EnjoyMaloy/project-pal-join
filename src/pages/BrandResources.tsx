@@ -62,7 +62,7 @@ const pills: Swatch[] = [
   {
     name: "Graphite Black", hex: "#202020", rgb: "32, 32, 32", cmyk: "0, 0, 0, 87",
     pill: true,
-    rest: "translate(-18%, -6%) rotate(4deg)",
+    rest: "translate(-18%, -45%) rotate(4deg)",
     gridClass: "col-start-2 row-start-3 col-span-2",
   },
 ];
