@@ -585,14 +585,21 @@ const Index = () => {
                       if (!pos) return null;
 
                       return (
-                        <foreignObject x={pos.cx - 36} y={pos.cy + 36} width="72" height="28">
+                        <foreignObject x={pos.cx - 50} y={pos.cy + 34} width="100" height="40">
                           <div className="flex justify-center">
                             <button
                               type="button"
                               onClick={(e) => { e.stopPropagation(); setActiveLesson(currentIdx); setLessonOpen(true); }}
-                              className="text-[13px] font-medium text-foreground bg-background rounded-full px-3 py-0.5 shadow-sm whitespace-nowrap cursor-pointer pointer-events-auto"
+                              className="text-[15px] font-medium whitespace-nowrap cursor-pointer pointer-events-auto"
+                              style={{
+                                color: '#460466',
+                                background: '#FFFFFF',
+                                borderRadius: 10,
+                                padding: '6px 16px',
+                                boxShadow: '0 2px 6px rgba(70, 4, 102, 0.12)',
+                              }}
                             >
-                              {lessonsData[currentIdx].progress > 0 ? t("index.continue") : t("index.start")}
+                              {t("index.start")}
                             </button>
                           </div>
                         </foreignObject>
