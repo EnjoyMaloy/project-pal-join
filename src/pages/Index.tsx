@@ -708,16 +708,15 @@ const Index = () => {
         const kind = STEPS[step];
 
         return (
-          <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onClick={close}>
+          <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center sm:p-4" onClick={close}>
             <div
-              className="relative rounded-2xl overflow-hidden flex flex-col"
+              className="relative overflow-hidden flex flex-col w-full h-full sm:rounded-2xl sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)]"
               style={{
-                width: "min(420px, 100%)",
-                height: "min(760px, 92vh)",
                 background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : "#FFFFFF",
               }}
               onClick={(e) => e.stopPropagation()}
             >
+
               {/* Progress bar — single continuous line at top */}
               <div
                 className="absolute top-0 left-0 right-0 z-20 overflow-hidden"
