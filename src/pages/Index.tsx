@@ -716,34 +716,23 @@ const Index = () => {
               }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Progress segments */}
-              <div className="absolute top-0 left-0 right-0 flex gap-1 px-2 pt-2 z-20">
-                {STEPS.map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-1 flex-1 rounded-full overflow-hidden"
-                    style={{ background: 'rgba(255,125,96,0.25)' }}
-                  >
-                    <div
-                      className="h-full rounded-full transition-all"
-                      style={{
-                        width: i < step ? '100%' : i === step ? '60%' : '0%',
-                        background: '#FF7D60',
-                      }}
-                    />
-                  </div>
-                ))}
+              {/* Progress bar — single continuous line at top */}
+              <div
+                className="absolute top-0 left-0 right-0 z-20 overflow-hidden"
+                style={{ height: 6, background: 'rgba(255,125,96,0.25)' }}
+              >
+                <div
+                  className="h-full transition-all"
+                  style={{
+                    width: `${((step + 0.6) / STEPS.length) * 100}%`,
+                    background: '#FF7D60',
+                  }}
+                />
               </div>
               <div className="h-4 shrink-0" />
 
               {/* Header */}
-              <div className="flex items-center justify-between px-4 pb-2 relative z-10">
-                <span
-                  className="text-[12px] font-medium uppercase tracking-[0.04em]"
-                  style={{ color: kind === "image" ? '#FFFFFF' : '#8D8D8D' }}
-                >
-                  {t("index.lesson")} {currentLesson.number} · {step + 1}/{STEPS.length}
-                </span>
+              <div className="flex items-center justify-end px-4 pb-2 relative z-10">
                 <button
                   onClick={close}
                   style={{ color: kind === "image" ? '#FFFFFF' : '#232323' }}
