@@ -798,7 +798,7 @@ const Index = () => {
                         <div className="flex items-center gap-5 mt-3 text-[16px] flex-wrap" style={{ color: lessonColors.meta, fontFamily: '"TT Commons", sans-serif' }}>
                           <span
                             className="inline-flex items-center gap-1 text-[16px] font-medium"
-                            style={{ color: isDark ? '#FFFFFF' : '#460466', background: isDark ? '#A66CFF' : '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
+                            style={{ color: '#460466', background: '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
                           >
                             <FileText className="w-4 h-4" />
                             {t("index.instruction")}
