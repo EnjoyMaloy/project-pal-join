@@ -264,6 +264,8 @@ const Index = () => {
   const [activeLesson, setActiveLesson] = useState(0);
   const [lessonOpen, setLessonOpen] = useState(false);
   const [storyIndex, setStoryIndex] = useState<number | null>(null);
+  const [instructionProgress, setInstructionProgress] = useState(0);
+  useEffect(() => { setInstructionProgress(0); }, [storyIndex]);
   const [popoverIndex, setPopoverIndex] = useState<number | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [listHeight, setListHeight] = useState(0);
