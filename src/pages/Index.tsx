@@ -260,6 +260,18 @@ const COMPLETED_PATHS = [
 
 const Index = () => {
   const { t } = useLanguage();
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+  const lessonColors = {
+    surface: isDark ? "#000000" : "#FFFFFF",
+    heading: isDark ? "#FFFFFF" : "#232323",
+    body: isDark ? "#EBE9EA" : "#464646",
+    meta: isDark ? "#8D8D8D" : "#8D8D8D",
+    quizBg: isDark ? "#232323" : "#F7F7F8",
+    quizBorder: isDark ? "#464646" : "#EBE9EA",
+    fadeRgb: isDark ? "0,0,0" : "255,255,255",
+  };
+
   const [searchParams] = useSearchParams();
   const mobileTab = searchParams.get("tab");
   const [sidebarOpen, setSidebarOpen] = useState(false);
