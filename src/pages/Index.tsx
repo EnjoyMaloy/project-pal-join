@@ -625,7 +625,6 @@ const Index = () => {
                   );
                 })()}
               </div>
-            )}
           </div>
 
           {/* Sidebar - desktop only */}
