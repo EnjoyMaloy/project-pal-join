@@ -854,14 +854,14 @@ const Index = () => {
               </div>
 
               {/* Bottom button */}
-              <div className="p-4 relative z-[2]" style={{ background: kind === "image" ? 'transparent' : 'transparent' }}>
+              <div className="px-4 pb-4 pt-0 relative z-[2]" style={{ background: 'transparent' }}>
                 {kind !== "image" && (
                   <div
                     className="pointer-events-none absolute left-0 right-0"
                     style={{
-                      bottom: 16,
-                      height: 64,
-                      background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,1) 100%)',
+                      bottom: '100%',
+                      height: 56,
+                      background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 55%, rgba(255,255,255,1) 100%)',
                       backdropFilter: 'blur(6px)',
                       WebkitBackdropFilter: 'blur(6px)',
                       maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 70%)',
@@ -870,7 +870,7 @@ const Index = () => {
                   />
                 )}
                 {kind !== "image" && (
-                  <div className="absolute left-0 right-0" style={{ bottom: 0, top: 0, background: '#FFFFFF', zIndex: -1 }} />
+                  <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 0, top: 0, background: '#FFFFFF', zIndex: -1 }} />
                 )}
                 {(() => {
                   const isInstruction = kind === "instruction";
