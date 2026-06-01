@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Paperclip, Eye, Clock, Calendar } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, Paperclip, Eye, Clock, Calendar } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const IconActive = ({ className }: { className?: string }) => (
