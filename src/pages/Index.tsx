@@ -717,23 +717,24 @@ const Index = () => {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Progress segments */}
-              <div className="flex gap-1.5 p-3 pb-2 relative z-10">
+              <div className="absolute top-0 left-0 right-0 flex gap-1 px-2 pt-2 z-20">
                 {STEPS.map((_, i) => (
                   <div
                     key={i}
                     className="h-1 flex-1 rounded-full overflow-hidden"
-                    style={{ background: 'rgba(255,255,255,0.35)' }}
+                    style={{ background: 'rgba(255,125,96,0.25)' }}
                   >
                     <div
                       className="h-full rounded-full transition-all"
                       style={{
                         width: i < step ? '100%' : i === step ? '60%' : '0%',
-                        background: '#FFFFFF',
+                        background: '#FF7D60',
                       }}
                     />
                   </div>
                 ))}
               </div>
+              <div className="h-4 shrink-0" />
 
               {/* Header */}
               <div className="flex items-center justify-between px-4 pb-2 relative z-10">
@@ -848,7 +849,7 @@ const Index = () => {
                   onClick={next}
                   className="w-full text-[16px] font-medium transition-opacity hover:opacity-90"
                   style={{
-                    background: '#232323',
+                    background: '#FF7D60',
                     color: '#FFFFFF',
                     borderRadius: 12,
                     height: 52,
