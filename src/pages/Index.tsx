@@ -448,7 +448,7 @@ const Index = () => {
 
                 {/* SVG map */}
                 <div className="relative z-10 w-full flex justify-center">
-                  <svg viewBox="0 0 418 600" fill="none" preserveAspectRatio="xMidYMid meet" className="w-full max-w-[640px] h-auto block">
+                  <svg viewBox="0 0 418 600" fill="none" preserveAspectRatio="xMidYMid meet" className="w-full max-w-[480px] h-auto block">
 
 
                     <defs>
