@@ -849,7 +849,7 @@ const Index = () => {
                   onClick={next}
                   className="w-full text-[16px] font-medium transition-opacity hover:opacity-90"
                   style={{
-                    background: '#232323',
+                    background: '#FF7D60',
                     color: '#FFFFFF',
                     borderRadius: 12,
                     height: 52,
