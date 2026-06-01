@@ -844,7 +844,7 @@ const Index = () => {
                   {kind === "quiz" && (
                     <div className="flex-1 flex flex-col justify-center items-center">
                       <div className="w-full max-w-sm">
-                        <h3 className="text-[20px] font-semibold leading-tight text-center" style={{ color: '#232323' }}>
+                        <h3 className="text-[20px] font-semibold leading-tight text-center" style={{ color: lessonColors.heading }}>
                           Что такое Telegram Gifts?
                         </h3>
                         <div className="mt-5 space-y-2">
@@ -856,8 +856,9 @@ const Index = () => {
                             <button
                               key={i}
                               className="w-full text-center text-[14px] rounded-xl border transition-colors hover:bg-violet-super-light"
-                              style={{ color: '#232323', borderColor: '#EBE9EA', padding: '12px 14px', background: '#F7F7F8' }}
+                              style={{ color: lessonColors.heading, borderColor: lessonColors.quizBorder, padding: '12px 14px', background: lessonColors.quizBg }}
                             >
+
                               {opt}
                             </button>
                           ))}
