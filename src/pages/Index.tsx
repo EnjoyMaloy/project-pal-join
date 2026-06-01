@@ -732,15 +732,8 @@ const Index = () => {
               <div className="h-4 shrink-0" />
 
               {/* Header */}
-              <div className="flex items-center justify-end px-4 pb-2 relative z-10">
-                <button
-                  onClick={close}
-                  style={{ color: kind === "image" ? '#FFFFFF' : '#232323' }}
-                  className="hover:opacity-70 transition-opacity"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+              <div className="pb-2 relative z-10" />
+
 
               {/* Tap zones */}
               <button
