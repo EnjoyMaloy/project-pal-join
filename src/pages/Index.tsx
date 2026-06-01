@@ -856,18 +856,38 @@ const Index = () => {
               {/* Bottom button */}
               <div className="px-4 pb-4 pt-0 relative z-[2]" style={{ background: 'transparent' }}>
                 {kind !== "image" && (
-                  <div
-                    className="pointer-events-none absolute left-0 right-0"
-                    style={{
-                      bottom: '100%',
-                      height: 140,
-                      background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.85) 85%, rgba(255,255,255,1) 100%)',
-                      backdropFilter: 'blur(10px)',
-                      WebkitBackdropFilter: 'blur(10px)',
-                      maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 25%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,1) 100%)',
-                      WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 25%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,1) 100%)',
-                    }}
-                  />
+                  <>
+                    {/* Progressive blur: stacked layers with increasing strength + soft masks */}
+                    {[
+                      { blur: 1,  from: 0,    to: 0.35 },
+                      { blur: 2,  from: 0.1,  to: 0.55 },
+                      { blur: 4,  from: 0.25, to: 0.75 },
+                      { blur: 8,  from: 0.45, to: 0.95 },
+                      { blur: 16, from: 0.65, to: 1    },
+                    ].map((layer, i) => (
+                      <div
+                        key={i}
+                        className="pointer-events-none absolute left-0 right-0"
+                        style={{
+                          bottom: '100%',
+                          height: 120,
+                          backdropFilter: `blur(${layer.blur}px)`,
+                          WebkitBackdropFilter: `blur(${layer.blur}px)`,
+                          maskImage: `linear-gradient(to bottom, rgba(0,0,0,0) ${layer.from * 100}%, rgba(0,0,0,1) ${layer.to * 100}%)`,
+                          WebkitMaskImage: `linear-gradient(to bottom, rgba(0,0,0,0) ${layer.from * 100}%, rgba(0,0,0,1) ${layer.to * 100}%)`,
+                        }}
+                      />
+                    ))}
+                    {/* Soft white veil for color fade */}
+                    <div
+                      className="pointer-events-none absolute left-0 right-0"
+                      style={{
+                        bottom: '100%',
+                        height: 120,
+                        background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 70%, rgba(255,255,255,0.95) 100%)',
+                      }}
+                    />
+                  </>
                 )}
                 {kind !== "image" && (
                   <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 0, top: 0, background: '#FFFFFF', zIndex: -1 }} />
