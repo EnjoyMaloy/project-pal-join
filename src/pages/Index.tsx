@@ -340,7 +340,7 @@ const Index = () => {
         </div>
       )}
 
-      <div className={`max-w-6xl mx-auto px-4 py-8 md:py-12 ${mobileTab === "instructions" ? "hidden md:block" : ""}`}>
+      <div className={`w-full px-4 md:px-8 py-8 md:py-12 ${mobileTab === "instructions" ? "hidden md:block" : ""}`}>
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-h1 text-foreground mb-3">{t("index.title")}</h1>
