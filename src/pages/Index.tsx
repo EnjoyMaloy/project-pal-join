@@ -275,6 +275,11 @@ const Index = () => {
   }, [sidebarOpen]);
 
   useEffect(() => {
+    if (lessonOpen) setStoryIndex(0);
+  }, [lessonOpen, activeLesson]);
+
+
+  useEffect(() => {
     const handler = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (popoverIndex !== null && !target.closest('[data-lesson-popover]') && !target.closest('[data-lesson-circle]')) {
