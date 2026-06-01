@@ -781,7 +781,7 @@ const Index = () => {
                         <h3 className="text-[28px] font-semibold leading-tight" style={{ color: '#232323' }}>
                           {currentLesson.content.heading}
                         </h3>
-                        <div className="flex items-center gap-5 mt-3 text-[16px] flex-wrap" style={{ color: '#8D8D8D' }}>
+                        <div className="flex items-center gap-5 mt-3 text-[16px] flex-wrap" style={{ color: '#8D8D8D', fontFamily: '"TT Commons", sans-serif' }}>
                           <span
                             className="inline-flex items-center gap-1 text-[16px] font-medium"
                             style={{ color: '#460466', background: '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
