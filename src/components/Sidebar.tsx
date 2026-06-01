@@ -13,17 +13,14 @@ const Sidebar = () => {
   const menuGroup1 = [
     { label: t("sidebar.home"), icon: Home, path: "/" },
     { label: t("sidebar.catalog"), icon: LayoutGrid, path: "/catalog", disabled: true },
-    { label: t("sidebar.myCourses"), icon: BookOpen, path: "/my-courses" },
+    { label: t("sidebar.myCourses"), icon: BookOpen, path: "/my-courses", disabled: true },
+    { label: t("sidebar.instructions"), icon: FileText, path: "/instructions" },
   ];
 
   const menuGroup2 = [
     { label: t("sidebar.tasks"), icon: ClipboardList, path: "/tasks", badge: 12, disabled: true },
     { label: t("sidebar.myToken"), icon: Coins, path: "/token", disabled: true },
     { label: t("sidebar.referral"), icon: Users, path: "/referral", disabled: true },
-  ];
-
-  const menuGroup3 = [
-    { label: t("sidebar.instructions"), icon: FileText, path: "/instructions" },
   ];
 
   const isActive = (path: string) => {
