@@ -178,7 +178,18 @@ const Index = () => {
                   {t("index.backToCourse")}
                 </button>
 
-                <article className="prose prose-neutral max-w-none">
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  {[0, 1].map((i) => (
+                    <div
+                      key={`top-${i}`}
+                      className="aspect-[4/3] rounded-xl bg-muted border border-dashed border-border flex items-center justify-center"
+                    >
+                      <span className="text-caption-12 text-muted-foreground">Изображение</span>
+                    </div>
+                  ))}
+                </div>
+
+                <article className="prose prose-neutral max-w-none mb-8">
                   <h2 className="text-h2 text-foreground mb-4">{currentLesson.content.heading}</h2>
                   {currentLesson.content.sections.map((section, i) => (
                     <div key={i}>
@@ -196,6 +207,18 @@ const Index = () => {
                     </div>
                   ))}
                 </article>
+
+                <div className="grid grid-cols-2 gap-4">
+                  {[0, 1].map((i) => (
+                    <div
+                      key={`bottom-${i}`}
+                      className="aspect-[4/3] rounded-xl bg-muted border border-dashed border-border flex items-center justify-center"
+                    >
+                      <span className="text-caption-12 text-muted-foreground">Изображение</span>
+                    </div>
+                  ))}
+                </div>
+
               </div>
             ) : (
               <div className="bg-secondary rounded-2xl p-8 min-h-[300px] flex flex-col items-center justify-center gap-6">
