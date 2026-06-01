@@ -862,12 +862,11 @@ const Index = () => {
                       className="pointer-events-none absolute left-0 right-0"
                       style={{
                         bottom: '100%',
-                        height: 56,
-                        backdropFilter: 'blur(0.5px)',
-                        WebkitBackdropFilter: 'blur(0.5px)',
-                        background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0.85) 75%, rgba(255,255,255,1) 100%)',
+                        height: 90,
+                        background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 30%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0.9) 85%, rgba(255,255,255,1) 100%)',
                       }}
                     />
+
 
 
                   </>
