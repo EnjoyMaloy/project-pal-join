@@ -817,30 +817,26 @@ const Index = () => {
 
 
                   {kind === "quiz" && (
-                    <div className="flex-1 flex flex-col">
-                      <span
-                        className="inline-flex self-start items-center text-[12px] font-medium mb-3"
-                        style={{ color: '#460466', background: '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
-                      >
-                        Квиз
-                      </span>
-                      <h3 className="text-[20px] font-semibold leading-tight" style={{ color: '#232323' }}>
-                        Что такое Telegram Gifts?
-                      </h3>
-                      <div className="mt-5 space-y-2">
-                        {[
-                          "Цифровые активы на блокчейне TON",
-                          "Обычные стикеры в чате",
-                          "Платная подписка на каналы",
-                        ].map((opt, i) => (
-                          <button
-                            key={i}
-                            className="w-full text-left text-[14px] rounded-xl border transition-colors hover:bg-violet-super-light"
-                            style={{ color: '#232323', borderColor: '#EBE9EA', padding: '12px 14px', background: '#F7F7F8' }}
-                          >
-                            {opt}
-                          </button>
-                        ))}
+                    <div className="flex-1 flex flex-col justify-center items-center">
+                      <div className="w-full max-w-sm">
+                        <h3 className="text-[20px] font-semibold leading-tight text-center" style={{ color: '#232323' }}>
+                          Что такое Telegram Gifts?
+                        </h3>
+                        <div className="mt-5 space-y-2">
+                          {[
+                            "Цифровые активы на блокчейне TON",
+                            "Обычные стикеры в чате",
+                            "Платная подписка на каналы",
+                          ].map((opt, i) => (
+                            <button
+                              key={i}
+                              className="w-full text-center text-[14px] rounded-xl border transition-colors hover:bg-violet-super-light"
+                              style={{ color: '#232323', borderColor: '#EBE9EA', padding: '12px 14px', background: '#F7F7F8' }}
+                            >
+                              {opt}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   )}
