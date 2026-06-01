@@ -264,6 +264,8 @@ const Index = () => {
   const [activeLesson, setActiveLesson] = useState(0);
   const [lessonOpen, setLessonOpen] = useState(false);
   const [storyIndex, setStoryIndex] = useState<number | null>(null);
+  const [instructionProgress, setInstructionProgress] = useState(0);
+  useEffect(() => { setInstructionProgress(0); }, [storyIndex]);
   const [popoverIndex, setPopoverIndex] = useState<number | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [listHeight, setListHeight] = useState(0);
@@ -772,6 +774,12 @@ const Index = () => {
                       <div
                         className="overflow-y-auto pr-1 flex-1 [&::-webkit-scrollbar]:hidden"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', paddingBottom: 96 }}
+                        onScroll={(e) => {
+                          const el = e.currentTarget;
+                          const max = el.scrollHeight - el.clientHeight;
+                          const p = max > 0 ? Math.min(1, el.scrollTop / max) : 1;
+                          setInstructionProgress(p);
+                        }}
                       >
                         <h3 className="text-[28px] font-semibold leading-tight" style={{ color: '#232323' }}>
                           {currentLesson.content.heading}
@@ -867,18 +875,33 @@ const Index = () => {
                 {kind !== "image" && (
                   <div className="absolute left-0 right-0" style={{ bottom: 0, top: 0, background: '#FFFFFF', zIndex: -1 }} />
                 )}
-                <button
-                  onClick={next}
-                  className="w-full text-[16px] font-medium transition-opacity hover:opacity-90"
-                  style={{
-                    background: '#FF7D60',
-                    color: '#FFFFFF',
-                    borderRadius: 12,
-                    height: 52,
-                  }}
-                >
-                  {step < STEPS.length - 1 ? t("index.next") : t("index.finish")}
-                </button>
+                {(() => {
+                  const isInstruction = kind === "instruction";
+                  const pct = Math.round(instructionProgress * 100);
+                  const isActive = !isInstruction || instructionProgress >= 0.9;
+                  const filled = '#FF7D60';
+                  const empty = '#FFD0C2';
+                  const bg = isInstruction
+                    ? `linear-gradient(to right, ${filled} 0%, ${filled} ${pct}%, ${empty} ${pct}%, ${empty} 100%)`
+                    : filled;
+                  return (
+                    <button
+                      onClick={isActive ? next : undefined}
+                      disabled={!isActive}
+                      className="w-full text-[16px] font-medium transition-all"
+                      style={{
+                        background: bg,
+                        color: '#FFFFFF',
+                        borderRadius: 12,
+                        height: 52,
+                        cursor: isActive ? 'pointer' : 'default',
+                        opacity: isActive ? 1 : 0.95,
+                      }}
+                    >
+                      {step < STEPS.length - 1 ? t("index.next") : t("index.finish")}
+                    </button>
+                  );
+                })()}
               </div>
             </div>
           </div>
