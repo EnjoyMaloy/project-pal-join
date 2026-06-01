@@ -792,13 +792,13 @@ const Index = () => {
                           setInstructionProgress(p);
                         }}
                       >
-                        <h3 className="text-[28px] font-semibold leading-tight" style={{ color: '#232323' }}>
+                        <h3 className="text-[28px] font-semibold leading-tight" style={{ color: lessonColors.heading }}>
                           {currentLesson.content.heading}
                         </h3>
-                        <div className="flex items-center gap-5 mt-3 text-[16px] flex-wrap" style={{ color: '#8D8D8D', fontFamily: '"TT Commons", sans-serif' }}>
+                        <div className="flex items-center gap-5 mt-3 text-[16px] flex-wrap" style={{ color: lessonColors.meta, fontFamily: '"TT Commons", sans-serif' }}>
                           <span
                             className="inline-flex items-center gap-1 text-[16px] font-medium"
-                            style={{ color: '#460466', background: '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
+                            style={{ color: isDark ? '#FFFFFF' : '#460466', background: isDark ? '#A66CFF' : '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
                           >
                             <FileText className="w-4 h-4" />
                             {t("index.instruction")}
@@ -808,36 +808,37 @@ const Index = () => {
                         </div>
                         <div className="mt-4 space-y-4">
                         {currentLesson.content.sections.slice(0, 12).map((s, i) => {
-                          if (s.type === "h2") return <h4 key={i} className="text-[22px] font-semibold" style={{ color: '#232323' }}>{s.text}</h4>;
-                          if (s.type === "h3") return <h5 key={i} className="text-[18px] font-semibold" style={{ color: '#232323' }}>{s.text}</h5>;
-                          if (s.type === "p") return <p key={i} className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>{renderRuns(s.runs)}</p>;
+                          if (s.type === "h2") return <h4 key={i} className="text-[22px] font-semibold" style={{ color: lessonColors.heading }}>{s.text}</h4>;
+                          if (s.type === "h3") return <h5 key={i} className="text-[18px] font-semibold" style={{ color: lessonColors.heading }}>{s.text}</h5>;
+                          if (s.type === "p") return <p key={i} className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>{renderRuns(s.runs)}</p>;
                           return null;
                         })}
-                        <h4 className="text-[22px] font-semibold" style={{ color: '#232323' }}>Как это работает на практике</h4>
-                        <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
+                        <h4 className="text-[22px] font-semibold" style={{ color: lessonColors.heading }}>Как это работает на практике</h4>
+                        <p className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>
                           Telegram Gifts — это коллекционные цифровые подарки, которые можно покупать, дарить друзьям и перепродавать на внутреннем маркете. Каждый подарок имеет ограниченный тираж, поэтому редкие экземпляры быстро растут в цене и становятся предметом охоты коллекционеров.
                         </p>
-                        <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
+                        <p className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>
                           Чтобы начать, тебе нужен только аккаунт Telegram и немного Stars — внутренней валюты платформы. Stars пополняются через App Store, Google Play или напрямую у ботов, а после покупки подарок мгновенно появляется в твоём профиле и его сразу видно друзьям.
                         </p>
-                        <h4 className="text-[22px] font-semibold" style={{ color: '#232323' }}>Почему на этом можно зарабатывать</h4>
-                        <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
+                        <h4 className="text-[22px] font-semibold" style={{ color: lessonColors.heading }}>Почему на этом можно зарабатывать</h4>
+                        <p className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>
                           Главный принцип рынка простой: чем меньше тираж и чем выше спрос — тем дороже подарок на вторичке. Лимитированные дропы раскупаются за минуты, а через несколько недель цена может вырасти в 3–10 раз. Опытные трейдеры мониторят релизы и заходят в первые секунды продаж.
                         </p>
-                        <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
+                        <p className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>
                           Второй способ — арбитраж между площадками. Один и тот же подарок может стоить по-разному на Fragment, в ботах и в личных сделках. Разница в 10–20% — это уже хороший профит при минимальных рисках, если ты понимаешь механику переводов и комиссий.
                         </p>
-                        <h4 className="text-[22px] font-semibold" style={{ color: '#232323' }}>На что обратить внимание новичку</h4>
-                        <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
+                        <h4 className="text-[22px] font-semibold" style={{ color: lessonColors.heading }}>На что обратить внимание новичку</h4>
+                        <p className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>
                           Никогда не покупай подарки у незнакомцев напрямую без эскроу — это самый частый способ развода. Используй только проверенные маркетплейсы и ботов с репутацией. Следи за комиссиями: иногда они съедают всю прибыль от сделки.
                         </p>
-                        <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
+                        <p className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>
                           Начни с малого: возьми один-два недорогих подарка из свежего дропа, поторгуй ими неделю, посмотри как меняется цена. Это даст реальное понимание рынка гораздо быстрее, чем любая теория. А дальше уже можно масштабировать стратегию.
                         </p>
                         </div>
                       </div>
                     </div>
                   )}
+
 
 
                   {kind === "quiz" && (
