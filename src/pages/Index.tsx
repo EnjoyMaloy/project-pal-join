@@ -534,11 +534,12 @@ const Index = () => {
                           )}
                           {state === "current" && (
                             <>
-                              <circle cx={pos.cx} cy={pos.cy} r="32" fill="url(#idx_gGoldNode)"/>
-
+                              <g filter="url(#idx_filter_i)">
+                                <circle cx={pos.cx} cy={pos.cy} r="32" fill="url(#idx_gGoldNode)"/>
+                              </g>
                               <circle cx={pos.cx} cy={pos.cy} r="31.5" stroke="#460466"/>
                               <circle opacity="0.3" cx={pos.cx} cy={pos.cy} r="23.7" fill="white"/>
-                              <ChecklistSparkleIcon cx={pos.cx} cy={pos.cy + 5} />
+                              <ChecklistSparkleIcon cx={pos.cx} cy={pos.cy} />
                             </>
                           )}
                           {state === "locked" && (
@@ -546,7 +547,7 @@ const Index = () => {
                               <circle cx={pos.cx} cy={pos.cy} r="31.5" fill="url(#idx_gWhiteNode)" stroke="white"/>
                               <circle cx={pos.cx} cy={pos.cy} r="23.7" fill="url(#idx_gLockedInner)"/>
                               {lockedVariant === "lock" && <LockIcon cx={pos.cx} cy={pos.cy} />}
-                              {lockedVariant === "sparkle" && <ChecklistSparkleIcon cx={pos.cx} cy={pos.cy + 5} />}
+                              {lockedVariant === "sparkle" && <ChecklistSparkleIcon cx={pos.cx} cy={pos.cy} />}
                               {lockedVariant === "checklist" && (
                                 <g>
                                   <rect x={pos.cx - 11.85} y={pos.cy - 13.16} width="10.53" height="10.53" rx="2" fill="#460466" />
