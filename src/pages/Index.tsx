@@ -722,7 +722,7 @@ const Index = () => {
         const kind = STEPS[step];
 
         return (
-          <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center sm:p-4" onClick={close}>
+          <div className="fixed inset-0 z-[60] bg-black/80 flex items-center justify-center sm:p-4" onClick={close}>
             <div
               className="relative overflow-hidden flex flex-col w-full h-full sm:rounded-2xl sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)]"
               style={{
@@ -761,7 +761,7 @@ const Index = () => {
               />
 
               {/* Step content */}
-              <div className="flex-1 overflow-y-auto px-5 pt-8 pb-4 relative z-[1] pointer-events-none">
+              <div className="flex-1 overflow-y-auto px-5 pb-4 relative z-[1] pointer-events-none">
                 <div className="pointer-events-auto h-full flex flex-col">
                   {kind === "image" && (
                     <div className="flex-1 flex flex-col items-center justify-center text-center">
@@ -784,7 +784,7 @@ const Index = () => {
                     <div className="flex-1 flex flex-col min-h-0">
                       <div
                         className="overflow-y-auto pr-1 flex-1 [&::-webkit-scrollbar]:hidden"
-                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', paddingBottom: 96, fontFamily: "'Inter', sans-serif" }}
+                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', paddingTop: 32, paddingBottom: 96, fontFamily: "'Inter', sans-serif" }}
                         onScroll={(e) => {
                           const el = e.currentTarget;
                           const max = el.scrollHeight - el.clientHeight;
