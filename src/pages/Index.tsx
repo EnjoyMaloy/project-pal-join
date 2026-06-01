@@ -444,7 +444,7 @@ const Index = () => {
 
                 {/* SVG map */}
                 <div className="relative z-10 flex justify-center">
-                  <svg width="418" height="230" viewBox="0 0 418 230" fill="none" className="max-w-full h-auto">
+                  <svg width="418" height="600" viewBox="0 0 418 600" fill="none" className="max-w-full h-auto">
                     <defs>
                       <filter id="idx_filter_i" x="88.9219" y="129" width="64" height="64" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
                         <feFlood floodOpacity="0" result="BackgroundImageFix"/>
@@ -477,9 +477,9 @@ const Index = () => {
                       </linearGradient>
                     </defs>
 
-                    {/* Dashed white path (full snake) */}
+                    {/* Dashed white path (full S-snake, 8 nodes) */}
                     <path
-                      d="M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H106.701"
+                      d="M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H64.7139C30.078 161.917 2 189.997 2 224.635V229.115C2 263.753 30.078 291.833 64.7139 291.833H174.23C208.866 291.833 236.944 319.905 236.944 354.543V359.028C236.944 393.667 208.874 421.75 174.238 421.75H64.7014C30.0655 421.75 2 449.83 2 484.468V488.948C2 523.587 30.078 551.667 64.7139 551.667H266.5"
                       stroke="white"
                       strokeWidth="4"
                       strokeLinecap="round"
@@ -487,6 +487,8 @@ const Index = () => {
                       strokeDasharray="10 8"
                       fill="none"
                     />
+
+
 
                     {/* Solid purple path (completed segment) */}
                     {(() => {
