@@ -774,6 +774,12 @@ const Index = () => {
                       <div
                         className="overflow-y-auto pr-1 flex-1 [&::-webkit-scrollbar]:hidden"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', paddingBottom: 96 }}
+                        onScroll={(e) => {
+                          const el = e.currentTarget;
+                          const max = el.scrollHeight - el.clientHeight;
+                          const p = max > 0 ? Math.min(1, el.scrollTop / max) : 1;
+                          setInstructionProgress(p);
+                        }}
                       >
                         <h3 className="text-[28px] font-semibold leading-tight" style={{ color: '#232323' }}>
                           {currentLesson.content.heading}
