@@ -529,7 +529,7 @@ const Index = () => {
                             <>
                               <circle cx={pos.cx} cy={pos.cy} r="31.5" fill="url(#idx_gPurpleNode)" stroke="#460466"/>
                               <circle opacity="0.3" cx={pos.cx} cy={pos.cy} r="23.7" fill="#924CFE"/>
-                              <TrophyIcon cx={pos.cx - 7.274 - (pos.cx - pos.cx)} cy={pos.cy - 3.781} />
+                              <TrophyIcon cx={pos.cx} cy={pos.cy} />
                             </>
                           )}
                           {state === "current" && (
