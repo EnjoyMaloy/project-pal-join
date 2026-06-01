@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, LayoutGrid, BookOpen, ClipboardList, Coins, Users, FileText, PanelLeftClose, PanelLeft, RotateCcw } from "lucide-react";
+import { Home, LayoutGrid, BookOpen, ClipboardList, Coins, Users, FileText, PanelLeftClose, PanelLeft, RotateCcw, Diamond } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { resetPurchaseStore } from "@/hooks/usePurchaseStore";
@@ -13,17 +13,14 @@ const Sidebar = () => {
   const menuGroup1 = [
     { label: t("sidebar.home"), icon: Home, path: "/" },
     { label: t("sidebar.catalog"), icon: LayoutGrid, path: "/catalog", disabled: true },
-    { label: t("sidebar.myCourses"), icon: BookOpen, path: "/my-courses" },
+    { label: t("sidebar.myCourses"), icon: BookOpen, path: "/my-courses", disabled: true },
+    { label: t("sidebar.instructions"), icon: FileText, path: "/instructions" },
   ];
 
   const menuGroup2 = [
     { label: t("sidebar.tasks"), icon: ClipboardList, path: "/tasks", badge: 12, disabled: true },
     { label: t("sidebar.myToken"), icon: Coins, path: "/token", disabled: true },
     { label: t("sidebar.referral"), icon: Users, path: "/referral", disabled: true },
-  ];
-
-  const menuGroup3 = [
-    { label: t("sidebar.instructions"), icon: FileText, path: "/instructions" },
   ];
 
   const isActive = (path: string) => {
@@ -104,7 +101,17 @@ const Sidebar = () => {
         <div className="my-3 border-t border-border" />
 
         <div className="flex flex-col gap-1.5">
-          {menuGroup3.map(renderItem)}
+          <div className="flex items-center gap-3 px-3 h-9 rounded-lg text-[16px] font-normal leading-none text-muted-foreground/60 cursor-default">
+            <Diamond className="w-[18px] h-[18px] flex-shrink-0" />
+            {!collapsed && (
+              <>
+                <span className="truncate">Studio</span>
+                <span className="ml-auto text-[10px] font-semibold tracking-wide text-primary-foreground bg-primary px-1.5 py-0.5 rounded">
+                  JOIN WL
+                </span>
+              </>
+            )}
+          </div>
         </div>
 
         <div className="mt-auto pb-6">
