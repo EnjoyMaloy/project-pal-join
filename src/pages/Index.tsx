@@ -860,12 +860,12 @@ const Index = () => {
                     className="pointer-events-none absolute left-0 right-0"
                     style={{
                       bottom: '100%',
-                      height: 56,
-                      background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 55%, rgba(255,255,255,1) 100%)',
-                      backdropFilter: 'blur(6px)',
-                      WebkitBackdropFilter: 'blur(6px)',
-                      maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 70%)',
-                      WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 70%)',
+                      height: 140,
+                      background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.85) 85%, rgba(255,255,255,1) 100%)',
+                      backdropFilter: 'blur(10px)',
+                      WebkitBackdropFilter: 'blur(10px)',
+                      maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 25%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,1) 100%)',
+                      WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 25%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,1) 100%)',
                     }}
                   />
                 )}
