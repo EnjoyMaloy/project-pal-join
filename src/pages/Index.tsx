@@ -534,9 +534,8 @@ const Index = () => {
                           )}
                           {state === "current" && (
                             <>
-                              <g filter="url(#idx_filter_i)">
-                                <circle cx={pos.cx} cy={pos.cy} r="32" fill="url(#idx_gGoldNode)"/>
-                              </g>
+                              <circle cx={pos.cx} cy={pos.cy} r="32" fill="url(#idx_gGoldNode)"/>
+
                               <circle cx={pos.cx} cy={pos.cy} r="31.5" stroke="#460466"/>
                               <circle opacity="0.3" cx={pos.cx} cy={pos.cy} r="23.7" fill="white"/>
                               <ChecklistSparkleIcon cx={pos.cx} cy={pos.cy + 5} />
