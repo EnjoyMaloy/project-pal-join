@@ -905,18 +905,25 @@ const Index = () => {
                     <button
                       onClick={isActive ? next : undefined}
                       disabled={!isActive}
-                      className="w-full text-[16px] font-medium transition-all"
+                      className="w-full transition-all"
                       style={{
                         background: bg,
                         color: '#FFFFFF',
+                        fontFamily: '"TT Commons", sans-serif',
+                        fontWeight: 600,
+                        fontStyle: 'normal',
+                        fontSize: 18,
+                        lineHeight: '18px',
                         borderRadius: 12,
                         height: 52,
                         cursor: isActive ? 'pointer' : 'default',
                         opacity: isActive ? 1 : 0.95,
+                        boxShadow: isActive ? '0 4px 0 0 #C75A40' : 'none',
                       }}
                     >
                       {step < STEPS.length - 1 ? t("index.next") : t("index.finish")}
                     </button>
+
                   );
                 })()}
               </div>
