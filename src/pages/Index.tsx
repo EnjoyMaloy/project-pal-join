@@ -193,7 +193,7 @@ const lessonsData: Lesson[] = [
 
 // ============ Inline renderers ============
 const HL = ({ children }: { children: React.ReactNode }) => (
-  <span className="rounded-md px-1.5 py-0.5 text-[#460466] bg-[#E8DCFB] font-medium">{children}</span>
+  <span className="rounded-md px-1.5 py-0.5 text-white bg-[#A66CFF] font-medium">{children}</span>
 );
 
 const renderRuns = (runs: Inline[]) =>
