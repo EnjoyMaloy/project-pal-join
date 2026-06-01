@@ -227,21 +227,30 @@ const LockIcon = ({ cx, cy }: { cx: number; cy: number }) => (
   </g>
 );
 
-// 4-node positions for the lesson map (ported from /course/1/lessons)
-const NODES_4 = [
+// 8-node S-snake positions (ported from /course/1/lessons)
+const NODES_8 = [
   { cx: 120.922, cy: 32 },
   { cx: 285.922, cy: 32 },
   { cx: 285.922, cy: 161 },
   { cx: 120.922, cy: 161 },
+  { cx: 120.922, cy: 292 },
+  { cx: 120.922, cy: 421 },
+  { cx: 120.922, cy: 550 },
+  { cx: 285.922, cy: 550 },
 ];
 
-// Solid "completed" path segments matching the dashed snake route
+// Decorative locked-icon variant for nodes beyond real lessons (matches CourseLessons)
+type LockedIconVariant = "checklist" | "sparkle" | "lock";
+const LOCKED_VARIANTS: LockedIconVariant[] = ["checklist", "sparkle", "lock", "lock"];
+
+// Solid "completed" path segments matching the dashed snake route up to the given node index
 const COMPLETED_PATHS = [
   "",
   "M106.701 32H285.922",
   "M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H285.922",
   "M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H106.701",
 ];
+
 
 const Index = () => {
   const { t } = useLanguage();
