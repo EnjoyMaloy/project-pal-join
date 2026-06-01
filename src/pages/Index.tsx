@@ -435,7 +435,7 @@ const Index = () => {
 
                 {/* SVG map */}
                 <div className="relative z-10 flex justify-center">
-                  <svg width="418" height="220" viewBox="0 0 418 220" fill="none" className="max-w-full h-auto">
+                  <svg width="418" height="230" viewBox="0 0 418 230" fill="none" className="max-w-full h-auto">
                     <defs>
                       <filter id="idx_filter_i" x="88.9219" y="129" width="64" height="64" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
                         <feFlood floodOpacity="0" result="BackgroundImageFix"/>
