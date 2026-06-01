@@ -612,67 +612,67 @@ const Index = () => {
                         left: "50%",
                         bottom: 16,
                         transform: "translateX(-50%)",
-                        width: 260,
+                        width: 320,
                         background: '#FFFFFF',
                         border: '1px solid #EBE9EA',
-                        boxShadow: '0px 4px 8px rgba(70, 4, 102, 0.1)',
-                        borderRadius: 10,
+                        boxShadow: '0px 8px 24px rgba(70, 4, 102, 0.12)',
+                        borderRadius: 14,
                         overflow: 'hidden',
                       }}
                     >
-                      <div style={{ background: '#F7F7F8', padding: '12px 9px' }}>
-                        <span className="text-[12px] font-normal tracking-[0.01em] uppercase" style={{ color: '#8D8D8D' }}>
+                      <div style={{ background: '#F7F7F8', padding: '14px 18px', borderBottom: '1px solid #EBE9EA' }}>
+                        <span className="text-[13px] font-medium tracking-[0.04em] uppercase" style={{ color: '#8D8D8D' }}>
                           {t("index.lesson")} {lesson.number}
                         </span>
                       </div>
-                      <div style={{ padding: '10px 8px 0' }}>
-                        <div className="flex items-center gap-1.5">
-                          <BookOpenCheck className="w-[18px] h-[18px] text-primary flex-shrink-0" />
-                          <span className="text-[16px] font-medium leading-[100%]" style={{ color: '#232323' }}>
+                      <div style={{ padding: '16px 18px 14px' }}>
+                        <div className="flex items-center gap-2">
+                          <BookOpenCheck className="w-[22px] h-[22px] text-primary flex-shrink-0" />
+                          <span className="text-[18px] font-semibold leading-[110%]" style={{ color: '#232323' }}>
                             {lesson.title}
                           </span>
                         </div>
-                        <p className="text-[12px] font-normal leading-[140%]" style={{ color: '#8D8D8D', marginTop: 6, paddingLeft: 24 }}>
+                        <p className="text-[14px] font-normal leading-[140%]" style={{ color: '#8D8D8D', marginTop: 8 }}>
                           {lesson.description}
                         </p>
                         {lesson.hasInstruction && (
-                          <div className="flex items-center gap-1.5 mt-2" style={{ paddingLeft: 24 }}>
+                          <div className="flex items-center gap-1.5 mt-3">
                             <span
-                              className="inline-flex items-center gap-1 text-[11px] font-medium"
-                              style={{ color: '#460466', background: '#E8DCFB', padding: '3px 8px', borderRadius: 6 }}
+                              className="inline-flex items-center gap-1 text-[12px] font-medium"
+                              style={{ color: '#460466', background: '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
                             >
-                              <FileText className="w-3 h-3" />
+                              <FileText className="w-3.5 h-3.5" />
                               {t("index.instruction")}
                             </span>
                           </div>
                         )}
                       </div>
-                      <div style={{ borderTop: '1px solid #EBE9EA', margin: '10px 0 0' }} />
-                      <div className="flex justify-between" style={{ padding: '10px 8px' }}>
+                      <div style={{ borderTop: '1px solid #EBE9EA' }} />
+                      <div className="flex justify-between" style={{ padding: '14px 18px 16px' }}>
                         <div className="flex flex-col" style={{ gap: 6 }}>
                           <span className="text-[14px] font-normal leading-[100%]" style={{ color: '#8D8D8D' }}>{t("index.completed")}</span>
-                          <span className="text-[16px] font-medium leading-[100%] tracking-[0.01em]" style={{ color: lesson.progress > 0 ? '#232323' : '#8D8D8D' }}>
+                          <span className="text-[24px] font-semibold leading-[100%] tracking-[-0.01em]" style={{ color: lesson.progress > 0 ? '#232323' : '#8D8D8D' }}>
                             {lesson.progress}%
                           </span>
                         </div>
                         <div className="flex flex-col" style={{ gap: 6 }}>
-                          <span className="text-[14px] font-normal leading-[100%]" style={{ color: '#232323' }}>{t("index.reward")}</span>
-                          <div className="flex items-center" style={{ gap: 4 }}>
+                          <span className="text-[14px] font-normal leading-[100%]" style={{ color: '#8D8D8D' }}>{t("index.reward")}</span>
+                          <div className="flex items-center" style={{ gap: 6 }}>
                             <span
-                              className="inline-flex items-center justify-center rounded-full text-[8px] font-bold"
-                              style={{ width: 16, height: 16, background: '#FF7D60', color: '#FFFFFF' }}
+                              className="inline-flex items-center justify-center rounded-full text-[11px] font-bold"
+                              style={{ width: 22, height: 22, background: '#FF7D60', color: '#FFFFFF' }}
                             >S</span>
-                            <span className="text-[14px] font-medium leading-[100%] tracking-[-0.01em]" style={{ color: '#232323' }}>
+                            <span className="text-[22px] font-semibold leading-[100%] tracking-[-0.01em]" style={{ color: '#232323' }}>
                               {lesson.reward.toLocaleString()}
                             </span>
                           </div>
                         </div>
                       </div>
-                      <div style={{ padding: '0 8px 8px' }}>
+                      <div style={{ padding: '0 14px 14px' }}>
                         <button
                           onClick={() => { setPopoverIndex(null); setActiveLesson(popoverIndex); setLessonOpen(true); }}
-                          className="w-full text-[14px] font-medium tracking-[0.01em] hover:opacity-90 transition-opacity"
-                          style={{ background: '#232323', color: '#FFFFFF', borderRadius: 8, height: 32 }}
+                          className="w-full text-[16px] font-medium tracking-[0.01em] hover:opacity-90 transition-opacity"
+                          style={{ background: '#232323', color: '#FFFFFF', borderRadius: 12, height: 52 }}
                         >
                           {lesson.progress === 100 ? t("index.retake") : lesson.progress > 0 ? t("index.continue") : t("index.start")}
                         </button>
