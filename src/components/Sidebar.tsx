@@ -78,7 +78,7 @@ const Sidebar = () => {
       <div className="flex flex-col h-full px-3 pt-6">
         <div className="flex items-center justify-between mb-6 px-1">
           {!collapsed && (
-            <img src={logo.url} alt="Open Academy" className="h-7 object-contain" />
+            <img src={logo.url} alt="Open Academy" className="h-14 object-contain" />
           )}
           <button
             onClick={() => setCollapsed(!collapsed)}
