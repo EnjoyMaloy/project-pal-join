@@ -638,7 +638,7 @@ const Index = () => {
                               className="inline-flex items-center gap-1 text-[11px] font-medium"
                               style={{ color: '#460466', background: '#E8DCFB', padding: '3px 8px', borderRadius: 6 }}
                             >
-                              <Paperclip className="w-3 h-3" />
+                              <FileText className="w-3 h-3" />
                               {t("index.instruction")}
                             </span>
                           </div>
