@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Eye, Clock, Calendar } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "next-themes";
+
 
 const IconActive = ({ className }: { className?: string }) => (
   <svg className={className} width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -258,6 +260,18 @@ const COMPLETED_PATHS = [
 
 const Index = () => {
   const { t } = useLanguage();
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+  const lessonColors = {
+    surface: isDark ? "#000000" : "#FFFFFF",
+    heading: isDark ? "#FFFFFF" : "#232323",
+    body: isDark ? "#EBE9EA" : "#464646",
+    meta: isDark ? "#8D8D8D" : "#8D8D8D",
+    quizBg: isDark ? "#232323" : "#F7F7F8",
+    quizBorder: isDark ? "#464646" : "#EBE9EA",
+    fadeRgb: isDark ? "0,0,0" : "255,255,255",
+  };
+
   const [searchParams] = useSearchParams();
   const mobileTab = searchParams.get("tab");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -712,9 +726,10 @@ const Index = () => {
             <div
               className="relative overflow-hidden flex flex-col w-full h-full sm:rounded-2xl sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)]"
               style={{
-                background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : "#FFFFFF",
+                background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : lessonColors.surface,
               }}
               onClick={(e) => e.stopPropagation()}
+
             >
 
               {/* Progress bar — single continuous line at top */}
@@ -777,13 +792,13 @@ const Index = () => {
                           setInstructionProgress(p);
                         }}
                       >
-                        <h3 className="text-[28px] font-semibold leading-tight" style={{ color: '#232323' }}>
+                        <h3 className="text-[28px] font-semibold leading-tight" style={{ color: lessonColors.heading }}>
                           {currentLesson.content.heading}
                         </h3>
-                        <div className="flex items-center gap-5 mt-3 text-[16px] flex-wrap" style={{ color: '#8D8D8D', fontFamily: '"TT Commons", sans-serif' }}>
+                        <div className="flex items-center gap-5 mt-3 text-[16px] flex-wrap" style={{ color: lessonColors.meta, fontFamily: '"TT Commons", sans-serif' }}>
                           <span
                             className="inline-flex items-center gap-1 text-[16px] font-medium"
-                            style={{ color: '#460466', background: '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
+                            style={{ color: isDark ? '#FFFFFF' : '#460466', background: isDark ? '#A66CFF' : '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
                           >
                             <FileText className="w-4 h-4" />
                             {t("index.instruction")}
@@ -793,30 +808,30 @@ const Index = () => {
                         </div>
                         <div className="mt-4 space-y-4">
                         {currentLesson.content.sections.slice(0, 12).map((s, i) => {
-                          if (s.type === "h2") return <h4 key={i} className="text-[22px] font-semibold" style={{ color: '#232323' }}>{s.text}</h4>;
-                          if (s.type === "h3") return <h5 key={i} className="text-[18px] font-semibold" style={{ color: '#232323' }}>{s.text}</h5>;
-                          if (s.type === "p") return <p key={i} className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>{renderRuns(s.runs)}</p>;
+                          if (s.type === "h2") return <h4 key={i} className="text-[22px] font-semibold" style={{ color: lessonColors.heading }}>{s.text}</h4>;
+                          if (s.type === "h3") return <h5 key={i} className="text-[18px] font-semibold" style={{ color: lessonColors.heading }}>{s.text}</h5>;
+                          if (s.type === "p") return <p key={i} className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>{renderRuns(s.runs)}</p>;
                           return null;
                         })}
-                        <h4 className="text-[22px] font-semibold" style={{ color: '#232323' }}>Как это работает на практике</h4>
-                        <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
+                        <h4 className="text-[22px] font-semibold" style={{ color: lessonColors.heading }}>Как это работает на практике</h4>
+                        <p className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>
                           Telegram Gifts — это коллекционные цифровые подарки, которые можно покупать, дарить друзьям и перепродавать на внутреннем маркете. Каждый подарок имеет ограниченный тираж, поэтому редкие экземпляры быстро растут в цене и становятся предметом охоты коллекционеров.
                         </p>
-                        <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
+                        <p className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>
                           Чтобы начать, тебе нужен только аккаунт Telegram и немного Stars — внутренней валюты платформы. Stars пополняются через App Store, Google Play или напрямую у ботов, а после покупки подарок мгновенно появляется в твоём профиле и его сразу видно друзьям.
                         </p>
-                        <h4 className="text-[22px] font-semibold" style={{ color: '#232323' }}>Почему на этом можно зарабатывать</h4>
-                        <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
+                        <h4 className="text-[22px] font-semibold" style={{ color: lessonColors.heading }}>Почему на этом можно зарабатывать</h4>
+                        <p className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>
                           Главный принцип рынка простой: чем меньше тираж и чем выше спрос — тем дороже подарок на вторичке. Лимитированные дропы раскупаются за минуты, а через несколько недель цена может вырасти в 3–10 раз. Опытные трейдеры мониторят релизы и заходят в первые секунды продаж.
                         </p>
-                        <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
+                        <p className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>
                           Второй способ — арбитраж между площадками. Один и тот же подарок может стоить по-разному на Fragment, в ботах и в личных сделках. Разница в 10–20% — это уже хороший профит при минимальных рисках, если ты понимаешь механику переводов и комиссий.
                         </p>
-                        <h4 className="text-[22px] font-semibold" style={{ color: '#232323' }}>На что обратить внимание новичку</h4>
-                        <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
+                        <h4 className="text-[22px] font-semibold" style={{ color: lessonColors.heading }}>На что обратить внимание новичку</h4>
+                        <p className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>
                           Никогда не покупай подарки у незнакомцев напрямую без эскроу — это самый частый способ развода. Используй только проверенные маркетплейсы и ботов с репутацией. Следи за комиссиями: иногда они съедают всю прибыль от сделки.
                         </p>
-                        <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
+                        <p className="text-[17px] leading-[1.55]" style={{ color: lessonColors.body }}>
                           Начни с малого: возьми один-два недорогих подарка из свежего дропа, поторгуй ими неделю, посмотри как меняется цена. Это даст реальное понимание рынка гораздо быстрее, чем любая теория. А дальше уже можно масштабировать стратегию.
                         </p>
                         </div>
@@ -825,10 +840,11 @@ const Index = () => {
                   )}
 
 
+
                   {kind === "quiz" && (
                     <div className="flex-1 flex flex-col justify-center items-center">
                       <div className="w-full max-w-sm">
-                        <h3 className="text-[20px] font-semibold leading-tight text-center" style={{ color: '#232323' }}>
+                        <h3 className="text-[20px] font-semibold leading-tight text-center" style={{ color: lessonColors.heading }}>
                           Что такое Telegram Gifts?
                         </h3>
                         <div className="mt-5 space-y-2">
@@ -840,8 +856,9 @@ const Index = () => {
                             <button
                               key={i}
                               className="w-full text-center text-[14px] rounded-xl border transition-colors hover:bg-violet-super-light"
-                              style={{ color: '#232323', borderColor: '#EBE9EA', padding: '12px 14px', background: '#F7F7F8' }}
+                              style={{ color: lessonColors.heading, borderColor: lessonColors.quizBorder, padding: '12px 14px', background: lessonColors.quizBg }}
                             >
+
                               {opt}
                             </button>
                           ))}
@@ -863,7 +880,7 @@ const Index = () => {
                       style={{
                         bottom: '100%',
                         height: 90,
-                        background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 30%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0.9) 85%, rgba(255,255,255,1) 100%)',
+                        background: `linear-gradient(to bottom, rgba(${lessonColors.fadeRgb},0) 0%, rgba(${lessonColors.fadeRgb},0.2) 30%, rgba(${lessonColors.fadeRgb},0.6) 60%, rgba(${lessonColors.fadeRgb},0.9) 85%, rgba(${lessonColors.fadeRgb},1) 100%)`,
                       }}
                     />
 
@@ -872,8 +889,9 @@ const Index = () => {
                   </>
                 )}
                 {kind !== "image" && (
-                  <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 0, top: 0, background: '#FFFFFF', zIndex: -1 }} />
+                  <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 0, top: 0, background: lessonColors.surface, zIndex: -1 }} />
                 )}
+
                 {(() => {
                   const isInstruction = kind === "instruction";
                   const pct = Math.round(instructionProgress * 100);
