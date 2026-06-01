@@ -858,34 +858,18 @@ const Index = () => {
                 {kind !== "image" && (
                   <>
                     {/* Progressive blur: stacked layers with increasing strength + soft masks */}
-                    {[
-                      { blur: 0.5, from: 0,    to: 0.4 },
-                      { blur: 1.5, from: 0.15, to: 0.6 },
-                      { blur: 3,   from: 0.3,  to: 0.8 },
-                      { blur: 6,   from: 0.5,  to: 1   },
-                    ].map((layer, i) => (
-                      <div
-                        key={i}
-                        className="pointer-events-none absolute left-0 right-0"
-                        style={{
-                          bottom: '100%',
-                          height: 56,
-                          backdropFilter: `blur(${layer.blur}px)`,
-                          WebkitBackdropFilter: `blur(${layer.blur}px)`,
-                          maskImage: `linear-gradient(to bottom, rgba(0,0,0,0) ${layer.from * 100}%, rgba(0,0,0,1) ${layer.to * 100}%)`,
-                          WebkitMaskImage: `linear-gradient(to bottom, rgba(0,0,0,0) ${layer.from * 100}%, rgba(0,0,0,1) ${layer.to * 100}%)`,
-                        }}
-                      />
-                    ))}
-                    {/* Soft white veil for color fade */}
+                    {/* Soft fade-out veil — minimal blur, mostly opacity */}
                     <div
                       className="pointer-events-none absolute left-0 right-0"
                       style={{
                         bottom: '100%',
                         height: 56,
-                        background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 70%, rgba(255,255,255,0.9) 100%)',
+                        backdropFilter: 'blur(0.5px)',
+                        WebkitBackdropFilter: 'blur(0.5px)',
+                        background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0.85) 75%, rgba(255,255,255,1) 100%)',
                       }}
                     />
+
 
                   </>
                 )}
