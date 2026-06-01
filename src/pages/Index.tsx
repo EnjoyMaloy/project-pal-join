@@ -565,8 +565,11 @@ const Index = () => {
                           {isReal && lesson.hasInstruction && (
                             <g transform={`translate(${pos.cx + 22}, ${pos.cy + 22})`}>
                               <circle r="9" fill="#FFFFFF" stroke="#BF96FF" strokeWidth="1" />
-                              <g transform="translate(-4.5,-4.5) scale(0.45)">
-                                <path d="M16 6l-6.5 6.5a3 3 0 104.243 4.243L20 10.5a5 5 0 10-7.071-7.071l-6.5 6.5a7 7 0 109.9 9.9l5.657-5.657" stroke="#460466" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                              <g transform="translate(-5.4,-5.4) scale(0.45)" stroke="#460466" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
                               </g>
                             </g>
                           )}
