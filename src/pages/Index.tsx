@@ -227,12 +227,20 @@ const LockIcon = ({ cx, cy }: { cx: number; cy: number }) => (
   </g>
 );
 
-// 4-node positions for the lesson map
+// 4-node positions for the lesson map (ported from /course/1/lessons)
 const NODES_4 = [
-  { cx: 120, cy: 40 },
-  { cx: 286, cy: 40 },
-  { cx: 286, cy: 169 },
-  { cx: 120, cy: 169 },
+  { cx: 120.922, cy: 32 },
+  { cx: 285.922, cy: 32 },
+  { cx: 285.922, cy: 161 },
+  { cx: 120.922, cy: 161 },
+];
+
+// Solid "completed" path segments matching the dashed snake route
+const COMPLETED_PATHS = [
+  "",
+  "M106.701 32H285.922",
+  "M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H285.922",
+  "M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H106.701",
 ];
 
 const Index = () => {
@@ -427,9 +435,9 @@ const Index = () => {
 
                 {/* SVG map */}
                 <div className="relative z-10 flex justify-center">
-                  <svg width="418" height="240" viewBox="0 0 418 240" fill="none" className="max-w-full h-auto">
+                  <svg width="418" height="230" viewBox="0 0 418 230" fill="none" className="max-w-full h-auto">
                     <defs>
-                      <filter id="idx_filter_i" x="88" y="137" width="64" height="64" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                      <filter id="idx_filter_i" x="88.9219" y="129" width="64" height="64" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
                         <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
                         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
@@ -460,24 +468,33 @@ const Index = () => {
                       </linearGradient>
                     </defs>
 
-                    {/* Dashed path (full route) */}
+                    {/* Dashed white path (full snake) */}
                     <path
-                      d="M120 40 H286 C350 40, 380 60, 380 100 C380 140, 350 169, 286 169 H120"
+                      d="M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H106.701"
                       stroke="white"
                       strokeWidth="4"
                       strokeLinecap="round"
+                      strokeLinejoin="round"
                       strokeDasharray="10 8"
                       fill="none"
                     />
 
-                    {/* Solid completed path (lessons 1-2 done) */}
-                    <path
-                      d="M120 40 H286"
-                      stroke="url(#idx_gPurpleFilled)"
-                      strokeWidth="8"
-                      strokeLinecap="round"
-                      fill="none"
-                    />
+                    {/* Solid purple path (completed segment) */}
+                    {(() => {
+                      const lastCompleted = lessonsData.reduce((acc, _, i) => lessonState(i) === "completed" ? i : acc, -1);
+                      if (lastCompleted < 1) return null;
+                      return (
+                        <path
+                          d={COMPLETED_PATHS[lastCompleted] || ""}
+                          stroke="url(#idx_gPurpleFilled)"
+                          strokeWidth="9"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          fill="none"
+                        />
+                      );
+                    })()}
+
 
                     {/* Nodes */}
                     {lessonsData.map((lesson, idx) => {
