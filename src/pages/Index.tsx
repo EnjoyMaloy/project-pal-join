@@ -783,7 +783,10 @@ const Index = () => {
                         <span className="inline-flex items-center gap-1"><Eye className="w-4 h-4" />{currentLesson.content.views}</span>
                         <span className="inline-flex items-center gap-1"><Clock className="w-4 h-4" />{currentLesson.content.readMin} мин</span>
                       </div>
-                      <div className="mt-4 space-y-4 overflow-y-auto pr-1 flex-1">
+                      <div
+                        className="mt-4 space-y-4 overflow-y-auto pr-1 flex-1 [&::-webkit-scrollbar]:hidden"
+                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', paddingBottom: 96 }}
+                      >
                         {currentLesson.content.sections.slice(0, 12).map((s, i) => {
                           if (s.type === "h2") return <h4 key={i} className="text-[22px] font-semibold" style={{ color: '#232323' }}>{s.text}</h4>;
                           if (s.type === "h3") return <h5 key={i} className="text-[18px] font-semibold" style={{ color: '#232323' }}>{s.text}</h5>;
@@ -844,7 +847,24 @@ const Index = () => {
               </div>
 
               {/* Bottom button */}
-              <div className="p-4 relative z-[2]" style={{ background: kind === "image" ? 'transparent' : '#FFFFFF' }}>
+              <div className="p-4 relative z-[2]" style={{ background: kind === "image" ? 'transparent' : 'transparent' }}>
+                {kind !== "image" && (
+                  <div
+                    className="pointer-events-none absolute left-0 right-0"
+                    style={{
+                      bottom: '100%',
+                      height: 64,
+                      background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,1) 100%)',
+                      backdropFilter: 'blur(6px)',
+                      WebkitBackdropFilter: 'blur(6px)',
+                      maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 70%)',
+                      WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 70%)',
+                    }}
+                  />
+                )}
+                {kind !== "image" && (
+                  <div className="absolute left-0 right-0" style={{ bottom: 0, top: 0, background: '#FFFFFF', zIndex: -1 }} />
+                )}
                 <button
                   onClick={next}
                   className="w-full text-[16px] font-medium transition-opacity hover:opacity-90"
