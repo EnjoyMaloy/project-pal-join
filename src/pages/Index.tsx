@@ -184,7 +184,7 @@ const Index = () => {
                       key={`top-${i}`}
                       className="aspect-[4/3] rounded-xl bg-muted border border-dashed border-border flex items-center justify-center"
                     >
-                      <span className="text-caption-12 text-muted-foreground">{t("index.imageSoon") || "Изображение"}</span>
+                      <span className="text-caption-12 text-muted-foreground">Изображение</span>
                     </div>
                   ))}
                 </div>
@@ -214,7 +214,7 @@ const Index = () => {
                       key={`bottom-${i}`}
                       className="aspect-[4/3] rounded-xl bg-muted border border-dashed border-border flex items-center justify-center"
                     >
-                      <span className="text-caption-12 text-muted-foreground">{t("index.imageSoon") || "Изображение"}</span>
+                      <span className="text-caption-12 text-muted-foreground">Изображение</span>
                     </div>
                   ))}
                 </div>
