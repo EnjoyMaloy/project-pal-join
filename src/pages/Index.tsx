@@ -206,12 +206,16 @@ const renderRuns = (runs: Inline[]) =>
 
 // ============ SVG lesson-map nodes ============
 const TrophyIcon = ({ cx, cy }: { cx: number; cy: number }) => (
-  <g>
-    <path d={`M${cx + 7.274} ${cy - 14.219}h-14.549a2.32 2.32 0 00-2.315 2.315v7.274a9.59 9.59 0 009.589 9.59 9.59 9.59 0 009.59-9.59v-7.274a2.32 2.32 0 00-2.315-2.315z`} fill="#D9C0FF" transform={`translate(${cx - cx}, 0)`} />
-    <path d={`M${cx + 2.017} ${cy + 1.653}h-3.968a.99.99 0 00-.992.992v6.613a.99.99 0 00.992.992h3.968a.99.99 0 00.992-.992v-6.613a.99.99 0 00-.992-.992z`} fill="#D9C0FF" />
-    <path d={`M${cx + 6.316} ${cy + 8.267}h-12.566a1.98 1.98 0 00-1.984 1.984v1.984a1.98 1.98 0 001.984 1.984h12.566a1.98 1.98 0 001.984-1.984v-1.984a1.98 1.98 0 00-1.984-1.984z`} fill="#D9C0FF" />
+  <g transform={`translate(${cx}, ${cy})`}>
+    {/* Cup body */}
+    <path d="M7.274 -14.219h-14.549a2.32 2.32 0 00-2.315 2.315v7.274a9.59 9.59 0 009.589 9.59 9.59 9.59 0 009.59-9.59v-7.274a2.32 2.32 0 00-2.315-2.315z" fill="#D9C0FF" />
+    {/* Stem */}
+    <path d="M1.983 1.653h-3.968a.99.99 0 00-.992.992v6.614c0 .548.444.992.992.992h3.968a.99.99 0 00.992-.992v-6.614a.99.99 0 00-.992-.992z" fill="#D9C0FF" />
+    {/* Base */}
+    <path d="M6.282 8.267h-12.566a1.98 1.98 0 00-1.984 1.984v1.984a1.98 1.98 0 001.984 1.984h12.566a1.98 1.98 0 001.984-1.984v-1.984a1.98 1.98 0 00-1.984-1.984z" fill="#D9C0FF" />
   </g>
 );
+
 
 const ChecklistSparkleIcon = ({ cx, cy, color = "#460466" }: { cx: number; cy: number; color?: string }) => (
   <g transform={`translate(${cx}, ${cy})`}>
@@ -525,14 +529,13 @@ const Index = () => {
                             <>
                               <circle cx={pos.cx} cy={pos.cy} r="31.5" fill="url(#idx_gPurpleNode)" stroke="#460466"/>
                               <circle opacity="0.3" cx={pos.cx} cy={pos.cy} r="23.7" fill="#924CFE"/>
-                              <TrophyIcon cx={pos.cx - 7.274 - (pos.cx - pos.cx)} cy={pos.cy - 3.781} />
+                              <TrophyIcon cx={pos.cx} cy={pos.cy} />
                             </>
                           )}
                           {state === "current" && (
                             <>
-                              <g filter="url(#idx_filter_i)">
-                                <circle cx={pos.cx} cy={pos.cy} r="32" fill="url(#idx_gGoldNode)"/>
-                              </g>
+                              <circle cx={pos.cx} cy={pos.cy} r="32" fill="url(#idx_gGoldNode)"/>
+
                               <circle cx={pos.cx} cy={pos.cy} r="31.5" stroke="#460466"/>
                               <circle opacity="0.3" cx={pos.cx} cy={pos.cy} r="23.7" fill="white"/>
                               <ChecklistSparkleIcon cx={pos.cx} cy={pos.cy + 5} />
