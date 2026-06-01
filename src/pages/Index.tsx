@@ -731,10 +731,7 @@ const Index = () => {
                   }}
                 />
               </div>
-              <div className="h-4 shrink-0" />
-
-              {/* Header */}
-              <div className="pb-2 relative z-10" />
+              {/* Header removed — content scrolls under progress bar */}
 
 
               {/* Tap zones */}
