@@ -722,7 +722,7 @@ const Index = () => {
         const kind = STEPS[step];
 
         return (
-          <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center sm:p-4" onClick={close}>
+          <div className="fixed inset-0 z-[60] bg-black/80 flex items-center justify-center sm:p-4" onClick={close}>
             <div
               className="relative overflow-hidden flex flex-col w-full h-full sm:rounded-2xl sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)]"
               style={{
