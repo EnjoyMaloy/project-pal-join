@@ -227,21 +227,30 @@ const LockIcon = ({ cx, cy }: { cx: number; cy: number }) => (
   </g>
 );
 
-// 4-node positions for the lesson map (ported from /course/1/lessons)
-const NODES_4 = [
+// 8-node S-snake positions (ported from /course/1/lessons)
+const NODES_8 = [
   { cx: 120.922, cy: 32 },
   { cx: 285.922, cy: 32 },
   { cx: 285.922, cy: 161 },
   { cx: 120.922, cy: 161 },
+  { cx: 120.922, cy: 292 },
+  { cx: 120.922, cy: 421 },
+  { cx: 120.922, cy: 550 },
+  { cx: 285.922, cy: 550 },
 ];
 
-// Solid "completed" path segments matching the dashed snake route
+// Decorative locked-icon variant for nodes beyond real lessons (matches CourseLessons)
+type LockedIconVariant = "checklist" | "sparkle" | "lock";
+const LOCKED_VARIANTS: LockedIconVariant[] = ["checklist", "sparkle", "lock", "lock"];
+
+// Solid "completed" path segments matching the dashed snake route up to the given node index
 const COMPLETED_PATHS = [
   "",
   "M106.701 32H285.922",
   "M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H285.922",
   "M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H106.701",
 ];
+
 
 const Index = () => {
   const { t } = useLanguage();
@@ -435,7 +444,7 @@ const Index = () => {
 
                 {/* SVG map */}
                 <div className="relative z-10 flex justify-center">
-                  <svg width="418" height="230" viewBox="0 0 418 230" fill="none" className="max-w-full h-auto">
+                  <svg width="418" height="600" viewBox="0 0 418 600" fill="none" className="max-w-full h-auto">
                     <defs>
                       <filter id="idx_filter_i" x="88.9219" y="129" width="64" height="64" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
                         <feFlood floodOpacity="0" result="BackgroundImageFix"/>
@@ -468,9 +477,9 @@ const Index = () => {
                       </linearGradient>
                     </defs>
 
-                    {/* Dashed white path (full snake) */}
+                    {/* Dashed white path (full S-snake, 8 nodes) */}
                     <path
-                      d="M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H106.701"
+                      d="M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H64.7139C30.078 161.917 2 189.997 2 224.635V229.115C2 263.753 30.078 291.833 64.7139 291.833H174.23C208.866 291.833 236.944 319.905 236.944 354.543V359.028C236.944 393.667 208.874 421.75 174.238 421.75H64.7014C30.0655 421.75 2 449.83 2 484.468V488.948C2 523.587 30.078 551.667 64.7139 551.667H266.5"
                       stroke="white"
                       strokeWidth="4"
                       strokeLinecap="round"
@@ -478,6 +487,8 @@ const Index = () => {
                       strokeDasharray="10 8"
                       fill="none"
                     />
+
+
 
                     {/* Solid purple path (completed segment) */}
                     {(() => {
@@ -496,16 +507,18 @@ const Index = () => {
                     })()}
 
 
-                    {/* Nodes */}
-                    {lessonsData.map((lesson, idx) => {
-                      const pos = NODES_4[idx];
-                      if (!pos) return null;
-                      const state = lessonState(idx);
+                    {/* Nodes - 8 positions, real lessons first then decorative locked */}
+                    {NODES_8.map((pos, idx) => {
+                      const lesson = lessonsData[idx];
+                      const isReal = !!lesson;
+                      const state = isReal ? lessonState(idx) : "locked";
+                      const lockedVariant: LockedIconVariant = isReal ? "lock" : LOCKED_VARIANTS[idx - lessonsData.length] ?? "lock";
+
                       return (
                         <g
-                          key={lesson.number}
-                          className="cursor-pointer"
-                          onClick={() => setPopoverIndex(popoverIndex === idx ? null : idx)}
+                          key={idx}
+                          className={isReal ? "cursor-pointer" : "cursor-not-allowed"}
+                          onClick={() => { if (isReal) setPopoverIndex(popoverIndex === idx ? null : idx); }}
                           data-lesson-circle
                         >
                           {state === "completed" && (
@@ -529,14 +542,23 @@ const Index = () => {
                             <>
                               <circle cx={pos.cx} cy={pos.cy} r="31.5" fill="url(#idx_gWhiteNode)" stroke="white"/>
                               <circle cx={pos.cx} cy={pos.cy} r="23.7" fill="url(#idx_gLockedInner)"/>
-                              <LockIcon cx={pos.cx} cy={pos.cy} />
+                              {lockedVariant === "lock" && <LockIcon cx={pos.cx} cy={pos.cy} />}
+                              {lockedVariant === "sparkle" && <ChecklistSparkleIcon cx={pos.cx} cy={pos.cy + 5} />}
+                              {lockedVariant === "checklist" && (
+                                <g>
+                                  <rect x={pos.cx - 11.85} y={pos.cy - 13.16} width="10.53" height="10.53" rx="2" fill="#460466" />
+                                  <rect x={pos.cx - 11.85} y={pos.cy + 2.63} width="10.53" height="10.53" rx="2" fill="#460466" />
+                                  <path d={`M${pos.cx + 5.26} ${pos.cy - 3.95} l-2.63 -2.63 a1.32 1.32 0 011.87 -1.87 l1.7 1.71 4.33 -4.34 a1.32 1.32 0 011.87 1.87 l-5.27 5.27 a1.32 1.32 0 01-.93 .38 z`} fill="#460466" />
+                                  <path d={`M${pos.cx + 9.87} ${pos.cy + 12.5} l-6.58 -6.58 a1.32 1.32 0 011.87 -1.87 l6.58 6.58 a1.32 1.32 0 01-.93 2.25 z`} fill="#460466" />
+                                  <path d={`M${pos.cx + 3.29} ${pos.cy + 12.5} a1.32 1.32 0 01-.93 -2.25 l6.58 -6.58 a1.32 1.32 0 011.87 1.87 l-6.58 6.58 a1.32 1.32 0 01-.93 .38 z`} fill="#460466" />
+                                </g>
+                              )}
                             </>
                           )}
                           {/* Instruction badge */}
-                          {lesson.hasInstruction && (
+                          {isReal && lesson.hasInstruction && (
                             <g transform={`translate(${pos.cx + 22}, ${pos.cy + 22})`}>
                               <circle r="9" fill="#FFFFFF" stroke="#BF96FF" strokeWidth="1" />
-                              <path d="M-3 -3 L3 3 M3 -3 L-3 3" stroke="#460466" strokeWidth="0" />
                               <g transform="translate(-4.5,-4.5) scale(0.45)">
                                 <path d="M16 6l-6.5 6.5a3 3 0 104.243 4.243L20 10.5a5 5 0 10-7.071-7.071l-6.5 6.5a7 7 0 109.9 9.9l5.657-5.657" stroke="#460466" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                               </g>
@@ -550,8 +572,9 @@ const Index = () => {
                     {(() => {
                       const currentIdx = lessonsData.findIndex((_, i) => lessonState(i) === "current");
                       if (currentIdx === -1) return null;
-                      const pos = NODES_4[currentIdx];
+                      const pos = NODES_8[currentIdx];
                       if (!pos) return null;
+
                       return (
                         <foreignObject x={pos.cx - 36} y={pos.cy + 36} width="72" height="28">
                           <div className="flex justify-center">
