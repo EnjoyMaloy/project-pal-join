@@ -219,9 +219,9 @@ const TrophyIcon = ({ cx, cy }: { cx: number; cy: number }) => (
 
 const ChecklistSparkleIcon = ({ cx, cy, color = "#460466" }: { cx: number; cy: number; color?: string }) => (
   <g transform={`translate(${cx}, ${cy})`}>
-    <path d="M15.587 5.323H7.959l7.878-2.022a.75.75 0 00-.554-1.394l-8.536 2.192 7.692-4.464a.75.75 0 10-.752-1.298L0 5.166l-13.485-7.824a.75.75 0 10-.752 1.298l7.693 4.464-8.536-2.192a.75.75 0 00-.554 1.394l7.878 2.022h-7.628a1.006 1.006 0 00-1.006 1.005v4.772c0 .555.45 1.005 1.006 1.005h11.104a5.1 5.1 0 004.483-2.328A5.1 5.1 0 004.483 12.105H15.587c.556 0 1.006-.45 1.006-1.005V6.328c0-.555-.45-1.005-1.006-1.005z" fill={color} transform="scale(0.85)" />
-    <path d="M-6.64-8.907a4.37 4.37 0 01-2.383-2.383.75.75 0 00-1.414 0 4.37 4.37 0 01-2.383 2.383.75.75 0 000 1.414 4.37 4.37 0 012.383 2.383.75.75 0 001.414 0 4.37 4.37 0 012.383-2.383.75.75 0 000-1.414z" fill={color} transform="translate(2,-6) scale(0.75)" />
-    <path d="M6.648-10.372a6.7 6.7 0 01-3.664-3.664.75.75 0 00-1.414 0 6.7 6.7 0 01-3.664 3.664.75.75 0 000 1.414 6.7 6.7 0 013.664 3.664.75.75 0 001.414 0 6.7 6.7 0 013.664-3.664.75.75 0 000-1.414z" fill={color} transform="translate(7,-4) scale(0.75)" />
+    <path d="M15.588 5.323H7.96l7.878-2.022a.75.75 0 00-.554-1.394l-8.536 2.192 7.692-4.464a.75.75 0 10-.752-1.298L0 5.166l-13.485-7.824a.75.75 0 10-.752 1.298l7.693 4.464-8.536-2.192a.75.75 0 00-.554 1.394l7.878 2.022h-7.628a1.006 1.006 0 00-1.006 1.005v4.772c0 .555.45 1.005 1.006 1.005h11.104a5.1 5.1 0 004.483-2.328 5.1 5.1 0 004.483 2.328h11.104c.556 0 1.006-.45 1.006-1.005V6.328c0-.555-.45-1.005-1.006-1.005z" fill={color} />
+    <path d="M-3.349-8.357a4.37 4.37 0 01-2.383-2.383.75.75 0 00-1.414 0 4.37 4.37 0 01-2.383 2.383.75.75 0 000 1.414 4.37 4.37 0 012.383 2.383.75.75 0 001.414 0 4.37 4.37 0 012.383-2.383.75.75 0 000-1.414z" fill={color} />
+    <path d="M9.939-9.822a6.7 6.7 0 01-3.664-3.664.75.75 0 00-1.414 0 6.7 6.7 0 01-3.664 3.664.75.75 0 000 1.414 6.7 6.7 0 013.664 3.664.75.75 0 001.414 0 6.7 6.7 0 013.664-3.664.75.75 0 000-1.414z" fill={color} />
   </g>
 );
 
@@ -450,7 +450,7 @@ const Index = () => {
                 <div className="relative z-10 flex justify-center">
                   <svg width="418" height="600" viewBox="0 0 418 600" fill="none" className="max-w-full h-auto">
                     <defs>
-                      <filter id="idx_filter_i" x="88.9219" y="129" width="64" height="64" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                      <filter id="idx_filter_i" x="-0.1" y="-0.1" width="1.2" height="1.2" colorInterpolationFilters="sRGB">
                         <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
                         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
@@ -534,11 +534,12 @@ const Index = () => {
                           )}
                           {state === "current" && (
                             <>
-                              <circle cx={pos.cx} cy={pos.cy} r="32" fill="url(#idx_gGoldNode)"/>
-
+                              <g filter="url(#idx_filter_i)">
+                                <circle cx={pos.cx} cy={pos.cy} r="32" fill="url(#idx_gGoldNode)"/>
+                              </g>
                               <circle cx={pos.cx} cy={pos.cy} r="31.5" stroke="#460466"/>
                               <circle opacity="0.3" cx={pos.cx} cy={pos.cy} r="23.7" fill="white"/>
-                              <ChecklistSparkleIcon cx={pos.cx} cy={pos.cy + 5} />
+                              <ChecklistSparkleIcon cx={pos.cx} cy={pos.cy} />
                             </>
                           )}
                           {state === "locked" && (
@@ -546,7 +547,7 @@ const Index = () => {
                               <circle cx={pos.cx} cy={pos.cy} r="31.5" fill="url(#idx_gWhiteNode)" stroke="white"/>
                               <circle cx={pos.cx} cy={pos.cy} r="23.7" fill="url(#idx_gLockedInner)"/>
                               {lockedVariant === "lock" && <LockIcon cx={pos.cx} cy={pos.cy} />}
-                              {lockedVariant === "sparkle" && <ChecklistSparkleIcon cx={pos.cx} cy={pos.cy + 5} />}
+                              {lockedVariant === "sparkle" && <ChecklistSparkleIcon cx={pos.cx} cy={pos.cy} />}
                               {lockedVariant === "checklist" && (
                                 <g>
                                   <rect x={pos.cx - 11.85} y={pos.cy - 13.16} width="10.53" height="10.53" rx="2" fill="#460466" />
