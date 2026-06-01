@@ -353,10 +353,8 @@ const Index = () => {
         <div className="flex flex-col md:flex-row gap-8">
           <div className={`flex-1 min-w-0 ${mobileTab === "instructions" ? "hidden md:block" : ""}`}>
             {/* ============ LESSON MAP ============ */}
-            {(() => null)()}
-              /* ============ LESSON MAP ============ */
-              <div
-                className="relative rounded-2xl overflow-hidden p-6"
+            <div
+              className="relative rounded-2xl overflow-hidden p-6"
                 style={{
                   background: "linear-gradient(180deg, hsl(270 60% 88% / 0.7) 0%, hsl(270 70% 85% / 1) 50%, hsl(270 60% 88% / 0.7) 100%)",
                 }}
