@@ -564,7 +564,7 @@ const Index = () => {
                           {/* Instruction badge */}
                           {isReal && lesson.hasInstruction && (
                             <g transform={`translate(${pos.cx + 22}, ${pos.cy + 22})`}>
-                              <circle r="9" fill="#FFFFFF" stroke="#BF96FF" strokeWidth="1" />
+                              <circle r="9" fill="#FFFFFF" stroke="#460466" strokeWidth="1" />
                               <g transform="translate(-5.4,-5.4) scale(0.45)" stroke="#460466" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
                                 <polyline points="14 2 14 8 20 8" />
