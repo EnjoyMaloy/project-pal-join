@@ -352,71 +352,8 @@ const Index = () => {
         {/* Main layout */}
         <div className="flex flex-col md:flex-row gap-8">
           <div className={`flex-1 min-w-0 ${mobileTab === "instructions" ? "hidden md:block" : ""}`}>
-            {lessonOpen ? (
-              <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
-                <button
-                  onClick={() => { setLessonOpen(false); setActiveLesson(-1); }}
-                  className="text-btn-medium inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg hover:bg-violet-dark transition-colors mb-8"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  {t("index.backToCourse")}
-                </button>
-
-                {/* Top images */}
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                  {[0, 1].map((i) => (
-                    <div key={`top-${i}`} className="aspect-[4/3] rounded-xl bg-muted border border-dashed border-border flex items-center justify-center">
-                      <span className="text-caption-12 text-muted-foreground">Изображение</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Article-style content */}
-                <article className="max-w-none mb-8">
-                  {/* Title + meta card */}
-                  <div className="bg-muted rounded-2xl p-5 md:p-6 mb-6">
-                    <h2 className="text-h2 text-foreground mb-4 leading-tight">{currentLesson.content.heading}</h2>
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-7 h-7 rounded-full bg-[#E8DCFB] border border-border flex items-center justify-center text-[10px] font-semibold text-[#460466]">
-                        {currentLesson.content.author.slice(0, 4)}
-                      </div>
-                      <span className="text-[14px] text-foreground/80">{currentLesson.content.author}</span>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-muted-foreground">
-                      <span className="inline-flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" />{currentLesson.content.views}</span>
-                      <span className="inline-flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{currentLesson.content.readMin} мин</span>
-                      <span className="inline-flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{currentLesson.content.date}</span>
-                    </div>
-                  </div>
-
-                  {/* Body */}
-                  <div className="space-y-4">
-                    {currentLesson.content.sections.map((s, i) => {
-                      if (s.type === "h2") return <h3 key={i} className="text-[22px] font-semibold leading-tight text-foreground mt-6 mb-2">{s.text}</h3>;
-                      if (s.type === "h3") return <h4 key={i} className="text-[16px] font-semibold text-foreground mt-4 mb-1">{s.text}</h4>;
-                      if (s.type === "p") return (
-                        <p key={i} className="text-[15px] leading-[1.7] text-foreground/85">{renderRuns(s.runs)}</p>
-                      );
-                      if (s.type === "list") return (
-                        <ul key={i} className="list-disc pl-5 space-y-1 text-[15px] leading-[1.7] text-foreground/85">
-                          {s.items.map((it, j) => <li key={j}>{renderRuns(it)}</li>)}
-                        </ul>
-                      );
-                      return null;
-                    })}
-                  </div>
-                </article>
-
-                {/* Bottom images */}
-                <div className="grid grid-cols-2 gap-4">
-                  {[0, 1].map((i) => (
-                    <div key={`bottom-${i}`} className="aspect-[4/3] rounded-xl bg-muted border border-dashed border-border flex items-center justify-center">
-                      <span className="text-caption-12 text-muted-foreground">Изображение</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
+            {/* ============ LESSON MAP ============ */}
+            {(() => null)()}
               /* ============ LESSON MAP ============ */
               <div
                 className="relative rounded-2xl overflow-hidden p-6"
