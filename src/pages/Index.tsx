@@ -507,16 +507,18 @@ const Index = () => {
                     })()}
 
 
-                    {/* Nodes */}
-                    {lessonsData.map((lesson, idx) => {
-                      const pos = NODES_4[idx];
-                      if (!pos) return null;
-                      const state = lessonState(idx);
+                    {/* Nodes - 8 positions, real lessons first then decorative locked */}
+                    {NODES_8.map((pos, idx) => {
+                      const lesson = lessonsData[idx];
+                      const isReal = !!lesson;
+                      const state = isReal ? lessonState(idx) : "locked";
+                      const lockedVariant: LockedIconVariant = isReal ? "lock" : LOCKED_VARIANTS[idx - lessonsData.length] ?? "lock";
+
                       return (
                         <g
-                          key={lesson.number}
-                          className="cursor-pointer"
-                          onClick={() => setPopoverIndex(popoverIndex === idx ? null : idx)}
+                          key={idx}
+                          className={isReal ? "cursor-pointer" : "cursor-not-allowed"}
+                          onClick={() => { if (isReal) setPopoverIndex(popoverIndex === idx ? null : idx); }}
                           data-lesson-circle
                         >
                           {state === "completed" && (
@@ -540,14 +542,23 @@ const Index = () => {
                             <>
                               <circle cx={pos.cx} cy={pos.cy} r="31.5" fill="url(#idx_gWhiteNode)" stroke="white"/>
                               <circle cx={pos.cx} cy={pos.cy} r="23.7" fill="url(#idx_gLockedInner)"/>
-                              <LockIcon cx={pos.cx} cy={pos.cy} />
+                              {lockedVariant === "lock" && <LockIcon cx={pos.cx} cy={pos.cy} />}
+                              {lockedVariant === "sparkle" && <ChecklistSparkleIcon cx={pos.cx} cy={pos.cy + 5} />}
+                              {lockedVariant === "checklist" && (
+                                <g>
+                                  <rect x={pos.cx - 11.85} y={pos.cy - 13.16} width="10.53" height="10.53" rx="2" fill="#460466" />
+                                  <rect x={pos.cx - 11.85} y={pos.cy + 2.63} width="10.53" height="10.53" rx="2" fill="#460466" />
+                                  <path d={`M${pos.cx + 5.26} ${pos.cy - 3.95} l-2.63 -2.63 a1.32 1.32 0 011.87 -1.87 l1.7 1.71 4.33 -4.34 a1.32 1.32 0 011.87 1.87 l-5.27 5.27 a1.32 1.32 0 01-.93 .38 z`} fill="#460466" />
+                                  <path d={`M${pos.cx + 9.87} ${pos.cy + 12.5} l-6.58 -6.58 a1.32 1.32 0 011.87 -1.87 l6.58 6.58 a1.32 1.32 0 01-.93 2.25 z`} fill="#460466" />
+                                  <path d={`M${pos.cx + 3.29} ${pos.cy + 12.5} a1.32 1.32 0 01-.93 -2.25 l6.58 -6.58 a1.32 1.32 0 011.87 1.87 l-6.58 6.58 a1.32 1.32 0 01-.93 .38 z`} fill="#460466" />
+                                </g>
+                              )}
                             </>
                           )}
                           {/* Instruction badge */}
-                          {lesson.hasInstruction && (
+                          {isReal && lesson.hasInstruction && (
                             <g transform={`translate(${pos.cx + 22}, ${pos.cy + 22})`}>
                               <circle r="9" fill="#FFFFFF" stroke="#BF96FF" strokeWidth="1" />
-                              <path d="M-3 -3 L3 3 M3 -3 L-3 3" stroke="#460466" strokeWidth="0" />
                               <g transform="translate(-4.5,-4.5) scale(0.45)">
                                 <path d="M16 6l-6.5 6.5a3 3 0 104.243 4.243L20 10.5a5 5 0 10-7.071-7.071l-6.5 6.5a7 7 0 109.9 9.9l5.657-5.657" stroke="#460466" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                               </g>
@@ -561,8 +572,9 @@ const Index = () => {
                     {(() => {
                       const currentIdx = lessonsData.findIndex((_, i) => lessonState(i) === "current");
                       if (currentIdx === -1) return null;
-                      const pos = NODES_4[currentIdx];
+                      const pos = NODES_8[currentIdx];
                       if (!pos) return null;
+
                       return (
                         <foreignObject x={pos.cx - 36} y={pos.cy + 36} width="72" height="28">
                           <div className="flex justify-center">
