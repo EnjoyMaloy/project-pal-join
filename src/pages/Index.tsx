@@ -854,7 +854,7 @@ const Index = () => {
                   <div
                     className="pointer-events-none absolute left-0 right-0"
                     style={{
-                      bottom: '100%',
+                      bottom: 16,
                       height: 64,
                       background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,1) 100%)',
                       backdropFilter: 'blur(6px)',
