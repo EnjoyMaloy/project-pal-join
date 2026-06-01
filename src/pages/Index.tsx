@@ -769,24 +769,25 @@ const Index = () => {
 
                   {kind === "instruction" && (
                     <div className="flex-1 flex flex-col min-h-0">
-                      <h3 className="text-[28px] font-semibold leading-tight" style={{ color: '#232323' }}>
-                        {currentLesson.content.heading}
-                      </h3>
-                      <div className="flex items-center gap-2 mt-3 text-[16px] flex-wrap" style={{ color: '#8D8D8D' }}>
-                        <span
-                          className="inline-flex items-center gap-1 text-[16px] font-medium"
-                          style={{ color: '#460466', background: '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
-                        >
-                          <FileText className="w-4 h-4" />
-                          {t("index.instruction")}
-                        </span>
-                        <span className="inline-flex items-center gap-1"><Eye className="w-4 h-4" />{currentLesson.content.views}</span>
-                        <span className="inline-flex items-center gap-1"><Clock className="w-4 h-4" />{currentLesson.content.readMin} мин</span>
-                      </div>
                       <div
-                        className="mt-4 space-y-4 overflow-y-auto pr-1 flex-1 [&::-webkit-scrollbar]:hidden"
+                        className="overflow-y-auto pr-1 flex-1 [&::-webkit-scrollbar]:hidden"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', paddingBottom: 96 }}
                       >
+                        <h3 className="text-[28px] font-semibold leading-tight" style={{ color: '#232323' }}>
+                          {currentLesson.content.heading}
+                        </h3>
+                        <div className="flex items-center gap-5 mt-3 text-[16px] flex-wrap" style={{ color: '#8D8D8D' }}>
+                          <span
+                            className="inline-flex items-center gap-1 text-[16px] font-medium"
+                            style={{ color: '#460466', background: '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
+                          >
+                            <FileText className="w-4 h-4" />
+                            {t("index.instruction")}
+                          </span>
+                          <span className="inline-flex items-center gap-1"><Eye className="w-4 h-4" />{currentLesson.content.views}</span>
+                          <span className="inline-flex items-center gap-1"><Clock className="w-4 h-4" />{currentLesson.content.readMin} мин</span>
+                        </div>
+                        <div className="mt-4 space-y-4">
                         {currentLesson.content.sections.slice(0, 12).map((s, i) => {
                           if (s.type === "h2") return <h4 key={i} className="text-[22px] font-semibold" style={{ color: '#232323' }}>{s.text}</h4>;
                           if (s.type === "h3") return <h5 key={i} className="text-[18px] font-semibold" style={{ color: '#232323' }}>{s.text}</h5>;
@@ -814,6 +815,7 @@ const Index = () => {
                         <p className="text-[17px] leading-[1.55]" style={{ color: '#464646' }}>
                           Начни с малого: возьми один-два недорогих подарка из свежего дропа, поторгуй ими неделю, посмотри как меняется цена. Это даст реальное понимание рынка гораздо быстрее, чем любая теория. А дальше уже можно масштабировать стратегию.
                         </p>
+                        </div>
                       </div>
                     </div>
                   )}
