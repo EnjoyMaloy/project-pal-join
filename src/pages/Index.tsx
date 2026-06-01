@@ -880,7 +880,7 @@ const Index = () => {
                       style={{
                         bottom: '100%',
                         height: 90,
-                        background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 30%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0.9) 85%, rgba(255,255,255,1) 100%)',
+                        background: `linear-gradient(to bottom, rgba(${lessonColors.fadeRgb},0) 0%, rgba(${lessonColors.fadeRgb},0.2) 30%, rgba(${lessonColors.fadeRgb},0.6) 60%, rgba(${lessonColors.fadeRgb},0.9) 85%, rgba(${lessonColors.fadeRgb},1) 100%)`,
                       }}
                     />
 
@@ -889,8 +889,9 @@ const Index = () => {
                   </>
                 )}
                 {kind !== "image" && (
-                  <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 0, top: 0, background: '#FFFFFF', zIndex: -1 }} />
+                  <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 0, top: 0, background: lessonColors.surface, zIndex: -1 }} />
                 )}
+
                 {(() => {
                   const isInstruction = kind === "instruction";
                   const pct = Math.round(instructionProgress * 100);
