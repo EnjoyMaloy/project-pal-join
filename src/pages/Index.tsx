@@ -690,66 +690,172 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Stories overlay */}
-      {storyIndex !== null && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4" onClick={() => setStoryIndex(null)}>
-          <div
-            className="relative bg-background rounded-2xl overflow-hidden flex flex-col"
-            style={{ width: "min(400px, 100%)", height: "min(700px, 90vh)" }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex gap-1.5 p-3 pb-0">
-              {lessonsData.map((_, i) => (
-                <div
-                  key={i}
-                  className={`h-1 flex-1 rounded-full transition-colors ${
-                    i === storyIndex ? "bg-primary" : i < storyIndex ? "bg-primary/40" : "bg-border"
-                  }`}
-                />
-              ))}
-            </div>
-            <div className="flex items-center justify-between px-4 py-3">
-              <span className="text-subh-14 text-foreground">{t("index.lesson")} {lessonsData[storyIndex].number}</span>
-              <button onClick={() => setStoryIndex(null)} className="text-muted-foreground hover:text-foreground">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="flex-1 overflow-y-auto px-4 pb-4">
-              <h2 className="text-h3 text-foreground mb-3">{lessonsData[storyIndex].content.heading}</h2>
-              <div className="space-y-3">
-                {lessonsData[storyIndex].content.sections.map((s, i) => {
-                  if (s.type === "h2") return <h3 key={i} className="text-[18px] font-semibold text-foreground mt-3">{s.text}</h3>;
-                  if (s.type === "h3") return <h4 key={i} className="text-subh-14 text-foreground mt-2">{s.text}</h4>;
-                  if (s.type === "p") return <p key={i} className="text-body-14 text-foreground/80 leading-relaxed">{renderRuns(s.runs)}</p>;
-                  if (s.type === "list") return (
-                    <ul key={i} className="text-body-14 text-foreground/80 space-y-1 pl-4 list-disc">
-                      {s.items.map((it, j) => <li key={j}>{renderRuns(it)}</li>)}
-                    </ul>
-                  );
-                  return null;
-                })}
+      {/* Stories overlay (5 steps per lesson) */}
+      {lessonOpen && currentLesson && (() => {
+        const STEPS: Array<"image" | "instruction" | "quiz"> = ["image", "image", "instruction", "quiz", "image"];
+        const step = Math.min(Math.max(storyIndex ?? 0, 0), STEPS.length - 1);
+        const setStep = (n: number) => setStoryIndex(n);
+        const close = () => { setLessonOpen(false); setStoryIndex(null); };
+        const next = () => { if (step < STEPS.length - 1) setStep(step + 1); else close(); };
+        const prev = () => { if (step > 0) setStep(step - 1); };
+        const kind = STEPS[step];
+
+        return (
+          <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onClick={close}>
+            <div
+              className="relative rounded-2xl overflow-hidden flex flex-col"
+              style={{
+                width: "min(420px, 100%)",
+                height: "min(760px, 92vh)",
+                background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : "#FFFFFF",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Progress segments */}
+              <div className="flex gap-1.5 p-3 pb-2 relative z-10">
+                {STEPS.map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-1 flex-1 rounded-full overflow-hidden"
+                    style={{ background: 'rgba(255,255,255,0.35)' }}
+                  >
+                    <div
+                      className="h-full rounded-full transition-all"
+                      style={{
+                        width: i < step ? '100%' : i === step ? '60%' : '0%',
+                        background: '#FFFFFF',
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Header */}
+              <div className="flex items-center justify-between px-4 pb-2 relative z-10">
+                <span
+                  className="text-[12px] font-medium uppercase tracking-[0.04em]"
+                  style={{ color: kind === "image" ? '#FFFFFF' : '#8D8D8D' }}
+                >
+                  {t("index.lesson")} {currentLesson.number} · {step + 1}/{STEPS.length}
+                </span>
+                <button
+                  onClick={close}
+                  style={{ color: kind === "image" ? '#FFFFFF' : '#232323' }}
+                  className="hover:opacity-70 transition-opacity"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Tap zones */}
+              <button
+                aria-label="prev"
+                onClick={prev}
+                className="absolute left-0 top-0 w-1/3 h-full z-0"
+              />
+              <button
+                aria-label="next"
+                onClick={next}
+                className="absolute right-0 top-0 w-1/3 h-full z-0"
+              />
+
+              {/* Step content */}
+              <div className="flex-1 overflow-y-auto px-5 py-4 relative z-[1] pointer-events-none">
+                <div className="pointer-events-auto h-full flex flex-col">
+                  {kind === "image" && (
+                    <div className="flex-1 flex flex-col items-center justify-center text-center">
+                      <div
+                        className="w-full aspect-[4/5] rounded-2xl border-2 border-dashed flex items-center justify-center"
+                        style={{ borderColor: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.15)' }}
+                      >
+                        <span className="text-[14px]" style={{ color: '#FFFFFF' }}>Изображение</span>
+                      </div>
+                      <h3 className="mt-5 text-[22px] font-semibold leading-tight" style={{ color: '#FFFFFF' }}>
+                        {currentLesson.title}
+                      </h3>
+                      <p className="mt-2 text-[14px]" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                        {currentLesson.description}
+                      </p>
+                    </div>
+                  )}
+
+                  {kind === "instruction" && (
+                    <div className="flex-1 flex flex-col">
+                      <span
+                        className="inline-flex self-start items-center gap-1.5 text-[12px] font-medium mb-3"
+                        style={{ color: '#460466', background: '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
+                      >
+                        <FileText className="w-3.5 h-3.5" />
+                        {t("index.instruction")}
+                      </span>
+                      <h3 className="text-[20px] font-semibold leading-tight" style={{ color: '#232323' }}>
+                        {currentLesson.content.heading}
+                      </h3>
+                      <div className="flex items-center gap-2 mt-3 text-[12px]" style={{ color: '#8D8D8D' }}>
+                        <span className="inline-flex items-center gap-1"><Eye className="w-3 h-3" />{currentLesson.content.views}</span>
+                        <span className="inline-flex items-center gap-1"><Clock className="w-3 h-3" />{currentLesson.content.readMin} мин</span>
+                      </div>
+                      <div className="mt-4 space-y-3 overflow-y-auto pr-1">
+                        {currentLesson.content.sections.slice(0, 4).map((s, i) => {
+                          if (s.type === "h2") return <h4 key={i} className="text-[15px] font-semibold" style={{ color: '#232323' }}>{s.text}</h4>;
+                          if (s.type === "h3") return <h5 key={i} className="text-[13px] font-semibold" style={{ color: '#232323' }}>{s.text}</h5>;
+                          if (s.type === "p") return <p key={i} className="text-[13px] leading-[1.5]" style={{ color: '#464646' }}>{renderRuns(s.runs)}</p>;
+                          return null;
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {kind === "quiz" && (
+                    <div className="flex-1 flex flex-col">
+                      <span
+                        className="inline-flex self-start items-center text-[12px] font-medium mb-3"
+                        style={{ color: '#460466', background: '#E8DCFB', padding: '4px 10px', borderRadius: 6 }}
+                      >
+                        Квиз
+                      </span>
+                      <h3 className="text-[20px] font-semibold leading-tight" style={{ color: '#232323' }}>
+                        Что такое Telegram Gifts?
+                      </h3>
+                      <div className="mt-5 space-y-2">
+                        {[
+                          "Цифровые активы на блокчейне TON",
+                          "Обычные стикеры в чате",
+                          "Платная подписка на каналы",
+                        ].map((opt, i) => (
+                          <button
+                            key={i}
+                            className="w-full text-left text-[14px] rounded-xl border transition-colors hover:bg-violet-super-light"
+                            style={{ color: '#232323', borderColor: '#EBE9EA', padding: '12px 14px', background: '#F7F7F8' }}
+                          >
+                            {opt}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Bottom button */}
+              <div className="p-4 relative z-[2]" style={{ background: kind === "image" ? 'transparent' : '#FFFFFF' }}>
+                <button
+                  onClick={next}
+                  className="w-full text-[16px] font-medium transition-opacity hover:opacity-90"
+                  style={{
+                    background: '#232323',
+                    color: '#FFFFFF',
+                    borderRadius: 12,
+                    height: 52,
+                  }}
+                >
+                  {step < STEPS.length - 1 ? t("index.next") : t("index.finish")}
+                </button>
               </div>
             </div>
-            <div className="p-4 border-t border-border">
-              {storyIndex < lessonsData.length - 1 ? (
-                <button
-                  onClick={() => setStoryIndex(storyIndex + 1)}
-                  className="w-full text-btn-medium bg-primary text-primary-foreground py-3 rounded-xl hover:bg-violet-dark transition-colors"
-                >
-                  {t("index.next")}
-                </button>
-              ) : (
-                <button
-                  onClick={() => setStoryIndex(null)}
-                  className="w-full text-btn-medium bg-primary text-primary-foreground py-3 rounded-xl hover:bg-violet-dark transition-colors"
-                >
-                  {t("index.finish")}
-                </button>
-              )}
-            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 };
