@@ -783,7 +783,10 @@ const Index = () => {
                         <span className="inline-flex items-center gap-1"><Eye className="w-4 h-4" />{currentLesson.content.views}</span>
                         <span className="inline-flex items-center gap-1"><Clock className="w-4 h-4" />{currentLesson.content.readMin} мин</span>
                       </div>
-                      <div className="mt-4 space-y-4 overflow-y-auto pr-1 flex-1">
+                      <div
+                        className="mt-4 space-y-4 overflow-y-auto pr-1 flex-1 [&::-webkit-scrollbar]:hidden"
+                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', paddingBottom: 96 }}
+                      >
                         {currentLesson.content.sections.slice(0, 12).map((s, i) => {
                           if (s.type === "h2") return <h4 key={i} className="text-[22px] font-semibold" style={{ color: '#232323' }}>{s.text}</h4>;
                           if (s.type === "h3") return <h5 key={i} className="text-[18px] font-semibold" style={{ color: '#232323' }}>{s.text}</h5>;
