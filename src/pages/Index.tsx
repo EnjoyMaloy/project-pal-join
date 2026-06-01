@@ -564,7 +564,7 @@ const Index = () => {
                           {/* Instruction badge */}
                           {isReal && lesson.hasInstruction && (
                             <g transform={`translate(${pos.cx + 22}, ${pos.cy + 22})`}>
-                              <circle r="9" fill="#FFFFFF" stroke="#BF96FF" strokeWidth="1" />
+                              <circle r="9" fill="#FFFFFF" stroke="#460466" strokeWidth="1" />
                               <g transform="translate(-5.4,-5.4) scale(0.45)" stroke="#460466" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
                                 <polyline points="14 2 14 8 20 8" />
@@ -585,14 +585,21 @@ const Index = () => {
                       if (!pos) return null;
 
                       return (
-                        <foreignObject x={pos.cx - 36} y={pos.cy + 36} width="72" height="28">
+                        <foreignObject x={pos.cx - 50} y={pos.cy + 34} width="100" height="40">
                           <div className="flex justify-center">
                             <button
                               type="button"
                               onClick={(e) => { e.stopPropagation(); setActiveLesson(currentIdx); setLessonOpen(true); }}
-                              className="text-[13px] font-medium text-foreground bg-background rounded-full px-3 py-0.5 shadow-sm whitespace-nowrap cursor-pointer pointer-events-auto"
+                              className="text-[15px] font-medium whitespace-nowrap cursor-pointer pointer-events-auto"
+                              style={{
+                                color: '#460466',
+                                background: '#FFFFFF',
+                                borderRadius: 10,
+                                padding: '6px 16px',
+                                boxShadow: '0 2px 6px rgba(70, 4, 102, 0.12)',
+                              }}
                             >
-                              {lessonsData[currentIdx].progress > 0 ? t("index.continue") : t("index.start")}
+                              {t("index.start")}
                             </button>
                           </div>
                         </foreignObject>
