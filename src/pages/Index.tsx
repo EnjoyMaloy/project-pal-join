@@ -227,12 +227,20 @@ const LockIcon = ({ cx, cy }: { cx: number; cy: number }) => (
   </g>
 );
 
-// 4-node positions for the lesson map
+// 4-node positions for the lesson map (ported from /course/1/lessons)
 const NODES_4 = [
-  { cx: 120, cy: 40 },
-  { cx: 286, cy: 40 },
-  { cx: 286, cy: 169 },
-  { cx: 120, cy: 169 },
+  { cx: 120.922, cy: 32 },
+  { cx: 285.922, cy: 32 },
+  { cx: 285.922, cy: 161 },
+  { cx: 120.922, cy: 161 },
+];
+
+// Solid "completed" path segments matching the dashed snake route
+const COMPLETED_PATHS = [
+  "",
+  "M106.701 32H285.922",
+  "M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H285.922",
+  "M106.701 32H350.286C384.922 32 413 60.08 413 94.7184V99.1983C413 133.837 384.922 161.917 350.286 161.917H106.701",
 ];
 
 const Index = () => {
