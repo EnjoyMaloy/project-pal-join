@@ -726,9 +726,10 @@ const Index = () => {
             <div
               className="relative overflow-hidden flex flex-col w-full h-full sm:rounded-2xl sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)]"
               style={{
-                background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : "#FFFFFF",
+                background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : lessonColors.surface,
               }}
               onClick={(e) => e.stopPropagation()}
+
             >
 
               {/* Progress bar — single continuous line at top */}
