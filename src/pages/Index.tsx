@@ -746,7 +746,7 @@ const Index = () => {
               />
 
               {/* Step content */}
-              <div className="flex-1 overflow-y-auto px-5 py-4 relative z-[1] pointer-events-none">
+              <div className="flex-1 overflow-y-auto px-5 pt-8 pb-4 relative z-[1] pointer-events-none">
                 <div className="pointer-events-auto h-full flex flex-col">
                   {kind === "image" && (
                     <div className="flex-1 flex flex-col items-center justify-center text-center">
