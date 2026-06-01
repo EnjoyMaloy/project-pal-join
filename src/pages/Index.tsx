@@ -770,7 +770,7 @@ const Index = () => {
                     <div className="flex-1 flex flex-col min-h-0">
                       <div
                         className="overflow-y-auto pr-1 flex-1 [&::-webkit-scrollbar]:hidden"
-                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', paddingBottom: 96 }}
+                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', paddingBottom: 96, fontFamily: "'Inter', sans-serif" }}
                         onScroll={(e) => {
                           const el = e.currentTarget;
                           const max = el.scrollHeight - el.clientHeight;
