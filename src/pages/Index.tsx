@@ -340,7 +340,7 @@ const Index = () => {
         </div>
       )}
 
-      <div className={`max-w-6xl mx-auto px-4 py-8 md:py-12 ${mobileTab === "instructions" ? "hidden md:block" : ""}`}>
+      <div className={`w-full px-4 md:px-8 py-8 md:py-12 ${mobileTab === "instructions" ? "hidden md:block" : ""}`}>
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-h1 text-foreground mb-3">{t("index.title")}</h1>
@@ -447,8 +447,9 @@ const Index = () => {
                 </div>
 
                 {/* SVG map */}
-                <div className="relative z-10 w-full">
-                  <svg viewBox="0 0 418 600" fill="none" preserveAspectRatio="xMidYMid meet" className="w-full h-auto block">
+                <div className="relative z-10 w-full flex justify-center">
+                  <svg viewBox="0 0 418 600" fill="none" preserveAspectRatio="xMidYMid meet" className="w-full max-w-[640px] h-auto block">
+
 
                     <defs>
                       <filter id="idx_filter_i" x="-0.1" y="-0.1" width="1.2" height="1.2" colorInterpolationFilters="sRGB">
