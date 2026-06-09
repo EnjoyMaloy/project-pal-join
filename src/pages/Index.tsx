@@ -738,7 +738,7 @@ const Index = () => {
         return (
           <div className="fixed inset-0 z-[60] bg-black/80 flex items-center justify-center sm:p-4" onClick={close}>
             <div
-              className="relative overflow-hidden flex flex-col w-full h-full sm:rounded-2xl sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)]"
+              className={`relative flex flex-col w-full h-full sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)] ${kind === "video" ? "" : "overflow-hidden sm:rounded-2xl"}`}
               style={{
                 background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : kind === "video" ? "#000000" : lessonColors.surface,
               }}
@@ -796,7 +796,7 @@ const Index = () => {
                   )}
 
                   {kind === "video" && (
-                    <div className="flex-1 flex flex-col items-center justify-center text-center relative">
+                    <div className="flex-1 flex flex-col items-center justify-center text-center relative -mx-5">
                       {/* Rotate toggle */}
                       <button
                         onClick={(e) => { e.stopPropagation(); setVideoRotated(v => !v); }}
@@ -826,7 +826,6 @@ const Index = () => {
                         <div
                           className="relative w-full h-full overflow-hidden flex items-center justify-center"
                           style={{
-                            borderRadius: 16,
                             background: '#000000',
                           }}
                         >
