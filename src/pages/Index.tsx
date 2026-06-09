@@ -841,7 +841,7 @@ const Index = () => {
               />
 
               {/* Step content */}
-              <div className="flex-1 overflow-y-auto px-5 pb-4 relative z-[1] pointer-events-none">
+              <div className={`flex-1 overflow-y-auto px-5 relative z-[1] pointer-events-none ${kind === "video" ? 'pb-0' : 'pb-4'}`}>
                 <div className="pointer-events-auto h-full flex flex-col">
                   {kind === "image" && (
                     <div className="flex-1 flex flex-col items-center justify-center text-center">
