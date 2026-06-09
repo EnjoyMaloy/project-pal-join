@@ -1024,7 +1024,7 @@ const Index = () => {
                         </div>
                         <div className="flex items-center justify-between gap-2" style={{ color: '#FFF' }}>
                           <div
-                            className="flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0"
+                            className={`flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 ${videoOrientation === 'portrait' ? '' : 'sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0'}`}
                           >
                             <button
                               onClick={(e) => {
@@ -1058,7 +1058,7 @@ const Index = () => {
                           </div>
 
                           <div
-                            className="flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0"
+                            className={`flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 ${videoOrientation === 'portrait' ? '' : 'sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0'}`}
                           >
                             <button
                               onClick={(e) => {
@@ -1099,17 +1099,19 @@ const Index = () => {
                                 <RotateCw className="w-6 h-6" />
                               </button>
                             )}
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                const v = videoRef.current; if (!v) return;
-                                if (v.requestFullscreen) v.requestFullscreen();
-                              }}
-                              className="p-2 hover:opacity-70 transition-opacity hidden sm:inline-flex"
-                              aria-label="fullscreen"
-                            >
-                              <Maximize2 className="w-6 h-6" />
-                            </button>
+                            {videoOrientation !== 'portrait' && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const v = videoRef.current; if (!v) return;
+                                  if (v.requestFullscreen) v.requestFullscreen();
+                                }}
+                                className="p-2 hover:opacity-70 transition-opacity hidden sm:inline-flex"
+                                aria-label="fullscreen"
+                              >
+                                <Maximize2 className="w-6 h-6" />
+                              </button>
+                            )}
                           </div>
                         </div>
 
