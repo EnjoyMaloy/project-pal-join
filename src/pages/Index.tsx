@@ -302,6 +302,7 @@ const Index = () => {
     setVideoCurrent(0);
     setVideoMuted(false);
     setVideoRate(1);
+    setVideoWatchedProgress(0);
     if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; videoRef.current.playbackRate = 1; }
   }, [storyIndex]);
   const [popoverIndex, setPopoverIndex] = useState<number | null>(null);
