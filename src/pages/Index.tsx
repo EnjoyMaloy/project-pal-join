@@ -317,6 +317,8 @@ const Index = () => {
     setVideoMuted(false);
     setVideoRate(1);
     setVideoWatchedProgress(0);
+    setVideoUIVisible(true);
+    if (videoUITimerRef.current) { window.clearTimeout(videoUITimerRef.current); videoUITimerRef.current = null; }
     if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; videoRef.current.playbackRate = 1; }
   }, [storyIndex]);
   const [popoverIndex, setPopoverIndex] = useState<number | null>(null);
