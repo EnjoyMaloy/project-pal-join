@@ -290,6 +290,7 @@ const Index = () => {
   const [videoRate, setVideoRate] = useState(1);
   const [videoQuality, setVideoQuality] = useState<string>("Авто");
   const [videoOrientation, setVideoOrientation] = useState<"landscape" | "portrait">("landscape");
+  const [videoWatchedProgress, setVideoWatchedProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const RATES = [1, 1.25, 1.5, 2, 0.5, 0.75];
   const QUALITIES = ["Авто", "1080p", "720p", "480p", "360p"];
