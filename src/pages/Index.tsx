@@ -1343,9 +1343,9 @@ const Index = () => {
 
                 {/* Bottom: transparent controls overlay */}
                 <div
-                  className="absolute bottom-0 left-0 right-0 z-[3] px-6 pt-10 pb-5 transition-opacity duration-300"
+                  className="absolute bottom-0 left-0 right-0 z-[3] px-5 pt-10 pb-5 transition-opacity duration-300"
                   style={{
-                    background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%)',
+                    background: 'transparent',
                     opacity: videoUIVisible ? 1 : 0,
                     pointerEvents: videoUIVisible ? undefined : 'none',
                     color: '#FFF',
