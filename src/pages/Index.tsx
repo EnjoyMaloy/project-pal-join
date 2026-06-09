@@ -956,7 +956,7 @@ const Index = () => {
 
                       {/* Native-style control bar — transparent overlay on mobile, solid on desktop */}
                       <div
-                        className="px-5 pt-4 pb-3 transition-opacity duration-300 absolute bottom-[72px] left-0 right-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black"
+                        className={`px-5 pt-4 transition-opacity duration-300 absolute left-0 right-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black ${videoOrientation === 'portrait' ? 'bottom-0 pb-4' : 'bottom-[72px] pb-3 sm:bottom-0'}`}
                         style={{
                           opacity: videoUIVisible ? 1 : 0,
                           pointerEvents: videoUIVisible ? undefined : 'none',
@@ -1111,6 +1111,43 @@ const Index = () => {
                             </button>
                           </div>
                         </div>
+
+                        {videoOrientation === 'portrait' && (
+                          <div className="mt-4 px-0">
+                            {(() => {
+                              const progress = videoWatchedProgress;
+                              const displayProgress = Math.min(progress / 0.9, 1);
+                              const pct = Math.round(displayProgress * 100);
+                              const isActive = progress >= 0.9;
+                              const filled = '#FF7D60';
+                              const empty = '#FFD0C2';
+                              const bg = `linear-gradient(to right, ${filled} 0%, ${filled} ${pct}%, ${empty} ${pct}%, ${empty} 100%)`;
+                              return (
+                                <button
+                                  onClick={isActive ? next : undefined}
+                                  disabled={!isActive}
+                                  className="transition-all w-full sm:hidden"
+                                  style={{
+                                    background: bg,
+                                    color: '#FFFFFF',
+                                    fontFamily: '"TT Commons", sans-serif',
+                                    fontWeight: 600,
+                                    fontStyle: 'normal',
+                                    fontSize: 18,
+                                    lineHeight: '18px',
+                                    borderRadius: 12,
+                                    height: 52,
+                                    cursor: isActive ? 'pointer' : 'default',
+                                    opacity: isActive ? 1 : 0.95,
+                                    boxShadow: isActive ? '0 4px 0 0 #C75A40' : 'none',
+                                  }}
+                                >
+                                  {step < STEPS.length - 1 ? t("index.next") : t("index.finish")}
+                                </button>
+                              );
+                            })()}
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
