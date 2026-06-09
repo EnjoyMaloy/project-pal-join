@@ -790,6 +790,25 @@ const Index = () => {
                 if (e.pointerType === "mouse") hideVideoUI();
               } : undefined}
             >
+              {kind === "video" && videoOrientation === 'portrait' && (
+                <video
+                  src={currentVideoUrl}
+                  playsInline
+                  muted
+                  aria-hidden
+                  className="absolute inset-0 w-full h-full pointer-events-none sm:hidden"
+                  style={{ objectFit: 'cover', objectPosition: 'center' }}
+                  ref={(el) => {
+                    if (!el) return;
+                    const main = videoRef.current;
+                    if (main && Math.abs(el.currentTime - main.currentTime) > 0.3) {
+                      try { el.currentTime = main.currentTime; } catch {}
+                    }
+                    if (main) el.playbackRate = main.playbackRate;
+                    if (videoPlaying) { el.play().catch(() => {}); } else { el.pause(); }
+                  }}
+                />
+              )}
 
 
               {/* Progress bar — single continuous line at top */}
@@ -960,7 +979,7 @@ const Index = () => {
 
                       {/* Native-style control bar — transparent overlay on mobile, solid on desktop */}
                       <div
-                        className={`px-5 pt-4 pb-3 transition-opacity duration-300 absolute left-0 right-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black ${videoOrientation === 'portrait' ? 'bottom-[72px] sm:bottom-0' : 'bottom-0'}`}
+                        className="px-5 pt-4 pb-3 transition-opacity duration-300 absolute bottom-[72px] left-0 right-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black"
                         style={{
                           opacity: videoUIVisible ? 1 : 0,
                           pointerEvents: videoUIVisible ? undefined : 'none',
