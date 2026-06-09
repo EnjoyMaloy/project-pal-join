@@ -1023,8 +1023,16 @@ const Index = () => {
                             <div className="h-full" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FFF' }} />
                           </div>
                         </div>
-                        <div className="flex items-center justify-between" style={{ color: '#FFF' }}>
-                          <div className="flex items-center gap-2">
+                        <div className="flex items-center justify-between gap-2" style={{ color: '#FFF' }}>
+                          <div
+                            className="flex items-center gap-1 rounded-full px-2 py-1 sm:rounded-none sm:px-0 sm:py-0 sm:gap-2"
+                            style={{
+                              background: 'rgba(0,0,0,0.28)',
+                              backdropFilter: 'blur(18px) saturate(1.4)',
+                              WebkitBackdropFilter: 'blur(18px) saturate(1.4)',
+                              border: '1px solid rgba(255,255,255,0.08)',
+                            }}
+                          >
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
@@ -1036,7 +1044,7 @@ const Index = () => {
                             >
                               {videoPlaying ? <Pause className="w-6 h-6" fill="#FFF" /> : <Play className="w-6 h-6" fill="#FFF" />}
                             </button>
-                            <span className="text-[15px] font-medium tabular-nums" style={{ fontFamily: '"TT Commons", sans-serif' }}>
+                            <span className="text-[15px] font-medium tabular-nums px-1" style={{ fontFamily: '"TT Commons", sans-serif' }}>
                               {(() => {
                                 const remaining = Math.max(0, (videoDuration || 0) - videoCurrent);
                                 const m = Math.floor(remaining / 60);
@@ -1056,7 +1064,15 @@ const Index = () => {
                             </button>
                           </div>
 
-                          <div className="flex items-center gap-2">
+                          <div
+                            className="flex items-center gap-1 rounded-full px-2 py-1 sm:rounded-none sm:px-0 sm:py-0 sm:gap-2"
+                            style={{
+                              background: 'rgba(0,0,0,0.28)',
+                              backdropFilter: 'blur(18px) saturate(1.4)',
+                              WebkitBackdropFilter: 'blur(18px) saturate(1.4)',
+                              border: '1px solid rgba(255,255,255,0.08)',
+                            }}
+                          >
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
