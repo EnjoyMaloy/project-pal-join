@@ -784,59 +784,39 @@ const Index = () => {
 
                   {kind === "video" && (
                     <div className="flex-1 flex flex-col items-center justify-center text-center relative">
-                      {/* Rotate / orientation toggle */}
+                      {/* Rotate toggle */}
                       <button
                         onClick={(e) => { e.stopPropagation(); setVideoRotated(v => !v); }}
-                        className="absolute top-12 right-2 z-10 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium transition-all hover:scale-105"
+                        className="absolute top-12 right-2 z-10 inline-flex items-center justify-center rounded-full transition-all hover:scale-105"
                         style={{
-                          fontFamily: '"TT Commons", sans-serif',
+                          width: 36,
+                          height: 36,
                           background: 'rgba(255,255,255,0.12)',
                           color: '#FFFFFF',
                           backdropFilter: 'blur(8px)',
                           border: '1px solid rgba(255,255,255,0.2)',
                         }}
-                        aria-label="toggle orientation"
+                        aria-label="rotate"
                       >
-                        {videoRotated ? <Monitor className="w-3.5 h-3.5" /> : <Smartphone className="w-3.5 h-3.5" />}
-                        {videoRotated
-                          ? (t("index.videoLandscape") || "Горизонтально")
-                          : (t("index.videoPortrait") || "Как на телефоне")}
-                        <RotateCw className="w-3.5 h-3.5 opacity-70" />
+                        <RotateCw className="w-4 h-4" />
                       </button>
 
                       <div
-                        className="relative flex items-center justify-center transition-all duration-500 ease-out"
+                        className="relative flex items-center justify-center transition-transform duration-500 ease-out"
                         style={{
-                          width: videoRotated ? '60%' : '100%',
-                          aspectRatio: videoRotated ? '9 / 16' : '16 / 9',
+                          width: '100%',
+                          aspectRatio: '16 / 9',
                           maxHeight: '70vh',
+                          transform: videoRotated ? 'rotate(90deg) scale(1.6)' : 'rotate(0deg) scale(1)',
                         }}
                       >
-                        {/* Phone frame when rotated */}
-                        {videoRotated && (
-                          <div
-                            className="absolute inset-0 rounded-[28px] pointer-events-none"
-                            style={{
-                              border: '6px solid #232323',
-                              boxShadow: '0 10px 40px rgba(0,0,0,0.4), inset 0 0 0 1px #464646',
-                            }}
-                          />
-                        )}
                         <div
                           className="relative w-full h-full overflow-hidden flex items-center justify-center"
                           style={{
-                            borderRadius: videoRotated ? 22 : 16,
+                            borderRadius: 16,
                             background: 'linear-gradient(135deg,#232323 0%,#000000 100%)',
                           }}
                         >
-                          {/* Notch when phone */}
-                          {videoRotated && (
-                            <div
-                              className="absolute top-2 left-1/2 -translate-x-1/2 z-10 rounded-full"
-                              style={{ width: 80, height: 18, background: '#000000' }}
-                            />
-                          )}
-                          {/* Play button */}
                           <button
                             className="relative z-[1] inline-flex items-center justify-center rounded-full transition-transform hover:scale-110"
                             style={{
@@ -849,7 +829,6 @@ const Index = () => {
                           >
                             <Play className="w-7 h-7" style={{ color: '#000000', marginLeft: 3 }} fill="#000000" />
                           </button>
-                          {/* Mock timeline */}
                           <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2">
                             <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.25)' }}>
                               <div className="h-full" style={{ width: '32%', background: '#FF7D60' }} />
@@ -861,16 +840,16 @@ const Index = () => {
                         </div>
                       </div>
 
-                      <h3 className="mt-5 text-[20px] font-semibold leading-tight px-4" style={{ color: '#FFFFFF', fontFamily: '"TT Commons", sans-serif' }}>
-                        {currentLesson.title}
-                      </h3>
-                      <p className="mt-1.5 text-[13px] px-6" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: '"TT Commons", sans-serif' }}>
-                        {videoRotated
-                          ? (t("index.videoHintPortrait") || "Предпросмотр как на вертикальном экране телефона")
-                          : (t("index.videoHintLandscape") || "Нажми на иконку, чтобы увидеть, как видео смотрится с телефона")}
-                      </p>
+                      {!videoRotated && (
+                        <>
+                          <h3 className="mt-5 text-[20px] font-semibold leading-tight px-4" style={{ color: '#FFFFFF', fontFamily: '"TT Commons", sans-serif' }}>
+                            {currentLesson.title}
+                          </h3>
+                        </>
+                      )}
                     </div>
                   )}
+
 
                   {kind === "instruction" && (
                     <div className="flex-1 flex flex-col min-h-0">
