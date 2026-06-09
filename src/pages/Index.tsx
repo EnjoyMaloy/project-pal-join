@@ -829,18 +829,14 @@ const Index = () => {
                           playsInline
                           muted
                           aria-hidden
-                          className="absolute pointer-events-none"
+                          className="absolute inset-0 w-full h-full pointer-events-none"
                           style={{
-                            top: '-60%',
-                            left: '-50%',
-                            width: '200%',
-                            height: '220%',
                             objectFit: 'cover',
                             objectPosition: 'center',
                             filter: 'blur(100px) saturate(1.8)',
                             opacity: 0.75,
-                            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,1) 38%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0) 80%)',
-                            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,1) 38%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0) 80%)',
+                            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 12%, rgba(0,0,0,1) 28%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.5) 78%, rgba(0,0,0,0) 88%)',
+                            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 12%, rgba(0,0,0,1) 28%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.5) 78%, rgba(0,0,0,0) 88%)',
                           }}
                           ref={(el) => {
                             if (!el) return;
