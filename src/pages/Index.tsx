@@ -3,6 +3,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Eye, Clock, Calendar, RotateCw, Play, Smartphone, Monitor } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
+import rehcVideo from "@/assets/rehc.mp4.asset.json";
 
 
 const IconActive = ({ className }: { className?: string }) => (
