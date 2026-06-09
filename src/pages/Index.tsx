@@ -802,11 +802,33 @@ const Index = () => {
 
                   {kind === "video" && (
                     <div className="flex-1 flex flex-col text-center relative -mx-5 min-h-0">
-                      {/* Video stage — letterboxed area */}
+                      {/* Video stage — letterboxed area with ambient glow */}
                       <div
-                        className="flex-1 flex items-center justify-center relative min-h-0"
-                        style={{ background: '#F2F2F2' }}
+                        className="flex-1 flex items-center justify-center relative min-h-0 overflow-hidden"
+                        style={{ background: '#000' }}
                       >
+                        {/* Ambient backlight — blurred copy of the video */}
+                        <video
+                          src={rehcVideo.url}
+                          playsInline
+                          muted
+                          aria-hidden
+                          className="absolute inset-0 w-full h-full pointer-events-none"
+                          style={{
+                            objectFit: 'cover',
+                            filter: 'blur(60px) saturate(1.6)',
+                            transform: 'scale(1.3)',
+                            opacity: 0.7,
+                          }}
+                          ref={(el) => {
+                            if (!el) return;
+                            const main = videoRef.current;
+                            if (main && Math.abs(el.currentTime - main.currentTime) > 0.3) {
+                              try { el.currentTime = main.currentTime; } catch {}
+                            }
+                            if (videoPlaying) { el.play().catch(() => {}); } else { el.pause(); }
+                          }}
+                        />
                         <div
                           className="relative flex items-center justify-center transition-transform duration-500 ease-out"
                           style={{
