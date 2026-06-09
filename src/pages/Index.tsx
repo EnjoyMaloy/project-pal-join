@@ -796,7 +796,7 @@ const Index = () => {
                   )}
 
                   {kind === "video" && (
-                    <div className="flex-1 flex flex-col items-center justify-center text-center relative">
+                    <div className="flex-1 flex flex-col items-center justify-center text-center relative -mx-5">
                       {/* Rotate toggle */}
                       <button
                         onClick={(e) => { e.stopPropagation(); setVideoRotated(v => !v); }}
