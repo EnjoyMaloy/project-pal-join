@@ -1024,7 +1024,13 @@ const Index = () => {
                         </div>
                         <div className="flex items-center justify-between gap-2" style={{ color: '#FFF' }}>
                           <div
-                            className={`flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 ${videoOrientation === 'portrait' ? '' : 'sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0'}`}
+                            className="flex items-center gap-1 rounded-full px-2 py-1"
+                            style={{
+                              background: 'linear-gradient(180deg, rgba(140,140,140,0.45) 0%, rgba(70,70,70,0.45) 100%)',
+                              backdropFilter: 'blur(24px) saturate(1.6)',
+                              WebkitBackdropFilter: 'blur(24px) saturate(1.6)',
+                              border: '1px solid rgba(255,255,255,0.15)',
+                            }}
                           >
                             <button
                               onClick={(e) => {
@@ -1058,7 +1064,13 @@ const Index = () => {
                           </div>
 
                           <div
-                            className={`relative flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 ${videoOrientation === 'portrait' ? '' : 'sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0'}`}
+                            className="relative flex items-center gap-1 rounded-full px-2 py-1"
+                            style={{
+                              background: 'linear-gradient(180deg, rgba(140,140,140,0.45) 0%, rgba(70,70,70,0.45) 100%)',
+                              backdropFilter: 'blur(24px) saturate(1.6)',
+                              WebkitBackdropFilter: 'blur(24px) saturate(1.6)',
+                              border: '1px solid rgba(255,255,255,0.15)',
+                            }}
                           >
                             <button
                               onClick={(e) => {
@@ -1123,10 +1135,10 @@ const Index = () => {
                                     right: 0,
                                     bottom: 'calc(100% + 8px)',
                                     minWidth: 180,
-                                    background: 'rgba(20,20,20,0.55)',
-                                    backdropFilter: 'blur(24px) saturate(1.4)',
-                                    WebkitBackdropFilter: 'blur(24px) saturate(1.4)',
-                                    border: '1px solid rgba(255,255,255,0.12)',
+                                    background: 'linear-gradient(180deg, rgba(140,140,140,0.45) 0%, rgba(70,70,70,0.45) 100%)',
+                                    backdropFilter: 'blur(24px) saturate(1.6)',
+                                    WebkitBackdropFilter: 'blur(24px) saturate(1.6)',
+                                    border: '1px solid rgba(255,255,255,0.15)',
                                     boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
                                     color: '#FFF',
                                     fontFamily: '"TT Commons", sans-serif',
@@ -1593,10 +1605,10 @@ const Index = () => {
                         right: 24,
                         top: 72,
                         minWidth: 200,
-                        background: 'rgba(20,20,20,0.55)',
-                        backdropFilter: 'blur(24px) saturate(1.4)',
-                        WebkitBackdropFilter: 'blur(24px) saturate(1.4)',
-                        border: '1px solid rgba(255,255,255,0.12)',
+                        background: 'linear-gradient(180deg, rgba(140,140,140,0.45) 0%, rgba(70,70,70,0.45) 100%)',
+                        backdropFilter: 'blur(24px) saturate(1.6)',
+                        WebkitBackdropFilter: 'blur(24px) saturate(1.6)',
+                        border: '1px solid rgba(255,255,255,0.15)',
                         boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
                         color: '#FFF',
                         fontFamily: '"TT Commons", sans-serif',
