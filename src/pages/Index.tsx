@@ -289,6 +289,7 @@ const Index = () => {
   const [videoMuted, setVideoMuted] = useState(false);
   const [videoRate, setVideoRate] = useState(1);
   const [videoQuality, setVideoQuality] = useState<string>("Авто");
+  const [videoOrientation, setVideoOrientation] = useState<"landscape" | "portrait">("landscape");
   const videoRef = useRef<HTMLVideoElement>(null);
   const RATES = [1, 1.25, 1.5, 2, 0.5, 0.75];
   const QUALITIES = ["Авто", "1080p", "720p", "480p", "360p"];
@@ -746,9 +747,14 @@ const Index = () => {
         return (
           <div className="fixed inset-0 z-[60] bg-black/80 flex items-center justify-center sm:p-4" onClick={close}>
             <div
-              className={`relative flex flex-col w-full h-full transition-[width,height,max-width,max-height] duration-500 ease-out ${kind === "video" ? "sm:w-[min(1920px,96vw)] sm:h-[min(1080px,96vh)] sm:rounded-2xl overflow-hidden" : "sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)] overflow-hidden sm:rounded-2xl"}`}
+              className={`relative flex flex-col transition-[width,height,max-width,max-height] duration-500 ease-out ${kind === "video" ? "sm:rounded-2xl overflow-hidden" : "w-full h-full sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)] overflow-hidden sm:rounded-2xl"}`}
               style={{
                 background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : kind === "video" ? "#000000" : lessonColors.surface,
+                ...(kind === "video" ? (
+                  videoOrientation === "landscape"
+                    ? { width: 'min(96vw, calc(92vh * 16 / 9))', height: 'min(92vh, calc(96vw * 9 / 16))', maxWidth: 1920, maxHeight: 1080 }
+                    : { width: 'min(96vw, calc(92vh * 9 / 16), 480px)', height: 'min(92vh, calc(96vw * 16 / 9), calc(480px * 16 / 9))' }
+                ) : {}),
               }}
               onClick={(e) => e.stopPropagation()}
 
@@ -848,11 +854,10 @@ const Index = () => {
                           }}
                         />
                         <div
-                          className="relative flex items-center justify-center transition-transform duration-500 ease-out"
+                          className="relative flex items-center justify-center transition-all duration-500 ease-out"
                           style={{
                             width: '100%',
-                            height: 'auto',
-                            aspectRatio: '16 / 9',
+                            height: '100%',
                             maxHeight: '100%',
                             maxWidth: '100%',
                           }}
@@ -865,7 +870,11 @@ const Index = () => {
                             muted={videoMuted}
                             className="absolute inset-0 w-full h-full"
                             style={{ objectFit: 'contain', background: '#000' }}
-                            onLoadedMetadata={(e) => setVideoDuration(e.currentTarget.duration || 0)}
+                            onLoadedMetadata={(e) => {
+                              const el = e.currentTarget;
+                              setVideoDuration(el.duration || 0);
+                              setVideoOrientation(el.videoWidth >= el.videoHeight ? "landscape" : "portrait");
+                            }}
                             onTimeUpdate={(e) => {
                               const el = e.currentTarget;
                               setVideoCurrent(el.currentTime);
