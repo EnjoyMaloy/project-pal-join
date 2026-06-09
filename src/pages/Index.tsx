@@ -1171,8 +1171,9 @@ const Index = () => {
                 {(() => {
                   const isInstruction = kind === "instruction";
                   const isVideo = kind === "video";
-                  const progress = isInstruction ? instructionProgress : isVideo ? videoProgress : 1;
-                  const pct = Math.round(progress * 100);
+                  const progress = isInstruction ? instructionProgress : isVideo ? videoWatchedProgress : 1;
+                  const displayProgress = isVideo ? Math.min(progress / 0.9, 1) : progress;
+                  const pct = Math.round(displayProgress * 100);
                   const isActive = (!isInstruction && !isVideo) || progress >= 0.9;
                   const filled = '#FF7D60';
                   const empty = '#FFD0C2';
