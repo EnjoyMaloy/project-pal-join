@@ -1403,7 +1403,7 @@ const Index = () => {
                     <div
                       className="flex items-center gap-1 rounded-full px-2 py-1"
                       style={{
-                        background: 'rgba(0,0,0,0.45)',
+                        background: 'rgba(0,0,0,0.28)',
                         backdropFilter: 'blur(18px) saturate(1.4)',
                         WebkitBackdropFilter: 'blur(18px) saturate(1.4)',
                         border: '1px solid rgba(255,255,255,0.08)',
@@ -1440,7 +1440,7 @@ const Index = () => {
                     <div
                       className="flex items-center gap-1 rounded-full px-2 py-1"
                       style={{
-                        background: 'rgba(0,0,0,0.45)',
+                        background: 'rgba(0,0,0,0.28)',
                         backdropFilter: 'blur(18px) saturate(1.4)',
                         WebkitBackdropFilter: 'blur(18px) saturate(1.4)',
                         border: '1px solid rgba(255,255,255,0.08)',
