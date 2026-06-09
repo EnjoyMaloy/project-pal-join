@@ -1283,8 +1283,8 @@ const Index = () => {
                   transformOrigin: 'center center',
                 }}
                 onClick={(e) => e.stopPropagation()}
-                onPointerMove={(e) => showVideoUI(e.pointerType !== "mouse")}
-                onPointerDown={(e) => showVideoUI(e.pointerType !== "mouse")}
+                onPointerMove={() => showVideoUI(true)}
+                onPointerDown={() => showVideoUI(true)}
               >
                 {/* Mirror video (muted) — audio comes from the main hidden video */}
                 <video
