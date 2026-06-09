@@ -1022,7 +1022,7 @@ const Index = () => {
                             <div className="h-full" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FFF' }} />
                           </div>
                         </div>
-                        <div className="flex items-center justify-between gap-2" style={{ color: '#FFF' }}>
+                        <div className="relative flex items-center justify-between gap-2" style={{ color: '#FFF' }}>
                           <div
                             className="flex items-center gap-1 rounded-full px-2 py-1"
                             style={{
@@ -1121,62 +1121,63 @@ const Index = () => {
                               </button>
                             )}
 
-                            {videoMenu && (
-                              <>
-                                <button
-                                  aria-label="close-menu"
-                                  onClick={(e) => { e.stopPropagation(); setVideoMenu(null); }}
-                                  className="fixed inset-0 z-[4]"
-                                  style={{ background: 'transparent' }}
-                                />
-                                <div
-                                  className="absolute z-[5] rounded-[28px] overflow-hidden"
-                                  style={{
-                                    right: 0,
-                                    bottom: 'calc(100% + 8px)',
-                                    minWidth: 180,
-                                    background: 'linear-gradient(180deg, rgba(140,140,140,0.45) 0%, rgba(70,70,70,0.45) 100%)',
-                                    backdropFilter: 'blur(48px) saturate(1.8)',
-                                    WebkitBackdropFilter: 'blur(48px) saturate(1.8)',
-                                    border: '1px solid rgba(255,255,255,0.15)',
-                                    boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
-                                    color: '#FFF',
-                                    fontFamily: '"TT Commons", sans-serif',
-                                  }}
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <div className="px-4 pt-3 pb-2 text-[13px] uppercase tracking-wide" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                                    {videoMenu === "speed" ? "Скорость" : "Качество"}
-                                  </div>
-                                  <div className="pb-2">
-                                    {(videoMenu === "speed" ? RATES : QUALITIES).map((opt) => {
-                                      const active = videoMenu === "speed" ? opt === videoRate : opt === videoQuality;
-                                      return (
-                                        <button
-                                          key={String(opt)}
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            if (videoMenu === "speed") {
-                                              setVideoRate(opt as number);
-                                              if (videoRef.current) videoRef.current.playbackRate = opt as number;
-                                            } else {
-                                              setVideoQuality(opt as string);
-                                            }
-                                            setVideoMenu(null);
-                                          }}
-                                          className="w-full flex items-center justify-between px-4 py-2.5 text-[15px] font-medium hover:bg-white/10 transition-colors"
-                                          style={{ color: '#FFF' }}
-                                        >
-                                          <span>{videoMenu === "speed" ? `${opt}x` : opt}</span>
-                                          {active && <span style={{ color: '#FFF' }}>✓</span>}
-                                        </button>
-                                      );
-                                    })}
-                                  </div>
-                                </div>
-                              </>
-                            )}
                           </div>
+
+                          {videoMenu && (
+                            <>
+                              <button
+                                aria-label="close-menu"
+                                onClick={(e) => { e.stopPropagation(); setVideoMenu(null); }}
+                                className="fixed inset-0 z-[4]"
+                                style={{ background: 'transparent' }}
+                              />
+                              <div
+                                className="absolute z-[5] rounded-[28px] overflow-hidden"
+                                style={{
+                                  right: 0,
+                                  bottom: 'calc(100% + 8px)',
+                                  minWidth: 180,
+                                  background: 'linear-gradient(180deg, rgba(140,140,140,0.45) 0%, rgba(70,70,70,0.45) 100%)',
+                                  backdropFilter: 'blur(48px) saturate(1.8)',
+                                  WebkitBackdropFilter: 'blur(48px) saturate(1.8)',
+                                  border: '1px solid rgba(255,255,255,0.15)',
+                                  boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
+                                  color: '#FFF',
+                                  fontFamily: '"TT Commons", sans-serif',
+                                }}
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <div className="px-4 pt-3 pb-2 text-[13px] uppercase tracking-wide" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                                  {videoMenu === "speed" ? "Скорость" : "Качество"}
+                                </div>
+                                <div className="pb-2">
+                                  {(videoMenu === "speed" ? RATES : QUALITIES).map((opt) => {
+                                    const active = videoMenu === "speed" ? opt === videoRate : opt === videoQuality;
+                                    return (
+                                      <button
+                                        key={String(opt)}
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          if (videoMenu === "speed") {
+                                            setVideoRate(opt as number);
+                                            if (videoRef.current) videoRef.current.playbackRate = opt as number;
+                                          } else {
+                                            setVideoQuality(opt as string);
+                                          }
+                                          setVideoMenu(null);
+                                        }}
+                                        className="w-full flex items-center justify-between px-4 py-2.5 text-[15px] font-medium hover:bg-white/10 transition-colors"
+                                        style={{ color: '#FFF' }}
+                                      >
+                                        <span>{videoMenu === "speed" ? `${opt}x` : opt}</span>
+                                        {active && <span style={{ color: '#FFF' }}>✓</span>}
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            </>
+                          )}
                         </div>
 
                         {videoOrientation === 'portrait' && (
