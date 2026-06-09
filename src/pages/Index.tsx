@@ -826,7 +826,6 @@ const Index = () => {
                         <div
                           className="relative w-full h-full overflow-hidden flex items-center justify-center"
                           style={{
-                            borderRadius: 16,
                             background: '#000000',
                           }}
                         >
