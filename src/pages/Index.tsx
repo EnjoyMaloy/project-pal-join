@@ -947,7 +947,14 @@ const Index = () => {
                       </div>
 
                       {/* Native-style control bar on black */}
-                      <div className="shrink-0 px-5 pt-4 pb-3" style={{ background: '#000' }}>
+                      <div
+                        className="shrink-0 px-5 pt-4 pb-3 transition-opacity duration-300"
+                        style={{
+                          background: '#000',
+                          opacity: videoUIVisible ? 1 : 0,
+                          pointerEvents: videoUIVisible ? undefined : 'none',
+                        }}
+                      >
                         <div
                           className="text-center text-[15px] font-medium tabular-nums mb-3 transition-opacity"
                           style={{
