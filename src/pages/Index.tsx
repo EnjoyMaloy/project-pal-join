@@ -1087,17 +1087,19 @@ const Index = () => {
                             >
                               {videoQuality}
                             </button>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setVideoLandscape(true);
-                                showVideoUI(true);
-                              }}
-                              className="p-2 hover:opacity-70 transition-opacity sm:hidden"
-                              aria-label="rotate"
-                            >
-                              <RotateCw className="w-6 h-6" />
-                            </button>
+                            {videoOrientation !== 'portrait' && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setVideoLandscape(true);
+                                  showVideoUI(true);
+                                }}
+                                className="p-2 hover:opacity-70 transition-opacity sm:hidden"
+                                aria-label="rotate"
+                              >
+                                <RotateCw className="w-6 h-6" />
+                              </button>
+                            )}
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
