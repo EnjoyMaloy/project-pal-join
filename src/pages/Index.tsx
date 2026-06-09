@@ -956,11 +956,10 @@ const Index = () => {
                         </div>
                       </div>
 
-                      {/* Native-style control bar on black */}
+                      {/* Native-style control bar — transparent overlay on mobile, solid on desktop */}
                       <div
-                        className="px-5 pt-4 pb-3 transition-opacity duration-300 absolute bottom-0 left-0 right-0 z-10 sm:static sm:shrink-0"
+                        className="px-5 pt-4 pb-3 transition-opacity duration-300 absolute bottom-0 left-0 right-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black"
                         style={{
-                          background: '#000',
                           opacity: videoUIVisible ? 1 : 0,
                           pointerEvents: videoUIVisible ? undefined : 'none',
                         }}
