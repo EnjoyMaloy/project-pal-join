@@ -871,7 +871,7 @@ const Index = () => {
                       >
                         {/* Ambient backlight — blurred copy of the video, softly faded at edges */}
                         <video
-                          src={rehcVideo.url}
+                          src={currentVideoUrl}
                           playsInline
                           muted
                           aria-hidden
@@ -898,7 +898,7 @@ const Index = () => {
                         >
                           <video
                             ref={videoRef}
-                            src={rehcVideo.url}
+                            src={currentVideoUrl}
                             playsInline
                             preload="metadata"
                             muted={videoMuted}
@@ -1290,7 +1290,7 @@ const Index = () => {
               >
                 {/* Mirror video (muted) — audio comes from the main hidden video */}
                 <video
-                  src={rehcVideo.url}
+                  src={currentVideoUrl}
                   playsInline
                   muted
                   aria-hidden
