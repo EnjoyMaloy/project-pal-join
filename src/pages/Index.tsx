@@ -831,15 +831,15 @@ const Index = () => {
                           aria-hidden
                           className="absolute pointer-events-none"
                           style={{
-                            top: '-30%',
-                            left: '-10%',
-                            width: '120%',
-                            height: '160%',
+                            top: '-40%',
+                            left: '-40%',
+                            width: '180%',
+                            height: '180%',
                             objectFit: 'cover',
-                            filter: 'blur(80px) saturate(1.7)',
-                            opacity: 0.65,
-                            WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0) 100%)',
-                            maskImage: 'radial-gradient(ellipse 70% 60% at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0) 100%)',
+                            filter: 'blur(90px) saturate(1.8)',
+                            opacity: 0.75,
+                            WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 95%)',
+                            maskImage: 'radial-gradient(ellipse 60% 50% at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 95%)',
                           }}
                           ref={(el) => {
                             if (!el) return;
