@@ -975,55 +975,57 @@ const Index = () => {
                                 return `-${m}:${s}`;
                               })()}
                             </span>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setVideoMuted(m => !m);
+                              }}
+                              className="p-2 hover:opacity-70 transition-opacity"
+                              aria-label="mute"
+                            >
+                              {videoMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+                            </button>
                           </div>
 
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const idx = RATES.indexOf(videoRate);
-                              const next = RATES[(idx + 1) % RATES.length];
-                              setVideoRate(next);
-                              if (videoRef.current) videoRef.current.playbackRate = next;
-                            }}
-                            className="text-[24px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none"
-                            aria-label="speed"
-                          >
-                            {videoRate}x
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const idx = QUALITIES.indexOf(videoQuality);
-                              const next = QUALITIES[(idx + 1) % QUALITIES.length];
-                              setVideoQuality(next);
-                            }}
-                            className="text-[15px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none tabular-nums"
-                            style={{ fontFamily: '"TT Commons", sans-serif' }}
-                            aria-label="quality"
-                          >
-                            {videoQuality}
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setVideoMuted(m => !m);
-                            }}
-                            className="p-2 hover:opacity-70 transition-opacity"
-                            aria-label="mute"
-                          >
-                            {videoMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const v = videoRef.current; if (!v) return;
-                              if (v.requestFullscreen) v.requestFullscreen();
-                            }}
-                            className="p-2 hover:opacity-70 transition-opacity"
-                            aria-label="fullscreen"
-                          >
-                            <Maximize2 className="w-6 h-6" />
-                          </button>
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                const idx = RATES.indexOf(videoRate);
+                                const next = RATES[(idx + 1) % RATES.length];
+                                setVideoRate(next);
+                                if (videoRef.current) videoRef.current.playbackRate = next;
+                              }}
+                              className="text-[24px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none"
+                              aria-label="speed"
+                            >
+                              {videoRate}x
+                            </button>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                const idx = QUALITIES.indexOf(videoQuality);
+                                const next = QUALITIES[(idx + 1) % QUALITIES.length];
+                                setVideoQuality(next);
+                              }}
+                              className="text-[15px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none tabular-nums"
+                              style={{ fontFamily: '"TT Commons", sans-serif' }}
+                              aria-label="quality"
+                            >
+                              {videoQuality}
+                            </button>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                const v = videoRef.current; if (!v) return;
+                                if (v.requestFullscreen) v.requestFullscreen();
+                              }}
+                              className="p-2 hover:opacity-70 transition-opacity"
+                              aria-label="fullscreen"
+                            >
+                              <Maximize2 className="w-6 h-6" />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
