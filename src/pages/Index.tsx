@@ -903,7 +903,7 @@ const Index = () => {
                             preload="metadata"
                             muted={videoMuted}
                             className="absolute inset-0 w-full h-full"
-                            style={{ objectFit: 'contain', background: 'transparent' }}
+                            style={{ objectFit: 'contain', objectPosition: 'center top', background: 'transparent' }}
                             onLoadedMetadata={(e) => {
                               const el = e.currentTarget;
                               setVideoDuration(el.duration || 0);
@@ -956,11 +956,10 @@ const Index = () => {
                         </div>
                       </div>
 
-                      {/* Native-style control bar on black */}
+                      {/* Native-style control bar — transparent overlay on mobile, solid on desktop */}
                       <div
-                        className="px-5 pt-4 pb-3 transition-opacity duration-300 absolute bottom-0 left-0 right-0 z-10 sm:static sm:shrink-0"
+                        className="px-5 pt-4 pb-3 transition-opacity duration-300 absolute bottom-0 left-0 right-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black"
                         style={{
-                          background: '#000',
                           opacity: videoUIVisible ? 1 : 0,
                           pointerEvents: videoUIVisible ? undefined : 'none',
                         }}
@@ -1024,8 +1023,10 @@ const Index = () => {
                             <div className="h-full" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FFF' }} />
                           </div>
                         </div>
-                        <div className="flex items-center justify-between" style={{ color: '#FFF' }}>
-                          <div className="flex items-center gap-2">
+                        <div className="flex items-center justify-between gap-2" style={{ color: '#FFF' }}>
+                          <div
+                            className="flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0"
+                          >
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
@@ -1037,7 +1038,7 @@ const Index = () => {
                             >
                               {videoPlaying ? <Pause className="w-6 h-6" fill="#FFF" /> : <Play className="w-6 h-6" fill="#FFF" />}
                             </button>
-                            <span className="text-[15px] font-medium tabular-nums" style={{ fontFamily: '"TT Commons", sans-serif' }}>
+                            <span className="text-[15px] font-medium tabular-nums px-1" style={{ fontFamily: '"TT Commons", sans-serif' }}>
                               {(() => {
                                 const remaining = Math.max(0, (videoDuration || 0) - videoCurrent);
                                 const m = Math.floor(remaining / 60);
@@ -1057,7 +1058,9 @@ const Index = () => {
                             </button>
                           </div>
 
-                          <div className="flex items-center gap-2">
+                          <div
+                            className="flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0"
+                          >
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
