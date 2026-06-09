@@ -280,7 +280,20 @@ const Index = () => {
   const [storyIndex, setStoryIndex] = useState<number | null>(null);
   const [instructionProgress, setInstructionProgress] = useState(0);
   const [videoRotated, setVideoRotated] = useState(false);
-  useEffect(() => { setInstructionProgress(0); setVideoRotated(false); }, [storyIndex]);
+  const [videoPlaying, setVideoPlaying] = useState(false);
+  const [videoProgress, setVideoProgress] = useState(0);
+  useEffect(() => { setInstructionProgress(0); setVideoRotated(false); setVideoPlaying(false); setVideoProgress(0); }, [storyIndex]);
+  useEffect(() => {
+    if (!videoPlaying) return;
+    const id = setInterval(() => {
+      setVideoProgress(p => {
+        const np = Math.min(1, p + 0.02);
+        if (np >= 1) { setVideoPlaying(false); }
+        return np;
+      });
+    }, 100);
+    return () => clearInterval(id);
+  }, [videoPlaying]);
   const [popoverIndex, setPopoverIndex] = useState<number | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [listHeight, setListHeight] = useState(0);
