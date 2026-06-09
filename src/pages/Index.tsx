@@ -820,21 +820,26 @@ const Index = () => {
                     <div className="flex-1 flex flex-col text-center relative -mx-5 min-h-0">
                       {/* Video stage — letterboxed area with ambient glow */}
                       <div
-                        className="flex-1 flex items-center justify-center relative min-h-0 overflow-hidden"
+                        className="flex-1 flex items-center justify-center relative min-h-0"
                         style={{ background: '#000' }}
                       >
-                        {/* Ambient backlight — blurred copy of the video */}
+                        {/* Ambient backlight — blurred copy of the video, softly faded at edges */}
                         <video
                           src={rehcVideo.url}
                           playsInline
                           muted
                           aria-hidden
-                          className="absolute inset-0 w-full h-full pointer-events-none"
+                          className="absolute pointer-events-none"
                           style={{
+                            top: '-30%',
+                            left: '-10%',
+                            width: '120%',
+                            height: '160%',
                             objectFit: 'cover',
-                            filter: 'blur(60px) saturate(1.6)',
-                            transform: 'scale(1.3)',
-                            opacity: 0.7,
+                            filter: 'blur(80px) saturate(1.7)',
+                            opacity: 0.65,
+                            WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0) 100%)',
+                            maskImage: 'radial-gradient(ellipse 70% 60% at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0) 100%)',
                           }}
                           ref={(el) => {
                             if (!el) return;
