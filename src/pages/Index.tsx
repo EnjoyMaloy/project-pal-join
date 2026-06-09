@@ -880,9 +880,16 @@ const Index = () => {
                             onTimeUpdate={(e) => {
                               const el = e.currentTarget;
                               setVideoCurrent(el.currentTime);
-                              if (el.duration) setVideoProgress(el.currentTime / el.duration);
+                              if (el.duration) {
+                                const p = el.currentTime / el.duration;
+                                setVideoProgress(p);
+                                setVideoWatchedProgress(prev => Math.max(prev, p));
+                              }
                             }}
-                            onEnded={() => setVideoPlaying(false)}
+                            onEnded={() => {
+                              setVideoPlaying(false);
+                              setVideoWatchedProgress(1);
+                            }}
                             onClick={(e) => {
                               e.stopPropagation();
                               const v = videoRef.current; if (!v) return;
