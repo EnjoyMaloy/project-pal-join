@@ -902,7 +902,7 @@ const Index = () => {
                             playsInline
                             preload="metadata"
                             muted={videoMuted}
-                            className="absolute inset-0 w-full h-full sm:object-contain"
+                            className="absolute inset-0 w-full h-full"
                             style={{ objectFit: videoOrientation === 'portrait' ? 'cover' : 'contain', objectPosition: 'center', background: 'transparent' }}
                             onLoadedMetadata={(e) => {
                               const el = e.currentTarget;
