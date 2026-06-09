@@ -790,27 +790,6 @@ const Index = () => {
                 if (e.pointerType === "mouse") hideVideoUI();
               } : undefined}
             >
-              {kind === "video" && videoOrientation === 'portrait' && (
-                <video
-                  src={currentVideoUrl}
-                  playsInline
-                  muted
-                  aria-hidden
-                  className="absolute inset-0 w-full h-full pointer-events-none sm:hidden"
-                  style={{ objectFit: 'cover', objectPosition: 'center' }}
-                  ref={(el) => {
-                    if (!el) return;
-                    const main = videoRef.current;
-                    if (main && Math.abs(el.currentTime - main.currentTime) > 0.3) {
-                      try { el.currentTime = main.currentTime; } catch {}
-                    }
-                    if (main) el.playbackRate = main.playbackRate;
-                    if (videoPlaying) { el.play().catch(() => {}); } else { el.pause(); }
-                  }}
-                />
-              )}
-
-
               {/* Progress bar — single continuous line at top */}
               <div
                 className="absolute top-0 left-0 right-0 z-20 overflow-hidden transition-opacity duration-300"
@@ -862,9 +841,7 @@ const Index = () => {
               />
 
               {/* Step content */}
-              <div
-                className={`flex-1 overflow-y-auto px-5 relative z-[1] pointer-events-none ${kind === "video" && videoOrientation === 'portrait' ? 'absolute inset-0 pb-0' : 'pb-4'}`}
-              >
+              <div className="flex-1 overflow-y-auto px-5 pb-4 relative z-[1] pointer-events-none">
                 <div className="pointer-events-auto h-full flex flex-col">
                   {kind === "image" && (
                     <div className="flex-1 flex flex-col items-center justify-center text-center">
@@ -979,7 +956,7 @@ const Index = () => {
 
                       {/* Native-style control bar — transparent overlay on mobile, solid on desktop */}
                       <div
-                        className="px-5 pt-4 pb-3 transition-opacity duration-300 absolute bottom-[72px] left-0 right-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black"
+                        className={`px-5 pt-4 transition-opacity duration-300 absolute left-0 right-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black ${videoOrientation === 'portrait' ? 'bottom-0 pb-4' : 'bottom-[72px] pb-3 sm:bottom-0'}`}
                         style={{
                           opacity: videoUIVisible ? 1 : 0,
                           pointerEvents: videoUIVisible ? undefined : 'none',
@@ -1134,6 +1111,43 @@ const Index = () => {
                             </button>
                           </div>
                         </div>
+
+                        {videoOrientation === 'portrait' && (
+                          <div className="mt-4 px-0">
+                            {(() => {
+                              const progress = videoWatchedProgress;
+                              const displayProgress = Math.min(progress / 0.9, 1);
+                              const pct = Math.round(displayProgress * 100);
+                              const isActive = progress >= 0.9;
+                              const filled = '#FF7D60';
+                              const empty = '#FFD0C2';
+                              const bg = `linear-gradient(to right, ${filled} 0%, ${filled} ${pct}%, ${empty} ${pct}%, ${empty} 100%)`;
+                              return (
+                                <button
+                                  onClick={isActive ? next : undefined}
+                                  disabled={!isActive}
+                                  className="transition-all w-full sm:hidden"
+                                  style={{
+                                    background: bg,
+                                    color: '#FFFFFF',
+                                    fontFamily: '"TT Commons", sans-serif',
+                                    fontWeight: 600,
+                                    fontStyle: 'normal',
+                                    fontSize: 18,
+                                    lineHeight: '18px',
+                                    borderRadius: 12,
+                                    height: 52,
+                                    cursor: isActive ? 'pointer' : 'default',
+                                    opacity: isActive ? 1 : 0.95,
+                                    boxShadow: isActive ? '0 4px 0 0 #C75A40' : 'none',
+                                  }}
+                                >
+                                  {step < STEPS.length - 1 ? t("index.next") : t("index.finish")}
+                                </button>
+                              );
+                            })()}
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
@@ -1230,7 +1244,7 @@ const Index = () => {
 
               {/* Bottom button */}
               <div
-                className={`px-4 pb-4 pt-0 relative z-[2] ${kind === "video" ? 'transition-opacity duration-300' : ''} ${kind === "video" && videoOrientation === 'portrait' ? 'absolute bottom-0 left-0 right-0 sm:static' : ''}`}
+                className={`px-4 pb-4 pt-0 relative z-[2] ${kind === "video" ? 'transition-opacity duration-300' : ''} ${kind === "video" && videoOrientation === 'portrait' ? 'hidden sm:block absolute bottom-0 left-0 right-0 sm:static' : ''}`}
                 style={{
                   background: 'transparent',
                   opacity: kind === "video" ? ((videoUIVisible || videoWatchedProgress >= 1) ? 1 : 0) : undefined,
