@@ -1306,7 +1306,7 @@ const Index = () => {
                   pointerEvents: kind === "video" ? ((videoUIVisible || videoWatchedProgress >= 1) ? undefined : 'none') : undefined,
                 }}
               >
-                {kind !== "image" && !(kind === "video" && videoOrientation === 'portrait') && (
+                {kind !== "image" && kind !== "video" && (
                   <>
                     {/* Progressive blur: stacked layers with increasing strength + soft masks */}
                     {/* Soft fade-out veil — minimal blur, mostly opacity */}
@@ -1323,7 +1323,7 @@ const Index = () => {
 
                   </>
                 )}
-                {kind !== "image" && !(kind === "video" && videoOrientation === 'portrait') && (
+                {kind !== "image" && kind !== "video" && (
                   <div className="absolute left-0 right-0 pointer-events-none" style={{ bottom: 0, top: 0, background: lessonColors.surface, zIndex: -1 }} />
                 )}
 
