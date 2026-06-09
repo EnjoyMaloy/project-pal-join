@@ -828,13 +828,11 @@ const Index = () => {
                   )}
 
                   {kind === "video" && (
-                    <div className="flex flex-col text-center relative -mx-5">
-                      {/* Top spacer so progress bar doesn't overlap video */}
-                      <div className="shrink-0" style={{ height: 40, background: '#000' }} />
-                      {/* Video stage — sized to actual video aspect, fills width */}
+                    <div className="flex-1 flex flex-col text-center relative -mx-5 min-h-0">
+                      {/* Video stage — fills remaining height; on desktop container width matches video aspect so no side bars */}
                       <div
-                        className="relative w-full"
-                        style={{ background: '#000', aspectRatio: String(videoAspect) }}
+                        className="flex-1 flex items-center justify-center relative min-h-0 pt-10"
+                        style={{ background: '#000' }}
                       >
                         {/* Ambient backlight — blurred copy of the video, softly faded at edges */}
                         <video
