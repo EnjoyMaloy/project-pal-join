@@ -758,13 +758,14 @@ const Index = () => {
 
       {/* Stories overlay (5 steps per lesson) */}
       {lessonOpen && currentLesson && (() => {
-        const STEPS: Array<"image" | "video" | "instruction" | "quiz"> = ["image", "video", "instruction", "quiz", "image"];
+        const STEPS: Array<"image" | "video" | "instruction" | "quiz"> = ["image", "video", "video", "instruction", "quiz", "image"];
         const step = Math.min(Math.max(storyIndex ?? 0, 0), STEPS.length - 1);
         const setStep = (n: number) => setStoryIndex(n);
         const close = () => { setLessonOpen(false); setStoryIndex(null); };
         const next = () => { if (step < STEPS.length - 1) setStep(step + 1); else close(); };
         const prev = () => { if (step > 0) setStep(step - 1); };
         const kind = STEPS[step];
+        const currentVideoUrl = step === 2 ? verticalVideo.url : rehcVideo.url;
 
         return (
           <div className="fixed inset-0 z-[60] bg-black/80 flex items-center justify-center sm:p-4" onClick={close}>
