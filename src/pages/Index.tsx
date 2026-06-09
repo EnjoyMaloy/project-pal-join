@@ -922,7 +922,7 @@ const Index = () => {
                               setVideoRate(next);
                               if (videoRef.current) videoRef.current.playbackRate = next;
                             }}
-                            className="text-[15px] font-semibold hover:opacity-70 transition-opacity px-2"
+                            className="text-[24px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none"
                             aria-label="speed"
                           >
                             {videoRate}x
