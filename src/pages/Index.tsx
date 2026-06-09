@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Eye, Clock, Calendar, RotateCw, Play, Pause, Smartphone, Monitor, Volume2, VolumeX, Maximize2 } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Eye, Clock, Calendar, Play, Pause, Smartphone, Monitor, Volume2, VolumeX, Maximize2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
 import rehcVideo from "@/assets/rehc.mp4.asset.json";
@@ -280,7 +280,7 @@ const Index = () => {
   const [lessonOpen, setLessonOpen] = useState(false);
   const [storyIndex, setStoryIndex] = useState<number | null>(null);
   const [instructionProgress, setInstructionProgress] = useState(0);
-  const [videoRotated, setVideoRotated] = useState(false);
+  
   const [videoPlaying, setVideoPlaying] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
@@ -291,7 +291,7 @@ const Index = () => {
   const RATES = [1, 1.25, 1.5, 2, 0.5, 0.75];
   useEffect(() => {
     setInstructionProgress(0);
-    setVideoRotated(false);
+    
     setVideoPlaying(false);
     setVideoProgress(0);
     setVideoCurrent(0);
@@ -832,9 +832,9 @@ const Index = () => {
                         <div
                           className="relative flex items-center justify-center transition-transform duration-500 ease-out"
                           style={{
-                            width: videoRotated ? 'auto' : '100%',
-                            height: videoRotated ? '100%' : 'auto',
-                            aspectRatio: videoRotated ? '9 / 16' : '16 / 9',
+                            width: '100%',
+                            height: 'auto',
+                            aspectRatio: '16 / 9',
                             maxHeight: '100%',
                             maxWidth: '100%',
                           }}
@@ -846,7 +846,7 @@ const Index = () => {
                             preload="metadata"
                             muted={videoMuted}
                             className="absolute inset-0 w-full h-full"
-                            style={{ objectFit: videoRotated ? 'cover' : 'contain', background: '#000' }}
+                            style={{ objectFit: 'contain', background: '#000' }}
                             onLoadedMetadata={(e) => setVideoDuration(e.currentTarget.duration || 0)}
                             onTimeUpdate={(e) => {
                               const el = e.currentTarget;
@@ -947,13 +947,6 @@ const Index = () => {
                             aria-label="fullscreen"
                           >
                             <Maximize2 className="w-6 h-6" />
-                          </button>
-                          <button
-                            onClick={(e) => { e.stopPropagation(); setVideoRotated(v => !v); }}
-                            className="p-2 hover:opacity-70 transition-opacity"
-                            aria-label="rotate"
-                          >
-                            <RotateCw className="w-6 h-6" />
                           </button>
                         </div>
                       </div>
