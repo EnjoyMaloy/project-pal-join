@@ -830,7 +830,7 @@ const Index = () => {
                     <div className="flex-1 flex flex-col text-center relative -mx-5 min-h-0">
                       {/* Video stage — letterboxed area with ambient glow */}
                       <div
-                        className="flex-1 flex items-center justify-center relative min-h-0 pt-4"
+                        className="flex-1 flex items-center justify-center relative min-h-0 pt-10"
                         style={{ background: '#000' }}
                       >
                         {/* Ambient backlight — blurred copy of the video, softly faded at edges */}
