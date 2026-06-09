@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Eye, Clock, Calendar, Play, Pause, Smartphone, Monitor, Volume2, VolumeX, Maximize2 } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Eye, Clock, Calendar, Play, Pause, Smartphone, Monitor, Volume2, VolumeX, Maximize2, RotateCw } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
 import rehcVideo from "@/assets/rehc.mp4.asset.json";
