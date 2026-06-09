@@ -988,11 +988,13 @@ const Index = () => {
 
                 {(() => {
                   const isInstruction = kind === "instruction";
-                  const pct = Math.round(instructionProgress * 100);
-                  const isActive = !isInstruction || instructionProgress >= 0.9;
+                  const isVideo = kind === "video";
+                  const progress = isInstruction ? instructionProgress : isVideo ? videoProgress : 1;
+                  const pct = Math.round(progress * 100);
+                  const isActive = (!isInstruction && !isVideo) || progress >= 0.9;
                   const filled = '#FF7D60';
                   const empty = '#FFD0C2';
-                  const bg = isInstruction
+                  const bg = (isInstruction || isVideo)
                     ? `linear-gradient(to right, ${filled} 0%, ${filled} ${pct}%, ${empty} ${pct}%, ${empty} 100%)`
                     : filled;
                   return (
