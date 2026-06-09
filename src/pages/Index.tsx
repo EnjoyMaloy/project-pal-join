@@ -1063,12 +1063,10 @@ const Index = () => {
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                const idx = RATES.indexOf(videoRate);
-                                const next = RATES[(idx + 1) % RATES.length];
-                                setVideoRate(next);
-                                if (videoRef.current) videoRef.current.playbackRate = next;
+                                setVideoMenu(m => m === "speed" ? null : "speed");
                               }}
-                              className="text-[20px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none"
+                              className="text-[20px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none rounded-full"
+                              style={{ background: videoMenu === "speed" ? 'rgba(255,255,255,0.18)' : 'transparent' }}
                               aria-label="speed"
                             >
                               {videoRate}x
@@ -1076,12 +1074,10 @@ const Index = () => {
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                const idx = QUALITIES.indexOf(videoQuality);
-                                const next = QUALITIES[(idx + 1) % QUALITIES.length];
-                                setVideoQuality(next);
+                                setVideoMenu(m => m === "quality" ? null : "quality");
                               }}
-                              className="text-[20px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none tabular-nums"
-                              style={{ fontFamily: '"TT Commons", sans-serif' }}
+                              className="text-[20px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none tabular-nums rounded-full"
+                              style={{ background: videoMenu === "quality" ? 'rgba(255,255,255,0.18)' : 'transparent', fontFamily: '"TT Commons", sans-serif' }}
                               aria-label="quality"
                             >
                               {videoQuality}
