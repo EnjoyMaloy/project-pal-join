@@ -861,7 +861,7 @@ const Index = () => {
                     <div className="flex-1 flex flex-col text-center relative -mx-5 min-h-0">
                       {/* Video stage — fills remaining height; on desktop container width matches video aspect so no side bars */}
                       <div
-                        className="flex-1 flex items-center justify-center relative min-h-0 pt-10"
+                        className="flex-1 flex items-center justify-center relative min-h-0 sm:pt-10"
                         style={{ background: '#000' }}
                       >
                         {/* Ambient backlight — blurred copy of the video, softly faded at edges */}
@@ -950,7 +950,7 @@ const Index = () => {
 
                       {/* Native-style control bar on black */}
                       <div
-                        className="shrink-0 px-5 pt-4 pb-3 transition-opacity duration-300"
+                        className="px-5 pt-4 pb-3 transition-opacity duration-300 absolute bottom-0 left-0 right-0 z-10 sm:static sm:shrink-0"
                         style={{
                           background: '#000',
                           opacity: videoUIVisible ? 1 : 0,
