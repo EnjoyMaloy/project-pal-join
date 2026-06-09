@@ -773,14 +773,27 @@ const Index = () => {
                 } : {}),
               }}
               onClick={(e) => e.stopPropagation()}
-
+              onPointerMove={kind === "video" ? (e) => {
+                showVideoUI(e.pointerType !== "mouse");
+              } : undefined}
+              onPointerDown={kind === "video" ? (e) => {
+                showVideoUI(e.pointerType !== "mouse");
+              } : undefined}
+              onPointerLeave={kind === "video" ? (e) => {
+                if (e.pointerType === "mouse") hideVideoUI();
+              } : undefined}
             >
 
 
               {/* Progress bar — single continuous line at top */}
               <div
-                className="absolute top-0 left-0 right-0 z-20 overflow-hidden"
-                style={{ height: 6, background: 'rgba(255,125,96,0.25)' }}
+                className="absolute top-0 left-0 right-0 z-20 overflow-hidden transition-opacity duration-300"
+                style={{
+                  height: 6,
+                  background: 'rgba(255,125,96,0.25)',
+                  opacity: kind === "video" && !videoUIVisible ? 0 : 1,
+                  pointerEvents: kind === "video" && !videoUIVisible ? 'none' : undefined,
+                }}
               >
                 <div
                   className="h-full transition-all"
@@ -794,12 +807,14 @@ const Index = () => {
               {kind === "video" && (
                 <button
                   onClick={prev}
-                  className="absolute top-4 left-4 z-30 inline-flex items-center justify-center rounded-full hover:opacity-80 transition-opacity"
+                  className="absolute top-4 left-4 z-30 inline-flex items-center justify-center rounded-full hover:opacity-80 transition-opacity duration-300"
                   style={{
                     width: 36,
                     height: 36,
                     background: 'rgba(0,0,0,0.4)',
                     backdropFilter: 'blur(4px)',
+                    opacity: videoUIVisible ? 1 : 0,
+                    pointerEvents: videoUIVisible ? undefined : 'none',
                   }}
                   aria-label="back"
                 >
