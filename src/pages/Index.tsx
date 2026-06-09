@@ -291,7 +291,7 @@ const Index = () => {
   const RATES = [1, 1.25, 1.5, 2, 0.5, 0.75];
   useEffect(() => {
     setInstructionProgress(0);
-    setVideoRotated(false);
+    
     setVideoPlaying(false);
     setVideoProgress(0);
     setVideoCurrent(0);
