@@ -1188,8 +1188,8 @@ const Index = () => {
                 className={`px-4 pb-4 pt-0 relative z-[2] ${kind === "video" ? 'transition-opacity duration-300' : ''}`}
                 style={{
                   background: 'transparent',
-                  opacity: kind === "video" ? (videoUIVisible ? 1 : 0) : undefined,
-                  pointerEvents: kind === "video" ? (videoUIVisible ? undefined : 'none') : undefined,
+                  opacity: kind === "video" ? ((videoUIVisible || videoWatchedProgress >= 1) ? 1 : 0) : undefined,
+                  pointerEvents: kind === "video" ? ((videoUIVisible || videoWatchedProgress >= 1) ? undefined : 'none') : undefined,
                 }}
               >
                 {kind !== "image" && (
