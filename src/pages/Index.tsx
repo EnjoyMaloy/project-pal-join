@@ -774,9 +774,10 @@ const Index = () => {
               style={{
                 background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : kind === "video" ? "#000000" : lessonColors.surface,
                 ...(kind === "video" ? {
-                  // Desktop only: fix height to 92vh and derive width from video aspect (like YouTube).
-                  // Mobile uses w-full h-full so it stays full-screen.
-                  ['--video-w' as any]: `min(96vw, calc((92vh - 172px) * ${videoAspect}))`,
+                  // Keep portrait videos in the same full-height overlay mode on tablet/desktop as on mobile.
+                  ['--video-w' as any]: videoOrientation === 'portrait'
+                    ? `min(96vw, calc(92vh * ${videoAspect}))`
+                    : `min(96vw, calc((92vh - 172px) * ${videoAspect}))`,
                 } : {}),
               }}
               onClick={(e) => e.stopPropagation()}
@@ -864,7 +865,7 @@ const Index = () => {
                     <div className="flex-1 flex flex-col text-center relative -mx-5 min-h-0">
                       {/* Video stage — fills remaining height; on desktop container width matches video aspect so no side bars */}
                       <div
-                        className="flex-1 flex items-center justify-center relative min-h-0 sm:pt-10"
+                        className={`flex-1 flex items-center justify-center relative min-h-0 ${videoOrientation === 'portrait' ? '' : 'sm:pt-10'}`}
                         style={{ background: '#000' }}
                       >
                         {/* Ambient backlight — blurred copy of the video, softly faded at edges */}
@@ -900,7 +901,7 @@ const Index = () => {
                             playsInline
                             preload="metadata"
                             muted={videoMuted}
-                            className={`absolute inset-0 w-full h-full ${videoOrientation === 'portrait' ? 'object-cover sm:object-contain' : 'object-contain'}`}
+                            className={`absolute inset-0 w-full h-full ${videoOrientation === 'portrait' ? 'object-cover' : 'object-contain'}`}
                             style={{ objectPosition: 'center', background: 'transparent' }}
                             onLoadedMetadata={(e) => {
                               const el = e.currentTarget;
@@ -956,7 +957,7 @@ const Index = () => {
 
                       {/* Native-style control bar — transparent overlay on mobile, solid on desktop */}
                       <div
-                        className={`px-5 pt-4 pb-3 transition-opacity duration-300 absolute left-0 right-0 bottom-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black ${videoOrientation === 'portrait' ? 'pb-4' : ''}`}
+                        className={`px-5 pt-4 pb-3 transition-opacity duration-300 left-0 right-0 bottom-0 z-10 ${videoOrientation === 'portrait' ? 'absolute bg-transparent pb-4' : 'absolute sm:static sm:shrink-0 bg-transparent sm:bg-black'}`}
                         style={{
                           opacity: videoUIVisible ? 1 : 0,
                           pointerEvents: videoUIVisible ? undefined : 'none',
@@ -1126,7 +1127,7 @@ const Index = () => {
                                 <button
                                   onClick={isActive ? next : undefined}
                                   disabled={!isActive}
-                                  className="transition-all w-full sm:hidden"
+                                  className="transition-all w-full"
                                   style={{
                                     background: bg,
                                     color: '#FFFFFF',
