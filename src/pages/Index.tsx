@@ -866,7 +866,11 @@ const Index = () => {
                             muted={videoMuted}
                             className="absolute inset-0 w-full h-full"
                             style={{ objectFit: 'contain', background: '#000' }}
-                            onLoadedMetadata={(e) => setVideoDuration(e.currentTarget.duration || 0)}
+                            onLoadedMetadata={(e) => {
+                              const el = e.currentTarget;
+                              setVideoDuration(el.duration || 0);
+                              setVideoOrientation(el.videoWidth >= el.videoHeight ? "landscape" : "portrait");
+                            }}
                             onTimeUpdate={(e) => {
                               const el = e.currentTarget;
                               setVideoCurrent(el.currentTime);
