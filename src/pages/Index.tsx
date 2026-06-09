@@ -1058,14 +1058,14 @@ const Index = () => {
                           </div>
 
                           <div
-                            className={`flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 ${videoOrientation === 'portrait' ? '' : 'sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0'}`}
+                            className={`relative flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 ${videoOrientation === 'portrait' ? '' : 'sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0'}`}
                           >
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setVideoMenu(m => m === "speed" ? null : "speed");
                               }}
-                              className="text-[20px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none rounded-full"
+                              className="inline-flex items-center justify-center h-10 px-2 text-[20px] font-semibold hover:opacity-70 transition-opacity leading-none rounded-full"
                               style={{ background: videoMenu === "speed" ? 'rgba(255,255,255,0.18)' : 'transparent' }}
                               aria-label="speed"
                             >
@@ -1076,7 +1076,7 @@ const Index = () => {
                                 e.stopPropagation();
                                 setVideoMenu(m => m === "quality" ? null : "quality");
                               }}
-                              className="text-[20px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none tabular-nums rounded-full"
+                              className="inline-flex items-center justify-center h-10 px-2 text-[20px] font-semibold hover:opacity-70 transition-opacity leading-none tabular-nums rounded-full"
                               style={{ background: videoMenu === "quality" ? 'rgba(255,255,255,0.18)' : 'transparent', fontFamily: '"TT Commons", sans-serif' }}
                               aria-label="quality"
                             >
@@ -1107,6 +1107,62 @@ const Index = () => {
                               >
                                 <Maximize2 className="w-6 h-6" />
                               </button>
+                            )}
+
+                            {videoMenu && (
+                              <>
+                                <button
+                                  aria-label="close-menu"
+                                  onClick={(e) => { e.stopPropagation(); setVideoMenu(null); }}
+                                  className="fixed inset-0 z-[4]"
+                                  style={{ background: 'transparent' }}
+                                />
+                                <div
+                                  className="absolute z-[5] rounded-2xl overflow-hidden"
+                                  style={{
+                                    right: 0,
+                                    bottom: 'calc(100% + 8px)',
+                                    minWidth: 180,
+                                    background: 'rgba(20,20,20,0.55)',
+                                    backdropFilter: 'blur(24px) saturate(1.4)',
+                                    WebkitBackdropFilter: 'blur(24px) saturate(1.4)',
+                                    border: '1px solid rgba(255,255,255,0.12)',
+                                    boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
+                                    color: '#FFF',
+                                    fontFamily: '"TT Commons", sans-serif',
+                                  }}
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <div className="px-4 pt-3 pb-2 text-[13px] uppercase tracking-wide" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                                    {videoMenu === "speed" ? "Скорость" : "Качество"}
+                                  </div>
+                                  <div className="pb-2">
+                                    {(videoMenu === "speed" ? RATES : QUALITIES).map((opt) => {
+                                      const active = videoMenu === "speed" ? opt === videoRate : opt === videoQuality;
+                                      return (
+                                        <button
+                                          key={String(opt)}
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            if (videoMenu === "speed") {
+                                              setVideoRate(opt as number);
+                                              if (videoRef.current) videoRef.current.playbackRate = opt as number;
+                                            } else {
+                                              setVideoQuality(opt as string);
+                                            }
+                                            setVideoMenu(null);
+                                          }}
+                                          className="w-full flex items-center justify-between px-4 py-2.5 text-[15px] font-medium hover:bg-white/10 transition-colors"
+                                          style={{ color: '#FFF' }}
+                                        >
+                                          <span>{videoMenu === "speed" ? `${opt}x` : opt}</span>
+                                          {active && <span style={{ color: '#FFF' }}>✓</span>}
+                                        </button>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              </>
                             )}
                           </div>
                         </div>
@@ -1146,62 +1202,6 @@ const Index = () => {
                               );
                             })()}
                           </div>
-                        )}
-
-                        {videoMenu && (
-                          <>
-                            <button
-                              aria-label="close-menu"
-                              onClick={(e) => { e.stopPropagation(); setVideoMenu(null); }}
-                              className="fixed inset-0 z-[4]"
-                              style={{ background: 'transparent' }}
-                            />
-                            <div
-                              className="absolute z-[5] rounded-2xl overflow-hidden"
-                              style={{
-                                right: 20,
-                                bottom: 'calc(100% - 8px)',
-                                minWidth: 180,
-                                background: 'rgba(20,20,20,0.55)',
-                                backdropFilter: 'blur(24px) saturate(1.4)',
-                                WebkitBackdropFilter: 'blur(24px) saturate(1.4)',
-                                border: '1px solid rgba(255,255,255,0.12)',
-                                boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
-                                color: '#FFF',
-                                fontFamily: '"TT Commons", sans-serif',
-                              }}
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <div className="px-4 pt-3 pb-2 text-[13px] uppercase tracking-wide" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                                {videoMenu === "speed" ? "Скорость" : "Качество"}
-                              </div>
-                              <div className="pb-2">
-                                {(videoMenu === "speed" ? RATES : QUALITIES).map((opt) => {
-                                  const active = videoMenu === "speed" ? opt === videoRate : opt === videoQuality;
-                                  return (
-                                    <button
-                                      key={String(opt)}
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        if (videoMenu === "speed") {
-                                          setVideoRate(opt as number);
-                                          if (videoRef.current) videoRef.current.playbackRate = opt as number;
-                                        } else {
-                                          setVideoQuality(opt as string);
-                                        }
-                                        setVideoMenu(null);
-                                      }}
-                                      className="w-full flex items-center justify-between px-4 py-2.5 text-[15px] font-medium hover:bg-white/10 transition-colors"
-                                      style={{ color: '#FFF' }}
-                                    >
-                                      <span>{videoMenu === "speed" ? `${opt}x` : opt}</span>
-                                      {active && <span style={{ color: '#FFF' }}>✓</span>}
-                                    </button>
-                                  );
-                                })}
-                              </div>
-                            </div>
-                          </>
                         )}
                       </div>
                     </div>
