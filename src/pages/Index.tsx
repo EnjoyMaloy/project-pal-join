@@ -714,7 +714,7 @@ const Index = () => {
 
       {/* Stories overlay (5 steps per lesson) */}
       {lessonOpen && currentLesson && (() => {
-        const STEPS: Array<"image" | "instruction" | "quiz"> = ["image", "image", "instruction", "quiz", "image"];
+        const STEPS: Array<"image" | "video" | "instruction" | "quiz"> = ["image", "video", "instruction", "quiz", "image"];
         const step = Math.min(Math.max(storyIndex ?? 0, 0), STEPS.length - 1);
         const setStep = (n: number) => setStoryIndex(n);
         const close = () => { setLessonOpen(false); setStoryIndex(null); };
@@ -727,11 +727,12 @@ const Index = () => {
             <div
               className="relative overflow-hidden flex flex-col w-full h-full sm:rounded-2xl sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)]"
               style={{
-                background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : lessonColors.surface,
+                background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : kind === "video" ? "#000000" : lessonColors.surface,
               }}
               onClick={(e) => e.stopPropagation()}
 
             >
+
 
               {/* Progress bar — single continuous line at top */}
               <div
