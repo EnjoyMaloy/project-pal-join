@@ -996,6 +996,19 @@ const Index = () => {
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
+                              const idx = QUALITIES.indexOf(videoQuality);
+                              const next = QUALITIES[(idx + 1) % QUALITIES.length];
+                              setVideoQuality(next);
+                            }}
+                            className="text-[15px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none tabular-nums"
+                            style={{ fontFamily: '"TT Commons", sans-serif' }}
+                            aria-label="quality"
+                          >
+                            {videoQuality}
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
                               setVideoMuted(m => !m);
                             }}
                             className="p-2 hover:opacity-70 transition-opacity"
