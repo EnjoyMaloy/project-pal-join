@@ -950,7 +950,7 @@ const Index = () => {
 
                       {/* Native-style control bar on black */}
                       <div
-                        className="shrink-0 px-5 pt-4 pb-3 transition-opacity duration-300"
+                        className="px-5 pt-4 pb-3 transition-opacity duration-300 absolute bottom-0 left-0 right-0 z-10 sm:static sm:shrink-0"
                         style={{
                           background: '#000',
                           opacity: videoUIVisible ? 1 : 0,
