@@ -1493,7 +1493,7 @@ const Index = () => {
                       className="absolute z-[5] rounded-2xl overflow-hidden"
                       style={{
                         right: 24,
-                        bottom: 96,
+                        top: 72,
                         minWidth: 200,
                         background: 'rgba(20,20,20,0.55)',
                         backdropFilter: 'blur(24px) saturate(1.4)',
