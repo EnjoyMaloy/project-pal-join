@@ -1059,13 +1059,7 @@ const Index = () => {
                           </div>
 
                           <div
-                            className="flex items-center gap-1 rounded-full px-2 py-1 sm:rounded-none sm:px-0 sm:py-0 sm:gap-2"
-                            style={{
-                              background: 'rgba(0,0,0,0.28)',
-                              backdropFilter: 'blur(18px) saturate(1.4)',
-                              WebkitBackdropFilter: 'blur(18px) saturate(1.4)',
-                              border: '1px solid rgba(255,255,255,0.08)',
-                            }}
+                            className="flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0"
                           >
                             <button
                               onClick={(e) => {
