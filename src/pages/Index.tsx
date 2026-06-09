@@ -1024,13 +1024,13 @@ const Index = () => {
                         </div>
                         <div className="flex items-center justify-between gap-2" style={{ color: '#FFF' }}>
                           <div
-                            className={`flex items-center gap-1 rounded-full px-2 py-1 ${videoOrientation === 'portrait' ? '' : 'sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0'}`}
-                            style={videoOrientation === 'portrait' || true ? {
+                            className="flex items-center gap-1 rounded-full px-2 py-1"
+                            style={{
                               background: 'linear-gradient(180deg, rgba(140,140,140,0.45) 0%, rgba(70,70,70,0.45) 100%)',
                               backdropFilter: 'blur(24px) saturate(1.6)',
                               WebkitBackdropFilter: 'blur(24px) saturate(1.6)',
                               border: '1px solid rgba(255,255,255,0.15)',
-                            } : undefined}
+                            }}
                           >
                             <button
                               onClick={(e) => {
