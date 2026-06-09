@@ -1400,7 +1400,15 @@ const Index = () => {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
+                    <div
+                      className="flex items-center gap-1 rounded-full px-2 py-1"
+                      style={{
+                        background: 'rgba(0,0,0,0.45)',
+                        backdropFilter: 'blur(18px) saturate(1.4)',
+                        WebkitBackdropFilter: 'blur(18px) saturate(1.4)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                      }}
+                    >
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -1410,9 +1418,9 @@ const Index = () => {
                         className="p-2 hover:opacity-70 transition-opacity"
                         aria-label="play-pause"
                       >
-                        {videoPlaying ? <Pause className="w-6 h-6" fill="#FFF" /> : <Play className="w-6 h-6" fill="#FFF" />}
+                        {videoPlaying ? <Pause className="w-5 h-5" fill="#FFF" /> : <Play className="w-5 h-5" fill="#FFF" />}
                       </button>
-                      <span className="text-[15px] font-medium tabular-nums" style={{ fontFamily: '"TT Commons", sans-serif' }}>
+                      <span className="text-[14px] font-medium tabular-nums px-1" style={{ fontFamily: '"TT Commons", sans-serif' }}>
                         {(() => {
                           const remaining = Math.max(0, (videoDuration || 0) - videoCurrent);
                           const m = Math.floor(remaining / 60);
@@ -1425,14 +1433,22 @@ const Index = () => {
                         className="p-2 hover:opacity-70 transition-opacity"
                         aria-label="mute"
                       >
-                        {videoMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+                        {videoMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                       </button>
                     </div>
 
-                    <div className="flex items-center gap-1">
+                    <div
+                      className="flex items-center gap-1 rounded-full px-2 py-1"
+                      style={{
+                        background: 'rgba(0,0,0,0.45)',
+                        backdropFilter: 'blur(18px) saturate(1.4)',
+                        WebkitBackdropFilter: 'blur(18px) saturate(1.4)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                      }}
+                    >
                       <button
                         onClick={(e) => { e.stopPropagation(); setVideoMenu(m => m === "speed" ? null : "speed"); showVideoUI(true); }}
-                        className="text-[18px] font-semibold hover:opacity-70 transition-opacity px-3 py-1.5 leading-none rounded-full"
+                        className="text-[15px] font-semibold hover:opacity-70 transition-opacity px-3 py-1.5 leading-none rounded-full"
                         style={{ background: videoMenu === "speed" ? 'rgba(255,255,255,0.18)' : 'transparent' }}
                         aria-label="speed"
                       >
@@ -1440,7 +1456,7 @@ const Index = () => {
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); setVideoMenu(m => m === "quality" ? null : "quality"); showVideoUI(true); }}
-                        className="text-[14px] font-semibold hover:opacity-70 transition-opacity px-3 py-1.5 leading-none rounded-full tabular-nums"
+                        className="text-[13px] font-semibold hover:opacity-70 transition-opacity px-3 py-1.5 leading-none rounded-full tabular-nums"
                         style={{ background: videoMenu === "quality" ? 'rgba(255,255,255,0.18)' : 'transparent', fontFamily: '"TT Commons", sans-serif' }}
                         aria-label="quality"
                       >
@@ -1451,7 +1467,7 @@ const Index = () => {
                         className="p-2 hover:opacity-70 transition-opacity"
                         aria-label="rotate-back-2"
                       >
-                        <RotateCw className="w-6 h-6" style={{ transform: 'scaleX(-1)' }} />
+                        <RotateCw className="w-5 h-5" style={{ transform: 'scaleX(-1)' }} />
                       </button>
                     </div>
                   </div>
