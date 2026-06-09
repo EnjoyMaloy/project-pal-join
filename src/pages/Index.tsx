@@ -1027,8 +1027,8 @@ const Index = () => {
                             className="flex items-center gap-1 rounded-full px-2 py-1"
                             style={{
                               background: 'linear-gradient(180deg, rgba(140,140,140,0.45) 0%, rgba(70,70,70,0.45) 100%)',
-                              backdropFilter: 'blur(24px) saturate(1.6)',
-                              WebkitBackdropFilter: 'blur(24px) saturate(1.6)',
+                              backdropFilter: 'blur(48px) saturate(1.8)',
+                              WebkitBackdropFilter: 'blur(48px) saturate(1.8)',
                               border: '1px solid rgba(255,255,255,0.15)',
                             }}
                           >
@@ -1067,8 +1067,8 @@ const Index = () => {
                             className="relative flex items-center gap-1 rounded-full px-2 py-1"
                             style={{
                               background: 'linear-gradient(180deg, rgba(140,140,140,0.45) 0%, rgba(70,70,70,0.45) 100%)',
-                              backdropFilter: 'blur(24px) saturate(1.6)',
-                              WebkitBackdropFilter: 'blur(24px) saturate(1.6)',
+                              backdropFilter: 'blur(48px) saturate(1.8)',
+                              WebkitBackdropFilter: 'blur(48px) saturate(1.8)',
                               border: '1px solid rgba(255,255,255,0.15)',
                             }}
                           >
@@ -1136,8 +1136,8 @@ const Index = () => {
                                     bottom: 'calc(100% + 8px)',
                                     minWidth: 180,
                                     background: 'linear-gradient(180deg, rgba(140,140,140,0.45) 0%, rgba(70,70,70,0.45) 100%)',
-                                    backdropFilter: 'blur(24px) saturate(1.6)',
-                                    WebkitBackdropFilter: 'blur(24px) saturate(1.6)',
+                                    backdropFilter: 'blur(48px) saturate(1.8)',
+                                    WebkitBackdropFilter: 'blur(48px) saturate(1.8)',
                                     border: '1px solid rgba(255,255,255,0.15)',
                                     boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
                                     color: '#FFF',
@@ -1606,8 +1606,8 @@ const Index = () => {
                         top: 72,
                         minWidth: 200,
                         background: 'linear-gradient(180deg, rgba(140,140,140,0.45) 0%, rgba(70,70,70,0.45) 100%)',
-                        backdropFilter: 'blur(24px) saturate(1.6)',
-                        WebkitBackdropFilter: 'blur(24px) saturate(1.6)',
+                        backdropFilter: 'blur(48px) saturate(1.8)',
+                        WebkitBackdropFilter: 'blur(48px) saturate(1.8)',
                         border: '1px solid rgba(255,255,255,0.15)',
                         boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
                         color: '#FFF',
