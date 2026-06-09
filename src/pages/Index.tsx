@@ -790,6 +790,25 @@ const Index = () => {
                 if (e.pointerType === "mouse") hideVideoUI();
               } : undefined}
             >
+              {kind === "video" && videoOrientation === 'portrait' && (
+                <video
+                  src={currentVideoUrl}
+                  playsInline
+                  muted
+                  aria-hidden
+                  className="absolute inset-0 w-full h-full pointer-events-none sm:hidden"
+                  style={{ objectFit: 'cover', objectPosition: 'center' }}
+                  ref={(el) => {
+                    if (!el) return;
+                    const main = videoRef.current;
+                    if (main && Math.abs(el.currentTime - main.currentTime) > 0.3) {
+                      try { el.currentTime = main.currentTime; } catch {}
+                    }
+                    if (main) el.playbackRate = main.playbackRate;
+                    if (videoPlaying) { el.play().catch(() => {}); } else { el.pause(); }
+                  }}
+                />
+              )}
 
 
               {/* Progress bar — single continuous line at top */}
@@ -843,7 +862,9 @@ const Index = () => {
               />
 
               {/* Step content */}
-              <div className="flex-1 overflow-y-auto px-5 pb-4 relative z-[1] pointer-events-none">
+              <div
+                className={`flex-1 overflow-y-auto px-5 relative z-[1] pointer-events-none ${kind === "video" && videoOrientation === 'portrait' ? 'absolute inset-0 pb-0' : 'pb-4'}`}
+              >
                 <div className="pointer-events-auto h-full flex flex-col">
                   {kind === "image" && (
                     <div className="flex-1 flex flex-col items-center justify-center text-center">
@@ -1209,7 +1230,7 @@ const Index = () => {
 
               {/* Bottom button */}
               <div
-                className={`px-4 pb-4 pt-0 relative z-[2] ${kind === "video" ? 'transition-opacity duration-300' : ''} ${kind === "video" && videoOrientation === 'portrait' ? 'absolute bottom-0 left-0 right-0 sm:static bg-black' : ''}`}
+                className={`px-4 pb-4 pt-0 relative z-[2] ${kind === "video" ? 'transition-opacity duration-300' : ''} ${kind === "video" && videoOrientation === 'portrait' ? 'absolute bottom-0 left-0 right-0 sm:static' : ''}`}
                 style={{
                   background: 'transparent',
                   opacity: kind === "video" ? ((videoUIVisible || videoWatchedProgress >= 1) ? 1 : 0) : undefined,
