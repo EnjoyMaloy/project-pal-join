@@ -884,37 +884,82 @@ const Index = () => {
 
                       {/* Native-style control bar on black */}
                       <div className="shrink-0 px-5 pt-4 pb-3" style={{ background: '#000' }}>
-                        <div className="text-center text-[15px] font-medium tabular-nums mb-3" style={{ color: '#FFF', fontFamily: '"TT Commons", sans-serif' }}>
+                        <div
+                          className="text-center text-[15px] font-medium tabular-nums mb-3 transition-opacity"
+                          style={{
+                            color: '#FFF',
+                            fontFamily: '"TT Commons", sans-serif',
+                            opacity: videoScrubbing ? 1 : 0,
+                            minHeight: '1.2em',
+                          }}
+                        >
                           {(() => {
                             const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s) % 60).padStart(2, '0')}`;
                             return `${fmt(videoCurrent)} / ${fmt(videoDuration)}`;
                           })()}
                         </div>
                         <div
-                          className="h-1 rounded-full overflow-hidden mb-3 cursor-pointer"
+                          className="h-1 rounded-full overflow-hidden mb-3 cursor-pointer touch-none"
                           style={{ background: 'rgba(255,255,255,0.25)' }}
-                          onClick={(e) => {
+                          onPointerDown={(e) => {
                             e.stopPropagation();
-                            const v = videoRef.current; if (!v || !v.duration) return;
+                            const bar = e.currentTarget;
+                            bar.setPointerCapture(e.pointerId);
+                            setVideoScrubbing(true);
+                            const v = videoRef.current;
+                            const seek = (clientX: number) => {
+                              const rect = bar.getBoundingClientRect();
+                              const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+                              setVideoProgress(ratio);
+                              if (v && v.duration) {
+                                v.currentTime = ratio * v.duration;
+                                setVideoCurrent(v.currentTime);
+                              }
+                            };
+                            seek(e.clientX);
+                          }}
+                          onPointerMove={(e) => {
+                            if (!videoScrubbing) return;
                             const rect = e.currentTarget.getBoundingClientRect();
                             const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-                            v.currentTime = ratio * v.duration;
+                            setVideoProgress(ratio);
+                            const v = videoRef.current;
+                            if (v && v.duration) {
+                              v.currentTime = ratio * v.duration;
+                              setVideoCurrent(v.currentTime);
+                            }
                           }}
+                          onPointerUp={(e) => {
+                            e.currentTarget.releasePointerCapture(e.pointerId);
+                            setVideoScrubbing(false);
+                          }}
+                          onPointerCancel={() => setVideoScrubbing(false)}
                         >
                           <div className="h-full" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FFF' }} />
                         </div>
                         <div className="flex items-center justify-between" style={{ color: '#FFF' }}>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const v = videoRef.current; if (!v) return;
-                              if (v.paused) { v.play(); setVideoPlaying(true); } else { v.pause(); setVideoPlaying(false); }
-                            }}
-                            className="p-2 hover:opacity-70 transition-opacity"
-                            aria-label="play-pause"
-                          >
-                            {videoPlaying ? <Pause className="w-6 h-6" fill="#FFF" /> : <Play className="w-6 h-6" fill="#FFF" />}
-                          </button>
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                const v = videoRef.current; if (!v) return;
+                                if (v.paused) { v.play(); setVideoPlaying(true); } else { v.pause(); setVideoPlaying(false); }
+                              }}
+                              className="p-2 hover:opacity-70 transition-opacity"
+                              aria-label="play-pause"
+                            >
+                              {videoPlaying ? <Pause className="w-6 h-6" fill="#FFF" /> : <Play className="w-6 h-6" fill="#FFF" />}
+                            </button>
+                            <span className="text-[15px] font-medium tabular-nums" style={{ fontFamily: '"TT Commons", sans-serif' }}>
+                              {(() => {
+                                const remaining = Math.max(0, (videoDuration || 0) - videoCurrent);
+                                const m = Math.floor(remaining / 60);
+                                const s = String(Math.floor(remaining) % 60).padStart(2, '0');
+                                return `-${m}:${s}`;
+                              })()}
+                            </span>
+                          </div>
+
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
