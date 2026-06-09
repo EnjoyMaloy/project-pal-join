@@ -827,12 +827,35 @@ const Index = () => {
                           className="relative w-full h-full overflow-hidden flex items-center justify-center"
                           style={{
                             borderRadius: 16,
-                            background: 'linear-gradient(135deg,#232323 0%,#000000 100%)',
+                            background: '#000000',
                           }}
                         >
+                          <video
+                            ref={videoRef}
+                            src={rehcVideo.url}
+                            playsInline
+                            preload="metadata"
+                            className="absolute inset-0 w-full h-full object-cover"
+                            onLoadedMetadata={(e) => setVideoDuration(e.currentTarget.duration || 0)}
+                            onTimeUpdate={(e) => {
+                              const el = e.currentTarget;
+                              setVideoCurrent(el.currentTime);
+                              if (el.duration) setVideoProgress(el.currentTime / el.duration);
+                            }}
+                            onEnded={() => setVideoPlaying(false)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const v = videoRef.current; if (!v) return;
+                              if (v.paused) { v.play(); setVideoPlaying(true); } else { v.pause(); setVideoPlaying(false); }
+                            }}
+                          />
                           <button
-                            onClick={(e) => { e.stopPropagation(); setVideoPlaying(p => !p); }}
-                            className="relative z-[1] inline-flex items-center justify-center rounded-full transition-transform hover:scale-110"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const v = videoRef.current; if (!v) return;
+                              v.play(); setVideoPlaying(true);
+                            }}
+                            className="relative z-[1] inline-flex items-center justify-center rounded-full transition-opacity hover:scale-110 pointer-events-auto"
                             style={{
                               width: 64,
                               height: 64,
@@ -846,16 +869,14 @@ const Index = () => {
                           >
                             <Play className="w-7 h-7" style={{ color: '#000000', marginLeft: 3 }} fill="#000000" />
                           </button>
-                          <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2">
+                          <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 z-[2] pointer-events-none">
                             <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.25)' }}>
-                              <div className="h-full transition-all" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FF7D60' }} />
+                              <div className="h-full" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FF7D60' }} />
                             </div>
                             <span className="text-[11px] tabular-nums" style={{ color: 'rgba(255,255,255,0.85)', fontFamily: '"TT Commons", sans-serif' }}>
                               {(() => {
-                                const total = 228; // 03:48
-                                const cur = Math.round(total * videoProgress);
-                                const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
-                                return `${fmt(cur)} / ${fmt(total)}`;
+                                const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(Math.floor(s) % 60).padStart(2, '0')}`;
+                                return `${fmt(videoCurrent)} / ${fmt(videoDuration)}`;
                               })()}
                             </span>
                           </div>
