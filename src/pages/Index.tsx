@@ -765,7 +765,7 @@ const Index = () => {
 
               {/* Progress bar — single continuous line at top */}
               <div
-                className="absolute top-0 left-0 right-0 z-20 overflow-hidden"
+                className="absolute top-2 left-0 right-0 z-20 overflow-hidden"
                 style={{ height: 6, background: 'rgba(255,125,96,0.25)' }}
               >
                 <div
@@ -828,7 +828,7 @@ const Index = () => {
                     <div className="flex-1 flex flex-col text-center relative -mx-5 min-h-0">
                       {/* Video stage — letterboxed area with ambient glow */}
                       <div
-                        className="flex-1 flex items-center justify-center relative min-h-0"
+                        className="flex-1 flex items-center justify-center relative min-h-0 pt-4"
                         style={{ background: '#000' }}
                       >
                         {/* Ambient backlight — blurred copy of the video, softly faded at edges */}
