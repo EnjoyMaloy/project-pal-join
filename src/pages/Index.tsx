@@ -866,7 +866,7 @@ const Index = () => {
                     <div className="flex-1 flex flex-col text-center relative -mx-5 min-h-0">
                       {/* Video stage — fills remaining height; on desktop container width matches video aspect so no side bars */}
                       <div
-                        className="flex-1 flex items-center justify-center relative min-h-0 sm:pt-10"
+                        className="flex-1 flex items-start sm:items-center justify-center relative min-h-0 sm:pt-10"
                         style={{ background: '#000' }}
                       >
                         {/* Ambient backlight — blurred copy of the video, softly faded at edges */}
