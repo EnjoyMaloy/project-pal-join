@@ -290,6 +290,7 @@ const Index = () => {
   const [videoRate, setVideoRate] = useState(1);
   const [videoQuality, setVideoQuality] = useState<string>("Авто");
   const [videoOrientation, setVideoOrientation] = useState<"landscape" | "portrait">("landscape");
+  const [videoAspect, setVideoAspect] = useState<number>(16 / 9);
   const [videoWatchedProgress, setVideoWatchedProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const RATES = [1, 1.25, 1.5, 2, 0.5, 0.75];
@@ -749,13 +750,13 @@ const Index = () => {
         return (
           <div className="fixed inset-0 z-[60] bg-black/80 flex items-center justify-center sm:p-4" onClick={close}>
             <div
-              className={`relative flex flex-col transition-[width,height,max-width,max-height] duration-500 ease-out ${kind === "video" ? "sm:rounded-2xl overflow-hidden" : "w-full h-full sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)] overflow-hidden sm:rounded-2xl"}`}
+              className={`relative flex flex-col transition-[width,height,max-width,max-height] duration-500 ease-out ${kind === "video" ? "sm:rounded-2xl overflow-hidden w-full sm:w-auto" : "w-full h-full sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)] overflow-hidden sm:rounded-2xl"}`}
               style={{
                 background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : kind === "video" ? "#000000" : lessonColors.surface,
                 ...(kind === "video" ? (
                   videoOrientation === "landscape"
-                    ? { width: 'min(96vw, calc(92vh * 16 / 9))', height: 'min(92vh, calc(96vw * 9 / 16))', maxWidth: 1920, maxHeight: 1080 }
-                    : { width: 'min(96vw, calc(92vh * 9 / 16), 480px)', height: 'min(92vh, calc(96vw * 16 / 9), calc(480px * 16 / 9))' }
+                    ? { maxWidth: `min(100vw, calc((92vh - 172px) * ${videoAspect}))` }
+                    : { maxWidth: `min(100vw, calc((92vh - 172px) * ${videoAspect}), 480px)` }
                 ) : {}),
               }}
               onClick={(e) => e.stopPropagation()}
@@ -827,11 +828,13 @@ const Index = () => {
                   )}
 
                   {kind === "video" && (
-                    <div className="flex-1 flex flex-col text-center relative -mx-5 min-h-0">
-                      {/* Video stage — letterboxed area with ambient glow */}
+                    <div className="flex flex-col text-center relative -mx-5">
+                      {/* Top spacer so progress bar doesn't overlap video */}
+                      <div className="shrink-0" style={{ height: 40, background: '#000' }} />
+                      {/* Video stage — sized to actual video aspect, fills width */}
                       <div
-                        className="flex-1 flex items-center justify-center relative min-h-0 pt-10"
-                        style={{ background: '#000' }}
+                        className="relative w-full"
+                        style={{ background: '#000', aspectRatio: String(videoAspect) }}
                       >
                         {/* Ambient backlight — blurred copy of the video, softly faded at edges */}
                         <video
@@ -858,13 +861,7 @@ const Index = () => {
                           }}
                         />
                         <div
-                          className="relative flex items-center justify-center"
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            maxHeight: '100%',
-                            maxWidth: '100%',
-                          }}
+                          className="absolute inset-0 flex items-center justify-center"
                         >
                           <video
                             ref={videoRef}
@@ -873,11 +870,15 @@ const Index = () => {
                             preload="metadata"
                             muted={videoMuted}
                             className="absolute inset-0 w-full h-full"
-                            style={{ objectFit: 'contain', background: '#000' }}
+                            style={{ objectFit: 'contain', background: 'transparent' }}
                             onLoadedMetadata={(e) => {
                               const el = e.currentTarget;
                               setVideoDuration(el.duration || 0);
-                              setVideoOrientation(el.videoWidth >= el.videoHeight ? "landscape" : "portrait");
+                              const landscape = el.videoWidth >= el.videoHeight;
+                              setVideoOrientation(landscape ? "landscape" : "portrait");
+                              if (el.videoWidth && el.videoHeight) {
+                                setVideoAspect(el.videoWidth / el.videoHeight);
+                              }
                             }}
                             onTimeUpdate={(e) => {
                               const el = e.currentTarget;
