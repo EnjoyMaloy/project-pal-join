@@ -290,6 +290,7 @@ const Index = () => {
   const [videoRate, setVideoRate] = useState(1);
   const [videoQuality, setVideoQuality] = useState<string>("Авто");
   const [videoOrientation, setVideoOrientation] = useState<"landscape" | "portrait">("landscape");
+  const [videoWatchedProgress, setVideoWatchedProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const RATES = [1, 1.25, 1.5, 2, 0.5, 0.75];
   const QUALITIES = ["Авто", "1080p", "720p", "480p", "360p"];
@@ -301,6 +302,7 @@ const Index = () => {
     setVideoCurrent(0);
     setVideoMuted(false);
     setVideoRate(1);
+    setVideoWatchedProgress(0);
     if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; videoRef.current.playbackRate = 1; }
   }, [storyIndex]);
   const [popoverIndex, setPopoverIndex] = useState<number | null>(null);
@@ -878,9 +880,16 @@ const Index = () => {
                             onTimeUpdate={(e) => {
                               const el = e.currentTarget;
                               setVideoCurrent(el.currentTime);
-                              if (el.duration) setVideoProgress(el.currentTime / el.duration);
+                              if (el.duration) {
+                                const p = el.currentTime / el.duration;
+                                setVideoProgress(p);
+                                setVideoWatchedProgress(prev => Math.max(prev, p));
+                              }
                             }}
-                            onEnded={() => setVideoPlaying(false)}
+                            onEnded={() => {
+                              setVideoPlaying(false);
+                              setVideoWatchedProgress(1);
+                            }}
                             onClick={(e) => {
                               e.stopPropagation();
                               const v = videoRef.current; if (!v) return;
@@ -926,7 +935,7 @@ const Index = () => {
                         </div>
                         <div
                           className="relative cursor-pointer touch-none group mb-3 py-2 -my-2"
-                          onPointerDown={(e) => {
+                            onPointerDown={(e) => {
                             e.stopPropagation();
                             const bar = e.currentTarget;
                             bar.setPointerCapture(e.pointerId);
@@ -939,6 +948,7 @@ const Index = () => {
                               if (v && v.duration) {
                                 v.currentTime = ratio * v.duration;
                                 setVideoCurrent(v.currentTime);
+                                setVideoWatchedProgress(prev => Math.max(prev, ratio));
                               }
                             };
                             seek(e.clientX);
@@ -952,6 +962,7 @@ const Index = () => {
                             if (v && v.duration) {
                               v.currentTime = ratio * v.duration;
                               setVideoCurrent(v.currentTime);
+                              setVideoWatchedProgress(prev => Math.max(prev, ratio));
                             }
                           }}
                           onPointerUp={(e) => {
@@ -1160,8 +1171,9 @@ const Index = () => {
                 {(() => {
                   const isInstruction = kind === "instruction";
                   const isVideo = kind === "video";
-                  const progress = isInstruction ? instructionProgress : isVideo ? videoProgress : 1;
-                  const pct = Math.round(progress * 100);
+                  const progress = isInstruction ? instructionProgress : isVideo ? videoWatchedProgress : 1;
+                  const displayProgress = isVideo ? Math.min(progress / 0.9, 1) : progress;
+                  const pct = Math.round(displayProgress * 100);
                   const isActive = (!isInstruction && !isVideo) || progress >= 0.9;
                   const filled = '#FF7D60';
                   const empty = '#FFD0C2';
