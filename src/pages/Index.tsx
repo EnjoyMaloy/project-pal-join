@@ -858,7 +858,7 @@ const Index = () => {
                           }}
                         />
                         <div
-                          className="relative flex items-center justify-center transition-all duration-500 ease-out"
+                          className="relative flex items-center justify-center"
                           style={{
                             width: '100%',
                             height: '100%',
@@ -974,7 +974,7 @@ const Index = () => {
                           onPointerCancel={() => setVideoScrubbing(false)}
                         >
                           <div
-                            className="h-1 rounded-full overflow-hidden transition-all duration-150 ease-out group-hover:h-2.5"
+                            className="h-1 rounded-full overflow-hidden transition-transform duration-150 ease-out origin-bottom group-hover:scale-y-[2.5]"
                             style={{ background: 'rgba(255,255,255,0.25)' }}
                           >
                             <div className="h-full" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FFF' }} />
