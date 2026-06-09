@@ -828,11 +828,13 @@ const Index = () => {
                   )}
 
                   {kind === "video" && (
-                    <div className="flex-1 flex flex-col text-center relative -mx-5 min-h-0">
-                      {/* Video stage — letterboxed area with ambient glow */}
+                    <div className="flex flex-col text-center relative -mx-5">
+                      {/* Top spacer so progress bar doesn't overlap video */}
+                      <div className="shrink-0" style={{ height: 40, background: '#000' }} />
+                      {/* Video stage — sized to actual video aspect, fills width */}
                       <div
-                        className="flex-1 flex items-center justify-center relative min-h-0 pt-10"
-                        style={{ background: '#000' }}
+                        className="relative w-full"
+                        style={{ background: '#000', aspectRatio: String(videoAspect) }}
                       >
                         {/* Ambient backlight — blurred copy of the video, softly faded at edges */}
                         <video
@@ -859,13 +861,7 @@ const Index = () => {
                           }}
                         />
                         <div
-                          className="relative flex items-center justify-center"
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            maxHeight: '100%',
-                            maxWidth: '100%',
-                          }}
+                          className="absolute inset-0 flex items-center justify-center"
                         >
                           <video
                             ref={videoRef}
@@ -874,11 +870,15 @@ const Index = () => {
                             preload="metadata"
                             muted={videoMuted}
                             className="absolute inset-0 w-full h-full"
-                            style={{ objectFit: 'contain', background: '#000' }}
+                            style={{ objectFit: 'contain', background: 'transparent' }}
                             onLoadedMetadata={(e) => {
                               const el = e.currentTarget;
                               setVideoDuration(el.duration || 0);
-                              setVideoOrientation(el.videoWidth >= el.videoHeight ? "landscape" : "portrait");
+                              const landscape = el.videoWidth >= el.videoHeight;
+                              setVideoOrientation(landscape ? "landscape" : "portrait");
+                              if (el.videoWidth && el.videoHeight) {
+                                setVideoAspect(el.videoWidth / el.videoHeight);
+                              }
                             }}
                             onTimeUpdate={(e) => {
                               const el = e.currentTarget;
