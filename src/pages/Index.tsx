@@ -1068,7 +1068,7 @@ const Index = () => {
                                 setVideoRate(next);
                                 if (videoRef.current) videoRef.current.playbackRate = next;
                               }}
-                              className="text-[24px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none"
+                              className="text-[20px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none"
                               aria-label="speed"
                             >
                               {videoRate}x
@@ -1080,7 +1080,7 @@ const Index = () => {
                                 const next = QUALITIES[(idx + 1) % QUALITIES.length];
                                 setVideoQuality(next);
                               }}
-                              className="text-[15px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none tabular-nums"
+                              className="text-[20px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none tabular-nums"
                               style={{ fontFamily: '"TT Commons", sans-serif' }}
                               aria-label="quality"
                             >
