@@ -925,8 +925,7 @@ const Index = () => {
                           })()}
                         </div>
                         <div
-                          className="h-1 rounded-full overflow-hidden mb-3 cursor-pointer touch-none"
-                          style={{ background: 'rgba(255,255,255,0.25)' }}
+                          className="relative cursor-pointer touch-none group mb-3 py-2 -my-2"
                           onPointerDown={(e) => {
                             e.stopPropagation();
                             const bar = e.currentTarget;
@@ -961,7 +960,12 @@ const Index = () => {
                           }}
                           onPointerCancel={() => setVideoScrubbing(false)}
                         >
-                          <div className="h-full" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FFF' }} />
+                          <div
+                            className="h-1 rounded-full overflow-hidden transition-all duration-150 ease-out group-hover:h-2.5"
+                            style={{ background: 'rgba(255,255,255,0.25)' }}
+                          >
+                            <div className="h-full" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FFF' }} />
+                          </div>
                         </div>
                         <div className="flex items-center justify-between" style={{ color: '#FFF' }}>
                           <div className="flex items-center gap-2">
