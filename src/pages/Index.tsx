@@ -1058,14 +1058,14 @@ const Index = () => {
                           </div>
 
                           <div
-                            className={`flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 ${videoOrientation === 'portrait' ? '' : 'sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0'}`}
+                            className={`relative flex items-center gap-1 rounded-full px-2 py-1 bg-black/30 backdrop-blur-xl backdrop-saturate-150 border border-white/10 ${videoOrientation === 'portrait' ? '' : 'sm:rounded-none sm:px-0 sm:py-0 sm:gap-2 sm:bg-transparent sm:backdrop-blur-none sm:border-0'}`}
                           >
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setVideoMenu(m => m === "speed" ? null : "speed");
                               }}
-                              className="text-[20px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none rounded-full"
+                              className="inline-flex items-center justify-center h-10 px-2 text-[20px] font-semibold hover:opacity-70 transition-opacity leading-none rounded-full"
                               style={{ background: videoMenu === "speed" ? 'rgba(255,255,255,0.18)' : 'transparent' }}
                               aria-label="speed"
                             >
@@ -1076,7 +1076,7 @@ const Index = () => {
                                 e.stopPropagation();
                                 setVideoMenu(m => m === "quality" ? null : "quality");
                               }}
-                              className="text-[20px] font-semibold hover:opacity-70 transition-opacity px-2 leading-none tabular-nums rounded-full"
+                              className="inline-flex items-center justify-center h-10 px-2 text-[20px] font-semibold hover:opacity-70 transition-opacity leading-none tabular-nums rounded-full"
                               style={{ background: videoMenu === "quality" ? 'rgba(255,255,255,0.18)' : 'transparent', fontFamily: '"TT Commons", sans-serif' }}
                               aria-label="quality"
                             >
