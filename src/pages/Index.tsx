@@ -923,6 +923,9 @@ const Index = () => {
                             onEnded={() => {
                               setVideoPlaying(false);
                               setVideoWatchedProgress(1);
+                              setVideoLandscape(false);
+                              setVideoMenu(null);
+                              showVideoUI(false);
                             }}
                             onClick={(e) => {
                               e.stopPropagation();
