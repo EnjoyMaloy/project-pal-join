@@ -1274,7 +1274,7 @@ const Index = () => {
                 )}
 
 
-                {(() => {
+                {!(kind === "video" && videoOrientation === 'portrait') && (() => {
                   const isInstruction = kind === "instruction";
                   const isVideo = kind === "video";
                   const progress = isInstruction ? instructionProgress : isVideo ? videoWatchedProgress : 1;
