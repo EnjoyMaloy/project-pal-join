@@ -858,7 +858,7 @@ const Index = () => {
                           }}
                         />
                         <div
-                          className="relative flex items-center justify-center transition-all duration-500 ease-out"
+                          className="relative flex items-center justify-center"
                           style={{
                             width: '100%',
                             height: '100%',
