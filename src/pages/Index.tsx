@@ -776,20 +776,22 @@ const Index = () => {
                   }}
                 />
               </div>
-              {/* Back button */}
-              <button
-                onClick={prev}
-                className="absolute top-4 left-4 z-30 inline-flex items-center justify-center rounded-full hover:opacity-80 transition-opacity"
-                style={{
-                  width: 36,
-                  height: 36,
-                  background: 'rgba(0,0,0,0.4)',
-                  backdropFilter: 'blur(4px)',
-                }}
-                aria-label="back"
-              >
-                <ArrowLeft className="text-white" size={18} />
-              </button>
+              {/* Back button — only for video blocks */}
+              {kind === "video" && (
+                <button
+                  onClick={prev}
+                  className="absolute top-4 left-4 z-30 inline-flex items-center justify-center rounded-full hover:opacity-80 transition-opacity"
+                  style={{
+                    width: 36,
+                    height: 36,
+                    background: 'rgba(0,0,0,0.4)',
+                    backdropFilter: 'blur(4px)',
+                  }}
+                  aria-label="back"
+                >
+                  <ArrowLeft className="text-white" size={18} />
+                </button>
+              )}
 
 
               {/* Tap zones */}
