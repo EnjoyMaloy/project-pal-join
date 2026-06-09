@@ -1157,7 +1157,7 @@ const Index = () => {
                     <button
                       onClick={isActive ? next : undefined}
                       disabled={!isActive}
-                      className="w-full transition-all"
+                      className={`transition-all ${isVideo ? 'w-full sm:w-[420px] sm:mx-auto sm:block' : 'w-full'}`}
                       style={{
                         background: bg,
                         color: '#FFFFFF',
