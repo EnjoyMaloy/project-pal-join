@@ -843,7 +843,9 @@ const Index = () => {
               />
 
               {/* Step content */}
-              <div className="flex-1 overflow-y-auto px-5 pb-4 relative z-[1] pointer-events-none">
+              <div
+                className={`flex-1 overflow-y-auto px-5 relative z-[1] pointer-events-none ${kind === "video" && videoOrientation === 'portrait' ? 'absolute inset-0 pb-0' : 'pb-4'}`}
+              >
                 <div className="pointer-events-auto h-full flex flex-col">
                   {kind === "image" && (
                     <div className="flex-1 flex flex-col items-center justify-center text-center">
@@ -958,7 +960,7 @@ const Index = () => {
 
                       {/* Native-style control bar — transparent overlay on mobile, solid on desktop */}
                       <div
-                        className="px-5 pt-4 pb-3 transition-opacity duration-300 absolute bottom-0 left-0 right-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black"
+                        className={`px-5 pt-4 pb-3 transition-opacity duration-300 absolute left-0 right-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black ${videoOrientation === 'portrait' ? 'bottom-[72px] sm:bottom-0' : 'bottom-0'}`}
                         style={{
                           opacity: videoUIVisible ? 1 : 0,
                           pointerEvents: videoUIVisible ? undefined : 'none',
