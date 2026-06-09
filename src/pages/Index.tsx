@@ -1184,7 +1184,14 @@ const Index = () => {
               </div>
 
               {/* Bottom button */}
-              <div className="px-4 pb-4 pt-0 relative z-[2]" style={{ background: 'transparent' }}>
+              <div
+                className={`px-4 pb-4 pt-0 relative z-[2] ${kind === "video" ? 'transition-opacity duration-300' : ''}`}
+                style={{
+                  background: 'transparent',
+                  opacity: kind === "video" ? (videoUIVisible ? 1 : 0) : undefined,
+                  pointerEvents: kind === "video" ? (videoUIVisible ? undefined : 'none') : undefined,
+                }}
+              >
                 {kind !== "image" && (
                   <>
                     {/* Progressive blur: stacked layers with increasing strength + soft masks */}
