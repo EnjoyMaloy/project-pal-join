@@ -935,7 +935,7 @@ const Index = () => {
                         </div>
                         <div
                           className="relative cursor-pointer touch-none group mb-3 py-2 -my-2"
-                          onPointerDown={(e) => {
+                            onPointerDown={(e) => {
                             e.stopPropagation();
                             const bar = e.currentTarget;
                             bar.setPointerCapture(e.pointerId);
@@ -948,6 +948,7 @@ const Index = () => {
                               if (v && v.duration) {
                                 v.currentTime = ratio * v.duration;
                                 setVideoCurrent(v.currentTime);
+                                setVideoWatchedProgress(prev => Math.max(prev, ratio));
                               }
                             };
                             seek(e.clientX);
@@ -961,6 +962,7 @@ const Index = () => {
                             if (v && v.duration) {
                               v.currentTime = ratio * v.duration;
                               setVideoCurrent(v.currentTime);
+                              setVideoWatchedProgress(prev => Math.max(prev, ratio));
                             }
                           }}
                           onPointerUp={(e) => {
