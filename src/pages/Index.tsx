@@ -283,18 +283,17 @@ const Index = () => {
   const [videoRotated, setVideoRotated] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
-  useEffect(() => { setInstructionProgress(0); setVideoRotated(false); setVideoPlaying(false); setVideoProgress(0); }, [storyIndex]);
+  const [videoDuration, setVideoDuration] = useState(0);
+  const [videoCurrent, setVideoCurrent] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
-    if (!videoPlaying) return;
-    const id = setInterval(() => {
-      setVideoProgress(p => {
-        const np = Math.min(1, p + 0.02);
-        if (np >= 1) { setVideoPlaying(false); }
-        return np;
-      });
-    }, 100);
-    return () => clearInterval(id);
-  }, [videoPlaying]);
+    setInstructionProgress(0);
+    setVideoRotated(false);
+    setVideoPlaying(false);
+    setVideoProgress(0);
+    setVideoCurrent(0);
+    if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; }
+  }, [storyIndex]);
   const [popoverIndex, setPopoverIndex] = useState<number | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [listHeight, setListHeight] = useState(0);
