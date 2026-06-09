@@ -1081,10 +1081,21 @@ const Index = () => {
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
+                                setVideoLandscape(true);
+                                showVideoUI(true);
+                              }}
+                              className="p-2 hover:opacity-70 transition-opacity sm:hidden"
+                              aria-label="rotate"
+                            >
+                              <RotateCw className="w-6 h-6" />
+                            </button>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
                                 const v = videoRef.current; if (!v) return;
                                 if (v.requestFullscreen) v.requestFullscreen();
                               }}
-                              className="p-2 hover:opacity-70 transition-opacity"
+                              className="p-2 hover:opacity-70 transition-opacity hidden sm:inline-flex"
                               aria-label="fullscreen"
                             >
                               <Maximize2 className="w-6 h-6" />
