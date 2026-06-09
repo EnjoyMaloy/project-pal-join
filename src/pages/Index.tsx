@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Eye, Clock, Calendar } from "lucide-react";
+import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Eye, Clock, Calendar, RotateCw, Play, Smartphone, Monitor } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
 
@@ -279,7 +279,8 @@ const Index = () => {
   const [lessonOpen, setLessonOpen] = useState(false);
   const [storyIndex, setStoryIndex] = useState<number | null>(null);
   const [instructionProgress, setInstructionProgress] = useState(0);
-  useEffect(() => { setInstructionProgress(0); }, [storyIndex]);
+  const [videoRotated, setVideoRotated] = useState(false);
+  useEffect(() => { setInstructionProgress(0); setVideoRotated(false); }, [storyIndex]);
   const [popoverIndex, setPopoverIndex] = useState<number | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [listHeight, setListHeight] = useState(0);
@@ -713,7 +714,7 @@ const Index = () => {
 
       {/* Stories overlay (5 steps per lesson) */}
       {lessonOpen && currentLesson && (() => {
-        const STEPS: Array<"image" | "instruction" | "quiz"> = ["image", "image", "instruction", "quiz", "image"];
+        const STEPS: Array<"image" | "video" | "instruction" | "quiz"> = ["image", "video", "instruction", "quiz", "image"];
         const step = Math.min(Math.max(storyIndex ?? 0, 0), STEPS.length - 1);
         const setStep = (n: number) => setStoryIndex(n);
         const close = () => { setLessonOpen(false); setStoryIndex(null); };
@@ -726,11 +727,12 @@ const Index = () => {
             <div
               className="relative overflow-hidden flex flex-col w-full h-full sm:rounded-2xl sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)]"
               style={{
-                background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : lessonColors.surface,
+                background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : kind === "video" ? "#000000" : lessonColors.surface,
               }}
               onClick={(e) => e.stopPropagation()}
 
             >
+
 
               {/* Progress bar — single continuous line at top */}
               <div
@@ -776,6 +778,96 @@ const Index = () => {
                       </h3>
                       <p className="mt-2 text-[14px]" style={{ color: 'rgba(255,255,255,0.85)' }}>
                         {currentLesson.description}
+                      </p>
+                    </div>
+                  )}
+
+                  {kind === "video" && (
+                    <div className="flex-1 flex flex-col items-center justify-center text-center relative">
+                      {/* Rotate / orientation toggle */}
+                      <button
+                        onClick={(e) => { e.stopPropagation(); setVideoRotated(v => !v); }}
+                        className="absolute top-12 right-2 z-10 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium transition-all hover:scale-105"
+                        style={{
+                          fontFamily: '"TT Commons", sans-serif',
+                          background: 'rgba(255,255,255,0.12)',
+                          color: '#FFFFFF',
+                          backdropFilter: 'blur(8px)',
+                          border: '1px solid rgba(255,255,255,0.2)',
+                        }}
+                        aria-label="toggle orientation"
+                      >
+                        {videoRotated ? <Monitor className="w-3.5 h-3.5" /> : <Smartphone className="w-3.5 h-3.5" />}
+                        {videoRotated
+                          ? (t("index.videoLandscape") || "Горизонтально")
+                          : (t("index.videoPortrait") || "Как на телефоне")}
+                        <RotateCw className="w-3.5 h-3.5 opacity-70" />
+                      </button>
+
+                      <div
+                        className="relative flex items-center justify-center transition-all duration-500 ease-out"
+                        style={{
+                          width: videoRotated ? '60%' : '100%',
+                          aspectRatio: videoRotated ? '9 / 16' : '16 / 9',
+                          maxHeight: '70vh',
+                        }}
+                      >
+                        {/* Phone frame when rotated */}
+                        {videoRotated && (
+                          <div
+                            className="absolute inset-0 rounded-[28px] pointer-events-none"
+                            style={{
+                              border: '6px solid #232323',
+                              boxShadow: '0 10px 40px rgba(0,0,0,0.4), inset 0 0 0 1px #464646',
+                            }}
+                          />
+                        )}
+                        <div
+                          className="relative w-full h-full overflow-hidden flex items-center justify-center"
+                          style={{
+                            borderRadius: videoRotated ? 22 : 16,
+                            background: 'linear-gradient(135deg,#232323 0%,#000000 100%)',
+                          }}
+                        >
+                          {/* Notch when phone */}
+                          {videoRotated && (
+                            <div
+                              className="absolute top-2 left-1/2 -translate-x-1/2 z-10 rounded-full"
+                              style={{ width: 80, height: 18, background: '#000000' }}
+                            />
+                          )}
+                          {/* Play button */}
+                          <button
+                            className="relative z-[1] inline-flex items-center justify-center rounded-full transition-transform hover:scale-110"
+                            style={{
+                              width: 64,
+                              height: 64,
+                              background: 'rgba(255,255,255,0.95)',
+                              boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
+                            }}
+                            aria-label="play"
+                          >
+                            <Play className="w-7 h-7" style={{ color: '#000000', marginLeft: 3 }} fill="#000000" />
+                          </button>
+                          {/* Mock timeline */}
+                          <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2">
+                            <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.25)' }}>
+                              <div className="h-full" style={{ width: '32%', background: '#FF7D60' }} />
+                            </div>
+                            <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.85)', fontFamily: '"TT Commons", sans-serif' }}>
+                              01:12 / 03:48
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <h3 className="mt-5 text-[20px] font-semibold leading-tight px-4" style={{ color: '#FFFFFF', fontFamily: '"TT Commons", sans-serif' }}>
+                        {currentLesson.title}
+                      </h3>
+                      <p className="mt-1.5 text-[13px] px-6" style={{ color: 'rgba(255,255,255,0.7)', fontFamily: '"TT Commons", sans-serif' }}>
+                        {videoRotated
+                          ? (t("index.videoHintPortrait") || "Предпросмотр как на вертикальном экране телефона")
+                          : (t("index.videoHintLandscape") || "Нажми на иконку, чтобы увидеть, как видео смотрится с телефона")}
                       </p>
                     </div>
                   )}
