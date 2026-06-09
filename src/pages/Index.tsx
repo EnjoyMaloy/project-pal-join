@@ -285,6 +285,7 @@ const Index = () => {
   const [videoProgress, setVideoProgress] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
   const [videoCurrent, setVideoCurrent] = useState(0);
+  const [videoScrubbing, setVideoScrubbing] = useState(false);
   const [videoMuted, setVideoMuted] = useState(false);
   const [videoRate, setVideoRate] = useState(1);
   const videoRef = useRef<HTMLVideoElement>(null);
