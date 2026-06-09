@@ -923,6 +923,9 @@ const Index = () => {
                             onEnded={() => {
                               setVideoPlaying(false);
                               setVideoWatchedProgress(1);
+                              setVideoLandscape(false);
+                              setVideoMenu(null);
+                              showVideoUI(false);
                             }}
                             onClick={(e) => {
                               e.stopPropagation();
@@ -1337,24 +1340,6 @@ const Index = () => {
                   className="absolute inset-0 z-0"
                 />
 
-                {/* Top-right: rotate back */}
-                <div
-                  className="absolute top-0 left-0 right-0 z-[3] flex justify-end p-4 transition-opacity duration-300"
-                  style={{
-                    opacity: videoUIVisible ? 1 : 0,
-                    pointerEvents: videoUIVisible ? undefined : 'none',
-                    background: 'linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%)',
-                  }}
-                >
-                  <button
-                    onClick={(e) => { e.stopPropagation(); setVideoLandscape(false); showVideoUI(true); }}
-                    className="inline-flex items-center justify-center rounded-full hover:opacity-80 transition-opacity"
-                    style={{ width: 40, height: 40, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(6px)', color: '#FFF' }}
-                    aria-label="rotate-back"
-                  >
-                    <RotateCw className="w-5 h-5" style={{ transform: 'scaleX(-1)' }} />
-                  </button>
-                </div>
 
                 {/* Bottom: transparent controls overlay */}
                 <div
