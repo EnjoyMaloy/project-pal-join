@@ -292,7 +292,20 @@ const Index = () => {
   const [videoOrientation, setVideoOrientation] = useState<"landscape" | "portrait">("landscape");
   const [videoAspect, setVideoAspect] = useState<number>(16 / 9);
   const [videoWatchedProgress, setVideoWatchedProgress] = useState(0);
+  const [videoUIVisible, setVideoUIVisible] = useState(true);
+  const videoUITimerRef = useRef<number | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const showVideoUI = (autoHide: boolean) => {
+    setVideoUIVisible(true);
+    if (videoUITimerRef.current) { window.clearTimeout(videoUITimerRef.current); videoUITimerRef.current = null; }
+    if (autoHide) {
+      videoUITimerRef.current = window.setTimeout(() => setVideoUIVisible(false), 3000);
+    }
+  };
+  const hideVideoUI = () => {
+    if (videoUITimerRef.current) { window.clearTimeout(videoUITimerRef.current); videoUITimerRef.current = null; }
+    setVideoUIVisible(false);
+  };
   const RATES = [1, 1.25, 1.5, 2, 0.5, 0.75];
   const QUALITIES = ["Авто", "1080p", "720p", "480p", "360p"];
   useEffect(() => {
