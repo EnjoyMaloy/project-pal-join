@@ -956,7 +956,7 @@ const Index = () => {
 
                       {/* Native-style control bar — transparent overlay on mobile, solid on desktop */}
                       <div
-                        className={`px-5 pt-4 transition-opacity duration-300 absolute left-0 right-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black ${videoOrientation === 'portrait' ? 'bottom-0 pb-4' : 'bottom-[72px] pb-3 sm:bottom-0'}`}
+                        className={`px-5 pt-4 pb-3 transition-opacity duration-300 absolute left-0 right-0 bottom-0 z-10 sm:static sm:shrink-0 bg-transparent sm:bg-black ${videoOrientation === 'portrait' ? 'pb-4' : ''}`}
                         style={{
                           opacity: videoUIVisible ? 1 : 0,
                           pointerEvents: videoUIVisible ? undefined : 'none',
