@@ -831,12 +831,16 @@ const Index = () => {
                           }}
                         >
                           <button
+                            onClick={(e) => { e.stopPropagation(); setVideoPlaying(p => !p); }}
                             className="relative z-[1] inline-flex items-center justify-center rounded-full transition-transform hover:scale-110"
                             style={{
                               width: 64,
                               height: 64,
                               background: 'rgba(255,255,255,0.95)',
                               boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
+                              opacity: videoPlaying ? 0 : 1,
+                              pointerEvents: videoPlaying ? 'none' : 'auto',
+                              transition: 'opacity 0.3s',
                             }}
                             aria-label="play"
                           >
@@ -844,12 +848,18 @@ const Index = () => {
                           </button>
                           <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2">
                             <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.25)' }}>
-                              <div className="h-full" style={{ width: '32%', background: '#FF7D60' }} />
+                              <div className="h-full transition-all" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FF7D60' }} />
                             </div>
-                            <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.85)', fontFamily: '"TT Commons", sans-serif' }}>
-                              01:12 / 03:48
+                            <span className="text-[11px] tabular-nums" style={{ color: 'rgba(255,255,255,0.85)', fontFamily: '"TT Commons", sans-serif' }}>
+                              {(() => {
+                                const total = 228; // 03:48
+                                const cur = Math.round(total * videoProgress);
+                                const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+                                return `${fmt(cur)} / ${fmt(total)}`;
+                              })()}
                             </span>
                           </div>
+
                         </div>
                       </div>
 
