@@ -293,6 +293,7 @@ const Index = () => {
   const [videoAspect, setVideoAspect] = useState<number>(16 / 9);
   const [videoWatchedProgress, setVideoWatchedProgress] = useState(0);
   const [videoUIVisible, setVideoUIVisible] = useState(true);
+  const [videoLandscape, setVideoLandscape] = useState(false);
   const videoUITimerRef = useRef<number | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const showVideoUI = (autoHide: boolean) => {
