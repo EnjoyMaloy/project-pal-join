@@ -1341,9 +1341,60 @@ const Index = () => {
                 />
 
 
-                {/* Bottom: transparent controls overlay */}
+                {/* Top-right: speed / quality / rotate-back pill */}
                 <div
-                  className="absolute bottom-0 left-0 right-0 z-[3] px-5 pt-10 pb-5 transition-opacity duration-300"
+                  className="absolute top-4 right-4 z-[3] transition-opacity duration-300"
+                  style={{
+                    opacity: videoUIVisible ? 1 : 0,
+                    pointerEvents: videoUIVisible ? undefined : 'none',
+                    color: '#FFF',
+                  }}
+                >
+                  <div
+                    className="flex items-center gap-1 rounded-full px-2 py-1"
+                    style={{
+                      background: 'rgba(0,0,0,0.28)',
+                      backdropFilter: 'blur(18px) saturate(1.4)',
+                      WebkitBackdropFilter: 'blur(18px) saturate(1.4)',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                    }}
+                  >
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setVideoMenu(m => m === "speed" ? null : "speed"); showVideoUI(true); }}
+                      className="text-[15px] font-semibold hover:opacity-70 transition-opacity px-3 py-1.5 leading-none rounded-full"
+                      style={{ background: videoMenu === "speed" ? 'rgba(255,255,255,0.18)' : 'transparent' }}
+                      aria-label="speed"
+                    >
+                      {videoRate}x
+                    </button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setVideoMenu(m => m === "quality" ? null : "quality"); showVideoUI(true); }}
+                      className="text-[13px] font-semibold hover:opacity-70 transition-opacity px-3 py-1.5 leading-none rounded-full tabular-nums"
+                      style={{ background: videoMenu === "quality" ? 'rgba(255,255,255,0.18)' : 'transparent', fontFamily: '"TT Commons", sans-serif' }}
+                      aria-label="quality"
+                    >
+                      {videoQuality}
+                    </button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setVideoMuted(m => !m); showVideoUI(true); }}
+                      className="p-2 hover:opacity-70 transition-opacity"
+                      aria-label="mute"
+                    >
+                      {videoMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                    </button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setVideoLandscape(false); setVideoMenu(null); showVideoUI(true); }}
+                      className="p-2 hover:opacity-70 transition-opacity"
+                      aria-label="rotate-back-2"
+                    >
+                      <RotateCw className="w-5 h-5" style={{ transform: 'scaleX(-1)' }} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Bottom: play | timeline | remaining time */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 z-[3] px-4 pt-10 pb-5 transition-opacity duration-300"
                   style={{
                     background: 'transparent',
                     opacity: videoUIVisible ? 1 : 0,
@@ -1351,125 +1402,81 @@ const Index = () => {
                     color: '#FFF',
                   }}
                 >
-                  {/* Progress bar */}
                   <div
-                    className="relative cursor-pointer touch-none group mb-3 py-2 -my-2"
-                    onPointerDown={(e) => {
-                      e.stopPropagation();
-                      const bar = e.currentTarget;
-                      bar.setPointerCapture(e.pointerId);
-                      setVideoScrubbing(true);
-                      const v = videoRef.current;
-                      const seek = (clientY: number) => {
-                        // rotated: horizontal progress maps to clientY in screen-space inversely
-                        const rect = bar.getBoundingClientRect();
+                    className="flex items-center gap-3 rounded-full pl-1 pr-4 py-1"
+                    style={{
+                      background: 'rgba(0,0,0,0.28)',
+                      backdropFilter: 'blur(18px) saturate(1.4)',
+                      WebkitBackdropFilter: 'blur(18px) saturate(1.4)',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                    }}
+                  >
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const v = videoRef.current; if (!v) return;
+                        if (v.paused) { v.play(); setVideoPlaying(true); } else { v.pause(); setVideoPlaying(false); }
+                      }}
+                      className="p-2 hover:opacity-70 transition-opacity shrink-0"
+                      aria-label="play-pause"
+                    >
+                      {videoPlaying ? <Pause className="w-5 h-5" fill="#FFF" /> : <Play className="w-5 h-5" fill="#FFF" />}
+                    </button>
+
+                    <div
+                      className="relative cursor-pointer touch-none group flex-1 py-3 -my-3"
+                      onPointerDown={(e) => {
+                        e.stopPropagation();
+                        const bar = e.currentTarget;
+                        bar.setPointerCapture(e.pointerId);
+                        setVideoScrubbing(true);
+                        const v = videoRef.current;
+                        const seek = () => {
+                          const rect = bar.getBoundingClientRect();
+                          const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                          setVideoProgress(ratio);
+                          if (v && v.duration) {
+                            v.currentTime = ratio * v.duration;
+                            setVideoCurrent(v.currentTime);
+                            setVideoWatchedProgress(prev => Math.max(prev, ratio));
+                          }
+                        };
+                        seek();
+                      }}
+                      onPointerMove={(e) => {
+                        if (!videoScrubbing) return;
+                        const rect = e.currentTarget.getBoundingClientRect();
                         const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
                         setVideoProgress(ratio);
+                        const v = videoRef.current;
                         if (v && v.duration) {
                           v.currentTime = ratio * v.duration;
                           setVideoCurrent(v.currentTime);
                           setVideoWatchedProgress(prev => Math.max(prev, ratio));
                         }
-                      };
-                      seek(e.clientY);
-                    }}
-                    onPointerMove={(e) => {
-                      if (!videoScrubbing) return;
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-                      setVideoProgress(ratio);
-                      const v = videoRef.current;
-                      if (v && v.duration) {
-                        v.currentTime = ratio * v.duration;
-                        setVideoCurrent(v.currentTime);
-                        setVideoWatchedProgress(prev => Math.max(prev, ratio));
-                      }
-                    }}
-                    onPointerUp={(e) => {
-                      e.currentTarget.releasePointerCapture(e.pointerId);
-                      setVideoScrubbing(false);
-                    }}
-                    onPointerCancel={() => setVideoScrubbing(false)}
-                  >
-                    <div
-                      className="h-1 rounded-full overflow-hidden transition-transform duration-150 ease-out origin-bottom group-hover:scale-y-[2.5]"
-                      style={{ background: 'rgba(255,255,255,0.3)' }}
-                    >
-                      <div className="h-full" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FFF' }} />
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div
-                      className="flex items-center gap-1 rounded-full px-2 py-1"
-                      style={{
-                        background: 'rgba(0,0,0,0.28)',
-                        backdropFilter: 'blur(18px) saturate(1.4)',
-                        WebkitBackdropFilter: 'blur(18px) saturate(1.4)',
-                        border: '1px solid rgba(255,255,255,0.08)',
                       }}
+                      onPointerUp={(e) => {
+                        e.currentTarget.releasePointerCapture(e.pointerId);
+                        setVideoScrubbing(false);
+                      }}
+                      onPointerCancel={() => setVideoScrubbing(false)}
                     >
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          const v = videoRef.current; if (!v) return;
-                          if (v.paused) { v.play(); setVideoPlaying(true); } else { v.pause(); setVideoPlaying(false); }
-                        }}
-                        className="p-2 hover:opacity-70 transition-opacity"
-                        aria-label="play-pause"
+                      <div
+                        className="h-1 rounded-full overflow-hidden transition-transform duration-150 ease-out origin-center group-hover:scale-y-[2]"
+                        style={{ background: 'rgba(255,255,255,0.3)' }}
                       >
-                        {videoPlaying ? <Pause className="w-5 h-5" fill="#FFF" /> : <Play className="w-5 h-5" fill="#FFF" />}
-                      </button>
-                      <span className="text-[14px] font-medium tabular-nums px-1" style={{ fontFamily: '"TT Commons", sans-serif' }}>
-                        {(() => {
-                          const remaining = Math.max(0, (videoDuration || 0) - videoCurrent);
-                          const m = Math.floor(remaining / 60);
-                          const s = String(Math.floor(remaining) % 60).padStart(2, '0');
-                          return `-${m}:${s}`;
-                        })()}
-                      </span>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setVideoMuted(m => !m); }}
-                        className="p-2 hover:opacity-70 transition-opacity"
-                        aria-label="mute"
-                      >
-                        {videoMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-                      </button>
+                        <div className="h-full" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FFF' }} />
+                      </div>
                     </div>
 
-                    <div
-                      className="flex items-center gap-1 rounded-full px-2 py-1"
-                      style={{
-                        background: 'rgba(0,0,0,0.28)',
-                        backdropFilter: 'blur(18px) saturate(1.4)',
-                        WebkitBackdropFilter: 'blur(18px) saturate(1.4)',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                      }}
-                    >
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setVideoMenu(m => m === "speed" ? null : "speed"); showVideoUI(true); }}
-                        className="text-[15px] font-semibold hover:opacity-70 transition-opacity px-3 py-1.5 leading-none rounded-full"
-                        style={{ background: videoMenu === "speed" ? 'rgba(255,255,255,0.18)' : 'transparent' }}
-                        aria-label="speed"
-                      >
-                        {videoRate}x
-                      </button>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setVideoMenu(m => m === "quality" ? null : "quality"); showVideoUI(true); }}
-                        className="text-[13px] font-semibold hover:opacity-70 transition-opacity px-3 py-1.5 leading-none rounded-full tabular-nums"
-                        style={{ background: videoMenu === "quality" ? 'rgba(255,255,255,0.18)' : 'transparent', fontFamily: '"TT Commons", sans-serif' }}
-                        aria-label="quality"
-                      >
-                        {videoQuality}
-                      </button>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setVideoLandscape(false); setVideoMenu(null); showVideoUI(true); }}
-                        className="p-2 hover:opacity-70 transition-opacity"
-                        aria-label="rotate-back-2"
-                      >
-                        <RotateCw className="w-5 h-5" style={{ transform: 'scaleX(-1)' }} />
-                      </button>
-                    </div>
+                    <span className="text-[14px] font-medium tabular-nums shrink-0" style={{ fontFamily: '"TT Commons", sans-serif' }}>
+                      {(() => {
+                        const remaining = Math.max(0, (videoDuration || 0) - videoCurrent);
+                        const m = Math.floor(remaining / 60);
+                        const s = String(Math.floor(remaining) % 60).padStart(2, '0');
+                        return `-${m}:${s}`;
+                      })()}
+                    </span>
                   </div>
                 </div>
 
