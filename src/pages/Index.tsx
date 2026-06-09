@@ -292,7 +292,20 @@ const Index = () => {
   const [videoOrientation, setVideoOrientation] = useState<"landscape" | "portrait">("landscape");
   const [videoAspect, setVideoAspect] = useState<number>(16 / 9);
   const [videoWatchedProgress, setVideoWatchedProgress] = useState(0);
+  const [videoUIVisible, setVideoUIVisible] = useState(true);
+  const videoUITimerRef = useRef<number | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const showVideoUI = (autoHide: boolean) => {
+    setVideoUIVisible(true);
+    if (videoUITimerRef.current) { window.clearTimeout(videoUITimerRef.current); videoUITimerRef.current = null; }
+    if (autoHide) {
+      videoUITimerRef.current = window.setTimeout(() => setVideoUIVisible(false), 3000);
+    }
+  };
+  const hideVideoUI = () => {
+    if (videoUITimerRef.current) { window.clearTimeout(videoUITimerRef.current); videoUITimerRef.current = null; }
+    setVideoUIVisible(false);
+  };
   const RATES = [1, 1.25, 1.5, 2, 0.5, 0.75];
   const QUALITIES = ["Авто", "1080p", "720p", "480p", "360p"];
   useEffect(() => {
@@ -304,6 +317,8 @@ const Index = () => {
     setVideoMuted(false);
     setVideoRate(1);
     setVideoWatchedProgress(0);
+    setVideoUIVisible(true);
+    if (videoUITimerRef.current) { window.clearTimeout(videoUITimerRef.current); videoUITimerRef.current = null; }
     if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; videoRef.current.playbackRate = 1; }
   }, [storyIndex]);
   const [popoverIndex, setPopoverIndex] = useState<number | null>(null);
@@ -760,14 +775,27 @@ const Index = () => {
                 } : {}),
               }}
               onClick={(e) => e.stopPropagation()}
-
+              onPointerMove={kind === "video" ? (e) => {
+                showVideoUI(e.pointerType !== "mouse");
+              } : undefined}
+              onPointerDown={kind === "video" ? (e) => {
+                showVideoUI(e.pointerType !== "mouse");
+              } : undefined}
+              onPointerLeave={kind === "video" ? (e) => {
+                if (e.pointerType === "mouse") hideVideoUI();
+              } : undefined}
             >
 
 
               {/* Progress bar — single continuous line at top */}
               <div
-                className="absolute top-0 left-0 right-0 z-20 overflow-hidden"
-                style={{ height: 6, background: 'rgba(255,125,96,0.25)' }}
+                className="absolute top-0 left-0 right-0 z-20 overflow-hidden transition-opacity duration-300"
+                style={{
+                  height: 6,
+                  background: 'rgba(255,125,96,0.25)',
+                  opacity: kind === "video" && !videoUIVisible ? 0 : 1,
+                  pointerEvents: kind === "video" && !videoUIVisible ? 'none' : undefined,
+                }}
               >
                 <div
                   className="h-full transition-all"
@@ -781,12 +809,14 @@ const Index = () => {
               {kind === "video" && (
                 <button
                   onClick={prev}
-                  className="absolute top-4 left-4 z-30 inline-flex items-center justify-center rounded-full hover:opacity-80 transition-opacity"
+                  className="absolute top-4 left-4 z-30 inline-flex items-center justify-center rounded-full hover:opacity-80 transition-opacity duration-300"
                   style={{
                     width: 36,
                     height: 36,
                     background: 'rgba(0,0,0,0.4)',
                     backdropFilter: 'blur(4px)',
+                    opacity: videoUIVisible ? 1 : 0,
+                    pointerEvents: videoUIVisible ? undefined : 'none',
                   }}
                   aria-label="back"
                 >
@@ -919,7 +949,14 @@ const Index = () => {
                       </div>
 
                       {/* Native-style control bar on black */}
-                      <div className="shrink-0 px-5 pt-4 pb-3" style={{ background: '#000' }}>
+                      <div
+                        className="shrink-0 px-5 pt-4 pb-3 transition-opacity duration-300"
+                        style={{
+                          background: '#000',
+                          opacity: videoUIVisible ? 1 : 0,
+                          pointerEvents: videoUIVisible ? undefined : 'none',
+                        }}
+                      >
                         <div
                           className="text-center text-[15px] font-medium tabular-nums mb-3 transition-opacity"
                           style={{
