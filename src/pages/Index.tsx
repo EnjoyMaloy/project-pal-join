@@ -747,13 +747,13 @@ const Index = () => {
         return (
           <div className="fixed inset-0 z-[60] bg-black/80 flex items-center justify-center sm:p-4" onClick={close}>
             <div
-              className={`relative flex flex-col w-full h-full transition-[width,height,max-width,max-height] duration-500 ease-out ${kind === "video" ? "sm:rounded-2xl overflow-hidden" : "sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)] overflow-hidden sm:rounded-2xl"}`}
+              className={`relative flex flex-col transition-[width,height,max-width,max-height] duration-500 ease-out ${kind === "video" ? "sm:rounded-2xl overflow-hidden" : "w-full h-full sm:w-[min(420px,100%)] sm:h-[min(760px,92vh)] overflow-hidden sm:rounded-2xl"}`}
               style={{
                 background: kind === "image" ? "linear-gradient(180deg,#D9C0FF 0%,#BF96FF 100%)" : kind === "video" ? "#000000" : lessonColors.surface,
                 ...(kind === "video" ? (
                   videoOrientation === "landscape"
                     ? { width: 'min(96vw, calc(92vh * 16 / 9))', height: 'min(92vh, calc(96vw * 9 / 16))', maxWidth: 1920, maxHeight: 1080 }
-                    : { width: 'min(calc(92vh * 9 / 16), 480px)', height: 'min(92vh, calc(480px * 16 / 9))' }
+                    : { width: 'min(96vw, calc(92vh * 9 / 16), 480px)', height: 'min(92vh, calc(96vw * 16 / 9), calc(480px * 16 / 9))' }
                 ) : {}),
               }}
               onClick={(e) => e.stopPropagation()}
