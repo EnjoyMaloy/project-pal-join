@@ -280,7 +280,20 @@ const Index = () => {
   const [storyIndex, setStoryIndex] = useState<number | null>(null);
   const [instructionProgress, setInstructionProgress] = useState(0);
   const [videoRotated, setVideoRotated] = useState(false);
-  useEffect(() => { setInstructionProgress(0); setVideoRotated(false); }, [storyIndex]);
+  const [videoPlaying, setVideoPlaying] = useState(false);
+  const [videoProgress, setVideoProgress] = useState(0);
+  useEffect(() => { setInstructionProgress(0); setVideoRotated(false); setVideoPlaying(false); setVideoProgress(0); }, [storyIndex]);
+  useEffect(() => {
+    if (!videoPlaying) return;
+    const id = setInterval(() => {
+      setVideoProgress(p => {
+        const np = Math.min(1, p + 0.02);
+        if (np >= 1) { setVideoPlaying(false); }
+        return np;
+      });
+    }, 100);
+    return () => clearInterval(id);
+  }, [videoPlaying]);
   const [popoverIndex, setPopoverIndex] = useState<number | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [listHeight, setListHeight] = useState(0);
@@ -818,12 +831,16 @@ const Index = () => {
                           }}
                         >
                           <button
+                            onClick={(e) => { e.stopPropagation(); setVideoPlaying(p => !p); }}
                             className="relative z-[1] inline-flex items-center justify-center rounded-full transition-transform hover:scale-110"
                             style={{
                               width: 64,
                               height: 64,
                               background: 'rgba(255,255,255,0.95)',
                               boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
+                              opacity: videoPlaying ? 0 : 1,
+                              pointerEvents: videoPlaying ? 'none' : 'auto',
+                              transition: 'opacity 0.3s',
                             }}
                             aria-label="play"
                           >
@@ -831,12 +848,18 @@ const Index = () => {
                           </button>
                           <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2">
                             <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.25)' }}>
-                              <div className="h-full" style={{ width: '32%', background: '#FF7D60' }} />
+                              <div className="h-full transition-all" style={{ width: `${Math.round(videoProgress * 100)}%`, background: '#FF7D60' }} />
                             </div>
-                            <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.85)', fontFamily: '"TT Commons", sans-serif' }}>
-                              01:12 / 03:48
+                            <span className="text-[11px] tabular-nums" style={{ color: 'rgba(255,255,255,0.85)', fontFamily: '"TT Commons", sans-serif' }}>
+                              {(() => {
+                                const total = 228; // 03:48
+                                const cur = Math.round(total * videoProgress);
+                                const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+                                return `${fmt(cur)} / ${fmt(total)}`;
+                              })()}
                             </span>
                           </div>
+
                         </div>
                       </div>
 
@@ -965,11 +988,13 @@ const Index = () => {
 
                 {(() => {
                   const isInstruction = kind === "instruction";
-                  const pct = Math.round(instructionProgress * 100);
-                  const isActive = !isInstruction || instructionProgress >= 0.9;
+                  const isVideo = kind === "video";
+                  const progress = isInstruction ? instructionProgress : isVideo ? videoProgress : 1;
+                  const pct = Math.round(progress * 100);
+                  const isActive = (!isInstruction && !isVideo) || progress >= 0.9;
                   const filled = '#FF7D60';
                   const empty = '#FFD0C2';
-                  const bg = isInstruction
+                  const bg = (isInstruction || isVideo)
                     ? `linear-gradient(to right, ${filled} 0%, ${filled} ${pct}%, ${empty} ${pct}%, ${empty} 100%)`
                     : filled;
                   return (
