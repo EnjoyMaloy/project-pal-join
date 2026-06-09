@@ -1244,7 +1244,7 @@ const Index = () => {
 
               {/* Bottom button */}
               <div
-                className={`px-4 pb-4 pt-0 relative z-[2] ${kind === "video" ? 'transition-opacity duration-300' : ''} ${kind === "video" && videoOrientation === 'portrait' ? 'absolute bottom-0 left-0 right-0 sm:static' : ''}`}
+                className={`px-4 pb-4 pt-0 relative z-[2] ${kind === "video" ? 'transition-opacity duration-300' : ''} ${kind === "video" && videoOrientation === 'portrait' ? 'hidden sm:block absolute bottom-0 left-0 right-0 sm:static' : ''}`}
                 style={{
                   background: 'transparent',
                   opacity: kind === "video" ? ((videoUIVisible || videoWatchedProgress >= 1) ? 1 : 0) : undefined,
