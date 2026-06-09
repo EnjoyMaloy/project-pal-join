@@ -319,6 +319,7 @@ const Index = () => {
     setVideoRate(1);
     setVideoWatchedProgress(0);
     setVideoUIVisible(true);
+    setVideoLandscape(false);
     if (videoUITimerRef.current) { window.clearTimeout(videoUITimerRef.current); videoUITimerRef.current = null; }
     if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; videoRef.current.playbackRate = 1; }
   }, [storyIndex]);
