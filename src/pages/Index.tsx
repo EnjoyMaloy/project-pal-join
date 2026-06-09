@@ -4,6 +4,7 @@ import { ArrowLeft, BookOpen, ChevronDown, X, BookOpenCheck, FileText, Eye, Cloc
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
 import rehcVideo from "@/assets/rehc.mp4.asset.json";
+import verticalVideo from "@/assets/vertical-video.mov.asset.json";
 
 
 const IconActive = ({ className }: { className?: string }) => (
