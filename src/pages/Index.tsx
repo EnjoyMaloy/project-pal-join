@@ -766,7 +766,7 @@ const Index = () => {
 
               {/* Progress bar — single continuous line at top */}
               <div
-                className="absolute top-2 left-0 right-0 z-20 overflow-hidden"
+                className="absolute top-0 left-0 right-0 z-20 overflow-hidden"
                 style={{ height: 6, background: 'rgba(255,125,96,0.25)' }}
               >
                 <div
