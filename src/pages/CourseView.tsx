@@ -394,7 +394,7 @@ const CourseView = () => {
             {/* Title */}
             <div className="flex items-center gap-3 mb-4 flex-wrap">
               <h1 className="text-[28px] font-bold text-foreground">{title}</h1>
-              {course.price !== null && (
+              {course.price !== null && !course.standalone && (
                 <span className="inline-flex items-center justify-center gap-[3px] rounded-full px-3 py-1 text-[13px] font-medium text-[hsl(280,92%,21%)] border border-[rgba(146,76,254,0.1)] bg-[rgba(217,192,255,0.5)] dark:text-[#E8DCFB] dark:border-[rgba(232,220,251,0.2)] dark:bg-[rgba(146,76,254,0.25)]">
                   <PremiumStarIcon className="w-3.5 h-3.5" fill="currentColor" />
                   {lang === "ru" ? "Премиум" : "Premium"}
@@ -429,21 +429,24 @@ const CourseView = () => {
                 <p className="text-[36px] font-medium leading-[32px] text-foreground">
                   {isFree
                     ? (lang === "ru" ? "Бесплатно" : "Free")
-                    : (<><span className="text-[16px] font-normal text-muted-foreground">{lang === "ru" ? "от " : "from "}</span>$6<span className="text-[16px] font-normal text-muted-foreground">{lang === "ru" ? "/мес" : "/mo"}</span></>)
+                    : course.standalone
+                      ? <>${course.price}</>
+                      : (<><span className="text-[16px] font-normal text-muted-foreground">{lang === "ru" ? "от " : "from "}</span>$6<span className="text-[16px] font-normal text-muted-foreground">{lang === "ru" ? "/мес" : "/mo"}</span></>)
                   }
                 </p>
               </div>
               {(() => {
                 const isPurchased = store.purchasedCourses.includes(course.id);
                 const hasSubscription = store.subscription?.active;
-                const isOwned = isPurchased || hasSubscription || isFree;
-                const isTrial = course.id === "6";
+                const isStandalone = !!course.standalone;
+                const isOwned = isPurchased || (!isStandalone && hasSubscription) || isFree;
+                const isTrial = course.id === "6" || course.id === "8";
                 return (
                   <Button
                     onClick={() => (isOwned || isTrial) ? navigate(`/course/${course.id}/lessons`) : setPaymentOpen(true)}
                     className="h-12 px-8 rounded-xl text-[18px] leading-[18px] font-medium gap-2 [&_svg]:size-5"
                   >
-                    {!isOwned && !isTrial && course.price && <PremiumStarIcon fill="currentColor" />}
+                    {!isOwned && !isTrial && course.price && !isStandalone && <PremiumStarIcon fill="currentColor" />}
                     {isOwned
                       ? (lang === "ru" ? "Начать обучение" : "Start learning")
                       : isTrial
