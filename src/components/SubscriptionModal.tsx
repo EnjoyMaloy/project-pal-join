@@ -199,8 +199,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
       discountEn: "45% off!",
       oldPriceRu: "₽5,760",
       oldPriceEn: "$72",
-      oldSubRu: " /год",
-      oldSubEn: " /year",
+      oldSubRu: "/год",
+      oldSubEn: "/year",
     },
   ];
 
