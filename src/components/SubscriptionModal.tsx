@@ -470,16 +470,21 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                       onKeyDown={(e) => { if (e.key === "Enter" && !appliedPromo) handleApplyPromo(); }}
                       disabled={!!appliedPromo}
                       placeholder={lang === "ru" ? "Есть промокод?" : "Have a promo code?"}
-                      className={`w-full h-11 rounded-xl bg-white/5 border px-4 pr-9 text-white placeholder:text-white/40 text-base outline-none transition-colors ${
+                      className={`w-full h-11 rounded-xl bg-white/5 border pl-4 text-white placeholder:text-white/40 text-base outline-none transition-colors ${
                         appliedPromo
-                          ? "border-[hsl(140_60%_50%)]/50"
+                          ? "border-[hsl(140_60%_50%)]/50 pr-[110px]"
                           : promoError
-                            ? "border-[hsl(0_70%_55%)]/60"
-                            : "border-white/15 focus:border-white/30"
+                            ? "border-[hsl(0_70%_55%)]/60 pr-9"
+                            : "border-white/15 focus:border-white/30 pr-9"
                       }`}
                     />
                     {appliedPromo && (
-                      <Check className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[hsl(140_60%_55%)]" strokeWidth={3} />
+                      <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1 rounded-full bg-[hsl(140_45%_92%)] px-2 py-0.5 text-[11px] font-medium text-[hsl(140_70%_20%)]">
+                        <Check className="w-3 h-3" strokeWidth={3} />
+                        {appliedPromo.kind === "percent"
+                          ? (lang === "ru" ? `−${appliedPromo.percent}% применено` : `−${appliedPromo.percent}% applied`)
+                          : (lang === "ru" ? `${appliedPromo.months} мес. бесплатно` : `${appliedPromo.months} months free`)}
+                      </div>
                     )}
                   </div>
                   {appliedPromo ? (
@@ -502,13 +507,6 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                     </button>
                   )}
                 </div>
-                {appliedPromo && (
-                  <p className="mt-2 text-sm text-[hsl(140_60%_60%)]">
-                    {appliedPromo.kind === "percent"
-                      ? (lang === "ru" ? `−${appliedPromo.percent}% применено` : `−${appliedPromo.percent}% applied`)
-                      : (lang === "ru" ? `${appliedPromo.months} мес. бесплатно` : `${appliedPromo.months} months free`)}
-                  </p>
-                )}
                 {promoError && (
                   <p className="mt-2 text-sm text-[hsl(0_70%_65%)]">
                     {promoError.code === "not_found" && (lang === "ru" ? "Промокод не найден" : "Promo code not found")}
