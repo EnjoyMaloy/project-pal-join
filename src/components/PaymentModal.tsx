@@ -47,9 +47,9 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   const [promoError, setPromoError] = useState<{ code: PromoErrorCode; requiredPlan?: PlanId } | null>(null);
 
   // Demo promo DB
-  const PROMO_DB: Record<string, { type: "percent" | "free_months"; value: number; plan_restriction?: PlanId; state?: "expired" | "limit" | "used" }> = {
-    COURSE99: { type: "percent", value: 99 },
-    
+  const PROMO_DB: Record<string, { type: "percent" | "free_months"; value: number; plan_restriction?: PlanId; excluded_plans?: PlanId[]; state?: "expired" | "limit" | "used" }> = {
+    COURSE99: { type: "percent", value: 99, excluded_plans: ["single"] },
+
     TEST50: { type: "percent", value: 50, plan_restriction: "monthly" },
     TEST50Y: { type: "percent", value: 50, plan_restriction: "yearly" },
     SINGLE50: { type: "percent", value: 50, plan_restriction: "single" },
@@ -72,6 +72,11 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     // free_months not applicable to single (one-time purchase)
     if (entry.type === "free_months" && plan === "single") {
       return { ok: false, error: { code: "wrong_plan", requiredPlan: "monthly" } };
+    }
+    if (entry.excluded_plans?.includes(plan)) {
+      // Suggest a plan that's allowed
+      const fallback = (["monthly", "yearly", "single"] as PlanId[]).find(p => !entry.excluded_plans!.includes(p));
+      return { ok: false, error: { code: "wrong_plan", requiredPlan: fallback } };
     }
     if (entry.plan_restriction && entry.plan_restriction !== plan) {
       return { ok: false, error: { code: "wrong_plan", requiredPlan: entry.plan_restriction } };
