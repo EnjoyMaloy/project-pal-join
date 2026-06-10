@@ -51,6 +51,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   const [termsAccepted, setTermsAccepted] = useState(true);
   const [autoBilling, setAutoBilling] = useState(false);
   const billingTermsRef = useRef<HTMLParagraphElement>(null);
+  const [showTestCodes, setShowTestCodes] = useState(false);
 
   // ---- Promo code state ----
   type PromoSuccess =
