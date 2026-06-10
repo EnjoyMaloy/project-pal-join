@@ -443,7 +443,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         return lang === "ru" ? `Всего ${perMonth}/месяц` : `Just ${perMonth}/mo`;
                       })()}
                     </span>
-                    {selectedPlanData.oldPriceRu && (
+                    {selectedPlanData.oldPriceRu && !(selectedPlan === "monthly" && !appliedPromo) && (
                       <span className="text-white/30 font-normal text-lg">
                         <span className="line-through">{lang === "ru" ? selectedPlanData.oldPriceRu : selectedPlanData.oldPriceEn}</span>
                         {lang === "ru" ? selectedPlanData.oldSubRu : selectedPlanData.oldSubEn}
