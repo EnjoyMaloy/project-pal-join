@@ -456,9 +456,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                       })()}
                     </span>
                     {selectedPlan === "yearly" && selectedPlanData.oldPriceRu && appliedPromo?.kind !== "free_months" && (
-                      <span className="text-white/30 font-normal text-lg">
-                        <span className="line-through">{lang === "ru" ? selectedPlanData.oldPriceRu : selectedPlanData.oldPriceEn}</span>
-                        {lang === "ru" ? selectedPlanData.oldSubRu : selectedPlanData.oldSubEn}
+                      <span className="text-white/30 font-normal text-lg line-through">
+                        {lang === "ru" ? selectedPlanData.oldPriceRu : selectedPlanData.oldPriceEn}
                       </span>
                     )}
                   </div>
@@ -551,10 +550,9 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         : `Activate ${appliedPromo.months} months free`;
                     }
                     const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
-                    const sub = lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn;
                     const finalPrice = appliedPromo?.kind === "percent" ? getDiscountedPrice(basePrice) : basePrice;
                     return lang === "ru"
-                      ? `Подписаться — ${finalPrice}${sub}`
+                      ? `Подписаться — ${finalPrice}`
                       : `Subscribe ${selectedPlanData.titleEn}`;
                   })()}
                 </button>
@@ -687,12 +685,11 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               <button
                 onClick={() => {
                   const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
-                  const sub = lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn;
                   let priceLabel = basePrice;
                   if (appliedPromo?.kind === "percent") priceLabel = getDiscountedPrice(basePrice);
                   else if (appliedPromo?.kind === "free_months") priceLabel = `${parsePrice(basePrice).prefix}0`;
                   else if (autoBilling) priceLabel = applyDiscount(basePrice);
-                  purchaseSubscription(selectedPlan, `${priceLabel}${sub}`);
+                  purchaseSubscription(selectedPlan, priceLabel);
                   setStep("success");
                 }}
                 className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
