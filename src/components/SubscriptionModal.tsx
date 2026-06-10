@@ -414,8 +414,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                     >
                       {appliedPromo?.kind === "free_months"
                         ? (lang === "ru"
-                            ? `Первые ${appliedPromo.months} мес. бесплатно, далее ${getPerMonthAfterFree(selectedPlanData.priceRu)}/мес`
-                            : `First ${appliedPromo.months} months free, then ${getPerMonthAfterFree(selectedPlanData.priceEn)}/mo`)
+                            ? `${appliedPromo.months} мес. бесплатно`
+                            : `${appliedPromo.months} months free`)
                         : (selectedPlanData.perMonthRu
                             ? (lang === "ru" ? `Всего ${selectedPlanData.perMonthRu}` : `Just ${selectedPlanData.perMonthEn}`)
                             : "")}
