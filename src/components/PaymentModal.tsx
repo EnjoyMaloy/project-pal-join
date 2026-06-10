@@ -483,11 +483,15 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
         ) : (
           /* Payment step */
           <div className="px-5 pt-6 pb-4 space-y-3">
+            {(() => { return null; })()}
             <button
+              disabled={appliedPromo?.kind === "free_months"}
               className={`w-full rounded-xl px-5 py-5 flex flex-col items-center gap-2 transition-all ${
-                paymentMethod === "card"
-                  ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
-                  : "border border-white/15 bg-white/5 hover:border-white/25"
+                appliedPromo?.kind === "free_months"
+                  ? "border border-white/10 bg-white/[0.03] opacity-50 cursor-not-allowed"
+                  : paymentMethod === "card"
+                    ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
+                    : "border border-white/15 bg-white/5 hover:border-white/25"
               }`}
               onClick={() => setPaymentMethod("card")}
             >
@@ -500,10 +504,13 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
             {lang === "en" && (
               <button
+                disabled={appliedPromo?.kind === "free_months"}
                 className={`w-full rounded-xl px-5 py-5 flex flex-col items-center gap-2 transition-all ${
-                  paymentMethod === "crypto"
-                    ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
-                    : "border border-white/15 bg-white/5 hover:border-white/25"
+                  appliedPromo?.kind === "free_months"
+                    ? "border border-white/10 bg-white/[0.03] opacity-50 cursor-not-allowed"
+                    : paymentMethod === "crypto"
+                      ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
+                      : "border border-white/15 bg-white/5 hover:border-white/25"
                 }`}
                 onClick={() => { setPaymentMethod("crypto"); setAutoBilling(false); }}
               >
@@ -513,8 +520,8 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               </button>
             )}
 
-            {/* Auto-billing discount checkbox — only for card */}
-            {paymentMethod === "card" && (selectedPlan === "monthly" || selectedPlan === "yearly") && (
+            {/* Auto-billing discount checkbox — only for card, hidden when free_months */}
+            {paymentMethod === "card" && (selectedPlan === "monthly" || selectedPlan === "yearly") && appliedPromo?.kind !== "free_months" && (
               <button
                 onClick={() => setAutoBilling(!autoBilling)}
                 className={`w-full rounded-xl px-4 py-3.5 flex items-center gap-3 transition-all text-left ${
@@ -539,6 +546,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
                 <span className="text-[hsl(var(--violet-mid))] text-base font-medium flex-shrink-0">-10%</span>
               </button>
             )}
+
 
             {/* Promo code input */}
             <div>
@@ -647,7 +655,11 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               }}
               className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
             >
-              {lang === "ru" ? "Подтвердить оплату" : "Confirm payment"}
+              {appliedPromo?.kind === "free_months"
+                ? (lang === "ru"
+                    ? `Активировать ${appliedPromo.months} мес. бесплатно`
+                    : `Activate ${appliedPromo.months} months free`)
+                : (lang === "ru" ? "Подтвердить оплату" : "Confirm payment")}
             </button>
 
 
