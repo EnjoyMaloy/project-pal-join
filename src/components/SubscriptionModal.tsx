@@ -317,7 +317,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               <div className="px-5 mb-4">
                 <div className="flex gap-2.5">
                   {plans.map((plan) => {
-                    const isSelected = selectedPlan === plan.id;
+                    const isFreeMonths = appliedPromo?.kind === "free_months";
+                    const isSelected = selectedPlan === plan.id && !isFreeMonths;
                     const badge = lang === "ru" ? plan.badgeRu : plan.badgeEn;
                     const isPromoHighlight = promoError?.code === "wrong_plan" && promoError.requiredPlan === plan.id;
 
@@ -372,7 +373,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
               {/* Selected plan details */}
               <div className="px-5 mb-4">
-                <div className="rounded-xl bg-white/5 px-5 py-4">
+                <div className={`rounded-xl px-5 py-4 transition-all ${appliedPromo?.kind === "free_months" ? "border-2 border-[hsl(var(--violet-light))] bg-white/10 shadow-[0_0_20px_hsl(var(--violet-light)/0.25)]" : "bg-white/5"}`}>
+
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-2">
                       <span className="text-white font-normal text-xl">
@@ -496,10 +498,24 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               {/* CTA */}
               <div className="px-5 pb-5">
                 <button
-                  onClick={() => setStep("payment")}
+                  onClick={() => {
+                    if (appliedPromo?.kind === "free_months") {
+                      const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                      const { prefix } = parsePrice(basePrice);
+                      purchaseSubscription(selectedPlan, `${prefix}0`);
+                      setStep("success");
+                    } else {
+                      setStep("payment");
+                    }
+                  }}
                   className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
                 >
                   {(() => {
+                    if (appliedPromo?.kind === "free_months") {
+                      return lang === "ru"
+                        ? `Активировать ${appliedPromo.months} мес. бесплатно`
+                        : `Activate ${appliedPromo.months} months free`;
+                    }
                     const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
                     const sub = lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn;
                     const finalPrice = appliedPromo?.kind === "percent" ? getDiscountedPrice(basePrice) : basePrice;
@@ -508,6 +524,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                       : `Subscribe ${selectedPlanData.titleEn}`;
                   })()}
                 </button>
+
               </div>
 
               {/* Footer links */}
