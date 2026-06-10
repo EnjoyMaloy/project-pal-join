@@ -68,6 +68,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
     SAVE20: { type: "percent", value: 20 },
     YEARLY30: { type: "percent", value: 30, plan_restriction: "yearly" },
     MONTHLY15: { type: "percent", value: 15, plan_restriction: "monthly" },
+    TEST25: { type: "percent", value: 25 },
     FRIEND3M: { type: "free_months", value: 3 },
     WELCOME1M: { type: "free_months", value: 1 },
     EXPIRED: { type: "percent", value: 10, state: "expired" },
