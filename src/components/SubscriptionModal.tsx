@@ -633,21 +633,26 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               )}
 
               <div className="rounded-xl bg-white/5 px-4 py-3.5 space-y-2.5">
-                {appliedPromo && (
+              {appliedPromo && (
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-white/60">
                       {lang === "ru" ? "Промокод" : "Promo"}{" "}
                       <span className="text-white/80 font-medium">{appliedPromo.code}</span>
                     </span>
-                    <span className="text-[hsl(140_60%_60%)] font-medium">
+                    <div className="flex items-center gap-1 rounded-lg bg-[hsl(140_45%_92%)] px-2 py-1 text-[11px] font-medium text-[hsl(140_70%_20%)]">
+                      <Check className="w-3 h-3" strokeWidth={3} />
                       {appliedPromo.kind === "percent"
                         ? (() => {
                             const base = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
                             const { num, prefix } = parsePrice(base);
                             return `−${formatPrice(num * appliedPromo.percent / 100, prefix)}`;
                           })()
-                        : (lang === "ru" ? `${appliedPromo.months} мес. бесплатно` : `${appliedPromo.months} months free`)}
-                    </span>
+                        : (() => {
+                            const prefix = lang === "ru" ? "₽" : "$";
+                            const monthPrice = lang === "ru" ? 480 : 6;
+                            return `−${prefix}${(appliedPromo.months * monthPrice).toLocaleString(lang === "ru" ? "ru-RU" : "en-US")}`;
+                          })()}
+                    </div>
                   </div>
                 )}
                 <div className="flex items-center justify-between">
