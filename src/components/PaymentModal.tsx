@@ -49,7 +49,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   // Demo promo DB
   const PROMO_DB: Record<string, { type: "percent" | "free_months"; value: number; plan_restriction?: PlanId; state?: "expired" | "limit" | "used" }> = {
     COURSE99: { type: "percent", value: 99 },
-    CRYPTON50: { type: "percent", value: 50 },
+    
     TEST50: { type: "percent", value: 50, plan_restriction: "monthly" },
     TEST50Y: { type: "percent", value: 50, plan_restriction: "yearly" },
     SINGLE50: { type: "percent", value: 50, plan_restriction: "single" },
@@ -308,7 +308,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
           <div className="space-y-2">
             {[
               { code: "COURSE99", desc: lang === "ru" ? "Скидка 99% на ЛЮБОЙ план (включая один курс). Логика: цена = base × 0.01. В «Итого» — новая цена, рядом зачёркнута исходная." : "99% off ANY plan (including single course). Logic: price = base × 0.01. Total shows new price, original struck-through." },
-              { code: "CRYPTON50", desc: lang === "ru" ? "Скидка 50% на любой план. Логика: цена = base × 0.5." : "50% off any plan. Logic: price = base × 0.5." },
+              
               { code: "SINGLE50", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на «Один курс». На месячном/годовом — ошибка «не подходит для этого тарифа»." : "50% off SINGLE course only. On monthly/yearly — error «not for this plan»." },
               { code: "TEST50", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на месячный план. Иначе — ошибка." : "50% off MONTHLY only. Otherwise — error." },
               { code: "TEST50Y", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на годовой план. Иначе — ошибка." : "50% off YEARLY only. Otherwise — error." },
