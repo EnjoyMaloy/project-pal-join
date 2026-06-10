@@ -432,6 +432,36 @@ const CourseView = () => {
               />
             </div>
 
+            {/* Test promo codes */}
+            <div className="rounded-xl border border-dashed border-border bg-muted/30 px-4 py-3">
+              <p className="text-[11px] uppercase tracking-wider text-muted-foreground font-medium mb-2.5">
+                {lang === "ru" ? "Тестовые промокоды" : "Test promo codes"}
+              </p>
+              <div className="space-y-2.5">
+                {/* Type 1: Percent on any plan */}
+                <div className="flex items-start gap-2.5">
+                  <span className="inline-block rounded-md bg-[hsl(261,100%,93%)] px-1.5 py-0.5 text-[11px] font-mono text-[hsl(280,92%,21%)] whitespace-nowrap mt-0.5">CRYPTON50</span>
+                  <span className="text-[12px] text-muted-foreground leading-[140%]">
+                    {lang === "ru" ? "Скидка 50% на любой тариф (месячный/годовой)" : "50% off any plan (monthly/yearly)"}
+                  </span>
+                </div>
+                {/* Type 2: Percent on one plan only */}
+                <div className="flex items-start gap-2.5">
+                  <span className="inline-block rounded-md bg-[hsl(261,100%,93%)] px-1.5 py-0.5 text-[11px] font-mono text-[hsl(280,92%,21%)] whitespace-nowrap mt-0.5">TEST50</span>
+                  <span className="text-[12px] text-muted-foreground leading-[140%]">
+                    {lang === "ru" ? "Скидка 50% только на месячный тариф" : "50% off monthly plan only"}
+                  </span>
+                </div>
+                {/* Type 3: Free months */}
+                <div className="flex items-start gap-2.5">
+                  <span className="inline-block rounded-md bg-[hsl(261,100%,93%)] px-1.5 py-0.5 text-[11px] font-mono text-[hsl(280,92%,21%)] whitespace-nowrap mt-0.5">FRIEND3M</span>
+                  <span className="text-[12px] text-muted-foreground leading-[140%]">
+                    {lang === "ru" ? "3 месяца бесплатно, потом базовая цена" : "3 months free, then base price"}
+                  </span>
+                </div>
+              </div>
+            </div>
+
             {/* Categories */}
             <div className="text-center">
               <h3 className="text-[18px] font-bold text-foreground mb-3">

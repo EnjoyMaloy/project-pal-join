@@ -528,43 +528,6 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 )}
               </div>
 
-              {/* Test promo codes panel */}
-              <div className="px-5 mb-4">
-                <div className="rounded-xl border border-dashed border-white/15 bg-white/[0.03] px-4 py-3">
-                  <p className="text-[11px] uppercase tracking-wider text-white/30 font-medium mb-2.5">
-                    {lang === "ru" ? "Тестовые промокоды" : "Test promo codes"}
-                  </p>
-                  <div className="space-y-2.5">
-                    {/* Type 1: Percent on any plan */}
-                    <div className="flex items-start gap-2.5">
-                      <span className="inline-block rounded-md bg-[hsl(280_25%_18%)] px-1.5 py-0.5 text-[11px] font-mono text-[hsl(var(--violet-light))] whitespace-nowrap mt-0.5">CRYPTON50</span>
-                      <span className="text-[12px] text-white/50 leading-[140%]">
-                        {lang === "ru"
-                          ? "Скидка 50% на любой тариф (месячный/годовой)"
-                          : "50% off any plan (monthly/yearly)"}
-                      </span>
-                    </div>
-                    {/* Type 2: Percent on one plan only */}
-                    <div className="flex items-start gap-2.5">
-                      <span className="inline-block rounded-md bg-[hsl(280_25%_18%)] px-1.5 py-0.5 text-[11px] font-mono text-[hsl(var(--violet-light))] whitespace-nowrap mt-0.5">TEST50</span>
-                      <span className="text-[12px] text-white/50 leading-[140%]">
-                        {lang === "ru"
-                          ? "Скидка 50% только на месячный тариф"
-                          : "50% off monthly plan only"}
-                      </span>
-                    </div>
-                    {/* Type 3: Free months */}
-                    <div className="flex items-start gap-2.5">
-                      <span className="inline-block rounded-md bg-[hsl(280_25%_18%)] px-1.5 py-0.5 text-[11px] font-mono text-[hsl(var(--violet-light))] whitespace-nowrap mt-0.5">FRIEND3M</span>
-                      <span className="text-[12px] text-white/50 leading-[140%]">
-                        {lang === "ru"
-                          ? "3 месяца бесплатно, потом базовая цена"
-                          : "3 months free, then base price"}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
               {/* CTA */}
               <div className="px-5 pb-5">
