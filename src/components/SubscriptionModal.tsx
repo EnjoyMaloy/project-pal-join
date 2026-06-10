@@ -75,7 +75,10 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
     USEDCODE: { type: "percent", value: 10, state: "used" },
   };
 
-  const validatePromo = (rawCode: string, plan: PlanId): { ok: true; promo: PromoSuccess } | { ok: false; error: { code: PromoErrorCode; requiredPlan?: PlanId } } => {
+  type PromoResult =
+    | { ok: true; promo: PromoSuccess }
+    | { ok: false; error: { code: PromoErrorCode; requiredPlan?: PlanId } };
+  const validatePromo = (rawCode: string, plan: PlanId): PromoResult => {
     const code = rawCode.trim().toUpperCase();
     const entry = PROMO_DB[code];
     if (!entry) return { ok: false, error: { code: "not_found" } };
@@ -85,12 +88,10 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
     if (entry.plan_restriction && entry.plan_restriction !== plan) {
       return { ok: false, error: { code: "wrong_plan", requiredPlan: entry.plan_restriction } };
     }
-    return {
-      ok: true,
-      promo: entry.type === "percent"
-        ? { kind: "percent", code, percent: entry.value }
-        : { kind: "free_months", code, months: entry.value },
-    };
+    const promo: PromoSuccess = entry.type === "percent"
+      ? { kind: "percent", code, percent: entry.value }
+      : { kind: "free_months", code, months: entry.value };
+    return { ok: true, promo };
   };
 
   const handleApplyPromo = () => {
