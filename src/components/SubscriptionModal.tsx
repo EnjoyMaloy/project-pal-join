@@ -4,7 +4,7 @@ import mascotSuccess from "@/assets/mascot-success.png";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Check, ChevronLeft, CreditCard, Bitcoin } from "lucide-react";
+import { X, Check, ChevronLeft, CreditCard, Bitcoin, Loader2 } from "lucide-react";
 import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { purchaseSubscription } from "@/hooks/usePurchaseStore";
 import { useNavigate } from "react-router-dom";
