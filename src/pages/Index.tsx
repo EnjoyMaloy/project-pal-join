@@ -5,6 +5,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
 import rehcVideo from "@/assets/rehc.mp4.asset.json";
 import verticalVideo from "@/assets/vertical-video.mov.asset.json";
+import KinescopePlayer from "@kinescope/react-kinescope-player";
+
+const KINESCOPE_VIDEO_ID = "8zqm1rRTLnNU94xauMTwUZ";
 
 
 const IconActive = ({ className }: { className?: string }) => (
@@ -297,7 +300,44 @@ const Index = () => {
   const [videoLandscape, setVideoLandscape] = useState(false);
   const [videoMenu, setVideoMenu] = useState<null | "speed" | "quality">(null);
   const videoUITimerRef = useRef<number | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<any>(null);
+  const kinescopePlayerRef = useRef<KinescopePlayer | null>(null);
+  const videoStateRef = useRef({ paused: true, currentTime: 0, duration: 0, playbackRate: 1 });
+  useEffect(() => {
+    videoRef.current = {
+      get paused() { return videoStateRef.current.paused; },
+      get currentTime() { return videoStateRef.current.currentTime; },
+      set currentTime(t: number) {
+        videoStateRef.current.currentTime = t;
+        kinescopePlayerRef.current?.seekTo(t);
+      },
+      get duration() { return videoStateRef.current.duration; },
+      get playbackRate() { return videoStateRef.current.playbackRate; },
+      set playbackRate(r: number) {
+        videoStateRef.current.playbackRate = r;
+        kinescopePlayerRef.current?.setPlaybackRate(r);
+      },
+      get videoWidth() { return 1920; },
+      get videoHeight() { return 1080; },
+      play: () => {
+        kinescopePlayerRef.current?.play();
+        videoStateRef.current.paused = false;
+      },
+      pause: () => {
+        kinescopePlayerRef.current?.pause();
+        videoStateRef.current.paused = true;
+      },
+      requestFullscreen: () => {
+        kinescopePlayerRef.current?.setFullscreen(true);
+      },
+    };
+  }, []);
+  useEffect(() => {
+    if (!kinescopePlayerRef.current) return;
+    if (videoMuted) kinescopePlayerRef.current.mute();
+    else kinescopePlayerRef.current.unmute();
+  }, [videoMuted]);
+
   const showVideoUI = (autoHide: boolean) => {
     setVideoUIVisible(true);
     if (videoUITimerRef.current) { window.clearTimeout(videoUITimerRef.current); videoUITimerRef.current = null; }
@@ -868,80 +908,83 @@ const Index = () => {
                         className={`flex-1 flex items-center justify-center relative min-h-0 ${videoOrientation === 'portrait' ? '' : 'sm:pt-10'}`}
                         style={{ background: '#000' }}
                       >
-                        {/* Ambient backlight — blurred copy of the video, softly faded at edges */}
-                        <video
-                          src={currentVideoUrl}
-                          playsInline
-                          muted
+                        {/* Ambient backlight — soft radial glow (Kinescope iframe can't be re-blurred) */}
+                        <div
                           aria-hidden
-                          className="absolute inset-0 w-full h-full pointer-events-none"
+                          className="absolute inset-0 pointer-events-none"
                           style={{
-                            objectFit: 'cover',
-                            objectPosition: 'center',
-                            filter: 'blur(100px) saturate(1.8)',
-                            opacity: 0.75,
-                            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 12%, rgba(0,0,0,1) 28%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.5) 78%, rgba(0,0,0,0) 88%)',
-                            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 12%, rgba(0,0,0,1) 28%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.5) 78%, rgba(0,0,0,0) 88%)',
-                          }}
-                          ref={(el) => {
-                            if (!el) return;
-                            const main = videoRef.current;
-                            if (main && Math.abs(el.currentTime - main.currentTime) > 0.3) {
-                              try { el.currentTime = main.currentTime; } catch {}
-                            }
-                            if (videoPlaying) { el.play().catch(() => {}); } else { el.pause(); }
+                            background: 'radial-gradient(ellipse at center, rgba(166,108,255,0.18) 0%, rgba(0,0,0,0) 60%)',
                           }}
                         />
-                        <div
-                          className="absolute inset-0 flex items-center justify-center"
-                        >
-                          <video
-                            ref={videoRef}
-                            src={currentVideoUrl}
-                            playsInline
-                            preload="metadata"
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <KinescopePlayer
+                            ref={(p: any) => { kinescopePlayerRef.current = p; }}
+                            videoId={KINESCOPE_VIDEO_ID}
+                            width="100%"
+                            height="100%"
                             muted={videoMuted}
-                            className={`absolute inset-0 w-full h-full ${videoOrientation === 'portrait' ? 'object-cover' : 'object-contain'}`}
-                            style={{ objectPosition: 'center', background: 'transparent' }}
-                            onLoadedMetadata={(e) => {
-                              const el = e.currentTarget;
-                              setVideoDuration(el.duration || 0);
-                              const landscape = el.videoWidth >= el.videoHeight;
-                              setVideoOrientation(landscape ? "landscape" : "portrait");
-                              if (el.videoWidth && el.videoHeight) {
-                                setVideoAspect(el.videoWidth / el.videoHeight);
+                            controls={false}
+                            playsInline
+                            onReady={(d: any) => {
+                              if (d?.duration) {
+                                videoStateRef.current.duration = d.duration;
+                                setVideoDuration(d.duration);
                               }
                             }}
-                            onTimeUpdate={(e) => {
-                              const el = e.currentTarget;
-                              setVideoCurrent(el.currentTime);
-                              if (el.duration) {
-                                const p = el.currentTime / el.duration;
+                            onDurationChange={(d: any) => {
+                              if (d?.duration) {
+                                videoStateRef.current.duration = d.duration;
+                                setVideoDuration(d.duration);
+                              }
+                            }}
+                            onTimeUpdate={(d: any) => {
+                              const t = d?.currentTime ?? 0;
+                              const dur = d?.duration ?? videoStateRef.current.duration;
+                              videoStateRef.current.currentTime = t;
+                              setVideoCurrent(t);
+                              if (dur) {
+                                const p = t / dur;
                                 setVideoProgress(p);
                                 setVideoWatchedProgress(prev => Math.max(prev, p));
                               }
                             }}
+                            onPlay={() => { videoStateRef.current.paused = false; setVideoPlaying(true); }}
+                            onPause={() => { videoStateRef.current.paused = true; setVideoPlaying(false); }}
                             onEnded={() => {
+                              videoStateRef.current.paused = true;
                               setVideoPlaying(false);
                               setVideoWatchedProgress(1);
                               setVideoLandscape(false);
                               setVideoMenu(null);
                               showVideoUI(false);
                             }}
+                            onSizeChanged={(d: any) => {
+                              if (d?.width && d?.height) {
+                                const landscape = d.width >= d.height;
+                                setVideoOrientation(landscape ? "landscape" : "portrait");
+                                setVideoAspect(d.width / d.height);
+                              }
+                            }}
+                          />
+                          {/* Click overlay for play/pause toggle */}
+                          <button
+                            aria-label="toggle"
                             onClick={(e) => {
                               e.stopPropagation();
                               const v = videoRef.current; if (!v) return;
-                              if (v.paused) { v.play(); setVideoPlaying(true); } else { v.pause(); setVideoPlaying(false); }
+                              if (v.paused) { v.play(); } else { v.pause(); }
                             }}
+                            className="absolute inset-0 z-[1]"
+                            style={{ background: 'transparent' }}
                           />
                           {!videoPlaying && (
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
                                 const v = videoRef.current; if (!v) return;
-                                v.play(); setVideoPlaying(true);
+                                v.play();
                               }}
-                              className="relative z-[1] inline-flex items-center justify-center rounded-full hover:scale-110 transition-transform"
+                              className="relative z-[2] inline-flex items-center justify-center rounded-full hover:scale-110 transition-transform"
                               style={{
                                 width: 64, height: 64,
                                 background: 'rgba(255,255,255,0.95)',
@@ -954,6 +997,7 @@ const Index = () => {
                           )}
                         </div>
                       </div>
+
 
                       {/* Native-style control bar — transparent overlay on mobile, solid on desktop */}
                       <div
@@ -1397,24 +1441,15 @@ const Index = () => {
                 onPointerMove={() => showVideoUI(true)}
                 onPointerDown={() => showVideoUI(true)}
               >
-                {/* Mirror video (muted) — audio comes from the main hidden video */}
-                <video
-                  src={currentVideoUrl}
-                  playsInline
-                  muted
+                {/* Landscape placeholder — the main Kinescope player continues to play audio in the background */}
+                <div
                   aria-hidden
-                  className="absolute inset-0 w-full h-full"
-                  style={{ objectFit: 'contain', background: '#000' }}
-                  ref={(el) => {
-                    if (!el) return;
-                    const main = videoRef.current;
-                    if (main && Math.abs(el.currentTime - main.currentTime) > 0.3) {
-                      try { el.currentTime = main.currentTime; } catch {}
-                    }
-                    if (main) el.playbackRate = main.playbackRate;
-                    if (videoPlaying) { el.play().catch(() => {}); } else { el.pause(); }
-                  }}
-                />
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{ background: '#000', color: 'rgba(255,255,255,0.5)', fontFamily: '"TT Commons", sans-serif', fontSize: 14 }}
+                >
+                  Поверните устройство, чтобы вернуться к видео
+                </div>
+
 
                 {/* Center play button when paused */}
                 {!videoPlaying && (
