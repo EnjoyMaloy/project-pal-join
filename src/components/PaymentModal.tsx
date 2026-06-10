@@ -104,8 +104,8 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   useEffect(() => {
     if (!appliedPromo) return;
     const result = validatePromo(appliedPromo.code, selectedPlan);
-    if (result.ok) { setAppliedPromo(result.promo); setPromoError(null); }
-    else { setAppliedPromo(null); setPromoError(result.error); }
+    if (result.ok === true) { setAppliedPromo(result.promo); setPromoError(null); }
+    else if (result.ok === false) { setAppliedPromo(null); setPromoError(result.error); }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPlan]);
 
