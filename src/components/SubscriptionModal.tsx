@@ -551,10 +551,9 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         : `Activate ${appliedPromo.months} months free`;
                     }
                     const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
-                    const sub = lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn;
                     const finalPrice = appliedPromo?.kind === "percent" ? getDiscountedPrice(basePrice) : basePrice;
                     return lang === "ru"
-                      ? `Подписаться — ${finalPrice}${sub}`
+                      ? `Подписаться — ${finalPrice}`
                       : `Subscribe ${selectedPlanData.titleEn}`;
                   })()}
                 </button>
