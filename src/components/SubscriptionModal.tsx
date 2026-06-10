@@ -425,13 +425,9 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         backgroundPosition: "-300% center",
                       } : {}}
                     >
-                      {appliedPromo?.kind === "free_months"
-                        ? (lang === "ru"
-                            ? `${appliedPromo.months} мес. бесплатно`
-                            : `${appliedPromo.months} months free`)
-                        : (selectedPlanData.perMonthRu
-                            ? (lang === "ru" ? `Всего ${selectedPlanData.perMonthRu}` : `Just ${selectedPlanData.perMonthEn}`)
-                            : "")}
+                      {appliedPromo?.kind !== "free_months" && (selectedPlanData.perMonthRu
+                        ? (lang === "ru" ? `Всего ${selectedPlanData.perMonthRu}` : `Just ${selectedPlanData.perMonthEn}`)
+                        : "")}
                     </span>
                     {selectedPlanData.oldPriceRu && !appliedPromo && (
                       <span className="text-white/30 font-normal text-lg">
