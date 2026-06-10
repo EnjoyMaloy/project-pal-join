@@ -98,6 +98,19 @@ const courseMaps: Record<string, CourseMapData> = {
       { id: 4, titleRu: "Смарт-контракты", titleEn: "Smart Contracts", completed: false, locked: true },
     ],
   },
+  "6": {
+    titleRu: "Тестовый курс с триалом",
+    titleEn: "Trial Test Course",
+    descriptionRu: "Пройдите первые 2 урока бесплатно, чтобы оценить курс.",
+    descriptionEn: "Complete the first 2 lessons free to evaluate the course.",
+    progress: 50,
+    lessons: [
+      { id: 1, titleRu: "Знакомство", titleEn: "Introduction", completed: true, locked: false },
+      { id: 2, titleRu: "Основные концепции", titleEn: "Core Concepts", completed: true, locked: false },
+      { id: 3, titleRu: "Практика", titleEn: "Practice", completed: false, locked: true, current: true },
+      { id: 4, titleRu: "Продвинутые темы", titleEn: "Advanced Topics", completed: false, locked: true },
+    ],
+  },
 };
 
 // Node positions in the snake SVG (center x,y for each node in order)
