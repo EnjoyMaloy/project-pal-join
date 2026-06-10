@@ -317,7 +317,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               <div className="px-5 mb-4">
                 <div className="flex gap-2.5">
                   {plans.map((plan) => {
-                    const isSelected = selectedPlan === plan.id;
+                    const isFreeMonths = appliedPromo?.kind === "free_months";
+                    const isSelected = selectedPlan === plan.id && !isFreeMonths;
                     const badge = lang === "ru" ? plan.badgeRu : plan.badgeEn;
                     const isPromoHighlight = promoError?.code === "wrong_plan" && promoError.requiredPlan === plan.id;
 
