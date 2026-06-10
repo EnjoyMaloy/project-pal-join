@@ -100,10 +100,10 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
     setPromoError(null);
     setTimeout(() => {
       const result = validatePromo(promoInput, selectedPlan);
-      if (result.ok) {
+      if (result.ok === true) {
         setAppliedPromo(result.promo);
         setPromoError(null);
-      } else {
+      } else if (result.ok === false) {
         setAppliedPromo(null);
         setPromoError(result.error);
       }
@@ -121,10 +121,10 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   useEffect(() => {
     if (!appliedPromo) return;
     const result = validatePromo(appliedPromo.code, selectedPlan);
-    if (result.ok) {
+    if (result.ok === true) {
       setAppliedPromo(result.promo);
       setPromoError(null);
-    } else {
+    } else if (result.ok === false) {
       setAppliedPromo(null);
       setPromoError(result.error);
     }
