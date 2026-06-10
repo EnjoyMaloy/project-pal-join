@@ -301,7 +301,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 { code: "CRYPTON50", desc: lang === "ru" ? "Скидка 50% на любой тариф. Логика: цена = base × 0.5. Поле «Итого» показывает новую цену, рядом — зачёркнутая исходная. Чип скидки зелёный с суммой в ₽." : "50% off any plan. Logic: price = base × 0.5. Total shows new price, original struck-through. Green discount chip with ₽ amount." },
                 { code: "TEST50", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на месячный тариф. Если выбран годовой — ошибка «промокод не подходит для этого тарифа», предлагает переключиться." : "50% off MONTHLY only. If yearly is selected — error «promo not for this plan», suggests switching." },
                 { code: "TEST50Y", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на годовой тариф. Если выбран месячный — ошибка, предлагает переключить план на годовой." : "50% off YEARLY only. If monthly is selected — error, suggests switching to yearly." },
-                { code: "FRIEND3M", desc: lang === "ru" ? "3 месяца бесплатно. Логика: списание сейчас = 0 ₽, затем базовая цена тарифа. В «Итого» показывается 0 ₽ и подпись «3 мес бесплатно, потом базовая цена»." : "3 months free. Logic: charge now = 0 ₽, then base price. Total shows 0 ₽ with «3 mo free, then base price» note." },
+                { code: "FRIEND3M", desc: lang === "ru" ? "3 месяца бесплатно. Логика: списание сейчас = 0 ₽. В «Итого» показывается 0 ₽ и подпись «3 мес бесплатно»." : "3 months free. Logic: charge now = 0 ₽. Total shows 0 ₽ with «3 mo free» note." },
               ].map((t) => (
                 <button
                   key={t.code}
