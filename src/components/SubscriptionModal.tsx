@@ -65,7 +65,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
   // Demo promo DB
   const PROMO_DB: Record<string, { type: "percent" | "free_months"; value: number; plan_restriction?: PlanId; state?: "expired" | "limit" | "used" }> = {
-    
+    PREMIUM50: { type: "percent", value: 50 },
     SAVE20: { type: "percent", value: 20 },
     YEARLY30: { type: "percent", value: 30, plan_restriction: "yearly" },
     MONTHLY15: { type: "percent", value: 15, plan_restriction: "monthly" },
@@ -298,7 +298,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
             </div>
             <div className="space-y-2">
               {[
-                
+                { code: "PREMIUM50", desc: lang === "ru" ? "Скидка 50% на ЛЮБОЙ тариф премиум (месяц или год). Только для премиум-подписки. Логика: цена = base × 0.5. В «Итого» — новая цена, рядом зачёркнута исходная." : "50% off ANY premium plan (monthly or yearly). Premium subscription only. Logic: price = base × 0.5. Total shows new price, original struck-through." },
                 { code: "TEST50", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на месячный тариф. Если выбран годовой — ошибка «промокод не подходит для этого тарифа», предлагает переключиться." : "50% off MONTHLY only. If yearly is selected — error «promo not for this plan», suggests switching." },
                 { code: "TEST50Y", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на годовой тариф. Если выбран месячный — ошибка, предлагает переключить план на годовой." : "50% off YEARLY only. If monthly is selected — error, suggests switching to yearly." },
                 { code: "FRIEND3M", desc: lang === "ru" ? "3 месяца бесплатно. Логика: списание сейчас = 0 ₽. В «Итого» показывается 0 ₽ и подпись «3 мес бесплатно»." : "3 months free. Logic: charge now = 0 ₽. Total shows 0 ₽ with «3 mo free» note." },
