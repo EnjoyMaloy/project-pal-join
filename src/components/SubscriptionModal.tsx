@@ -581,31 +581,64 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               </button>
               )}
 
-              <div className="rounded-xl bg-white/5 px-4 py-3.5 flex items-center justify-between">
-                <span className="text-white/60 text-lg font-normal">
-                  {lang === "ru" ? "Итого" : "Total"}
-                </span>
-                <div className="flex items-baseline gap-2">
-                  {autoBilling && (
-                    <span className="text-white/30 text-sm line-through">
-                      {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
+              <div className="rounded-xl bg-white/5 px-4 py-3.5 space-y-2.5">
+                {appliedPromo && (
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-white/60">
+                      {lang === "ru" ? "Промокод" : "Promo"}{" "}
+                      <span className="text-white/80 font-medium">{appliedPromo.code}</span>
                     </span>
-                  )}
-                  <span className="text-white text-xl font-normal">
-                    {autoBilling
-                      ? applyDiscount(lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)
-                      : (lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)
-                    }
-                    <span className="text-white/40 text-sm">{lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn}</span>
+                    <span className="text-[hsl(140_60%_60%)] font-medium">
+                      {appliedPromo.kind === "percent"
+                        ? (() => {
+                            const base = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                            const { num, prefix } = parsePrice(base);
+                            return `−${formatPrice(num * appliedPromo.percent / 100, prefix)}`;
+                          })()
+                        : (lang === "ru" ? `${appliedPromo.months} мес. бесплатно` : `${appliedPromo.months} months free`)}
+                    </span>
+                  </div>
+                )}
+                <div className="flex items-center justify-between">
+                  <span className="text-white/60 text-lg font-normal">
+                    {lang === "ru" ? "Итого" : "Total"}
                   </span>
+                  <div className="flex items-baseline gap-2">
+                    {(autoBilling || appliedPromo?.kind === "percent") && (
+                      <span className="text-white/30 text-sm line-through">
+                        {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
+                      </span>
+                    )}
+                    <span className="text-white text-xl font-normal">
+                      {(() => {
+                        const base = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                        const sub = lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn;
+                        if (appliedPromo?.kind === "free_months") {
+                          const monthly = getPerMonthAfterFree(base);
+                          const { prefix } = parsePrice(base);
+                          return lang === "ru"
+                            ? <>{prefix}0 первые {appliedPromo.months} мес.<span className="text-white/40 text-sm">, далее {monthly}/мес</span></>
+                            : <>{prefix}0 first {appliedPromo.months} months<span className="text-white/40 text-sm">, then {monthly}/mo</span></>;
+                        }
+                        let priced = base;
+                        if (appliedPromo?.kind === "percent") priced = getDiscountedPrice(base);
+                        else if (autoBilling) priced = applyDiscount(base);
+                        return <>{priced}<span className="text-white/40 text-sm">{sub}</span></>;
+                      })()}
+                    </span>
+                  </div>
                 </div>
               </div>
 
               <button
                 onClick={() => {
                   const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
-                  const priceLabel = autoBilling ? applyDiscount(basePrice) : basePrice;
-                  purchaseSubscription(selectedPlan, `${priceLabel}${lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn}`);
+                  const sub = lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn;
+                  let priceLabel = basePrice;
+                  if (appliedPromo?.kind === "percent") priceLabel = getDiscountedPrice(basePrice);
+                  else if (appliedPromo?.kind === "free_months") priceLabel = `${parsePrice(basePrice).prefix}0`;
+                  else if (autoBilling) priceLabel = applyDiscount(basePrice);
+                  purchaseSubscription(selectedPlan, `${priceLabel}${sub}`);
                   setStep("success");
                 }}
                 className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
