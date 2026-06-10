@@ -172,13 +172,14 @@ const CourseLessons = () => {
 
   const courseMapRaw = id ? courseMaps[id] : null;
   const isOwned = id ? purchasedCourses.includes(id) : false;
+  const isTrial = id === "6";
   const isReset = purchasedCourses.length === 0 && !store.subscription && store.transactions.length === 0;
 
   const courseMap = courseMapRaw ? {
     ...courseMapRaw,
-    progress: isReset ? 0 : courseMapRaw.progress,
+    progress: (isReset && !isTrial) ? 0 : courseMapRaw.progress,
     lessons: courseMapRaw.lessons.map((lesson, idx) => {
-      if (isReset) {
+      if (isReset && !isTrial) {
         return { ...lesson, completed: false, current: idx === 0, locked: idx > 0 };
       }
       return lesson;
