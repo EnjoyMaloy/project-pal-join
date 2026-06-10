@@ -280,6 +280,56 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
         <X className="w-4 h-4" />
       </button>
 
+      {/* Test promo codes toggle */}
+      <button
+        onClick={() => setShowTestCodes((v) => !v)}
+        className="absolute top-4 right-14 h-8 px-2.5 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-mono font-semibold text-white/70 hover:text-white hover:bg-white/20 transition-colors z-30 tracking-wider"
+        aria-label="Test promo codes"
+        title={lang === "ru" ? "Тестовые промокоды" : "Test promo codes"}
+      >
+        TEST
+      </button>
+
+      {/* Test promo codes panel */}
+      {showTestCodes && (
+        <div className="absolute top-14 right-4 z-40 w-[300px] rounded-xl border border-white/10 bg-[hsl(280_30%_10%)] shadow-2xl p-3">
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-[11px] uppercase tracking-wider text-white/50 font-medium">
+              {lang === "ru" ? "Тестовые промокоды" : "Test promo codes"}
+            </p>
+            <button
+              onClick={() => setShowTestCodes(false)}
+              className="text-white/40 hover:text-white/80 transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+          <div className="space-y-2">
+            {[
+              { code: "COURSE99", desc: lang === "ru" ? "Скидка 99% на ЛЮБОЙ план (включая один курс). Логика: цена = base × 0.01. В «Итого» — новая цена, рядом зачёркнута исходная." : "99% off ANY plan (including single course). Logic: price = base × 0.01. Total shows new price, original struck-through." },
+              { code: "CRYPTON50", desc: lang === "ru" ? "Скидка 50% на любой план. Логика: цена = base × 0.5." : "50% off any plan. Logic: price = base × 0.5." },
+              { code: "SINGLE50", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на «Один курс». На месячном/годовом — ошибка «не подходит для этого тарифа»." : "50% off SINGLE course only. On monthly/yearly — error «not for this plan»." },
+              { code: "TEST50", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на месячный план. Иначе — ошибка." : "50% off MONTHLY only. Otherwise — error." },
+              { code: "TEST50Y", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на годовой план. Иначе — ошибка." : "50% off YEARLY only. Otherwise — error." },
+              { code: "FRIEND3M", desc: lang === "ru" ? "3 месяца бесплатно. Работает только для месячного/годового плана. На «Один курс» — ошибка. В «Итого» — 0 ₽." : "3 months free. Works for monthly/yearly only. On single — error. Total shows 0." },
+            ].map((t) => (
+              <button
+                key={t.code}
+                onClick={() => { setPromoInput(t.code); setShowTestCodes(false); }}
+                className="w-full text-left flex items-start gap-2 p-1.5 rounded-lg hover:bg-white/5 transition-colors"
+              >
+                <span className="inline-block rounded-md bg-[hsl(261,100%,93%)] px-1.5 py-0.5 text-[11px] font-mono text-[hsl(280,92%,21%)] whitespace-nowrap mt-0.5">{t.code}</span>
+                <span className="text-[11px] text-white/60 leading-[140%]">{t.desc}</span>
+              </button>
+            ))}
+          </div>
+          <p className="text-[10px] text-white/30 mt-2 px-1.5">
+            {lang === "ru" ? "Кликни код — он подставится в поле промо." : "Click a code to fill the promo input."}
+          </p>
+        </div>
+      )}
+
       {/* Back button - fixed over content */}
       {step === "payment" && (
         <button
