@@ -47,9 +47,9 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   const [promoError, setPromoError] = useState<{ code: PromoErrorCode; requiredPlan?: PlanId } | null>(null);
 
   // Demo promo DB
-  const PROMO_DB: Record<string, { type: "percent" | "free_months"; value: number; plan_restriction?: PlanId; state?: "expired" | "limit" | "used" }> = {
-    COURSE99: { type: "percent", value: 99 },
-    
+  const PROMO_DB: Record<string, { type: "percent" | "free_months"; value: number; plan_restriction?: PlanId; excluded_plans?: PlanId[]; state?: "expired" | "limit" | "used" }> = {
+    COURSE99: { type: "percent", value: 99, excluded_plans: ["single"] },
+
     TEST50: { type: "percent", value: 50, plan_restriction: "monthly" },
     TEST50Y: { type: "percent", value: 50, plan_restriction: "yearly" },
     SINGLE50: { type: "percent", value: 50, plan_restriction: "single" },
@@ -72,6 +72,11 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     // free_months not applicable to single (one-time purchase)
     if (entry.type === "free_months" && plan === "single") {
       return { ok: false, error: { code: "wrong_plan", requiredPlan: "monthly" } };
+    }
+    if (entry.excluded_plans?.includes(plan)) {
+      // Suggest a plan that's allowed
+      const fallback = (["monthly", "yearly", "single"] as PlanId[]).find(p => !entry.excluded_plans!.includes(p));
+      return { ok: false, error: { code: "wrong_plan", requiredPlan: fallback } };
     }
     if (entry.plan_restriction && entry.plan_restriction !== plan) {
       return { ok: false, error: { code: "wrong_plan", requiredPlan: entry.plan_restriction } };
@@ -307,7 +312,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
           </div>
           <div className="space-y-2">
             {[
-              { code: "COURSE99", desc: lang === "ru" ? "Скидка 99% на ЛЮБОЙ план (включая один курс). Логика: цена = base × 0.01. В «Итого» — новая цена, рядом зачёркнута исходная." : "99% off ANY plan (including single course). Logic: price = base × 0.01. Total shows new price, original struck-through." },
+              { code: "COURSE99", desc: lang === "ru" ? "Скидка 99% ТОЛЬКО на подписку (месяц или год). На «Один курс» — ошибка «не подходит для этого тарифа», предлагается переключиться на месячный/годовой. Логика: цена = base × 0.01." : "99% off SUBSCRIPTION only (monthly or yearly). On «Single course» — error «not for this plan», suggests switching to monthly/yearly. Logic: price = base × 0.01." },
               
               { code: "SINGLE50", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на «Один курс». На месячном/годовом — ошибка «не подходит для этого тарифа»." : "50% off SINGLE course only. On monthly/yearly — error «not for this plan»." },
               { code: "TEST50", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на месячный план. Иначе — ошибка." : "50% off MONTHLY only. Otherwise — error." },
