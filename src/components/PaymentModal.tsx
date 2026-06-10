@@ -208,7 +208,14 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
   const handleClose = (value: boolean) => {
     onOpenChange(value);
-    if (!value) { setStep("plan"); setAutoBilling(false); }
+    if (!value) {
+      setStep("plan");
+      setAutoBilling(false);
+      setAppliedPromo(null);
+      setPromoError(null);
+      setPromoInput("");
+      setShowTestCodes(false);
+    }
   };
 
   // Success content
