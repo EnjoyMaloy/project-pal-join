@@ -373,7 +373,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
               {/* Selected plan details */}
               <div className="px-5 mb-4">
-                <div className="rounded-xl bg-white/5 px-5 py-4">
+                <div className={`rounded-xl px-5 py-4 transition-all ${appliedPromo?.kind === "free_months" ? "border-2 border-[hsl(var(--violet-light))] bg-white/10 shadow-[0_0_20px_hsl(var(--violet-light)/0.25)]" : "bg-white/5"}`}>
+
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-2">
                       <span className="text-white font-normal text-xl">
