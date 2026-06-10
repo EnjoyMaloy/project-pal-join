@@ -392,15 +392,21 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                           : (lang === "ru" ? selectedPlanData.titleRu : selectedPlanData.titleEn)}
                       </span>
                       {selectedPlanData.discountRu && appliedPromo?.kind !== "free_months" && !(selectedPlan === "monthly" && !appliedPromo) && (() => {
-                        const oldP = lang === "ru" ? selectedPlanData.oldPriceRu! : selectedPlanData.oldPriceEn!;
-                        const baseP = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
-                        const finalP = appliedPromo?.kind === "percent" ? getDiscountedPrice(baseP) : baseP;
-                        const oldNum = parsePrice(oldP).num;
-                        const finalNum = parsePrice(finalP).num;
-                        const pct = Math.round((1 - finalNum / oldNum) * 100);
+                        let label: string;
+                        if (selectedPlan === "monthly" && appliedPromo?.kind === "percent") {
+                          label = `−${appliedPromo.percent}%`;
+                        } else {
+                          const oldP = lang === "ru" ? selectedPlanData.oldPriceRu! : selectedPlanData.oldPriceEn!;
+                          const baseP = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                          const finalP = appliedPromo?.kind === "percent" ? getDiscountedPrice(baseP) : baseP;
+                          const oldNum = parsePrice(oldP).num;
+                          const finalNum = parsePrice(finalP).num;
+                          const pct = Math.round((1 - finalNum / oldNum) * 100);
+                          label = lang === "ru" ? `Скидка ${pct}%` : `${pct}% off!`;
+                        }
                         return (
                           <span className="border-2 border-[hsl(var(--violet-mid))] text-[hsl(var(--violet-mid))] rounded-full px-2 py-0.5 font-medium text-xs">
-                            {lang === "ru" ? `Скидка ${pct}%` : `${pct}% off!`}
+                            {label}
                           </span>
                         );
                       })()}
