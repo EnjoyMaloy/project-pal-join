@@ -413,6 +413,11 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                             : `$${appliedPromo.months * 6}`}
                         </span>
                       )}
+                      {selectedPlan === "monthly" && appliedPromo && appliedPromo.kind !== "free_months" && (
+                        <span className="text-white/30 font-normal text-lg line-through">
+                          {lang === "ru" ? selectedPlanData.oldPriceRu : selectedPlanData.oldPriceEn}
+                        </span>
+                      )}
                       <span className="text-white font-normal text-3xl">
                         {appliedPromo?.kind === "free_months"
                           ? "$0"
@@ -443,7 +448,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         return lang === "ru" ? `Всего ${perMonth}/месяц` : `Just ${perMonth}/mo`;
                       })()}
                     </span>
-                    {selectedPlanData.oldPriceRu && !(selectedPlan === "monthly" && !appliedPromo) && (
+                    {selectedPlan === "yearly" && selectedPlanData.oldPriceRu && (
                       <span className="text-white/30 font-normal text-lg">
                         <span className="line-through">{lang === "ru" ? selectedPlanData.oldPriceRu : selectedPlanData.oldPriceEn}</span>
                         {lang === "ru" ? selectedPlanData.oldSubRu : selectedPlanData.oldSubEn}
