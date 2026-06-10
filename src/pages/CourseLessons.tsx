@@ -366,8 +366,9 @@ const CourseLessons = () => {
               {/* Node 3 - (286, 161) - Completed */}
               {courseMap.lessons[2] && (() => {
                 const l = courseMap.lessons[2];
+                const trialLocked = isTrial && l.locked;
                 return (
-                  <g className="cursor-pointer" onClick={() => { if (!l.locked && !l.completed && !isOwned) setPaymentOpen(true); }}>
+                  <g className="cursor-pointer" onClick={() => { if (trialLocked) setPaymentOpen(true); else if (!l.locked && !l.completed && !isOwned) setPaymentOpen(true); }}>
                     <circle cx="285.922" cy="161" r="31.5" fill="url(#gPurpleNode)" stroke="#460466"/>
                     <circle opacity="0.3" cx="285.922" cy="161" r="23.7037" fill="#924CFE"/>
                     <path d="M293.196 146.781H278.647a2.32 2.32 0 00-2.315 2.315v7.275a9.59 9.59 0 009.59 9.59 9.59 9.59 0 009.59-9.59v-7.275a2.32 2.32 0 00-2.316-2.315z" fill="#D9C0FF"/>
@@ -376,6 +377,24 @@ const CourseLessons = () => {
                   </g>
                 );
               })()}
+
+              {/* Trial "Открыть доступ" label below node 3 */}
+              {isTrial && courseMap.lessons[2]?.current && (
+                <foreignObject x="220" y="196" width="132" height="32">
+                  <div className="flex justify-center">
+                    <button
+                      type="button"
+                      onClick={() => setPaymentOpen(true)}
+                      className="inline-flex items-center gap-1 text-[13px] font-medium text-foreground bg-background rounded-full px-3 py-1 shadow-sm whitespace-nowrap cursor-pointer pointer-events-auto"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-[hsl(var(--violet-primary))]">
+                        <path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 21 12 16.51 5.79 21l2.39-7.15L2 9.36h7.61L12 2z"/>
+                      </svg>
+                      {lang === "ru" ? "Открыть доступ" : "Get access"}
+                    </button>
+                  </div>
+                </foreignObject>
+              )}
 
               {/* Node 4 - (121, 161) - Current (Golden) */}
               {courseMap.lessons[3] && (() => {
