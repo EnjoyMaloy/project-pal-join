@@ -631,11 +631,10 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         const base = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
                         const sub = lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn;
                         if (appliedPromo?.kind === "free_months") {
-                          const monthly = getPerMonthAfterFree(base);
                           const { prefix } = parsePrice(base);
                           return lang === "ru"
-                            ? <>{prefix}0 первые {appliedPromo.months} мес.<span className="text-white/40 text-sm">, далее {monthly}/мес</span></>
-                            : <>{prefix}0 first {appliedPromo.months} months<span className="text-white/40 text-sm">, then {monthly}/mo</span></>;
+                            ? <>{prefix}0 <span className="text-white/40 text-sm">{appliedPromo.months} мес. бесплатно</span></>
+                            : <>{prefix}0 <span className="text-white/40 text-sm">{appliedPromo.months} months free</span></>;
                         }
                         let priced = base;
                         if (appliedPromo?.kind === "percent") priced = getDiscountedPrice(base);
