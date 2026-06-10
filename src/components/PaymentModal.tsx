@@ -4,7 +4,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Check, CreditCard, ChevronLeft, Bitcoin } from "lucide-react";
+import { X, Check, CreditCard, ChevronLeft, Bitcoin, Loader2 } from "lucide-react";
 import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { useNavigate } from "react-router-dom";
 import { purchaseCourse, purchaseSubscription } from "@/hooks/usePurchaseStore";
@@ -34,6 +34,102 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
   const [termsAccepted, setTermsAccepted] = useState(true);
   const [autoBilling, setAutoBilling] = useState(false);
   const billingTermsRef = useRef<HTMLParagraphElement>(null);
+  const [showTestCodes, setShowTestCodes] = useState(false);
+
+  // ---- Promo code state ----
+  type PromoSuccess =
+    | { kind: "percent"; code: string; percent: number }
+    | { kind: "free_months"; code: string; months: number };
+  type PromoErrorCode = "not_found" | "expired" | "limit" | "used" | "wrong_plan";
+  const [promoInput, setPromoInput] = useState("");
+  const [promoLoading, setPromoLoading] = useState(false);
+  const [appliedPromo, setAppliedPromo] = useState<PromoSuccess | null>(null);
+  const [promoError, setPromoError] = useState<{ code: PromoErrorCode; requiredPlan?: PlanId } | null>(null);
+
+  // Demo promo DB
+  const PROMO_DB: Record<string, { type: "percent" | "free_months"; value: number; plan_restriction?: PlanId; state?: "expired" | "limit" | "used" }> = {
+    COURSE99: { type: "percent", value: 99 },
+    CRYPTON50: { type: "percent", value: 50 },
+    TEST50: { type: "percent", value: 50, plan_restriction: "monthly" },
+    TEST50Y: { type: "percent", value: 50, plan_restriction: "yearly" },
+    SINGLE50: { type: "percent", value: 50, plan_restriction: "single" },
+    FRIEND3M: { type: "free_months", value: 3 },
+    EXPIRED: { type: "percent", value: 10, state: "expired" },
+    SOLDOUT: { type: "percent", value: 25, state: "limit" },
+    USEDCODE: { type: "percent", value: 10, state: "used" },
+  };
+
+  type PromoResult =
+    | { ok: true; promo: PromoSuccess }
+    | { ok: false; error: { code: PromoErrorCode; requiredPlan?: PlanId } };
+  const validatePromo = (rawCode: string, plan: PlanId): PromoResult => {
+    const code = rawCode.trim().toUpperCase();
+    const entry = PROMO_DB[code];
+    if (!entry) return { ok: false, error: { code: "not_found" } };
+    if (entry.state === "expired") return { ok: false, error: { code: "expired" } };
+    if (entry.state === "limit") return { ok: false, error: { code: "limit" } };
+    if (entry.state === "used") return { ok: false, error: { code: "used" } };
+    // free_months not applicable to single (one-time purchase)
+    if (entry.type === "free_months" && plan === "single") {
+      return { ok: false, error: { code: "wrong_plan", requiredPlan: "monthly" } };
+    }
+    if (entry.plan_restriction && entry.plan_restriction !== plan) {
+      return { ok: false, error: { code: "wrong_plan", requiredPlan: entry.plan_restriction } };
+    }
+    const promo: PromoSuccess = entry.type === "percent"
+      ? { kind: "percent", code, percent: entry.value }
+      : { kind: "free_months", code, months: entry.value };
+    return { ok: true, promo };
+  };
+
+  const handleApplyPromo = () => {
+    if (!promoInput.trim()) return;
+    setPromoLoading(true);
+    setPromoError(null);
+    setTimeout(() => {
+      const result = validatePromo(promoInput, selectedPlan);
+      if (result.ok === true) { setAppliedPromo(result.promo); setPromoError(null); }
+      else if (result.ok === false) { setAppliedPromo(null); setPromoError(result.error); }
+      setPromoLoading(false);
+    }, 400);
+  };
+
+  const handleRemovePromo = () => {
+    setAppliedPromo(null);
+    setPromoError(null);
+    setPromoInput("");
+  };
+
+  // Re-validate when plan changes
+  useEffect(() => {
+    if (!appliedPromo) return;
+    const result = validatePromo(appliedPromo.code, selectedPlan);
+    if (result.ok === true) { setAppliedPromo(result.promo); setPromoError(null); }
+    else if (result.ok === false) { setAppliedPromo(null); setPromoError(result.error); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedPlan]);
+
+  const parsePrice = (price: string) => {
+    const num = parseFloat(price.replace(/[^0-9.]/g, "").replace(",", ""));
+    const prefix = price.match(/^[₽$]/)?.[0] || "";
+    return { num, prefix };
+  };
+  const formatPrice = (num: number, prefix: string) => {
+    const rounded = Math.round(num * 100) / 100;
+    return `${prefix}${rounded % 1 === 0 ? rounded.toLocaleString("en-US") : rounded.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+  };
+  const applyPromoToPrice = (price: string) => {
+    if (!appliedPromo) return price;
+    if (appliedPromo.kind === "percent") {
+      const { num, prefix } = parsePrice(price);
+      return formatPrice(num * (1 - appliedPromo.percent / 100), prefix);
+    }
+    if (appliedPromo.kind === "free_months") {
+      const { prefix } = parsePrice(price);
+      return `${prefix}0`;
+    }
+    return price;
+  };
 
   useEffect(() => {
     if (autoBilling) {
@@ -112,7 +208,14 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
   const handleClose = (value: boolean) => {
     onOpenChange(value);
-    if (!value) { setStep("plan"); setAutoBilling(false); }
+    if (!value) {
+      setStep("plan");
+      setAutoBilling(false);
+      setAppliedPromo(null);
+      setPromoError(null);
+      setPromoInput("");
+      setShowTestCodes(false);
+    }
   };
 
   // Success content
@@ -176,6 +279,56 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
       >
         <X className="w-4 h-4" />
       </button>
+
+      {/* Test promo codes toggle */}
+      <button
+        onClick={() => setShowTestCodes((v) => !v)}
+        className="absolute top-4 right-14 h-8 px-2.5 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-mono font-semibold text-white/70 hover:text-white hover:bg-white/20 transition-colors z-30 tracking-wider"
+        aria-label="Test promo codes"
+        title={lang === "ru" ? "Тестовые промокоды" : "Test promo codes"}
+      >
+        TEST
+      </button>
+
+      {/* Test promo codes panel */}
+      {showTestCodes && (
+        <div className="absolute top-14 right-4 z-40 w-[300px] rounded-xl border border-white/10 bg-[hsl(280_30%_10%)] shadow-2xl p-3">
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-[11px] uppercase tracking-wider text-white/50 font-medium">
+              {lang === "ru" ? "Тестовые промокоды" : "Test promo codes"}
+            </p>
+            <button
+              onClick={() => setShowTestCodes(false)}
+              className="text-white/40 hover:text-white/80 transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+          <div className="space-y-2">
+            {[
+              { code: "COURSE99", desc: lang === "ru" ? "Скидка 99% на ЛЮБОЙ план (включая один курс). Логика: цена = base × 0.01. В «Итого» — новая цена, рядом зачёркнута исходная." : "99% off ANY plan (including single course). Logic: price = base × 0.01. Total shows new price, original struck-through." },
+              { code: "CRYPTON50", desc: lang === "ru" ? "Скидка 50% на любой план. Логика: цена = base × 0.5." : "50% off any plan. Logic: price = base × 0.5." },
+              { code: "SINGLE50", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на «Один курс». На месячном/годовом — ошибка «не подходит для этого тарифа»." : "50% off SINGLE course only. On monthly/yearly — error «not for this plan»." },
+              { code: "TEST50", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на месячный план. Иначе — ошибка." : "50% off MONTHLY only. Otherwise — error." },
+              { code: "TEST50Y", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на годовой план. Иначе — ошибка." : "50% off YEARLY only. Otherwise — error." },
+              { code: "FRIEND3M", desc: lang === "ru" ? "3 месяца бесплатно. Работает только для месячного/годового плана. На «Один курс» — ошибка. В «Итого» — 0 ₽." : "3 months free. Works for monthly/yearly only. On single — error. Total shows 0." },
+            ].map((t) => (
+              <button
+                key={t.code}
+                onClick={() => { setPromoInput(t.code); setShowTestCodes(false); }}
+                className="w-full text-left flex items-start gap-2 p-1.5 rounded-lg hover:bg-white/5 transition-colors"
+              >
+                <span className="inline-block rounded-md bg-[hsl(261,100%,93%)] px-1.5 py-0.5 text-[11px] font-mono text-[hsl(280,92%,21%)] whitespace-nowrap mt-0.5">{t.code}</span>
+                <span className="text-[11px] text-white/60 leading-[140%]">{t.desc}</span>
+              </button>
+            ))}
+          </div>
+          <p className="text-[10px] text-white/30 mt-2 px-1.5">
+            {lang === "ru" ? "Кликни код — он подставится в поле промо." : "Click a code to fill the promo input."}
+          </p>
+        </div>
+      )}
 
       {/* Back button - fixed over content */}
       {step === "payment" && (
@@ -382,32 +535,104 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               </button>
             )}
 
+            {/* Promo code input */}
+            <div>
+              <div className="flex gap-2">
+                <div className="flex-1 relative">
+                  <input
+                    type="text"
+                    value={promoInput}
+                    onChange={(e) => { setPromoInput(e.target.value); if (promoError) setPromoError(null); }}
+                    onKeyDown={(e) => { if (e.key === "Enter" && !appliedPromo) handleApplyPromo(); }}
+                    disabled={!!appliedPromo}
+                    placeholder={lang === "ru" ? "Есть промокод?" : "Have a promo code?"}
+                    className={`w-full h-11 rounded-xl bg-white/5 border pl-4 text-white placeholder:text-white/40 text-base outline-none transition-colors ${
+                      appliedPromo
+                        ? "border-[hsl(140_60%_50%)]/50 pr-[110px]"
+                        : promoError
+                          ? "border-[hsl(0_70%_55%)]/60 pr-9"
+                          : "border-white/15 focus:border-white/30 pr-9"
+                    }`}
+                  />
+                  {appliedPromo && (
+                    <div className="absolute right-1.5 top-1/2 -translate-y-1/2 flex items-center gap-1 rounded-lg bg-[hsl(140_45%_92%)] px-2 py-1 text-[11px] font-medium text-[hsl(140_70%_20%)]">
+                      <Check className="w-3 h-3" strokeWidth={3} />
+                      {appliedPromo.kind === "percent"
+                        ? (lang === "ru" ? `−${appliedPromo.percent}% применено` : `−${appliedPromo.percent}% applied`)
+                        : (lang === "ru" ? `${appliedPromo.months} мес. бесплатно` : `${appliedPromo.months} months free`)}
+                    </div>
+                  )}
+                </div>
+                {appliedPromo ? (
+                  <button
+                    onClick={handleRemovePromo}
+                    className="h-11 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white/80 flex items-center justify-center transition-colors"
+                    aria-label="Remove promo code"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleApplyPromo}
+                    disabled={!promoInput.trim() || promoLoading}
+                    className="h-11 px-5 rounded-xl bg-white/10 hover:bg-white/20 disabled:opacity-40 disabled:cursor-not-allowed text-white text-base font-medium transition-colors flex items-center justify-center min-w-[88px]"
+                  >
+                    {promoLoading
+                      ? <Loader2 className="w-4 h-4 animate-spin" />
+                      : (lang === "ru" ? "Применить" : "Apply")}
+                  </button>
+                )}
+              </div>
+              {promoError && (
+                <p className="mt-2 text-sm text-[hsl(0_70%_65%)]">
+                  {promoError.code === "not_found" && (lang === "ru" ? "Промокод не найден" : "Promo code not found")}
+                  {promoError.code === "expired" && (lang === "ru" ? "Срок действия промокода истёк" : "This promo code has expired")}
+                  {promoError.code === "limit" && (lang === "ru" ? "Промокод больше недоступен" : "This promo code is no longer available")}
+                  {promoError.code === "used" && (lang === "ru" ? "Вы уже использовали этот промокод" : "You have already used this promo code")}
+                  {promoError.code === "wrong_plan" && (
+                    lang === "ru"
+                      ? `Этот код работает только для тарифа «${promoError.requiredPlan === "yearly" ? "На год" : promoError.requiredPlan === "monthly" ? "На месяц" : "Один курс"}»`
+                      : `This code works for ${promoError.requiredPlan === "yearly" ? "Yearly" : promoError.requiredPlan === "monthly" ? "Monthly" : "Single course"} only`
+                  )}
+                </p>
+              )}
+            </div>
+
             <div className="rounded-xl bg-white/5 px-4 py-3.5 flex items-center justify-between">
               <span className="text-white/60 text-lg font-normal">
                 {lang === "ru" ? "Итого" : "Total"}
               </span>
               <div className="flex items-baseline gap-2">
-                {autoBilling && (selectedPlan === "monthly" || selectedPlan === "yearly") && (
-                  <span className="text-white/30 text-sm line-through">
-                    {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
-                  </span>
-                )}
-                <span className="text-white text-xl font-normal">
-                  {autoBilling && (selectedPlan === "monthly" || selectedPlan === "yearly")
-                    ? applyDiscount(lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)
-                    : (lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)
-                  }
-                  {"subRu" in selectedPlanData && selectedPlanData.subRu && (
-                    <span className="text-white/40 text-sm">{lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn}</span>
-                  )}
-                </span>
+                {(() => {
+                  const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                  const afterAuto = autoBilling && (selectedPlan === "monthly" || selectedPlan === "yearly")
+                    ? applyDiscount(basePrice)
+                    : basePrice;
+                  const finalPrice = applyPromoToPrice(afterAuto);
+                  const showStrike = appliedPromo || (autoBilling && (selectedPlan === "monthly" || selectedPlan === "yearly"));
+                  return (
+                    <>
+                      {showStrike && finalPrice !== basePrice && (
+                        <span className="text-white/30 text-sm line-through">{basePrice}</span>
+                      )}
+                      <span className="text-white text-xl font-normal">{finalPrice}</span>
+                    </>
+                  );
+                })()}
               </div>
             </div>
+
+            {appliedPromo?.kind === "free_months" && (
+              <p className="text-center text-xs text-white/50 -mt-1">
+                {lang === "ru" ? `${appliedPromo.months} мес бесплатно` : `${appliedPromo.months} months free`}
+              </p>
+            )}
 
             <button
               onClick={() => {
                 const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
-                const priceLabel = autoBilling && selectedPlan !== "single" ? applyDiscount(basePrice) : basePrice;
+                const afterAuto = autoBilling && selectedPlan !== "single" ? applyDiscount(basePrice) : basePrice;
+                const priceLabel = applyPromoToPrice(afterAuto);
                 if (selectedPlan === "single") {
                   purchaseCourse(courseId, courseTitleRu, courseTitleEn, priceLabel);
                 } else {
@@ -419,6 +644,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
             >
               {lang === "ru" ? "Подтвердить оплату" : "Confirm payment"}
             </button>
+
 
             {/* Auto-billing terms */}
             {autoBilling && (selectedPlan === "monthly" || selectedPlan === "yearly") && (
