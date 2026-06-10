@@ -635,11 +635,6 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
               </div>
             </div>
 
-            {appliedPromo?.kind === "free_months" && (
-              <p className="text-center text-xs text-white/50 -mt-1">
-                {lang === "ru" ? `${appliedPromo.months} мес бесплатно` : `${appliedPromo.months} months free`}
-              </p>
-            )}
 
             <button
               onClick={() => {
