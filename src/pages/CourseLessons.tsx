@@ -111,6 +111,33 @@ const courseMaps: Record<string, CourseMapData> = {
       { id: 4, titleRu: "Продвинутые темы", titleEn: "Advanced Topics", completed: false, locked: true },
     ],
   },
+  "7": {
+    titleRu: "Платный курс (вне подписки)",
+    titleEn: "Standalone Paid Course",
+    descriptionRu: "Самостоятельный платный курс, не входит в подписку.",
+    descriptionEn: "Standalone paid course, not part of the subscription.",
+    progress: 0,
+    lessons: [
+      { id: 1, titleRu: "Введение", titleEn: "Introduction", completed: false, locked: false, current: true },
+      { id: 2, titleRu: "Основы", titleEn: "Basics", completed: false, locked: true },
+      { id: 3, titleRu: "Практика", titleEn: "Practice", completed: false, locked: true },
+      { id: 4, titleRu: "Итог", titleEn: "Summary", completed: false, locked: true },
+    ],
+  },
+  "8": {
+    titleRu: "Платный курс с 3 триал-уроками",
+    titleEn: "Standalone Paid Course with 3 Trial Lessons",
+    descriptionRu: "Первые 3 урока бесплатно — далее открывайте доступ покупкой.",
+    descriptionEn: "First 3 lessons are free — get full access by purchasing.",
+    progress: 60,
+    lessons: [
+      { id: 1, titleRu: "Урок 1", titleEn: "Lesson 1", completed: true, locked: false },
+      { id: 2, titleRu: "Урок 2", titleEn: "Lesson 2", completed: true, locked: false },
+      { id: 3, titleRu: "Урок 3", titleEn: "Lesson 3", completed: true, locked: false },
+      { id: 4, titleRu: "Урок 4", titleEn: "Lesson 4", completed: false, locked: true, current: true },
+      { id: 5, titleRu: "Урок 5", titleEn: "Lesson 5", completed: false, locked: true },
+    ],
+  },
 };
 
 // Node positions in the snake SVG (center x,y for each node in order)
@@ -172,7 +199,7 @@ const CourseLessons = () => {
 
   const courseMapRaw = id ? courseMaps[id] : null;
   const isOwned = id ? purchasedCourses.includes(id) : false;
-  const isTrial = id === "6";
+  const isTrial = id === "6" || id === "8";
   const isReset = purchasedCourses.length === 0 && !store.subscription && store.transactions.length === 0;
 
   const courseMap = courseMapRaw ? {
