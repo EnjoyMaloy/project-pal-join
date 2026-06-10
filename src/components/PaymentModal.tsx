@@ -4,7 +4,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { X, Check, CreditCard, ChevronLeft, Bitcoin } from "lucide-react";
+import { X, Check, CreditCard, ChevronLeft, Bitcoin, Loader2 } from "lucide-react";
 import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { useNavigate } from "react-router-dom";
 import { purchaseCourse, purchaseSubscription } from "@/hooks/usePurchaseStore";
