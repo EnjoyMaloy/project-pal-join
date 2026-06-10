@@ -5,6 +5,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "next-themes";
 import rehcVideo from "@/assets/rehc.mp4.asset.json";
 import verticalVideo from "@/assets/vertical-video.mov.asset.json";
+import KinescopePlayer from "@kinescope/react-kinescope-player";
+
+const KINESCOPE_VIDEO_ID = "8zqm1rRTLnNU94xauMTwUZ";
 
 
 const IconActive = ({ className }: { className?: string }) => (
@@ -297,7 +300,38 @@ const Index = () => {
   const [videoLandscape, setVideoLandscape] = useState(false);
   const [videoMenu, setVideoMenu] = useState<null | "speed" | "quality">(null);
   const videoUITimerRef = useRef<number | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<any>(null);
+  const kinescopePlayerRef = useRef<KinescopePlayer | null>(null);
+  const videoStateRef = useRef({ paused: true, currentTime: 0, duration: 0, playbackRate: 1 });
+  useEffect(() => {
+    videoRef.current = {
+      get paused() { return videoStateRef.current.paused; },
+      get currentTime() { return videoStateRef.current.currentTime; },
+      set currentTime(t: number) {
+        videoStateRef.current.currentTime = t;
+        kinescopePlayerRef.current?.seekTo(t);
+      },
+      get duration() { return videoStateRef.current.duration; },
+      get playbackRate() { return videoStateRef.current.playbackRate; },
+      set playbackRate(r: number) {
+        videoStateRef.current.playbackRate = r;
+        kinescopePlayerRef.current?.setPlaybackRate(r);
+      },
+      get videoWidth() { return 1920; },
+      get videoHeight() { return 1080; },
+      play: () => {
+        kinescopePlayerRef.current?.play();
+        videoStateRef.current.paused = false;
+      },
+      pause: () => {
+        kinescopePlayerRef.current?.pause();
+        videoStateRef.current.paused = true;
+      },
+      requestFullscreen: () => {
+        kinescopePlayerRef.current?.setFullscreen(true);
+      },
+    };
+  }, []);
   const showVideoUI = (autoHide: boolean) => {
     setVideoUIVisible(true);
     if (videoUITimerRef.current) { window.clearTimeout(videoUITimerRef.current); videoUITimerRef.current = null; }
