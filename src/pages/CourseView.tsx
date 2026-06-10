@@ -239,6 +239,39 @@ const coursesData: Record<string, CourseData> = {
       },
     ],
   },
+  "6": {
+    id: "6",
+    titleRu: "Тестовый курс с триалом",
+    titleEn: "Trial Test Course",
+    descriptionRu: "Этот курс с триалом — пройдите первые 2 урока бесплатно, чтобы оценить материал. Доступ к остальным урокам открывается после оплаты.",
+    descriptionEn: "This course has a trial — complete the first 2 lessons for free to evaluate the material. Access to remaining lessons opens after payment.",
+    categoryRu: "Основы крипты",
+    categoryEn: "Crypto Basics",
+    rating: 4.7,
+    reviewCount: 312,
+    students: 1024,
+    price: 49,
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=500&fit=crop",
+    updatedAt: "01.06.26",
+    languages: "English, Русский",
+    authorName: "OpenCore Club",
+    authorRating: 4.8,
+    courseTypeRu: "Геймифицированный",
+    courseTypeEn: "Gamified",
+    modules: [
+      {
+        titleRu: "Триал модуль",
+        titleEn: "Trial Module",
+        lessons: [
+          { titleRu: "Знакомство", titleEn: "Introduction" },
+          { titleRu: "Основные концепции", titleEn: "Core Concepts" },
+          { titleRu: "Практика (Премиум)", titleEn: "Practice (Premium)" },
+          { titleRu: "Продвинутые темы", titleEn: "Advanced Topics" },
+        ],
+      },
+    ],
+    reviews: [],
+  },
 };
 
 const CourseView = () => {
@@ -334,15 +367,18 @@ const CourseView = () => {
                 const isPurchased = store.purchasedCourses.includes(course.id);
                 const hasSubscription = store.subscription?.active;
                 const isOwned = isPurchased || hasSubscription || isFree;
+                const isTrial = course.id === "6";
                 return (
                   <Button
-                    onClick={() => isOwned ? navigate(`/course/${course.id}/lessons`) : setPaymentOpen(true)}
+                    onClick={() => (isOwned || isTrial) ? navigate(`/course/${course.id}/lessons`) : setPaymentOpen(true)}
                     className="h-12 px-8 rounded-xl text-[18px] leading-[18px] font-medium gap-2 [&_svg]:size-5"
                   >
-                    {!isOwned && course.price && <PremiumStarIcon fill="currentColor" />}
+                    {!isOwned && !isTrial && course.price && <PremiumStarIcon fill="currentColor" />}
                     {isOwned
                       ? (lang === "ru" ? "Начать обучение" : "Start learning")
-                      : (lang === "ru" ? "Открыть доступ" : "Get access")
+                      : isTrial
+                        ? (lang === "ru" ? "Начать бесплатно" : "Start free")
+                        : (lang === "ru" ? "Открыть доступ" : "Get access")
                     }
                   </Button>
                 );
