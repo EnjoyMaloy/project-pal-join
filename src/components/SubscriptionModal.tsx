@@ -368,7 +368,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               </div>
 
               {/* Selected plan details */}
-              <div className="px-5 mb-5">
+              <div className="px-5 mb-4">
                 <div className="rounded-xl bg-white/5 px-5 py-4">
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-2">
@@ -381,15 +381,24 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         </span>
                       )}
                     </div>
-                    <span className="text-white font-normal text-3xl">
-                      {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
-                    </span>
+                    <div className="flex items-baseline gap-2">
+                      {appliedPromo?.kind === "percent" && (
+                        <span className="text-white/30 font-normal text-lg line-through">
+                          {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
+                        </span>
+                      )}
+                      <span className="text-white font-normal text-3xl">
+                        {appliedPromo?.kind === "percent"
+                          ? getDiscountedPrice(lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)
+                          : (lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)}
+                      </span>
+                    </div>
                   </div>
                   <div className="flex items-center justify-between">
                     <span
                       key={`permonth-${shimmerKey}`}
                       className="text-white/40 font-normal text-lg"
-                      style={selectedPlan === "yearly" && shimmerKey > 0 && selectedPlanData.perMonthRu ? {
+                      style={selectedPlan === "yearly" && shimmerKey > 0 && selectedPlanData.perMonthRu && !appliedPromo ? {
                         background: "linear-gradient(90deg, rgba(255,255,255,0.4) 40%, hsl(261, 100%, 93%) 50%, rgba(255,255,255,0.4) 60%)",
                         backgroundSize: "300% auto",
                         WebkitBackgroundClip: "text",
@@ -398,11 +407,15 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         backgroundPosition: "-300% center",
                       } : {}}
                     >
-                      {selectedPlanData.perMonthRu
-                        ? (lang === "ru" ? `Всего ${selectedPlanData.perMonthRu}` : `Just ${selectedPlanData.perMonthEn}`)
-                        : ""}
+                      {appliedPromo?.kind === "free_months"
+                        ? (lang === "ru"
+                            ? `Первые ${appliedPromo.months} мес. бесплатно, далее ${getPerMonthAfterFree(selectedPlanData.priceRu)}/мес`
+                            : `First ${appliedPromo.months} months free, then ${getPerMonthAfterFree(selectedPlanData.priceEn)}/mo`)
+                        : (selectedPlanData.perMonthRu
+                            ? (lang === "ru" ? `Всего ${selectedPlanData.perMonthRu}` : `Just ${selectedPlanData.perMonthEn}`)
+                            : "")}
                     </span>
-                    {selectedPlanData.oldPriceRu && (
+                    {selectedPlanData.oldPriceRu && !appliedPromo && (
                       <span className="text-white/30 font-normal text-lg">
                         <span className="line-through">{lang === "ru" ? selectedPlanData.oldPriceRu : selectedPlanData.oldPriceEn}</span>
                         {lang === "ru" ? selectedPlanData.oldSubRu : selectedPlanData.oldSubEn}
@@ -412,16 +425,85 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                 </div>
               </div>
 
+              {/* Promo code input */}
+              <div className="px-5 mb-5">
+                <div className="flex gap-2">
+                  <div className="flex-1 relative">
+                    <input
+                      type="text"
+                      value={promoInput}
+                      onChange={(e) => { setPromoInput(e.target.value); if (promoError) setPromoError(null); }}
+                      onKeyDown={(e) => { if (e.key === "Enter" && !appliedPromo) handleApplyPromo(); }}
+                      disabled={!!appliedPromo}
+                      placeholder={lang === "ru" ? "Есть промокод?" : "Have a promo code?"}
+                      className={`w-full h-11 rounded-xl bg-white/5 border px-4 pr-9 text-white placeholder:text-white/40 text-base outline-none transition-colors ${
+                        appliedPromo
+                          ? "border-[hsl(140_60%_50%)]/50"
+                          : promoError
+                            ? "border-[hsl(0_70%_55%)]/60"
+                            : "border-white/15 focus:border-white/30"
+                      }`}
+                    />
+                    {appliedPromo && (
+                      <Check className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[hsl(140_60%_55%)]" strokeWidth={3} />
+                    )}
+                  </div>
+                  {appliedPromo ? (
+                    <button
+                      onClick={handleRemovePromo}
+                      className="h-11 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white/80 flex items-center justify-center transition-colors"
+                      aria-label="Remove promo code"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleApplyPromo}
+                      disabled={!promoInput.trim() || promoLoading}
+                      className="h-11 px-5 rounded-xl bg-white/10 hover:bg-white/20 disabled:opacity-40 disabled:cursor-not-allowed text-white text-base font-medium transition-colors flex items-center justify-center min-w-[88px]"
+                    >
+                      {promoLoading
+                        ? <Loader2 className="w-4 h-4 animate-spin" />
+                        : (lang === "ru" ? "Применить" : "Apply")}
+                    </button>
+                  )}
+                </div>
+                {appliedPromo && (
+                  <p className="mt-2 text-sm text-[hsl(140_60%_60%)]">
+                    {appliedPromo.kind === "percent"
+                      ? (lang === "ru" ? `−${appliedPromo.percent}% применено` : `−${appliedPromo.percent}% applied`)
+                      : (lang === "ru" ? `${appliedPromo.months} мес. бесплатно` : `${appliedPromo.months} months free`)}
+                  </p>
+                )}
+                {promoError && (
+                  <p className="mt-2 text-sm text-[hsl(0_70%_65%)]">
+                    {promoError.code === "not_found" && (lang === "ru" ? "Промокод не найден" : "Promo code not found")}
+                    {promoError.code === "expired" && (lang === "ru" ? "Срок действия промокода истёк" : "This promo code has expired")}
+                    {promoError.code === "limit" && (lang === "ru" ? "Промокод больше недоступен" : "This promo code is no longer available")}
+                    {promoError.code === "used" && (lang === "ru" ? "Вы уже использовали этот промокод" : "You have already used this promo code")}
+                    {promoError.code === "wrong_plan" && (
+                      lang === "ru"
+                        ? `Этот код работает только для ${promoError.requiredPlan === "yearly" ? "годового" : "месячного"} тарифа`
+                        : `This code works for ${promoError.requiredPlan === "yearly" ? "Yearly" : "Monthly"} plan only`
+                    )}
+                  </p>
+                )}
+              </div>
+
               {/* CTA */}
               <div className="px-5 pb-5">
                 <button
                   onClick={() => setStep("payment")}
                   className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
                 >
-                  {lang === "ru"
-                    ? `Подписаться — ${selectedPlanData.priceRu}${selectedPlanData.subRu}`
-                    : `Subscribe ${selectedPlanData.titleEn}`
-                  }
+                  {(() => {
+                    const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                    const sub = lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn;
+                    const finalPrice = appliedPromo?.kind === "percent" ? getDiscountedPrice(basePrice) : basePrice;
+                    return lang === "ru"
+                      ? `Подписаться — ${finalPrice}${sub}`
+                      : `Subscribe ${selectedPlanData.titleEn}`;
+                  })()}
                 </button>
               </div>
 
