@@ -426,8 +426,9 @@ const CourseLessons = () => {
               {/* Node 4 - (121, 161) - Current (Golden) */}
               {courseMap.lessons[3] && (() => {
                 const l = courseMap.lessons[3];
+                const trialLocked = isTrial && l.locked;
                 return (
-                  <g className="cursor-pointer" onClick={() => { if (!l.locked) setPaymentOpen(true); }}>
+                  <g className="cursor-pointer" onClick={() => { if (trialLocked) setPaymentOpen(true); else if (!l.locked) setPaymentOpen(true); }}>
                     <g filter="url(#filter0_i)">
                       <circle cx="120.922" cy="161" r="32" fill="url(#gGoldNode)"/>
                     </g>
@@ -441,20 +442,41 @@ const CourseLessons = () => {
                 );
               })()}
 
-              {/* "Начать" label under current node */}
-              {courseMap.lessons[3]?.current && (
-                <foreignObject x="85" y="196" width="72" height="28">
-                  <div className="flex justify-center">
-                    <button
-                      type="button"
-                      onClick={() => setPaymentOpen(true)}
-                      className="text-[13px] font-medium text-foreground bg-background rounded-full px-3 py-0.5 shadow-sm whitespace-nowrap cursor-pointer pointer-events-auto"
-                    >
-                      {lang === "ru" ? "Начать" : "Start"}
-                    </button>
-                  </div>
-                </foreignObject>
-              )}
+              {/* "Начать" / "Открыть доступ" label under current node 4 */}
+              {courseMap.lessons[3]?.current && (() => {
+                const trialLocked = isTrial && courseMap.lessons[3]?.locked;
+                if (trialLocked) {
+                  return (
+                    <foreignObject x="55" y="196" width="132" height="32">
+                      <div className="flex justify-center">
+                        <button
+                          type="button"
+                          onClick={() => setPaymentOpen(true)}
+                          className="inline-flex items-center gap-1 text-[13px] font-medium text-foreground bg-background rounded-full px-3 py-1 shadow-sm whitespace-nowrap cursor-pointer pointer-events-auto"
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" className="text-[hsl(var(--violet-primary))]">
+                            <path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 21 12 16.51 5.79 21l2.39-7.15L2 9.36h7.61L12 2z"/>
+                          </svg>
+                          {lang === "ru" ? "Открыть доступ" : "Get access"}
+                        </button>
+                      </div>
+                    </foreignObject>
+                  );
+                }
+                return (
+                  <foreignObject x="85" y="196" width="72" height="28">
+                    <div className="flex justify-center">
+                      <button
+                        type="button"
+                        onClick={() => setPaymentOpen(true)}
+                        className="text-[13px] font-medium text-foreground bg-background rounded-full px-3 py-0.5 shadow-sm whitespace-nowrap cursor-pointer pointer-events-auto"
+                      >
+                        {lang === "ru" ? "Начать" : "Start"}
+                      </button>
+                    </div>
+                  </foreignObject>
+                );
+              })()}
 
               {/* Node 5 - (121, 292) - Locked (checklist icon) */}
               {courseMap.lessons[4] && (() => {
