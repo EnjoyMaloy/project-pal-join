@@ -215,7 +215,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
 
   const handleClose = (value: boolean) => {
     onOpenChange(value);
-    if (!value) { setStep("plan"); setAutoBilling(false); }
+    if (!value) { setStep("plan"); setAutoBilling(false); setAppliedPromo(null); setPromoError(null); setPromoInput(""); }
   };
 
   if (step === "success") {
