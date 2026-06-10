@@ -378,24 +378,30 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-2">
                       <span className="text-white font-normal text-xl">
-                        {lang === "ru" ? selectedPlanData.titleRu : selectedPlanData.titleEn}
+                        {appliedPromo?.kind === "free_months"
+                          ? (lang === "ru"
+                              ? `${appliedPromo.months} бесплатных месяца`
+                              : `${appliedPromo.months} months free`)
+                          : (lang === "ru" ? selectedPlanData.titleRu : selectedPlanData.titleEn)}
                       </span>
-                      {selectedPlanData.discountRu && (
+                      {selectedPlanData.discountRu && appliedPromo?.kind !== "free_months" && (
                         <span className="border-2 border-[hsl(var(--violet-mid))] text-[hsl(var(--violet-mid))] rounded-full px-2 py-0.5 font-medium text-xs">
                           {lang === "ru" ? selectedPlanData.discountRu : selectedPlanData.discountEn}
                         </span>
                       )}
                     </div>
                     <div className="flex items-baseline gap-2">
-                      {appliedPromo?.kind === "percent" && (
+                      {(appliedPromo?.kind === "percent" || appliedPromo?.kind === "free_months") && (
                         <span className="text-white/30 font-normal text-lg line-through">
                           {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
                         </span>
                       )}
                       <span className="text-white font-normal text-3xl">
-                        {appliedPromo?.kind === "percent"
-                          ? getDiscountedPrice(lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)
-                          : (lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)}
+                        {appliedPromo?.kind === "free_months"
+                          ? "$0"
+                          : appliedPromo?.kind === "percent"
+                            ? getDiscountedPrice(lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)
+                            : (lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn)}
                       </span>
                     </div>
                   </div>
