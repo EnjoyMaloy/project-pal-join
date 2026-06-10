@@ -1435,24 +1435,15 @@ const Index = () => {
                 onPointerMove={() => showVideoUI(true)}
                 onPointerDown={() => showVideoUI(true)}
               >
-                {/* Mirror video (muted) — audio comes from the main hidden video */}
-                <video
-                  src={currentVideoUrl}
-                  playsInline
-                  muted
+                {/* Landscape placeholder — the main Kinescope player continues to play audio in the background */}
+                <div
                   aria-hidden
-                  className="absolute inset-0 w-full h-full"
-                  style={{ objectFit: 'contain', background: '#000' }}
-                  ref={(el) => {
-                    if (!el) return;
-                    const main = videoRef.current;
-                    if (main && Math.abs(el.currentTime - main.currentTime) > 0.3) {
-                      try { el.currentTime = main.currentTime; } catch {}
-                    }
-                    if (main) el.playbackRate = main.playbackRate;
-                    if (videoPlaying) { el.play().catch(() => {}); } else { el.pause(); }
-                  }}
-                />
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{ background: '#000', color: 'rgba(255,255,255,0.5)', fontFamily: '"TT Commons", sans-serif', fontSize: 14 }}
+                >
+                  Поверните устройство, чтобы вернуться к видео
+                </div>
+
 
                 {/* Center play button when paused */}
                 {!videoPlaying && (
