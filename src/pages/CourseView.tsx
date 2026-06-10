@@ -239,6 +239,39 @@ const coursesData: Record<string, CourseData> = {
       },
     ],
   },
+  "6": {
+    id: "6",
+    titleRu: "Тестовый курс с триалом",
+    titleEn: "Trial Test Course",
+    descriptionRu: "Этот курс с триалом — пройдите первые 2 урока бесплатно, чтобы оценить материал. Доступ к остальным урокам открывается после оплаты.",
+    descriptionEn: "This course has a trial — complete the first 2 lessons for free to evaluate the material. Access to remaining lessons opens after payment.",
+    categoryRu: "Основы крипты",
+    categoryEn: "Crypto Basics",
+    rating: 4.7,
+    reviewCount: 312,
+    students: 1024,
+    price: 49,
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=500&fit=crop",
+    updatedAt: "01.06.26",
+    languages: "English, Русский",
+    authorName: "OpenCore Club",
+    authorRating: 4.8,
+    courseTypeRu: "Геймифицированный",
+    courseTypeEn: "Gamified",
+    modules: [
+      {
+        titleRu: "Триал модуль",
+        titleEn: "Trial Module",
+        lessons: [
+          { titleRu: "Знакомство", titleEn: "Introduction" },
+          { titleRu: "Основные концепции", titleEn: "Core Concepts" },
+          { titleRu: "Практика (Премиум)", titleEn: "Practice (Premium)" },
+          { titleRu: "Продвинутые темы", titleEn: "Advanced Topics" },
+        ],
+      },
+    ],
+    reviews: [],
+  },
 };
 
 const CourseView = () => {
