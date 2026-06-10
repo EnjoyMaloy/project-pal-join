@@ -52,6 +52,106 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
   const [autoBilling, setAutoBilling] = useState(false);
   const billingTermsRef = useRef<HTMLParagraphElement>(null);
 
+  // ---- Promo code state ----
+  type PromoSuccess =
+    | { kind: "percent"; code: string; percent: number }
+    | { kind: "free_months"; code: string; months: number };
+  type PromoErrorCode = "not_found" | "expired" | "limit" | "used" | "wrong_plan";
+  const [promoInput, setPromoInput] = useState("");
+  const [promoLoading, setPromoLoading] = useState(false);
+  const [appliedPromo, setAppliedPromo] = useState<PromoSuccess | null>(null);
+  const [promoError, setPromoError] = useState<{ code: PromoErrorCode; requiredPlan?: PlanId } | null>(null);
+
+  // Demo promo DB
+  const PROMO_DB: Record<string, { type: "percent" | "free_months"; value: number; plan_restriction?: PlanId; state?: "expired" | "limit" | "used" }> = {
+    CRYPTON50: { type: "percent", value: 50 },
+    SAVE20: { type: "percent", value: 20 },
+    YEARLY30: { type: "percent", value: 30, plan_restriction: "yearly" },
+    MONTHLY15: { type: "percent", value: 15, plan_restriction: "monthly" },
+    FRIEND3M: { type: "free_months", value: 3, plan_restriction: "monthly" },
+    WELCOME1M: { type: "free_months", value: 1 },
+    EXPIRED: { type: "percent", value: 10, state: "expired" },
+    SOLDOUT: { type: "percent", value: 25, state: "limit" },
+    USEDCODE: { type: "percent", value: 10, state: "used" },
+  };
+
+  const validatePromo = (rawCode: string, plan: PlanId): { ok: true; promo: PromoSuccess } | { ok: false; error: { code: PromoErrorCode; requiredPlan?: PlanId } } => {
+    const code = rawCode.trim().toUpperCase();
+    const entry = PROMO_DB[code];
+    if (!entry) return { ok: false, error: { code: "not_found" } };
+    if (entry.state === "expired") return { ok: false, error: { code: "expired" } };
+    if (entry.state === "limit") return { ok: false, error: { code: "limit" } };
+    if (entry.state === "used") return { ok: false, error: { code: "used" } };
+    if (entry.plan_restriction && entry.plan_restriction !== plan) {
+      return { ok: false, error: { code: "wrong_plan", requiredPlan: entry.plan_restriction } };
+    }
+    return {
+      ok: true,
+      promo: entry.type === "percent"
+        ? { kind: "percent", code, percent: entry.value }
+        : { kind: "free_months", code, months: entry.value },
+    };
+  };
+
+  const handleApplyPromo = () => {
+    if (!promoInput.trim()) return;
+    setPromoLoading(true);
+    setPromoError(null);
+    setTimeout(() => {
+      const result = validatePromo(promoInput, selectedPlan);
+      if (result.ok) {
+        setAppliedPromo(result.promo);
+        setPromoError(null);
+      } else {
+        setAppliedPromo(null);
+        setPromoError(result.error);
+      }
+      setPromoLoading(false);
+    }, 500);
+  };
+
+  const handleRemovePromo = () => {
+    setAppliedPromo(null);
+    setPromoError(null);
+    setPromoInput("");
+  };
+
+  // Re-validate when plan changes
+  useEffect(() => {
+    if (!appliedPromo) return;
+    const result = validatePromo(appliedPromo.code, selectedPlan);
+    if (result.ok) {
+      setAppliedPromo(result.promo);
+      setPromoError(null);
+    } else {
+      setAppliedPromo(null);
+      setPromoError(result.error);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedPlan]);
+
+  // Price helpers
+  const parsePrice = (price: string) => {
+    const num = parseFloat(price.replace(/[^0-9.]/g, "").replace(",", ""));
+    const prefix = price.match(/^[₽$]/)?.[0] || "";
+    return { num, prefix };
+  };
+  const formatPrice = (num: number, prefix: string) => {
+    const rounded = Math.round(num * 100) / 100;
+    return `${prefix}${rounded % 1 === 0 ? rounded.toLocaleString("en-US") : rounded.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+  };
+  const getDiscountedPrice = (price: string) => {
+    if (!appliedPromo || appliedPromo.kind !== "percent") return price;
+    const { num, prefix } = parsePrice(price);
+    return formatPrice(num * (1 - appliedPromo.percent / 100), prefix);
+  };
+  const getPerMonthAfterFree = (price: string) => {
+    // For free_months, post-trial monthly price = monthly equivalent
+    const { num, prefix } = parsePrice(price);
+    if (selectedPlan === "yearly") return formatPrice(num / 12, prefix);
+    return formatPrice(num, prefix);
+  };
+
   useEffect(() => {
     if (autoBilling) {
       setTimeout(() => billingTermsRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }), 100);
