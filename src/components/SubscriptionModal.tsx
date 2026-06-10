@@ -319,6 +319,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                   {plans.map((plan) => {
                     const isSelected = selectedPlan === plan.id;
                     const badge = lang === "ru" ? plan.badgeRu : plan.badgeEn;
+                    const isPromoHighlight = promoError?.code === "wrong_plan" && promoError.requiredPlan === plan.id;
 
                     return (
                       <button
@@ -328,7 +329,9 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                           flex-1 rounded-xl px-3 py-4 text-center transition-all relative
                           ${isSelected
                             ? "border-2 border-[hsl(var(--violet-light))] bg-white/10"
-                            : "border border-[hsl(280_25%_14%)] bg-white/5 hover:border-white/25"
+                            : isPromoHighlight
+                              ? "border-2 border-[hsl(0_70%_55%)]/70 bg-white/5 animate-pulse"
+                              : "border border-[hsl(280_25%_14%)] bg-white/5 hover:border-white/25"
                           }
                         `}
                       >
