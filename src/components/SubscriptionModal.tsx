@@ -498,10 +498,24 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
               {/* CTA */}
               <div className="px-5 pb-5">
                 <button
-                  onClick={() => setStep("payment")}
+                  onClick={() => {
+                    if (appliedPromo?.kind === "free_months") {
+                      const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                      const { prefix } = parsePrice(basePrice);
+                      purchaseSubscription(selectedPlan, `${prefix}0`);
+                      setStep("success");
+                    } else {
+                      setStep("payment");
+                    }
+                  }}
                   className="w-full h-[52px] rounded-2xl text-[hsl(var(--violet-super-dark))] bg-[hsl(var(--violet-mid))] hover:bg-[hsl(var(--violet-light))] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 text-xl font-medium"
                 >
                   {(() => {
+                    if (appliedPromo?.kind === "free_months") {
+                      return lang === "ru"
+                        ? `Активировать ${appliedPromo.months} мес. бесплатно`
+                        : `Activate ${appliedPromo.months} months free`;
+                    }
                     const basePrice = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
                     const sub = lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn;
                     const finalPrice = appliedPromo?.kind === "percent" ? getDiscountedPrice(basePrice) : basePrice;
@@ -510,6 +524,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                       : `Subscribe ${selectedPlanData.titleEn}`;
                   })()}
                 </button>
+
               </div>
 
               {/* Footer links */}
