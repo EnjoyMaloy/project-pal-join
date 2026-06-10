@@ -29,6 +29,7 @@ interface CourseData {
   authorRating: number;
   courseTypeRu: string;
   courseTypeEn: string;
+  standalone?: boolean;
   modules: { titleRu: string; titleEn: string; lessons: { titleRu: string; titleEn: string }[] }[];
   reviews: { username: string; color: string; rating: number; timeRu: string; timeEn: string; textRu: string; textEn: string }[];
 }
@@ -272,6 +273,75 @@ const coursesData: Record<string, CourseData> = {
     ],
     reviews: [],
   },
+  "7": {
+    id: "7",
+    titleRu: "Платный курс (вне подписки)",
+    titleEn: "Standalone Paid Course",
+    descriptionRu: "Самостоятельный платный курс, не входит в подписку Premium. Доступ открывается только после разовой покупки.",
+    descriptionEn: "A standalone paid course, not included in the Premium subscription. Access is granted only after one-time purchase.",
+    categoryRu: "Инструменты",
+    categoryEn: "Tools",
+    rating: 4.6,
+    reviewCount: 128,
+    students: 512,
+    price: 79,
+    standalone: true,
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop",
+    updatedAt: "05.06.26",
+    languages: "English, Русский",
+    authorName: "OpenCore Club",
+    authorRating: 4.8,
+    courseTypeRu: "Геймифицированный",
+    courseTypeEn: "Gamified",
+    modules: [
+      {
+        titleRu: "Самостоятельный курс",
+        titleEn: "Standalone Course",
+        lessons: [
+          { titleRu: "Введение", titleEn: "Introduction" },
+          { titleRu: "Основы", titleEn: "Basics" },
+          { titleRu: "Практика", titleEn: "Practice" },
+          { titleRu: "Итог", titleEn: "Summary" },
+        ],
+      },
+    ],
+    reviews: [],
+  },
+  "8": {
+    id: "8",
+    titleRu: "Платный курс с 3 триал-уроками",
+    titleEn: "Standalone Paid Course with 3 Trial Lessons",
+    descriptionRu: "Самостоятельный платный курс вне подписки. Первые 3 урока доступны бесплатно — далее открывайте доступ покупкой курса.",
+    descriptionEn: "Standalone paid course outside the subscription. First 3 lessons are free — get full access by purchasing the course.",
+    categoryRu: "Инструменты",
+    categoryEn: "Tools",
+    rating: 4.7,
+    reviewCount: 156,
+    students: 640,
+    price: 89,
+    standalone: true,
+    image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?w=800&h=500&fit=crop",
+    updatedAt: "08.06.26",
+    languages: "English, Русский",
+    authorName: "OpenCore Club",
+    authorRating: 4.8,
+    courseTypeRu: "Геймифицированный",
+    courseTypeEn: "Gamified",
+    modules: [
+      {
+        titleRu: "Триал и основной модуль",
+        titleEn: "Trial and Main Module",
+        lessons: [
+          { titleRu: "Урок 1 (бесплатно)", titleEn: "Lesson 1 (free)" },
+          { titleRu: "Урок 2 (бесплатно)", titleEn: "Lesson 2 (free)" },
+          { titleRu: "Урок 3 (бесплатно)", titleEn: "Lesson 3 (free)" },
+          { titleRu: "Урок 4 (после покупки)", titleEn: "Lesson 4 (after purchase)" },
+          { titleRu: "Урок 5 (после покупки)", titleEn: "Lesson 5 (after purchase)" },
+        ],
+      },
+    ],
+    reviews: [],
+  },
 };
 
 const CourseView = () => {
@@ -324,7 +394,7 @@ const CourseView = () => {
             {/* Title */}
             <div className="flex items-center gap-3 mb-4 flex-wrap">
               <h1 className="text-[28px] font-bold text-foreground">{title}</h1>
-              {course.price !== null && (
+              {course.price !== null && !course.standalone && (
                 <span className="inline-flex items-center justify-center gap-[3px] rounded-full px-3 py-1 text-[13px] font-medium text-[hsl(280,92%,21%)] border border-[rgba(146,76,254,0.1)] bg-[rgba(217,192,255,0.5)] dark:text-[#E8DCFB] dark:border-[rgba(232,220,251,0.2)] dark:bg-[rgba(146,76,254,0.25)]">
                   <PremiumStarIcon className="w-3.5 h-3.5" fill="currentColor" />
                   {lang === "ru" ? "Премиум" : "Premium"}
@@ -359,21 +429,24 @@ const CourseView = () => {
                 <p className="text-[36px] font-medium leading-[32px] text-foreground">
                   {isFree
                     ? (lang === "ru" ? "Бесплатно" : "Free")
-                    : (<><span className="text-[16px] font-normal text-muted-foreground">{lang === "ru" ? "от " : "from "}</span>$6<span className="text-[16px] font-normal text-muted-foreground">{lang === "ru" ? "/мес" : "/mo"}</span></>)
+                    : course.standalone
+                      ? <>${course.price}</>
+                      : (<><span className="text-[16px] font-normal text-muted-foreground">{lang === "ru" ? "от " : "from "}</span>$6<span className="text-[16px] font-normal text-muted-foreground">{lang === "ru" ? "/мес" : "/mo"}</span></>)
                   }
                 </p>
               </div>
               {(() => {
                 const isPurchased = store.purchasedCourses.includes(course.id);
                 const hasSubscription = store.subscription?.active;
-                const isOwned = isPurchased || hasSubscription || isFree;
-                const isTrial = course.id === "6";
+                const isStandalone = !!course.standalone;
+                const isOwned = isPurchased || (!isStandalone && hasSubscription) || isFree;
+                const isTrial = course.id === "6" || course.id === "8";
                 return (
                   <Button
                     onClick={() => (isOwned || isTrial) ? navigate(`/course/${course.id}/lessons`) : setPaymentOpen(true)}
                     className="h-12 px-8 rounded-xl text-[18px] leading-[18px] font-medium gap-2 [&_svg]:size-5"
                   >
-                    {!isOwned && !isTrial && course.price && <PremiumStarIcon fill="currentColor" />}
+                    {!isOwned && !isTrial && course.price && !isStandalone && <PremiumStarIcon fill="currentColor" />}
                     {isOwned
                       ? (lang === "ru" ? "Начать обучение" : "Start learning")
                       : isTrial
