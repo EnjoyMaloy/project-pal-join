@@ -29,6 +29,7 @@ interface CourseData {
   authorRating: number;
   courseTypeRu: string;
   courseTypeEn: string;
+  standalone?: boolean;
   modules: { titleRu: string; titleEn: string; lessons: { titleRu: string; titleEn: string }[] }[];
   reviews: { username: string; color: string; rating: number; timeRu: string; timeEn: string; textRu: string; textEn: string }[];
 }
@@ -267,6 +268,75 @@ const coursesData: Record<string, CourseData> = {
           { titleRu: "Основные концепции", titleEn: "Core Concepts" },
           { titleRu: "Практика (Премиум)", titleEn: "Practice (Premium)" },
           { titleRu: "Продвинутые темы", titleEn: "Advanced Topics" },
+        ],
+      },
+    ],
+    reviews: [],
+  },
+  "7": {
+    id: "7",
+    titleRu: "Платный курс (вне подписки)",
+    titleEn: "Standalone Paid Course",
+    descriptionRu: "Самостоятельный платный курс, не входит в подписку Premium. Доступ открывается только после разовой покупки.",
+    descriptionEn: "A standalone paid course, not included in the Premium subscription. Access is granted only after one-time purchase.",
+    categoryRu: "Инструменты",
+    categoryEn: "Tools",
+    rating: 4.6,
+    reviewCount: 128,
+    students: 512,
+    price: 79,
+    standalone: true,
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop",
+    updatedAt: "05.06.26",
+    languages: "English, Русский",
+    authorName: "OpenCore Club",
+    authorRating: 4.8,
+    courseTypeRu: "Геймифицированный",
+    courseTypeEn: "Gamified",
+    modules: [
+      {
+        titleRu: "Самостоятельный курс",
+        titleEn: "Standalone Course",
+        lessons: [
+          { titleRu: "Введение", titleEn: "Introduction" },
+          { titleRu: "Основы", titleEn: "Basics" },
+          { titleRu: "Практика", titleEn: "Practice" },
+          { titleRu: "Итог", titleEn: "Summary" },
+        ],
+      },
+    ],
+    reviews: [],
+  },
+  "8": {
+    id: "8",
+    titleRu: "Платный курс с 3 триал-уроками",
+    titleEn: "Standalone Paid Course with 3 Trial Lessons",
+    descriptionRu: "Самостоятельный платный курс вне подписки. Первые 3 урока доступны бесплатно — далее открывайте доступ покупкой курса.",
+    descriptionEn: "Standalone paid course outside the subscription. First 3 lessons are free — get full access by purchasing the course.",
+    categoryRu: "Инструменты",
+    categoryEn: "Tools",
+    rating: 4.7,
+    reviewCount: 156,
+    students: 640,
+    price: 89,
+    standalone: true,
+    image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?w=800&h=500&fit=crop",
+    updatedAt: "08.06.26",
+    languages: "English, Русский",
+    authorName: "OpenCore Club",
+    authorRating: 4.8,
+    courseTypeRu: "Геймифицированный",
+    courseTypeEn: "Gamified",
+    modules: [
+      {
+        titleRu: "Триал и основной модуль",
+        titleEn: "Trial and Main Module",
+        lessons: [
+          { titleRu: "Урок 1 (бесплатно)", titleEn: "Lesson 1 (free)" },
+          { titleRu: "Урок 2 (бесплатно)", titleEn: "Lesson 2 (free)" },
+          { titleRu: "Урок 3 (бесплатно)", titleEn: "Lesson 3 (free)" },
+          { titleRu: "Урок 4 (после покупки)", titleEn: "Lesson 4 (after purchase)" },
+          { titleRu: "Урок 5 (после покупки)", titleEn: "Lesson 5 (after purchase)" },
         ],
       },
     ],
