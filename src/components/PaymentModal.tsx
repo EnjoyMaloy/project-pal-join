@@ -312,7 +312,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
           </div>
           <div className="space-y-2">
             {[
-              { code: "COURSE99", desc: lang === "ru" ? "Скидка 99% на ЛЮБОЙ план (включая один курс). Логика: цена = base × 0.01. В «Итого» — новая цена, рядом зачёркнута исходная." : "99% off ANY plan (including single course). Logic: price = base × 0.01. Total shows new price, original struck-through." },
+              { code: "COURSE99", desc: lang === "ru" ? "Скидка 99% ТОЛЬКО на подписку (месяц или год). На «Один курс» — ошибка «не подходит для этого тарифа», предлагается переключиться на месячный/годовой. Логика: цена = base × 0.01." : "99% off SUBSCRIPTION only (monthly or yearly). On «Single course» — error «not for this plan», suggests switching to monthly/yearly. Logic: price = base × 0.01." },
               
               { code: "SINGLE50", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на «Один курс». На месячном/годовом — ошибка «не подходит для этого тарифа»." : "50% off SINGLE course only. On monthly/yearly — error «not for this plan»." },
               { code: "TEST50", desc: lang === "ru" ? "Скидка 50% ТОЛЬКО на месячный план. Иначе — ошибка." : "50% off MONTHLY only. Otherwise — error." },
