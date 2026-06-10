@@ -454,7 +454,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         return lang === "ru" ? `Всего ${perMonth}/месяц` : `Just ${perMonth}/mo`;
                       })()}
                     </span>
-                    {selectedPlan === "yearly" && selectedPlanData.oldPriceRu && (
+                    {selectedPlan === "yearly" && selectedPlanData.oldPriceRu && appliedPromo?.kind !== "free_months" && (
                       <span className="text-white/30 font-normal text-lg">
                         <span className="line-through">{lang === "ru" ? selectedPlanData.oldPriceRu : selectedPlanData.oldPriceEn}</span>
                         {lang === "ru" ? selectedPlanData.oldSubRu : selectedPlanData.oldSubEn}
@@ -485,7 +485,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                       }`}
                     />
                     {appliedPromo && (
-                      <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1 rounded-full bg-[hsl(140_45%_92%)] px-2 py-0.5 text-[11px] font-medium text-[hsl(140_70%_20%)]">
+                      <div className="absolute right-1.5 top-1/2 -translate-y-1/2 flex items-center gap-1 rounded-lg bg-[hsl(140_45%_92%)] px-2 py-1 text-[11px] font-medium text-[hsl(140_70%_20%)]">
                         <Check className="w-3 h-3" strokeWidth={3} />
                         {appliedPromo.kind === "percent"
                           ? (lang === "ru" ? `−${appliedPromo.percent}% применено` : `−${appliedPromo.percent}% applied`)
