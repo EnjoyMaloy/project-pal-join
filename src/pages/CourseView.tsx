@@ -367,15 +367,18 @@ const CourseView = () => {
                 const isPurchased = store.purchasedCourses.includes(course.id);
                 const hasSubscription = store.subscription?.active;
                 const isOwned = isPurchased || hasSubscription || isFree;
+                const isTrial = course.id === "6";
                 return (
                   <Button
-                    onClick={() => isOwned ? navigate(`/course/${course.id}/lessons`) : setPaymentOpen(true)}
+                    onClick={() => (isOwned || isTrial) ? navigate(`/course/${course.id}/lessons`) : setPaymentOpen(true)}
                     className="h-12 px-8 rounded-xl text-[18px] leading-[18px] font-medium gap-2 [&_svg]:size-5"
                   >
-                    {!isOwned && course.price && <PremiumStarIcon fill="currentColor" />}
+                    {!isOwned && !isTrial && course.price && <PremiumStarIcon fill="currentColor" />}
                     {isOwned
                       ? (lang === "ru" ? "Начать обучение" : "Start learning")
-                      : (lang === "ru" ? "Открыть доступ" : "Get access")
+                      : isTrial
+                        ? (lang === "ru" ? "Начать бесплатно" : "Start free")
+                        : (lang === "ru" ? "Открыть доступ" : "Get access")
                     }
                   </Button>
                 );
