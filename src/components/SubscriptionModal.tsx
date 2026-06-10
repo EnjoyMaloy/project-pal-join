@@ -391,9 +391,16 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                       )}
                     </div>
                     <div className="flex items-baseline gap-2">
-                      {(appliedPromo?.kind === "percent" || appliedPromo?.kind === "free_months") && (
+                      {appliedPromo?.kind === "percent" && (
                         <span className="text-white/30 font-normal text-lg line-through">
                           {lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn}
+                        </span>
+                      )}
+                      {appliedPromo?.kind === "free_months" && (
+                        <span className="text-white/30 font-normal text-lg line-through">
+                          {lang === "ru"
+                            ? `₽${(appliedPromo.months * 480).toLocaleString("ru-RU")}`
+                            : `$${appliedPromo.months * 6}`}
                         </span>
                       )}
                       <span className="text-white font-normal text-3xl">
