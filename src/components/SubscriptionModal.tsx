@@ -176,6 +176,12 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
       priceEn: "$6",
       subRu: " /мес",
       subEn: " /mo",
+      discountRu: "Скидка 20%",
+      discountEn: "20% off!",
+      oldPriceRu: "₽600",
+      oldPriceEn: "$7.50",
+      oldSubRu: " /мес",
+      oldSubEn: " /mo",
     },
     {
       id: "yearly" as PlanId,
