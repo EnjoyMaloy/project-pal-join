@@ -668,7 +668,6 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                     <span className="text-white text-xl font-normal">
                       {(() => {
                         const base = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
-                        const sub = lang === "ru" ? selectedPlanData.subRu : selectedPlanData.subEn;
                         if (appliedPromo?.kind === "free_months") {
                           const { prefix } = parsePrice(base);
                           return lang === "ru"
@@ -678,7 +677,7 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         let priced = base;
                         if (appliedPromo?.kind === "percent") priced = getDiscountedPrice(base);
                         else if (autoBilling) priced = applyDiscount(base);
-                        return <>{priced}<span className="text-white/40 text-sm">{sub}</span></>;
+                        return priced;
                       })()}
                     </span>
                   </div>
