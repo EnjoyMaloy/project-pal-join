@@ -332,6 +332,12 @@ const Index = () => {
       },
     };
   }, []);
+  useEffect(() => {
+    if (!kinescopePlayerRef.current) return;
+    if (videoMuted) kinescopePlayerRef.current.mute();
+    else kinescopePlayerRef.current.unmute();
+  }, [videoMuted]);
+
   const showVideoUI = (autoHide: boolean) => {
     setVideoUIVisible(true);
     if (videoUITimerRef.current) { window.clearTimeout(videoUITimerRef.current); videoUITimerRef.current = null; }
