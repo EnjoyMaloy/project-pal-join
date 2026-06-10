@@ -231,7 +231,7 @@ const CourseLessons = () => {
         <Button
           className="rounded-full px-8 py-3 text-[15px] font-medium bg-foreground text-background hover:bg-foreground/90 mb-8"
           onClick={() => {
-            if (!isOwned) {
+            if (!isOwned && !isTrial) {
               setPaymentOpen(true);
             }
           }}
