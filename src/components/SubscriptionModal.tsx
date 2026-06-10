@@ -385,11 +385,19 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                               : `${appliedPromo.months} months free`)
                           : (lang === "ru" ? selectedPlanData.titleRu : selectedPlanData.titleEn)}
                       </span>
-                      {selectedPlanData.discountRu && appliedPromo?.kind !== "free_months" && (
-                        <span className="border-2 border-[hsl(var(--violet-mid))] text-[hsl(var(--violet-mid))] rounded-full px-2 py-0.5 font-medium text-xs">
-                          {lang === "ru" ? selectedPlanData.discountRu : selectedPlanData.discountEn}
-                        </span>
-                      )}
+                      {selectedPlanData.discountRu && appliedPromo?.kind !== "free_months" && (() => {
+                        const oldP = lang === "ru" ? selectedPlanData.oldPriceRu! : selectedPlanData.oldPriceEn!;
+                        const baseP = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                        const finalP = appliedPromo?.kind === "percent" ? getDiscountedPrice(baseP) : baseP;
+                        const oldNum = parsePrice(oldP).num;
+                        const finalNum = parsePrice(finalP).num;
+                        const pct = Math.round((1 - finalNum / oldNum) * 100);
+                        return (
+                          <span className="border-2 border-[hsl(var(--violet-mid))] text-[hsl(var(--violet-mid))] rounded-full px-2 py-0.5 font-medium text-xs">
+                            {lang === "ru" ? `Скидка ${pct}%` : `${pct}% off!`}
+                          </span>
+                        );
+                      })()}
                     </div>
                     <div className="flex items-baseline gap-2">
                       {appliedPromo?.kind === "percent" && (
@@ -426,17 +434,22 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                         backgroundPosition: "-300% center",
                       } : {}}
                     >
-                      {appliedPromo?.kind !== "free_months" && (selectedPlanData.perMonthRu
-                        ? (lang === "ru" ? `Всего ${selectedPlanData.perMonthRu}` : `Just ${selectedPlanData.perMonthEn}`)
-                        : "")}
+                      {appliedPromo?.kind !== "free_months" && selectedPlanData.perMonthRu && (() => {
+                        const baseP = lang === "ru" ? selectedPlanData.priceRu : selectedPlanData.priceEn;
+                        const finalP = appliedPromo?.kind === "percent" ? getDiscountedPrice(baseP) : baseP;
+                        const { num, prefix } = parsePrice(finalP);
+                        const perMonth = formatPrice(num / 12, prefix);
+                        return lang === "ru" ? `Всего ${perMonth}/месяц` : `Just ${perMonth}/mo`;
+                      })()}
                     </span>
-                    {selectedPlanData.oldPriceRu && !appliedPromo && (
+                    {selectedPlanData.oldPriceRu && (
                       <span className="text-white/30 font-normal text-lg">
                         <span className="line-through">{lang === "ru" ? selectedPlanData.oldPriceRu : selectedPlanData.oldPriceEn}</span>
                         {lang === "ru" ? selectedPlanData.oldSubRu : selectedPlanData.oldSubEn}
                       </span>
                     )}
                   </div>
+
                 </div>
               </div>
 
