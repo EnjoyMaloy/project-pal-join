@@ -456,9 +456,8 @@ const SubscriptionModal = ({ open, onOpenChange }: SubscriptionModalProps) => {
                       })()}
                     </span>
                     {selectedPlan === "yearly" && selectedPlanData.oldPriceRu && appliedPromo?.kind !== "free_months" && (
-                      <span className="text-white/30 font-normal text-lg">
-                        <span className="line-through">{lang === "ru" ? selectedPlanData.oldPriceRu : selectedPlanData.oldPriceEn}</span>
-                        {lang === "ru" ? selectedPlanData.oldSubRu : selectedPlanData.oldSubEn}
+                      <span className="text-white/30 font-normal text-lg line-through">
+                        {lang === "ru" ? selectedPlanData.oldPriceRu : selectedPlanData.oldPriceEn}
                       </span>
                     )}
                   </div>
