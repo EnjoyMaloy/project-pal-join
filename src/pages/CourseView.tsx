@@ -352,6 +352,8 @@ const CourseView = () => {
   const [paymentOpen, setPaymentOpen] = useState(false);
   const store = usePurchaseStore();
 
+  if (id === "9") return <CourseExperimental />;
+
   const course = id ? coursesData[id] : null;
 
   if (!course) {
