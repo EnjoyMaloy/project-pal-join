@@ -17,6 +17,7 @@ import {
   Twitter,
   Youtube,
   Instagram,
+  LayoutGrid,
 } from "lucide-react";
 import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { Button } from "@/components/ui/button";
