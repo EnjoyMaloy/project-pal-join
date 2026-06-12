@@ -27,40 +27,16 @@ const COURSE_ID = "9";
 
 const IMG = "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&h=800&fit=crop";
 
-const modules = [
-  {
-    titleRu: "Введение в экспериментальный курс",
-    titleEn: "Intro to experimental course",
-    durationRu: "32 мин",
-    durationEn: "32 min",
-    lessons: [
-      { titleRu: "Что такое эксперименты в Web3", titleEn: "What are Web3 experiments", min: 8 },
-      { titleRu: "Подготовка окружения", titleEn: "Setting up environment", min: 12 },
-      { titleRu: "Первый сценарий", titleEn: "First scenario", min: 12 },
-    ],
-  },
-  {
-    titleRu: "Глубокое погружение",
-    titleEn: "Deep dive",
-    durationRu: "1 ч 10 мин",
-    durationEn: "1h 10m",
-    lessons: [
-      { titleRu: "Архитектура решений", titleEn: "Solution architecture", min: 18 },
-      { titleRu: "Практика: запуск", titleEn: "Practice: launch", min: 22 },
-      { titleRu: "Разбор кейсов", titleEn: "Case studies", min: 30 },
-    ],
-  },
-  {
-    titleRu: "Финальный проект",
-    titleEn: "Final project",
-    durationRu: "55 мин",
-    durationEn: "55 min",
-    lessons: [
-      { titleRu: "Постановка задачи", titleEn: "Define the task", min: 15 },
-      { titleRu: "Реализация", titleEn: "Build", min: 25 },
-      { titleRu: "Защита и фидбек", titleEn: "Review & feedback", min: 15 },
-    ],
-  },
+const lessons = [
+  { titleRu: "Что такое эксперименты в Web3", titleEn: "What are Web3 experiments", min: 8 },
+  { titleRu: "Подготовка окружения", titleEn: "Setting up environment", min: 12 },
+  { titleRu: "Первый сценарий", titleEn: "First scenario", min: 12 },
+  { titleRu: "Архитектура решений", titleEn: "Solution architecture", min: 18 },
+  { titleRu: "Практика: запуск", titleEn: "Practice: launch", min: 22 },
+  { titleRu: "Разбор кейсов", titleEn: "Case studies", min: 30 },
+  { titleRu: "Постановка задачи", titleEn: "Define the task", min: 15 },
+  { titleRu: "Реализация", titleEn: "Build", min: 25 },
+  { titleRu: "Защита и фидбек", titleEn: "Review & feedback", min: 15 },
 ];
 
 const reviews = [
