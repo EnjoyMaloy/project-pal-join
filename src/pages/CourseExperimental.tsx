@@ -72,7 +72,8 @@ const CourseExperimental = () => {
 
   const cta = () => (isOwned ? navigate(`/course/${COURSE_ID}/lessons`) : setPaymentOpen(true));
 
-  const totalLessons = modules.reduce((s, m) => s + m.lessons.length, 0);
+  const totalLessons = lessons.length;
+  const totalMin = lessons.reduce((s, l) => s + l.min, 0);
 
   return (
     <div className="min-h-screen bg-background">
