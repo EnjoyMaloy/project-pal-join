@@ -37,8 +37,8 @@ interface CourseData {
 const coursesData: Record<string, CourseData> = {
   "1": {
     id: "1",
-    titleRu: "Быстрый старт в Telegram Gifts",
-    titleEn: "Quick Start with Telegram Gifts",
+    titleRu: "1 курс — Бесплатный",
+    titleEn: "1 — Free course",
     descriptionRu: "Узнайте, как использовать Telegram Gifts для создания уникальных цифровых подарков, коллекций и заработка на NFT-подарках в экосистеме Telegram.",
     descriptionEn: "Learn how to use Telegram Gifts to create unique digital gifts, collections, and earn from NFT gifts in the Telegram ecosystem.",
     categoryRu: "Web3 и DeFi",
@@ -79,8 +79,8 @@ const coursesData: Record<string, CourseData> = {
   },
   "2": {
     id: "2",
-    titleRu: "Анализ проектов",
-    titleEn: "Project Analysis",
+    titleRu: "2 курс — В подписке без триала",
+    titleEn: "2 — Subscription, no trial",
     descriptionRu: "Научимся анализировать потенциальные проекты для инвестиций: читать whitepaper, проверять токеномику и оценивать команду. Курс даст понятные инструменты для выбора перспективных проектов и защиты от скама.",
     descriptionEn: "Learn to analyze potential investment projects: read whitepapers, verify tokenomics, and evaluate teams. This course provides clear tools for selecting promising projects and protecting against scams.",
     categoryRu: "Инвестиции",
@@ -242,8 +242,8 @@ const coursesData: Record<string, CourseData> = {
   },
   "6": {
     id: "6",
-    titleRu: "Тестовый курс с триалом",
-    titleEn: "Trial Test Course",
+    titleRu: "3 курс — В подписке с триалом",
+    titleEn: "3 — Subscription with trial",
     descriptionRu: "Этот курс с триалом — пройдите первые 2 урока бесплатно, чтобы оценить материал. Доступ к остальным урокам открывается после оплаты.",
     descriptionEn: "This course has a trial — complete the first 2 lessons for free to evaluate the material. Access to remaining lessons opens after payment.",
     categoryRu: "Основы крипты",
@@ -275,8 +275,8 @@ const coursesData: Record<string, CourseData> = {
   },
   "7": {
     id: "7",
-    titleRu: "Платный курс (вне подписки)",
-    titleEn: "Standalone Paid Course",
+    titleRu: "4 курс — Платный без триала",
+    titleEn: "4 — Paid, no trial",
     descriptionRu: "Самостоятельный платный курс, не входит в подписку Premium. Доступ открывается только после разовой покупки.",
     descriptionEn: "A standalone paid course, not included in the Premium subscription. Access is granted only after one-time purchase.",
     categoryRu: "Инструменты",
@@ -309,8 +309,8 @@ const coursesData: Record<string, CourseData> = {
   },
   "8": {
     id: "8",
-    titleRu: "Платный курс с 3 триал-уроками",
-    titleEn: "Standalone Paid Course with 3 Trial Lessons",
+    titleRu: "5 курс — Платный с триалом",
+    titleEn: "5 — Paid with trial",
     descriptionRu: "Самостоятельный платный курс вне подписки. Первые 3 урока доступны бесплатно — далее открывайте доступ покупкой курса.",
     descriptionEn: "Standalone paid course outside the subscription. First 3 lessons are free — get full access by purchasing the course.",
     categoryRu: "Инструменты",
@@ -394,7 +394,7 @@ const CourseView = () => {
             {/* Title */}
             <div className="flex items-center gap-3 mb-4 flex-wrap">
               <h1 className="text-[28px] font-bold text-foreground">{title}</h1>
-              {course.price !== null && !course.standalone && (
+              {course.price !== null && (
                 <span className="inline-flex items-center justify-center gap-[3px] rounded-full px-3 py-1 text-[13px] font-medium text-[hsl(280,92%,21%)] border border-[rgba(146,76,254,0.1)] bg-[rgba(217,192,255,0.5)] dark:text-[#E8DCFB] dark:border-[rgba(232,220,251,0.2)] dark:bg-[rgba(146,76,254,0.25)]">
                   <PremiumStarIcon className="w-3.5 h-3.5" fill="currentColor" />
                   {lang === "ru" ? "Премиум" : "Premium"}
@@ -598,6 +598,7 @@ const CourseView = () => {
         courseImage={course.image}
         courseDescRu={course.descriptionRu}
         courseDescEn={course.descriptionEn}
+        standaloneOnly={!!course.standalone}
       />
     </div>
   );

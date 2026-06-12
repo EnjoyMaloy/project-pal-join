@@ -44,14 +44,11 @@ interface CourseData {
 }
 
 const courses: CourseData[] = [
-  { id: "1", titleRu: "Быстрый старт в Telegram Gifts", titleEn: "Quick Start with Telegram Gifts", categoryId: "web3", rating: 4.9, students: 371, image: "https://images.unsplash.com/photo-1621504450181-5d356f61d307?w=400&h=300&fit=crop", isNew: true },
-  { id: "2", titleRu: "Анализ проектов", titleEn: "Project Analysis", categoryId: "invest", rating: 4.9, students: 35419, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop", premium: true, price: 49, trending: true },
-  { id: "3", titleRu: "Как создать систему достижения финансовых целей?", titleEn: "How to Build a Financial Goals System?", categoryId: "invest", rating: 4.8, students: 4168, image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&h=300&fit=crop", premium: true, price: 29, isNew: true },
-  { id: "4", titleRu: "Погружение в DeFi", titleEn: "Diving into DeFi", categoryId: "web3", rating: 4.8, students: 33898, image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=300&fit=crop" },
-  { id: "5", titleRu: "Основы блокчейна: архитектура доверия", titleEn: "Blockchain Basics: Trust Architecture", categoryId: "crypto", rating: 4.8, students: 11301, image: "https://images.unsplash.com/photo-1644143379190-08a5f055de1d?w=400&h=300&fit=crop", premium: true, price: 39 },
-  { id: "6", titleRu: "Тестовый курс с триалом", titleEn: "Trial Test Course", categoryId: "crypto", rating: 4.7, students: 1024, image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop", premium: true, price: 49, isNew: true },
-  { id: "7", titleRu: "Платный курс (вне подписки)", titleEn: "Standalone Paid Course", categoryId: "tools", rating: 4.6, students: 512, image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop", price: 79, isNew: true },
-  { id: "8", titleRu: "Платный курс с 3 триал-уроками", titleEn: "Standalone Paid Course with 3 Trial Lessons", categoryId: "tools", rating: 4.7, students: 640, image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?w=400&h=300&fit=crop", price: 89, isNew: true },
+  { id: "1", titleRu: "1 курс — Бесплатный", titleEn: "1 — Free course", categoryId: "web3", rating: 4.9, students: 371, image: "https://images.unsplash.com/photo-1621504450181-5d356f61d307?w=400&h=300&fit=crop", isNew: true },
+  { id: "2", titleRu: "2 курс — В подписке без триала", titleEn: "2 — Subscription, no trial", categoryId: "invest", rating: 4.9, students: 35419, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop", premium: true, price: 49, trending: true },
+  { id: "6", titleRu: "3 курс — В подписке с триалом", titleEn: "3 — Subscription with trial", categoryId: "crypto", rating: 4.7, students: 1024, image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop", premium: true, price: 49, isNew: true },
+  { id: "7", titleRu: "4 курс — Платный без триала", titleEn: "4 — Paid, no trial", categoryId: "tools", rating: 4.6, students: 512, image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop", premium: true, price: 79, isNew: true },
+  { id: "8", titleRu: "5 курс — Платный с триалом", titleEn: "5 — Paid with trial", categoryId: "tools", rating: 4.7, students: 640, image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?w=400&h=300&fit=crop", premium: true, price: 89, isNew: true },
 ];
 
 const Catalog = () => {

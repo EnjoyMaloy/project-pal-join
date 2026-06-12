@@ -19,12 +19,13 @@ interface PaymentModalProps {
   courseImage?: string;
   courseDescRu?: string;
   courseDescEn?: string;
+  standaloneOnly?: boolean;
 }
 
 type PlanId = "single" | "monthly" | "yearly";
 type Step = "plan" | "payment" | "success";
 
-const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, courseId, courseImage, courseDescRu, courseDescEn }: PaymentModalProps) => {
+const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, courseId, courseImage, courseDescRu, courseDescEn, standaloneOnly }: PaymentModalProps) => {
   const { lang } = useLanguage();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
@@ -142,6 +143,10 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     }
   }, [autoBilling]);
 
+  useEffect(() => {
+    if (standaloneOnly && selectedPlan !== "single") setSelectedPlan("single");
+  }, [standaloneOnly, selectedPlan]);
+
   const courseTitle = lang === "ru" ? courseTitleRu : courseTitleEn;
 
   const plans = [
@@ -182,6 +187,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     },
   ];
 
+  const visiblePlans = standaloneOnly ? plans.filter(p => p.id === "single") : plans;
   const selectedPlanData = plans.find((p) => p.id === selectedPlan)!;
 
   const applyDiscount = (price: string) => {
@@ -398,7 +404,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
             {/* Plan selection */}
             <div className="px-5 mb-4 space-y-2.5">
-              {plans.map((plan) => {
+              {visiblePlans.map((plan) => {
                 const isSelected = selectedPlan === plan.id;
                 return (
                   <button

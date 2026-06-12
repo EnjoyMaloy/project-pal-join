@@ -26,10 +26,10 @@ interface CourseMapData {
 
 const courseMaps: Record<string, CourseMapData> = {
   "1": {
-    titleRu: "Быстрый старт в Telegram Gifts",
-    titleEn: "Quick Start with Telegram Gifts",
-    descriptionRu: "Узнайте, как использовать Telegram Gifts для создания уникальных цифровых подарков.",
-    descriptionEn: "Learn how to use Telegram Gifts to create unique digital gifts.",
+    titleRu: "1 курс — Бесплатный",
+    titleEn: "1 — Free course",
+    descriptionRu: "Бесплатный курс — пример курса без оплаты.",
+    descriptionEn: "Free course — example without payment.",
     progress: 9,
     lessons: [
       { id: 1, titleRu: "Что такое Telegram Gifts", titleEn: "What are Telegram Gifts", completed: true, locked: false },
@@ -43,10 +43,10 @@ const courseMaps: Record<string, CourseMapData> = {
     ],
   },
   "2": {
-    titleRu: "Анализ проектов",
-    titleEn: "Project Analysis",
-    descriptionRu: "Научимся анализировать потенциальные проекты для инвестиций.",
-    descriptionEn: "Learn to analyze potential investment projects.",
+    titleRu: "2 курс — В подписке без триала",
+    titleEn: "2 — Subscription, no trial",
+    descriptionRu: "Премиум-курс по подписке без триал-уроков.",
+    descriptionEn: "Premium subscription course without trial lessons.",
     progress: 26,
     lessons: [
       { id: 1, titleRu: "Введение в анализ", titleEn: "Introduction to Analysis", completed: true, locked: false },
@@ -99,10 +99,10 @@ const courseMaps: Record<string, CourseMapData> = {
     ],
   },
   "6": {
-    titleRu: "Тестовый курс с триалом",
-    titleEn: "Trial Test Course",
-    descriptionRu: "Пройдите первые 2 урока бесплатно, чтобы оценить курс.",
-    descriptionEn: "Complete the first 2 lessons free to evaluate the course.",
+    titleRu: "3 курс — В подписке с триалом",
+    titleEn: "3 — Subscription with trial",
+    descriptionRu: "Премиум-курс по подписке с бесплатными триал-уроками.",
+    descriptionEn: "Premium subscription course with free trial lessons.",
     progress: 50,
     lessons: [
       { id: 1, titleRu: "Знакомство", titleEn: "Introduction", completed: true, locked: false },
@@ -112,10 +112,10 @@ const courseMaps: Record<string, CourseMapData> = {
     ],
   },
   "7": {
-    titleRu: "Платный курс (вне подписки)",
-    titleEn: "Standalone Paid Course",
-    descriptionRu: "Самостоятельный платный курс, не входит в подписку.",
-    descriptionEn: "Standalone paid course, not part of the subscription.",
+    titleRu: "4 курс — Платный без триала",
+    titleEn: "4 — Paid, no trial",
+    descriptionRu: "Платный курс вне подписки, без триал-уроков.",
+    descriptionEn: "Standalone paid course, no trial.",
     progress: 0,
     lessons: [
       { id: 1, titleRu: "Введение", titleEn: "Introduction", completed: false, locked: false, current: true },
@@ -125,10 +125,10 @@ const courseMaps: Record<string, CourseMapData> = {
     ],
   },
   "8": {
-    titleRu: "Платный курс с 3 триал-уроками",
-    titleEn: "Standalone Paid Course with 3 Trial Lessons",
-    descriptionRu: "Первые 3 урока бесплатно — далее открывайте доступ покупкой.",
-    descriptionEn: "First 3 lessons are free — get full access by purchasing.",
+    titleRu: "5 курс — Платный с триалом",
+    titleEn: "5 — Paid with trial",
+    descriptionRu: "Платный курс вне подписки с триал-уроками.",
+    descriptionEn: "Standalone paid course with trial lessons.",
     progress: 60,
     lessons: [
       { id: 1, titleRu: "Урок 1", titleEn: "Lesson 1", completed: true, locked: false },
@@ -544,6 +544,7 @@ const CourseLessons = () => {
           courseTitleRu={courseMap.titleRu}
           courseTitleEn={courseMap.titleEn}
           courseId={id || "1"}
+          standaloneOnly={id === "7" || id === "8"}
         />
       )}
     </div>
