@@ -9,6 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import PaymentModal from "@/components/PaymentModal";
+import CourseExperimental from "./CourseExperimental";
 
 interface CourseData {
   id: string;
@@ -350,6 +351,8 @@ const CourseView = () => {
   const { lang } = useLanguage();
   const [paymentOpen, setPaymentOpen] = useState(false);
   const store = usePurchaseStore();
+
+  if (id === "9") return <CourseExperimental />;
 
   const course = id ? coursesData[id] : null;
 
