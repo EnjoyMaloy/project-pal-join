@@ -107,8 +107,12 @@ const CourseExperimental = () => {
                     {lang === "ru" ? "Премиум" : "Premium"}
                   </span>
                   <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-body-12 font-medium text-foreground border border-border bg-background">
-                    <Sparkles className="w-3.5 h-3.5 text-primary" />
-                    {lang === "ru" ? "Эксперимент" : "Experimental"}
+                    <LayoutGrid className="w-3.5 h-3.5 text-muted-foreground" />
+                    {lang === "ru" ? "Web3 и DeFi" : "Web3 & DeFi"}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-body-12 font-medium text-foreground border border-border bg-background">
+                    <Globe className="w-3.5 h-3.5 text-muted-foreground" />
+                    EN · RU
                   </span>
                 </div>
 
@@ -134,10 +138,6 @@ const CourseExperimental = () => {
                 <div className="flex items-center gap-1.5">
                   <Calendar className="w-4 h-4" />
                   <span>{lang === "ru" ? "Обновлён 12.06.26" : "Updated 06/12/26"}</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Globe className="w-4 h-4" />
-                  <span>EN · RU</span>
                 </div>
               </div>
 
