@@ -19,12 +19,13 @@ interface PaymentModalProps {
   courseImage?: string;
   courseDescRu?: string;
   courseDescEn?: string;
+  standaloneOnly?: boolean;
 }
 
 type PlanId = "single" | "monthly" | "yearly";
 type Step = "plan" | "payment" | "success";
 
-const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, courseId, courseImage, courseDescRu, courseDescEn }: PaymentModalProps) => {
+const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, courseId, courseImage, courseDescRu, courseDescEn, standaloneOnly }: PaymentModalProps) => {
   const { lang } = useLanguage();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
