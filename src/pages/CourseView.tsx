@@ -9,6 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import PaymentModal from "@/components/PaymentModal";
+import CourseExperimental from "./CourseExperimental";
 
 interface CourseData {
   id: string;
