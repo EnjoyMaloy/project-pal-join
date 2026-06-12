@@ -49,6 +49,7 @@ const courses: CourseData[] = [
   { id: "6", titleRu: "3 курс — В подписке с триалом", titleEn: "3 — Subscription with trial", categoryId: "crypto", rating: 4.7, students: 1024, image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop", premium: true, price: 49, isNew: true },
   { id: "7", titleRu: "4 курс — Платный без триала", titleEn: "4 — Paid, no trial", categoryId: "tools", rating: 4.6, students: 512, image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop", premium: true, price: 79, isNew: true },
   { id: "8", titleRu: "5 курс — Платный с триалом", titleEn: "5 — Paid with trial", categoryId: "tools", rating: 4.7, students: 640, image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?w=400&h=300&fit=crop", premium: true, price: 89, isNew: true },
+  { id: "9", titleRu: "Экспериментальная стр курса", titleEn: "Experimental course page", categoryId: "web3", rating: 4.95, students: 2480, image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=300&fit=crop", premium: true, price: 59, isNew: true, trending: true },
 ];
 
 const Catalog = () => {
