@@ -183,6 +183,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     },
   ];
 
+  const visiblePlans = standaloneOnly ? plans.filter(p => p.id === "single") : plans;
   const selectedPlanData = plans.find((p) => p.id === selectedPlan)!;
 
   const applyDiscount = (price: string) => {
@@ -399,7 +400,7 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
 
             {/* Plan selection */}
             <div className="px-5 mb-4 space-y-2.5">
-              {plans.map((plan) => {
+              {visiblePlans.map((plan) => {
                 const isSelected = selectedPlan === plan.id;
                 return (
                   <button
