@@ -225,60 +225,37 @@ const CourseExperimental = () => {
               </div>
             </section>
 
-            {/* Modules */}
+            {/* Lessons */}
             <section>
               <div className="flex items-end justify-between mb-5">
                 <h2 className="text-h2 text-foreground">
                   {lang === "ru" ? "Программа курса" : "Curriculum"}
                 </h2>
                 <span className="text-caption-12">
-                  {modules.length} {lang === "ru" ? "модулей · " : "modules · "}{totalLessons} {lang === "ru" ? "уроков" : "lessons"}
+                  {totalLessons} {lang === "ru" ? "уроков · " : "lessons · "}{totalMin} {lang === "ru" ? "мин" : "min"}
                 </span>
               </div>
-              <Accordion type="single" collapsible defaultValue="module-0" className="space-y-3">
-                {modules.map((mod, idx) => (
-                  <AccordionItem
-                    key={idx}
-                    value={`module-${idx}`}
-                    className="border border-border rounded-2xl px-5 bg-card"
+              <ul className="rounded-2xl border border-border bg-card overflow-hidden">
+                {lessons.map((l, i) => (
+                  <li
+                    key={i}
+                    className={`flex items-center gap-4 px-5 py-4 hover:bg-background transition-colors ${i > 0 ? "border-t border-border" : ""}`}
                   >
-                    <AccordionTrigger className="hover:no-underline py-5">
-                      <div className="flex items-center gap-4 text-left w-full">
-                        <div className="w-9 h-9 rounded-lg bg-background border border-border flex items-center justify-center text-[14px] font-medium text-foreground flex-shrink-0">
-                          {String(idx + 1).padStart(2, "0")}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <p className="text-subh-16 text-foreground truncate">
-                            {lang === "ru" ? mod.titleRu : mod.titleEn}
-                          </p>
-                          <p className="text-caption-12 mt-1.5">
-                            {mod.lessons.length} {lang === "ru" ? "уроков · " : "lessons · "}
-                            {lang === "ru" ? mod.durationRu : mod.durationEn}
-                          </p>
-                        </div>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="pb-5">
-                      <ul className="space-y-1">
-                        {mod.lessons.map((l, li) => (
-                          <li
-                            key={li}
-                            className="flex items-center justify-between gap-3 py-2.5 px-3 rounded-lg hover:bg-background transition-colors"
-                          >
-                            <div className="flex items-center gap-3 min-w-0">
-                              <Play className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
-                              <span className="text-body-14 text-foreground truncate">
-                                {li + 1}. {lang === "ru" ? l.titleRu : l.titleEn}
-                              </span>
-                            </div>
-                            <span className="text-caption-12 flex-shrink-0">{l.min} {lang === "ru" ? "мин" : "min"}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
+                    <div className="w-9 h-9 rounded-lg bg-background border border-border flex items-center justify-center text-[14px] font-medium text-foreground flex-shrink-0">
+                      {String(i + 1).padStart(2, "0")}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-subh-16-medium text-foreground truncate">
+                        {lang === "ru" ? l.titleRu : l.titleEn}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2 text-caption-12 flex-shrink-0">
+                      <Play className="w-3.5 h-3.5" />
+                      {l.min} {lang === "ru" ? "мин" : "min"}
+                    </div>
+                  </li>
                 ))}
-              </Accordion>
+              </ul>
             </section>
 
             {/* Reviews */}
