@@ -143,6 +143,10 @@ const PaymentModal = ({ open, onOpenChange, courseTitleRu, courseTitleEn, course
     }
   }, [autoBilling]);
 
+  useEffect(() => {
+    if (standaloneOnly && selectedPlan !== "single") setSelectedPlan("single");
+  }, [standaloneOnly, selectedPlan]);
+
   const courseTitle = lang === "ru" ? courseTitleRu : courseTitleEn;
 
   const plans = [
