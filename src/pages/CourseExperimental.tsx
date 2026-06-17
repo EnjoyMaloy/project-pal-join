@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import {
@@ -18,7 +18,6 @@ import {
   Youtube,
   Instagram,
   LayoutGrid,
-  Search,
 } from "lucide-react";
 import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { Button } from "@/components/ui/button";
@@ -68,7 +67,8 @@ const CourseExperimental = () => {
   const { lang } = useLanguage();
   const store = usePurchaseStore();
   const [paymentOpen, setPaymentOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("q") || "";
 
   const titleRu = "Экспериментальная стр курса";
   const titleEn = "Experimental course page";
@@ -188,13 +188,6 @@ const CourseExperimental = () => {
             <div className="relative min-h-[280px] md:min-h-[460px]">
               <img src={IMG} alt={title} className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              <button
-                onClick={cta}
-                className="absolute bottom-5 left-5 inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-background/90 backdrop-blur border border-border text-[14px] font-medium text-foreground hover:bg-background transition-colors"
-              >
-                <Play className="w-4 h-4 fill-foreground" />
-                {lang === "ru" ? "Смотреть трейлер · 1:24" : "Watch trailer · 1:24"}
-              </button>
             </div>
           </div>
         </div>
@@ -216,7 +209,7 @@ const CourseExperimental = () => {
                   return (
                     <div
                       key={i}
-                      className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 hover:border-primary/40 transition-colors"
+                      className="group relative overflow-hidden rounded-2xl bg-sidebar p-5 transition-colors"
                     >
                       <div className="flex items-start gap-4">
                         <div
@@ -251,36 +244,16 @@ const CourseExperimental = () => {
                     {totalLessons} {lang === "ru" ? "уроков · " : "lessons · "}{totalMin} {lang === "ru" ? "мин" : "min"}
                   </span>
                 </div>
-                
-                {/* Search input */}
-                <div className="relative w-full sm:w-[260px]">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder={lang === "ru" ? "Поиск по урокам..." : "Search lessons..."}
-                    className="w-full pl-9 pr-8 py-2 rounded-xl bg-card border border-border text-body-14 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-                  />
-                  {searchQuery && (
-                    <button
-                      onClick={() => setSearchQuery("")}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground text-caption-12"
-                    >
-                      ✕
-                    </button>
-                  )}
-                </div>
               </div>
 
               {filteredLessons.length > 0 ? (
-                <ul className="rounded-2xl border border-border bg-card overflow-hidden">
+                <ul className="rounded-2xl bg-sidebar overflow-hidden">
                   {filteredLessons.map((l, i) => {
                     const originalIndex = lessons.findIndex(orig => orig.titleRu === l.titleRu);
                     return (
                       <li
                         key={i}
-                        className={`flex items-center gap-4 px-5 py-4 hover:bg-background transition-colors ${i > 0 ? "border-t border-border" : ""}`}
+                        className={`flex items-center gap-4 px-5 py-4 hover:bg-background/40 transition-colors ${i > 0 ? "border-t border-border/20" : ""}`}
                       >
                         <div className="w-9 h-9 rounded-lg bg-background border border-border flex items-center justify-center text-[14px] font-medium text-foreground flex-shrink-0">
                           {String(originalIndex !== -1 ? originalIndex + 1 : i + 1).padStart(2, "0")}
@@ -299,7 +272,7 @@ const CourseExperimental = () => {
                   })}
                 </ul>
               ) : (
-                <div className="rounded-2xl border border-border bg-card p-8 text-center text-muted-foreground text-body-14">
+                <div className="rounded-2xl bg-sidebar p-8 text-center text-muted-foreground text-body-14">
                   {lang === "ru" ? "Уроки не найдены" : "No lessons found"}
                 </div>
               )}
@@ -318,7 +291,7 @@ const CourseExperimental = () => {
               </div>
               <div className="grid md:grid-cols-2 gap-3">
                 {reviews.map((r, i) => (
-                  <div key={i} className="rounded-2xl border border-border bg-card p-5">
+                  <div key={i} className="rounded-2xl bg-sidebar p-5">
                     <div className="flex items-center gap-3 mb-3">
                       <div
                         className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
@@ -350,7 +323,7 @@ const CourseExperimental = () => {
           {/* SIDEBAR */}
           <aside className="space-y-5 lg:sticky lg:top-6 self-start">
             {/* Author */}
-            <div className="rounded-2xl border border-border bg-card p-5">
+            <div className="rounded-2xl bg-sidebar p-5">
               <p className="text-caption-12 mb-4">{lang === "ru" ? "Автор курса" : "Course author"}</p>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#A66CFF] to-[#FF7D60] flex items-center justify-center text-white font-bold text-[20px]">
@@ -383,7 +356,7 @@ const CourseExperimental = () => {
                     key={i}
                     href="#"
                     aria-label={label}
-                    className="w-9 h-9 rounded-lg border border-border bg-background flex items-center justify-center text-foreground hover:bg-muted transition-colors"
+                    className="w-9 h-9 rounded-lg border border-border/20 bg-background flex items-center justify-center text-foreground hover:bg-muted transition-colors"
                   >
                     <Icon className="w-4 h-4" />
                   </a>
@@ -392,7 +365,7 @@ const CourseExperimental = () => {
             </div>
 
             {/* Quick facts */}
-            <div className="rounded-2xl border border-border bg-card overflow-hidden">
+            <div className="rounded-2xl bg-sidebar overflow-hidden">
               <div className="grid grid-cols-2">
                 <Fact label={lang === "ru" ? "Учеников" : "Students"} value={(2480).toLocaleString()} />
                 <Fact label={lang === "ru" ? "Уроков" : "Lessons"} value={totalLessons.toString()} bordered />
@@ -402,11 +375,11 @@ const CourseExperimental = () => {
             </div>
 
             {/* Languages */}
-            <div className="rounded-2xl border border-border bg-card p-5">
+            <div className="rounded-2xl bg-sidebar p-5">
               <p className="text-caption-12 mb-3">{lang === "ru" ? "Языки курса" : "Course languages"}</p>
               <div className="flex flex-wrap gap-2">
                 {["English", "Русский"].map((l) => (
-                  <span key={l} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-background text-body-14 text-foreground">
+                  <span key={l} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/20 bg-background text-body-14 text-foreground">
                     <Globe className="w-3.5 h-3.5 text-muted-foreground" />
                     {l}
                   </span>
@@ -443,7 +416,7 @@ const Fact = ({
   topBorder?: boolean;
 }) => (
   <div
-    className={`p-4 ${bordered ? "border-l border-border" : ""} ${topBorder ? "border-t border-border" : ""}`}
+    className={`p-4 ${bordered ? "border-l border-border/20" : ""} ${topBorder ? "border-t border-border/20" : ""}`}
   >
     <p className="text-caption-12 mb-1.5">{label}</p>
     <p className="text-subh-16 text-foreground">{value}</p>
