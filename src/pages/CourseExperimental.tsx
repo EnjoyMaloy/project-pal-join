@@ -51,9 +51,24 @@ const lessons = [
 ];
 
 const reviews = [
-  { username: "alex_w3", color: "#A66CFF", rating: 5, timeRu: "3 дня назад", timeEn: "3 days ago", textRu: "Совершенно новая подача материала. Чувствуется, что курс делали с любовью.", textEn: "A completely fresh way of teaching. Made with love." },
-  { username: "kira_dev", color: "#FF7D60", rating: 5, timeRu: "1 неделю назад", timeEn: "1 week ago", textRu: "Награды реально мотивируют дойти до конца. Лучший экспериментальный формат.", textEn: "The rewards actually push you to finish. Best experimental format." },
-  { username: "n0va", color: "#4CAF50", rating: 4, timeRu: "2 недели назад", timeEn: "2 weeks ago", textRu: "Очень красиво и удобно. Хочу больше таких курсов.", textEn: "Beautiful and convenient. Want more courses like this." },
+  {
+    username: "Shahriyar2100",
+    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&h=150&q=80",
+    rating: 5,
+    timeRu: "1 неделю назад",
+    timeEn: "1 week ago",
+    textRu: "Да, это именно те шаблоны. Хотите сделать один специально для своего курса? Просто напишите мне: 1. *Название курса* 2. *Оценка*, которую вы бы поставили из 5 3. *1-2 вещи*, которые вам понравились 4. *1 вещь*, которую вы бы улучшили. Я превращу это в аккуратный отзыв, который вы сможете опубликовать за 10 секунд. Или, если вы готовы, смело берите любой из шаблонов выше и адаптируйте его под свой опыт.",
+    textEn: "Yep, those are the templates. Want to make one specific to your course? Just drop me: 1. *Course name* 2. *Rating* you'd give /5 3. *1-2 things you liked* 4. *1 thing you'd improve* I'll turn it into a clean review you can post in 10 seconds. Or if you're all set, feel free to grab any of the templates above and tweak them to fit your experience."
+  },
+  {
+    username: "pawansatoshi",
+    avatar: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=150&h=150&q=80",
+    rating: 5,
+    timeRu: "1 неделю назад",
+    timeEn: "1 week ago",
+    textRu: "Отличное введение в OpenClaw. Курс четко объясняет разницу между моделями LLM и ИИ-агентами, памятью, конфиденциальностью и хостингом. Легко понять новичкам, но при этом дает полезные инсайты для продвинутых пользователей. С нетерпением жду уроков.",
+    textEn: "Great introduction to OpenClaw. The course clearly explains the difference between LLM models and AI agents, memory, privacy, and hosted deployment. Easy to understand for beginners while still providing useful insights for advanced users. Looking forward to the lessons."
+  }
 ];
 
 const rewards = [
