@@ -121,6 +121,7 @@ const CourseExperimental = () => {
                     <LayoutGrid className="w-3.5 h-3.5 text-muted-foreground" />
                     {lang === "ru" ? "Web3 и DeFi" : "Web3 & DeFi"}
                   </span>
+                </div>
 
                 <h1 className="text-[40px] md:text-[52px] leading-[0.95] font-medium tracking-tight text-foreground mb-5">
                   {title}
