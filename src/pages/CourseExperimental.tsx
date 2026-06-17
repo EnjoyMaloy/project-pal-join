@@ -349,28 +349,25 @@ const CourseExperimental = () => {
                 </button>
               </div>
 
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#A66CFF] to-[#FF7D60] flex items-center justify-center text-white font-bold text-[20px]">
-                  O
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-subh-16 text-foreground truncate">OpenCore Club</p>
-                  <div className="flex items-center gap-1.5 mt-1">
-                    <Star className="w-3.5 h-3.5 fill-orange-400 text-orange-400" />
-                    <span className="text-body-14 text-foreground">4.9</span>
-                    <span className="text-caption-12">· 12 {lang === "ru" ? "курсов" : "courses"}</span>
+              {authorTab === "courses" ? (
+                <div className="flex items-center gap-3">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#A66CFF] to-[#FF7D60] flex items-center justify-center text-white font-bold text-[20px]">
+                    O
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-subh-16 text-foreground truncate">OpenCore Club</p>
+                    <div className="flex items-center gap-1.5 mt-1">
+                      <Star className="w-3.5 h-3.5 fill-orange-400 text-orange-400" />
+                      <span className="text-body-14 text-foreground">4.9</span>
+                      <span className="text-caption-12">· 12 {lang === "ru" ? "курсов" : "courses"}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              {authorTab === "courses" ? (
-                <p className="text-body-14 text-muted-foreground leading-relaxed mb-4">
-                  {lang === "ru"
-                    ? "Сообщество практиков Web3 и DeFi. Делимся боевыми кейсами и помогаем разобраться в новых технологиях."
-                    : "A community of Web3 & DeFi practitioners. We share real cases and help you navigate new tech."}
-                </p>
               ) : (
-                <div className="mb-4 space-y-3">
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-subh-18 font-medium text-foreground">OpenCore Club</p>
+                  </div>
                   <p className="text-body-14 text-muted-foreground leading-relaxed">
                     {lang === "ru"
                       ? "OpenCore Club — независимое сообщество исследователей Web3, DeFi и новых форматов образования. С 2021 года выпускаем курсы, в которых сочетаем боевую практику и доступную подачу."
@@ -401,27 +398,25 @@ const CourseExperimental = () => {
                       </span>
                     ))}
                   </div>
+                  <div className="flex items-center gap-2 pt-1">
+                    {[
+                      { Icon: Send, label: "Telegram" },
+                      { Icon: Twitter, label: "X" },
+                      { Icon: Youtube, label: "YouTube" },
+                      { Icon: Instagram, label: "Instagram" },
+                    ].map(({ Icon, label }, i) => (
+                      <a
+                        key={i}
+                        href="#"
+                        aria-label={label}
+                        className="w-9 h-9 rounded-lg border border-border/20 bg-background flex items-center justify-center text-foreground hover:bg-muted transition-colors"
+                      >
+                        <Icon className="w-4 h-4" />
+                      </a>
+                    ))}
+                  </div>
                 </div>
               )}
-
-              {/* Socials */}
-              <div className="flex items-center gap-2">
-                {[
-                  { Icon: Send, label: "Telegram" },
-                  { Icon: Twitter, label: "X" },
-                  { Icon: Youtube, label: "YouTube" },
-                  { Icon: Instagram, label: "Instagram" },
-                ].map(({ Icon, label }, i) => (
-                  <a
-                    key={i}
-                    href="#"
-                    aria-label={label}
-                    className="w-9 h-9 rounded-lg border border-border/20 bg-background flex items-center justify-center text-foreground hover:bg-muted transition-colors"
-                  >
-                    <Icon className="w-4 h-4" />
-                  </a>
-                ))}
-              </div>
             </div>
 
             {/* Quick facts */}
