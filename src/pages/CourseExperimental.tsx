@@ -216,31 +216,31 @@ const CourseExperimental = () => {
           <div className="min-w-0 space-y-10">
             {/* What you get / Rewards */}
             <section>
-              <div className="flex items-end justify-between mb-5">
-                <h2 className="text-h2 text-foreground">
+              <div className="flex items-end justify-between mb-6">
+                <h2 className="text-[28px] md:text-[32px] font-semibold tracking-tight text-foreground">
                   {lang === "ru" ? "Награды за прохождение" : "Rewards for completion"}
                 </h2>
               </div>
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid sm:grid-cols-2 gap-4">
                 {rewards.map((r, i) => {
                   const Icon = r.icon;
                   return (
                     <div
                       key={i}
-                      className="group relative overflow-hidden rounded-2xl bg-sidebar p-5 transition-colors"
+                      className="group relative overflow-hidden rounded-2xl bg-sidebar p-6 transition-colors"
                     >
                       <div className="flex items-start gap-4">
                         <div
-                          className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                          className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                           style={{ background: "hsl(var(--violet-super-light))" }}
                         >
-                          <Icon className="w-5 h-5 text-primary" />
+                          <Icon className="w-6 h-6 text-primary" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-subh-16 text-foreground mb-1.5">
+                          <p className="text-[18px] font-semibold text-foreground mb-1.5 tracking-tight">
                             {lang === "ru" ? r.titleRu : r.titleEn}
                           </p>
-                          <p className="text-body-14 text-muted-foreground leading-relaxed">
+                          <p className="text-[15px] text-muted-foreground leading-relaxed">
                             {lang === "ru" ? r.descRu : r.descEn}
                           </p>
                         </div>
