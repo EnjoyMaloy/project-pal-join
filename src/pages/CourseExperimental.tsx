@@ -67,7 +67,8 @@ const CourseExperimental = () => {
   const { lang } = useLanguage();
   const store = usePurchaseStore();
   const [paymentOpen, setPaymentOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("q") || "";
 
   const titleRu = "Экспериментальная стр курса";
   const titleEn = "Experimental course page";
