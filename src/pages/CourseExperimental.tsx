@@ -416,15 +416,56 @@ const CourseExperimental = () => {
               )}
             </div>
 
-            {/* Quick facts */}
-            <div className="rounded-2xl bg-sidebar overflow-hidden">
-              <div className="grid grid-cols-2">
-                <Fact label={lang === "ru" ? "Учеников" : "Students"} value={(2480).toLocaleString()} />
-                <Fact label={lang === "ru" ? "Уроков" : "Lessons"} value={totalLessons.toString()} bordered />
-                <Fact label={lang === "ru" ? "Длительность" : "Duration"} value={lang === "ru" ? "≈ 2,5 ч" : "≈ 2.5h"} topBorder />
-                <Fact label={lang === "ru" ? "Уровень" : "Level"} value={lang === "ru" ? "Средний" : "Mid"} bordered topBorder />
+            {/* Completion funnel */}
+            <div className="rounded-2xl bg-sidebar p-5">
+              <div className="flex items-start justify-between mb-5">
+                <div>
+                  <p className="text-caption-12 mb-1">{lang === "ru" ? "Воронка прохождения" : "Completion funnel"}</p>
+                  <p className="text-body-14 text-foreground font-medium">
+                    {lang === "ru" ? "Как держим внимание" : "How we hold attention"}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-[28px] leading-none font-medium text-violet-dark">39%</p>
+                  <p className="text-caption-12 mt-1">{lang === "ru" ? "Удержание" : "Retention"}</p>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {[
+                  { labelRu: "Начали курс", labelEn: "Started", value: 2480, pct: 100, bg: "bg-violet-dark", text: "text-white" },
+                  { labelRu: "Прошли половину", labelEn: "Half-way", value: 1612, pct: 65, bg: "bg-violet-medium", text: "text-white" },
+                  { labelRu: "Завершили", labelEn: "Completed", value: 968, pct: 39, bg: "bg-violet-light", text: "text-violet-super-dark" },
+                ].map((s) => (
+                  <div key={s.labelEn}>
+                    <div className="flex items-baseline justify-between mb-1.5">
+                      <span className="text-body-12 text-foreground">{lang === "ru" ? s.labelRu : s.labelEn}</span>
+                      <span className="text-body-12 text-muted-foreground tabular-nums">
+                        <span className="text-foreground font-medium">{s.value.toLocaleString()}</span> · {s.pct}%
+                      </span>
+                    </div>
+                    <div className="relative h-7 rounded-lg bg-background overflow-hidden">
+                      <div
+                        className={`absolute inset-y-0 left-0 ${s.bg} rounded-lg transition-all duration-700 ease-out`}
+                        style={{ width: `${s.pct}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-border/20 grid grid-cols-2 gap-3">
+                <div>
+                  <p className="text-caption-12 mb-0.5">{lang === "ru" ? "Уроков" : "Lessons"}</p>
+                  <p className="text-body-14 font-medium text-foreground">{totalLessons}</p>
+                </div>
+                <div>
+                  <p className="text-caption-12 mb-0.5">{lang === "ru" ? "Длительность" : "Duration"}</p>
+                  <p className="text-body-14 font-medium text-foreground">{lang === "ru" ? "≈ 2,5 ч" : "≈ 2.5h"}</p>
+                </div>
               </div>
             </div>
+
 
             {/* Languages */}
             <div className="rounded-2xl bg-sidebar p-5">
