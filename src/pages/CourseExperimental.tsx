@@ -351,7 +351,7 @@ const CourseExperimental = () => {
 
               {authorTab === "courses" ? (
                 <div className="flex items-center gap-4 py-1">
-                  <div className="w-16 h-14 rounded-full bg-gradient-to-br from-[#A66CFF] to-[#FF7D60] flex items-center justify-center text-white font-bold text-[22px]">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#A66CFF] to-[#FF7D60] flex items-center justify-center text-white font-bold text-[22px] flex-shrink-0">
                     O
                   </div>
                   <div className="min-w-0 flex-1">
@@ -409,7 +409,7 @@ const CourseExperimental = () => {
                         key={i}
                         href="#"
                         aria-label={label}
-                        className="w-10 h-10 rounded-lg border border-border/20 bg-background flex items-center justify-center text-muted-foreground hover:text-[#924CFE] hover:border-[#924CFE]/40 hover:bg-[#924CFE]/5 transition-all"
+                        className="w-10 h-10 rounded-lg border border-border/20 bg-background flex items-center justify-center text-muted-foreground hover:bg-[#924CFE] hover:text-white hover:border-transparent transition-all"
                       >
                         <Icon className="w-4.5 h-4.5" />
                       </a>
