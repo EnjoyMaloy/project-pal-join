@@ -433,9 +433,9 @@ const CourseExperimental = () => {
 
               <div className="space-y-3">
                 {[
-                  { labelRu: "Начали курс", labelEn: "Started", value: 2480, pct: 100, bg: "bg-violet-dark", text: "text-white" },
-                  { labelRu: "Прошли половину", labelEn: "Half-way", value: 1612, pct: 65, bg: "bg-violet-medium", text: "text-white" },
-                  { labelRu: "Завершили", labelEn: "Completed", value: 968, pct: 39, bg: "bg-violet-light", text: "text-violet-super-dark" },
+                  { labelRu: "Начали курс", labelEn: "Started", value: 2480, pct: 100, bg: "bg-violet-super-dark", text: "text-white" },
+                  { labelRu: "Прошли половину", labelEn: "Half-way", value: 1612, pct: 65, bg: "bg-violet-dark", text: "text-white" },
+                  { labelRu: "Завершили", labelEn: "Completed", value: 968, pct: 39, bg: "bg-violet-mid", text: "text-violet-super-dark" },
                 ].map((s) => (
                   <div key={s.labelEn}>
                     <div className="flex items-baseline justify-between mb-1.5">
