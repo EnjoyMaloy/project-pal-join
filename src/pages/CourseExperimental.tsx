@@ -299,18 +299,18 @@ const CourseExperimental = () => {
             {/* Reviews */}
             <section className="space-y-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-[22px] font-semibold text-foreground tracking-tight">
+                <h2 className="text-[28px] md:text-[32px] font-semibold text-foreground tracking-tight">
                   {lang === "ru" ? "Отзывы (211)" : "Reviews (211)"}
                 </h2>
-                <button className="text-[14px] text-muted-foreground hover:text-foreground font-normal transition-colors inline-flex items-center gap-1">
+                <button className="text-[15px] text-muted-foreground hover:text-foreground font-normal transition-colors inline-flex items-center gap-1">
                   {lang === "ru" ? "Показать все" : "View All"}
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
               
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-4">
                 {reviews.map((r, i) => (
-                  <div key={i} className="rounded-3xl bg-background border border-border/30 p-8 shadow-sm hover:shadow-md transition-shadow">
+                  <div key={i} className="rounded-3xl bg-sidebar p-7">
                     <div className="flex gap-4 items-start mb-6">
                       <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 border border-border/10">
                         <img src={r.avatar} alt={r.username} className="w-full h-full object-cover" />
