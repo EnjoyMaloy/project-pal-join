@@ -121,10 +121,6 @@ const CourseExperimental = () => {
                     <LayoutGrid className="w-3.5 h-3.5 text-muted-foreground" />
                     {lang === "ru" ? "Web3 и DeFi" : "Web3 & DeFi"}
                   </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-body-12 font-medium text-foreground border border-border bg-background">
-                    <Users className="w-3.5 h-3.5 text-muted-foreground" />
-                    OpenCore Club
-                  </span>
                 </div>
 
                 <h1 className="text-[40px] md:text-[52px] leading-[0.95] font-medium tracking-tight text-foreground mb-5">
