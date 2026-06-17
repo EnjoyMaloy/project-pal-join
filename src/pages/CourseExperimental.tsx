@@ -204,7 +204,6 @@ const CourseExperimental = () => {
                 <h2 className="text-h2 text-foreground">
                   {lang === "ru" ? "Награды за прохождение" : "Rewards for completion"}
                 </h2>
-                <span className="text-caption-12">{lang === "ru" ? "4 награды" : "4 rewards"}</span>
               </div>
               <div className="grid sm:grid-cols-2 gap-3">
                 {rewards.map((r, i) => {
