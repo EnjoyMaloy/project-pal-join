@@ -59,6 +59,7 @@ const CourseExperimental = () => {
   const { lang } = useLanguage();
   const store = usePurchaseStore();
   const [paymentOpen, setPaymentOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const titleRu = "Экспериментальная стр курса";
   const titleEn = "Experimental course page";
@@ -74,8 +75,16 @@ const CourseExperimental = () => {
 
   const cta = () => (isOwned ? navigate(`/course/${COURSE_ID}/lessons`) : setPaymentOpen(true));
 
-  const totalLessons = lessons.length;
-  const totalMin = lessons.reduce((s, l) => s + l.min, 0);
+  const filteredLessons = lessons.filter(l => {
+    const q = searchQuery.toLowerCase();
+    return (
+      l.titleRu.toLowerCase().includes(q) ||
+      l.titleEn.toLowerCase().includes(q)
+    );
+  });
+
+  const totalLessons = filteredLessons.length;
+  const totalMin = filteredLessons.reduce((s, l) => s + l.min, 0);
 
   return (
     <div className="min-h-screen bg-background">
