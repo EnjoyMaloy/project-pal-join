@@ -155,14 +155,19 @@ const CourseExperimental = () => {
 
               {/* CTA */}
               <div className="flex items-end gap-6 flex-wrap">
-                <div>
-                  <p className="text-caption-12 mb-1">{lang === "ru" ? "Цена" : "Price"}</p>
-                  <p className="text-[36px] leading-[32px] font-medium text-foreground">
-                    <span className="text-[16px] font-normal text-muted-foreground">{lang === "ru" ? "от " : "from "}</span>
-                    $6
-                    <span className="text-[16px] font-normal text-muted-foreground">{lang === "ru" ? "/мес" : "/mo"}</span>
-                  </p>
+                <div className="flex flex-col">
+                  <span className="text-caption-12 mb-1.5 tracking-wide uppercase">
+                    {lang === "ru" ? "от" : "from"}
+                  </span>
+                  <div className="flex items-baseline gap-1 tabular-nums">
+                    <span className="text-[20px] font-normal text-muted-foreground leading-none">$</span>
+                    <span className="text-[44px] font-light tracking-[-0.02em] leading-none text-foreground">6</span>
+                    <span className="text-[16px] font-normal text-muted-foreground leading-none ml-0.5">
+                      {lang === "ru" ? "/мес" : "/mo"}
+                    </span>
+                  </div>
                 </div>
+
                 <Button
                   onClick={cta}
                   className="h-12 px-7 rounded-xl text-[16px] font-medium gap-2 [&_svg]:size-5"
