@@ -79,14 +79,6 @@ const CourseExperimental = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="w-full px-4 md:px-8 py-6 md:py-8">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-body-14 mb-6">
-          <button onClick={() => navigate("/catalog")} className="text-muted-foreground hover:text-foreground transition-colors">
-            {lang === "ru" ? "Библиотека" : "Library"}
-          </button>
-          <ChevronRight className="w-4 h-4 text-muted-foreground" />
-          <span className="text-primary font-medium truncate">{title}</span>
-        </nav>
 
         {/* HERO */}
         <div className="relative overflow-hidden rounded-[28px] border border-border bg-card mb-8">
