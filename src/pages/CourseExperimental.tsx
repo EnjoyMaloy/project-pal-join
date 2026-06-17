@@ -7,6 +7,7 @@ import {
   Users,
   Globe,
   Calendar,
+  ChevronLeft,
   ChevronRight,
   Play,
   Trophy,
@@ -51,9 +52,24 @@ const lessons = [
 ];
 
 const reviews = [
-  { username: "alex_w3", color: "#A66CFF", rating: 5, timeRu: "3 дня назад", timeEn: "3 days ago", textRu: "Совершенно новая подача материала. Чувствуется, что курс делали с любовью.", textEn: "A completely fresh way of teaching. Made with love." },
-  { username: "kira_dev", color: "#FF7D60", rating: 5, timeRu: "1 неделю назад", timeEn: "1 week ago", textRu: "Награды реально мотивируют дойти до конца. Лучший экспериментальный формат.", textEn: "The rewards actually push you to finish. Best experimental format." },
-  { username: "n0va", color: "#4CAF50", rating: 4, timeRu: "2 недели назад", timeEn: "2 weeks ago", textRu: "Очень красиво и удобно. Хочу больше таких курсов.", textEn: "Beautiful and convenient. Want more courses like this." },
+  {
+    username: "Shahriyar2100",
+    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&h=150&q=80",
+    rating: 5,
+    timeRu: "1 неделю назад",
+    timeEn: "1 week ago",
+    textRu: "Да, это именно те шаблоны. Хотите сделать один специально для своего курса? Просто напишите мне: 1. *Название курса* 2. *Оценка*, которую вы бы поставили из 5 3. *1-2 вещи*, которые вам понравились 4. *1 вещь*, которую вы бы улучшили. Я превращу это в аккуратный отзыв, который вы сможете опубликовать за 10 секунд. Или, если вы готовы, смело берите любой из шаблонов выше и адаптируйте его под свой опыт.",
+    textEn: "Yep, those are the templates. Want to make one specific to your course? Just drop me: 1. *Course name* 2. *Rating* you'd give /5 3. *1-2 things you liked* 4. *1 thing you'd improve* I'll turn it into a clean review you can post in 10 seconds. Or if you're all set, feel free to grab any of the templates above and tweak them to fit your experience."
+  },
+  {
+    username: "pawansatoshi",
+    avatar: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=150&h=150&q=80",
+    rating: 5,
+    timeRu: "1 неделю назад",
+    timeEn: "1 week ago",
+    textRu: "Отличное введение в OpenClaw. Курс четко объясняет разницу между моделями LLM и ИИ-агентами, памятью, конфиденциальностью и хостингом. Легко понять новичкам, но при этом дает полезные инсайты для продвинутых пользователей. С нетерпением жду уроков.",
+    textEn: "Great introduction to OpenClaw. The course clearly explains the difference between LLM models and AI agents, memory, privacy, and hosted deployment. Easy to understand for beginners while still providing useful insights for advanced users. Looking forward to the lessons."
+  }
 ];
 
 const rewards = [
@@ -281,43 +297,51 @@ const CourseExperimental = () => {
             </section>
 
             {/* Reviews */}
-            <section>
-              <div className="flex items-end justify-between mb-5">
-                <h2 className="text-h2 text-foreground">
-                  {lang === "ru" ? "Отзывы (128)" : "Reviews (128)"}
+            <section className="space-y-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-[22px] font-semibold text-foreground tracking-tight">
+                  {lang === "ru" ? "Отзывы (211)" : "Reviews (211)"}
                 </h2>
-                <button className="text-body-14 text-muted-foreground hover:text-foreground inline-flex items-center gap-1 transition-colors">
-                  {lang === "ru" ? "Показать все" : "Show all"}
+                <button className="text-[14px] text-muted-foreground hover:text-foreground font-normal transition-colors inline-flex items-center gap-1">
+                  {lang === "ru" ? "Показать все" : "View All"}
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
-              <div className="grid md:grid-cols-2 gap-3">
+              
+              <div className="grid md:grid-cols-2 gap-6">
                 {reviews.map((r, i) => (
-                  <div key={i} className="rounded-2xl bg-sidebar p-5">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div
-                        className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
-                        style={{ backgroundColor: r.color }}
-                      >
-                        {r.username[0].toUpperCase()}
+                  <div key={i} className="rounded-3xl bg-background border border-border/30 p-8 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex gap-4 items-start mb-6">
+                      <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 border border-border/10">
+                        <img src={r.avatar} alt={r.username} className="w-full h-full object-cover" />
                       </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-subh-14 text-foreground truncate">{r.username}</p>
-                        <div className="flex items-center gap-2 mt-1.5">
-                          <div className="flex gap-0.5">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[19px] font-semibold text-foreground tracking-tight leading-none mb-1.5">{r.username}</p>
+                        <div className="flex items-center justify-between">
+                          <div className="flex gap-1">
                             {Array.from({ length: r.rating }).map((_, si) => (
-                              <Star key={si} className="w-3 h-3 fill-orange-400 text-orange-400" />
+                              <Star key={si} className="w-[15px] h-[15px] fill-[#FF6B57] text-[#FF6B57]" />
                             ))}
                           </div>
-                          <span className="text-caption-12">{lang === "ru" ? r.timeRu : r.timeEn}</span>
+                          <span className="text-[13px] text-muted-foreground/80 font-normal">{lang === "ru" ? r.timeRu : r.timeEn}</span>
                         </div>
                       </div>
                     </div>
-                    <p className="text-body-14 text-foreground leading-relaxed">
+                    <p className="text-[15px] leading-[1.65] font-normal text-foreground/90 leading-relaxed">
                       {lang === "ru" ? r.textRu : r.textEn}
                     </p>
                   </div>
                 ))}
+              </div>
+
+              {/* Slider Controls to match image */}
+              <div className="flex justify-end gap-2.5 pt-2">
+                <button className="w-10 h-10 rounded-full border border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/10 transition-all">
+                  <ChevronLeft className="w-5 h-5 stroke-[1.5]" />
+                </button>
+                <button className="w-10 h-10 rounded-full border border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/10 transition-all">
+                  <ChevronRight className="w-5 h-5 stroke-[1.5]" />
+                </button>
               </div>
             </section>
           </div>
