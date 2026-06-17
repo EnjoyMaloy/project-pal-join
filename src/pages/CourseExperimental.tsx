@@ -188,13 +188,6 @@ const CourseExperimental = () => {
             <div className="relative min-h-[280px] md:min-h-[460px]">
               <img src={IMG} alt={title} className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              <button
-                onClick={cta}
-                className="absolute bottom-5 left-5 inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-background/90 backdrop-blur border border-border text-[14px] font-medium text-foreground hover:bg-background transition-colors"
-              >
-                <Play className="w-4 h-4 fill-foreground" />
-                {lang === "ru" ? "Смотреть трейлер · 1:24" : "Watch trailer · 1:24"}
-              </button>
             </div>
           </div>
         </div>
