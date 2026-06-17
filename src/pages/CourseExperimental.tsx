@@ -7,6 +7,7 @@ import {
   Users,
   Globe,
   Calendar,
+  ChevronLeft,
   ChevronRight,
   Play,
   Trophy,
