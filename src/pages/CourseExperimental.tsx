@@ -291,7 +291,7 @@ const CourseExperimental = () => {
               </div>
               <div className="grid md:grid-cols-2 gap-3">
                 {reviews.map((r, i) => (
-                  <div key={i} className="rounded-2xl border border-border bg-card p-5">
+                  <div key={i} className="rounded-2xl bg-sidebar p-5">
                     <div className="flex items-center gap-3 mb-3">
                       <div
                         className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
@@ -323,7 +323,7 @@ const CourseExperimental = () => {
           {/* SIDEBAR */}
           <aside className="space-y-5 lg:sticky lg:top-6 self-start">
             {/* Author */}
-            <div className="rounded-2xl border border-border bg-card p-5">
+            <div className="rounded-2xl bg-sidebar p-5">
               <p className="text-caption-12 mb-4">{lang === "ru" ? "Автор курса" : "Course author"}</p>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#A66CFF] to-[#FF7D60] flex items-center justify-center text-white font-bold text-[20px]">
@@ -356,7 +356,7 @@ const CourseExperimental = () => {
                     key={i}
                     href="#"
                     aria-label={label}
-                    className="w-9 h-9 rounded-lg border border-border bg-background flex items-center justify-center text-foreground hover:bg-muted transition-colors"
+                    className="w-9 h-9 rounded-lg border border-border/20 bg-background flex items-center justify-center text-foreground hover:bg-muted transition-colors"
                   >
                     <Icon className="w-4 h-4" />
                   </a>
@@ -365,7 +365,7 @@ const CourseExperimental = () => {
             </div>
 
             {/* Quick facts */}
-            <div className="rounded-2xl border border-border bg-card overflow-hidden">
+            <div className="rounded-2xl bg-sidebar overflow-hidden">
               <div className="grid grid-cols-2">
                 <Fact label={lang === "ru" ? "Учеников" : "Students"} value={(2480).toLocaleString()} />
                 <Fact label={lang === "ru" ? "Уроков" : "Lessons"} value={totalLessons.toString()} bordered />
@@ -375,11 +375,11 @@ const CourseExperimental = () => {
             </div>
 
             {/* Languages */}
-            <div className="rounded-2xl border border-border bg-card p-5">
+            <div className="rounded-2xl bg-sidebar p-5">
               <p className="text-caption-12 mb-3">{lang === "ru" ? "Языки курса" : "Course languages"}</p>
               <div className="flex flex-wrap gap-2">
                 {["English", "Русский"].map((l) => (
-                  <span key={l} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-background text-body-14 text-foreground">
+                  <span key={l} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/20 bg-background text-body-14 text-foreground">
                     <Globe className="w-3.5 h-3.5 text-muted-foreground" />
                     {l}
                   </span>
@@ -416,7 +416,7 @@ const Fact = ({
   topBorder?: boolean;
 }) => (
   <div
-    className={`p-4 ${bordered ? "border-l border-border" : ""} ${topBorder ? "border-t border-border" : ""}`}
+    className={`p-4 ${bordered ? "border-l border-border/20" : ""} ${topBorder ? "border-t border-border/20" : ""}`}
   >
     <p className="text-caption-12 mb-1.5">{label}</p>
     <p className="text-subh-16 text-foreground">{value}</p>
