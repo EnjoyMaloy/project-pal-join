@@ -24,10 +24,19 @@ import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import PaymentModal from "@/components/PaymentModal";
+import courseHeroAsset from "@/assets/course-experimental-hero.png.asset.json";
 
 const COURSE_ID = "9";
 
-const IMG = "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&h=800&fit=crop";
+// Основной цвет курса — используется для генерации градиента карточки
+const COURSE_COLOR = {
+  base: "#FF3D4D",      // основной (коралл/красный)
+  light: "#FFD8DC",     // светлый оттенок для фона
+  superLight: "#FFEEF0", // самый светлый
+  dark: "#7A0A14",      // тёмный для текста/акцентов
+};
+
+const IMG = courseHeroAsset.url;
 
 const lessons = [
   { titleRu: "Что такое эксперименты в Web3", titleEn: "What are Web3 experiments", min: 8 },
@@ -91,12 +100,11 @@ const CourseExperimental = () => {
       <div className="w-full px-4 md:px-8 py-6 md:py-8">
 
         {/* HERO */}
-        <div className="relative overflow-hidden rounded-[28px] border border-border bg-card mb-8">
+        <div className="relative overflow-hidden rounded-[28px] border border-border mb-8" style={{ backgroundColor: COURSE_COLOR.superLight }}>
           <div
-            className="absolute inset-0 opacity-90"
+            className="absolute inset-0"
             style={{
-              backgroundImage:
-                "radial-gradient(120% 90% at 100% 0%, hsl(var(--violet-super-light)) 0%, transparent 60%), radial-gradient(120% 90% at 0% 100%, hsl(var(--cat-web3-bg)) 0%, transparent 55%)",
+              backgroundImage: `radial-gradient(120% 90% at 100% 0%, ${COURSE_COLOR.light} 0%, transparent 60%), radial-gradient(120% 90% at 0% 100%, ${COURSE_COLOR.base}33 0%, transparent 55%)`,
             }}
           />
           <div className="relative grid md:grid-cols-[1.1fr_1fr] gap-0">
