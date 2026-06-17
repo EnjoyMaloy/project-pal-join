@@ -67,6 +67,7 @@ const CourseExperimental = () => {
   const { lang } = useLanguage();
   const store = usePurchaseStore();
   const [paymentOpen, setPaymentOpen] = useState(false);
+  const [authorTab, setAuthorTab] = useState<"courses" | "about">("courses");
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
 
