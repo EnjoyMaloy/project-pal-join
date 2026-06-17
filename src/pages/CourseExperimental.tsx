@@ -216,31 +216,31 @@ const CourseExperimental = () => {
           <div className="min-w-0 space-y-10">
             {/* What you get / Rewards */}
             <section>
-              <div className="flex items-end justify-between mb-5">
-                <h2 className="text-h2 text-foreground">
+              <div className="flex items-end justify-between mb-6">
+                <h2 className="text-[28px] md:text-[32px] font-semibold tracking-tight text-foreground">
                   {lang === "ru" ? "Награды за прохождение" : "Rewards for completion"}
                 </h2>
               </div>
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid sm:grid-cols-2 gap-4">
                 {rewards.map((r, i) => {
                   const Icon = r.icon;
                   return (
                     <div
                       key={i}
-                      className="group relative overflow-hidden rounded-2xl bg-sidebar p-5 transition-colors"
+                      className="group relative overflow-hidden rounded-2xl bg-sidebar p-6 transition-colors"
                     >
                       <div className="flex items-start gap-4">
                         <div
-                          className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                          className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                           style={{ background: "hsl(var(--violet-super-light))" }}
                         >
-                          <Icon className="w-5 h-5 text-primary" />
+                          <Icon className="w-6 h-6 text-primary" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-subh-16 text-foreground mb-1.5">
+                          <p className="text-[18px] font-semibold text-foreground mb-1.5 tracking-tight">
                             {lang === "ru" ? r.titleRu : r.titleEn}
                           </p>
-                          <p className="text-body-14 text-muted-foreground leading-relaxed">
+                          <p className="text-[15px] text-muted-foreground leading-relaxed">
                             {lang === "ru" ? r.descRu : r.descEn}
                           </p>
                         </div>
@@ -253,12 +253,12 @@ const CourseExperimental = () => {
 
              {/* Lessons */}
             <section>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
                 <div className="flex items-end justify-between sm:justify-start sm:gap-4 flex-1">
-                  <h2 className="text-h2 text-foreground">
+                  <h2 className="text-[28px] md:text-[32px] font-semibold tracking-tight text-foreground">
                     {lang === "ru" ? "Программа курса" : "Curriculum"}
                   </h2>
-                  <span className="text-caption-12">
+                  <span className="text-[14px] text-muted-foreground">
                     {totalLessons} {lang === "ru" ? "уроков · " : "lessons · "}{totalMin} {lang === "ru" ? "мин" : "min"}
                   </span>
                 </div>
@@ -271,18 +271,18 @@ const CourseExperimental = () => {
                     return (
                       <li
                         key={i}
-                        className={`flex items-center gap-4 px-5 py-4 hover:bg-background/40 transition-colors ${i > 0 ? "border-t border-border/20" : ""}`}
+                        className={`flex items-center gap-4 px-6 py-5 hover:bg-background/40 transition-colors ${i > 0 ? "border-t border-border/20" : ""}`}
                       >
-                        <div className="w-9 h-9 rounded-lg bg-background border border-border flex items-center justify-center text-[14px] font-medium text-foreground flex-shrink-0">
+                        <div className="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center text-[15px] font-medium text-foreground flex-shrink-0">
                           {String(originalIndex !== -1 ? originalIndex + 1 : i + 1).padStart(2, "0")}
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-subh-16-medium text-foreground truncate">
+                          <p className="text-[17px] font-medium text-foreground truncate">
                             {lang === "ru" ? l.titleRu : l.titleEn}
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 text-caption-12 flex-shrink-0">
-                          <Play className="w-3.5 h-3.5" />
+                        <div className="flex items-center gap-2 text-[14px] text-muted-foreground flex-shrink-0">
+                          <Play className="w-4 h-4" />
                           {l.min} {lang === "ru" ? "мин" : "min"}
                         </div>
                       </li>
@@ -290,7 +290,7 @@ const CourseExperimental = () => {
                   })}
                 </ul>
               ) : (
-                <div className="rounded-2xl bg-sidebar p-8 text-center text-muted-foreground text-body-14">
+                <div className="rounded-2xl bg-sidebar p-8 text-center text-muted-foreground text-[15px]">
                   {lang === "ru" ? "Уроки не найдены" : "No lessons found"}
                 </div>
               )}
@@ -299,18 +299,18 @@ const CourseExperimental = () => {
             {/* Reviews */}
             <section className="space-y-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-[22px] font-semibold text-foreground tracking-tight">
+                <h2 className="text-[28px] md:text-[32px] font-semibold text-foreground tracking-tight">
                   {lang === "ru" ? "Отзывы (211)" : "Reviews (211)"}
                 </h2>
-                <button className="text-[14px] text-muted-foreground hover:text-foreground font-normal transition-colors inline-flex items-center gap-1">
+                <button className="text-[15px] text-muted-foreground hover:text-foreground font-normal transition-colors inline-flex items-center gap-1">
                   {lang === "ru" ? "Показать все" : "View All"}
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
               
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-4">
                 {reviews.map((r, i) => (
-                  <div key={i} className="rounded-3xl bg-background border border-border/30 p-8 shadow-sm hover:shadow-md transition-shadow">
+                  <div key={i} className="rounded-3xl bg-sidebar p-7">
                     <div className="flex gap-4 items-start mb-6">
                       <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 border border-border/10">
                         <img src={r.avatar} alt={r.username} className="w-full h-full object-cover" />
