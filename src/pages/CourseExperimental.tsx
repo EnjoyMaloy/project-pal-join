@@ -324,12 +324,12 @@ const CourseExperimental = () => {
           {/* SIDEBAR */}
           <aside className="space-y-5 lg:sticky lg:top-6 self-start">
             {/* Author */}
-            <div className="rounded-2xl bg-sidebar p-5">
+            <div className="rounded-2xl bg-sidebar p-6 space-y-5">
               {/* Tabs */}
-              <div className="flex items-center gap-1 p-1 rounded-xl bg-background mb-4">
+              <div className="flex items-center gap-1 p-1 rounded-xl bg-background mb-1">
                 <button
                   onClick={() => setAuthorTab("courses")}
-                  className={`flex-1 h-8 rounded-lg text-body-14 font-medium transition-colors ${
+                  className={`flex-1 h-10 rounded-lg text-[15px] font-medium transition-colors ${
                     authorTab === "courses"
                       ? "bg-sidebar text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -339,7 +339,7 @@ const CourseExperimental = () => {
                 </button>
                 <button
                   onClick={() => setAuthorTab("about")}
-                  className={`flex-1 h-8 rounded-lg text-body-14 font-medium transition-colors ${
+                  className={`flex-1 h-10 rounded-lg text-[15px] font-medium transition-colors ${
                     authorTab === "about"
                       ? "bg-sidebar text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -350,55 +350,55 @@ const CourseExperimental = () => {
               </div>
 
               {authorTab === "courses" ? (
-                <div className="flex items-center gap-3">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#A66CFF] to-[#FF7D60] flex items-center justify-center text-white font-bold text-[20px]">
+                <div className="flex items-center gap-4 py-1">
+                  <div className="w-16 h-14 rounded-full bg-gradient-to-br from-[#A66CFF] to-[#FF7D60] flex items-center justify-center text-white font-bold text-[22px]">
                     O
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-subh-16 text-foreground truncate">OpenCore Club</p>
-                    <div className="flex items-center gap-1.5 mt-1">
-                      <Star className="w-3.5 h-3.5 fill-orange-400 text-orange-400" />
-                      <span className="text-body-14 text-foreground">4.9</span>
-                      <span className="text-caption-12">· 12 {lang === "ru" ? "курсов" : "courses"}</span>
+                    <p className="text-[19px] font-medium text-foreground truncate">OpenCore Club</p>
+                    <div className="flex items-center gap-1.5 mt-1.5">
+                      <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
+                      <span className="text-[15px] font-medium text-foreground">4.9</span>
+                      <span className="text-[14px] text-muted-foreground">· 12 {lang === "ru" ? "курсов" : "courses"}</span>
                     </div>
                   </div>
                 </div>
               ) : (
                 <div className="space-y-4">
                   <div>
-                    <p className="text-subh-18 font-medium text-foreground">OpenCore Club</p>
+                    <p className="text-[21px] font-semibold text-foreground">OpenCore Club</p>
                   </div>
-                  <p className="text-body-14 text-muted-foreground leading-relaxed">
+                  <p className="text-[15px] text-muted-foreground leading-relaxed">
                     {lang === "ru"
                       ? "OpenCore Club — независимое сообщество исследователей Web3, DeFi и новых форматов образования. С 2021 года выпускаем курсы, в которых сочетаем боевую практику и доступную подачу."
                       : "OpenCore Club is an independent community of researchers in Web3, DeFi and new educational formats. Since 2021 we publish courses combining hands-on practice with accessible delivery."}
                   </p>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-2">
                     {(lang === "ru"
                       ? [
-                          "5 лет в Web3",
-                          "12 курсов",
-                          "40k+ учеников",
-                          "Топ-автор 2025",
-                          "On-chain эксперт",
+                          { text: "5 лет в Web3", style: "bg-[#E8DCFB] text-[#924CFE] dark:bg-[#460466]/40 dark:text-[#BF96FF]" },
+                          { text: "12 курсов", style: "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-300" },
+                          { text: "40k+ учеников", style: "bg-orange-50 text-orange-700 dark:bg-orange-950/30 dark:text-orange-300" },
+                          { text: "Топ-автор 2025", style: "bg-amber-50 text-amber-700 dark:bg-amber-950/30 dark:text-amber-300" },
+                          { text: "On-chain эксперт", style: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-300" },
                         ]
                       : [
-                          "5 years in Web3",
-                          "12 courses",
-                          "40k+ students",
-                          "Top author 2025",
-                          "On-chain expert",
+                          { text: "5 years in Web3", style: "bg-[#E8DCFB] text-[#924CFE] dark:bg-[#460466]/40 dark:text-[#BF96FF]" },
+                          { text: "12 courses", style: "bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-300" },
+                          { text: "40k+ students", style: "bg-orange-50 text-orange-700 dark:bg-orange-950/30 dark:text-orange-300" },
+                          { text: "Top author 2025", style: "bg-amber-50 text-amber-700 dark:bg-amber-950/30 dark:text-amber-300" },
+                          { text: "On-chain expert", style: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-300" },
                         ]
                     ).map((a) => (
                       <span
-                        key={a}
-                        className="inline-flex items-center px-2.5 py-1 rounded-full bg-background text-caption-12 text-foreground"
+                        key={a.text}
+                        className={`inline-flex items-center px-3 py-1.5 rounded-full text-[13px] font-medium ${a.style}`}
                       >
-                        {a}
+                        {a.text}
                       </span>
                     ))}
                   </div>
-                  <div className="flex items-center gap-2 pt-1">
+                  <div className="flex items-center gap-2.5 pt-1">
                     {[
                       { Icon: Send, label: "Telegram" },
                       { Icon: Twitter, label: "X" },
@@ -409,9 +409,9 @@ const CourseExperimental = () => {
                         key={i}
                         href="#"
                         aria-label={label}
-                        className="w-9 h-9 rounded-lg border border-border/20 bg-background flex items-center justify-center text-foreground hover:bg-muted transition-colors"
+                        className="w-10 h-10 rounded-lg border border-border/20 bg-background flex items-center justify-center text-muted-foreground hover:text-[#924CFE] hover:border-[#924CFE]/40 hover:bg-[#924CFE]/5 transition-all"
                       >
-                        <Icon className="w-4 h-4" />
+                        <Icon className="w-4.5 h-4.5" />
                       </a>
                     ))}
                   </div>
