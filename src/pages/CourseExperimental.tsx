@@ -420,8 +420,7 @@ const CourseExperimental = () => {
             <div className="rounded-2xl bg-sidebar p-5">
               <div className="flex items-start justify-between mb-5">
                 <div>
-                  <p className="text-caption-12 mb-1">{lang === "ru" ? "Воронка прохождения" : "Completion funnel"}</p>
-                  <p className="text-body-14 text-foreground font-medium">
+                  <p className="text-subh-18 text-foreground">
                     {lang === "ru" ? "Как держим внимание" : "How we hold attention"}
                   </p>
                 </div>
