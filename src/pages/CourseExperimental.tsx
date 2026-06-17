@@ -134,24 +134,24 @@ const CourseExperimental = () => {
                 <h1 className="text-[40px] md:text-[52px] leading-[0.95] font-medium tracking-tight text-foreground mb-5">
                   {title}
                 </h1>
-                <p className="text-[16px] leading-relaxed text-muted-foreground max-w-[520px]">
+                <p className="text-[18px] md:text-[20px] leading-relaxed text-muted-foreground max-w-[580px] mb-6">
                   {description}
                 </p>
               </div>
 
               {/* Stat row */}
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-body-14 text-muted-foreground">
-                <div className="flex items-center gap-1.5">
-                  <Star className="w-4 h-4 fill-orange-400 text-orange-400" />
+              <div className="flex flex-wrap items-center gap-x-8 gap-y-4 text-[16px] text-muted-foreground mb-4">
+                <div className="flex items-center gap-2">
+                  <Star className="w-5 h-5 fill-orange-400 text-orange-400" />
                   <span className="font-semibold text-foreground">4.95</span>
                   <span>(128 {lang === "ru" ? "отзывов" : "reviews"})</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <Users className="w-4 h-4" />
+                <div className="flex items-center gap-2">
+                  <Users className="w-5 h-5" />
                   <span>{(2480).toLocaleString()} {lang === "ru" ? "учеников" : "students"}</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4" />
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-5 h-5" />
                   <span>{lang === "ru" ? "Обновлён 12.06.26" : "Updated 06/12/26"}</span>
                 </div>
               </div>
