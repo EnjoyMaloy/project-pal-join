@@ -253,12 +253,12 @@ const CourseExperimental = () => {
 
              {/* Lessons */}
             <section>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
                 <div className="flex items-end justify-between sm:justify-start sm:gap-4 flex-1">
-                  <h2 className="text-h2 text-foreground">
+                  <h2 className="text-[28px] md:text-[32px] font-semibold tracking-tight text-foreground">
                     {lang === "ru" ? "Программа курса" : "Curriculum"}
                   </h2>
-                  <span className="text-caption-12">
+                  <span className="text-[14px] text-muted-foreground">
                     {totalLessons} {lang === "ru" ? "уроков · " : "lessons · "}{totalMin} {lang === "ru" ? "мин" : "min"}
                   </span>
                 </div>
@@ -271,18 +271,18 @@ const CourseExperimental = () => {
                     return (
                       <li
                         key={i}
-                        className={`flex items-center gap-4 px-5 py-4 hover:bg-background/40 transition-colors ${i > 0 ? "border-t border-border/20" : ""}`}
+                        className={`flex items-center gap-4 px-6 py-5 hover:bg-background/40 transition-colors ${i > 0 ? "border-t border-border/20" : ""}`}
                       >
-                        <div className="w-9 h-9 rounded-lg bg-background border border-border flex items-center justify-center text-[14px] font-medium text-foreground flex-shrink-0">
+                        <div className="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center text-[15px] font-medium text-foreground flex-shrink-0">
                           {String(originalIndex !== -1 ? originalIndex + 1 : i + 1).padStart(2, "0")}
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-subh-16-medium text-foreground truncate">
+                          <p className="text-[17px] font-medium text-foreground truncate">
                             {lang === "ru" ? l.titleRu : l.titleEn}
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 text-caption-12 flex-shrink-0">
-                          <Play className="w-3.5 h-3.5" />
+                        <div className="flex items-center gap-2 text-[14px] text-muted-foreground flex-shrink-0">
+                          <Play className="w-4 h-4" />
                           {l.min} {lang === "ru" ? "мин" : "min"}
                         </div>
                       </li>
@@ -290,7 +290,7 @@ const CourseExperimental = () => {
                   })}
                 </ul>
               ) : (
-                <div className="rounded-2xl bg-sidebar p-8 text-center text-muted-foreground text-body-14">
+                <div className="rounded-2xl bg-sidebar p-8 text-center text-muted-foreground text-[15px]">
                   {lang === "ru" ? "Уроки не найдены" : "No lessons found"}
                 </div>
               )}
