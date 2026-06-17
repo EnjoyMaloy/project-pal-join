@@ -24,6 +24,7 @@ const Navbar = () => {
   const isArticleView = location.pathname.startsWith("/instructions/");
   const isMyCourses = location.pathname === "/my-courses";
   const isCatalog = location.pathname === "/catalog" || location.pathname === "/";
+  const isCourseView = location.pathname.startsWith("/course/");
   const isProfile = location.pathname === "/profile";
   const searchValue = searchParams.get("q") || "";
   const { lang, setLang, t } = useLanguage();
@@ -47,7 +48,7 @@ const Navbar = () => {
     >
       <div className="max-w-full mx-auto px-3 md:px-9 flex items-center justify-between h-full gap-2 md:gap-4 pt-2 md:pt-0">
         {/* Left: Streak (mobile) + Search (desktop) */}
-        {isInstructions || isCatalog ? (
+        {isInstructions || isCatalog || isCourseView ? (
           <div className="flex items-center gap-4">
             {/* Streak - always visible */}
             <button className="flex items-center gap-2 text-foreground hover:opacity-80 transition-opacity">
@@ -68,7 +69,7 @@ const Navbar = () => {
                     setSearchParams({});
                   }
                 }}
-                placeholder={isCatalog ? t("nav.searchCourse") : t("nav.search")}
+                placeholder={isCatalog || isCourseView ? t("nav.searchCourse") : t("nav.search")}
                 className="w-full pl-10 pr-4 py-2.5 rounded-[10px] bg-muted border-none text-[18px] font-normal text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
                 style={{ height: 48 }}
               />
