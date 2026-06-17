@@ -411,7 +411,7 @@ const CourseExperimental = () => {
                         aria-label={label}
                         className="w-10 h-10 rounded-lg border border-border/20 bg-background flex items-center justify-center text-muted-foreground hover:bg-[#924CFE] hover:text-white hover:border-transparent transition-all"
                       >
-                        <Icon className="w-4.5 h-4.5" />
+                        <Icon className="w-3.5 h-3.5" />
                       </a>
                     ))}
                   </div>
