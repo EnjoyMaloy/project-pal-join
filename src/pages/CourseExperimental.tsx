@@ -118,7 +118,7 @@ const CourseExperimental = () => {
       <div className="w-full px-4 md:px-8 py-6 md:py-8">
 
         {/* HERO */}
-        <div className="relative overflow-hidden rounded-[28px] border border-border mb-8" style={{ backgroundColor: COURSE_COLOR.superLight }}>
+        <div className="relative overflow-hidden rounded-2xl border border-border mb-8" style={{ backgroundColor: COURSE_COLOR.superLight }}>
           <div
             className="absolute inset-0"
             style={{
@@ -186,7 +186,7 @@ const CourseExperimental = () => {
 
                 <Button
                   onClick={cta}
-                  className="h-12 px-7 rounded-xl text-[16px] font-medium gap-2 [&_svg]:size-5"
+                  className="h-12 px-7 rounded-lg text-[16px] font-medium gap-2 [&_svg]:size-5"
                 >
                   {!isOwned && <PremiumStarIcon fill="currentColor" />}
                   {isOwned
@@ -195,7 +195,7 @@ const CourseExperimental = () => {
                 </Button>
                 <button
                   onClick={cta}
-                  className="h-12 px-5 rounded-xl border border-border bg-background text-foreground text-[15px] font-medium inline-flex items-center gap-2 hover:bg-muted transition-colors"
+                  className="h-12 px-5 rounded-lg border border-border bg-background text-foreground text-[15px] font-medium inline-flex items-center gap-2 hover:bg-muted transition-colors"
                 >
                   <Play className="w-4 h-4 fill-foreground" />
                   {lang === "ru" ? "Превью" : "Preview"}
@@ -227,11 +227,11 @@ const CourseExperimental = () => {
                   return (
                     <div
                       key={i}
-                      className="group relative overflow-hidden rounded-2xl bg-sidebar p-6 transition-colors"
+                      className="group relative overflow-hidden rounded-xl bg-sidebar p-6 transition-colors"
                     >
                       <div className="flex items-start gap-4">
                         <div
-                          className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                          className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0"
                           style={{ background: "hsl(var(--violet-super-light))" }}
                         >
                           <Icon className="w-6 h-6 text-primary" />
@@ -265,7 +265,7 @@ const CourseExperimental = () => {
               </div>
 
               {filteredLessons.length > 0 ? (
-                <ul className="rounded-2xl bg-sidebar overflow-hidden">
+                <ul className="rounded-xl bg-sidebar overflow-hidden">
                   {filteredLessons.map((l, i) => {
                     const originalIndex = lessons.findIndex(orig => orig.titleRu === l.titleRu);
                     return (
@@ -273,7 +273,7 @@ const CourseExperimental = () => {
                         key={i}
                         className={`flex items-center gap-4 px-6 py-5 hover:bg-background/40 transition-colors ${i > 0 ? "border-t border-border/20" : ""}`}
                       >
-                        <div className="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center text-[15px] font-medium text-foreground flex-shrink-0">
+                        <div className="w-10 h-10 rounded-md bg-background border border-border flex items-center justify-center text-[15px] font-medium text-foreground flex-shrink-0">
                           {String(originalIndex !== -1 ? originalIndex + 1 : i + 1).padStart(2, "0")}
                         </div>
                         <div className="min-w-0 flex-1">
@@ -290,7 +290,7 @@ const CourseExperimental = () => {
                   })}
                 </ul>
               ) : (
-                <div className="rounded-2xl bg-sidebar p-8 text-center text-muted-foreground text-[15px]">
+                <div className="rounded-xl bg-sidebar p-8 text-center text-muted-foreground text-[15px]">
                   {lang === "ru" ? "Уроки не найдены" : "No lessons found"}
                 </div>
               )}
@@ -310,7 +310,7 @@ const CourseExperimental = () => {
               
               <div className="grid md:grid-cols-2 gap-4">
                 {reviews.map((r, i) => (
-                  <div key={i} className="rounded-3xl bg-sidebar p-7">
+                  <div key={i} className="rounded-xl bg-sidebar p-7">
                     <div className="flex gap-4 items-start mb-6">
                       <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 border border-border/10">
                         <img src={r.avatar} alt={r.username} className="w-full h-full object-cover" />
@@ -349,12 +349,12 @@ const CourseExperimental = () => {
           {/* SIDEBAR */}
           <aside className="space-y-5 lg:sticky lg:top-6 self-start">
             {/* Author */}
-            <div className="rounded-2xl bg-sidebar p-6 space-y-5">
+            <div className="rounded-xl bg-sidebar p-6 space-y-5">
               {/* Tabs */}
-              <div className="flex items-center gap-1 p-1 rounded-xl bg-background mb-1">
+              <div className="flex items-center gap-1 p-1 rounded-lg bg-background mb-1">
                 <button
                   onClick={() => setAuthorTab("courses")}
-                  className={`flex-1 h-10 rounded-lg text-[15px] font-medium transition-colors ${
+                  className={`flex-1 h-10 rounded-md text-[15px] font-medium transition-colors ${
                     authorTab === "courses"
                       ? "bg-sidebar text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -362,9 +362,9 @@ const CourseExperimental = () => {
                 >
                   {lang === "ru" ? "Создал курс" : "Created course"}
                 </button>
-                <button
+                 <button
                   onClick={() => setAuthorTab("about")}
-                  className={`flex-1 h-10 rounded-lg text-[15px] font-medium transition-colors ${
+                  className={`flex-1 h-10 rounded-md text-[15px] font-medium transition-colors ${
                     authorTab === "about"
                       ? "bg-sidebar text-foreground"
                       : "text-muted-foreground hover:text-foreground"
@@ -445,7 +445,7 @@ const CourseExperimental = () => {
             </div>
 
             {/* Completion funnel */}
-            <div className="rounded-2xl bg-sidebar p-5">
+            <div className="rounded-xl bg-sidebar p-5">
               <div className="flex items-start justify-between mb-5">
                 <div>
                   <p className="text-[19px] font-medium text-foreground leading-tight">
@@ -471,9 +471,9 @@ const CourseExperimental = () => {
                         <span className="text-foreground font-medium">{s.value.toLocaleString()}</span> · {s.pct}%
                       </span>
                     </div>
-                    <div className="relative h-7 rounded-lg bg-background overflow-hidden">
+                    <div className="relative h-7 rounded-md bg-background overflow-hidden">
                       <div
-                        className={`absolute inset-y-0 left-0 ${s.bg} rounded-lg transition-all duration-700 ease-out`}
+                        className={`absolute inset-y-0 left-0 ${s.bg} rounded-md transition-all duration-700 ease-out`}
                         style={{ width: `${s.pct}%` }}
                       />
                     </div>
@@ -484,11 +484,11 @@ const CourseExperimental = () => {
 
 
             {/* Languages */}
-            <div className="rounded-2xl bg-sidebar p-5">
+            <div className="rounded-xl bg-sidebar p-5">
               <p className="text-caption-12 mb-3">{lang === "ru" ? "Языки курса" : "Course languages"}</p>
               <div className="flex flex-wrap gap-2">
                 {["English", "Русский"].map((l) => (
-                  <span key={l} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/20 bg-background text-body-14 text-foreground">
+                  <span key={l} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-border/20 bg-background text-body-14 text-foreground">
                     <Globe className="w-3.5 h-3.5 text-muted-foreground" />
                     {l}
                   </span>
