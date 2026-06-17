@@ -420,8 +420,8 @@ const CourseExperimental = () => {
             <div className="rounded-2xl bg-sidebar p-5">
               <div className="flex items-start justify-between mb-5">
                 <div>
-                  <p className="text-subh-18 text-foreground">
-                    {lang === "ru" ? "Как держим внимание" : "How we hold attention"}
+                  <p className="text-[19px] font-medium text-foreground leading-tight">
+                    {lang === "ru" ? "Уровень удержания внимания" : "Attention retention level"}
                   </p>
                 </div>
                 <div className="text-right">
@@ -451,17 +451,6 @@ const CourseExperimental = () => {
                     </div>
                   </div>
                 ))}
-              </div>
-
-              <div className="mt-4 pt-4 border-t border-border/20 grid grid-cols-2 gap-3">
-                <div>
-                  <p className="text-caption-12 mb-0.5">{lang === "ru" ? "Уроков" : "Lessons"}</p>
-                  <p className="text-body-14 font-medium text-foreground">{totalLessons}</p>
-                </div>
-                <div>
-                  <p className="text-caption-12 mb-0.5">{lang === "ru" ? "Длительность" : "Duration"}</p>
-                  <p className="text-body-14 font-medium text-foreground">{lang === "ru" ? "≈ 2,5 ч" : "≈ 2.5h"}</p>
-                </div>
               </div>
             </div>
 
