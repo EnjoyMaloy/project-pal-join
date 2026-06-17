@@ -67,6 +67,7 @@ const CourseExperimental = () => {
   const { lang } = useLanguage();
   const store = usePurchaseStore();
   const [paymentOpen, setPaymentOpen] = useState(false);
+  const [authorTab, setAuthorTab] = useState<"courses" | "about">("courses");
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
 
@@ -324,7 +325,30 @@ const CourseExperimental = () => {
           <aside className="space-y-5 lg:sticky lg:top-6 self-start">
             {/* Author */}
             <div className="rounded-2xl bg-sidebar p-5">
-              <p className="text-caption-12 mb-4">{lang === "ru" ? "Автор курса" : "Course author"}</p>
+              {/* Tabs */}
+              <div className="flex items-center gap-1 p-1 rounded-xl bg-background mb-4">
+                <button
+                  onClick={() => setAuthorTab("courses")}
+                  className={`flex-1 h-8 rounded-lg text-body-14 font-medium transition-colors ${
+                    authorTab === "courses"
+                      ? "bg-sidebar text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {lang === "ru" ? "Создал курс" : "Created course"}
+                </button>
+                <button
+                  onClick={() => setAuthorTab("about")}
+                  className={`flex-1 h-8 rounded-lg text-body-14 font-medium transition-colors ${
+                    authorTab === "about"
+                      ? "bg-sidebar text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {lang === "ru" ? "Об авторе" : "About author"}
+                </button>
+              </div>
+
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#A66CFF] to-[#FF7D60] flex items-center justify-center text-white font-bold text-[20px]">
                   O
@@ -338,11 +362,47 @@ const CourseExperimental = () => {
                   </div>
                 </div>
               </div>
-              <p className="text-body-14 text-muted-foreground leading-relaxed mb-4">
-                {lang === "ru"
-                  ? "Сообщество практиков Web3 и DeFi. Делимся боевыми кейсами и помогаем разобраться в новых технологиях."
-                  : "A community of Web3 & DeFi practitioners. We share real cases and help you navigate new tech."}
-              </p>
+
+              {authorTab === "courses" ? (
+                <p className="text-body-14 text-muted-foreground leading-relaxed mb-4">
+                  {lang === "ru"
+                    ? "Сообщество практиков Web3 и DeFi. Делимся боевыми кейсами и помогаем разобраться в новых технологиях."
+                    : "A community of Web3 & DeFi practitioners. We share real cases and help you navigate new tech."}
+                </p>
+              ) : (
+                <div className="mb-4 space-y-3">
+                  <p className="text-body-14 text-muted-foreground leading-relaxed">
+                    {lang === "ru"
+                      ? "OpenCore Club — независимое сообщество исследователей Web3, DeFi и новых форматов образования. С 2021 года выпускаем курсы, в которых сочетаем боевую практику и доступную подачу."
+                      : "OpenCore Club is an independent community of researchers in Web3, DeFi and new educational formats. Since 2021 we publish courses combining hands-on practice with accessible delivery."}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {(lang === "ru"
+                      ? [
+                          "5 лет в Web3",
+                          "12 курсов",
+                          "40k+ учеников",
+                          "Топ-автор 2025",
+                          "On-chain эксперт",
+                        ]
+                      : [
+                          "5 years in Web3",
+                          "12 courses",
+                          "40k+ students",
+                          "Top author 2025",
+                          "On-chain expert",
+                        ]
+                    ).map((a) => (
+                      <span
+                        key={a}
+                        className="inline-flex items-center px-2.5 py-1 rounded-full bg-background text-caption-12 text-foreground"
+                      >
+                        {a}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Socials */}
               <div className="flex items-center gap-2">
