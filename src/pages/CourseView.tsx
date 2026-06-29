@@ -9,7 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import PaymentModal from "@/components/PaymentModal";
-import CourseExperimental from "./CourseExperimental";
+import CourseExperimental, { EXPERIMENTAL_COURSE_IDS } from "./CourseExperimental";
 
 interface CourseData {
   id: string;
@@ -352,7 +352,7 @@ const CourseView = () => {
   const [paymentOpen, setPaymentOpen] = useState(false);
   const store = usePurchaseStore();
 
-  if (id === "9") return <CourseExperimental />;
+  if (id && EXPERIMENTAL_COURSE_IDS.includes(id)) return <CourseExperimental />;
 
   const course = id ? coursesData[id] : null;
 

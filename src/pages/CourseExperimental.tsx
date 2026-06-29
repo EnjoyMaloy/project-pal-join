@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, useParams } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePurchaseStore } from "@/hooks/usePurchaseStore";
 import {
@@ -23,43 +23,64 @@ import {
 } from "lucide-react";
 import PremiumStarIcon from "@/components/icons/PremiumStarIcon";
 import { Button } from "@/components/ui/button";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import PaymentModal from "@/components/PaymentModal";
 import courseHeroAsset from "@/assets/course-experimental-hero.png.asset.json";
 
-const COURSE_ID = "9";
+type Scenario = "free" | "sub" | "sub-trial" | "paid" | "paid-trial";
 
-// Основной цвет курса — используется для генерации градиента карточки
-const COURSE_COLOR = {
-  base: "#FF3D4D",      // основной (коралл/красный)
-  light: "#FFD8DC",     // светлый оттенок для фона
-  superLight: "#FFEEF0", // самый светлый
-  dark: "#7A0A14",      // тёмный для текста/акцентов
+interface Review {
+  username: string;
+  avatar: string;
+  rating: number;
+  timeRu: string;
+  timeEn: string;
+  textRu: string;
+  textEn: string;
+}
+
+interface CourseConfig {
+  id: string;
+  scenario: Scenario;
+  titleRu: string;
+  titleEn: string;
+  descriptionRu: string;
+  descriptionEn: string;
+  categoryRu: string;
+  categoryEn: string;
+  levelRu: string;
+  levelEn: string;
+  image: string;
+  rating: number;
+  reviewCount: number;
+  students: number;
+  updatedRu: string;
+  updatedEn: string;
+  price: number | null;        // one-time price (paid scenarios)
+  monthlyFrom?: number;        // shown for subscription scenarios
+  trialLessons?: number;       // for *-trial scenarios
+  color: { base: string; light: string; superLight: string; dark: string };
+  lessons: { titleRu: string; titleEn: string; min: number }[];
+  reviews: Review[];
+}
+
+const COLORS = {
+  red:   { base: "#FF3D4D", light: "#FFD8DC", superLight: "#FFEEF0", dark: "#7A0A14" },
+  blue:  { base: "#3D8BFF", light: "#D5E5FF", superLight: "#EDF3FF", dark: "#0A2E7A" },
+  green: { base: "#22C55E", light: "#CFF3DC", superLight: "#ECFBF0", dark: "#0D4A24" },
+  amber: { base: "#F59E0B", light: "#FCE7BD", superLight: "#FEF5E1", dark: "#7A4A07" },
+  purple:{ base: "#A66CFF", light: "#E5D6FF", superLight: "#F3ECFF", dark: "#460466" },
+  teal:  { base: "#14B8A6", light: "#C7F0EA", superLight: "#E7F8F5", dark: "#0D4A44" },
 };
 
-const IMG = courseHeroAsset.url;
-
-const lessons = [
-  { titleRu: "Что такое эксперименты в Web3", titleEn: "What are Web3 experiments", min: 8 },
-  { titleRu: "Подготовка окружения", titleEn: "Setting up environment", min: 12 },
-  { titleRu: "Первый сценарий", titleEn: "First scenario", min: 12 },
-  { titleRu: "Архитектура решений", titleEn: "Solution architecture", min: 18 },
-  { titleRu: "Практика: запуск", titleEn: "Practice: launch", min: 22 },
-  { titleRu: "Разбор кейсов", titleEn: "Case studies", min: 30 },
-  { titleRu: "Постановка задачи", titleEn: "Define the task", min: 15 },
-  { titleRu: "Реализация", titleEn: "Build", min: 25 },
-  { titleRu: "Защита и фидбек", titleEn: "Review & feedback", min: 15 },
-];
-
-const reviews = [
+const REVIEWS_DEMO: Review[] = [
   {
     username: "Shahriyar2100",
     avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&h=150&q=80",
     rating: 5,
     timeRu: "1 неделю назад",
     timeEn: "1 week ago",
-    textRu: "Да, это именно те шаблоны. Хотите сделать один специально для своего курса? Просто напишите мне: 1. *Название курса* 2. *Оценка*, которую вы бы поставили из 5 3. *1-2 вещи*, которые вам понравились 4. *1 вещь*, которую вы бы улучшили. Я превращу это в аккуратный отзыв, который вы сможете опубликовать за 10 секунд. Или, если вы готовы, смело берите любой из шаблонов выше и адаптируйте его под свой опыт.",
-    textEn: "Yep, those are the templates. Want to make one specific to your course? Just drop me: 1. *Course name* 2. *Rating* you'd give /5 3. *1-2 things you liked* 4. *1 thing you'd improve* I'll turn it into a clean review you can post in 10 seconds. Or if you're all set, feel free to grab any of the templates above and tweak them to fit your experience."
+    textRu: "Да, это именно те шаблоны. Хотите сделать один специально для своего курса? Просто напишите мне: 1. *Название курса* 2. *Оценка*, которую вы бы поставили из 5 3. *1-2 вещи*, которые вам понравились 4. *1 вещь*, которую вы бы улучшили. Я превращу это в аккуратный отзыв, который вы сможете опубликовать за 10 секунд.",
+    textEn: "Yep, those are the templates. Want to make one specific to your course? Just drop me: 1. *Course name* 2. *Rating* you'd give /5 3. *1-2 things you liked* 4. *1 thing you'd improve* I'll turn it into a clean review you can post in 10 seconds."
   },
   {
     username: "pawansatoshi",
@@ -67,14 +88,226 @@ const reviews = [
     rating: 5,
     timeRu: "1 неделю назад",
     timeEn: "1 week ago",
-    textRu: "Отличное введение в OpenClaw. Курс четко объясняет разницу между моделями LLM и ИИ-агентами, памятью, конфиденциальностью и хостингом. Легко понять новичкам, но при этом дает полезные инсайты для продвинутых пользователей. С нетерпением жду уроков.",
-    textEn: "Great introduction to OpenClaw. The course clearly explains the difference between LLM models and AI agents, memory, privacy, and hosted deployment. Easy to understand for beginners while still providing useful insights for advanced users. Looking forward to the lessons."
+    textRu: "Отличное введение. Курс четко объясняет ключевые понятия и даёт практические инсайты. Легко понять новичкам, при этом полезно и продвинутым.",
+    textEn: "Great introduction. The course clearly explains the key concepts and gives practical insights. Easy to understand for beginners while still useful for advanced users."
   }
 ];
 
+const REVIEWS_FREE: Review[] = [
+  {
+    username: "crypto_fan",
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&h=150&q=80",
+    rating: 5,
+    timeRu: "2 месяца назад",
+    timeEn: "2 months ago",
+    textRu: "Отличный бесплатный курс для начинающих! Всё понятно объясняется, быстро разобрался с Telegram Gifts.",
+    textEn: "Great free course for beginners! Everything is explained clearly, I quickly figured out Telegram Gifts.",
+  },
+  REVIEWS_DEMO[1],
+];
+
+const REVIEWS_INVEST: Review[] = [
+  {
+    username: "elijah_andikan",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80",
+    rating: 5,
+    timeRu: "5 месяцев назад",
+    timeEn: "5 months ago",
+    textRu: "Рекомендую на 100%. Я новичок в крипте, и часто видел, как KOL и блогеры рекомендуют проекты — всегда было интересно, как они их выбирают. Курс закрыл этот вопрос.",
+    textEn: "I 100% recommend this course. I'm a newbie in crypto and I usually see how KOLs recommend projects on Twitter — I always wondered how they pick them. This course solved that.",
+  },
+  {
+    username: "patr1ckk",
+    avatar: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=150&h=150&q=80",
+    rating: 5,
+    timeRu: "5 месяцев назад",
+    timeEn: "5 months ago",
+    textRu: "Курс отличный. По делу, без воды, чётко по шагам — что и зачем проверять в проекте.",
+    textEn: "Great course. To the point, no fluff, clear steps — what to check in a project and why.",
+  },
+];
+
+const COURSE_CONFIGS: Record<string, CourseConfig> = {
+  "1": {
+    id: "1",
+    scenario: "free",
+    titleRu: "Telegram Gifts: цифровые подарки и NFT",
+    titleEn: "Telegram Gifts: digital gifts & NFTs",
+    descriptionRu: "Бесплатный курс о том, как использовать Telegram Gifts: создавать уникальные цифровые подарки, собирать коллекции и зарабатывать на NFT-подарках в экосистеме Telegram.",
+    descriptionEn: "A free course on Telegram Gifts: create unique digital gifts, build collections, and earn from NFT gifts inside the Telegram ecosystem.",
+    categoryRu: "Web3 и DeFi",
+    categoryEn: "Web3 & DeFi",
+    levelRu: "Начальный",
+    levelEn: "Beginner",
+    image: "https://images.unsplash.com/photo-1621504450181-5d356f61d307?w=1200&h=800&fit=crop",
+    rating: 4.9,
+    reviewCount: 85,
+    students: 371,
+    updatedRu: "Обновлён 10.04.26",
+    updatedEn: "Updated 04/10/26",
+    price: null,
+    color: COLORS.green,
+    lessons: [
+      { titleRu: "Что такое Telegram Gifts", titleEn: "What are Telegram Gifts", min: 6 },
+      { titleRu: "Создание первого подарка", titleEn: "Creating your first gift", min: 10 },
+      { titleRu: "Коллекции и редкость", titleEn: "Collections & rarity", min: 12 },
+      { titleRu: "Монетизация подарков", titleEn: "Monetizing gifts", min: 14 },
+    ],
+    reviews: REVIEWS_FREE,
+  },
+  "2": {
+    id: "2",
+    scenario: "sub",
+    titleRu: "Анализ проектов: как выбирать перспективное",
+    titleEn: "Project analysis: picking winners",
+    descriptionRu: "Научимся анализировать потенциальные проекты для инвестиций: читать whitepaper, проверять токеномику и оценивать команду. Понятные инструменты для выбора и защиты от скама.",
+    descriptionEn: "Learn to analyze investment projects: read whitepapers, verify tokenomics, and evaluate teams. Clear tools for picking projects and avoiding scams.",
+    categoryRu: "Инвестиции",
+    categoryEn: "Investments",
+    levelRu: "Средний",
+    levelEn: "Intermediate",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop",
+    rating: 4.9,
+    reviewCount: 1010,
+    students: 35419,
+    updatedRu: "Обновлён 07.04.26",
+    updatedEn: "Updated 04/07/26",
+    price: null,
+    monthlyFrom: 6,
+    color: COLORS.blue,
+    lessons: [
+      { titleRu: "Введение в анализ", titleEn: "Introduction to analysis", min: 10 },
+      { titleRu: "Чтение Whitepaper", titleEn: "Reading whitepapers", min: 18 },
+      { titleRu: "Токеномика", titleEn: "Tokenomics", min: 22 },
+      { titleRu: "Оценка команды", titleEn: "Evaluating the team", min: 16 },
+      { titleRu: "Чек-лист: красные флаги", titleEn: "Red flags checklist", min: 14 },
+    ],
+    reviews: REVIEWS_INVEST,
+  },
+  "6": {
+    id: "6",
+    scenario: "sub-trial",
+    titleRu: "Основы крипты с триалом",
+    titleEn: "Crypto basics with trial",
+    descriptionRu: "Курс с триалом — пройдите первые 2 урока бесплатно, чтобы оценить материал. Доступ к остальным урокам открывается по подписке Premium.",
+    descriptionEn: "A course with a trial — complete the first 2 lessons for free to evaluate the material. The rest unlocks with a Premium subscription.",
+    categoryRu: "Основы крипты",
+    categoryEn: "Crypto Basics",
+    levelRu: "Начальный",
+    levelEn: "Beginner",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=800&fit=crop",
+    rating: 4.7,
+    reviewCount: 312,
+    students: 1024,
+    updatedRu: "Обновлён 01.06.26",
+    updatedEn: "Updated 06/01/26",
+    price: null,
+    monthlyFrom: 6,
+    trialLessons: 2,
+    color: COLORS.purple,
+    lessons: [
+      { titleRu: "Знакомство", titleEn: "Introduction", min: 8 },
+      { titleRu: "Основные концепции", titleEn: "Core concepts", min: 12 },
+      { titleRu: "Практика (Премиум)", titleEn: "Practice (Premium)", min: 18 },
+      { titleRu: "Продвинутые темы", titleEn: "Advanced topics", min: 22 },
+    ],
+    reviews: REVIEWS_DEMO,
+  },
+  "7": {
+    id: "7",
+    scenario: "paid",
+    titleRu: "Инструменты Web3-исследователя",
+    titleEn: "Web3 researcher toolkit",
+    descriptionRu: "Самостоятельный платный курс, не входит в подписку Premium. Доступ открывается только после разовой покупки.",
+    descriptionEn: "A standalone paid course, not included in the Premium subscription. Access is granted only after a one-time purchase.",
+    categoryRu: "Инструменты",
+    categoryEn: "Tools",
+    levelRu: "Средний",
+    levelEn: "Intermediate",
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=800&fit=crop",
+    rating: 4.6,
+    reviewCount: 128,
+    students: 512,
+    updatedRu: "Обновлён 05.06.26",
+    updatedEn: "Updated 06/05/26",
+    price: 79,
+    color: COLORS.amber,
+    lessons: [
+      { titleRu: "Введение", titleEn: "Introduction", min: 8 },
+      { titleRu: "Основы", titleEn: "Basics", min: 16 },
+      { titleRu: "Боевые кейсы", titleEn: "Real-world cases", min: 24 },
+      { titleRu: "Практика", titleEn: "Hands-on practice", min: 28 },
+      { titleRu: "Итог", titleEn: "Summary", min: 10 },
+    ],
+    reviews: REVIEWS_DEMO,
+  },
+  "8": {
+    id: "8",
+    scenario: "paid-trial",
+    titleRu: "Глубокая практика с триалом",
+    titleEn: "Deep practice with trial",
+    descriptionRu: "Самостоятельный платный курс вне подписки. Первые 3 урока доступны бесплатно — далее открывайте доступ покупкой курса.",
+    descriptionEn: "Standalone paid course outside the subscription. First 3 lessons are free — unlock the rest with a one-time purchase.",
+    categoryRu: "Инструменты",
+    categoryEn: "Tools",
+    levelRu: "Продвинутый",
+    levelEn: "Advanced",
+    image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?w=1200&h=800&fit=crop",
+    rating: 4.7,
+    reviewCount: 156,
+    students: 640,
+    updatedRu: "Обновлён 08.06.26",
+    updatedEn: "Updated 06/08/26",
+    price: 89,
+    trialLessons: 3,
+    color: COLORS.teal,
+    lessons: [
+      { titleRu: "Урок 1 (бесплатно)", titleEn: "Lesson 1 (free)", min: 8 },
+      { titleRu: "Урок 2 (бесплатно)", titleEn: "Lesson 2 (free)", min: 12 },
+      { titleRu: "Урок 3 (бесплатно)", titleEn: "Lesson 3 (free)", min: 14 },
+      { titleRu: "Урок 4 (после покупки)", titleEn: "Lesson 4 (after purchase)", min: 18 },
+      { titleRu: "Урок 5 (после покупки)", titleEn: "Lesson 5 (after purchase)", min: 22 },
+    ],
+    reviews: REVIEWS_DEMO,
+  },
+  "9": {
+    id: "9",
+    scenario: "sub",
+    titleRu: "Экспериментальная стр курса",
+    titleEn: "Experimental course page",
+    descriptionRu: "Полностью переосмысленная страница курса — больше визуала, больше воздуха, больше пользы. Узнайте, как мы экспериментируем с подачей образовательного контента.",
+    descriptionEn: "A fully rethought course page — more visual, more breathing room, more value. See how we experiment with educational delivery.",
+    categoryRu: "Web3 и DeFi",
+    categoryEn: "Web3 & DeFi",
+    levelRu: "Средний",
+    levelEn: "Intermediate",
+    image: courseHeroAsset.url,
+    rating: 4.95,
+    reviewCount: 128,
+    students: 2480,
+    updatedRu: "Обновлён 12.06.26",
+    updatedEn: "Updated 06/12/26",
+    price: null,
+    monthlyFrom: 6,
+    color: COLORS.red,
+    lessons: [
+      { titleRu: "Что такое эксперименты в Web3", titleEn: "What are Web3 experiments", min: 8 },
+      { titleRu: "Подготовка окружения", titleEn: "Setting up environment", min: 12 },
+      { titleRu: "Первый сценарий", titleEn: "First scenario", min: 12 },
+      { titleRu: "Архитектура решений", titleEn: "Solution architecture", min: 18 },
+      { titleRu: "Практика: запуск", titleEn: "Practice: launch", min: 22 },
+      { titleRu: "Разбор кейсов", titleEn: "Case studies", min: 30 },
+      { titleRu: "Постановка задачи", titleEn: "Define the task", min: 15 },
+      { titleRu: "Реализация", titleEn: "Build", min: 25 },
+      { titleRu: "Защита и фидбек", titleEn: "Review & feedback", min: 15 },
+    ],
+    reviews: REVIEWS_DEMO,
+  },
+};
+
 const rewards = [
   { icon: Trophy, titleRu: "NFT-сертификат", titleEn: "NFT certificate", descRu: "Уникальный on-chain сертификат об окончании", descEn: "Unique on-chain certificate of completion" },
-  { icon: Award, titleRu: "Бейдж в профиле", titleEn: "Profile badge", descRu: "Постоянный бейдж «Experimentalist»", descEn: "Permanent “Experimentalist” badge" },
+  { icon: Award, titleRu: "Бейдж в профиле", titleEn: "Profile badge", descRu: "Постоянный бейдж выпускника курса", descEn: "Permanent course graduate badge" },
   { icon: Sparkles, titleRu: "500 XP", titleEn: "500 XP", descRu: "Опыт идёт в общий рейтинг", descEn: "XP counts toward your global rating" },
   { icon: BadgeCheck, titleRu: "Доступ в чат", titleEn: "Private chat", descRu: "Закрытый чат выпускников курса", descEn: "Closed chat for graduates" },
 ];
@@ -87,20 +320,40 @@ const CourseExperimental = () => {
   const [authorTab, setAuthorTab] = useState<"courses" | "about">("courses");
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
+  const { id: routeId } = useParams<{ id: string }>();
 
-  const titleRu = "Экспериментальная стр курса";
-  const titleEn = "Experimental course page";
-  const title = lang === "ru" ? titleRu : titleEn;
-  const description =
-    lang === "ru"
-      ? "Полностью переосмысленная страница курса — больше визуала, больше воздуха, больше пользы. Узнайте, как мы экспериментируем с подачей образовательного контента."
-      : "A fully rethought course page — more visual, more breathing room, more value. See how we experiment with educational delivery.";
+  const config = COURSE_CONFIGS[routeId ?? "9"] ?? COURSE_CONFIGS["9"];
+  const COURSE_ID = config.id;
+  const COURSE_COLOR = config.color;
+  const IMG = config.image;
+  const lessons = config.lessons;
+  const reviews = config.reviews;
+
+  const title = lang === "ru" ? config.titleRu : config.titleEn;
+  const description = lang === "ru" ? config.descriptionRu : config.descriptionEn;
+  const category = lang === "ru" ? config.categoryRu : config.categoryEn;
+  const level = lang === "ru" ? config.levelRu : config.levelEn;
+  const updated = lang === "ru" ? config.updatedRu : config.updatedEn;
 
   const isPurchased = store.purchasedCourses.includes(COURSE_ID);
   const hasSubscription = store.subscription?.active;
-  const isOwned = isPurchased || hasSubscription;
+  const isStandalone = config.scenario === "paid" || config.scenario === "paid-trial";
+  const isFree = config.scenario === "free";
+  const hasTrial = config.scenario === "sub-trial" || config.scenario === "paid-trial";
+  const isOwned = isFree || isPurchased || (!isStandalone && hasSubscription);
 
   const cta = () => (isOwned ? navigate(`/course/${COURSE_ID}/lessons`) : setPaymentOpen(true));
+  const startTrial = () => navigate(`/course/${COURSE_ID}/lessons`);
+
+  // CTA label per scenario
+  let ctaLabel = lang === "ru" ? "Начать обучение" : "Start learning";
+  if (!isOwned) {
+    if (config.scenario === "paid" || config.scenario === "paid-trial") {
+      ctaLabel = lang === "ru" ? `Купить за $${config.price}` : `Buy for $${config.price}`;
+    } else {
+      ctaLabel = lang === "ru" ? "Открыть доступ" : "Get access";
+    }
+  }
 
   const filteredLessons = lessons.filter(l => {
     const q = searchQuery.toLowerCase();
@@ -112,6 +365,50 @@ const CourseExperimental = () => {
 
   const totalLessons = filteredLessons.length;
   const totalMin = filteredLessons.reduce((s, l) => s + l.min, 0);
+
+  // Price block per scenario
+  const PriceBlock = () => {
+    if (isFree) {
+      return (
+        <div className="flex flex-col">
+          <span className="text-caption-12 mb-1.5 tracking-wide uppercase">
+            {lang === "ru" ? "Стоимость" : "Price"}
+          </span>
+          <span className="text-[36px] font-light tracking-[-0.02em] leading-none text-foreground">
+            {lang === "ru" ? "Бесплатно" : "Free"}
+          </span>
+        </div>
+      );
+    }
+    if (isStandalone) {
+      return (
+        <div className="flex flex-col">
+          <span className="text-caption-12 mb-1.5 tracking-wide uppercase">
+            {lang === "ru" ? "Разовая покупка" : "One-time"}
+          </span>
+          <div className="flex items-baseline gap-1 tabular-nums">
+            <span className="text-[20px] font-normal text-muted-foreground leading-none">$</span>
+            <span className="text-[44px] font-light tracking-[-0.02em] leading-none text-foreground">{config.price}</span>
+          </div>
+        </div>
+      );
+    }
+    // subscription
+    return (
+      <div className="flex flex-col">
+        <span className="text-caption-12 mb-1.5 tracking-wide uppercase">
+          {lang === "ru" ? "от" : "from"}
+        </span>
+        <div className="flex items-baseline gap-1 tabular-nums">
+          <span className="text-[20px] font-normal text-muted-foreground leading-none">$</span>
+          <span className="text-[44px] font-light tracking-[-0.02em] leading-none text-foreground">{config.monthlyFrom ?? 6}</span>
+          <span className="text-[16px] font-normal text-muted-foreground leading-none ml-0.5">
+            {lang === "ru" ? "/мес" : "/mo"}
+          </span>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -130,17 +427,36 @@ const CourseExperimental = () => {
             <div className="p-6 md:p-10 flex flex-col justify-between gap-8">
               <div>
                 <div className="flex items-center gap-2 mb-5 flex-wrap">
-                  <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-body-12 font-medium text-violet-super-dark border border-[rgba(146,76,254,0.15)] bg-[rgba(217,192,255,0.55)]">
-                    <PremiumStarIcon className="w-3.5 h-3.5" fill="currentColor" />
-                    {lang === "ru" ? "Премиум" : "Premium"}
-                  </span>
+                  {!isFree && !isStandalone && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-body-12 font-medium text-violet-super-dark border border-[rgba(146,76,254,0.15)] bg-[rgba(217,192,255,0.55)]">
+                      <PremiumStarIcon className="w-3.5 h-3.5" fill="currentColor" />
+                      {lang === "ru" ? "Премиум" : "Premium"}
+                    </span>
+                  )}
+                  {isFree && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-body-12 font-medium text-emerald-700 border border-emerald-200 bg-emerald-50">
+                      {lang === "ru" ? "Бесплатно" : "Free"}
+                    </span>
+                  )}
+                  {isStandalone && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-body-12 font-medium text-amber-800 border border-amber-200 bg-amber-50">
+                      {lang === "ru" ? "Отдельный курс" : "Standalone"}
+                    </span>
+                  )}
+                  {hasTrial && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-body-12 font-medium text-foreground border border-border bg-background">
+                      {lang === "ru"
+                        ? `Первые ${config.trialLessons} урока бесплатно`
+                        : `First ${config.trialLessons} lessons free`}
+                    </span>
+                  )}
                   <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-body-12 font-medium text-foreground border border-border bg-background">
                     <LayoutGrid className="w-3.5 h-3.5 text-muted-foreground" />
-                    {lang === "ru" ? "Web3 и DeFi" : "Web3 & DeFi"}
+                    {category}
                   </span>
                   <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-body-12 font-medium text-foreground border border-border bg-background">
                     <BarChart className="w-3.5 h-3.5 text-muted-foreground" />
-                    {lang === "ru" ? "Средний" : "Intermediate"}
+                    {level}
                   </span>
                 </div>
 
@@ -156,50 +472,49 @@ const CourseExperimental = () => {
               <div className="flex flex-wrap items-center gap-x-8 gap-y-4 text-[16px] text-muted-foreground mb-4">
                 <div className="flex items-center gap-2">
                   <Star className="w-5 h-5 fill-orange-400 text-orange-400" />
-                  <span className="font-semibold text-foreground">4.95</span>
-                  <span>(128 {lang === "ru" ? "отзывов" : "reviews"})</span>
+                  <span className="font-semibold text-foreground">{config.rating}</span>
+                  <span>({config.reviewCount} {lang === "ru" ? "отзывов" : "reviews"})</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-5 h-5" />
-                  <span>{(2480).toLocaleString()} {lang === "ru" ? "учеников" : "students"}</span>
+                  <span>{config.students.toLocaleString()} {lang === "ru" ? "учеников" : "students"}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-5 h-5" />
-                  <span>{lang === "ru" ? "Обновлён 12.06.26" : "Updated 06/12/26"}</span>
+                  <span>{updated}</span>
                 </div>
               </div>
 
               {/* CTA */}
               <div className="flex items-end gap-6 flex-wrap">
-                <div className="flex flex-col">
-                  <span className="text-caption-12 mb-1.5 tracking-wide uppercase">
-                    {lang === "ru" ? "от" : "from"}
-                  </span>
-                  <div className="flex items-baseline gap-1 tabular-nums">
-                    <span className="text-[20px] font-normal text-muted-foreground leading-none">$</span>
-                    <span className="text-[44px] font-light tracking-[-0.02em] leading-none text-foreground">6</span>
-                    <span className="text-[16px] font-normal text-muted-foreground leading-none ml-0.5">
-                      {lang === "ru" ? "/мес" : "/mo"}
-                    </span>
-                  </div>
-                </div>
+                <PriceBlock />
 
                 <Button
                   onClick={cta}
                   className="h-12 px-7 rounded-lg text-[16px] font-medium gap-2 [&_svg]:size-5"
                 >
-                  {!isOwned && <PremiumStarIcon fill="currentColor" />}
-                  {isOwned
-                    ? (lang === "ru" ? "Начать обучение" : "Start learning")
-                    : (lang === "ru" ? "Открыть доступ" : "Get access")}
+                  {!isOwned && !isFree && !isStandalone && <PremiumStarIcon fill="currentColor" />}
+                  {ctaLabel}
                 </Button>
-                <button
-                  onClick={cta}
-                  className="h-12 px-5 rounded-lg border border-border bg-background text-foreground text-[15px] font-medium inline-flex items-center gap-2 hover:bg-muted transition-colors"
-                >
-                  <Play className="w-4 h-4 fill-foreground" />
-                  {lang === "ru" ? "Превью" : "Preview"}
-                </button>
+
+                {hasTrial && !isOwned && (
+                  <button
+                    onClick={startTrial}
+                    className="h-12 px-5 rounded-lg border border-border bg-background text-foreground text-[15px] font-medium inline-flex items-center gap-2 hover:bg-muted transition-colors"
+                  >
+                    <Play className="w-4 h-4 fill-foreground" />
+                    {lang === "ru" ? "Попробовать бесплатно" : "Try for free"}
+                  </button>
+                )}
+                {(!hasTrial || isOwned) && (
+                  <button
+                    onClick={cta}
+                    className="h-12 px-5 rounded-lg border border-border bg-background text-foreground text-[15px] font-medium inline-flex items-center gap-2 hover:bg-muted transition-colors"
+                  >
+                    <Play className="w-4 h-4 fill-foreground" />
+                    {lang === "ru" ? "Превью" : "Preview"}
+                  </button>
+                )}
               </div>
             </div>
 
@@ -214,7 +529,7 @@ const CourseExperimental = () => {
         <div className="grid lg:grid-cols-[1fr_360px] gap-8">
           {/* MAIN COL */}
           <div className="min-w-0 space-y-10">
-            {/* What you get / Rewards */}
+            {/* Rewards */}
             <section>
               <div className="flex items-end justify-between mb-6">
                 <h2 className="text-[28px] md:text-[32px] font-semibold tracking-tight text-foreground">
@@ -251,7 +566,7 @@ const CourseExperimental = () => {
               </div>
             </section>
 
-             {/* Lessons */}
+            {/* Lessons */}
             <section>
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
                 <div className="flex items-end justify-between sm:justify-start sm:gap-4 flex-1">
@@ -268,19 +583,29 @@ const CourseExperimental = () => {
                 <ul className="rounded-xl bg-sidebar overflow-hidden">
                   {filteredLessons.map((l, i) => {
                     const originalIndex = lessons.findIndex(orig => orig.titleRu === l.titleRu);
+                    const lessonNo = originalIndex !== -1 ? originalIndex + 1 : i + 1;
+                    const isFreeLesson =
+                      hasTrial && config.trialLessons ? lessonNo <= config.trialLessons : isFree;
                     return (
                       <li
                         key={i}
                         className={`flex items-center gap-4 px-6 py-5 hover:bg-background/40 transition-colors ${i > 0 ? "border-t border-border/20" : ""}`}
                       >
                         <div className="w-10 h-10 rounded-md bg-background border border-border flex items-center justify-center text-[15px] font-medium text-foreground flex-shrink-0">
-                          {String(originalIndex !== -1 ? originalIndex + 1 : i + 1).padStart(2, "0")}
+                          {String(lessonNo).padStart(2, "0")}
                         </div>
                         <div className="min-w-0 flex-1">
                           <p className="text-[17px] font-medium text-foreground truncate">
                             {lang === "ru" ? l.titleRu : l.titleEn}
                           </p>
                         </div>
+                        {hasTrial && (
+                          <span className={`text-[12px] font-medium px-2 py-0.5 rounded ${isFreeLesson ? "bg-emerald-50 text-emerald-700" : "bg-muted text-muted-foreground"}`}>
+                            {isFreeLesson
+                              ? (lang === "ru" ? "Бесплатно" : "Free")
+                              : (lang === "ru" ? (isStandalone ? "После покупки" : "Премиум") : (isStandalone ? "After purchase" : "Premium"))}
+                          </span>
+                        )}
                         <div className="flex items-center gap-2 text-[14px] text-muted-foreground flex-shrink-0">
                           <Play className="w-4 h-4" />
                           {l.min} {lang === "ru" ? "мин" : "min"}
@@ -300,14 +625,14 @@ const CourseExperimental = () => {
             <section className="space-y-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-[28px] md:text-[32px] font-semibold text-foreground tracking-tight">
-                  {lang === "ru" ? "Отзывы (211)" : "Reviews (211)"}
+                  {lang === "ru" ? `Отзывы (${config.reviewCount})` : `Reviews (${config.reviewCount})`}
                 </h2>
                 <button className="text-[15px] text-muted-foreground hover:text-foreground font-normal transition-colors inline-flex items-center gap-1">
                   {lang === "ru" ? "Показать все" : "View All"}
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-4">
                 {reviews.map((r, i) => (
                   <div key={i} className="rounded-xl bg-sidebar p-7">
@@ -327,14 +652,13 @@ const CourseExperimental = () => {
                         </div>
                       </div>
                     </div>
-                    <p className="text-[15px] leading-[1.65] font-normal text-foreground/90 leading-relaxed">
+                    <p className="text-[15px] leading-[1.65] font-normal text-foreground/90">
                       {lang === "ru" ? r.textRu : r.textEn}
                     </p>
                   </div>
                 ))}
               </div>
 
-              {/* Slider Controls to match image */}
               <div className="flex justify-end gap-2.5 pt-2">
                 <button className="w-10 h-10 rounded-full border border-border/40 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/10 transition-all">
                   <ChevronLeft className="w-5 h-5 stroke-[1.5]" />
@@ -350,7 +674,6 @@ const CourseExperimental = () => {
           <aside className="space-y-5 lg:sticky lg:top-6 self-start">
             {/* Author */}
             <div className="rounded-xl bg-sidebar p-6 space-y-5">
-              {/* Tabs */}
               <div className="flex items-center gap-1 p-1 rounded-lg bg-background mb-1">
                 <button
                   onClick={() => setAuthorTab("courses")}
@@ -362,7 +685,7 @@ const CourseExperimental = () => {
                 >
                   {lang === "ru" ? "Создал курс" : "Created course"}
                 </button>
-                 <button
+                <button
                   onClick={() => setAuthorTab("about")}
                   className={`flex-1 h-10 rounded-md text-[15px] font-medium transition-colors ${
                     authorTab === "about"
@@ -460,9 +783,9 @@ const CourseExperimental = () => {
 
               <div className="space-y-3">
                 {[
-                  { labelRu: "Начали курс", labelEn: "Started", value: 2480, pct: 100, bg: "bg-violet-super-dark", text: "text-white" },
-                  { labelRu: "Прошли половину", labelEn: "Half-way", value: 1612, pct: 65, bg: "bg-violet-dark", text: "text-white" },
-                  { labelRu: "Завершили", labelEn: "Completed", value: 968, pct: 39, bg: "bg-violet-mid", text: "text-violet-super-dark" },
+                  { labelRu: "Начали курс", labelEn: "Started", value: config.students, pct: 100, bg: "bg-violet-super-dark" },
+                  { labelRu: "Прошли половину", labelEn: "Half-way", value: Math.round(config.students * 0.65), pct: 65, bg: "bg-violet-dark" },
+                  { labelRu: "Завершили", labelEn: "Completed", value: Math.round(config.students * 0.39), pct: 39, bg: "bg-violet-mid" },
                 ].map((s) => (
                   <div key={s.labelEn}>
                     <div className="flex items-baseline justify-between mb-1.5">
@@ -481,7 +804,6 @@ const CourseExperimental = () => {
                 ))}
               </div>
             </div>
-
 
             {/* Languages */}
             <div className="rounded-xl bg-sidebar p-5">
@@ -503,33 +825,16 @@ const CourseExperimental = () => {
         open={paymentOpen}
         onOpenChange={setPaymentOpen}
         courseId={COURSE_ID}
-        courseTitleRu={titleRu}
-        courseTitleEn={titleEn}
+        courseTitleRu={config.titleRu}
+        courseTitleEn={config.titleEn}
         courseImage={IMG}
-        courseDescRu={description}
-        courseDescEn={description}
+        courseDescRu={config.descriptionRu}
+        courseDescEn={config.descriptionEn}
       />
     </div>
   );
 };
 
-const Fact = ({
-  label,
-  value,
-  bordered,
-  topBorder,
-}: {
-  label: string;
-  value: string;
-  bordered?: boolean;
-  topBorder?: boolean;
-}) => (
-  <div
-    className={`p-4 ${bordered ? "border-l border-border/20" : ""} ${topBorder ? "border-t border-border/20" : ""}`}
-  >
-    <p className="text-caption-12 mb-1.5">{label}</p>
-    <p className="text-subh-16 text-foreground">{value}</p>
-  </div>
-);
+export const EXPERIMENTAL_COURSE_IDS = ["1", "2", "6", "7", "8", "9"];
 
 export default CourseExperimental;
